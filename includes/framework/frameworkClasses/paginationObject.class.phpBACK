@@ -1,0 +1,222 @@
+<?php
+
+
+// classe de gestion de pagination
+// Dorer Laurent 2008
+
+// historique des versions
+// version 1.0 --- 
+
+// 27-10-2008 : version 1.1 -- ajout du type de lien freeLink , pour pouvoir faire des liens libres avec en option le numero de page ##numPage##
+
+/*
+UTILISATION 
+
+				$pagination = new paginationObject();
+				$arrayPagination=$pagination->pagination(array(
+										'nomParamPageCourante'=>'archiPageCouranteVille',
+										'nbEnregistrementsParPage'=>$nbEnregistrementsParPage,
+										'nbEnregistrementsTotaux'=>$nbEnregistrementTotaux,
+										'typeLiens'=>'noformulaire'
+				));
+				
+			cette fonction retourne :
+			return array('html'=>$html,'limitSqlDebut'=>$limitSqlDebut);
+			
+			
+			a rajouter dans la requete a paginer
+			LIMIT ".$limitSqlDebut.",".$nbEnregistrementsParPage."
+
+*/
+
+
+
+
+class paginationObject extends config
+{
+	private $limitSqlDebut;
+	private $nbEnregistrementsParPage;
+	
+	function __construct($connexion='')
+	{
+		parent::__construct();	//
+		
+		$this->limitSqlDebut=0;
+		$this->nbEnregistrementsParPage=0;
+	}
+
+	// fonction permettant d'afficher la pagination en fonction de la requete courante et de la page courante
+	public function pagination($parametres=array())
+	{
+		$html = '';
+		
+		$t=new Template($this->cheminTemplates);
+		$t->set_filenames((array('pagination'=>'pagination.tpl')));
+		
+		$nbEnregistrementsTotaux = 0;
+		if(isset($parametres['nbEnregistrementsTotaux']))
+			$nbEnregistrementsTotaux = $parametres['nbEnregistrementsTotaux'];
+		
+		
+		$typeLiens="default";
+		if(isset($parametres['typeLiens']))
+			$typeLiens = $parametres['typeLiens'];
+		
+		
+		$nomParamPageCourante = '';
+		if(isset($parametres['nomParamPageCourante']))
+			$nomParamPageCourante = $parametres['nomParamPageCourante'];
+		
+
+		$pageCourante=1;
+		if(isset($this->variablesGet[$nomParamPageCourante]) && $this->variablesGet[$nomParamPageCourante]!='')
+			$pageCourante = $this->variablesGet[$nomParamPageCourante];
+		elseif(isset($this->variablesPost[$nomParamPageCourante]) && $this->variablesPost[$nomParamPageCourante]!='')
+			$pageCourante = $this->variablesPost[$nomParamPageCourante];
+		
+		// le parametre setPageCouranteTo , permet d'assigner le numero de la page courante , inutile pour une utilisation normale de la pagination
+		if(isset($parametres['setPageCouranteTo']))
+		{
+			$pageCourante = $parametres['setPageCouranteTo'];
+		}
+	
+		$nbEnregistrementsParPage = 0;
+		if(isset($parametres['nbEnregistrementsParPage']))
+		{
+			$nbEnregistrementsParPage = $parametres['nbEnregistrementsParPage'];
+			
+			$premierePage =1;
+			// calcul du nombre de pages 
+			if(($nbEnregistrementsTotaux/$nbEnregistrementsParPage)>1)
+			{
+				if($nbEnregistrementsTotaux%$nbEnregistrementsParPage==0)
+				{
+					$nbPages = $nbEnregistrementsTotaux/$nbEnregistrementsParPage;
+				}
+				else
+				{
+					$nbPages = intval($nbEnregistrementsTotaux/$nbEnregistrementsParPage)+1;
+				}
+			}
+			else
+			{
+				// il n'y a qu'une page
+				$nbPages = 1;
+			}
+			
+			$nbPagesAffichees=$nbPages;
+			if($nbPages > 20)
+			{
+				if($pageCourante > 10)
+				{
+					$premierePage = $pageCourante-5;
+					$t->assign_vars(array('pointillesPrecedents'=>'...'));
+				}
+				if($pageCourante < $nbPages-10)
+				{
+					$nbPagesAffichees = $pageCourante+5;
+					$t->assign_vars(array('pointillesSuivants'=>'...'));
+				}
+			}
+
+			for($i=$premierePage ; $i<=$nbPagesAffichees ; $i++)
+			{
+				$t->assign_block_vars('pages',array('numero'=>$i,'stylePageCourante'=>'font-weight:bold;'));
+				if($i!=$pageCourante)
+				{
+					switch($typeLiens)
+					{
+						
+		
+						case "formulaire":
+							// dans ce cas , on valide le formulaire dont l'ID est passé en parametres et on passe l'id dans un champs a cet effet     //$this->creerUrl('','',array_merge($this->variablesGet,array('archiPageSource'=>$i))),
+							$t->assign_block_vars('pages.isNotPageCourante',array(
+								'url'=>"#",
+								'onClick'=>"document.getElementById('".$parametres['champPageCourante']."').value='".$i."';document.getElementById('".$parametres['nomChampActionFormulaireOnSubmit']."').value='".$parametres['nomActionFormulaireOnSubmit']."';document.getElementById('".$parametres['idFormulaire']."').submit();"
+							));
+						break;		
+						
+						
+						case "noformulaire":
+							// on ne valide pas de formulaire , on fabrique simplement l'url
+							$t->assign_block_vars('pages.isNotPageCourante',array(
+														'url'=>$this->creerUrl('','',array_merge($this->variablesGet,array($nomParamPageCourante=>$i))),
+														'onClick'=>""							
+							));
+						
+						break;
+						case "freeLink":
+							$t->assign_block_vars('pages.isNotPageCourante',array(
+														'url'=>str_replace('##numPage##',$i,$parametres['urlFreeLink']),
+														'onClick'=>""
+							));
+						break;
+						default:
+							// dans ce cas le click sur un numero de page renvoi simplement vers la meme page avec le numero de page clicqué en parametres
+							$t->assign_block_vars('pages.isNotPageCourante',array(
+								'url'=>$this->creerUrl('','',array_merge($this->variablesGet,array('archiPageSource'=>$i))),
+								'onClick'=>''
+							));
+						break;
+					}
+				}
+				else
+				{
+					$t->assign_block_vars('pages.isPageCourante',array());
+				}
+			}
+		}
+		else
+			echo "Erreur : le nombre d'enregistrements par page est de 0.";
+		
+		
+		
+		$limitSqlDebut = $nbEnregistrementsParPage * ($pageCourante-1);
+		
+		ob_start();
+		$t->pparse('pagination');
+		$html=ob_get_contents();
+		ob_end_clean();
+		
+		$this->limitSqlDebut = $limitSqlDebut;
+		$this->nbEnregistrementsParPage = $nbEnregistrementsParPage;
+		
+		// gestion des boutons suivant et precedent
+		$lienBoutonSuivant="";
+		$lienBoutonPrecedent="";
+
+		if($pageCourante==1 && $pageCourante==$nbPages)
+		{
+			$lienBoutonPrecedent="#";
+			$lienBoutonSuivant="#";
+		}
+		elseif($pageCourante==1)
+		{
+			$lienBoutonPrecedent="#";
+			//$lienBoutonSuivant="annonces.php?".$nomParamPageCourante."=".($pageCourante+1);
+			$lienBoutonSuivant = ($pageCourante+1);
+		}
+		elseif($pageCourante==$nbPages)
+		{
+			$lienBoutonPrecedent=($pageCourante-1);
+			$lienBoutonSuivant="#";
+		}
+		else
+		{
+			$lienBoutonSuivant=($pageCourante+1);
+			$lienBoutonPrecedent=($pageCourante-1);
+		}
+		
+		return array('html'=>$html,'limitSqlDebut'=>$limitSqlDebut,'lienSuivant'=>$lienBoutonSuivant,'lienPrecedent'=>$lienBoutonPrecedent);
+	}
+	
+	// ajoute les limites a la requete
+	public function addLimitToQuery($req="")
+	{
+		$req = $req." LIMIT ".$this->limitSqlDebut.",".$this->nbEnregistrementsParPage;
+		return $req;
+	}
+	
+	
+}
+?>

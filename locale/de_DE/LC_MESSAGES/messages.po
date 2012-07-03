@@ -1,0 +1,3672 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ArchiWiki 2.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-08 15:09+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../modules/header/templates/header.tpl:8
+msgid ""
+"architectures,architecture,neudorf,contades,centre,strasbourg,photos,"
+"immeubles,monuments,immobilier,alsace"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:54
+#: ../../../modules/header/templates/header.tpl:60
+#: ../../../modules/header/templates/header.tpl:81
+msgid "Mot de passe oublié ?"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:68
+#: ../../../modules/header/index.php:227
+#: ../../../modules/header/templates/header.tpl:74
+#: ../../../modules/header/templates/header.tpl:95
+#: ../../../modules/header/index.php:222
+msgid "Accueil"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:70
+#: ../../../modules/archi/templates/listeUtilisateur.tpl:9
+#: ../../../modules/header/templates/header.tpl:76
+#: ../../../modules/header/templates/header.tpl:97
+msgid "Utilisateurs"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:72
+#: ../../../modules/header/templates/header.tpl:78
+#: ../../../modules/header/templates/header.tpl:99
+msgid "Logs Mails"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:76
+#: ../../../modules/archi/templates/administration.tpl:1
+#: ../../../modules/header/templates/header.tpl:82
+#: ../../../modules/header/templates/header.tpl:103
+msgid "Administration"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:79
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:30
+#: ../../../modules/archi/templates/rechercheSimple.tpl:2
+#: ../../../modules/header/templates/header.tpl:85
+#: ../../../modules/header/templates/header.tpl:106
+msgid "Recherche"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:80
+#: ../../../modules/header/templates/header.tpl:86
+#: ../../../modules/header/templates/header.tpl:107
+msgid "Français"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:81
+#: ../../../modules/header/templates/header.tpl:87
+#: ../../../modules/header/templates/header.tpl:108
+msgid "Anglais"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:90
+#: ../../../modules/archi/templates/rechercheSimple.tpl:21
+#: ../../../modules/header/templates/header.tpl:96
+#: ../../../modules/header/templates/header.tpl:117
+msgid "Rechercher"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:102
+#: ../../../modules/archi/templates/edito.tpl:1
+#: ../../../modules/header/templates/header.tpl:108
+msgid "Edito"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:103
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:1
+#: ../../../modules/header/templates/header.tpl:109
+#: ../../../modules/header/templates/header.tpl:130
+msgid "Qui sommes nous ?"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:104
+#: ../../../modules/archi/templates/faq.tpl:2
+msgid "FAQ"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:105
+msgid "Inscription"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:106
+#: ../../../modules/archi/templates/evenement.tpl:28
+#: ../../../modules/header/templates/header.tpl:110
+#: ../../../modules/header/templates/header.tpl:131
+msgid "Adresses"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:112
+#: ../../../modules/header/templates/header.tpl:116
+#: ../../../modules/header/templates/header.tpl:137
+msgid "Ajoutez votre adresse"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:113
+#: ../../../modules/archi/includes/archiSource.class.php:656
+#: ../../../modules/header/templates/header.tpl:117
+#: ../../../modules/archi/includes/archiSource.class.php:658
+#: ../../../modules/header/templates/header.tpl:138
+msgid "Nos sources"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:114
+msgid "Nous contacter"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:115
+#: ../../../modules/header/templates/header.tpl:119
+#: ../../../modules/header/templates/header.tpl:140
+msgid "Les médias parlent de nous..."
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:116
+#: ../../../modules/header/templates/header.tpl:120
+#: ../../../modules/header/templates/header.tpl:141
+msgid "Nos donateurs"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:121
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:1
+#: ../../../modules/header/templates/header.tpl:125
+#: ../../../modules/header/templates/header.tpl:147
+msgid "Faire un don"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:156
+#: ../../../modules/header/templates/header.tpl:160
+#: ../../../modules/header/templates/header.tpl:182
+msgid "Pour continuer à lire du contenu gratuit et de qualité, faites un don."
+msgstr ""
+
+#: ../../../modules/archi/templates/accueil.tpl:3
+msgid ""
+"Pour pérenniser le site et assurer les nouveaux développements, merci de "
+"votre soutien financier qui nous est indispensable pour continuer à exister."
+msgstr ""
+
+#: ../../../modules/archi/templates/accueil.tpl:74
+msgid "Ils nous soutiennent et nous les remercions :"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:1
+#: ../../../modules/archi/templates/detailAdresse.tpl:25
+#: ../../../modules/archi/includes/archiAccueil.class.php:679
+#: ../../../modules/archi/includes/archiEvenement.class.php:1946
+#: ../../../includes/framework/config.class.php:1593
+#: ../../../includes/framework/config.class.php:1691
+#: ../../../includes/framework/config.class.php:1694
+#: ../../../modules/archi/includes/archiAccueil.class.php:667
+#: ../../../includes/framework/config.class.php:1594
+#: ../../../includes/framework/config.class.php:1695
+msgid "Ajouter une adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:8
+msgid "Date :"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:18
+msgid "Description :"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:21
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:23
+#: ../../../modules/archi/templates/nouveauDossier.tpl:182
+#: ../../../modules/archi/templates/nouveauDossier.tpl:183
+msgid "Aperçu"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:24
+msgid "Etage :"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:27
+msgid "Numéro :"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:30
+msgid "ISMH :"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:33
+msgid "MH :"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:36
+msgid "Choix de l'adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/adresseFormulaire.tpl:5
+msgid "Intitule :"
+msgstr ""
+
+#: ../../../modules/archi/templates/authentification.tpl:11
+#: ../../../modules/archi/templates/authentification.tpl:31
+msgid "Mot de passe :"
+msgstr ""
+
+#: ../../../modules/archi/templates/authentification.tpl:12
+#: ../../../modules/archi/templates/authentification.tpl:32
+msgid "Rester connecté"
+msgstr ""
+
+#: ../../../modules/archi/templates/authentification.tpl:12
+msgid "30 jours"
+msgstr ""
+
+#: ../../../modules/archi/templates/authentification.tpl:13
+#: ../../../modules/archi/templates/authentification.tpl:33
+msgid "Se connecter"
+msgstr ""
+
+#: ../../../modules/archi/templates/authentification.tpl:16
+msgid "Vous pouvez également vous connecter avec"
+msgstr ""
+
+#: ../../../modules/archi/templates/authentification.tpl:16
+#: ../../../modules/archi/includes/archiAdministration.class.php:76
+msgid " :"
+msgstr ""
+
+#: ../../../modules/archi/templates/authentification.tpl:17
+#: ../../../modules/archi/templates/authentification.tpl:35
+msgid "Se connecter avec BrowserID"
+msgstr ""
+
+#: ../../../modules/archi/templates/authentification.tpl:30
+msgid "Login (mail) :"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:3
+#: ../../../modules/archi/templates/modificationElementAdresseRue.tpl:11
+#: ../../../modules/archi/templates/modificationElementAdresse.tpl:8
+msgid "Intitulé"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:3
+msgid "Valeurs"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:7
+#: ../../../modules/archi/templates/modificationElementAdresseQuartier.tpl:5
+#: ../../../modules/archi/templates/modificationElementAdresseRue.tpl:7
+#: ../../../modules/archi/templates/modificationElementAdresseSousQuartier.tpl:5
+#: ../../../modules/archi/templates/modificationElementAdresse.tpl:4
+#: ../../../modules/archi/templates/modificationElementAdresseVille.tpl:6
+msgid "Pays"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:10
+#: ../../../modules/archi/templates/choixAdresse.tpl:36
+#: ../../../modules/archi/templates/choixAdresse.tpl:49
+msgid "Tous"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:20
+#: ../../../modules/archi/templates/modificationElementAdresseQuartier.tpl:6
+#: ../../../modules/archi/templates/modificationElementAdresseRue.tpl:8
+#: ../../../modules/archi/templates/modificationElementAdresseSousQuartier.tpl:6
+#: ../../../modules/archi/templates/modificationElementAdresse.tpl:5
+#: ../../../modules/archi/templates/nouveauDossier.tpl:76
+msgid "Ville"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:23
+#: ../../../modules/archi/templates/choixAdresse.tpl:62
+#: ../../../modules/archi/templates/listeSources.tpl:12
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:35
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:41
+msgid "Toutes"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:33
+#: ../../../modules/archi/templates/modificationElementAdresseRue.tpl:9
+#: ../../../modules/archi/templates/modificationElementAdresseSousQuartier.tpl:7
+#: ../../../modules/archi/templates/modificationElementAdresse.tpl:6
+#: ../../../modules/archi/templates/nouveauDossier.tpl:84
+msgid "Quartier"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:46
+#: ../../../modules/archi/templates/modificationElementAdresseRue.tpl:10
+#: ../../../modules/archi/templates/modificationElementAdresse.tpl:7
+#: ../../../modules/archi/templates/nouveauDossier.tpl:94
+msgid "Sous-quartier"
+msgstr ""
+
+#: ../../../modules/archi/templates/choixAdresse.tpl:59
+#: ../../../modules/archi/templates/nouveauDossier.tpl:109
+msgid "Rue"
+msgstr ""
+
+#: ../../../modules/archi/templates/comparaisonEvenements.tpl:3
+msgid "Version précédente"
+msgstr ""
+
+#: ../../../modules/archi/templates/comparaisonEvenements.tpl:3
+msgid "Version courante"
+msgstr ""
+
+#: ../../../modules/archi/templates/comparaisonEvenements.tpl:9
+msgid "Revenir à la version précédente"
+msgstr ""
+
+#: ../../../modules/archi/templates/derniersEvenements.tpl:1
+msgid "Les derniers évènements"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:1
+msgid "Détails de l'adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:10
+msgid "Modifier cet historique"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:22
+msgid "Ajouter une image à l'adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:23
+msgid "Modifier vos images"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:24
+msgid "Ajouter un historique à cette adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:26
+msgid "Ajouter un evenement à cette adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:27
+msgid "Supprimer cette adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:28
+msgid "Supprimer cet historique"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailAdresse.tpl:31
+msgid "Connectez-vous pour pouvoir ajouter ou modifier une adresse."
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:2
+msgid "Retour"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:5
+msgid "Detail de l'image"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:16
+msgid ""
+"L'utilisation des images est autorisée dans un but non commercial et sous "
+"condition d'indiquer la source : www.archi-strasbourg.org"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:27
+#: ../../../modules/archi/templates/detailImage.tpl:29
+msgid "Modifier l'image"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:32
+#: ../../../modules/archi/templates/detailImage.tpl:34
+msgid "Afficher l'historique de l'image"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:36
+#: ../../../modules/archi/templates/detailImage.tpl:38
+msgid "Supprimer l'image"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:40
+#: ../../../modules/archi/templates/detailImage.tpl:42
+msgid "Zone de selection"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:48
+#: ../../../modules/archi/templates/detailImage.tpl:50
+msgid "Cette photo donne une vue sur :"
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:54
+#: ../../../modules/archi/templates/detailImage.tpl:56
+msgid "Cette photo a été prise depuis :"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:1
+msgid "Donateurs"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:3
+msgid ""
+"Vous trouverez ci-dessous la liste de nos mécènes et donateurs (par ordre de "
+"don, du plus récent au plus ancien) :"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:13
+msgid "Agence Raphaëlimmo"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:15
+msgid ""
+"Raphaëlimmo est une agence immobilière spécialisée où vous trouverez des "
+"biens immobiliers dans la région de Strasbourg"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:17
+msgid "Consulter le site de l'agence"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:30
+msgid "Association Villa 17"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:32
+msgid "Villa 17 est une association pour la défense du patrimoine Wilhelmien."
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:34
+#: ../../../modules/archi/templates/donateurs.tpl:49
+msgid "Consulter le site de l'association"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:44
+#: ../../../modules/archi/templates/donateurs.tpl:56
+msgid ""
+"Merci à tout nos mécènes et donateurs qui permettent au site de continuer à "
+"exister."
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:46
+#: ../../../modules/archi/templates/donateurs.tpl:58
+msgid ""
+"Pour faire partie de nos mécènes et ainsi bénéficier de votre logo et d'un "
+"lien vers votre site (entreprise et association), vous pouvez soutenir notre "
+"association par un don à partir de 80 euros pour une année."
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:47
+#: ../../../modules/archi/templates/donateurs.tpl:59
+msgid ""
+"Les particuliers peuvent aussi nous aider, à partir de 40 euros pour un "
+"membre donateur, et ainsi figurer s'il le souhaite, sur cette page."
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:50
+#: ../../../modules/archi/templates/donateurs.tpl:62
+msgid "Pour rejoindre l'association ou en savoir plus, vous pouvez cliquez sur"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:50
+#: ../../../modules/archi/templates/donateurs.tpl:62
+msgid "Qui sommes-nous ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/encartAccueilCommentaires.tpl:3
+msgid "Derniers commentaires"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:3
+msgid "d'un Évènement"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:11
+msgid "Libelle"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:20
+#: ../../../modules/archi/templates/imageFormulaire.tpl:54
+#: ../../../modules/archi/templates/nouveauDossier.tpl:179
+#: ../../../modules/archi/templates/personneFormulaire.tpl:31
+#: ../../../modules/archi/templates/personne.tpl:9
+#: ../../../modules/archi/templates/sourceFormulaire.tpl:11
+#: ../../../modules/archi/templates/nouveauDossier.tpl:180
+msgid "Description"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:26
+msgid "Date de début"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:30
+msgid "Date de fin"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:31
+#: ../../../modules/archi/templates/imageFormulaire.tpl:67
+#: ../../../modules/archi/templates/nouveauDossier.tpl:204
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:35
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:8
+#: ../../../modules/archi/templates/nouveauDossier.tpl:205
+msgid "Source"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:35
+#: ../../../modules/archi/templates/evenementsLies.tpl:5
+#: ../../../modules/archi/templates/nouveauDossier.tpl:226
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:41
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:14
+#: ../../../modules/archi/templates/nouveauDossier.tpl:227
+msgid "Type de structure"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:35
+#: ../../../modules/archi/templates/nouveauDossier.tpl:86
+#: ../../../modules/archi/templates/nouveauDossier.tpl:96
+#: ../../../modules/archi/templates/nouveauDossier.tpl:118
+#: ../../../modules/archi/templates/nouveauDossier.tpl:229
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:14
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:20
+#: ../../../modules/archi/templates/nouveauDossier.tpl:230
+msgid "Aucun"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:46
+#: ../../../modules/archi/templates/nouveauDossier.tpl:261
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:47
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:20
+#: ../../../modules/archi/templates/nouveauDossier.tpl:262
+msgid "Type d'évènement"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:47
+#: ../../../modules/archi/templates/nouveauDossier.tpl:262
+#: ../../../modules/archi/templates/nouveauDossier.tpl:263
+msgid "Culturel"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:48
+#: ../../../modules/archi/templates/nouveauDossier.tpl:263
+#: ../../../modules/archi/templates/nouveauDossier.tpl:264
+msgid "Travaux"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:63
+msgid "ISMH"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:66
+msgid "MH"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:74
+#: ../../../modules/archi/templates/nouveauDossier.tpl:288
+#: ../../../modules/archi/templates/nouveauDossier.tpl:289
+msgid "Nombre d'étages"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:77
+#: ../../../modules/archi/templates/evenement.tpl:59
+msgid "Courant Architectural"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:85
+msgid "Personnages"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:85
+msgid "personnes"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:95
+msgid "Lier à des adresses"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:99
+msgid "Ajouter des adresses à l'évènement"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:105
+msgid "Lier à d'autres évènements"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementFormulaire.tpl:109
+#: ../../../modules/archi/templates/evenement.tpl:125
+#: ../../../modules/archi/templates/listeEvenement.tpl:34
+msgid "Ajouter un évènement"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementsLies.tpl:4
+msgid "Evenements associés"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementsLies.tpl:5
+#: ../../../modules/archi/templates/historiqueEvenement.tpl:4
+msgid "Titre"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenementsLies.tpl:5
+msgid "Type d'évenemement"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:8
+msgid "Ajouter"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:9
+#: ../../../modules/archi/templates/evenement.tpl:11
+#: ../../../modules/archi/templates/evenement.tpl:18
+#: ../../../modules/archi/templates/listeImages.tpl:1
+msgid "Images"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:10
+#: ../../../modules/archi/includes/archiEvenement.class.php:1950
+msgid "Modifier"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:11
+#: ../../../modules/archi/templates/listeEvenement.tpl:1
+msgid "Évènement"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:13
+msgid "Supprimer"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:22
+msgid "Importer"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:23
+msgid "Images selectionnées"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:27
+msgid "Lier"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:31
+msgid "Déplacer"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:32
+msgid "Vers Adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:50
+msgid "Type d'Évènement :"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:72
+msgid "Voir l'historique"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:107
+msgid "Voir tous les bâtiments de cette rue..."
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:108
+msgid "Voir tous les bâtiments de ce quartier..."
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:123
+#: ../../../modules/archi/templates/recapitulatifAncres.tpl:2
+msgid "Historique des évènements"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:128
+msgid "Sélectionner des images"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:131
+msgid "Sélectionner l'image principale"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:134
+msgid "Sélectionner le titre"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:137
+msgid "Repositionner les évènements"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:177
+msgid "Historique des noms de la rue"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:208
+msgid "Autres vues sur"
+msgstr ""
+
+#: ../../../modules/archi/templates/evenement.tpl:215
+msgid "Vues prises depuis"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:3
+msgid "Qu'est ce que Archi-Strasbourg ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:5
+msgid ""
+"Archi-strasbourg est un site internet proposant d'inventorier l'ensemble des "
+"immeubles, parcs et monuments de Strasbourg et son agglomération."
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:7
+msgid "Pourquoi Archi-Strasbourg ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:9
+msgid ""
+"Archi-strasbourg est né d'une volonté de partage de la connaissance et de "
+"l'information. Sur internet on trouve presque tout sur tout de façon "
+"éparpillée. Archi-strasbourg se donne donc comme but de classer "
+"l'information de façon rationnelle."
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:10
+msgid "Que trouve-t-on comme information ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:12
+msgid "Pour chaque immeuble, parc ou monument on trouve : "
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:14
+msgid "l'historique"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:15
+msgid "les architectes, entrepreneurs ou grands hommes"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:16
+msgid "des photos"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:18
+msgid "Chaque information est classée sous la forme d'événements"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:21
+msgid "Comment est classée l'information ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:23
+msgid ""
+"L'information est classée par adresse. Chaque adresse possède un ou "
+"plusieurs événements. Chaque adresse est rangée dans une rue. La rue est "
+"rangée dans un sous quartier et le sous quartier dans un quartier."
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:26
+msgid "Comment trouver l'information ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:28
+msgid "L'information est accessible par un"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:28
+msgid "moteur de recherche"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:28
+msgid "général ou par une"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:28
+msgid "carte de type google maps"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:28
+msgid ""
+"Pour chaque événement il est possible et recommandé d'indiquer une source "
+"c'est à dire d'où vient l'information."
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:32
+msgid "Qui peut mettre à jour Archi-Strasbourg ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:34
+msgid ""
+"Tout utilisateur enregistré. L'enregistrement est gratuit il suffit de "
+"communiquer son email et de choisir un mot de passe. Une fois l'email validé "
+"vous pouvez saisir de nouveaux événements. Pour s'enregistrer"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:34
+msgid "cliquez ici"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:36
+msgid ""
+"Un utilisateur non enregistré (internaute) peut laisser sur chaque événement "
+"un commentaire un peu à la façon d'un blog"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:40
+msgid "Archi-Strasbourg est t-il gratuit ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:42
+msgid ""
+"Archi-Strasbourg est totalement gratuit, il est maintenu et hébergé par "
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:42
+msgid "l'association Archi-Strasbourg"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:42
+msgid "grâce aux cotisations et dons. Pour nous soutenir n'hésitez pas à"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:42
+msgid "faire un don"
+msgstr ""
+
+#: ../../../modules/archi/templates/faq.tpl:42
+msgid "rien que l'hébergement nous coûte 700 euros annuel (serveur dédié)"
+msgstr ""
+
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:2
+msgid "Recherche images"
+msgstr ""
+
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:5
+msgid "Recherche par intitulé/description"
+msgstr ""
+
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:10
+msgid "Recherche par date d'upload :"
+msgstr ""
+
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:11
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:16
+msgid "du :"
+msgstr ""
+
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:11
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:12
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:16
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:17
+#: ../../../modules/archi/templates/listeAdressesLiesAImage.tpl:8
+#: ../../../modules/archi/templates/listeAdressesLiesAImage.tpl:13
+msgid "Choisir"
+msgstr ""
+
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:12
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:17
+msgid "au :"
+msgstr ""
+
+#: ../../../modules/archi/templates/formulaireRechercheImage.tpl:15
+msgid "Recherche par date de prise de vue :"
+msgstr ""
+
+#: ../../../modules/archi/templates/historiqueAdresse.tpl:2
+msgid "Historique de l'adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/historiqueAdresse.tpl:4
+#: ../../../modules/archi/templates/historiqueEvenement.tpl:4
+#: ../../../modules/archi/includes/archiEvenement.class.php:1631
+msgid "Date"
+msgstr ""
+
+#: ../../../modules/archi/templates/historiqueAdresse.tpl:4
+#: ../../../modules/archi/templates/inscription.tpl:11
+#: ../../../modules/archi/templates/listePersonnes.tpl:21
+#: ../../../modules/archi/templates/listeSources.tpl:47
+#: ../../../modules/archi/templates/personneFormulaire.tpl:7
+#: ../../../modules/archi/templates/sourceFormulaire.tpl:8
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:13
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:12
+msgid "Nom"
+msgstr ""
+
+#: ../../../modules/archi/templates/historiqueAdresse.tpl:4
+#: ../../../modules/archi/templates/historiqueEvenement.tpl:4
+msgid "Coordonnées"
+msgstr ""
+
+#: ../../../modules/archi/templates/historiqueEvenement.tpl:2
+msgid "Historique de l'évènement"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:20
+msgid "Date d'upload de l'image :"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:21
+msgid "Pris depuis"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:25
+msgid "Vue sur"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:42
+#: ../../../modules/archi/templates/nouveauDossier.tpl:169
+msgid "Mise en forme"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:57
+msgid "Apercu"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:61
+msgid "Date de la prise de vue"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:62
+#: ../../../modules/archi/templates/nouveauDossier.tpl:185
+#: ../../../modules/archi/templates/nouveauDossier.tpl:186
+msgid "environ"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:79
+msgid "N° archive"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:89
+msgid "Evenements liées"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:102
+msgid "Remplacer l'image par :"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageUploadFormulaire.tpl:20
+msgid "Ajouter une photo"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageUploadFormulaire.tpl:66
+#: ../../../modules/archi/templates/imageUploadFormulaire.tpl:75
+msgid "Fichier"
+msgstr ""
+
+#: ../../../modules/archi/templates/inscription.tpl:5
+msgid ""
+"L'inscription sur www.archi-strasbourg.com vous permet de contribuer au site "
+"en donnant des informations sur un immeuble, une adresse, en ajoutant des "
+"photos, ou en modifiant les articles existants. Vous pourrez aussi recevoir "
+"les nouvelles adresses par mail."
+msgstr ""
+
+#: ../../../modules/archi/templates/inscription.tpl:14
+#: ../../../modules/archi/templates/listePersonnes.tpl:21
+#: ../../../modules/archi/templates/personneFormulaire.tpl:10
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:14
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:13
+msgid "Prénom"
+msgstr ""
+
+#: ../../../modules/archi/templates/inscription.tpl:17
+msgid "Adresse e-mail (qui sera votre identifiant pour la connexion)"
+msgstr ""
+
+#: ../../../modules/archi/templates/inscription.tpl:20
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:60
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:61
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:49
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:50
+msgid "Mot de passe"
+msgstr ""
+
+#: ../../../modules/archi/templates/inscription.tpl:23
+msgid "Mot de passe (confirmation)"
+msgstr ""
+
+#: ../../../modules/archi/templates/inscription.tpl:26
+msgid "Recopiez les caractères de l'image"
+msgstr ""
+
+#: ../../../modules/archi/templates/inscription.tpl:26
+msgid "Recharger"
+msgstr ""
+
+#: ../../../modules/archi/templates/inscription.tpl:32
+#: ../../../modules/archi/templates/nouveauDossier.tpl:313
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:45
+#: ../../../modules/archi/includes/archiEvenement.class.php:2341
+#: ../../../modules/archi/includes/archiImage.class.php:4585
+#: ../../../includes/framework/frameworkClasses/formGenerator.class.php:1388
+#: ../../../includes/framework/frameworkClasses/formGenerator.class.php:2115
+#: ../../../modules/archi/templates/nouveauDossier.tpl:314
+#: ../../../modules/archi/includes/archiImage.class.php:4573
+msgid "Valider"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeAdressesDetailEvenement.tpl:1
+#: ../../../modules/archi/includes/archiAccueil.class.php:27
+#: ../../../modules/archi/includes/archiRecherche.class.php:1011
+msgid "Adresses :"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeAdressesLiesAImage.tpl:3
+msgid "Liste des adresses liées à l'image"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeAdressesLiesAImage.tpl:17
+msgid "étage"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeAdressesLiesAImage.tpl:20
+msgid "hauteur"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeCommentaires.tpl:2
+msgid "Liste des commentaires"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeEvenementsLiesAImage.tpl:2
+msgid "Liste des evenements liés à l'image"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeEvenement.tpl:3
+#: ../../../modules/archi/templates/listeImages.tpl:2
+msgid "réponses :"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeImagesAssocies.tpl:2
+msgid "Images associées"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeImages.tpl:22
+msgid "Ajouter une image dans la bibliothèque"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeNavigationAdresse.tpl:3
+msgid "Liste de navigation"
+msgstr ""
+
+#: ../../../modules/archi/templates/listePersonnes.tpl:20
+#: ../../../modules/archi/templates/nouveauDossier.tpl:241
+#: ../../../modules/archi/templates/nouveauDossier.tpl:242
+msgid "Personnes"
+msgstr ""
+
+#: ../../../modules/archi/templates/listePersonnes.tpl:21
+#: ../../../modules/archi/templates/personneFormulaire.tpl:13
+#: ../../../modules/archi/templates/personne.tpl:5
+msgid "Métier"
+msgstr ""
+
+#: ../../../modules/archi/templates/listePersonnes.tpl:35
+#: ../../../modules/archi/templates/personneFormulaire.tpl:1
+#: ../../../modules/archi/templates/personne.tpl:12
+msgid "Ajouter une personne"
+msgstr ""
+
+#: ../../../modules/archi/templates/listePersonnes.tpl:37
+msgid "Il n'y a pas d'enregistrement"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeSources.tpl:19
+msgid "Recherche :"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeSources.tpl:47
+msgid "Type"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeSources.tpl:58
+#: ../../../modules/archi/templates/sourceFormulaire.tpl:1
+#: ../../../modules/archi/templates/source.tpl:5
+msgid "Ajouter une source"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeSources.tpl:62
+msgid "Il n'y a pas d'enregistrement."
+msgstr ""
+
+#: ../../../modules/archi/templates/listeUtilisateur.tpl:1
+msgid "Liste des utilisateurs"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeUtilisateur.tpl:10
+msgid "Nombre de connexions"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeUtilisateur.tpl:11
+msgid "Nombre de participations"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeUtilisateur.tpl:12
+msgid "Date de la dernière connexion"
+msgstr ""
+
+#: ../../../modules/archi/templates/listeUtilisateur.tpl:13
+msgid "Date de création du compte"
+msgstr ""
+
+#: ../../../modules/archi/templates/modificationElementAdressePays.tpl:1
+#: ../../../modules/archi/templates/modificationElementAdresseQuartier.tpl:1
+#: ../../../modules/archi/templates/modificationElementAdresseRue.tpl:3
+#: ../../../modules/archi/templates/modificationElementAdresseSousQuartier.tpl:1
+#: ../../../modules/archi/templates/modificationElementAdresse.tpl:1
+#: ../../../modules/archi/templates/modificationElementAdresseVille.tpl:1
+msgid "Modification d'un élément d'adresse de type"
+msgstr ""
+
+#: ../../../modules/archi/templates/modificationElementAdressePays.tpl:5
+msgid "Intitulé pays"
+msgstr ""
+
+#: ../../../modules/archi/templates/modificationElementAdresseQuartier.tpl:7
+msgid "Intitulé quartier"
+msgstr ""
+
+#: ../../../modules/archi/templates/modificationElementAdresseRue.tpl:12
+#: ../../../modules/archi/templates/modificationElementAdresse.tpl:9
+msgid "Complément d'adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/modificationElementAdresseSousQuartier.tpl:8
+msgid "Intitulé sous-quartier"
+msgstr ""
+
+#: ../../../modules/archi/templates/modificationElementAdresseVille.tpl:7
+msgid "Intitule ville"
+msgstr ""
+
+#: ../../../modules/archi/templates/modificationElementAdresseVille.tpl:8
+msgid "Code postal"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:18
+msgid "Une ville doit être précisée."
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:23
+msgid "Il faut au moins préciser un quartier pour l'adresse."
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:33
+msgid ""
+"Pour valider une adresse il faut préciser une rue ou au moins un quartier ou "
+"un sous quartier en plus de la ville."
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:109
+msgid "Numéro"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:109
+msgid "Indicatif"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:109
+msgid "Suppr"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:141
+msgid ""
+"Si vous souhaitez que nous ajoutions une rue, un quartier, un sous quartier "
+"ou une ville, faites nous en part grâce au formulaire de"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:141
+msgid "contact"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:163
+msgid "Événement"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:167
+msgid "Libellé"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:185
+#: ../../../modules/archi/templates/nouveauDossier.tpl:186
+msgid "Date début"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:192
+#: ../../../modules/archi/templates/nouveauDossier.tpl:193
+msgid "Date fin"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:218
+#: ../../../modules/archi/templates/nouveauDossier.tpl:219
+msgid "Numéro d'archive"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:276
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:66
+#: ../../../modules/archi/templates/nouveauDossier.tpl:277
+msgid "ISMH (inscrit)"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:279
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:61
+#: ../../../modules/archi/templates/nouveauDossier.tpl:280
+msgid "MH (classé)"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouveauDossier.tpl:299
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:53
+#: ../../../modules/archi/templates/nouveauDossier.tpl:300
+msgid "Courant architectural"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:4
+msgid "Vous voulez ajouter un(e) :"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:7
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:16
+msgid "rue"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:8
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:17
+msgid "sous-quartier"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:9
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:18
+msgid "quartier"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:10
+msgid "ville"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:11
+msgid "pays"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:28
+msgid "Intitule nouvel élément"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:32
+msgid "Code postal :"
+msgstr ""
+
+#: ../../../modules/archi/templates/nouvelleAdresseFormulaire.tpl:38
+msgid "complément d'adresse :"
+msgstr ""
+
+#: ../../../modules/archi/templates/personneFormulaire.tpl:2
+msgid "Vous pouvez ajouter une personne ici."
+msgstr ""
+
+#: ../../../modules/archi/templates/personneFormulaire.tpl:3
+msgid ""
+"Remplissez le champ métier pour ajouter un nouveau métier. Sinon, prenez-en "
+"un existant."
+msgstr ""
+
+#: ../../../modules/archi/templates/personneFormulaire.tpl:21
+msgid "Ajouter un métier"
+msgstr ""
+
+#: ../../../modules/archi/templates/personneFormulaire.tpl:25
+msgid "Date de naissance"
+msgstr ""
+
+#: ../../../modules/archi/templates/personneFormulaire.tpl:28
+msgid "Date de décès"
+msgstr ""
+
+#: ../../../modules/archi/templates/personne.tpl:1
+msgid "Présentation d'une personne"
+msgstr ""
+
+#: ../../../modules/archi/templates/personne.tpl:4
+msgid "Infomations minimales"
+msgstr ""
+
+#: ../../../modules/archi/templates/personne.tpl:6
+msgid "Naissance"
+msgstr ""
+
+#: ../../../modules/archi/templates/personne.tpl:7
+msgid "Décès"
+msgstr ""
+
+#: ../../../modules/archi/templates/popupChoixDate.tpl:5
+msgid "Choix d'une date"
+msgstr ""
+
+#: ../../../modules/archi/templates/popupChoixPersonne.tpl:5
+msgid "Choix d'une personne"
+msgstr ""
+
+#: ../../../modules/archi/templates/popupChoixRue.tpl:5
+msgid "Choix de la rue"
+msgstr ""
+
+#: ../../../modules/archi/templates/popupChoixSource.tpl:5
+msgid "Choix de la source"
+msgstr ""
+
+#: ../../../modules/archi/templates/popupChoixVille.tpl:6
+msgid "Choix de la ville"
+msgstr ""
+
+#: ../../../modules/archi/templates/popupDescriptionSource.tpl:4
+msgid "Description de la source"
+msgstr ""
+
+#: ../../../modules/archi/templates/recapitulatifAdresses.tpl:18
+msgid "Voir tous les bâtiments de cette rue"
+msgstr ""
+
+#: ../../../modules/archi/templates/recapitulatifAdresses.tpl:19
+msgid "Voir tous les bâtiments de ce quartier"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheAvanceeAdresseFormulaire.tpl:33
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:32
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:6
+msgid "Recherche par mot clé"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheAvanceeAdresseFormulaire.tpl:37
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:27
+msgid "Adresse"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:3
+msgid "Recherche avancée d'évènement"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:56
+msgid "Intervalle d'années"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheAvanceeEvenementFormulaire.tpl:57
+#: ../../../modules/archi/includes/archiEvenement.class.php:1654
+msgid "à"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:1
+msgid "Recherche générale"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:4
+msgid "Formulaire"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheFormulaire.tpl:8
+msgid "Aucune"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheSimple.tpl:23
+#: ../../../modules/archi/includes/archiRecherche.class.php:1370
+#: ../../../modules/header/index.php:250 ../../../modules/header/index.php:245
+msgid "Recherche avancée"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheSimple.tpl:26
+msgid "Afficher les 100 premiers résultats sur une carte"
+msgstr ""
+
+#: ../../../modules/archi/templates/rechercheUtilisateurs.tpl:27
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1182
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1596
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1707
+#: ../../../modules/archi/index.php:16
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1178
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1590
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1699
+#: ../../../modules/archi/index.php:28
+msgid "Envoyer"
+msgstr ""
+
+#: ../../../modules/archi/templates/sourceFormulaire.tpl:3
+msgid ""
+"Vous pouvez ajouter une source ici, si vous entrez un type de source dans le "
+"champ approprié, vous ajouterez un nouveau type de source."
+msgstr ""
+
+#: ../../../modules/archi/templates/sourceFormulaire.tpl:14
+msgid "Type de source"
+msgstr ""
+
+#: ../../../modules/archi/templates/sourceFormulaire.tpl:22
+msgid "Nouveau type de source"
+msgstr ""
+
+#: ../../../modules/archi/templates/source.tpl:1
+msgid "Source :"
+msgstr ""
+
+#: ../../../modules/archi/templates/source.tpl:2
+msgid "Type :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticArticleDNA.tpl:5
+msgid "Les médias parlent d'archi-strasbourg.org"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:4
+msgid ""
+"Archi-strasbourg.org vous aide dans vos recherches ? Alors aidez notre "
+"association (à but non lucratif) en faisant un don. Même un don de 1 €  sera "
+"toujours apprécié !"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:6
+msgid ""
+"Archi-strasbourg.org est un site gratuit, mis à jour par ses membres "
+"bénévoles. Pour continuer à assurer les nouveaux développements et prendre "
+"en charge les coûts d'hébergement et de maintenance, nous avons besoin de "
+"vous."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:8
+msgid ""
+"En faisant un don vous participez à la pérennisation du site – jamais "
+"acquise - et à la construction d'un vieil idéal sur le web : fournir un "
+"contenu de qualité gratuitement."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:10
+msgid "Pour nous aider financièrement, vous pouvez faire un don de 3 façons :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:12
+msgid "via paypal :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:23
+msgid "par virement :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:24
+msgid "RIB de l'association :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:26
+msgid "Code Banque"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:26
+msgid "Code guichet"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:26
+msgid "Numéro de compte"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:26
+msgid "Clé RIB"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:34
+msgid "Télécharger le RIB au format PDF"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:38
+msgid ""
+"par chèque à l'ordre de <i>Association Archi-strasbourg</i> en l'envoyant au "
+"siège de l'association :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
+msgid "IMPORTANT :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
+#, php-format
+msgid ""
+"Notre association est reconnu d'intérêt général, dès réception du don vous "
+"recevrez un reçu fiscal vous permettant de déduire 66% de votre don."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
+#, php-format
+msgid ""
+"Exemple : pour un don de 50 € le coût à votre charge sera de 17€ après "
+"réduction d'impôts. Pour les entreprises les dons sont déductible à 60% dans "
+"la limite de 0,5% du chiffre d'affaire."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
+msgid ""
+"Possibilité d'apparaitre dans notre rubrique donateur avec nom et lien sur "
+"votre site."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
+msgid "Voir notre rubrique donateur"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:48
+msgid ""
+"Vous pouvez aussi nous aider en rejoignant notre association et en "
+"participant à nos activités bénévoles. Merci de "
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:48
+msgid "prendre contact avec nous"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:50
+msgid "Merci d'avance."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticFaireUnDon.tpl:53
+msgid "Président-fondateur d'Archi-Strasbourg"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:4
+msgid ""
+"Le site\r\n"
+"internet"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:6
+msgid ""
+"fut d'abord une initiative privée (2003), avant de devenir un\r\n"
+"site collaboratif (2008). Rejoint par une dizaine de contributeurs\r\n"
+"qui ont contribué au succès du site, les internautes\r\n"
+"ont décidés de se constituer en association pour mieux\r\n"
+"faire connaître leurs actions auprès des élus,\r\n"
+"institutions, chercheurs et le public."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:14
+msgid ""
+"Ainsi est\r\n"
+"née l'association Archi-Strasbourg le 23 septembre 2011, dont\r\n"
+"l'objet est le suivant :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:17
+msgid ""
+"L'association\r\n"
+"est constituée pour faciliter l'accès à\r\n"
+"l'information historique, architecturale et patrimoniale de la ville\r\n"
+"de Strasbourg et des communes environnantes."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:21
+msgid ""
+"L'objectif\r\n"
+"est de constituer une base de données des bâtiments et\r\n"
+"lieux de Strasbourg, accessible au plus grand nombre, par internet ou\r\n"
+"tout autre support."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:25
+msgid ""
+"Les\r\n"
+"bâtiments et lieux de Strasbourg, sont répertoriés\r\n"
+"quelle que soit l'époque, le style et le type de bâtiment."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:28
+msgid ""
+"L'association\r\n"
+"s'intéresse au Strasbourg disparu, aux bâtiments actuels\r\n"
+"et au futur de la ville."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:33
+msgid ""
+"Adresse\r\n"
+"du siège :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:41
+msgid "Tél :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:45
+msgid ""
+"Les\r\n"
+"membres du conseil d'administration sont :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:48
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:112
+msgid "président"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:50
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:104
+msgid "secrétaire"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:52
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:106
+msgid "trésorier"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:57
+msgid ""
+"Télécharger\r\n"
+"les statuts complets"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:58
+msgid ""
+"l'assemblée\r\n"
+"constitutive"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:62
+msgid ""
+"Pour nous\r\n"
+"aider, et nous rejoindre en tant que membre, vous pouvez"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:63
+msgid ""
+"nous\r\n"
+"contacter"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:64
+msgid ""
+"en nous communiquant votre nom,\r\n"
+"prénom, adresse et téléphone."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:68
+msgid "Cotisation"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:69
+msgid ""
+"Particuliers\r\n"
+":"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:71
+msgid "Membre :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:73
+msgid ""
+"Membre\r\n"
+"donateur :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:75
+msgid ""
+"Membre\r\n"
+"bienfaiteur à partir de"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:77
+msgid ""
+"Tarif\r\n"
+"réduit de"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:78
+msgid ""
+"pour étudiants, bénéficiaires\r\n"
+"du RSA et personnes non-imposables, sur justificatif."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:82
+msgid "Sociétés :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:83
+msgid "nom et logo sur notre site"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:84
+msgid ""
+"Mécènes\r\n"
+"à partir de"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:85
+msgid ""
+"avec le nom, un logo et un lien sur le\r\n"
+"site de la société."
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:89
+msgid ""
+"Le\r\n"
+"paiement se fait par chèque à l'ordre de"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:91
+msgid "ou par virement"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:91
+msgid ""
+"télécharger\r\n"
+"le RIB"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:93
+msgid ""
+"Vous\r\n"
+"pouvez aussi nous aider"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:94
+msgid ""
+"en\r\n"
+"faisant un don"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:102
+msgid ""
+"Rencontre public du 26 novembre 2011 avec les internautes au café Michel. "
+"Liste de nos membres fondateurs par ordre alphabétique :"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:132
+msgid ""
+"Pour que\r\n"
+"demain www.archi-strasbourg.org continue d'exister, se développe,\r\n"
+"et fournisse un contenu gratuit et de qualité, soutenez-nous\r\n"
+"et engagez-vous !"
+msgstr ""
+
+#: ../../../modules/archi/templates/staticQuiSommesNous.tpl:140
+msgid ""
+"Président-fondateur\r\n"
+"d'Archi-Strasbourg"
+msgstr ""
+
+#: ../../../modules/archi/templates/statistiquesAccueil.tpl:1
+msgid "Statistiques"
+msgstr ""
+
+#: ../../../modules/archi/templates/statistiquesAccueil.tpl:11
+msgid ""
+"La base archi-strasbourg comprend <b>{nbAdresses}</b> adresses sur environ "
+"20000 recensées sur Strasbourg."
+msgstr ""
+
+#: ../../../modules/archi/templates/statistiquesAccueil.tpl:12
+msgid "Il y a en tout"
+msgstr ""
+
+#: ../../../modules/archi/templates/statistiquesAccueil.tpl:12
+msgid "évènements decrivant chacune de ces adresses."
+msgstr ""
+
+#: ../../../modules/archi/templates/statistiquesAccueil.tpl:13
+msgid "photos illustrent ces évènements."
+msgstr ""
+
+#: ../../../modules/archi/templates/statistiquesAccueil.tpl:17
+msgid "Les dix architectes les plus productifs :"
+msgstr ""
+
+#: ../../../modules/archi/templates/statistiquesAccueil.tpl:24
+msgid "Les dix rues où il y a le plus d'adresses :"
+msgstr ""
+
+#: ../../../modules/archi/templates/suppression.tpl:1
+msgid "Supression"
+msgstr ""
+
+#: ../../../modules/archi/templates/tousLesCommentaires.tpl:1
+msgid "Liste de tous les commentaires"
+msgstr ""
+
+#: ../../../modules/archi/templates/tousLesCommentaires.tpl:6
+msgid "Commentaires"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:1
+msgid "Utilisateur"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:2
+msgid "Actions de l'utilisateur"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:4
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:4
+msgid "Cet utilisateur a le rang :"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:12
+msgid "Détails"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:15
+msgid "Adresse e-mail"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:16
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:15
+msgid "URL de votre site"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:17
+msgid "Votre avatar"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:17
+msgid "Taille de fichier max :"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:17
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:16
+msgid "Cochez pour supprimer"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:18
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:17
+msgid "Ville favorite"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:25
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:24
+msgid "Profil"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:28
+msgid "Alerte mail"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:29
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:33
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:36
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:39
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:42
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:45
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:50
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:29
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:33
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:36
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:39
+msgid "Oui"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:30
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:34
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:37
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:40
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:43
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:46
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:51
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:30
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:34
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:37
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:40
+msgid "Non"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:32
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:32
+msgid "Recevoir les alertes sur les commentaires"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:35
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:35
+msgid "Recevoir les alertes sur les adresses que j'ai créées"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:38
+msgid "Permettre à l'utilisateur de se faire contacter<br>sur son profil"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:41
+msgid "Permettre à l'utilisateur de renseigner le champ numero d'archive"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:44
+msgid ""
+"Permettre à l'utilisateur de renseigner le champs date fin (uniquement "
+"profil utilisateur)"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:49
+msgid "Bannir l'utilisateur (le compte devient inactif)"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:56
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:45
+msgid "Périodicité de l'envoi de mails d'information"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurDetail.tpl:61
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:50
+msgid "confirmation"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:14
+msgid "E-mail"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:16
+msgid "Taille de fichier max : 5 Mo"
+msgstr ""
+
+#: ../../../modules/archi/templates/utilisateurProfil.tpl:28
+msgid "Alerte mail des nouvelles adresses (1 par semaine)"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:22
+msgid "Nombre d'évènements :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:32
+msgid "Photos :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:69
+#: ../../../modules/archi/includes/archiAccueil.class.php:98
+#: ../../../modules/archi/includes/archiAccueil.class.php:457
+#: ../../../modules/archi/includes/archiAccueil.class.php:67
+#: ../../../modules/archi/includes/archiAccueil.class.php:94
+#: ../../../modules/archi/includes/archiAccueil.class.php:459
+msgid "Nouveautés"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:70
+#: ../../../modules/archi/includes/archiAccueil.class.php:99
+#: ../../../modules/archi/includes/archiAccueil.class.php:458
+#: ../../../modules/header/index.php:229
+#: ../../../modules/archi/includes/archiAccueil.class.php:68
+#: ../../../modules/archi/includes/archiAccueil.class.php:95
+#: ../../../modules/archi/includes/archiAccueil.class.php:460
+#: ../../../modules/header/index.php:224
+msgid "Mon Profil"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:71
+#: ../../../modules/archi/includes/archiAccueil.class.php:100
+#: ../../../modules/archi/includes/archiAccueil.class.php:111
+#: ../../../modules/archi/includes/archiAccueil.class.php:459
+#: ../../../modules/header/index.php:231
+#: ../../../modules/archi/includes/archiAccueil.class.php:69
+#: ../../../modules/archi/includes/archiAccueil.class.php:96
+#: ../../../modules/archi/includes/archiAccueil.class.php:107
+#: ../../../modules/archi/includes/archiAccueil.class.php:461
+#: ../../../modules/header/index.php:226
+msgid "Mon Archi"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:113
+#: ../../../modules/archi/includes/archiAccueil.class.php:115
+msgid "En tant qu'utilisateur vous pouvez :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:114
+msgid ""
+"En ajoutant votre adresse vous contribuez au développement du site. Mais d"
+"\\'abord qu\\'entend t-on par \"votre adresse\" ? Et bien cela peut être l"
+"\\'immeuble ou la maison que vous occupez. Un immeuble que vous aimez mais "
+"que vous ne trouvez pas sur le site. Avec le développement des appareils "
+"photo numériques, il devient très simple de prendre une photo, et de la "
+"copier sur l\\'ordinateur. Ajouter une adresse dans www.archi-strasbourg.org "
+"ne prend pas plus de 20 secondes. Copier la photo 10 secondes de plus..."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:114
+#: ../../../modules/archi/includes/archiAccueil.class.php:116
+msgid "ajouter des adresses"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:115
+#: ../../../modules/archi/includes/archiAccueil.class.php:117
+msgid "Vous pouvez ajouter des photos afin d'illustrer une adresse."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:115
+#: ../../../modules/archi/includes/archiAccueil.class.php:117
+msgid "ajouter des photos à une adresse"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:116
+#: ../../../modules/archi/includes/archiAccueil.class.php:118
+msgid ""
+"Vous pouvez ajouter des évènements sur toute adresse qu'un autre utilisateur "
+"a créée."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:116
+#: ../../../modules/archi/includes/archiAccueil.class.php:118
+msgid "ajouter des évènements à une adresse"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:117
+msgid ""
+"En activant votre alerte mail sur les adresses, vous serez prevenu de toute "
+"modification sur une adresse dont vous êtes l'auteur"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:117
+#: ../../../modules/archi/includes/archiAccueil.class.php:119
+msgid "être prévenu par mail d'une modification de vos participations"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:118
+msgid ""
+"En acceptant de recevoir les mails concernant les nouvelles adresses, vous "
+"serez prévenu de l'ajout d'une nouvelle adresse sur le site."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:118
+#: ../../../modules/archi/includes/archiAccueil.class.php:120
+msgid "être averti des nouvelles adresses"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:119
+msgid ""
+"Grâce à l'alerte par mail sur les commentaires, vous pouvez débattre avec "
+"les autres utilisateurs."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:119
+#: ../../../modules/archi/includes/archiAccueil.class.php:121
+msgid ""
+"être averti des nouveaux commentaires ajoutés sur une adresse que vous avez "
+"créée."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:120
+#: ../../../modules/archi/includes/archiAccueil.class.php:122
+msgid "Vos statistiques :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:121
+#: ../../../modules/archi/includes/archiAccueil.class.php:123
+msgid "Vous vous êtes connecté :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:122
+#: ../../../modules/archi/includes/archiAccueil.class.php:124
+msgid "Date de votre dernière connexion :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:126
+#: ../../../modules/archi/includes/archiAccueil.class.php:128
+msgid "Nombre d'images modifiées :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:127
+#: ../../../modules/archi/includes/archiAccueil.class.php:129
+msgid "Nombre d'images ajoutées :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:128
+#: ../../../modules/archi/includes/archiAccueil.class.php:130
+msgid "Nombre d'évènements modifiés :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:129
+#: ../../../modules/archi/includes/archiAccueil.class.php:131
+msgid "Nombre d'évènements ajoutés :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:217
+#: ../../../modules/archi/includes/archiAccueil.class.php:219
+msgid "Liste de vos derniers évènements créés :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:222
+#: ../../../modules/archi/includes/archiAccueil.class.php:224
+msgid "Vous n'avez pas encore ajouté d'évènement."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:300
+#: ../../../modules/archi/includes/archiAccueil.class.php:302
+msgid "Liste de vos adresses :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:306
+#: ../../../modules/archi/includes/archiAccueil.class.php:308
+msgid "Vous n'avez pas encore ajouté d'adresse."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:390
+#: ../../../modules/archi/includes/archiAccueil.class.php:392
+msgid "Liste de vos derniers commentaires :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:396
+#: ../../../modules/archi/includes/archiAccueil.class.php:398
+msgid "Vous n'avez pas encore ajouté de commentaire."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:519
+#: ../../../modules/archi/includes/archiAccueil.class.php:521
+msgid "Dernières démolitions"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:525
+#: ../../../modules/archi/includes/archiAccueil.class.php:527
+msgid "Toutes les démolitions"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:534
+msgid "Il n'y a pas encore de démolitions pour cette localité"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:572
+#: ../../../modules/archi/includes/archiAccueil.class.php:570
+msgid "Derniers travaux"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:576
+#: ../../../modules/archi/includes/archiAccueil.class.php:574
+msgid "Tous les travaux"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:584
+#: ../../../modules/archi/includes/archiAccueil.class.php:580
+msgid "Il n'y a pas encore de travaux pour cette localité"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:619
+#: ../../../modules/archi/includes/archiAccueil.class.php:613
+msgid "Derniers évènements culturels"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:623
+#: ../../../modules/archi/includes/archiAccueil.class.php:617
+msgid "Tous les évènements culturels"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:627
+#: ../../../modules/archi/includes/archiAccueil.class.php:619
+msgid "Ajouter un évènement culturel"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:632
+#: ../../../modules/archi/includes/archiAccueil.class.php:624
+msgid "Il n'y a pas encore d'évènements culturels pour cette localité"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:670
+#: ../../../modules/archi/includes/archiAccueil.class.php:660
+msgid "Nouvelles adresses"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:674
+#: ../../../modules/archi/includes/archiAccueil.class.php:664
+msgid "Toutes les adresses"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:684
+#: ../../../modules/archi/includes/archiAccueil.class.php:672
+msgid "Il n'y a pas encore de nouvelles adresses pour cette localité"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:731
+#: ../../../modules/archi/includes/archiAccueil.class.php:715
+msgid "Dernières vues"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:735
+#: ../../../modules/archi/includes/archiAccueil.class.php:719
+msgid "Toutes les vues"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:798
+#: ../../../modules/archi/includes/archiAccueil.class.php:780
+msgid "Toutes les actualités"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1137
+#: ../../../modules/archi/includes/archiAccueil.class.php:1117
+msgid "Voir tous les architectes classés"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1139
+#: ../../../modules/archi/includes/archiAccueil.class.php:1119
+msgid "Voir toutes les rues classées"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1216
+#: ../../../modules/archi/includes/archiAccueil.class.php:1220
+#: ../../../modules/archi/includes/archiAccueil.class.php:1190
+#: ../../../modules/archi/includes/archiAccueil.class.php:1192
+msgid "Lire la suite"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1273
+#: ../../../modules/archi/includes/archiAccueil.class.php:1243
+msgid "Votre participation a déjà été enregistrée."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1287
+#: ../../../modules/archi/includes/archiAccueil.class.php:1255
+msgid "Votre vote n'a pas pu être enregistré."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1292
+#: ../../../modules/archi/includes/archiAccueil.class.php:1258
+msgid "Vous n'avez selectionné aucune proposition."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1307
+#: ../../../modules/archi/includes/archiAccueil.class.php:1273
+msgid "Statistiques à ce jour"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1307
+#: ../../../modules/archi/includes/archiAccueil.class.php:1273
+msgid "Nombre de participants :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1355
+#: ../../../modules/archi/includes/archiAccueil.class.php:1319
+msgid "Pour un plus grand confort de lecture téléchargez la"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1355
+#: ../../../modules/archi/includes/archiAccueil.class.php:1319
+msgid "version PDF du texte."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:1373
+#: ../../../modules/archi/includes/archiAccueil.class.php:1343
+msgid "Actualités"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:23
+msgid "Droits"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:26
+msgid "actualités"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:29
+msgid "sources"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:32
+msgid "types sources"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:35
+msgid "types structures"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:38
+msgid "courant architecturaux"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:41
+msgid "metiers"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:44
+msgid "ajout d'element d'adresse (rue, sous-quartier, quartier, ville, pays)"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:47
+msgid "modifier une personne"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:50
+msgid "gérer les rues"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:53
+msgid "gérer les sousQuartiers"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:56
+msgid "gérer les quartiers"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:59
+msgid "gérer les villes"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:62
+msgid "gérer les pays"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:65
+msgid "Voir les statistiques des sondages"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:68
+msgid "gérer les parcours"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:70
+msgid "Traduction"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:61
+msgid "Votre nom ou pseudo :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:62
+#: ../../../modules/archi/index.php:11 ../../../modules/archi/index.php:23
+msgid "Votre prénom :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:63
+#: ../../../modules/archi/index.php:12 ../../../modules/archi/index.php:24
+msgid "Votre e-mail :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:64
+msgid "Votre commentaire :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:6701
+#: ../../../modules/archi/includes/archiAdresse.class.php:6705
+msgid "Par rues de"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:6701
+#: ../../../modules/archi/includes/archiAdresse.class.php:6705
+msgid "Par quartiers de"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:6701
+#: ../../../modules/archi/includes/archiAdresse.class.php:6705
+msgid "Par villes"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:9698
+#: ../../../modules/archi/includes/archiAdresse.class.php:9702
+msgid "Erreur :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:9698
+#: ../../../modules/archi/includes/archiAdresse.class.php:9702
+msgid "il y a déjà un enregistrement de rue du même nom dans cette ville"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:9800
+#: ../../../modules/archi/includes/archiEvenement.class.php:1925
+#: ../../../modules/archi/includes/archiAdresse.class.php:9804
+msgid "voir la carte en + grand"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:9884
+#: ../../../modules/archi/includes/archiAdresse.class.php:9888
+msgid "Ajouter un commentaire"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:9888
+#: ../../../modules/archi/includes/archiAdresse.class.php:9892
+msgid "Prévisualisation :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:9921
+#: ../../../modules/archi/includes/archiAdresse.class.php:9925
+msgid "%d/%m/%Y à %kh%i"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:9937
+#: ../../../modules/archi/includes/archiAdresse.class.php:9941
+msgid "Il n'y a pas encore de commentaires pour cette adresse."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:10052
+#: ../../../modules/archi/includes/archiAdresse.class.php:10056
+msgid "Tous les commentaires"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:10100
+#: ../../../modules/archi/includes/archiAdresse.class.php:10104
+msgid "de"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdresse.class.php:10100
+#: ../../../modules/archi/includes/archiAdresse.class.php:10104
+msgid "pour"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:112
+msgid "Un nouvel utilisateur s'est inscrit sur archi-strasbourg :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:114
+msgid "Nom :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:115
+msgid "Prénom :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:116
+msgid "Mail :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:117
+msgid "Un nouvel utilisateur s'est inscrit"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:123
+msgid "Votre inscription sur archi-strasbourg a été pris en compte."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:124
+msgid "Bonjour"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:124
+msgid "Votre compte n'est pas encore actif."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:128
+msgid "Cliquez sur ce lien pour l'activer"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:130
+msgid "Votre demande d'inscription sur archi-strasbourg"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:131
+msgid ""
+"Inscription prise en compte, vous allez recevoir un mail de confirmation."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:199
+msgid "Ce compte n'existe pas !"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:199
+msgid "Vous pouvez vous inscrire ci-dessous."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:202
+#: ../../../modules/archi/includes/archiAuthentification.class.php:226
+msgid "Connexion :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:202
+msgid "erreur dans vos identifiants"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:226
+msgid "BrowserID a renvoyé une erreur"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:394
+msgid ""
+"Afin de pouvoir ajouter une adresse ou en modifier une existante vous devez, "
+"au préalable, créer votre compte personnel sur www.archi-strasbourg.org. "
+"Pour cela inscrivez-vous en cliquant"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:394
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1639
+#: ../../../modules/archi/includes/archiAccueil.class.php:111
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1631
+msgid "ici"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:439
+msgid "Vous n'avez pas renseigné le champ nom"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:443
+msgid "Vous n'avez pas renseigné le champ prenom"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:447
+msgid "Vous n'avez pas renseigné le champ mail"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:451
+#: ../../../modules/archi/includes/archiAuthentification.class.php:455
+msgid "Vous n'avez pas renseigné le champ mot de passe"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:459
+msgid "Les deux mots de passe diffèrent"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:463
+msgid "Le mail est invalide"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:467
+msgid "Ce mail est déjà enregistré"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:471
+msgid "Le code ne correspond pas"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:496
+msgid "Vous venez de modifier le statut de"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:496
+msgid "utilisateur"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:498
+#: ../../../modules/archi/includes/archiAuthentification.class.php:499
+msgid "Erreur, vous n'avez pas donné un id valide !"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:499
+#: ../../../modules/archi/includes/archiAuthentification.class.php:503
+msgid "Rendre Admin :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAuthentification.class.php:503
+msgid "Erreur, vous n'êtes pas administrateur !"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:276
+msgid "Exactement le même enregistrement existe déjà !"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1033
+msgid ""
+"Cet évènement est déjà en cours d'édition. Veuillez retenter dans quelques "
+"minutes."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1373
+msgid "%e/%m/%Y à %kh%i"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1612
+msgid "Année de construction :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1629
+msgid "Année"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1636
+#: ../../../modules/archi/includes/archiEvenement.class.php:1645
+msgid "Classement Monument Historique"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1642
+#: ../../../modules/archi/includes/archiEvenement.class.php:2102
+msgid "Inscription à l'Inventaire Supplémentaire des Monuments Historiques"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1656
+msgid "au"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1668
+#: ../../../modules/archi/includes/archiEvenement.class.php:2105
+#: ../../../modules/archi/includes/archiEvenement.class.php:4193
+msgid "Sans titre"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1725
+msgid "Liste des adresses liées :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1733
+msgid "Consulter l'historique"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1742
+msgid "Envoyé"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1747
+msgid "Modifié"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:1749
+msgid "le"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:2000
+msgid "Recherche d'adresses"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:2097
+msgid "Classement aux Monuments Historiques"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:2496
+msgid "Historique de mise à jour"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:2690
+msgid "Ajouter des adresses qui seront liées à cet evenement :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:2697
+msgid "Enregistrer"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiEvenement.class.php:4485
+msgid "Evenement impossible à deplacer, veuillez contacter l'administrateur"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiImage.class.php:1019
+#: ../../../modules/archi/includes/archiImage.class.php:1017
+msgid "L'image ci-dessus est un zoom de l'image ci-dessous :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiRecherche.class.php:991
+msgid "Résultats de la recherche avancée :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiRecherche.class.php:995
+msgid "aucun résultat."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiRecherche.class.php:999
+msgid "résultats."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiRecherche.class.php:1012
+msgid "Aucun résultat."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiRecherche.class.php:1373
+msgid "Afficher les 100 premiers résultats sur une carte."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:93
+msgid ""
+"Ajout de source : type de source incorrect ! Utilisateur du choix par défaut "
+"= 1"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:94
+msgid "Erreur ajout source"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:107
+msgid "Une nouvelle source a été ajoutée :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:110
+msgid "un utilisateur ajouté une source"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:208
+msgid "Erreur, l'id n'est pas valide ! Id automatiquement défini"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:238
+msgid "Erreur, aucun résultat"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:614
+#: ../../../modules/archi/includes/archiSource.class.php:616
+msgid "Il n'y a pas de description pour cette source."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:657
+#: ../../../modules/archi/includes/archiSource.class.php:659
+msgid ""
+"L'une des difficultés d'un site collaboratif, c'est la crédibilité que l'on "
+"peut apporter aux informations renseignées par chaque internaute. C'est "
+"pourquoi, par soucis de transparence, nous vous livrons ici de façon "
+"exhaustive l'ensemble des sources qui sont consultées pour enrichir le site :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:717
+#: ../../../modules/archi/includes/archiSource.class.php:719
+msgid "Sources"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiSource.class.php:718
+#: ../../../modules/archi/includes/archiSource.class.php:720
+msgid "Nombre de liaisons (articles ou photos)"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:473
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:469
+msgid "Bienvenue sur votre profil"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1259
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1255
+msgid "Aucun résultat"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1594
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1588
+msgid "Vous avez perdu votre mot de passe"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1598
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1592
+msgid ""
+"Une fois ce formulaire validé, un mail contenant un lien vous permettant de "
+"choisir un nouveau mot de passe vous sera envoyé."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1610
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1604
+msgid "Entrez votre adresse mail :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1639
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1631
+msgid "Vous avez fais une demande de nouveau mot de passe, veuillez cliquer"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1639
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1631
+msgid "pour pouvoir redéfinir votre mot de passe sur le site"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1640
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1632
+msgid "ou copier coller le lien suivant dans votre navigateur :"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1642
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1634
+msgid "L'équipe archi-strasbourg.org"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1644
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1636
+msgid "Demande de changement de mot de passe"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1651
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1643
+msgid "Un utilisateur a fait une demande de changement de mot de passe."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1652
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1644
+msgid "Demande de changement de mot de passe sur"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1657
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1649
+msgid ""
+"Un mail vous a été envoyé contenant un lien pour redéfinir votre mot de "
+"passe."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1662
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1654
+msgid ""
+"Attention, plusieurs comptes ont ce mail comme identifiant. Merci de "
+"contacter l'administrateur du site."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1666
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1658
+msgid ""
+"Le mail n'a pas été trouvé dans la base de données, merci de vérifier le mail"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1705
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1697
+msgid "Choisissez un nouveau mot de passe"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1718
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1708
+msgid "Erreur dans le lien. Merci de contacter l'administrateur."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1747
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1737
+msgid "Votre mot de passe a été mis à jour."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1751
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1741
+msgid "Attention un mot de passe doit comporter au moins 5 caractères."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1756
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1746
+msgid "Attention le mot de passe et sa vérification ne correspondent pas."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1762
+#: ../../../modules/archi/includes/archiUtilisateur.class.php:1750
+msgid ""
+"Problème changement de mot de passe : il y a un problème avec le formulaire. "
+"Merci de contacter l'administrateur."
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1596
+#: ../../../includes/framework/config.class.php:1694
+#: ../../../includes/framework/config.class.php:1697
+#: ../../../includes/framework/config.class.php:1597
+#: ../../../includes/framework/config.class.php:1698
+msgid "Retirer la dernière adresse"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1599
+#: ../../../includes/framework/config.class.php:1697
+#: ../../../includes/framework/config.class.php:1700
+#: ../../../includes/framework/config.class.php:1600
+#: ../../../includes/framework/config.class.php:1701
+msgid "Choisissez la ville"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1602
+#: ../../../includes/framework/config.class.php:1700
+#: ../../../includes/framework/config.class.php:1703
+#: ../../../includes/framework/config.class.php:1603
+#: ../../../includes/framework/config.class.php:1704
+msgid "Choisissez un quartier appartenant à la ville selectionnée"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1605
+#: ../../../includes/framework/config.class.php:1703
+#: ../../../includes/framework/config.class.php:1706
+#: ../../../includes/framework/config.class.php:1606
+#: ../../../includes/framework/config.class.php:1707
+msgid "Vous pouvez affiner en choisissant un sous quartier"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1608
+#: ../../../includes/framework/config.class.php:1706
+#: ../../../includes/framework/config.class.php:1709
+#: ../../../includes/framework/config.class.php:1609
+#: ../../../includes/framework/config.class.php:1710
+msgid "Choisissez la rue et le numéro de l’adresse dont vous voulez parler"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1612
+#: ../../../includes/framework/config.class.php:1613
+msgid "Vous pouvez préciser un titre pour votre article"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1615
+#: ../../../includes/framework/config.class.php:1616
+msgid ""
+"Selectionnez une partie de votre texte et cliquez sur ce bouton pour mettre "
+"le texte en gras"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1619
+#: ../../../includes/framework/config.class.php:1620
+msgid ""
+"Selectionnez une partie de votre texte et cliquez sur ce bouton pour mettre "
+"le texte en italique"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1623
+#: ../../../includes/framework/config.class.php:1624
+msgid ""
+"Selectionnez une partie de votre texte et cliquez sur ce bouton pour "
+"souligner le texte selectionné"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1627
+#: ../../../includes/framework/config.class.php:1628
+msgid ""
+"Sélectionnez une partie de texte à mettre entre cotes et cliquez sur ce "
+"bouton"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1631
+#: ../../../includes/framework/config.class.php:1632
+msgid "Vous pouvez utiliser ce bouton pour insérer du code"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1634
+#: ../../../includes/framework/config.class.php:1635
+msgid "Insérer une adresse WEB"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1637
+#: ../../../includes/framework/config.class.php:1640
+#: ../../../includes/framework/config.class.php:1641
+msgid "Texte de votre article"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1640
+#: ../../../includes/framework/config.class.php:1646
+#: ../../../includes/framework/config.class.php:1643
+#: ../../../includes/framework/config.class.php:1649
+#: ../../../includes/framework/config.class.php:1644
+#: ../../../includes/framework/config.class.php:1650
+msgid ""
+"Datez votre article : vous pouvez préciser une date de plusieurs "
+"manières<br> Exemple : <br>Une année 1900<br>Un mois et une année "
+"03/2008<br>Avec le jour 02/08/2008"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1652
+#: ../../../includes/framework/config.class.php:1655
+#: ../../../includes/framework/config.class.php:1656
+msgid ""
+"Vous pouvez préciser une source à partir de laquelle vous vous êtes "
+"inspiré<br> pour écrire votre article"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1656
+#: ../../../includes/framework/config.class.php:1659
+#: ../../../includes/framework/config.class.php:1660
+msgid "Précisez le type de structure dont vous parlez"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1659
+#: ../../../includes/framework/config.class.php:1662
+#: ../../../includes/framework/config.class.php:1663
+msgid "Précisez quel est le type de l’évènement lié à votre article"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1662
+#: ../../../includes/framework/config.class.php:1665
+#: ../../../includes/framework/config.class.php:1666
+msgid ""
+"Le bâtiment est-il inscrit à l’Inventaire Supplémentaire des Monuments "
+"Historiques"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1666
+#: ../../../includes/framework/config.class.php:1669
+#: ../../../includes/framework/config.class.php:1670
+msgid "Le bâtiment est-il inscrit au Monuments Historiques"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1669
+#: ../../../includes/framework/config.class.php:1672
+#: ../../../includes/framework/config.class.php:1673
+msgid "Nombre d’étages du bâtiment"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1672
+#: ../../../includes/framework/config.class.php:1675
+#: ../../../includes/framework/config.class.php:1676
+msgid "Vous pouvez préciser le courant architectural du bâtiment"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1675
+#: ../../../includes/framework/config.class.php:1678
+#: ../../../includes/framework/config.class.php:1679
+msgid ""
+"Précisez si une personnalité est liée à l’évènement en cliquant sur "
+"choisir<br><font color=red>Cliquez sur une personne de la liste pour la "
+"retirer de la liste.</font>"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1681
+#: ../../../includes/framework/config.class.php:1684
+#: ../../../includes/framework/config.class.php:1685
+msgid "Validez votre article"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1684
+#: ../../../includes/framework/config.class.php:1687
+#: ../../../includes/framework/config.class.php:1688
+msgid ""
+"Renseignez dans cette case le numéro d’archive fourni par les archives "
+"municipales si vous le connaissez. Exemple : 44W250"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1710
+#: ../../../includes/framework/config.class.php:1713
+#: ../../../includes/framework/config.class.php:1714
+msgid "Validez votre saisie"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1715
+#: ../../../includes/framework/config.class.php:1718
+#: ../../../includes/framework/config.class.php:1719
+msgid "Donnez un intitulé à la photo"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1718
+#: ../../../includes/framework/config.class.php:1721
+#: ../../../includes/framework/config.class.php:1722
+msgid "Donnez une description de l’image"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1721
+#: ../../../includes/framework/config.class.php:1724
+#: ../../../includes/framework/config.class.php:1725
+msgid "Précisez la date de la prise de vue de la photo"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1724
+#: ../../../includes/framework/config.class.php:1727
+#: ../../../includes/framework/config.class.php:1728
+msgid "Date à laquelle la photo à été chargé sur le site"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1727
+#: ../../../includes/framework/config.class.php:1730
+#: ../../../includes/framework/config.class.php:1731
+msgid "Vous pouvez préciser la source de la photo"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1730
+#: ../../../includes/framework/config.class.php:1733
+#: ../../../includes/framework/config.class.php:1734
+msgid "Voici la liste des évènements auxquels est liée l’image"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1733
+#: ../../../includes/framework/config.class.php:1736
+#: ../../../includes/framework/config.class.php:1737
+msgid "Vous pouvez charger une autre image pour remplacer celle-ci"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1736
+#: ../../../includes/framework/config.class.php:1739
+#: ../../../includes/framework/config.class.php:1740
+msgid "Vous pouvez préciser le numéro d’archive sur la photo courante."
+msgstr ""
+
+#: ../../../modules/archi/index.php:10 ../../../modules/archi/index.php:22
+msgid "Votre nom :"
+msgstr ""
+
+#: ../../../modules/archi/index.php:13 ../../../modules/archi/index.php:25
+msgid "Votre message :"
+msgstr ""
+
+#: ../../../modules/archi/index.php:16 ../../../modules/archi/index.php:28
+msgid "Contactez-nous"
+msgstr ""
+
+#: ../../../modules/archi/index.php:88 ../../../modules/archi/index.php:98
+msgid "Merci pour votre commentaire."
+msgstr ""
+
+#: ../../../modules/archi/index.php:88 ../../../modules/archi/index.php:98
+msgid ""
+"Il va ête lu par un administrateur du site et mis en ligne prochainement."
+msgstr ""
+
+#: ../../../modules/archi/index.php:161 ../../../modules/archi/index.php:158
+msgid "Erreur lors de l'enregistrement."
+msgstr ""
+
+#: ../../../modules/archi/index.php:188 ../../../modules/archi/index.php:221
+#: ../../../modules/archi/index.php:182 ../../../modules/archi/index.php:212
+msgid "Enregistrement effectué"
+msgstr ""
+
+#: ../../../modules/header/index.php:38 ../../../modules/header/index.php:49
+msgid "Architecture et photos à Strasbourg"
+msgstr ""
+
+#: ../../../modules/header/index.php:39
+msgid "Architecture, photos et patrimoine de Strasbourg."
+msgstr ""
+
+#: ../../../modules/header/index.php:45 ../../../modules/header/index.php:55
+msgid "Architecture et photos à"
+msgstr ""
+
+#: ../../../modules/header/index.php:46 ../../../modules/header/index.php:56
+msgid "Architecture, photos et patrimoine de"
+msgstr ""
+
+#: ../../../modules/header/index.php:199 ../../../modules/header/index.php:196
+msgid "Vous êtes connecté!"
+msgstr ""
+
+#: ../../../modules/header/index.php:203 ../../../modules/header/index.php:198
+msgid "Vous n'êtes pas connecté"
+msgstr ""
+
+#: ../../../modules/header/index.php:208 ../../../modules/header/index.php:204
+msgid "Inscrivez-vous !"
+msgstr ""
+
+#: ../../../modules/header/index.php:223 ../../../modules/header/index.php:218
+msgid "Déconnexion"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:45
+msgid "Association StrasWeb"
+msgstr ""
+
+#: ../../../modules/archi/templates/donateurs.tpl:47
+msgid "StrasWeb est une association d'étudiants passionnés par le Web."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:2
+msgid "Historique d'Archi-Strasbourg"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:4
+msgid ""
+"Archi-Strasbourg existe depuis 2003. Le site a nécessité pour sa première "
+"version en ligne, un mois de développement. C'est très court et je tiens "
+"tout de suite à remercier Romain qui a développé cette première version."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:6
+msgid ""
+"Au départ l'idée était de présenter des photos des édifices les plus "
+"remarquables. Dans cette version il était déjà prévu que plusieurs "
+"administrateurs puissent ajouter ou modifier des photos. En pratique, faute "
+"d'une utilisation aisée, j'étais le seul à rajouter des photos ou "
+"informations."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:8
+msgid ""
+"Au fur et à mesure de mes connaissances j'ai pris en photos tout type "
+"d'immeuble, parc et monument. J'ai eu envie de partager ce que je voyais "
+"dans la rue : les rénovations, les ravalements, les travaux de voirie, "
+"etc... bref tout ce que l'espace public rendait accessible à mon appareil "
+"photo. La rue au quotidien n'inspire peut être rien mais mis bout à bout "
+"chaque épisode du quotidien nous raconte une histoire. Prendre ces photos "
+"pour les garder dans un recoin de mon disque dur n'avais aucun intérêt."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:10
+msgid ""
+"Entre la première version (celle de Romain) et ce jusqu'en Avril 2008 il n'y "
+"a quasiment pas eu d'amélioration, preuve que dès l'origine le modèle était "
+"bien pensé. A mesure que le nombre de photos et d'adresses croissaient, les "
+"visites sur le site ont augmenté pour atteindre en moyenne 400 visiteurs "
+"uniques par jour."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:12
+msgid ""
+"Le nombre de visites croissant a entrainé de plus en plus de contacts avec "
+"les internautes, notamment pour me poser des questions mais aussi pour me "
+"proposer des photos à ajouter sur le site."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:15
+msgid "L'évolution :"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:17
+msgid ""
+"Pour palier aux principaux inconvénients de la version d'origine (2003) il a "
+"été décidé de créer une nouvelle version ou chaque internaute pourrait "
+"contribuer gratuitement. L'idée de cette nouvelle version est née depuis "
+"longtemps. En fait depuis l'origine du projet il était question que "
+"quiconque puisse rajouter des photos. Mais cette version a tardé par manque "
+"de temps..."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:19
+msgid ""
+"Archi-Strasbourg nouvelle version permet donc à chaque internaute "
+"enregistré :"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:21
+msgid "d'ajouter des adresses et des photos"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:22
+msgid "d'ajouter des actualités et des informations complémentaires"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:24
+msgid ""
+"Un internaute de passage sur le site (non enregistré) peut s'il le souhaite "
+"ajouter des commentaires sur chaque événement."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:26
+msgid ""
+"La nouvelle version permet de multiplier les possibilités d'ajout et de "
+"recherche d'information. La recherche s'effectue de 2 façons :"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:28
+msgid "sur critères (architecture, style architectural, époque)"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:29
+msgid "sur une carte google maps"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:31
+msgid "Panorama des sites existants et développement"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:33
+msgid "Panorama des sites existants"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:35
+msgid ""
+"C'est parce que sur le web aucun site ne répondait à mes attentes que l'idée "
+"de développer un site spécifique sur les archives du patrimoine et de "
+"l'architecture m'est venu."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:37
+msgid ""
+"Plusieurs sites présentent tel ou tel immeuble, parc ou édifice mais aucun "
+"ne présente de façon structurée un catalogue d'archives. Les archives "
+"municipales répondent de façon quasi exhaustive à l'évolution du patrimoine "
+"pour ces 100 dernières années, mais le soucis c'est l'accès et surtout la "
+"disponibilité de l'information. Il fallait donc un support moderne pour "
+"qu'avec un site unique on puisse avoir un panorama complet sur l'évolution "
+"complète d'une ville ces 100, 200, 300 et d'avantage d'années... En allant à "
+"l'extrême jusqu'à la création de Strasbourg ville romaine."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:39
+msgid ""
+"Voici quelques sites qui répondent à chaque fois de façon partielle au sujet "
+"qui me tient à coeur - l'évolution de la ville :"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:41
+msgid "photos de ville"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:41
+msgid "photos à jour de l'ensemble des façades de la ville de Strasbourg."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:43
+#: ../../../modules/archi/templates/edito.tpl:49
+#: ../../../modules/archi/templates/edito.tpl:56
+msgid "Avantage :"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:43
+msgid "le site est à jour et complet."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:44
+msgid "Inconvénients :"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:44
+msgid ""
+"pas d'historique, pas de notion d'architecture ni de date, les photos sont "
+"petites et de mauvaise qualité"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:47
+msgid ""
+"Ce type de site est efficace pour l'envoi des photos par les internautes, "
+"mais ne permet pas une recherche efficace (architecte, style architecturale, "
+"adresse)."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:49
+msgid ""
+"le site bénéficie de la notoriété des DNA (Dernière Nouvelles d'Alsace)."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:50
+#: ../../../modules/archi/templates/edito.tpl:55
+msgid "Inconvénient :"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:50
+msgid "moteur de recherche inefficace, pas d'historique"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:53
+msgid ""
+"très complet pour l'information d'immeubles remarquables mais ne permet pas "
+"une recherche efficace (par style architectural, architecte, époque, etc...) "
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:55
+msgid "trop général pour le sujet traité"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:56
+msgid "modification simple et efficace"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:60
+msgid ""
+"Il existe beaucoup d'autres sites qui à chaque fois sont plus ou moins "
+"générals et parlent d'un ou plusieurs sujets intéressant. Tous les citer ne "
+"serait pas possible et n'aurait pas d'intérêt."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:62
+msgid "Développement"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:64
+msgid ""
+"Avant d'entreprendre le développement d'un projet aussi important qu'archi-"
+"strasbourg.org 2éme édition, une seconde étude de l'existant a été effectuée."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:66
+msgid ""
+"Cette seconde étude c'est donnée comme objectif d'identifier un ou plusieurs "
+"sites existant suffisamment souples et ouverts pour permettre de saisir les "
+"informations dont j'avais besoin tout en évitant un développement"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:68
+msgid "Le seul site qui aurait pu répondre à ce besoin est fr.wikipedia.org"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:70
+msgid ""
+"Néanmoins victime de sa trop grande souplesse, fr.wikipedia.org n'a "
+"finalement pas été retenu en raison d'une limitation trop importante dans "
+"les recherches et les classements des catégories. Tout étant géré de façon "
+"manuelle la saisie et surtout la remontée d'informations aurait été trop "
+"laborieuse. Le site est trop général et le sujet archi-strasbourg.org trop "
+"vaste pour encombrer un site déjà bien fourni. Souhaitons toutefois beaucoup "
+"de bien à l'évolution de wikipedia qui est très réussi et riche "
+"d'information."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:72
+msgid ""
+"N'étant pas convaincu par wikipedia, j'ai également imaginé d'améliorer et "
+"de redévelopper partiellement le code source d'Archi-Strasbourg.org 1ére "
+"version. Après plusieurs discussions notamment avec Romain, le concepteur "
+"original, j'ai laissé tomber cette possibilité. Le site de part son "
+"architecture était trop ancien et trop de notion nouvelle aurais remis en "
+"cause le modèle existant."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:74
+msgid ""
+"C'est ainsi qu'Archi-Strasbourg v2 a été redéveloppé de zéro ou presque. "
+"Nous avons juste utilisé un template, c'est à dire un modèle, qui gérait "
+"déjà la partie connexion/déconnexion ainsi que la gestion des utilisateurs."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:76
+msgid "Objectifs du site"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:78
+msgid ""
+"L'objectif d'Archi-Strasbourg.org est d'inventorier l'ensemble des "
+"immeubles, parcs et monuments de l'agglomération de Strasbourg"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:80
+msgid ""
+"Dans quel intérêt les plus sceptiques d'entre vous vont certainement se "
+"demander ?"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:82
+msgid ""
+"De la même façon qu'un dictionnaire donne la définition de tous les mots, "
+"Archi-Strasbourg.org se donne pour ambition d'informatiser l'ensemble des "
+"adresses de la ville, avec à chaque fois au moins une photo pour illustrer "
+"le propos. Je me souviens des débuts de Wikipédia, lorsqu'il n'y avait que "
+"quelques lettres... aujourd'hui en moins de 10 ans il s'agit certainement de "
+"la plus grande base de connaissance accessible depuis le web."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:85
+msgid "Faire vivre nos rues : les événements"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:87
+msgid ""
+"La notion d'événement est au coeur du projet. Cette notion d'événement "
+"concerne aussi bien les actualités des bâtiments et des monuments, que les "
+"extensions, les démolitions ou autres ravalements."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:89
+msgid ""
+"Les événements font vivre le site et reflètent les changements dans nos rues "
+"et quartiers. Il existe deux grands types d'événements : les travaux et les "
+"événements culturels"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:91
+msgid "Un évènement égal une source"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:93
+msgid ""
+"Pour chaque événements il est vivement recommandé d'associer une source, "
+"c'est à dire de citer la référence. La source peut être un quotidien, un "
+"livre, un magazine ou encore un site web."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:95
+msgid ""
+"Plus les événements seront vérifiables et plus le site sera crédible. Qui "
+"voudrais consulter un site dont les informations ne sont pas certaines ? En "
+"cas de doute sur une information il convient soit :"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:97
+msgid "de s'abstenir"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:98
+msgid ""
+"de préciser que l'on est pas sûr, dans l'attente qu'un autre internaute ou "
+"que vous même puissiez vérifier l'information"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:100
+msgid ""
+"A titre d'exemple, le site Wikipédia a été victime à de nombreuses reprise "
+"de son succès : le site étant mis à jour par de nombreux internautes, "
+"certaines informations se sont avérées fausses, ce qui a entrainé une "
+"décrédibilisation du site. Actuellement Wikipédia tente de regagner la "
+"confiance des internautes en étant plus vigilant sur son contenu et en "
+"multipliant les demandes de sources (références)"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:102
+msgid "Devenir une référence"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:104
+msgid ""
+"Avec Archi-Strasbourg l'information qui constitue l'espace public est "
+"organisée. C'est le propre de l'informatique que d'essayer de rationaliser "
+"l'information. Rendre l'information accessible et compréhensible par tous."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:106
+msgid ""
+"Il est aujourd'hui difficile de se représenter ce qu'était telle ou telle "
+"place avant les guerres ou avant les grands projets d'urbanisme."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:108
+msgid ""
+"Archi-Strasbourg.org se donne comme ambition de présenter l'historique de "
+"chaque immeuble ou monument. Des photos ou des croquis d'époque "
+"accompagnerons le plus souvent chaque adresse."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:110
+msgid "Gratuité du service"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:112
+msgid ""
+"Archi-Strasbourg.org est gratuit, cela concerne aussi bien la mise à jour "
+"que l'accès à l'ensemble du site. Il n'est toutefois pas exclu que d'ici "
+"quelques mois un lien 'faites un don' et de petits bandeaux de pub fassent "
+"leur apparition (pas de popup, mais sans doute de petites vignettes type "
+"google ad words). Ces bandeaux seront fonction du succès des dons et surtout "
+"de l'avis des utilisateurs."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:114
+msgid "Actuellement le site ne coûte rien car hébergé gratuitement au sein de"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:114
+msgid "ma société"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:114
+msgid ""
+"cependant à terme pour prendre son autonomie le site aura besoin de son "
+"propre serveur. Les besoins en stockage d'archi-strasbourg.org augmenterons "
+"avec sa notoriété. Le plus gros consommateur de ressource c'est le poids des "
+"images sur le serveur."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:116
+msgid "Améliorations et développements futurs"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:118
+msgid ""
+"A terme en fonction du succès de la nouvelle version il est envisageable que "
+"le site soit étendu à d'autres agglomérations."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:120
+msgid ""
+"On peut imaginer intégrer les archives de la ville sur le site après un "
+"travail de numérisation et un accord avec la ville. Cet accord permettrait "
+"d'accréditer le caractère historique et procurerait nombre de croquis et "
+"schémas aujourd'hui difficiles d'accès. Actuellement pour avoir les plans "
+"des façades d'époque il faut le plus souvent se déplacer physiquement et "
+"faire des recherches pour savoir ou se trouve le document. Avec Archi-"
+"Strasbourg.org ce serait possible quasiment tout de suite."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:122
+msgid "Pour conclure..."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:124
+msgid ""
+"Cette idée de créer une bibliothèque d'images de nos rues n'est pas nouvelle "
+"et j'en suis bien conscient. En son temps le banquier Albert Kahn avait créé "
+"un fond appelé 'Archives de la Planète' (1907-1930). Ce mécène avait payé "
+"des photographes, la plupart de jeunes étudiants qu'il avait formé, pour "
+"photographier plus de 50 pays de façon à ramener, je cite « un maximum de "
+"souvenirs d'une vie qui allait bientôt changer ». Il avait vu juste. Ce "
+"visionnaire à permis de collecter 70000 photographies qui constituent un "
+"fond unique et représentent une mémoire sur la vie des générations passées."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:126
+msgid ""
+"Plus proche de nous, Adolphe Seyboth, a rédigé en 1890 puis 1894 deux "
+"ouvrages sur les rues de Strasbourg. Ces ouvrages sont illustrés de "
+"nombreuses gravures du vieux Strasbourg. Seyboth conscient des changements "
+"de son époque, nous a laissé deux ouvrages passionnés qui racontent la vie "
+"de ses contemporains au détour de chaque rue du vieux Strasbourg. Les "
+"volumes de Seyboth font encore référence aujourd'hui pour celui qui "
+"s'intéresse au Strasbourg d'avant 1870."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:128
+msgid ""
+"Pour le Strasbourg d'aujourd'hui il existe une bible dont je me sers très "
+"fréquemment intitulé 'Dictionnaire Historique des rues de Strasbourg' "
+"coécrit par Léon Daul, Maurice Moszberger et Théodore Rieger"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:130
+msgid ""
+"Archi-Strasbourg.org doit se positionner dans la même optique, avec les "
+"outils d'aujourd'hui. En structurant l'information dans un modèle logique, "
+"nous la rendons accessible au plus grand nombre. Archi-Strasbourg.org est un "
+"outil. Un outil du savoir et de la connaissance. C'est un outil pratique "
+"dont l'usage est accessible à tous."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:132
+msgid ""
+"En permettant un accès plus aisé à l'information de notre ville nous "
+"donnerons un accès plus aisé à la culture et permettrons d'améliorer notre "
+"quotidien en évitant de renouveler les erreurs du passé."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:134
+msgid ""
+"En son temps Vauban avait besoin de fabriquer des plans reliefs pour "
+"anticiper les conflits et organiser les défenses appropriées. Les "
+"architectes d'aujourd'hui construisent de nouveaux immeubles en tenant "
+"compte de l'environnement actuel et passé. Archi-Strasbourg.org représente à "
+"cet effet un formidable outil. Les urbanismes à une échelle encore plus "
+"globale ont besoin d'un maximum de renseignements sur l'état actuel et passé "
+"de notre ville pour préparer son avenir."
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:136
+msgid ""
+"Archi-Strasbourg.org c'est le passé, le présent et l'avenir de notre ville !"
+msgstr ""
+
+#: ../../../modules/archi/templates/edito.tpl:139
+msgid ""
+"Passionné d'architecture & d'urbanisme Concepteur du projet Archi-Strasbourg."
+"org"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:71
+#: ../../../modules/archi/includes/archiAdministration.class.php:70
+msgid "Détecter les nouvelles chaines à traduire"
+msgstr ""
+
+#: ../../../includes/framework/config.class.php:1637
+#: ../../../includes/framework/config.class.php:1638
+msgid "Insérer une adresse WEB (exemple : vidéo)"
+msgstr ""
+
+#: ../../../modules/header/templates/header.tpl:190
+msgid ""
+"Le texte de ce site est disponible selon les termes de la Licence ouverte."
+msgstr ""
+
+#: ../../../modules/archi/templates/detailImage.tpl:17
+msgid "Cette photo est disponible sous la licence suivante :"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:105
+msgid "Auteur"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageFormulaire.tpl:111
+msgid "Licence"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageUploadFormulaire.tpl:67
+msgid "Attention :"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageUploadFormulaire.tpl:69
+msgid ""
+"Si vous êtes l'auteur de l'image, vous devez accepter de la publier sous "
+"licence"
+msgstr ""
+
+#: ../../../modules/archi/templates/imageUploadFormulaire.tpl:70
+msgid ""
+"Si vous n'êtes pas l'auteur de l'image, assurez-vous que celle-ci soit libre "
+"ou dans le domaine public."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:109
+msgid "Certaines de vos images ne sont pas librement réutilisables !"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:111
+msgid "Cliquez"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:111
+msgid "pour les publier sous licence libre."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:116
+msgid ""
+"En ajoutant votre adresse vous contribuez au développement du site. Mais d"
+"\\'abord qu\\'entend t-on par \"votre adresse\" ? Et bien cela peut être l"
+"\\'immeuble ou la maison que vous occupez. Un immeuble que vous aimez mais "
+"que vous ne trouvez pas sur le site. Avec le développement des appareils "
+"photo numériques,  il devient très simple de prendre une photo,  et de la "
+"copier sur l\\'ordinateur. Ajouter une adresse dans www.archi-strasbourg.org "
+"ne prend pas plus de 20 secondes. Copier la photo 10 secondes de plus..."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:119
+msgid ""
+"En activant votre alerte mail sur les adresses,  vous serez prevenu de toute "
+"modification sur une adresse dont vous êtes l'auteur"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:120
+msgid ""
+"En acceptant de recevoir les mails concernant les nouvelles adresses,  vous "
+"serez prévenu de l'ajout d'une nouvelle adresse sur le site."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAccueil.class.php:121
+msgid ""
+"Grâce à l'alerte par mail sur les commentaires,  vous pouvez débattre avec "
+"les autres utilisateurs."
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:70
+msgid "Appliquer les nouvelles traductions"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiAdministration.class.php:73
+msgid "Pages"
+msgstr ""
+
+#: ../../../modules/archi/includes/archiImage.class.php:2782
+msgid "Seul l'auteur peut changer la licence de cette image."
+msgstr ""

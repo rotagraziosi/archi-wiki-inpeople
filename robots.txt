@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /images/avatar/
+Disallow: /images/originaux/
+Disallow: /images/uploadMultiple/
+User-agent: Googlebot-Image
+Allow: /images/mini/
+Allow: /images/moyen/
+Allow: /images/grand/
+Allow: /
