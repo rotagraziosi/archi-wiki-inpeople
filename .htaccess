@@ -1,0 +1,166 @@
+#--------------------------------------------------
+# Répertoire : /
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+
+RewriteBase /archi-strasbourg.org/
+
+########################################
+# Exemples 							   #
+########################################
+
+RewriteRule images/(.+) images/$1 [L,QSA]
+
+RewriteRule css/(.+) css/$1 [L,QSA]
+
+RewriteRule includes/(.+) includes/$1 [L,QSA]
+
+RewriteRule modules/(.+) modules/$1 [L,QSA]
+
+RewriteRule script/(.+) script/$1 [L,QSA]
+
+RewriteRule js/(.+) js/$1 [L,QSA]
+
+RewriteRule accueil-ville-photos-immeubles-(.+)-([0-9]+)-([0-9]+)\.html index.php?archiAffichage=afficheAccueil&archiIdVilleGeneral=$2&archiIdPaysGeneral=$3 [L,QSA]
+
+RewriteRule adresse-(.+)-([0-9]+)\.html index.php?archiAffichage=adresseDetail&archiIdAdresse=$2 [QSA,L]
+
+
+#format special ... on redimensionne l'image originale à la volée
+RewriteRule photos-(.*)-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-moyenRedim\.jpg getPhotoRedimensionnee.php?dimX=700&photoOriginale=images/originaux/$2-$3-$4/$5\.jpg [L,QSA]
+
+RewriteRule photos-(.*)-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-([a-zA-Z]+)\.jpg images/$6/$2-$3-$4/$5\.jpg [L,QSA]
+
+
+RewriteRule personnalite-(.+)-([0-9]+)\.html index.php?archiAffichage=evenementListe&selection=personne&id=$2 [QSA,L]
+
+# cas ou on affiche la liste des rues sans afficher les groupes d'adresse lié a la rue sans numero d'adresse
+RewriteRule rue-adresses-(.+)-([0-9]+)\.html index.php?archiAffichage=listeAdressesFromRue&recherche_rue=$2&noAdresseSansNumero=1 [QSA,L]
+
+RewriteRule rue-(.*)-([0-9]+)\.html index.php?archiAffichage=listeAdressesFromRue&recherche_rue=$2 [QSA,L]
+
+RewriteRule sous-quartier-(.+)-([0-9]+)\.html index.php?archiAffichage=adresseListe&recherche_sousQuartier=$2 [QSA,L]
+
+#RewriteRule quartier-(.+)-([0-9]+)\.html index.php?archiAffichage=adresseListe&recherche_quartier=$2 [QSA,L]
+RewriteRule quartier-(.+)-([0-9]+)\.html index.php?archiAffichage=listeDossiers&archiIdQuartier=$2&modeAffichageListe=parRuesDeQuartier [QSA,L]
+RewriteRule quartier-(.+)-([0-9]+)-page([0-9]+)\.html index.php?archiAffichage=listeDossiers&archiIdQuartier=$2&modeAffichageListe=parRuesDeQuartier&archiPageRuesQuartier=$3 [QSA,L]
+
+RewriteRule ville-(.+)-([0-9]+)\.html index.php?archiAffichage=adresseListe&recherche_ville=$2 [QSA,L]
+
+RewriteRule statistiques-adresses-photos-architectes-strasbourg\.html index.php?archiAffichage=statistiquesAccueil [L,QSA]
+
+RewriteRule profil-([0-9]+)\.html index.php?archiAffichage=detailProfilPublique&archiIdUtilisateur=$1 [QSA,L]
+
+RewriteRule profil-([0-9]+)-([0-9]+)\.html index.php?archiAffichage=detailProfilPublique&archiIdUtilisateur=$1&archiIdEvenementGroupeAdresseOrigine=$2 [QSA,L]
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+# gestion des liens des dossiers pour pouvoir faire des copiers coller des liens ( ne sert qu'a ca, vu que archiIdVilleGeneral est en session )
+# donc quand l'url est entrée dans le navigateur, la page vers placer la valeur dans la session
+#
+#modif lettreCourante
+RewriteRule dossiers-rues-quartiers-adresses-photos-strasbourg-page([0-9]+)-lettre([a-z])\.html index.php?archiAffichage=listeDossiers&archiPageCouranteVille=$1&lettreCourante=$2 [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-(.+)-([0-9]+)-page([0-9]+)-(.+)-lettre([a-z])\.html index.php?archiAffichage=listeDossiers&archiIdVilleGeneral=$2&archiPageCouranteVille=$3&modeAffichageListe=$4&lettreCourante=$5 [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-strasbourg-lettre([a-z])\.html index.php?archiAffichage=listeDossiers&lettreCourante=$1 [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-ville-(.+)-([0-9]+)-([A-Za-z]+)-lettre([a-z])\.html index.php?archiAffichage=listeDossiers&archiIdVilleGeneral=$2&modeAffichageListe=$3&lettreCourante=$4 [L,QSA]
+
+
+
+
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-(.+)-([0-9]+)\.html index.php?archiAffichage=listeDossiers&archiIdVilleGeneral=$2 [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-(.+)-([0-9]+)-page([0-9]+)\.html index.php?archiAffichage=listeDossiers&archiPageCouranteVille=$3&archiIdVilleGeneral=$2 [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-(.+)-([0-9]+)-page([0-9]+)-(.+)\.html index.php?archiAffichage=listeDossiers&archiPageCouranteVille=$3&modeAffichageListe=$4&archiIdVilleGeneral=$2 [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-ville-(.+)-([0-9]+)-(.+)\.html index.php?archiAffichage=listeDossiers&modeAffichageListe=$3&archiIdVilleGeneral=$2 [L,QSA]
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-strasbourg\.html index.php?archiAffichage=listeDossiers [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-strasbourg-page([0-9]+)\.html index.php?archiAffichage=listeDossiers&archiPageCouranteVille=$1 [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-strasbourg-page([0-9]+)-(.+)\.html index.php?archiAffichage=listeDossiers&archiPageCouranteVille=$1&modeAffichageListe=$2 [L,QSA]
+
+RewriteRule dossiers-rues-quartiers-adresses-photos-strasbourg-ville-(.+)\.html index.php?archiAffichage=listeDossiers&modeAffichageListe=$1 [L,QSA]
+
+RewriteRule demolitions-toutes-adresses-strasbourg-archi\.html index.php?archiAffichage=toutesLesDemolitions [L,QSA]
+
+RewriteRule demolitions-toutes-adresses-strasbourg-archi-([0-9]+)-([0-9]+)\.html index.php?archiAffichage=toutesLesDemolitions&archiIdVilleGeneral=$1&archiIdPaysGeneral=$2 [L,QSA]
+
+RewriteRule travaux-tous-adresses-strasbourg-archi\.html index.php?archiAffichage=tousLesTravaux [L,QSA]
+
+RewriteRule travaux-tous-adresses-strasbourg-archi-([0-9]+)-([0-9]+)\.html index.php?archiAffichage=tousLesTravaux&archiIdVilleGeneral=$1&archiIdPaysGeneral=$2 [L,QSA]
+
+RewriteRule culture-evenements-culturels-adresses-strasbourg-archi\.html index.php?archiAffichage=tousLesEvenementsCulturels [L,QSA]
+
+RewriteRule culture-evenements-culturels-adresses-strasbourg-archi-([0-9]+)-([0-9]+)\.html index.php?archiAffichage=tousLesEvenementsCulturels&archiIdVilleGeneral=$1&archiIdPaysGeneral=$2 [L,QSA]
+
+RewriteRule adresses-nouvelles-toutes-rues-villes-quartiers-strasbourg-archi\.html index.php?archiAffichage=recherche&motcle=&submit=Rechercher [L,QSA]
+
+RewriteRule adresses-nouvelles-toutes-rues-villes-quartiers-strasbourg-archi-([0-9]+)-([0-9]+)\.html index.php?archiAffichage=recherche&motcle=&submit=Rechercher&archiIdVilleGeneral=$1&archiIdPaysGeneral=$2 [L,QSA]
+
+RewriteRule architectes-strasbourg-photos-classes\.html index.php?archiAffichage=tousLesArchitectesClasses [L,QSA]
+
+RewriteRule rues-strasbourg-photos-classees\.html index.php?archiAffichage=toutesLesRuesCompletesClassees [L,QSA]
+
+RewriteRule rues-strasbourg-photos-classees-([0-9]+)\.html index.php?archiAffichage=toutesLesRuesCompletesClassees&archiPageCouranteRue=$1 [L,QSA]
+
+RewriteRule architectes-strasbourg-photos-classes-([0-9]+)\.html index.php?archiAffichage=tousLesArchitectesClasses&archiPageCouranteArchitectes=$1 [L,QSA]
+
+
+
+RewriteRule photo-detail-(.+)-([0-9]+)-([a-zA-Z0-9]+)-([a-zA-Z0-9]+)-([0-9]+)-adresse([0-9]+)\.html index.php?archiAffichage=imageDetail&archiIdImage=$2&archiRetourAffichage=$3&archiRetourIdName=$4&archiRetourIdValue=$5&archiIdAdresse=$6 [L,QSA]
+
+
+# liens vers photo detail
+RewriteRule photo-detail-strasbourg-([0-9]+)-([a-zA-Z0-9]+)-([a-zA-Z0-9]+)-([0-9]+)\.html index.php?archiAffichage=imageDetail&archiIdImage=$1&archiRetourAffichage=$2&archiRetourIdName=$3&archiRetourIdValue=$4 [L,QSA]
+
+# liens vers photo detail idAdresse precise
+RewriteRule photo-detail-strasbourg-([0-9]+)-([a-zA-Z0-9]+)-([a-zA-Z0-9]+)-([0-9]+)-adresse([0-9]+)\.html index.php?archiAffichage=imageDetail&archiIdImage=$1&archiRetourAffichage=$2&archiRetourIdName=$3&archiRetourIdValue=$4&archiIdAdresse=$5 [L,QSA]
+
+
+# lien vers photo detail avec précision du format
+RewriteRule photo-detail-strasbourg-([0-9]+)-([a-zA-Z0-9]+)-([a-zA-Z0-9]+)-([0-9]+)-([a-zA-Z]+)\.html index.php?archiAffichage=imageDetail&archiIdImage=$1&archiRetourAffichage=$2&archiRetourIdName=$3&archiRetourIdValue=$4&formatPhoto=$5 [L,QSA]
+
+RewriteRule qui-sommes-nous\.html index.php?archiAffichage=quiSommesNous [L,QSA]
+
+RewriteRule commentaires-archi-strasbourg\.html index.php?archiAffichage=tousLesCommentaires [L,QSA]
+
+RewriteRule commentaires-archi-strasbourg-([0-9]+)\.html index.php?archiAffichage=tousLesCommentaires&pageCourante=$1 [L,QSA]
+
+RewriteRule archi-strasbourg-media-presse-publicite-([0-9]+)\.html index.php?archiAffichage=publiciteArticlesPresse&archiAncre=$1 [L,QSA]
+
+RewriteRule archi-strasbourg-media-presse-publicite\.html index.php?archiAffichage=publiciteArticlesPresse [L,QSA]
+
+RewriteRule sondage-financement-archi-strasbourg\.html index.php?archiAffichage=afficheSondageGrand [L,QSA]
+
+RewriteRule sondage-financement-archi-strasbourg-statistiques\.html index.php?archiAffichage=afficheSondageResultatGrand [L,QSA]
+
+RewriteRule actualites-archi-strasbourg-([0-9]+)\.html index.php?archiAffichage=afficherActualite&archiIdActualite=$1 [L,QSA]
+
+RewriteRule actualites-archi-strasbourg-liste\.html index.php?archiAffichage=toutesLesActualites [L,QSA]
+
+RewriteRule vues-photos-archi-strasbourg\.html index.php?archiAffichage=toutesLesVues [L,QSA]
+
+
+
+# URL rewrite pour le nom de la ville en faux sous domaine
+
+RewriteRule (.+)\/ index.php?archiAffichage=afficheAccueil&archiNomVilleGeneral=$1 [L,QSA]
