@@ -859,7 +859,7 @@ class ArchiPersonne extends ArchiContenu
             ";
         } else {
             $req = "
-            INSERT INTO `archi-strasbourg`.`_personneImage` (
+            INSERT INTO `_personneImage` (
                 `idPersonne` ,
                 `idImage`
             )

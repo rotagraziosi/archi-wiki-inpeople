@@ -8129,19 +8129,19 @@ class archiAdresse extends ArchiContenu
 				//$this->getUrlImage("moyen")."/".$fetchEvenements['dateUpload']."/".$fetchEvenements['idHistoriqueImage'].".jpg"
 				$positionEvenement = $this->getPositionFromEvenement($fetchEvenements['idEvenement']);
 				$infosAdresseCourante = array(
-													"idAdresse"=>$fetchEvenements['idAdresse'],
-													"idIndicatif"=>$fetchEvenements['idIndicatif'],
-													"numero"=>$fetchEvenements['numero'],
-													"nomRue"=>$fetchEvenements['nomRue'],
-													"nomQuartier"=>$fetchEvenements['nomQuartier'],
-													"nomSousQuartier"=>$fetchEvenements['nomSousQuartier'],
-													"nomVille"=>$fetchEvenements['nomVille'],
-													"prefixeRue"=>$fetchEvenements['prefixeRue'],
-													"dateCreationEvenement"=>$fetchEvenements['dateCreationEvenement'],
-													"positionEvenement"=>$positionEvenement,
-													"idEvenement"=>$fetchEvenements['idEvenement'],
-													"idEvenementGroupeAdresse"=>$fetchEvenements['idEvenementGroupeAdresses']
-													);
+                    "idAdresse"=>$fetchEvenements['idAdresse'],
+                    "idIndicatif"=>$fetchEvenements['idIndicatif'],
+                    "numero"=>$fetchEvenements['numero'],
+                    "nomRue"=>$fetchEvenements['nomRue'],
+                    "nomQuartier"=>$fetchEvenements['nomQuartier'],
+                    "nomSousQuartier"=>$fetchEvenements['nomSousQuartier'],
+                    "nomVille"=>$fetchEvenements['nomVille'],
+                    "prefixeRue"=>$fetchEvenements['prefixeRue'],
+                    "dateCreationEvenement"=>$fetchEvenements['dateCreationEvenement'],
+                    "positionEvenement"=>$positionEvenement,
+                    "idEvenement"=>$fetchEvenements['idEvenement'],
+                    "idEvenementGroupeAdresse"=>$fetchEvenements['idEvenementGroupeAdresses']
+                );
 				//"titreEvenement"=>$fetchEvenements['titreEvenement'],
 				//"description"=>$fetchEvenements['descriptionEvenement'],
 				//"idHistoriqueImage"=>$fetchEvenements['idHistoriqueImage'],
@@ -8194,6 +8194,7 @@ class archiAdresse extends ArchiContenu
 						//if($fetchEvenements['annneeDebut']==date('Y'))
 						//{
 							// TRAVAUX
+                            
 							if(!in_array($fetchEvenements['idAdresse'],$tabAdressesEvenementsAffichees) && !in_array($fetchEvenements['idEvenementGroupeAdresses'],$tabEvenementGroupeAdressesAffichees))
 							{
 								//if(count($tabConstruction)<5)
@@ -8522,12 +8523,11 @@ class archiAdresse extends ArchiContenu
 					//$resImagesConstructionFromAdresse = $image->getImagesEvenementsFromAdresse($value['idAdresse']);
 					//$fetchImageConstruction = mysql_fetch_assoc($resImagesConstructionFromAdresse);
 					$fetch = $this->getFirstImageFromEvenement($value['idEvenement']);
-					if(isset($fetch['idHistoriqueImage']) && $fetch['idHistoriqueImage']!='' && $fetch['idHistoriqueImage']!='0')
-					{
+					if (isset($fetch['idHistoriqueImage']) && $fetch['idHistoriqueImage']!='' && $fetch['idHistoriqueImage']!='0') {
 						$imageElementPremierePosition['construction'] = $fetch;//array('idHistoriqueImage'=> $fetchImageConstruction['idHistoriqueImage'], 'dateUpload'=>$fetchImageConstruction['dateUpload'] );
 						//$indiceElementPremierePosition['construction'] = $indice;
 						$trouveImageConstruction=true;
-						$cktab5Constructions[0] = $value;
+						$tab5Constructions[0] = $value;
 						$indiceElementPremierePosition['construction'] = 0;
 						
 					}
@@ -8575,16 +8575,13 @@ class archiAdresse extends ArchiContenu
 		
 		// on recupere l'evenement qui comporte l'image et on limite le tableau en sortie a 5
 		$i=1;
-		if($trouveImageConstructionSurAdresse || $trouveImageConstruction) // en principe maintenant c'est toujours possible , vu qu'on parcours tout et on s'arrete seulement s'il y a une image dans la boucle précédente
-		{
+        // en principe maintenant c'est toujours possible, vu qu'on parcours tout et on s'arrete seulement s'il y a une image dans la boucle précédente
+		if ($trouveImageConstructionSurAdresse || $trouveImageConstruction) {
 			foreach($tabConstruction as $indice => $value)
 			{
-				if($i>4)
-				{
+				if ($i>4) {
 					break;
-				}
-				else
-				{
+				} else {
 					if(isset($tab5Constructions[0]) && $value['idEvenementGroupeAdresse']!=$tab5Constructions[0]['idEvenementGroupeAdresse'])
 					{
 						$tab5Constructions[$i] = $value;

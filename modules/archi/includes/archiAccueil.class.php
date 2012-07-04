@@ -585,7 +585,6 @@ class archiAccueil extends config
                             ));
         
         }
-        
         foreach ($params['constructions'] as $indice => $value)
         {
             $intituleAdresse = $adresse->getIntituleAdresseAccueil($value, array('ifTitreAfficheTitreSeulement'=>true));
