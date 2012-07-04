@@ -1998,7 +1998,7 @@ class archiAdresse extends ArchiContenu
 	// ***************************************************************************************************************************************
 	// recuperation d'une image appartenant a l'adresse , s'il n'y en a pas , on en recupere une d'un evenement lié a l'adresse
 	// ***************************************************************************************************************************************
-	public function getUrlImageFromAdresse($idAdresse=0,$format='mini',$params=array())
+	public function getUrlImageFromAdresse($idAdresse=0, $format='mini', $params=array())
 	{
 		$url="";
 		$dateUpload = "";
@@ -6256,14 +6256,14 @@ class archiAdresse extends ArchiContenu
                     $titre.=ucwords(stripslashes($infosPersonne['nom']))." ".ucwords(stripslashes($infosPersonne['prenom']));
                     
                     $description="<div class='personHeader tableauResumeAdresse'>";
-                    $description.="<ul style='float:right;'><li><a href='".$this->creerUrl("", "editPerson", array("id"=>$_GET["id"]))."'>Modifier</a></li>";
-                    $description.="<li><a href='".$this->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>Choisir l'image</a></li></ul>";
+                    $description.="<ul style='float:right;'><li><a href='".$this->creerUrl("", "editPerson", array("id"=>$_GET["id"]))."'>"._("Modifier")."</a></li>";
+                    $description.="<li><a href='".$this->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>"._("Sélectionner l'image principale")."</a></li></ul>";
                     $description.="<img src='".archiPersonne::getImage($this->variablesGet['id'])."' alt=''/>";
                     if ($infosPersonne['dateNaissance']!='0000-00-00') {
-                        $description.="<br>Date de naissance : ".$this->date->toFrench($infosPersonne['dateNaissance']);
+                        $description.="<br>"._("Date de naissance :")." ".$this->date->toFrench($infosPersonne['dateNaissance']);
                     }
                     if ($infosPersonne['dateDeces']!='0000-00-00') {
-                        $description.="<br>Date de décès : ".$this->date->toFrench($infosPersonne['dateDeces']);
+                        $description.="<br>"._("Date de décès :")." ".$this->date->toFrench($infosPersonne['dateDeces']);
                     }
                     
                     

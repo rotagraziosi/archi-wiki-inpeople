@@ -17,6 +17,11 @@ if (isset($_POST["evenementGroupeAdresse"])) {
         $_GET["id"], $_POST["prenom"], $_POST["nom"], $_POST["metier"],
         $_POST["dateNaissance"], $_POST["dateDeces"]
     );
+    header(
+        "Location: ".$config->creerUrl(
+            "", "evenementListe", array("selection"=>"personne", "id"=>$_GET["id"])
+        )
+    );
 }
 
 $t=new Template('modules/archi/templates/');
@@ -45,7 +50,7 @@ while ($job = mysql_fetch_assoc($resJobs)) {
 $t->assign_vars(
     array(
         'titrePage'=>_("Edition de")." <a href='".$config->creerUrl(
-            "", "evenementListe", array("selection"=>"personne", "id"=>869)
+            "", "evenementListe", array("selection"=>"personne", "id"=>$_GET["id"])
         )."'>".$p->prenom." ".$p->nom."</a>", 
         "jobList"=>$jobList,
         "typeBoutonValidation"=>"submit"

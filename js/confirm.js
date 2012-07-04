@@ -1,15 +1,20 @@
-function goodbye(e) {
+var initConfirm = function () {
     "use strict";
-	if (!e) {
-        e = window.event;
-    }
-	//e.cancelBubble is supported by IE - this will kill the bubbling process.
-	e.cancelBubble = true;
+    var noconfirm, goodbye;
+    noconfirm = function () {
+        window.onbeforeunload = null;
+    };
+    goodbye = function (e) {
+        if (!e) {
+            e = window.event;
+        }
 
-	//e.stopPropagation works in Firefox.
-	if (e.stopPropagation) {
-		e.stopPropagation();
-		e.preventDefault();
-	}
-}
-window.onbeforeunload = goodbye;
+        if (e.stopPropagation) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+    };
+    window.onbeforeunload = goodbye;
+    document.getElementById("submitBtn").addEventListener("click", noconfirm, true);
+};
+window.addEventListener("load", initConfirm);

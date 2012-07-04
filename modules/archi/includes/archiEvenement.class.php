@@ -1342,7 +1342,6 @@ class archiEvenement extends config
 				
 			}
 		} else {
-
 			if($modeAffichage=='simple')
 			{
 				// l'idEvenement en parametre correspond a l'evenement enfant a afficher
@@ -1395,7 +1394,6 @@ class archiEvenement extends config
         } else {
             echo "<p><strong>Cette fiche n'existe plus, merci de <a href='".$this->creerUrl("", "contact")."'>contacter un administrateur</a>.</strong></p>";
         }
-		
 		
 		// lien vers le formulaire d'ajout d'une adresse pour un evenement parent
 		// recherche de l'evenement parent
@@ -1485,7 +1483,6 @@ class archiEvenement extends config
 		
 		
 		
-		
 		if (isset($sqlWhere) && mysql_num_rows($rep) > 0)
 		{
 
@@ -1522,7 +1519,7 @@ class archiEvenement extends config
 							$ancrePositionAdresseLiee = "#".$positionSurAdresseOrigine;
 						}
 						
-						$t->assign_vars(array("urlEvenementExterne"=>"Adresse d'origine : <a href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$fetchAdressesExternes['idAdresse'])).$ancrePositionAdresseLiee."'>".$intituleAdresse."</a>"));
+						$t->assign_vars(array("urlEvenementExterne"=>"<small>"._("Adresse d'origine :")." <a href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$fetchAdressesExternes['idAdresse'])).$ancrePositionAdresseLiee."'>".$intituleAdresse."</a></small>"));
 					}
 					else
 					{
@@ -1867,38 +1864,13 @@ class archiEvenement extends config
                     
                     $res = $this->connexionBdd->requete($req);
                     $date2 =mysql_fetch_object($res);
-                    $linkedEvents=archiPersonne::getEvenementsLies($idPerson, $dateDebut, $date2);
-                    if (count($linkedEvents)) {
-                        $linkedEventsHTML="<h4>"._("Evénements liés :")."</h4><ul>";
-                        foreach ($linkedEvents as $linkedEvent) {
-                            $req = "
-                                SELECT titre, dateDebut
-                                FROM historiqueEvenement
-                                WHERE idEvenement = '".$linkedEvent."'
-                            ";
-                        
-                            $res = $this->connexionBdd->requete($req);
-                            $event=mysql_fetch_object($res);
-                            
-                            $a=new archiAdresse();
-                            $linkedEventAddress=$a->getIntituleAdresseFrom($linkedEvent, "idEvenement");
-                            
-                            $req = "
-                                    SELECT  idAdresse
-                                    FROM _adresseEvenement 
-                                    WHERE idEvenement = ".
-                                    $this->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent);
-                            $res = $this->connexionBdd->requete($req);
-                            $linkedEventIdAddress=mysql_fetch_object($res)->idAdresse;
-                            $linkedEventsHTML.="<li><a href='".$this->creerUrl("", "adresseDetail", array("archiIdAdresse"=>$linkedEventIdAddress, "archiIdEvenementGroupeAdresse"=>$linkedEvent))."'>".$linkedEventAddress;
-                            if (!empty($event->titre)) {
-                                $linkedEventsHTML.=" - ".$event->titre;
-                            }
-                            $linkedEventsHTML.=" - ".$this->date->toFrench($event->dateDebut)."</li>";
-                        }
-                        $linkedEventsHTML.="</ul>";
-                        $t->assign_vars(array("evenementsLiesPersonne" => $linkedEventsHTML));
-                    }
+                    $linkedEventsHTML=archiPersonne::displayEvenementsLies($idPerson, $dateDebut, $date2->dateDebut);
+                    
+                    $t->assign_vars(array("evenementsLiesPersonne" => $linkedEventsHTML));
+                } else if ($idPerson=archiPersonne::isPerson($idEvenementGroupeAdresse)) {
+                    $linkedEventsHTML=archiPersonne::displayEvenementsLies($idPerson, $dateDebut, 3000);
+                    
+                    $t->assign_vars(array("evenementsLiesPersonne" => $linkedEventsHTML));
                 }
 				
 				/*
@@ -2179,6 +2151,8 @@ class archiEvenement extends config
 						$params['imagesVuesSurLinkedByDate'] = array();
                         if (isset($tabIdEvenementsLies[$i+1]["idEvenementAssocie"])) {
                             $params["nextEvent"]=$tabIdEvenementsLies[$i+1]["idEvenementAssocie"];
+                        } else {
+                            $params["nextEvent"]=null;
                         }
 						if(isset($arrayCorrespondancesVuesSur[$value['idEvenementAssocie']]))
 							$params['imagesVuesSurLinkedByDate'] = $arrayCorrespondancesVuesSur[$value['idEvenementAssocie']];

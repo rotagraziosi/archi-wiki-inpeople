@@ -5162,7 +5162,8 @@ class archiImage extends config
     }
     
     /**
-     * Fonction permettant d'afficher les images d'un utilisateur ,  fonction de debug
+     * Fonction permettant d'afficher les images d'un utilisateur,
+     * fonction de debug
      * 
      * @param array $params Paramètres
      * 

@@ -734,3 +734,11 @@ vertical-align:top;
 .personHeader {
     padding:1em;
 }
+
+.linkedEvents img {
+    vertical-align:middle;
+}
+.linkedEvents {
+    margin-bottom:0.2em;
+    list-style-type:square;
+}

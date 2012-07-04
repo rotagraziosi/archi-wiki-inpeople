@@ -70,7 +70,7 @@ abstract class ArchiContenu extends config
             }
             $t->assign_vars(
                 array(
-                    'titrePage'=>_("Ajout d'une nouvelle personne"), 
+                    'titrePage'=>_("Ajout d'une nouvelle personne (physique ou morale)"), 
                     "jobList"=>$jobList,
                     "typeBoutonValidation"=>"submit"
                 )

@@ -15,7 +15,7 @@ if (isset($_POST["image"])) {
     if (archiPersonne::setImage($_GET["id"], $_POST["image"])) {
         header(
             "Location: ".$config->creerUrl(
-                "", "evenementListe", array("selection"=>"personne", "id"=>869)
+                "", "evenementListe", array("selection"=>"personne", "id"=>$_GET["id"])
             )
         );
     }
@@ -28,15 +28,23 @@ echo "<h2 class='h1'><a href='".$config->creerUrl(
         'selection'=>"personne", 'id'=>$_GET["id"]
     )
 )."'>".$infos["prenom"]." ".$infos["nom"]."</a></h2>";
-
+echo "<p>"._("Cliquez sur une image pour la sélectionner.")."</p>";
 $images = archiPersonne::getImages($_GET["id"]);
 echo "<form method='POST' action='".
-$config->creerUrl("", "choosePicturePerson", array("id"=>869))."'>";
-foreach ($images as $image) {
-    echo "<button type='submit' name='image' value='".$image->idImage."'>
-    <img src='".$config->getUrlImage("moyen").
-    $image->dateUpload."/".$image->idHistoriqueImage.".jpg' alt='' />
-    </button>";
+$config->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>";
+if (is_array($images)) {
+    foreach ($images as $image) {
+        echo "<button type='submit' name='image' value='".$image->idImage."'>
+        <img src='".$config->getUrlImage("moyen").
+        $image->dateUpload."/".$image->idHistoriqueImage.".jpg' alt='' />
+        </button>";
+    }
+} else {
+    header(
+        "Location: ".$config->creerUrl(
+            "", "evenementListe", array("selection"=>"personne", "id"=>$_GET["id"])
+        )
+    );
 }
 echo "</form>";
 ?>
