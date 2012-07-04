@@ -244,7 +244,7 @@ class googleMap extends config
 			$displayDebug='none';
 			
 		//$html.="<div style='width:500px; height:300px;overflow:scroll;display:".$displayDebug.";' id='debugGoogleMap'></div>";
-		$html.="<script  >load();</script>";
+		$html.="<script>load();</script>";
 		
 		// fonction appelant les affichages de coordonnées , appels regroupées dans une fonction qui groupe les coordonnées par paquet , afin de ne pas trop en envoyer a la fois
 		if(count($this->coordonnees)>0)
@@ -643,7 +643,7 @@ class googleMap extends config
 		// pour preciser que l'on veut une version stable : v=2.s
 		// la derniere version v=2.x
 		// version chaipakoi v=2   
-		$html.="<script src=\"https://maps-api-ssl.google.com/maps?file=api&amp;v=2&amp;key=".$this->googleMapKeyProperty."\" type=\"text/javascript\"></script>";
+		$html.="<script src=\"http://maps.google.com/maps?file=api&amp;v=2&amp;key=".$this->googleMapKeyProperty."\" type=\"text/javascript\"></script>";
 		$html.="<script>
 				var map;
 				var geocoder;
