@@ -1,4 +1,5 @@
-﻿<h1>{titre}</h1>
+﻿{divBegin}
+<h1>{titre}</h1>
 {description}
 <!-- BEGIN t -->	
 	
@@ -35,3 +36,4 @@
 	<br />
 <!-- END t -->
 
+{divEnd}

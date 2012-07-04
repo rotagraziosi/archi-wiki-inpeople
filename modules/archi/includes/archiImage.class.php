@@ -1043,7 +1043,7 @@ class archiImage extends config
             $licence=$this->getLicence($idImage);
             $textLicence="<img src='images/licences/".$licence["logo"]."' alt=''/> ";
             if (!empty($licence["link"])) {
-                $textLicence.="<a href='".$licence["link"]."'>";
+                $textLicence.="<a rel='license' href='".$licence["link"]."'>";
             }
             $textLicence.=$licence["name"];
             if (!empty($licence["link"])) {
@@ -1052,10 +1052,10 @@ class archiImage extends config
             $auteur=$this->getAuteur($idImage);
             if (is_array($auteur)) {
                 if (!empty($auteur["nom"]) && $auteur["nom"]!=" ") {
-                    $textLicence.=" (<a href='profil-".$auteur["id"].".html'>".$auteur["nom"]."</a>)";
+                    $textLicence.=" (<span itemprop='author'><a rel='author' href='profil-".$auteur["id"].".html'>".$auteur["nom"]."</a></span>)";
                 } 
             } else {
-                $textLicence.=" (".$auteur.")";
+                $textLicence.=" (<span itemprop='author'>".$auteur."</span>)";
             }
             $t->assign_vars(array("licence"=>$textLicence));
             // ***********************************************************************************************************************

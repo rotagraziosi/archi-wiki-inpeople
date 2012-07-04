@@ -1,4 +1,5 @@
-﻿<!-- BEGIN isRetour -->
+﻿<div itemscope itemtype="http://schema.org/Photograph">
+<!-- BEGIN isRetour -->
 <a href='{isRetour.urlRetour}'><?_("Retour")?></a>
 <!-- END isRetour -->
 <br>
@@ -12,15 +13,16 @@
 {imageZoom}
 {txtZoom}
 <div id='divImage' style='position:relative;'>
-<img src='{cheminDetailImage}' alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
+<img itemprop='image' src='{cheminDetailImage}' alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
 <br/><br/>
 <div><?_("Cette photo est disponible sous la licence suivante :")?><br/>
 <div class="licence">{licence}</div></div>
 <div id='{IDDivZones}' style='position:absolute;top:0px;left:0px;'></div>
 </div>
 <br>
-{datePriseDeVue}
-<br />{description}
+<span itemprop="dateCreated">
+{datePriseDeVue}</span>
+<br /><div itemprop="description">{description}</div>
 {infosPrisDepuis}<br />
 {infosVueSur}
 </p>
@@ -65,5 +67,5 @@
 
 {listeDivsZones}
 
-
+</div>
 

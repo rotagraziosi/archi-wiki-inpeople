@@ -6251,19 +6251,19 @@ class archiAdresse extends ArchiContenu
                     $infosPersonne = $personneObj->getInfosPersonne($this->variablesGet['id']);
                     $titre="";
                     if (isset($infosPersonne['nomMetier']) && $infosPersonne['nomMetier']!="") {
-                        $titre = ucwords(stripslashes($infosPersonne['nomMetier']))." : ";
+                        $titre = "<span itemprop='jobTitle'>".ucwords(stripslashes($infosPersonne['nomMetier']))."</span> : ";
                     }
-                    $titre.=ucwords(stripslashes($infosPersonne['nom']))." ".ucwords(stripslashes($infosPersonne['prenom']));
+                    $titre.="<span itemprop='name'><span itemprop='familyName'>".ucwords(stripslashes($infosPersonne['nom']))."</span> <span itemprop='givenName'>".ucwords(stripslashes($infosPersonne['prenom']))."</span></span>";
                     
                     $description="<div class='personHeader tableauResumeAdresse'>";
                     $description.="<ul style='float:right;'><li><a href='".$this->creerUrl("", "editPerson", array("id"=>$_GET["id"]))."'>"._("Modifier")."</a></li>";
                     $description.="<li><a href='".$this->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>"._("Sélectionner l'image principale")."</a></li></ul>";
                     $description.="<img src='".archiPersonne::getImage($this->variablesGet['id'])."' alt=''/>";
                     if ($infosPersonne['dateNaissance']!='0000-00-00') {
-                        $description.="<br>"._("Date de naissance :")." ".$this->date->toFrench($infosPersonne['dateNaissance']);
+                        $description.="<br>"._("Date de naissance :")." <span itemprop='birthDate'>".$this->date->toFrench($infosPersonne['dateNaissance'])."</span>";
                     }
                     if ($infosPersonne['dateDeces']!='0000-00-00') {
-                        $description.="<br>"._("Date de décès :")." ".$this->date->toFrench($infosPersonne['dateDeces']);
+                        $description.="<br>"._("Date de décès :")." <span itemprop='deathDate'>".$this->date->toFrench($infosPersonne['dateDeces'])."</span>";
                     }
                     
                     
@@ -6287,8 +6287,13 @@ class archiAdresse extends ArchiContenu
                     //$description.="<br><br><h2>"._("Liste de ses réalisations :")."</h2>";
                     
                     
-                    $t->assign_vars(array('titre'=>$titre));
-                    $t->assign_vars(array('description'=>$description));
+                    $t->assign_vars(
+                        array(
+                            'titre'=>$titre, 'description'=>$description,
+                            "divBegin"=>"<div itemscope itemtype='http://schema.org/Person'>",
+                            "divEnd"=>"</div>"
+                        )
+                    );
                 } elseif (isset($this->variablesGet['selection']) && $this->variablesGet['selection']=='source' && isset($this->variablesGet['id']) && $this->variablesGet['id']!='') {
                     $sourceObj = new archiSource();
                     $bbCode = new bbCodeObject();
