@@ -543,11 +543,9 @@ class archiAdresse extends ArchiContenu
                 <meta itemprop='addressCountry' content='".$address["nomPays"]."'/>
                 </span>";
             }
-            $html.="</h2>";
-        } else {
-            $html.="</h2>";
-        }
-        
+            
+        } 
+        $html.="</h2>";
 		
 		$evenement = new archiEvenement();
 		// si le groupe d'adresse est precisé dans l'url , on ne va afficher que celui ci

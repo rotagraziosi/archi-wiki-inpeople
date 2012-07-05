@@ -2003,7 +2003,11 @@ class archiEvenement extends config
                             )
                         );
                         
-                        
+                        if($authentification->estConnecte())
+                        {
+                            $t->assign_block_vars('noSimple.isConnected', array());
+                            $t->assign_block_vars('noSimple.adresses.isConnected', array());
+                        }
                         
                         
                         if($retourAdresse['nbAdresses']==0)
@@ -2015,10 +2019,7 @@ class archiEvenement extends config
                             $t->assign_vars(array('intituleActionAdresses'=>_("Modifier")));
                         }
                         
-                        if($authentification->estConnecte())
-                        {
-                            $t->assign_block_vars('noSimple.isConnected',array());
-                        }
+                        
                         
                         if($authentification->estConnecte() && $authentification->estAdmin())
                         {

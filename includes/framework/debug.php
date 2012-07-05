@@ -23,7 +23,7 @@ function shutdown()
 {
     print_r(error_get_last());
 }
-
-register_shutdown_function("shutdown");
-
+if (isset($config->debug) && $config->debug) {
+    register_shutdown_function("shutdown");
+}
 ?>
