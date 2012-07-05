@@ -919,6 +919,9 @@ class ArchiPersonne extends ArchiContenu
                 $res = $config->connexionBdd->requete($req);
                 $linkedEventType=mysql_fetch_object($res)->nom;
                 $linkedEventImg=$a->getUrlImageFromEvenement($linkedEvent, "mini");
+                if ($linkedEventImg["url"]==$config->getUrlImage("", "transparent.gif")) {
+                    $linkedEventImg=$a->getUrlImageFromAdresse($linkedEventIdAddress, "mini");
+                }
                 $linkedEventUrl=$config->creerUrl("", "adresseDetail", array("archiIdAdresse"=>$linkedEventIdAddress, "archiIdEvenementGroupeAdresse"=>$linkedEvent));
                 $linkedEventsHTML.="<li class='linkedEvents'><img src='".
                 $linkedEventImg["url"]."' alt='' /> <div style='display:inline-block;'><a href='$linkedEventUrl'>".$linkedEventAddress;

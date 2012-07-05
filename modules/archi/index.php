@@ -836,8 +836,16 @@ if (isset($_GET['archiAffichage'])) {
             include "inc/choosePicturePerson.php";
             break;
         case "ajoutNouvelPersonne":
-            $p = new archiPersonne();
-            echo $p->afficheFormulaireNouveauDossier(array(), "personne");
+            $auth=new archiAuthentification();
+            if ($auth->estConnecte()) {
+                $p = new archiPersonne();
+                echo $p->afficheFormulaireNouveauDossier(array(), "personne");
+            } else {
+                if (!$afficheAuthentificationAction) {
+                    $auth = new archiAuthentification();
+                    echo $auth->afficheFormulaireAuthentification();
+                }
+            }
             break;
         case 'afficheChoixVille':
             $a = new archiAdresse();

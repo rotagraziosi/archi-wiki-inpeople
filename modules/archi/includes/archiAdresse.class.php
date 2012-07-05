@@ -6256,8 +6256,13 @@ class archiAdresse extends ArchiContenu
                     $titre.="<span itemprop='name'><span itemprop='familyName'>".ucwords(stripslashes($infosPersonne['nom']))."</span> <span itemprop='givenName'>".ucwords(stripslashes($infosPersonne['prenom']))."</span></span>";
                     
                     $description="<div class='personHeader tableauResumeAdresse'>";
-                    $description.="<ul style='float:right;'><li><a href='".$this->creerUrl("", "editPerson", array("id"=>$_GET["id"]))."'>"._("Modifier")."</a></li>";
-                    $description.="<li><a href='".$this->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>"._("Sélectionner l'image principale")."</a></li></ul>";
+
+                    $authentification = new archiAuthentification();
+
+                    if ($authentification->estConnecte()) {
+                        $description.="<ul style='float:right;'><li><a href='".$this->creerUrl("", "editPerson", array("id"=>$_GET["id"]))."'>"._("Modifier")."</a></li>";
+                        $description.="<li><a href='".$this->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>"._("Sélectionner l'image principale")."</a></li></ul>";
+                    }
                     $description.="<img src='".archiPersonne::getImage($this->variablesGet['id'])."' alt=''/>";
                     if ($infosPersonne['dateNaissance']!='0000-00-00') {
                         $description.="<br>"._("Date de naissance :")." <span itemprop='birthDate'>".$this->date->toFrench($infosPersonne['dateNaissance'])."</span>";
