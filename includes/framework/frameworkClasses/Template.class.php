@@ -1,5 +1,5 @@
 <?php 
-/*                              template.php
+/**                              template.php
  *                            -------------------
  *   begin                : Saturday, Feb 13, 2001
  *   copyright            : (C) 2001 The phpBB Group
@@ -7,6 +7,11 @@
  *
  *   $Id: template.php,v 1.10 2002/04/02 21:13:47 the_systech Exp $
  *
+ * @category Class
+ * @package  PhpBB
+ * @author   The phpBB Group <support@phpbb.com>
+ * @license  GNU General Public License
+ * @link     phpbb.com
  *
  ***************************************************************************/
 
@@ -16,6 +21,8 @@
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation; either version 2 of the License, or
  *   (at your option) any later version.
+ * 
+ * 
  *
  ***************************************************************************/
 
@@ -23,10 +30,16 @@
  * Template class. By Nathan Codding of the phpBB group.
  * The interface was originally inspired by PHPLib templates,
  * and the template file formats are quite similar.
+ * 
+ * @category Class
+ * @package  PhpBB
+ * @author   The phpBB Group <support@phpbb.com>
+ * @license  GNU General Public License
+ * @link     phpbb.com
  *
  */
-
-class Template {
+class Template
+{
     var $classname = "Template";
 
     // variable that holds all the data we'll be substituting into
@@ -53,6 +66,9 @@ class Template {
     /**
      * Constructor. Simply sets the root dir.
      *
+     * @param string $root Chemin de la racine
+     * 
+     * @return void
      */
     function Template($root = "./")
     {
@@ -62,6 +78,8 @@ class Template {
     /**
      * Destroys this template object. Should be called when you're done with it, in order
      * to clear out the template data so you can load/parse a new template set.
+     * 
+     * @return void
      */
     function destroy()
     {
@@ -70,11 +88,14 @@ class Template {
 
     /**
      * Sets the template root directory for this Template object.
+     * 
+     * @param string $dir Répertoire
+     * 
+     * @return bool
      */
     function set_rootdir($dir)
     {
-        if (!is_dir($dir))
-        {
+        if (!is_dir($dir)) {
             return false;
         }
 
@@ -85,17 +106,19 @@ class Template {
     /**
      * Sets the template filenames for handles. $filename_array
      * should be a hash of handle => filename pairs.
+     * 
+     * @param array $filename_array Nom des fichiers
+     * 
+     * @return bool
      */
     function set_filenames($filename_array)
     {
-        if (!is_array($filename_array))
-        {
+        if (!is_array($filename_array)) {
             return false;
         }
 
         reset($filename_array);
-        while(list($handle, $filename) = each($filename_array))
-        {
+        while (list($handle, $filename) = each($filename_array)) {
             $this->files[$handle] = $this->make_filename($filename);
         }
 
@@ -107,17 +130,19 @@ class Template {
      * Load the file for the handle, compile the file,
      * and run the compiled code. This will print out
      * the results of executing the template.
+     * 
+     * @param string $handle ?
+     * 
+     * @return void
      */
     function pparse($handle)
     {
-        if (!$this->loadfile($handle))
-        {
-            die("Template->pparse(): Impossible de charger le fichier template pour le mod魥 $handle");
+        if (!$this->loadfile($handle)) {
+            die("Template->pparse(): Impossible de charger le fichier template pour le modèle $handle");
         }
 
         // actually compile the template now.
-        if (!isset($this->compiled_code[$handle]) || empty($this->compiled_code[$handle]))
-        {
+        if (!isset($this->compiled_code[$handle]) || empty($this->compiled_code[$handle])) {
             // Actually compile the code now.
             $this->compiled_code[$handle] = $this->compile($this->uncompiled_code[$handle]);
         }
@@ -134,12 +159,16 @@ class Template {
      * template.
      * Note that all desired assignments to the variables in $handle should be done
      * BEFORE calling this function.
+     * 
+     * @param string $varname Nom de la variable
+     * @param string $handle  ?
+     * 
+     * @return bool
      */
     function assign_var_from_handle($varname, $handle)
     {
-        if (!$this->loadfile($handle))
-        {
-            die("Template->assign_var_from_handle(): Impossible de charger le fichier template pour le mod魥 $handle");
+        if (!$this->loadfile($handle)) {
+            die("Template->assign_var_from_handle(): Impossible de charger le fichier template pour le modèle $handle");
         }
 
         // Compile it, with the "no echo statements" option on.
@@ -158,17 +187,20 @@ class Template {
      * Block-level variable assignment. Adds a new block iteration with the given
      * variable assignments. Note that this should only be called once per block
      * iteration.
+     * 
+     * @param string $blockname Nom du bloc
+     * @param array  $vararray  Variables
+     * 
+     * @return true
      */
     function assign_block_vars($blockname, $vararray)
     {
-        if (strstr($blockname, '.'))
-        {
+        if (strstr($blockname, '.')) {
             // Nested block.
             $blocks = explode('.', $blockname);
             $blockcount = sizeof($blocks) - 1;
             $str = '$this->_tpldata';
-            for ($i = 0; $i < $blockcount; $i++)
-            {
+            for ($i = 0; $i < $blockcount; $i++) {
                 $str .= '[\'' . $blocks[$i] . '.\']';
                 eval('$lastiteration = sizeof(' . $str . ') - 1;');
                 $str .= '[' . $lastiteration . ']';
@@ -180,9 +212,7 @@ class Template {
 
             // Now we evaluate this assignment we've built up.
             eval($str);
-        }
-        else
-        {
+        } else {
             // Top-level block.
             // Add a new iteration to this block with the variable assignments
             // we were given.
@@ -195,12 +225,15 @@ class Template {
     /**
      * Root-level variable assignment. Adds to current assignments, overriding
      * any existing variable assignment with the same name.
+     * 
+     * @param array $vararray Variables
+     * 
+     * @return bool
      */
     function assign_vars($vararray)
     {
-        reset ($vararray);
-        while (list($key, $val) = each($vararray))
-        {
+        reset($vararray);
+        while (list($key, $val) = each($vararray)) {
             $this->_tpldata['.'][0][$key] = $val;
         }
 
@@ -210,6 +243,11 @@ class Template {
     /**
      * Root-level variable assignment. Adds to current assignments, overriding
      * any existing variable assignment with the same name.
+     * 
+     * @param string $varname Nom de la variable
+     * @param mixed  $varval  Valeur de la variable
+     * 
+     * @return bool
      */
     function assign_var($varname, $varval)
     {
@@ -223,17 +261,19 @@ class Template {
      * Generates a full path+filename for the given filename, which can either
      * be an absolute name, or a name relative to the rootdir for this Template
      * object.
+     * 
+     * @param string $filename Nom du fichier
+     * 
+     * @return string Nom du fichier
      */
     function make_filename($filename)
     {
         // Check if it's an absolute or relative path.
-        if (pia_substr($filename, 0, 1) != '/')
-        {
+        if (pia_substr($filename, 0, 1) != '/') {
             $filename = $this->root . '/' . $filename;
         }
 
-        if (!file_exists($filename))
-        {
+        if (!file_exists($filename)) {
             die("Template->make_filename(): Erreur - Le fichier $filename est inexistant");
         }
 
@@ -244,27 +284,28 @@ class Template {
     /**
      * If not already done, load the file for the given handle and populate
      * the uncompiled_code[] hash with its code. Do not compile.
+     * 
+     * @param string $handle ?
+     * 
+     * @return bool
      */
     function loadfile($handle)
     {
         // If the file for this handle is already loaded and compiled, do nothing.
-        if (isset($this->uncompiled_code[$handle]) && !empty($this->uncompiled_code[$handle]))
-        {
+        if (isset($this->uncompiled_code[$handle]) && !empty($this->uncompiled_code[$handle])) {
             return true;
         }
 
         // If we don't have a file assigned to this handle, die.
-        if (!isset($this->files[$handle]))
-        {
-            die("Template->loadfile(): Aucun fichier spꤩfi顰our le mod魥 $handle");
+        if (!isset($this->files[$handle])) {
+            die("Template->loadfile(): Aucun fichier spécifié pour le modèle $handle");
         }
 
         $filename = $this->files[$handle];
 
         $str = implode("", @file($filename)); 
-        if (empty($str))
-        {
-            die("Template->loadfile(): Le fichier $filename pour le mod魥 $handle est vide");
+        if (empty($str)) {
+            die("Template->loadfile(): Le fichier $filename pour le modèle $handle est vide");
         }
 
         $this->uncompiled_code[$handle] = $str;
@@ -280,6 +321,12 @@ class Template {
      * If "do_not_echo" is true, the returned code will not be directly
      * executable, but can be used as part of a variable assignment
      * for use in assign_code_from_handle().
+     * 
+     * @param string $code        Code
+     * @param bool   $do_not_echo ?
+     * @param string $retvar      ?
+     * 
+     * @return string
      */
     function compile($code, $do_not_echo = false, $retvar = '')
     {
