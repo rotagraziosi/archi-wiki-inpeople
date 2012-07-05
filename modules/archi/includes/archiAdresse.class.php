@@ -6007,7 +6007,7 @@ class archiAdresse extends ArchiContenu
         
         $sqlEvenementsGroupeAdressesSupplementaires = "";
         if (isset($criteres['groupesAdressesSupplementairesExternes'])) {
-            $listeGroupesAdresses = implode("', '", array_unique($criteres['groupesAdressesSupplementairesExternes']));
+            $listeGroupesAdresses = implode("','", array_unique($criteres['groupesAdressesSupplementairesExternes']));
             $sqlEvenementsGroupeAdressesSupplementaires = "AND ee.idEvenement in ('".$listeGroupesAdresses."')";
             $sqlOrderBy = " CAST(ha1.numero as signed) ASC,  1 "; 
         }
@@ -6339,7 +6339,6 @@ class archiAdresse extends ArchiContenu
             }
         }
         
-        
         // gestion de la pagination de la recherche
         switch ($modeAffichage) {
         case 'calqueImage':
@@ -6401,7 +6400,7 @@ class archiAdresse extends ArchiContenu
             );
         }
         
-        if ($modeAffichage!="personnalite") {
+        if ($_GET["selection"]!="personne") {
             // on peut cacher l'affichage du nombre de reponses suivant l'affichage souhaité
             if (!isset($criteres['cacheNbReponses'])) {
                 $nbReponses=$nbReponses.' réponses :';
@@ -7029,7 +7028,6 @@ class archiAdresse extends ArchiContenu
                 // si on affiche a partir du template : listeAdressesDetailEvenement.tpl c'est qu'on est sur le detail d'un evenement
                 /*if ($criteres["useTemplateFile"]=="listeAdressesDetailEvenement.tpl") {
                     $coordonnees = $this->getCoordonneesFrom($idDerniereAdresse, 'idAdresse');
-                    var_dump($coordonnees);
                     if ($coordonnees['latitude']!='0' && $coordonnees['longitude']!='0') {
                         // affichage de la googleMap
                         $gm = new googleMap(array(
