@@ -84,10 +84,11 @@ if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail' &
     $descriptionFirstEvenement = $descriptionAndTitre['description'];
     if (isset($_GET['archiIdEvenementGroupeAdresse'])) {
         $intituleAdresse = $adresse->getIntituleAdresseFrom($_GET['archiIdEvenementGroupeAdresse'], "idEvenementGroupeAdresse", array("afficheTitreSiTitreSinonRien"=>true, "noHTML"=>true));
-        if (!empty($intituleAdresse)) {
+        $quartier=$adresse->getIntituleAdresseFrom($_GET['archiIdAdresse'], "idAdresse", array('afficheSousQuartier'=>false, 'noQuartierCentreVille'=>true, "noSousQuartier"=>true, "noQuartier"=>true, "noVille"=>true));
+        if (!empty($intituleAdresse) && !empty($quartier)) {
             $intituleAdresse.=" - ";
         }
-        $intituleAdresse.=$adresse->getIntituleAdresseFrom($_GET['archiIdAdresse'], "idAdresse", array('afficheSousQuartier'=>false, 'noQuartierCentreVille'=>true, "noSousQuartier"=>true, "noQuartier"=>true, "noVille"=>true));
+        $intituleAdresse.=$quartier;
         $titre = $intituleAdresse." - ".$titre;
     } else {
         $titre = $titre;

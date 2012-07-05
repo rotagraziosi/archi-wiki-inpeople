@@ -449,21 +449,23 @@ class ArchiAdministration extends config
         $tableau->addValue("nom de la rue");
         $tableau->addValue("localisation");
         while ($fetch = mysql_fetch_assoc($res)) {
-            $tableau->addValue("<input type='checkbox' name='selection[]' value='".$fetch['idRue']."'>");
-            $tableau->addValue("<a href='".$this->creerUrl('', 'adminAdresseDetail', array('tableName'=>'rue', 'idModification'=>$fetch['idRue']))."'>".$fetch['idRue']."</a>");
-            $tableau->addValue(stripslashes($fetch['prefixe']));
-            $tableau->addValue(stripslashes($fetch['nomRue']));
-            $localisation = array();
-            if ($fetch['nomSousQuartier']!='' && $fetch['nomSousQuartier']!='autre') {
-                $localisation[] = $fetch['nomSousQuartier'];
+            if ($fetch['idRue']!=0) {
+                $tableau->addValue("<input type='checkbox' name='selection[]' value='".$fetch['idRue']."'>");
+                $tableau->addValue("<a href='".$this->creerUrl('', 'adminAdresseDetail', array('tableName'=>'rue', 'idModification'=>$fetch['idRue']))."'>".$fetch['idRue']."</a>");
+                $tableau->addValue(stripslashes($fetch['prefixe']));
+                $tableau->addValue(stripslashes($fetch['nomRue']));
+                $localisation = array();
+                if ($fetch['nomSousQuartier']!='' && $fetch['nomSousQuartier']!='autre') {
+                    $localisation[] = $fetch['nomSousQuartier'];
+                }
+                if ($fetch['nomQuartier']!='' && $fetch['nomQuartier']!='autre') {
+                    $localisation[] = $fetch['nomQuartier'];
+                }
+                if ($fetch['nomVille']!='' && $fetch['nomVille']!='autre') {
+                    $localisation[] = $fetch['nomVille'];
+                }
+                $tableau->addValue(stripslashes(implode(" - ", $localisation)));
             }
-            if ($fetch['nomQuartier']!='' && $fetch['nomQuartier']!='autre') {
-                $localisation[] = $fetch['nomQuartier'];
-            }
-            if ($fetch['nomVille']!='' && $fetch['nomVille']!='autre') {
-                $localisation[] = $fetch['nomVille'];
-            }
-            $tableau->addValue(stripslashes(implode(" - ", $localisation)));
         }
         $html .= "<form name='formListe' id='formListe' enctype='multipart/form-data' method='POST'>";
         $html .= "Recherche : <input type='text' name='rechercheFormulaireAdministration' id='rechercheFormulaireAdministration' value='".$objetDeLaRecherche."'>";
