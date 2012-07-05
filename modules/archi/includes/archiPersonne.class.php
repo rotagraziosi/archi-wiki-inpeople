@@ -942,7 +942,7 @@ class ArchiPersonne extends ArchiContenu
                     }
                 }
                 if (!empty($event->titre)) {
-                    $linkedEventsHTML.=$event->titre;
+                    $linkedEventsHTML.=stripslashes($event->titre);
                 }
                 $linkedEventsHTML.=", ".$linkedEventType;
                 $linkedEventsHTML.="</a></small>";
