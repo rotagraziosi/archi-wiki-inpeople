@@ -3509,9 +3509,6 @@ class archiEvenement extends config
 					// MODIFICATION d'UN EVENEMENT (juste l'evenement, pas d'adresse , pas de groupe d'adresse)
 					// initialisation des champs du template que l'on va afficher
 					$t->assign_block_vars('afficheAjoutEvenement',array());
-                    if (!archiPersonne::isPerson($idEvenementGroupeAdresse)) {	
-                        $t->assign_block_vars("afficheAjoutEvenement.isAddress", array());
-                    }
 					$t->assign_vars(array('nomBoutonValidation'=>'evenementSimple'));	
 					$t->assign_vars(array('typeBoutonValidation'=>"submit"));					
 				}
@@ -3520,6 +3517,7 @@ class archiEvenement extends config
 			{
 				// ce n'est pas une modification d'evenement
 				$t->assign_block_vars('afficheAjoutEvenement',array());
+                
 			}
 		}
 		
@@ -3553,7 +3551,9 @@ class archiEvenement extends config
         if (!isset($idEvenementGroupeAdresse)) {
             $idEvenementGroupeAdresse=$_GET["archiIdEvenement"];
         }
+        
 		if (!archiPersonne::isPerson($idEvenementGroupeAdresse)) {
+            $t->assign_block_vars("afficheAjoutEvenement.isAddress", array());
             $sqlTypeStructure = 'SELECT idTypeStructure, nom FROM typeStructure order by nom';
             if ($result = $this->connexionBdd->requete($sqlTypeStructure))
             {

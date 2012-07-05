@@ -6400,7 +6400,7 @@ class archiAdresse extends ArchiContenu
             );
         }
         
-        if ($_GET["selection"]!="personne") {
+        if (!isset($_GET["selection"]) || $_GET["selection"]!="personne") {
             // on peut cacher l'affichage du nombre de reponses suivant l'affichage souhaité
             if (!isset($criteres['cacheNbReponses'])) {
                 $nbReponses=$nbReponses.' réponses :';
