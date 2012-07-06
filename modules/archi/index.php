@@ -688,6 +688,9 @@ if (isset($_GET['archiAffichage'])) {
         case 'recherche':
             $a = new archiRecherche();
             echo $a->rechercher();
+            if (isset($_GET["motcle"])) {
+                echo archiPersonne::search($_GET["motcle"]);
+            }
             break;
         case 'source':
             $s = new archiSource();

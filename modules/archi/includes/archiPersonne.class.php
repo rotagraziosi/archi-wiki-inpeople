@@ -757,11 +757,13 @@ class ArchiPersonne extends ArchiContenu
     /**
      * Obtenir l'image principale d'une personne
      * 
-     * @param int $id ID de la personne
+     * @param int    $id          ID de la personne
+     * @param string $size        Taille de l'image
+     * @param bool   $showDefault Afficher une image de remplacement si pas d'image ?
      * 
      * @return string URL
      * */
-    static function getImage($id)
+    static function getImage($id, $size="moyen", $showDefault=true)
     {
         global $config;
         $req = "
@@ -780,9 +782,11 @@ class ArchiPersonne extends ArchiContenu
             ";
             $res = $config->connexionBdd->requete($req);
             $fetch = mysql_fetch_object($res);
-            return $config->getUrlImage("moyen").$fetch->dateUpload.'/'.$fetch->idHistoriqueImage.'.jpg';
+            return $config->getUrlImage($size).$fetch->dateUpload.'/'.$fetch->idHistoriqueImage.'.jpg';
         } else {
-            return "images/avatar/default.jpg";
+            if ($showDefault) {
+                return "images/avatar/default.jpg";
+            }
         }
         
     }
@@ -951,6 +955,78 @@ class ArchiPersonne extends ArchiContenu
             $linkedEventsHTML.="</ul>";
             return $linkedEventsHTML;
         }
+    }
+    
+    
+    /**
+     * Recherche une personne
+     * 
+     * @param string $keyword Mot recherché
+     * @param int    $pos     Afficher à partir de quel élément
+     * 
+     * @return string HTML
+     * */
+    static function search($keyword, $pos=0)
+    {
+        global $config;
+        $html="<h1>"._("Personnes")."</h1>";
+        $req="SELECT idPersonne
+            FROM `personne`
+            WHERE `prenom` LIKE '%$keyword'
+            OR `nom` LIKE '%$keyword%'
+            OR CONCAT_WS(' ', nom, prenom) LIKE '%$keyword%'
+            OR CONCAT_WS(' ', prenom, nom) LIKE '%$keyword%'";
+        $res = $config->connexionBdd->requete($req);
+        $nbPeople=mysql_num_rows($res);
+        $req="SELECT idPersonne, nom, prenom, idMetier
+            FROM `personne`
+            WHERE `prenom` LIKE '%$keyword'
+            OR `nom` LIKE '%$keyword%'
+            OR CONCAT_WS(' ', nom, prenom) LIKE '%$keyword%'
+            OR CONCAT_WS(' ', prenom, nom) LIKE '%$keyword%'
+            LIMIT $pos, ".($pos+10);
+        $res = $config->connexionBdd->requete($req);
+        while ($person=mysql_fetch_object($res)) {
+            $people[]=($person);
+        }
+        $t=new Template('modules/archi/templates/');
+        $t->set_filenames(array('listeAdresses'=>'listeAdresses.tpl'));
+        $t->assign_block_vars(
+            't',  array(
+                'urlPrecedent'         => "",
+                'urlPrecedentOnClick'    => "",
+                'urlSuivant'           => "", 
+                'urlSuivantOnClick'    => "", 
+                'nbReponses'           => $nbPeople." ".ngettext("réponse", "réponses", $nbPeople)
+            )
+        );
+        $t->assign_block_vars(
+            "t.nav",  array(
+                "nb"=>1
+            )
+        );
+        foreach ($people as $person) {
+            $req="SELECT nom
+                FROM `metier`
+                WHERE `idMetier` =".$person->idMetier;
+            $res = $config->connexionBdd->requete($req);
+            $job=mysql_fetch_object($res)->nom;
+            $t->assign_block_vars(
+                "t.adresses", array(
+                    "nom"=>$person->prenom." ".$person->nom,
+                    "urlDetailHref"=>$config->creerUrl(
+                        "", "evenementListe", array("selection"=>"personne", "id"=>$person->idPersonne)
+                    ),
+                    "urlImageIllustration"=>archiPersonne::getImage($person->idPersonne, "mini", false),
+                    "titresEvenements"=>$job
+                )
+            );
+        }
+        ob_start();
+        $t->pparse('listeAdresses');
+        $html.=ob_get_contents();
+        ob_end_clean();
+        return $html;
     }
 }
 ?>
