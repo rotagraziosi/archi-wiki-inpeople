@@ -49,7 +49,7 @@ $titreSite=$config->titreSite;
 $titre=_("Architecture et photos à Strasbourg");
 $description=$config->descSite;
 $motsCle = "";
-if ($session->isInSession('archiIdVilleGeneral') && $session->getFromSession('archiIdVilleGeneral')!='' && $session->getFromSession('archiIdVilleGeneral')!='1') {
+if ($session->isInSession('archiIdVilleGeneral') && $session->getFromSession('archiIdVilleGeneral')!='' && $session->getFromSession('archiIdVilleGeneral')!='1' && !empty($_SESSION["archiIdVilleGeneral"])) {
     //$titreSite = "photos-immeubles.org";
     $infosVille = $adresse->getInfosVille($session->getFromSession('archiIdVilleGeneral'), array("fieldList"=>"v.nom as nomVille"));
     $titre=_("Architecture et photos à")." ".$infosVille['nomVille'];
