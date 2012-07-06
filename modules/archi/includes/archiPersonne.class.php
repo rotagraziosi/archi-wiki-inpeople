@@ -966,10 +966,10 @@ class ArchiPersonne extends ArchiContenu
      * 
      * @return string HTML
      * */
-    static function search($keyword, $pos=0)
+    static function search($keyword, $pos=1)
     {
         global $config;
-        $html="<h1>"._("Personnes")."</h1>";
+        $html="<h1 id='personSearch'>"._("Personnes")."</h1>";
         $req="SELECT idPersonne
             FROM `personne`
             WHERE `prenom` LIKE '%$keyword'
@@ -978,13 +978,27 @@ class ArchiPersonne extends ArchiContenu
             OR CONCAT_WS(' ', prenom, nom) LIKE '%$keyword%'";
         $res = $config->connexionBdd->requete($req);
         $nbPeople=mysql_num_rows($res);
+        $maxPos=round($nbPeople/10);
+        if ($maxPos<1) {
+            $maxPos=1;
+        }
+        $minPos=1;
+        $prevPos=$pos-1;
+        $nextPos=$pos+1;
+        if ($prevPos < $minPos) {
+            $prevPos=$minPos;
+        }
+        
+        if ($nextPos > $maxPos) {
+            $nextPos=$maxPos;
+        }
         $req="SELECT idPersonne, nom, prenom, idMetier
             FROM `personne`
             WHERE `prenom` LIKE '%$keyword'
             OR `nom` LIKE '%$keyword%'
             OR CONCAT_WS(' ', nom, prenom) LIKE '%$keyword%'
             OR CONCAT_WS(' ', prenom, nom) LIKE '%$keyword%'
-            LIMIT $pos, ".($pos+10);
+            LIMIT ".(($pos-1)*10).", ".($pos*10);
         $res = $config->connexionBdd->requete($req);
         while ($person=mysql_fetch_object($res)) {
             $people[]=($person);
@@ -993,34 +1007,42 @@ class ArchiPersonne extends ArchiContenu
         $t->set_filenames(array('listeAdresses'=>'listeAdresses.tpl'));
         $t->assign_block_vars(
             't',  array(
-                'urlPrecedent'         => "",
+                'urlPrecedent'         => $config->creerUrl("", "recherche", array("motcle"=>$_GET["motcle"], "pos"=>$prevPos, "submit"=>"Rechercher"))."#personSearch",
                 'urlPrecedentOnClick'    => "",
-                'urlSuivant'           => "", 
+                'urlSuivant'           => $config->creerUrl("", "recherche", array("motcle"=>$_GET["motcle"], "pos"=>$nextPos, "submit"=>"Rechercher"))."#personSearch", 
                 'urlSuivantOnClick'    => "", 
                 'nbReponses'           => $nbPeople." ".ngettext("réponse", "réponses", $nbPeople)
             )
         );
-        $t->assign_block_vars(
-            "t.nav",  array(
-                "nb"=>1
-            )
-        );
-        foreach ($people as $person) {
-            $req="SELECT nom
-                FROM `metier`
-                WHERE `idMetier` =".$person->idMetier;
-            $res = $config->connexionBdd->requete($req);
-            $job=mysql_fetch_object($res)->nom;
+        for ($i=$minPos; $i<=$maxPos; $i++) {
             $t->assign_block_vars(
-                "t.adresses", array(
-                    "nom"=>$person->prenom." ".$person->nom,
-                    "urlDetailHref"=>$config->creerUrl(
-                        "", "evenementListe", array("selection"=>"personne", "id"=>$person->idPersonne)
-                    ),
-                    "urlImageIllustration"=>archiPersonne::getImage($person->idPersonne, "mini", false),
-                    "titresEvenements"=>$job
+                "t.nav",  array(
+                    "nb"=>$i,
+                    "urlNb"=>$config->creerUrl("", "recherche", array("motcle"=>$_GET["motcle"], "pos"=>$i, "submit"=>"Rechercher"))."#personSearch"
                 )
             );
+            if ($i==$pos) {
+                $t->assign_block_vars("t.nav.courant", array());
+            }
+        }
+        if (isset($people)) {
+            foreach ($people as $person) {
+                $req="SELECT nom
+                    FROM `metier`
+                    WHERE `idMetier` =".$person->idMetier;
+                $res = $config->connexionBdd->requete($req);
+                $job=mysql_fetch_object($res)->nom;
+                $t->assign_block_vars(
+                    "t.adresses", array(
+                        "nom"=>$person->prenom." ".$person->nom,
+                        "urlDetailHref"=>$config->creerUrl(
+                            "", "evenementListe", array("selection"=>"personne", "id"=>$person->idPersonne)
+                        ),
+                        "urlImageIllustration"=>archiPersonne::getImage($person->idPersonne, "mini", false),
+                        "titresEvenements"=>$job
+                    )
+                );
+            }
         }
         ob_start();
         $t->pparse('listeAdresses');
