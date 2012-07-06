@@ -9,7 +9,7 @@
  * @author   Pierre Rudloff <contact@rudloff.pro>
  * @author   Laurent Dorer <laurent_dorer@yahoo.fr>
  * @author   Partenaire Immobilier <contact@partenaireimmo.com>
- * @license  Inconnue https://archi-strasbourg.org/?archiAffichage=faq
+ * @license  GNU GPL v3 https://www.gnu.org/licenses/gpl.html
  * @link     https://archi-strasbourg.org/
  * 
  * */
@@ -24,7 +24,7 @@
  * @author   Pierre Rudloff <contact@rudloff.pro>
  * @author   Laurent Dorer <laurent_dorer@yahoo.fr>
  * @author   Partenaire Immobilier <contact@partenaireimmo.com>
- * @license  Inconnue https://archi-strasbourg.org/?archiAffichage=faq
+ * @license  GNU GPL v3 https://www.gnu.org/licenses/gpl.html
  * @link     https://archi-strasbourg.org/
  * */
 class ArchiStatic extends config

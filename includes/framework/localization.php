@@ -8,7 +8,7 @@
  * @package  ArchiWiki
  * @author   Pierre Rudloff <contact@rudloff.pro>
  * @author   Partenaire Immobilier <contact@partenaireimmo.com>
- * @license  Inconnue https://archi-strasbourg.org/?archiAffichage=faq
+ * @license  GNU GPL v3 https://www.gnu.org/licenses/gpl.html
  * @link     https://archi-strasbourg.org/
  * 
  * */
