@@ -5,13 +5,16 @@ var initConfirm = function () {
         window.onbeforeunload = null;
     };
     goodbye = function (e) {
-        if (!e) {
-            e = window.event;
-        }
+        var textarea = document.getElementById("textarea_desc");
+        if (textarea.defaultValue !== textarea.value) {
+            if (!e) {
+                e = window.event;
+            }
 
-        if (e.stopPropagation) {
-            e.stopPropagation();
-            e.preventDefault();
+            if (e.stopPropagation) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
         }
     };
     window.onbeforeunload = goodbye;

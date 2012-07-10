@@ -216,7 +216,7 @@ function affichePopupAttente()
 	</td>
 </tr>
 <tr title="{msgDescription}" onMouseOut="closeContextHelp();">
-<td class='enteteFormulaireDossier'><?_("Description")?></td><td><textarea name='description' onkeyup="bbcode_keyup(this,'apercu');" cols="50" rows="15">{description}</textarea></td><td></td>
+<td class='enteteFormulaireDossier'><?_("Description")?></td><td><textarea id="textarea_desc" name='description' onkeyup="bbcode_keyup(this,'apercu');" cols="50" rows="15">{description}</textarea></td><td></td>
 </tr>
 <tr>
 <td class='enteteFormulaireDossier'><?_("Aperçu")?></td><td><div id='apercu'><pre></pre></div></td><td></td>
