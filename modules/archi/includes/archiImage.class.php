@@ -850,8 +850,8 @@ class archiImage extends config
             if (archiPersonne::isPerson($e->getIdEvenementGroupeAdresseFromIdEvenement($_GET["archiRetourIdValue"]))) {
                $resImage = $this->connexionBdd->requete("SELECT * FROM `historiqueImage` WHERE `idImage` =".$idImage);
             } else {
-            
-                $resImage = $this->connexionBdd->requete("
+                $resImage = $this->connexionBdd->requete("SELECT * FROM `historiqueImage` WHERE `idImage` =".$idImage);
+                /*$resImage = $this->connexionBdd->requete("
                 select hI.idSource,  hI.nom, hI.dateUpload, hI.dateCliche, hI.description, hI.idUtilisateur, hI.idHistoriqueImage, ha1.idAdresse as idAdresse, ha1.numero as numero, 
                 hI.isDateClicheEnviron as isDateClicheEnviron, 
                 r.nom as nomRue, 
@@ -886,16 +886,15 @@ class archiImage extends config
                 
                 
                 
-                where hI.idImage='".$idImage."'
+                where hI.idImage='$idImage'
                 and hI2.idImage=hI.idImage
                 group by hI.idImage, hI.idHistoriqueImage, ha1.idAdresse,  ha1.idHistoriqueAdresse
                 having hI.idHistoriqueImage = max(hI2.idHistoriqueImage) and ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                 LIMIT 1
-                ");
+                ");*/
             }
             
             $fetch=mysql_fetch_array($resImage);
-            
             /*
             stripslashes($fetch['nom'])
              $this->date->toFrench($fetch['dateCliche'])
@@ -946,7 +945,6 @@ class archiImage extends config
             
             $intituleAdresse = $adresse->getIntituleAdresse($fetch);
             $intituleAdresseNoQuartierNoVille = $adresse->getIntituleAdresse($fetch,  array('noQuartier'=>true,  'noSousQuartier'=>true,  'noVille'=>true));
-            
             $t->assign_vars(array(
                 'datePriseDeVue'=>$datePriseDeVue, 
                 'cheminDetailImage' => 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetch['dateUpload'].'-'.$fetch['idHistoriqueImage'].'-'.$formatPhoto.'.jpg', 
