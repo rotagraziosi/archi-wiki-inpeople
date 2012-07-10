@@ -921,7 +921,9 @@ class archiImage extends config
             $description = $fetch['description'];
 
             $bbCode = new bbCodeObject();
-            $description = $bbCode->convertToDisplay(array('text'=>$description));
+            if (!empty($description)) {
+                $description = $bbCode->convertToDisplay(array('text'=>$description));
+            }
             
             
             if (isset($fetch['idSource']) && $fetch['idSource']!='' && $fetch['idSource']!='0')
@@ -4682,7 +4684,6 @@ class archiImage extends config
                 LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = ei.idEvenement
                 WHERE ae.idEvenement = ee.idEvenement
         ";
-        
         return $this->connexionBdd->requete($req);
     }
     
@@ -4796,6 +4797,7 @@ class archiImage extends config
                 FROM historiqueImage hi2,  historiqueImage hi1
                 WHERE hi2.idImage = hi1.idImage
                 AND hi1.idImage=$idImage
+                ORDER BY hi1.idHistoriqueImage DESC
                 ";
         $resImage = $this->connexionBdd->requete($reqImage);
         

@@ -125,18 +125,20 @@ if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='imageDetail' && 
     $e=new archiEvenement();
     if (!archiPersonne::isPerson($e->getIdEvenementGroupeAdresseFromIdEvenement($_GET['archiRetourIdValue']))) {
         $resAdresses = $image->getIdAdressesFromIdImage($_GET['archiIdImage']);
-        $fetchAdresses = mysql_fetch_assoc($resAdresses);
-        
-        $resGroupeAdresses = $adresse->getIdEvenementsFromAdresse($fetchAdresses['idAdresse']);
-        $fetchGroupeAdresses = mysql_fetch_assoc($resGroupeAdresses);
-        $titreFirstEvenement = $evenement->getTitreFromFirstChildEvenement($fetchGroupeAdresses['idEvenement']);
-        $titre = "Photo : ".$titreFirstEvenement;
-        $resAdresse = $adresse->getAdressesFromEvenementGroupeAdresses($fetchGroupeAdresses['idEvenement']);
-        $fetchAdresse = mysql_fetch_assoc($resAdresse);
-        $idAdresse = $fetchAdresse['idAdresse'];
-        
-        $intituleAdresse = $adresse->getIntituleAdresseFrom($idAdresse, "idAdresse", array('afficheSousQuartier'=>false, 'noQuartierCentreVille'=>true));
-        $titre = str_replace("\"", "'", $titre." - ".$intituleAdresse);
+        if ($fetchAdresses = mysql_fetch_assoc($resAdresses)) {
+            $resGroupeAdresses = $adresse->getIdEvenementsFromAdresse($fetchAdresses['idAdresse']);
+            $fetchGroupeAdresses = mysql_fetch_assoc($resGroupeAdresses);
+            $titreFirstEvenement = $evenement->getTitreFromFirstChildEvenement($fetchGroupeAdresses['idEvenement']);
+            $titre = "Photo : ".$titreFirstEvenement;
+            $resAdresse = $adresse->getAdressesFromEvenementGroupeAdresses($fetchGroupeAdresses['idEvenement']);
+            $fetchAdresse = mysql_fetch_assoc($resAdresse);
+            $idAdresse = $fetchAdresse['idAdresse'];
+            
+            $intituleAdresse = $adresse->getIntituleAdresseFrom($idAdresse, "idAdresse", array('afficheSousQuartier'=>false, 'noQuartierCentreVille'=>true));
+            $titre = str_replace("\"", "'", $titre." - ".$intituleAdresse);
+        } else {
+            $titre = "Photo - ".$titre;
+        }
     }
     $tabMotsCle = explode(" ", $titre);
     $tabMotsCleNettoye = array();
