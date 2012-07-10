@@ -5919,7 +5919,7 @@ class archiAdresse extends ArchiContenu
                             + IF(ha1.idQuartier !=0 and ha1.idRue=0 and ha1.numero=0 and q.nom  LIKE \"%".$motcle."%\", 1000000000, 0)
                             + IF(ha1.numero=0 and CONCAT_WS('', r.prefixe, ' ', r.nom) ".$motcleAdresseEntiere.", 1000000000000000000000000000, 0)
                             + IF(ha1.numero=0 and ha1.idRue=0 and ha1.idQuartier=0 and ha1.idSousQuartier=0 and v.nom LIKE \"%".$motcle."%\", 10000000000000000, 0)
-                            + IF(CONCAT_WS('', CONVERT(ha1.numero USING utf8), ind.nom, r.prefixe, r.nom, sq.nom,  q.nom,  v.nom,  p.nom) LIKE '%".$motcleEscaped."%', 100000000000, 0)
+                            + IF(CONCAT_WS('', CONVERT(ha1.numero USING utf8), ind.nom, r.prefixe, r.nom, sq.nom,  q.nom,  v.nom,  p.nom) LIKE '%".$motcleEscaped."%', 1000000000000000000000000000, 0)
                             + IF(CONCAT_WS('', CONVERT(ha1.numero USING utf8), ' ', r.prefixe, ' ', r.nom) ".$motcleAdresseEntiere.", 1000000000000000000000000000, 0)
                             + IF(CONCAT_WS('', he1.titre, CONVERT(ha1.numero USING utf8), ' ', r.prefixe, ' ', r.nom) LIKE \"%".$motcleEscaped."%\", 2000000000000000000000000000, 0)
                             + IF(CONCAT_WS('', pers.nom, pers.prenom) LIKE \"%".$motcleEscaped."%\", 20000000000000000, 0)

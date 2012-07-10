@@ -4329,7 +4329,12 @@ class archiImage extends config
         $a = new archiAdresse();
         $erreurObj = new objetErreur();
         // recuperation du groupe d'adresse de l'image pour l'affichage au retour
-        $idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImage));
+        if ($idPerson=archiPersonne::isPerson($this->getIdEvenementGroupeAdresseFromImage(array("idImage"=>$idImage, "type"=>"personne")))) {
+            $type="personne";
+        } else {
+            $type=null;
+        }
+        $idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImage, "type"=>$type));
         $u = new archiUtilisateur();
         $authentification  = new archiAuthentification();
         
@@ -4397,7 +4402,9 @@ class archiImage extends config
             $resDeleteImageEvenementImage = $this->connexionBdd->requete($reqDeleteImageEvenementImage);
         
         }
-        
+        if ($idPerson) {
+            header("Location: ".$this->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$idPerson), false, false));
+        }
         
         if ($erreurObj->getNbErreurs()>0)
         {

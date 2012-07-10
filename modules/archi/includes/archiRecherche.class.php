@@ -179,6 +179,7 @@ class archiRecherche extends config {
         
         return $html;
     }
+    
     public function rechercher()
     {
         $html = '';
@@ -195,8 +196,7 @@ class archiRecherche extends config {
             
             $erreur = $formulaire->getArrayFromPost($tabForm, $_GET);
 
-            if (count($erreur) == 0)
-            {
+            if (count($erreur) == 0) {
                 $options=array('sansFormulaire' => 1);
                 
                 $modeAffichage='';

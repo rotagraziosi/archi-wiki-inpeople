@@ -782,11 +782,12 @@ class ArchiPersonne extends ArchiContenu
             ";
             $res = $config->connexionBdd->requete($req);
             $fetch = mysql_fetch_object($res);
-            return $config->getUrlImage($size).$fetch->dateUpload.'/'.$fetch->idHistoriqueImage.'.jpg';
-        } else {
-            if ($showDefault) {
-                return "images/avatar/default.jpg";
+            if (isset($fetch->idHistoriqueImage)) {
+                return $config->getUrlImage($size).$fetch->dateUpload.'/'.$fetch->idHistoriqueImage.'.jpg';
             }
+        }
+        if ($showDefault) {
+            return "images/avatar/default.jpg";
         }
         
     }
