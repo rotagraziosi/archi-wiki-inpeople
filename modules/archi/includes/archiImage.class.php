@@ -2191,7 +2191,6 @@ class archiImage extends config
             );
         }
         
-        
         // recuperation d'une adresse pour chacune des images pour l'affichage de l'adresse dans l'url de la photo
         $tab = new tableau();
         foreach ($listeImages as $idImage => $valuesImage)

@@ -32,7 +32,7 @@
 </tr>
 </table>
 
-<a href="{urlAjout}"><?_("Ajouter une personne")?></a>
+<!--<a href="{urlAjout}"><?_("Ajouter une personne")?></a>-->
 <!-- BEGIN noPersonne -->
 <?_("Il n'y a pas d'enregistrement")?>
 <!-- END noPersonne -->
