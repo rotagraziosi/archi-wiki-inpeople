@@ -107,13 +107,13 @@ class MailObject extends config
             $retour = true;
             
             if ($writeMailToLogs) {
-                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>$sujet,"message"=>$message,"debug"=>true));
+                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>stripslashes($sujet),"message"=>$message,"debug"=>true));
             }
         } else {
             $retour = pia_mail($destinataire, $sujet, $message, $headers, null);
             
             if ($writeMailToLogs) {
-                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>$sujet,"message"=>$message,"debug"=>false));
+                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>stripslashes($sujet),"message"=>$message,"debug"=>false));
             }            
         }
         

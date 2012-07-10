@@ -484,8 +484,8 @@ class archiImage extends config
         
         //archiAffichage=imageDetail&archiIdImage=28940&archiRetourAffichage=evenement&archiRetourIdName=idEvenement&archiRetourIdValue=18149
         $idEvenementGroupeAdresse=$this->getIdEvenementGroupeAdresseFromImage(array("idImage"=>$idImageModifiee, "type"=>"personne"));
-        if (archiPersonne::isPerson($idEvenementGroupeAdresse)) {
-            header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'imageDetail', 'archiRetourAffichage'=>"evenement", 'archiIdImage'=>$idImageModifiee, "archiRetourIdName"=>"idEvenement", "archiRetourIdValue"=>$idEvenementGroupeAdresse), false, false));
+        if ($idPerson=archiPersonne::isPerson($idEvenementGroupeAdresse)) {
+            header("Location: ".$this->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$idPerson), false, false));
         }
         
         // ************************************************************************************************************************************************
