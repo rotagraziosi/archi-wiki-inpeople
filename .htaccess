@@ -30,6 +30,8 @@ RewriteRule script/(.+) script/$1 [L,QSA]
 
 RewriteRule js/(.+) js/$1 [L,QSA]
 
+RewriteRule doc/(.+) doc/$1 [L,QSA]
+
 RewriteRule accueil-ville-photos-immeubles-(.+)-([0-9]+)-([0-9]+)\.html index.php?archiAffichage=afficheAccueil&archiIdVilleGeneral=$2&archiIdPaysGeneral=$3 [L,QSA]
 
 RewriteRule adresse-(.+)-([0-9]+)\.html index.php?archiAffichage=adresseDetail&archiIdAdresse=$2 [QSA,L]
