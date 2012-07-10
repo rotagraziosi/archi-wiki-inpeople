@@ -119,10 +119,12 @@ Fonctions membres publiques statiques</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#a9e639c987b085af0bb3298c445c34a5b">isPerson</a> ($id)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#ab14cb18f5e1ba6c7773c0ee4693184aa">getName</a> ($id)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#a47df5cfda9389aca807eabf5146fe258">getEvenementsLies</a> ($id, $date, $date2)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#aa9089680c7004a17e6176e21f1b8b9ea">getImage</a> ($id)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#aada06ffa44ad3e404149008a105ad78b">getImage</a> ($id, $size=&quot;moyen&quot;, $showDefault=true)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#abcc567652f380dd938d89e1dbecb5d6b">getEvents</a> ($id)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#a67719a71515e6accc93134cf8d8589c8">getImages</a> ($id)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#aa6ab02c70969ea61b9d82cb1aeac4df1">setImage</a> ($idPerson, $idImage)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#ac572b2ba998ea4d6598c429f8bdae7a5">displayEvenementsLies</a> ($idPerson, $dateDebut, $date2)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArchiPersonne.html#ac7d184d46d5d23a08c5d976c90a10b8c">search</a> ($keyword, $pos=1)</td></tr>
 </table>
 <hr/><h2>Documentation des constructeurs et destructeur</h2>
 <a class="anchor" id="a0dd77341ce4a4bc5644d84f7e6430198"></a><!-- doxytag: member="ArchiPersonne::__construct" ref="a0dd77341ce4a4bc5644d84f7e6430198" args="()" -->
@@ -327,6 +329,49 @@ Fonctions membres publiques statiques</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac572b2ba998ea4d6598c429f8bdae7a5"></a><!-- doxytag: member="ArchiPersonne::displayEvenementsLies" ref="ac572b2ba998ea4d6598c429f8bdae7a5" args="($idPerson, $dateDebut, $date2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classArchiPersonne.html#ac572b2ba998ea4d6598c429f8bdae7a5">ArchiPersonne::displayEvenementsLies</a> </td>
+          <td>(</td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>idPerson</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>dateDebut</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>date2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Afficher les événements liés à une personne</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int</td><td class="paramname">$idPerson</td><td>ID de la personne </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$dateDebut</td><td>Date de début de la période voulue </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$date2</td><td>Date de fin de la période voulue</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>string HTML </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="afc351223cb1ea52f2480634180d3567c"></a><!-- doxytag: member="ArchiPersonne::dissocierEvenement" ref="afc351223cb1ea52f2480634180d3567c" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -449,16 +494,32 @@ Fonctions membres publiques statiques</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa9089680c7004a17e6176e21f1b8b9ea"></a><!-- doxytag: member="ArchiPersonne::getImage" ref="aa9089680c7004a17e6176e21f1b8b9ea" args="($id)" -->
+<a class="anchor" id="aada06ffa44ad3e404149008a105ad78b"></a><!-- doxytag: member="ArchiPersonne::getImage" ref="aada06ffa44ad3e404149008a105ad78b" args="($id, $size=&quot;moyen&quot;, $showDefault=true)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classArchiPersonne.html#aa9089680c7004a17e6176e21f1b8b9ea">ArchiPersonne::getImage</a> </td>
+          <td class="memname">static <a class="el" href="classArchiPersonne.html#aada06ffa44ad3e404149008a105ad78b">ArchiPersonne::getImage</a> </td>
           <td>(</td>
           <td class="paramtype">$&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>size</em> = <code>&quot;moyen&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>showDefault</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -466,7 +527,9 @@ Fonctions membres publiques statiques</h2></td></tr>
 <p>Obtenir l'image principale d'une personne</p>
 <dl class="params"><dt><b>Paramètres:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramtype">int</td><td class="paramname">$id</td><td>ID de la personne</td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$id</td><td>ID de la personne </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$size</td><td>Taille de l'image </td></tr>
+    <tr><td class="paramtype">bool</td><td class="paramname">$showDefault</td><td>Afficher une image de remplacement si pas d'image ?</td></tr>
   </table>
   </dd>
 </dl>
@@ -663,6 +726,42 @@ Fonctions membres publiques statiques</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac7d184d46d5d23a08c5d976c90a10b8c"></a><!-- doxytag: member="ArchiPersonne::search" ref="ac7d184d46d5d23a08c5d976c90a10b8c" args="($keyword, $pos=1)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classArchiPersonne.html#ac7d184d46d5d23a08c5d976c90a10b8c">ArchiPersonne::search</a> </td>
+          <td>(</td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>keyword</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>pos</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Recherche une personne</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$keyword</td><td>Mot recherché </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$pos</td><td>Afficher à partir de quel élément</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>string HTML </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="aa6ab02c70969ea61b9d82cb1aeac4df1"></a><!-- doxytag: member="ArchiPersonne::setImage" ref="aa6ab02c70969ea61b9d82cb1aeac4df1" args="($idPerson, $idImage)" -->
 <div class="memitem">
 <div class="memproto">
@@ -738,7 +837,7 @@ Fonctions membres publiques statiques</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Généré le Mardi Juillet 3 2012 10:21:31 pour Archi-Strasbourg par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Lundi Juillet 9 2012 13:48:09 pour Archi-Strasbourg par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

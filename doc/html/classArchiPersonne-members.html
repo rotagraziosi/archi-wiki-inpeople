@@ -95,11 +95,12 @@ Liste complète des membres de <a class="el" href="classArchiPersonne.html">Arch
   <tr class="memlist"><td><a class="el" href="classArchiContenu.html#a3f3c345e75575d70d271fe141c7bfe1d">ajouterNouveauDossier</a>()</td><td><a class="el" href="classArchiContenu.html">ArchiContenu</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#a2f5d670a4e239a1175d6745aef74f105">associerEvenement</a>()</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#a75a07771ece1c8c53ec7080fc7326b42">deleteLiaisonsPersonneFromIdEvenement</a>($idEvenement=0)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#ac572b2ba998ea4d6598c429f8bdae7a5">displayEvenementsLies</a>($idPerson, $dateDebut, $date2)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#afc351223cb1ea52f2480634180d3567c">dissocierEvenement</a>()</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#a3572697be3f8429b824bec6b4356f358">enregistreLiaisonEvenement</a>($idEvenementALier=0, $nomChampPersonneFormulaire='personnes')</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#a47df5cfda9389aca807eabf5146fe258">getEvenementsLies</a>($id, $date, $date2)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#abcc567652f380dd938d89e1dbecb5d6b">getEvents</a>($id)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#aa9089680c7004a17e6176e21f1b8b9ea">getImage</a>($id)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#aada06ffa44ad3e404149008a105ad78b">getImage</a>($id, $size=&quot;moyen&quot;, $showDefault=true)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#a67719a71515e6accc93134cf8d8589c8">getImages</a>($id)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#abb7344b6d3979ee1d24f51b01d8cf0f7">getInfosPersonne</a>($id=0)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#ab14cb18f5e1ba6c7773c0ee4693184aa">getName</a>($id)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
@@ -108,6 +109,7 @@ Liste complète des membres de <a class="el" href="classArchiPersonne.html">Arch
   <tr class="memlist"><td><a class="el" href="classArchiContenu.html#a54aca16e4c8813b099ecb0ca8472da72">getPopupChoixVille</a>($modeAffichage='')</td><td><a class="el" href="classArchiContenu.html">ArchiContenu</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#a9e639c987b085af0bb3298c445c34a5b">isPerson</a>($id)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#a6af2f9bb9e7afebbd9541760f1a5ba80">modifier</a>($id, $firstname, $name, $job, $birth, $death)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#ac7d184d46d5d23a08c5d976c90a10b8c">search</a>($keyword, $pos=1)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#aa6ab02c70969ea61b9d82cb1aeac4df1">setImage</a>($idPerson, $idImage)</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td><code> [static]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classArchiPersonne.html#a2aa8b3ddea1d3fda226eb36edd7d6b83">supprimer</a>()</td><td><a class="el" href="classArchiPersonne.html">ArchiPersonne</a></td><td></td></tr>
 </table></div><!-- contents -->
@@ -128,7 +130,7 @@ Liste complète des membres de <a class="el" href="classArchiPersonne.html">Arch
 
 
 <hr class="footer"/><address class="footer"><small>
-Généré le Mardi Juillet 3 2012 10:21:31 pour Archi-Strasbourg par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Lundi Juillet 9 2012 13:48:09 pour Archi-Strasbourg par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

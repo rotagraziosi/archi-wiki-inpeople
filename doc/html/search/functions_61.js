@@ -13,7 +13,7 @@ var searchData=
   ['afficheformulaireauthentification',['afficheFormulaireAuthentification',['../classArchiAuthentification.html#adc38ffaac5b53005ff0a24555eca086d',1,'ArchiAuthentification']]],
   ['afficheformulaireinscription',['afficheFormulaireInscription',['../classArchiAuthentification.html#ad310d12a092d6b0126e79a155ed59417',1,'ArchiAuthentification']]],
   ['afficheformulairenouveaudossier',['afficheFormulaireNouveauDossier',['../classArchiContenu.html#a497c5b49bba0d8f63be69a426b0d0032',1,'ArchiContenu']]],
-  ['afficheimagesfromutilisateurdebug',['afficheImagesFromUtilisateurDebug',['../classarchiImage.html#a5e9e673cba3c56a03d01b9ea47bec760',1,'archiImage\afficheImagesFromUtilisateurDebug($params=array())'],['../classarchiImage.html#a5e9e673cba3c56a03d01b9ea47bec760',1,'archiImage\afficheImagesFromUtilisateurDebug($params=array())']]],
+  ['afficheimagesfromutilisateurdebug',['afficheImagesFromUtilisateurDebug',['../classarchiImage.html#a5e9e673cba3c56a03d01b9ea47bec760',1,'archiImage']]],
   ['affichelisteregroupee',['afficheListeRegroupee',['../classarchiAdresse.html#adfd08c3c175a65f81f35f61a33a0408a',1,'archiAdresse']]],
   ['affichemenu',['afficheMenu',['../classArchiAdministration.html#a98c29bb2bfd8a15c4ce9c87806928c8b',1,'ArchiAdministration']]],
   ['affichepressemediapublicite',['affichePresseMediaPublicite',['../classArchiStatic.html#a4cfdeb0a3c990c6ec44e22eba12a49f0',1,'ArchiStatic']]],

@@ -121,9 +121,7 @@ Attributs publics</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a559afe1b1276b3e10e455f414fe33b0b"></a><!-- doxytag: member="Template::$uncompiled_code" ref="a559afe1b1276b3e10e455f414fe33b0b" args="" -->
 &#160;</td><td class="memItemRight" valign="bottom"><b>$uncompiled_code</b> = array()</td></tr>
 </table>
-<hr/><a name="details" id="details"></a><h2>Description détaillée</h2>
-<div class="textblock"><p><a class="el" href="classTemplate.html">Template</a> class. By Nathan Codding of the phpBB group. The interface was originally inspired by PHPLib templates, and the template file formats are quite similar. </p>
-</div><hr/><h2>Documentation des fonctions membres</h2>
+<hr/><h2>Documentation des fonctions membres</h2>
 <a class="anchor" id="a678299101826d25900c583ffe60b5701"></a><!-- doxytag: member="Template::assign_block_vars" ref="a678299101826d25900c583ffe60b5701" args="($blockname, $vararray)" -->
 <div class="memitem">
 <div class="memproto">
@@ -148,7 +146,15 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Block-level variable assignment. Adds a new block iteration with the given variable assignments. Note that this should only be called once per block iteration. </p>
+<p>Block-level variable assignment. Adds a new block iteration with the given variable assignments. Note that this should only be called once per block iteration.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$blockname</td><td>Nom du bloc </td></tr>
+    <tr><td class="paramtype">array</td><td class="paramname">$vararray</td><td>Variables</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>true </dd></dl>
 
 </div>
 </div>
@@ -176,7 +182,15 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Root-level variable assignment. Adds to current assignments, overriding any existing variable assignment with the same name. </p>
+<p>Root-level variable assignment. Adds to current assignments, overriding any existing variable assignment with the same name.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$varname</td><td>Nom de la variable </td></tr>
+    <tr><td class="paramtype">mixed</td><td class="paramname">$varval</td><td>Valeur de la variable</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>bool </dd></dl>
 
 </div>
 </div>
@@ -204,7 +218,15 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Inserts the uncompiled code for $handle as the value of $varname in the root-level. This can be used to effectively include a template in the middle of another template. Note that all desired assignments to the variables in $handle should be done BEFORE calling this function. </p>
+<p>Inserts the uncompiled code for $handle as the value of $varname in the root-level. This can be used to effectively include a template in the middle of another template. Note that all desired assignments to the variables in $handle should be done BEFORE calling this function.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$varname</td><td>Nom de la variable </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$handle</td><td>?</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>bool </dd></dl>
 
 </div>
 </div>
@@ -222,7 +244,14 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Root-level variable assignment. Adds to current assignments, overriding any existing variable assignment with the same name. </p>
+<p>Root-level variable assignment. Adds to current assignments, overriding any existing variable assignment with the same name.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">array</td><td class="paramname">$vararray</td><td>Variables</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>bool </dd></dl>
 
 </div>
 </div>
@@ -256,7 +285,16 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Compiles the given string of code, and returns the result in a string. If "do_not_echo" is true, the returned code will not be directly executable, but can be used as part of a variable assignment for use in assign_code_from_handle(). </p>
+<p>Compiles the given string of code, and returns the result in a string. If "do_not_echo" is true, the returned code will not be directly executable, but can be used as part of a variable assignment for use in assign_code_from_handle().</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$code</td><td>Code </td></tr>
+    <tr><td class="paramtype">bool</td><td class="paramname">$do_not_echo</td><td>? </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$retvar</td><td>?</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>string </dd></dl>
 
 </div>
 </div>
@@ -273,7 +311,8 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Destroys this template object. Should be called when you're done with it, in order to clear out the template data so you can load/parse a new template set. </p>
+<p>Destroys this template object. Should be called when you're done with it, in order to clear out the template data so you can load/parse a new template set.</p>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -364,7 +403,14 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>If not already done, load the file for the given handle and populate the uncompiled_code[] hash with its code. Do not compile. </p>
+<p>If not already done, load the file for the given handle and populate the uncompiled_code[] hash with its code. Do not compile.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$handle</td><td>?</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>bool </dd></dl>
 
 </div>
 </div>
@@ -382,7 +428,14 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Generates a full path+filename for the given filename, which can either be an absolute name, or a name relative to the rootdir for this <a class="el" href="classTemplate.html">Template</a> object. </p>
+<p>Generates a full path+filename for the given filename, which can either be an absolute name, or a name relative to the rootdir for this <a class="el" href="classTemplate.html">Template</a> object.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$filename</td><td>Nom du fichier</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>string Nom du fichier </dd></dl>
 
 </div>
 </div>
@@ -400,7 +453,14 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Load the file for the handle, compile the file, and run the compiled code. This will print out the results of executing the template. </p>
+<p>Load the file for the handle, compile the file, and run the compiled code. This will print out the results of executing the template.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$handle</td><td>?</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -418,7 +478,14 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Sets the template filenames for handles. $filename_array should be a hash of handle =&gt; filename pairs. </p>
+<p>Sets the template filenames for handles. $filename_array should be a hash of handle =&gt; filename pairs.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">array</td><td class="paramname">$filename_array</td><td>Nom des fichiers</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>bool </dd></dl>
 
 </div>
 </div>
@@ -436,7 +503,14 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Sets the template root directory for this <a class="el" href="classTemplate.html">Template</a> object. </p>
+<p>Sets the template root directory for this <a class="el" href="classTemplate.html">Template</a> object.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$dir</td><td>Répertoire</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>bool </dd></dl>
 
 </div>
 </div>
@@ -454,7 +528,14 @@ Attributs publics</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Constructor. Simply sets the root dir. </p>
+<p>Constructor. Simply sets the root dir.</p>
+<dl class="params"><dt><b>Paramètres:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$root</td><td>Chemin de la racine</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Renvoie:</b></dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -504,7 +585,7 @@ Attributs publics</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Généré le Mardi Juillet 3 2012 10:21:31 pour Archi-Strasbourg par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Lundi Juillet 9 2012 13:48:10 pour Archi-Strasbourg par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

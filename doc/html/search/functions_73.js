@@ -6,6 +6,7 @@ var searchData=
   ['save',['save',['../classstyleHTML.html#ad73f204b1dc13e343054428520aaa87b',1,'styleHTML']]],
   ['savedata',['saveData',['../classSecurimage.html#a115fe97ec9c75f3b8e0d851725b6e86f',1,'Securimage']]],
   ['savemailtologs',['saveMailToLogs',['../classMailObject.html#a8f98ae8314e247878a0102ce656fcd88',1,'MailObject']]],
+  ['search',['search',['../classArchiPersonne.html#ac7d184d46d5d23a08c5d976c90a10b8c',1,'ArchiPersonne']]],
   ['searchcode',['searchCode',['../classparsingHTML.html#aaedb4d17af850dba3f7bbc58e93b92a5',1,'parsingHTML']]],
   ['securimage',['Securimage',['../classSecurimage.html#a26696161d9ab41868ff467b6094b5caf',1,'Securimage']]],
   ['sendmail',['sendMail',['../classMailObject.html#a94c2c2fff02e87a4f6d9e38c72fa9448',1,'MailObject']]],
@@ -21,6 +22,6 @@ var searchData=
   ['supprimer',['supprimer',['../classArchiPersonne.html#a2aa8b3ddea1d3fda226eb36edd7d6b83',1,'ArchiPersonne']]],
   ['supprimeractualite',['supprimerActualite',['../classArchiAdministration.html#a7b0dbaacda2b39254d1687f3b73b16c9',1,'ArchiAdministration']]],
   ['supprimeretapeparcours',['supprimerEtapeParcours',['../classArchiAdministration.html#a1e24d9cca93bcee2334ab9faf83b3e4a',1,'ArchiAdministration']]],
-  ['supprimerimagesselectionnees',['supprimerImagesSelectionnees',['../classarchiImage.html#aef214012ee66a1ab56e7f4d94eb20a3e',1,'archiImage\supprimerImagesSelectionnees()'],['../classarchiImage.html#aef214012ee66a1ab56e7f4d94eb20a3e',1,'archiImage\supprimerImagesSelectionnees()']]],
+  ['supprimerimagesselectionnees',['supprimerImagesSelectionnees',['../classarchiImage.html#aef214012ee66a1ab56e7f4d94eb20a3e',1,'archiImage']]],
   ['supprimerparcours',['supprimerParcours',['../classArchiAdministration.html#ae0ed39715b678271eba364e73914ee66',1,'ArchiAdministration']]]
 ];

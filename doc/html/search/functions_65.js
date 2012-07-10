@@ -8,7 +8,7 @@ var searchData=
   ['encodetoutf8',['encodeToUTF8',['../classStringObject.html#aaa433abad2fd7ba40b555887c6103bd3',1,'StringObject']]],
   ['enregistredroits',['enregistreDroits',['../classDroitsObject.html#a13b00fef42b07d697da7c3ce1db84553',1,'DroitsObject']]],
   ['enregistreliaisonevenement',['enregistreLiaisonEvenement',['../classArchiPersonne.html#a3572697be3f8429b824bec6b4356f358',1,'ArchiPersonne']]],
-  ['enregistrepositionimages',['enregistrePositionImages',['../classarchiImage.html#a4a9efbcefd3543320c6b24c2cc5d1dde',1,'archiImage\enregistrePositionImages()'],['../classarchiImage.html#a4a9efbcefd3543320c6b24c2cc5d1dde',1,'archiImage\enregistrePositionImages()']]],
+  ['enregistrepositionimages',['enregistrePositionImages',['../classarchiImage.html#a4a9efbcefd3543320c6b24c2cc5d1dde',1,'archiImage']]],
   ['enregistrerordresetapes',['enregistrerOrdresEtapes',['../classArchiAdministration.html#a27558008ce9e42d957235992a3a54019',1,'ArchiAdministration']]],
   ['estadmin',['estAdmin',['../classArchiAuthentification.html#a6123fb226cdf36cee77d9fd6b86d3e0b',1,'ArchiAuthentification']]],
   ['estconnecte',['estConnecte',['../classArchiAuthentification.html#a41eb59ace6b9b16ea31138df7da2c994',1,'ArchiAuthentification']]],

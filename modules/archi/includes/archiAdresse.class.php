@@ -13448,7 +13448,9 @@ class archiAdresse extends ArchiContenu
 			}
 			else
 			{
-				$html.= $gm->getMap(array('idDivDisplayEtapesText'=>'parcoursDetail','travelMode'=>'walking','listeCoordonneesParcours'=>$arrayEtapes,'urlImageIcon'=>$this->getUrlImage()."pointGM.png",'pathImageIcon'=>$this->getCheminPhysique()."images/pointGM.png"));
+                $polyline=mysql_fetch_object($this->connexionBdd->requete("SELECT trace, niveau FROM parcoursArt WHERE idParcours = '$idParcours'"));
+
+				$html.= $gm->getMap(array('idDivDisplayEtapesText'=>'parcoursDetail','travelMode'=>'walking','listeCoordonneesParcours'=>$arrayEtapes,'urlImageIcon'=>$this->getUrlImage()."pointGM.png",'pathImageIcon'=>$this->getCheminPhysique()."images/pointGM.png", "polyline"=>$polyline->trace, "levels"=>$polyline->niveau));
 			}
 			
 			if(isset($this->variablesPost['submitVertices']))

@@ -68,8 +68,8 @@
     <a href="actualites-archi-strasbourg-30.html">
     Dons :
     <div id='progressbar' class='progressbar'></div>
-    <span class="percent">67 %</span><br/>
-    <span class="euros">11900 € restants</span>
+    <span class="percent">68 %</span><br/>
+    <span class="euros">11850 € restants</span>
     </a>
 	</div>
     

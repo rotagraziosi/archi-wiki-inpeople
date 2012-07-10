@@ -3560,18 +3560,20 @@ class archiEvenement extends config
             {
                 while ($fetchTypeStructure = mysql_fetch_object($result))
                 {
-                    //$tabTypeStructure[$rep->idTypeStructure] = $rep->nom;
-                    if ((isset( $tabTravail['typeStructure']) && $tabTravail['typeStructure']['value'] == $fetchTypeStructure->idTypeStructure) || ( $heriteIdTypeStructure!='' && $fetchTypeStructure->idTypeStructure == $heriteIdTypeStructure ))
-                        $selected = 'selected="selected"';
-                    else
-                        $selected = '';
-                    $t->assign_block_vars(
-                        'afficheAjoutEvenement.isAddress.typesStructure', array(
-                            'id'=> $fetchTypeStructure->idTypeStructure, 
-                            'nom'=> $fetchTypeStructure->nom, 
-                            'selected'=> $selected
-                        )
-                    );
+                    if ($fetchTypeStructure->idTypeStructure !=0) {
+                        //$tabTypeStructure[$rep->idTypeStructure] = $rep->nom;
+                        if ((isset( $tabTravail['typeStructure']) && $tabTravail['typeStructure']['value'] == $fetchTypeStructure->idTypeStructure) || ( $heriteIdTypeStructure!='' && $fetchTypeStructure->idTypeStructure == $heriteIdTypeStructure ))
+                            $selected = 'selected="selected"';
+                        else
+                            $selected = '';
+                        $t->assign_block_vars(
+                            'afficheAjoutEvenement.isAddress.typesStructure', array(
+                                'id'=> $fetchTypeStructure->idTypeStructure, 
+                                'nom'=> $fetchTypeStructure->nom, 
+                                'selected'=> $selected
+                            )
+                        );
+                    }
                 }
             }
         }
