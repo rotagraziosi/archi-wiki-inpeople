@@ -952,7 +952,7 @@ class archiAdresse extends ArchiContenu
                     if (isset($params["noHTML"])) {
                         $titre=stripslashes($fetchTitre['titre']);
                     } else {
-                        $titre = "<span $classCSS style='$styleCSSTitre'>".stripslashes($fetchTitre['titre'])."</span>&nbsp;";
+                        $titre = "<span $classCSS style='$styleCSSTitre'>".stripslashes($fetchTitre['titre'])."</span> ";
                     }
 					if(trim($fetchTitre['titre'])!='')
 					{
@@ -995,7 +995,7 @@ class archiAdresse extends ArchiContenu
                     if (isset($params["noHTML"])) {
                         $titre=stripslashes($fetchTitre['titre']);
                     } else {
-                        $titre = "<b $classCSS>".stripslashes($fetchTitre['titre'])."</b>&nbsp;";
+                        $titre = "<b $classCSS>".stripslashes($fetchTitre['titre'])."</b> ";
                     }
 					if(trim($fetchTitre['titre'])=='')
 					{
@@ -1465,7 +1465,7 @@ class archiAdresse extends ArchiContenu
 					$resTitre = $this->connexionBdd->requete($reqTitre);
 					
 					$fetchTitre = mysql_fetch_assoc($resTitre);
-					$titre = "<span $classCSS>".stripslashes($fetchTitre['titre'])."</span>&nbsp;";
+					$titre = "<span $classCSS>".stripslashes($fetchTitre['titre'])."</span> ";
 					$trouve=true;
 					
 				}
@@ -1494,7 +1494,7 @@ class archiAdresse extends ArchiContenu
 				if(mysql_num_rows($resTitre)==1)
 				{
 					$fetchTitre = mysql_fetch_assoc($resTitre);
-					$titre = "<span $classCSS>".stripslashes($fetchTitre['titre'])."</span>&nbsp;";
+					$titre = "<span $classCSS>".stripslashes($fetchTitre['titre'])."</span> ";
 				}
 			}
 			
@@ -1552,11 +1552,11 @@ class archiAdresse extends ArchiContenu
 		$nomAdresse = trim($nomAdresse);
 		
 		$retour="";
-		if(isset($params['ifTitreAfficheTitreSeulement']) && $params['ifTitreAfficheTitreSeulement']==true && $titre!='' && $titre!="<span $classCSS></span>&nbsp;")
+		if(isset($params['ifTitreAfficheTitreSeulement']) && $params['ifTitreAfficheTitreSeulement']==true && $titre!='' && $titre!="<span $classCSS></span> ")
 			$retour = $titre;
 		else
 		{
-			if($titre=="<span $classCSS></span>&nbsp;")
+			if($titre=="<span $classCSS></span> ")
 			{
 				$titre = "";
 			}
@@ -11000,7 +11000,7 @@ class archiAdresse extends ArchiContenu
 			break;
 		}
 		
-		return $this->getIntituleAdresse($fetch,$params);
+		return $this->getIntituleAdresse($fetch, $params);
 	}
 	
 	

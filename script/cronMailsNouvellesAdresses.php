@@ -12,6 +12,10 @@
  * @link     https://archi-strasbourg.org/
  * 
  * */
+ 
+if (isset($_GET["testMail"])){
+    session_start();
+}
 mb_internal_encoding("UTF-8");
 mb_regex_encoding("UTF-8");
 ini_set('max_execution_time', 0);
@@ -359,7 +363,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                 }
                 $is3 = 0;
             } else {
-                // la ville n'a pas de nouvelles adresses , mais des adresses modifiees
+                // la ville n'a pas de nouvelles adresses, mais des adresses modifiees
                 foreach ($valueVille as $indiceAdresse=>$valueAdresse) {
                     if (!in_array($valueAdresse['idEvenementGroupeAdresse'], $adressesModifieesAffichees)) {
                         if ($iv3==0) {
@@ -398,7 +402,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
     <meta charset='UTF-8' />
     </head>
     <body>";
-    if (isset($_GET["modePrevisualisationAdmin"])) {
+    if (isset($_GET["modePrevisualisationAdmin"]) && !isset($_GET["testMail"])) {
         $messageHTML .= $messageIntro.$messageFin;
     } else {
         $messageHTML .= $messageIntro.$messageStrasbourg.$messageStrasModif.$messageAutres.$messageAutresModif.$messageFin;
@@ -406,6 +410,15 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
     $messageHTML .= "</body></html>";
     if ((isset($_SERVER["SERVER_NAME"]) && !isset($_GET["modePrevisualisationAdmin"])) || isset($_GET["preview"])) {
         print_r($messageHTML);
+        if (isset($_GET["testMail"])){
+            include_once __DIR__."/../modules/archi/includes/archiAuthentification.class.php";
+            include_once __DIR__."/../modules/archi/includes/archiUtilisateur.class.php";
+            $auth = new archiAuthentification();
+            $idUtilisateur = $auth->getIdUtilisateur();
+            $u = new archiUtilisateur();
+            $mailUtilisateur = $u->getMailUtilisateur($idUtilisateur);
+            $mail->sendMail($mail->getSiteMail(), $mailUtilisateur, $sujet, $messageHTML, false);
+        }
     } else {
         $reqUtilisateurs = "SELECT idUtilisateur,mail FROM utilisateur WHERE alerteMail='1' and compteActif='1'";
         $resUtilisateurs = $config->connexionBdd->requete($reqUtilisateurs);

@@ -1040,7 +1040,9 @@ class ArchiAdministration extends config
         $boutonSupprimer                          = "";
         $boutonPrevisualiser                      = "<input type='button' name='previsualisation' value='Prévisualisation' onclick=\"tinyMCE.triggerSave(true,true);document.getElementById('".$c->getJSDivId()."').style.top=(50+getScrollHeight())+'px';document.getElementById('".$c->getJSIFrameId()."').src='".$this->creerUrl('', 'previsualisationActualite', array())."';".$c->getJSOpenPopup()."\">";
         $boutonValiderEtEnvoiMailPrevisualisation = "<input type='button' name='valideEtEnvoi' id='valideEtEnvoi' value=\"Envoyer le mail tout de suite\" onclick=\"document.getElementById('formActu').action+='&previsualisationMail=1';document.getElementById('formActu').submit();\">
-        <input type='button' name='valideEtPrev' id='valideEtPrev' value=\"Prévisualiser le mail\" onclick=\"document.getElementById('formActu').action+='&previsualisationMail=1&preview=1';document.getElementById('formActu').setAttribute('target', '_blank'); document.getElementById('formActu').submit();\">";
+        <input type='button' name='valideEtPrev' id='valideEtPrev' value='"._("Prévisualiser le mail")."' onclick=\"document.getElementById('formActu').action+='&previsualisationMail=1&preview=1';document.getElementById('formActu').setAttribute('target', '_blank'); document.getElementById('formActu').submit();\">
+        <input type='button' name='testMail' id='testMail' value='"._("Envoyer un mail de test")."' onclick=\"document.getElementById('formActu').action+='&previsualisationMail=1&preview=1&testMail=1';document.getElementById('formActu').setAttribute('target', '_blank'); document.getElementById('formActu').submit();\">
+        ";
         if (isset($this->variablesGet['archiIdActualite']) && $this->variablesGet['archiIdActualite']!='') {
             $idActualite           = $this->variablesGet['archiIdActualite'];
             $reqActu               = "SELECT date,titre, sousTitre,photoIllustration, texte,urlFichier, fichierPdf, desactive,texteMailHebdomadaire,envoiMailHebdomadaire FROM actualites WHERE idActualite='".$idActualite."'";
@@ -1197,7 +1199,8 @@ class ArchiAdministration extends config
         if (isset($this->variablesGet['previsualisationMail']) && $this->variablesGet['previsualisationMail']=='1') {
             $auth=new archiAuthentification();
             $preview=isset($_GET["preview"])?"&preview=1":"";
-            echo "<script>location.href='".$this->getUrlRacine()."/script/cronMailsNouvellesAdresses.php?modePrevisualisationAdmin=1&idActualite=$idNewActualite&idUtilisateur=".$auth->getIdUtilisateur().$preview."';</script>";
+            $testMail=isset($_GET["testMail"])?"&testMail=1":"";
+            echo "<script>location.href='".$this->getUrlRacine()."/script/cronMailsNouvellesAdresses.php?modePrevisualisationAdmin=1&idActualite=$idNewActualite&idUtilisateur=".$auth->getIdUtilisateur().$preview.$testMail."';</script>";
 
             //$this->creerUrl('','', array("modePrevisualisationAdmin"=>1,"idActualite"=>$idActualite,"idUtilisateur"=>$authentification->getIdUtilisateur()))
         }
@@ -1285,7 +1288,8 @@ class ArchiAdministration extends config
             }
             if (isset($this->variablesGet['previsualisationMail']) && $this->variablesGet['previsualisationMail']=='1') {
                 $preview=isset($_GET["preview"])?"&preview=1":"";
-                echo "<script>location.href='".$this->getUrlRacine()."/script/cronMailsNouvellesAdresses.php?modePrevisualisationAdmin=1&idActualite=$idActualite&idUtilisateur=".$authentification->getIdUtilisateur().$preview."';</script>";
+                $testMail=isset($_GET["testMail"])?"&testMail=1":"";
+                echo "<script>location.href='".$this->getUrlRacine()."/script/cronMailsNouvellesAdresses.php?modePrevisualisationAdmin=1&idActualite=$idActualite&idUtilisateur=".$authentification->getIdUtilisateur().$preview.$testMail."';</script>";
 
                 //$this->creerUrl('','', array("modePrevisualisationAdmin"=>1,"idActualite"=>$idActualite,"idUtilisateur"=>$authentification->getIdUtilisateur()))
             }
