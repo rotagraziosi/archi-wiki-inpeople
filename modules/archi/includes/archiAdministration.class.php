@@ -991,7 +991,7 @@ class ArchiAdministration extends config
             } else {
                 $t->addValue("active");
             }
-            $t->addValue($fetch['titre']);
+            $t->addValue(stripslashes($fetch['titre']));
         }
         $html .= $arrayPagination['html'];
         $html .= $t->createHtmlTableFromArray(3);
