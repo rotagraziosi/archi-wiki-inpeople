@@ -26,7 +26,7 @@ class formGenerator extends config
     {
         if (self::$appelInitTinyMCE==0) // test pour etre sûr que l'on inclu le js 1 seule fois
         {
-            $this->addToJsHeader("<script   type='text/javascript' src='".$this->urlFrameworkFromRoot."frameworkClasses/tiny_mce/tiny_mce.js'></script>");
+            $this->addToJsHeader("<script type='text/javascript' src='".$this->getUrlRacine()."includes/framework/frameworkClasses/tiny_mce/tiny_mce.js'></script>");
             // debug des styles (au cas ou les icones de tinyMCE s'affiche bizzarement ,  c'est surement un conflit de styles avec la feuille de style du site
             $this->addToJsHeader("<style>#tinyMCE table{margin-bottom:0;} #tinyMCE table td{ padding : 0;}</style>");
         }
@@ -56,7 +56,8 @@ class formGenerator extends config
                 plugins : \"table,  fullscreen\", 
                 theme_advanced_buttons3_add : \"tablecontrols,  fullscreen\", 
                 theme_advanced_buttons1_add : \"forecolor, backcolor\", 
-                
+                relative_urls : false,
+                remove_script_host : false
 
             });
         </script>");//
