@@ -141,7 +141,7 @@
                     <li style='white-space:nowrap;'><a href="{ajoutNouvellePersonne}"><?_("Ajouter une personne")?></a></li>
 					<li style='white-space:nowrap;'><a href="{nosSources}"><?_("Nos sources")?></a></li>
 					
-					<li><a href="{publiciteMedias}"><?_("Les médias parlent de nous...")?></a></li>
+					<!--<li><a href="{publiciteMedias}"><?_("Les médias parlent de nous...")?></a></li>-->
 					<li><a href="index.php?archiAffichage=donateurs"><?_("Nos donateurs")?></a></li>
                     
 				</ul>
