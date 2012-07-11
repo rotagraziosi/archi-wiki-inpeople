@@ -850,7 +850,10 @@ class archiImage extends config
             if (archiPersonne::isPerson($e->getIdEvenementGroupeAdresseFromIdEvenement($_GET["archiRetourIdValue"]))) {
                $resImage = $this->connexionBdd->requete("SELECT * FROM `historiqueImage` WHERE `idImage` =".$idImage);
             } else {
-                $resImage = $this->connexionBdd->requete("SELECT * FROM `historiqueImage` WHERE `idImage` =".$idImage);
+                $resImage = $this->connexionBdd->requete(
+                    "SELECT * FROM `historiqueImage` WHERE `idImage` = $idImage
+                    ORDER BY idHistoriqueImage DESC"
+                );
                 /*$resImage = $this->connexionBdd->requete("
                 select hI.idSource,  hI.nom, hI.dateUpload, hI.dateCliche, hI.description, hI.idUtilisateur, hI.idHistoriqueImage, ha1.idAdresse as idAdresse, ha1.numero as numero, 
                 hI.isDateClicheEnviron as isDateClicheEnviron, 
