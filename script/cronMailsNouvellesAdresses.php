@@ -398,7 +398,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
     $messageHTML = "<!Doctype HTML>
     <html>
     <head>
-    <title>".$sujet."</title>
+    <title>".stripslashes($sujet)."</title>
     <meta charset='UTF-8' />
     </head>
     <body>";
