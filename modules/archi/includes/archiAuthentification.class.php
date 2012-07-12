@@ -542,13 +542,15 @@ class ArchiAuthentification extends config
             $fetch = mysql_fetch_object($res);
             if (isset($fetch->id) && $fetch->id==$id) {
                 $resUser = $config->connexionBdd->requete(
-                    "SELECT idUtilisateur, idVilleFavoris, alerteCommentaires, alerteAdresses
-                    FROM utilisateur
+                    "SELECT u.idUtilisateur idUtilisateur, u.idVilleFavoris as idVilleFavoris,v.idPays as idPaysFavoris, alerteCommentaires,alerteAdresses
+                    FROM utilisateur u
+                    LEFT JOIN ville v ON v.idVille = u.idVilleFavoris
                     WHERE mail='".mysql_escape_string($login)."' "
                 );
                 $fetch = mysql_fetch_object($resUser);
                 $config->session->addToSession('utilisateurConnecte'.$config->idSite, $fetch->idUtilisateur);
                 $config->session->addToSession('idVilleFavoris', $fetch->idVilleFavoris);
+                $config->session->addToSession('idPaysFavoris', $fetch->idPaysFavoris);
                 $config->session->addToSession('utilisateurAlerteCommentaires', $fetch->alerteCommentaires);
                 $config->session->addToSession('utilisateurAlerteAdresses', $fetch->alerteAdresses);
                 return true;

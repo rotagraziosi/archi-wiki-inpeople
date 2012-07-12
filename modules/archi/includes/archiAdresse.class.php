@@ -3359,7 +3359,6 @@ class archiAdresse extends ArchiContenu
 		}
 		
 		
-		
 		//***********************************************************************************************************************************
 		
 		// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3412,9 +3411,9 @@ class archiAdresse extends ArchiContenu
                     
                     if($idPaysChoixAdresse !=0 && $idPaysChoixAdresse==$fetchPays['idPays'])
                     {
-                        $selectedPays='selected';
+                        $selectedPays="selected='selected'";
                     }
-                    $t->assign_block_vars('isPays.listePays',array('idPays'=>$fetchPays['idPays'],'nomPays'=>$fetchPays['nom'],'selected'=>$selectedPays));
+                    $t->assign_block_vars('isPays.listePays', array('idPays'=>$fetchPays['idPays'], 'nomPays'=>$fetchPays['nom'], 'selected'=>$selectedPays));
                 }
 			}
 		}
