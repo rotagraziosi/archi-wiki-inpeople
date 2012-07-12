@@ -1770,7 +1770,7 @@ if (!function_exists('pia_mail')) {
         $additional_headers = null, $additional_parameters = null
     ) {
         return mail(
-            $to, $subject, html_entity_decode($message), $additional_headers, $additional_parameters
+            $to, $subject, $message, $additional_headers, $additional_parameters
         );
     }
 
