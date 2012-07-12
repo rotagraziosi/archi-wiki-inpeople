@@ -281,7 +281,7 @@ function affichePopupAttente()
 <tr title="{msgPersonne}" onMouseOut="closeContextHelp();" style='display:{affichePersonnesBlock};'>
 <td  class='enteteFormulaireDossier'><?_("Personnes")?></td>
 <td>
-<select name='personnes[]' id='personnes' multiple='multiple' readonly='readonly' onclick="gestionSelectElement('personnes','Voulez vous vraiment supprimer cette personne de l\'évènement ?">
+<select name='personnes[]' id='personnes' multiple='multiple' readonly='readonly' onclick="gestionSelectElement('personnes', '<?_("Voulez vous vraiment supprimer cette personne de cet évènement ?")?>');">
 	<!-- BEGIN personnes -->
 	<option value='{afficheAjoutEvenement.personnes.id}' {afficheAjoutEvenement.personnes.selected}>{afficheAjoutEvenement.personnes.nom}</option>
 	<!-- END personnes -->
