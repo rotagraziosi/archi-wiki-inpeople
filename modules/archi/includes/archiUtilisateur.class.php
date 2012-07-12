@@ -2143,10 +2143,10 @@ class archiUtilisateur extends config {
                         
                         $contenu = "Bonjour,<br><br>";
                         $contenu.="Un utilisateur d'archi-strasbourg (<a href=\"mailto:".$this->variablesPost['mailEnvoyeur']."\">".$this->variablesPost['mailEnvoyeur']."</a>)$complementMsgVisiteAdresse vous envoie un message privé :<br><br>";
-                        $contenu.=stripslashes($this->variablesPost['message']);
+                        $contenu.=stripslashes($bb->convertToDisplay(array('text'=>$this->variablesPost['message'])));
                         $contenu.="";
                         $contenu.="";
-                        if ($mail->sendMail($this->siteMail,$infosArray['mail'], "Un utilisateur d'archi-strasbourg vous envoie un message",$bb->convertToDisplay(array('text'=>$contenu)),$writeMailToLogs=false, $this->variablesPost['mailEnvoyeur']))
+                        if ($mail->sendMail($this->siteMail,$infosArray['mail'], "Un utilisateur d'archi-strasbourg vous envoie un message", $contenu, $writeMailToLogs=false, $this->variablesPost['mailEnvoyeur']))
                         {
                             echo "<span style='color:red;'>Mail envoyé.</span>";
                         }
