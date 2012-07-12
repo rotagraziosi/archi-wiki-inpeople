@@ -6276,14 +6276,16 @@ class archiAdresse extends ArchiContenu
                     }
                     $description.="</div><br/>";
                     $relatedPeople=archiPersonne::getRelatedPeople($this->variablesGet['id']);
-                    $description.= "<div style='float:right;'>";
-                    $description.="<h3>Personnes liées :</h3>";
-                    $description.="<ul>";
-                    foreach ($relatedPeople as $relatedPerson) {
-                        $name=archiPersonne::getName($relatedPerson);
-                        $description.="<li><a href='".$this->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$relatedPerson))."'>".$name->prenom." ".$name->nom."</a></li>";
+                    if (!empty($relatedPeople)) {
+                        $description.= "<div style='float:right;'>";
+                        $description.="<h3>Personnes liées :</h3>";
+                        $description.="<ul>";
+                        foreach ($relatedPeople as $relatedPerson) {
+                            $name=archiPersonne::getName($relatedPerson);
+                            $description.="<li><a href='".$this->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$relatedPerson))."'>".$name->prenom." ".$name->nom."</a></li>";
+                        }
+                        $description.="</ul></div>";
                     }
-                    $description.="</ul></div>";
                     $description.="<div style='clear:right;'></div>";
                     //$bbCode = new bbCodeObject();
                     
