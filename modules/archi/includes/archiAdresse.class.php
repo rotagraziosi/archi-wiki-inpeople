@@ -11417,18 +11417,18 @@ class archiAdresse extends ArchiContenu
 				//$listeCoords[$i]['idEvenementGroupeAdresse'] = $fetchGA['idEvenement'];
 				if(isset($params['urlRedirectedToParent']) && $params['urlRedirectedToParent']==true) // si on appel d'une iframe dans une iframe
 				{
-					$listeCoords[$i]['jsCodeOnClickMarker'] = "parent.parent.document.location.href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$fetchListeCoords['idAdresse']))."';";
+					$listeCoords[$i]['jsCodeOnClickMarker'] = "parent.parent.document.location.href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$fetchListeCoords['idAdresse'], "archiIdEvenementGroupeAdresse"=>$fetchGA['idEvenement']), false, false)."';";
 				}
 				else
 				{
 					if(isset($fetchListeCoords['idAdresse']))
 					{
-						$listeCoords[$i]['jsCodeOnClickMarker'] = "parent.document.location.href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$fetchListeCoords['idAdresse']))."';";
+						$listeCoords[$i]['jsCodeOnClickMarker'] = "parent.document.location.href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$fetchListeCoords['idAdresse'], "archiIdEvenementGroupeAdresse"=>$fetchGA['idEvenement']), false, false)."';";
 					}
 					else
 					{
 						// cas ou l'on a transmis un tableau de groupes d'adresses a la fonction, dans ce cas l'idAdresse est recuperé par la requete qui verifie le nombre de groupe d'adresses
-						$listeCoords[$i]['jsCodeOnClickMarker'] = "parent.document.location.href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdEvenementGroupeAdresse'=>$fetchGA['idEvenement'],'archiIdAdresse'=>$fetchGA['idAdresse']))."';";
+						$listeCoords[$i]['jsCodeOnClickMarker'] = "parent.document.location.href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdEvenementGroupeAdresse'=>$fetchGA['idEvenement'],'archiIdAdresse'=>$fetchGA['idAdresse']), false, false)."';";
 					}
 				}
 				$listeCoords[$i]['jsCodeOnMouseOverMarker'] = "currentLabel.show();";//"currentMarker.openInfoWindowHtml(\"<table width=150><tr><td><span style='font-size:9px;'>$infosAdresses<br><a  href='#' onclick=\\\"parent.document.location.href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$fetchListeCoords['idAdresse']))."'\\\">Afficher</a></span></td></tr></table>\");";
