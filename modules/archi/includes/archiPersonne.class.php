@@ -1051,5 +1051,34 @@ class ArchiPersonne extends ArchiContenu
         ob_end_clean();
         return $html;
     }
+    
+    /**
+     * Affiche les personnes liées
+     * 
+     * @param int $id ID de la personne
+     * 
+     * @return array
+     * */
+    static function getRelatedPeople($id)
+    {
+        global $config;
+        $req="SELECT idEvenement
+            FROM `_evenementPersonne`
+            WHERE `idPersonne` =".$id;
+        $res = $config->connexionBdd->requete($req);
+        $return = array();
+        while ($event=mysql_fetch_object($res)) {
+            $req2="SELECT DISTINCT idPersonne
+                FROM `_evenementPersonne`
+                WHERE `idEvenement` =".$event->idEvenement;
+            $res2 = $config->connexionBdd->requete($req2);
+            while ($person=mysql_fetch_object($res2)) {
+                if ($person->idPersonne != $id && !in_array($person->idPersonne, $return)) {
+                    $return[]=$person->idPersonne;
+                }
+            }
+        }
+        return $return;
+    }
 }
 ?>

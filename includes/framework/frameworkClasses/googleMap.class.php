@@ -249,7 +249,7 @@ class googleMap extends config
 		// fonction appelant les affichages de coordonnées , appels regroupées dans une fonction qui groupe les coordonnées par paquet , afin de ne pas trop en envoyer a la fois
 		if(count($this->coordonnees)>0)
 		{
-			$html.="<script  >";
+			$html.="<script>";
 			$html.="var numPaquet=0;\n";
 			$html.="var timer;\n";
 			$html.="startTimerPaquets();\n";

@@ -6266,15 +6266,25 @@ class archiAdresse extends ArchiContenu
                         $description.="<ul style='float:right;'><li><a href='".$this->creerUrl("", "editPerson", array("id"=>$_GET["id"]))."'>"._("Modifier")."</a></li>";
                         $description.="<li><a href='".$this->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>"._("Sélectionner l'image principale")."</a></li></ul>";
                     }
-                    $description.="<img src='".archiPersonne::getImage($this->variablesGet['id'])."' alt=''/>";
+                    $description.="<img src='".archiPersonne::getImage($this->variablesGet['id'])."' alt=''/>
+                    <div style='display:inline-block;'>";
                     if ($infosPersonne['dateNaissance']!='0000-00-00') {
                         $description.="<br>"._("Date de naissance :")." <span itemprop='birthDate'>".$this->date->toFrench($infosPersonne['dateNaissance'])."</span>";
                     }
                     if ($infosPersonne['dateDeces']!='0000-00-00') {
                         $description.="<br>"._("Date de décès :")." <span itemprop='deathDate'>".$this->date->toFrench($infosPersonne['dateDeces'])."</span>";
                     }
-                    
-                    
+                    $description.="</div><br/>";
+                    $relatedPeople=archiPersonne::getRelatedPeople($this->variablesGet['id']);
+                    $description.= "<div style='float:right;'>";
+                    $description.="<h3>Personnes liées :</h3>";
+                    $description.="<ul>";
+                    foreach ($relatedPeople as $relatedPerson) {
+                        $name=archiPersonne::getName($relatedPerson);
+                        $description.="<li><a href='".$this->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$relatedPerson))."'>".$name->prenom." ".$name->nom."</a></li>";
+                    }
+                    $description.="</ul></div>";
+                    $description.="<div style='clear:right;'></div>";
                     //$bbCode = new bbCodeObject();
                     
                     //$descriptionPersonne = $bbCode->convertToDisplay(array('text'=>$infosPersonne['description']));
