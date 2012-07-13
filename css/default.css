@@ -3,51 +3,49 @@
     http://www.freecsstemplates.org
     Released for free under a Creative Commons Attribution 2.5 License
 */
-/*Modifié par Pierre Rudloff en mai 2012*/
 
+/*Modifié par Pierre Rudloff en mai 2012*/
 
 /* Basic */
 
-h1
-{
+h1 {
+    margin: 0;
+    padding: 0;
     font-size: 1.6em;
-    font-weight:bold;
+    font-weight: bold;
     color: #444;
-    margin: 0;
-    padding: 0;
 }
 
-h4,h5,h6
-{
-    color: #444;
+h4,
+h5,
+h6 {
     margin: 0;
     padding: 0;
+    color: #444;
 }
 
-h3
-{
-    font-size: 1.0em;
-    color: #444;
+h3 {
     margin: 0;
     padding: 0;
+    font-size: 1em;
+    color: #444;
 }
 
 h3 a img {
-    vertical-align:baseline;
+    vertical-align: baseline;
 }
 
-h2
-{
-    font-size: 1.25em;
-    color: #444;
+h2 {
     margin: 0;
     padding: 0;
+    font-size: 1.25em;
+    color: #444;
 }
 
 table td,
-table{
-    border-spacing:0;
-    border:none;
+table {
+    border: none;
+    border-spacing: 0;
 }
 
 .primaryContent,
@@ -58,140 +56,121 @@ body,
     padding: 0;
 }
 
-body,input
-{
-    font-family: tahoma, sans-serif;
+body,
+input {
+    font-family: tahoma,sans-serif;
     font-size: 10pt;
     color: #4B4B4B;
 }
 
-input.button
-{
-    border-top: solid 1px #fff;
-    border-left: solid 1px #fff;
-    border-bottom: solid 1px #888;
-    border-right: solid 1px #888;
-    background-color: #eaeaea;
-    color: #555;
-    font-size: 0.8em;
+input.button {
     padding: 0.35em;
+    border-top: solid 1px #fff;
+    border-right: solid 1px #888;
+    border-bottom: solid 1px #888;
+    border-left: solid 1px #fff;
+    font-size: 0.8em;
+    color: #555;
+    background-color: #eaeaea;
 }
 
-input.text
-{
-    border-top: solid 1px #888;
-    border-left: solid 1px #888;
-    border-bottom: solid 1px #fff;
-    border-right: solid 1px #fff;
-    padding: 0.1em;
+input.text {
     margin-top: 0.25em;
     margin-bottom: 0.5em;
+    padding: 0.1em;
+    border-top: solid 1px #888;
+    border-right: solid 1px #fff;
+    border-bottom: solid 1px #fff;
+    border-left: solid 1px #888;
 }
 
-a
-{
-    color: #006699;
+a {
     text-decoration: none;
+    color: #006699;
 }
 
-a:hover
-{
+a:hover {
     text-decoration: none;
     color: #2288BB;
 }
 
 /* Outer */
 
-.outer
-{
-    margin: 0 auto 0 auto;
+.outer {
     width: 100%;
+    margin: 0 auto 0 auto;
 }
 
 /* Header */
 
-.header
-{
-    /*padding: 4.5em 4.5em 0 4.5em;*/
-    padding:44px 0 0 0;
-    margin:0;
+.header {
+    margin: 0;
+    padding: 44px 0 0 0;
 }
 
 .header .title {
-    padding-left:30px;
+    padding-left: 30px;
 }
 
 .header img {
-    vertical-align:top;
+    vertical-align: top;
 }
 
 .header .homeTitle {
-    margin-top:3em;
+    margin-top: 3em;
 }
 
-.header .h2
-{
+.header .h2 {
+    display: inline;
+    padding-left: 0.5em;
     font-size: 0.8em;
     font-weight: normal;
     color: #949494;
-    display: inline;
-    padding-left: 0.5em;
 }
 
-.header .h1
-{
-    font-size: 1.9em;
+.header .h1 {
     display: inline;
+    font-size: 1.9em;
     letter-spacing: -0.05em;
 }
 
-
-
-
-.header .h1 a
-{
-    color: #343434;
+.header .h1 a {
     text-decoration: none;
+    color: #343434;
 }
-
 
 /* Menu */
 
-.menu
-{
+.menu {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #558800;
-    border-bottom: solid 1px #336600;
     width: 100%;
+    border-bottom: solid 1px #336600;
+    background-color: #558800;
 }
 
-.menu ul
-{
+.menu ul {
     padding: 1em 1em 1em 4.5em;
     list-style: none;
 }
 
-.menu .nopadding{
-    padding:0;
+.menu .nopadding {
+    padding: 0;
 }
 
-.menu li
-{
+.menu li {
     display: inline;
     padding-right: 1em;
     font-size: 0.8em;
 }
 
-.menu li a
-{
+.menu li a {
     color: #fff;
     background-color: inherit;
 }
 
-.menu li a:hover
-{
+.menu li a:hover {
     border-bottom: solid 1px #558800;
 }
 
@@ -203,441 +182,495 @@ a:hover
     padding-right: 2em;
 }*/
 
-.box
-{
+.box {
     margin-bottom: 1.25em;
 }
 
-.boxContent
-{
+.boxContent {
     margin-top: 0.5em;
-    /*width:140px;*/
     padding: 0.25em 1em 0.25em 1em;
     background: #ffffff url('images/a1.gif') top left repeat-x;
 }
 
 /** boxA **/
 
-.boxA .boxContent
-{
+.boxA .boxContent {
     margin-top: 0;
-    color: #fff;
-    border-bottom: solid 1px #bb6600;
-    background: #ff8800;
     padding: 1em 1.5em 1em 1em;
-}
-
-.boxA span
-{
-    font-weight: bold;
-    font-size: 0.8em;
-}
-
-.boxA a
-{
-    background-color: inherit;
+    border-bottom: solid 1px #bb6600;
     color: #fff;
+    background: #ff8800;
+}
+
+.boxA span {
     font-size: 0.8em;
+    font-weight: bold;
 }
 
-.boxA a:hover
-{
-    text-decoration: none;
+.boxA a {
+    font-size: 0.8em;
+    color: #fff;
+    background-color: inherit;
+}
+
+.boxA a:hover {
     border-bottom: solid 1px #ff9900;
+    text-decoration: none;
 }
 
-.boxA input.button
-{
+.boxA input.button {
     margin-top: 0.25em;
     vertical-align: middle;
 }
+
 .box input {
-    max-width:130px;
+    max-width: 130px;
 }
-.boxA input.text
-{
+
+.boxA input.text {
     width: 90%;
 }
 
 /** boxB **/
 
-.boxB .boxContent
-{
+.boxB .boxContent {
     margin-top: 0;
-    color: #fff;
-    border-bottom: solid 1px #004466;
-    background: #007799;
     padding: 1em 1.5em 1em 1em;
-}
-
-.boxB span
-{
-    font-weight: bold;
-    font-size: 0.8em;
-}
-
-.boxB a
-{
-    background-color: inherit;
+    border-bottom: solid 1px #004466;
     color: #fff;
+    background: #007799;
+}
+
+.boxB span {
     font-size: 0.8em;
+    font-weight: bold;
+}
+
+.boxB a {
+    font-size: 0.8em;
+    color: #fff;
+    background-color: inherit;
 }
 
 .dernierscomm,
-.boxB a:hover
-{
+.boxB a:hover {
     text-decoration: underline;
 }
 
 .dernierscomm {
-    color: rgb(0, 119, 153);
+    color: rgb(0,119,153);
 }
 
-.boxB input.button
-{
+.boxB input.button {
     margin-top: 0.25em;
     vertical-align: middle;
 }
 
-.boxB input.text
-{
+.boxB input.text {
     width: 100%;
 }
 
 /** Content **/
 
-.content p
-{
+.content p {
     margin-bottom: 1em;
     text-align: justify;
     line-height: 1.5em;
 }
 
-.content strong
-{
+.content strong {
     color: #444;
 }
 
-
-
-.content ul
-{
+.content ul {
     margin-bottom: 1em;
     padding-left: 1em;
     line-height: 1.8em;
 }
 
 .primaryContent ul {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     line-height: 1.5em;
-    list-style-position:inside;
+    list-style-position: inside;
 }
-.primaryContent ul li ul{
-    margin-top:0.5em;
-    padding-left:2em;
+
+.primaryContent ul li ul {
+    margin-top: 0.5em;
+    padding-left: 2em;
 }
-.content blockquote
-{
-    padding: 1em;
+
+.content blockquote {
     margin-bottom: 1.5em;
+    padding: 1em;
     border-left: solid 6px #558800;
 }
 
-.content blockquote p
-{
+.content blockquote p {
     margin-bottom: 0;
     line-height: 1.5em;
 }
 
-.content table
-{
+.content table {
     margin-bottom: 1.5em;
 }
 
-.content table th
-{
+.content table th {
+    padding: 0.5em;
     text-align: left;
     font-weight: bold;
-    padding: 0.5em;
     color: #444;
 }
 
-.content table td
-{
+.content table td {
     padding: 0.5em;
-    padding-bottom:0;
+    padding-bottom: 0;
 }
 
-.content table .rowA
-{
+.content table .rowA {
+    color: inherit;
     background-color: #efefef;
-    color: inherit;
 }
 
-.content table .rowB
-{
-    background-color: #fafafa;
+.content table .rowB {
     color: inherit;
+    background-color: #fafafa;
 }
 
 /* Primary Content */
 
-.primaryContentContainer
-{
+.primaryContentContainer {
     float: right;
-    margin-left: -19em;
     width: 100%;
+    margin-left: -19em;
 }
 
-.primaryContent
-{
-    /* 01/04/2008 correction décalage du bloc central passage de 17em à 15em */
+.primaryContent {
     margin: 0 0 0 200px;
-    padding: 0 0 0 5px ;
-    margin-right:25px;
+    margin-right: 25px;
+    padding: 0 0 0 5px;
 }
 
 /* Secondary Content */
+
 /* menu de gauche */
-.secondaryContent
-{
+
+.secondaryContent {
     float: left;
-    max-width:130px;
-    /*width: 13em;*/
     padding: 2.5em 2.5em 1.5em 2.5em;
+    max-width: 130px;
 }
 
 /* Footer */
 
-.footer
-{
+.footer {
+    z-index: 9;
+    bottom: 0;
+    padding-top: 0.4em;
+    padding-left: 1em;
     border-top: solid 1px #e5e5e5;
     text-align: center;
-    padding-top: 0.4em;
-    padding-left:1em;
-    bottom:0;
-    background-color:white;
-    z-index:9;
+    background-color: white;
 }
 
-.clear
-{
+.clear {
     clear: both;
 }
 
 /* personnalisés */
-.center
-{
+
+.center {
     text-align: center;
 }
 
 /********************************************************/
+
 /* ajout laurent                                         */
+
 /********************************************************/
 
 /* TD Entete de la popup */
 
-.tdEntetePopup         { padding:0;background-color:#007799; }
+.tdEntetePopup {
+    padding: 0;
+    background-color: #007799;
+}
 
-.texteEntetePopup     { color:#FFFFFF;font-size:12px;font-weight:bold;float:left; }
+.texteEntetePopup {
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
 
-.boutonFermerPopup    { text-align:right; }
+.boutonFermerPopup {
+    text-align: right;
+}
 
 /* Entetes du tableau de liaison d'adresses */
 
-.enteteAdresses { background-color:#006699;color:#FFFFFF; font-size:12px; font-weight:bold; }
+.enteteAdresses {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #006699;
+}
 
 /* Entetes du tableau de la page d'inscription d'utilisateur */
 
-.enteteInscription { background-color:#006699;color:#FFFFFF; font-size:12px; font-weight:bold; }
+.enteteInscription {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #006699;
+}
 
-.borduresInscription { border-right : 1px solid #000000; border-top:1px solid #000000;}
+.borduresInscription {
+    border-top: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
 
-.bordureFinInscription { border-bottom:1px solid #000000; }
+.bordureFinInscription {
+    border-bottom: 1px solid #000000;
+}
 
 /* Entetes du tableau d'authentification */
 
-.enteteAuthentificationNoCompact { font-size:12px; background-color:#006699;  color:#FFFFFF}
+.enteteAuthentificationNoCompact {
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #006699;
+}
 
-.enteteAuthentificationCompact { font-size:12px; color:#FFFFFF; border:none;}
+.enteteAuthentificationCompact {
+    border: none;
+    font-size: 12px;
+    color: #FFFFFF;
+}
 
-.borduresAuthentification { border-right : 1px solid #000000; border-top:1px solid #000000;}
+.borduresAuthentification {
+    border-top: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
 
-.borduresFinAuthentification { border-bottom:1px solid #000000; }
+.borduresFinAuthentification {
+    border-bottom: 1px solid #000000;
+}
 
 .authentification,
 .authentification tbody,
 .authentification tr,
 .authentification td {
-    border:none;
-} 
+    border: none;
+}
 
 /* entetes tableau ajout d'un dossier */
 
-.enteteFormulaireDossier{ font-size:12px; background-color:#006699; color:#FFFFFF;}
+.enteteFormulaireDossier {
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #006699;
+}
 
-.enteteFormulaireDossierTypeEvenement{ font-size:12px; background-color:#668899; color:#FFFFFF;}
+.enteteFormulaireDossierTypeEvenement {
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #668899;
+}
 
-.listeCourantsArchitecturaux, .choixFormulaireTypeEvenement{font-size:12px; color:#000000;}
+.listeCourantsArchitecturaux,
+.choixFormulaireTypeEvenement {
+    font-size: 12px;
+    color: #000000;
+}
 
 /* entetes tableau modification des infos d'une image */
 
-.enteteFormulaireMajPhoto {font-size:12px; background-color:#006699; color:#FFFFFF;}
+.enteteFormulaireMajPhoto {
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #006699;
+}
 
 /* tableau recapitulatif des adresses de l'evenement */
 
-.tableauResumeAdresse{ border: 2px solid rgb(102, 102, 102);}
+.tableauResumeAdresse {
+    border: 2px solid rgb(102,102,102);
+}
 
 /* tableau entourant le descritif de l'evenement */
 
-.tableauDescriptifEvenement{ border: 2px solid rgb(102, 102, 102); padding-top:0;padding-bottom:0;}
+.tableauDescriptifEvenement {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 2px solid rgb(102,102,102);
+}
 
-.textePetit {font-size:11px;}
-
+.textePetit {
+    font-size: 11px;
+}
 
 /* styles sur le detail d'une photo , liens vers les différents formats */
-.formatAffichePhotoSelected{color:#FF0000;font-weight:bold;}
-.formatAffichePhoto{color:#007799;}
+
+.formatAffichePhotoSelected {
+    font-weight: bold;
+    color: #FF0000;
+}
+
+.formatAffichePhoto {
+    color: #007799;
+}
 
 /*style du titre d'evenement qui s'affiche sur l'affichage d'adresse , ex sur detail d'une image vue sur ou prise depuis*/
-.textePrisDepuisVueSur{font-size:14px;}
 
-.textePrisDepuisVueSurEntete{font-weight:bold;}
+.textePrisDepuisVueSur {
+    font-size: 14px;
+}
 
-.divConsultationHistoriqueEvenement{ 
-border-top:10px solid #007799; 
-border-bottom:0; 
-border-left:2px solid #007799; 
-border-right:0;
-margin-bottom:10px;
-padding-left:5px;
+.textePrisDepuisVueSurEntete {
+    font-weight: bold;
+}
+
+.divConsultationHistoriqueEvenement {
+    margin-bottom: 10px;
+    padding-left: 5px;
+    border-top: 10px solid #007799;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 2px solid #007799;
 }
 
 .inline-block {
-    display:inline-block;
+    display: inline-block;
 }
 
-img { border: 0; } 
+img {
+    border: 0;
+}
 
-.boxContent{
-    min-width:140px;
+.boxContent {
+    min-width: 140px;
 }
 
 .center {
-    text-align:center;
+    text-align: center;
 }
 
-.clear{
-clear:both;
+.clear {
+    clear: both;
 }
 
 .homeTable td {
-    width:49%;
-    vertical-align:top;
+    width: 49%;
+    vertical-align: top;
 }
 
 .results {
-    width:100%;
-    max-width:1000px;
-    margin:auto;
+    width: 100%;
+    margin: auto;
+    max-width: 1000px;
 }
 
-.flag img{
-    vertical-align:middle;
+.flag img {
+    vertical-align: middle;
 }
 
-.puce{
-    list-style-image:url("images/puce.png");
-    vertical-align:middle;
-    line-height:1em;
+.puce {
+    line-height: 1em;
+    vertical-align: middle;
+    list-style-image: url("images/puce.png");
 }
 
-.adminMenu{
-    list-style-position:inside;
-    font-size:larger;
-}
-.adminMenu li{
-    margin-bottom:1em;
-}
-.inside{
-list-style-position:inside;
-}
-.square{
-list-style-type:square;
+.adminMenu {
+    font-size: larger;
+    list-style-position: inside;
 }
 
-.loginForm{
-float:right;
-padding-right:1em;
-line-height:11px;
-color:white;
+.adminMenu li {
+    margin-bottom: 1em;
 }
 
-.loginForm .imgBtn{
-    vertical-align:top;
+.inside {
+    list-style-position: inside;
 }
 
-.userMenu{
-padding:15px 5px 15px 5px;
-margin:0;
-overflow:visible;
-display:block;
-list-style-type:none;
+.square {
+    list-style-type: square;
 }
-.userMenu li{
-line-height:1.2em;
 
+.loginForm {
+    float: right;
+    padding-right: 1em;
+    line-height: 11px;
+    color: white;
+}
+
+.loginForm .imgBtn {
+    vertical-align: top;
+}
+
+.userMenu {
+    display: block;
+    margin: 0;
+    padding: 15px 5px 15px 5px;
+    overflow: visible;
+    list-style-type: none;
+}
+
+.userMenu li {
+    line-height: 1.2em;
 }
 
 .h1 {
-    font-size:x-large;
-    font-weight:bold;
+    font-size: x-large;
+    font-weight: bold;
 }
-
 
 .box {
-    width:100%;
+    width: 100%;
 }
 
-.center{
-    text-align:center;
+.center {
+    text-align: center;
 }
 
-.subbox{
-    width:170px;
+.subbox {
+    width: 170px;
 }
 
-.actionEvent{
-    list-style-type:none;
-    padding-left:1em;
-    background-color:#E1E1E1;
+.actionEvent {
+    padding-left: 1em;
+    list-style-type: none;
+    background-color: #E1E1E1;
 }
 
 .onglet {
-    border:thin solid #333;
+    border: thin solid #333;
 }
 
 .desc {
-    text-align:justify;
+    text-align: justify;
 }
 
-.nopadding{
-    padding:0;
+.nopadding {
+    padding: 0;
 }
-
 
 .commentHeader {
-font-size:12px;font-weight:bold;border-bottom:2px solid #007799;background-color:#007799;color:#FFFFFF;
+    border-bottom: 2px solid #007799;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #007799;
 }
 
 .commentHeader,
 .comment {
-    padding:0.5em;
+    padding: 0.5em;
 }
 
 .eventImage {
-    border:solid 2px #007799;
+    border: solid 2px #007799;
 }
 
 .calque,
@@ -645,100 +678,101 @@ font-size:12px;font-weight:bold;border-bottom:2px solid #007799;background-color
 .calqueRue,
 .calqueDate,
 .calqueSource {
-    z-index:10;
+    z-index: 10;
 }
 
 .right {
-    float:right;
+    float: right;
 }
 
 .left {
-    float:left;
+    float: left;
 }
 
 .footer nav li {
-    list-style-type:none;
-    display:inline;
+    display: inline;
+    list-style-type: none;
 }
+
 .footer nav li:after {
-    content:" |";
+    content: " |";
 }
 
 .footer nav li:last-child:after {
-    content:"";
+    content: "";
 }
 
 .footer .left {
-    padding-top:0.2em;
+    padding-top: 0.2em;
 }
 
-.footer .left img{
-    margin-left:0.5em;
+.footer .left img {
+    margin-left: 0.5em;
 }
 
 .footer .right {
-    padding-top:0.5em;
-    margin-right:1em;
-    padding-bottom:0.5em;
-    vertical-align:top;
+    margin-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    vertical-align: top;
 }
 
 .footer .fb_ltr,
 .footer .twitter-follow-button {
-vertical-align:top;
+    vertical-align: top;
 }
 
 .primaryContent .h1 {
-    margin-bottom:0.5em;
+    margin-bottom: 0.5em;
 }
-
 
 .large,
 .evenement {
-    width:100%;
+    width: 100%;
 }
 
 .barredons {
-    float:right;
-    margin-top:3em;
+    float: right;
+    margin-top: 3em;
 }
-
 
 .barredons .percent {
-    position:relative;
-    color:#222;
-    right:5.4em;
+    position: relative;
+    right: 5.4em;
+    color: #222;
 }
 
-.progressbar{
-    display:inline-block;
-    width:6em;
-    vertical-align:bottom;
+.progressbar {
+    display: inline-block;
+    width: 6em;
+    vertical-align: bottom;
 }
+
 .barredons .euros {
-    padding-left:2em;
+    padding-left: 2em;
 }
 
-.licence{
-    padding:0.5em;
-    background-color:#EEE;
-    border:thin solid #BBB;
-    min-height:35px;
-    max-width:50%;
+.licence {
+    padding: 0.5em;
+    max-width: 50%;
+    min-height: 35px;
+    border: thin solid #BBB;
+    background-color: #EEE;
 }
 
-.licence img{
-    vertical-align:middle;
+.licence img {
+    vertical-align: middle;
 }
 
 .personHeader {
-    padding:1em;
+    padding: 1em;
 }
 
 .linkedEvents img {
-    vertical-align:middle;
+    vertical-align: middle;
 }
+
 .linkedEvents {
-    margin-bottom:0.2em;
-    list-style-type:square;
+    margin-bottom: 0.2em;
+    list-style-type: square;
 }
