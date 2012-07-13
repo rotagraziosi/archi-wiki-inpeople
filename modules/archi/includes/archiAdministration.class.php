@@ -706,7 +706,7 @@ class ArchiAdministration extends config
 
         $encoder = new PolylineEncoder();
         @$polyline = $encoder->encode($points);
-        $reqTrace              = "SELECT trace FROM `parcoursArt` WHERE `idParcours` = ".mysql_escape_string($idParcours);
+        $reqTrace              = "SELECT trace, levels FROM `parcoursArt` WHERE `idParcours` = ".mysql_escape_string($idParcours);
         $resTrace              = $this->connexionBdd->requete($reqTrace);
         $trace = mysql_fetch_assoc($resTrace);
         //
@@ -720,7 +720,8 @@ class ArchiAdministration extends config
             'idSource'=>array('libelle'=>'idSource', 'type'=>'hidden', 'error'=>'', 'value'=>'', 'default'=>$idSource, 'htmlCode'=>""),
             "polyline"=>array("libelle"=>_("Liste des coordonnées")." ("._("à utiliser avec")." <a href='https://developers.google.com/maps/documentation/utilities/polylineutility'>Interactive Polyline Encoder</a>)", "type"=>"text", "default"=>$polyline->points, "htmlCode"=>"readonly onclick='this.select();'", "error"=>""),
             "levels"=>array("libelle"=>_("Niveaux"), "type"=>"text", "default"=>$polyline->levels, "htmlCode"=>"readonly onclick='this.select();'", "error"=>""),
-            "trace"=>array("libelle"=>_("Coordonnées détaillées"), "type"=>"text", "default"=>$trace["trace"], "htmlCode"=>"", "error"=>"")
+            "trace"=>array("libelle"=>_("Coordonnées détaillées"), "type"=>"text", "default"=>$trace["trace"], "htmlCode"=>"", "error"=>""),
+            "newLevels"=>array("libelle"=>_("Niveaux détaillés"), "type"=>"text", "default"=>$trace["levels"], "htmlCode"=>"", "error"=>"")
         );
         $configForm   = array('fields'=>$configFields, 'formAction'=>$formAction, 'formName'=>'formParcours');
         $f            = new formGenerator();
@@ -772,7 +773,7 @@ class ArchiAdministration extends config
             if (isset($this->variablesPost['isActif']) && $this->variablesPost['isActif']=='1') {
                 $parcoursActif = '1';
             }
-            $reqUpdate = "UPDATE parcoursArt set dateAjoutParcours='".$d->toBdd($this->variablesPost['dateAjoutParcours'])."',isActif='".$parcoursActif."',libelleParcours=\"".mysql_real_escape_string($this->variablesPost['libelleParcours'])."\",commentaireParcours=\"".mysql_real_escape_string($this->variablesPost['commentaireParcours'])."\",idSource='".$this->variablesPost['idSource']."', trace='".mysql_escape_string($this->variablesPost['trace'])."'
+            $reqUpdate = "UPDATE parcoursArt set dateAjoutParcours='".$d->toBdd($this->variablesPost['dateAjoutParcours'])."',isActif='".$parcoursActif."',libelleParcours=\"".mysql_real_escape_string($this->variablesPost['libelleParcours'])."\",commentaireParcours=\"".mysql_real_escape_string($this->variablesPost['commentaireParcours'])."\",idSource='".$this->variablesPost['idSource']."', trace='".mysql_escape_string($this->variablesPost['trace'])."', levels='".mysql_escape_string($this->variablesPost['newLevels'])."'
             WHERE idParcours='".$this->variablesPost['idParcours']."'";
             $resUpdate = $this->connexionBdd->requete($reqUpdate);
         }

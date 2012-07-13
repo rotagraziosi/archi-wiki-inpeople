@@ -1969,7 +1969,7 @@ acl.getManyElements=function(s){
 
 			$html.="gdir.loadFromWaypoints(wp,options); ";
             $html.="var encodedPolyline = new GPolyline.fromEncoded({
-                        points: '".$params["polyline"]."',
+                        points: '".addslashes($params["polyline"])."',
                         levels: '".$params["levels"]."',
                         zoomFactor: 32,
                         numLevels: 4

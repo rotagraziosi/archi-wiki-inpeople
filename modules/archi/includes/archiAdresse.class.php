@@ -13463,9 +13463,9 @@ class archiAdresse extends ArchiContenu
 			}
 			else
 			{
-                $polyline=mysql_fetch_object($this->connexionBdd->requete("SELECT trace, niveau FROM parcoursArt WHERE idParcours = '$idParcours'"));
+                $polyline=mysql_fetch_object($this->connexionBdd->requete("SELECT trace, levels FROM parcoursArt WHERE idParcours = '$idParcours'"));
 
-				$html.= $gm->getMap(array('idDivDisplayEtapesText'=>'parcoursDetail','travelMode'=>'walking','listeCoordonneesParcours'=>$arrayEtapes,'urlImageIcon'=>$this->getUrlImage()."pointGM.png",'pathImageIcon'=>$this->getCheminPhysique()."images/pointGM.png", "polyline"=>$polyline->trace, "levels"=>$polyline->niveau));
+				$html.= $gm->getMap(array('idDivDisplayEtapesText'=>'parcoursDetail','travelMode'=>'walking','listeCoordonneesParcours'=>$arrayEtapes,'urlImageIcon'=>$this->getUrlImage()."pointGM.png",'pathImageIcon'=>$this->getCheminPhysique()."images/pointGM.png", "polyline"=>$polyline->trace, "levels"=>$polyline->levels));
 			}
 			
 			if(isset($this->variablesPost['submitVertices']))
@@ -13610,7 +13610,7 @@ class archiAdresse extends ArchiContenu
 				$intituleAdresse = $this->getIntituleAdresseFrom($fetchEtapes['idEvenementGroupeAdresse'],'idEvenementGroupeAdresse',array('setSeparatorAfterTitle'=>'<br>','displayFirstTitreAdresse'=>true,'noVille'=>true,'noQuartier'=>true,'noSousQuartier'=>true));
 				
 				
-				$marqueur = "<div style=\"font-size:14px;padding-left:5px;width:20px;height:34px;background-repeat:no-repeat;background-image:url(".$this->getUrlImage()."greenMarkerGM.gif);font-weight:bold;\">".pia_strtoupper(pia_substr($alphaChars,$i,1))."</div>";
+				$marqueur = "<div style=\"font-size:10px; padding-top:3px; width:20px; height:34px; background-repeat:no-repeat; background-image:url(".$this->getUrlImage()."greenMarkerGM.gif); font-weight:bold; text-align:center;\">".($i+1)."</div>";
 			
 				$t->addValue($marqueur);
 				$t->addValue("<a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdEvenementGroupeAdresse'=>$fetchEtapes['idEvenementGroupeAdresse'],'archiIdAdresse'=>$idAdresse))."'>$photo</a>", "align=center");
