@@ -1343,7 +1343,7 @@ class formGenerator extends config
                 switch($proprietes['type']) {
                     
                     case 'text':
-                        $champ = $proprietes['htmlCodeBeforeField']."<input type='text' name='".$fieldName."' id='".$fieldName."' value=\"".($value)."\" ".$proprietes['htmlCode'].">".$proprietes['htmlCode2'];
+                        $champ = $proprietes['htmlCodeBeforeField']."<input type='text' name='".$fieldName."' id='".$fieldName."' value=\"".stripslashes($value)."\" ".$proprietes['htmlCode'].">".$proprietes['htmlCode2'];
                         break;
                     case 'date':
                         $d = new dateObject();
