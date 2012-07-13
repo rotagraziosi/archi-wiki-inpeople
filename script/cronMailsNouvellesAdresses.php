@@ -13,7 +13,7 @@
  * 
  * */
  
-if (isset($_GET["testMail"])){
+if (isset($_GET["testMail"])) {
     session_start();
 }
 mb_internal_encoding("UTF-8");
@@ -38,6 +38,7 @@ if ($enLigne) {
 
     //	include_once('/home/pia/archiv2/modules/archi/includes/archiEvenement.class.php');
     include_once __DIR__.'/../modules/archi/includes/archiEvenement.class.php';
+    include_once __DIR__.'/../modules/archi/includes/archiPersonne.class.php';
 } else {
     include '/home/laurent/public_html/a/includes/framework/config.class.php';
     include_once '/home/laurent/public_html/a/modules/archi/includes/archiAdresse.class.php';
@@ -390,6 +391,32 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
     }
     $messageFin = "<br>L'équipe archi-strasbourg.org<br>";
     $messageFin .= $config->getMessageDesabonnerAlerteMail();
+    
+    $reqNewPeople = "
+					SELECT pers.idPersonne, pers.nom, pers.prenom
+					FROM personne pers
+					
+					LEFT JOIN _personneEvenement ae ON ae.idPersonne = pers.idPersonne
+					LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+					LEFT JOIN historiqueEvenement he ON he.idEvenement = ae.idEvenement
+					
+
+							
+					
+					WHERE he.dateCreationEvenement < $borneMin
+					AND he.dateCreationEvenement >= $borneMax
+					GROUP BY pers.idPersonne,ee.idEvenement
+					HAVING count(ee.idEvenementAssocie)>0
+					ORDER BY he.dateCreationEvenement
+			";
+    $resNewPeople = $config->connexionBdd->requete($reqNewPeople);
+    $messagePeople="<h4>Nouvelles personnes :</h4>
+    <ul>";
+    while ($newPerson= mysql_fetch_object($resNewPeople)) {
+        $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$newPerson->idPersonne))."'>".$newPerson->prenom." ".$newPerson->nom."</a></li>";
+    }
+    $messagePeople.="</ul>";
+    
     if (isset($fetchComplement['titre'])) {
         $sujet = $fetchComplement['titre'];
     } else {
@@ -405,12 +432,12 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
     if (isset($_GET["modePrevisualisationAdmin"]) && !isset($_GET["testMail"])) {
         $messageHTML .= $messageIntro.$messageFin;
     } else {
-        $messageHTML .= $messageIntro.$messageStrasbourg.$messageStrasModif.$messageAutres.$messageAutresModif.$messageFin;
+        $messageHTML .= $messageIntro.$messageStrasbourg.$messageStrasModif.$messageAutres.$messageAutresModif.$messagePeople.$messageFin;
     }
     $messageHTML .= "</body></html>";
     if ((isset($_SERVER["SERVER_NAME"]) && !isset($_GET["modePrevisualisationAdmin"])) || isset($_GET["preview"])) {
         print_r($messageHTML);
-        if (isset($_GET["testMail"])){
+        if (isset($_GET["testMail"])) {
             include_once __DIR__."/../modules/archi/includes/archiAuthentification.class.php";
             include_once __DIR__."/../modules/archi/includes/archiUtilisateur.class.php";
             $auth = new archiAuthentification();
