@@ -915,43 +915,46 @@ class ArchiPersonne extends ArchiContenu
                         WHERE idEvenement = ".
                         $e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent);
                 $res = $config->connexionBdd->requete($req);
-                $linkedEventIdAddress=mysql_fetch_object($res)->idAdresse;
-                $req = "
-                        SELECT  nom
-                        FROM typeEvenement 
-                        WHERE idTypeEvenement = ".
-                        $event->idTypeEvenement;
-                $res = $config->connexionBdd->requete($req);
-                $linkedEventType=mysql_fetch_object($res)->nom;
-                $linkedEventImg=$a->getUrlImageFromEvenement($linkedEvent, "mini");
-                if ($linkedEventImg["url"]==$config->getUrlImage("", "transparent.gif")) {
-                    $linkedEventImg=$a->getUrlImageFromAdresse($linkedEventIdAddress, "mini");
-                }
-                $linkedEventUrl=$config->creerUrl("", "adresseDetail", array("archiIdAdresse"=>$linkedEventIdAddress, "archiIdEvenementGroupeAdresse"=>$linkedEvent));
-                $linkedEventsHTML.="<li class='linkedEvents'><img src='".
-                $linkedEventImg["url"]."' alt='' /> <div style='display:inline-block;'><a href='$linkedEventUrl'>".$linkedEventAddress;
-                $res=$e->getInfosEvenementsLiesForAncres($e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent));
-                $i=0;
-                while ($rep=mysql_fetch_object($res)) {
-                    if ($rep->idEvenement == $linkedEvent) {
-                        $linkedEventPos=$i;
+                $fetch = mysql_fetch_object($res);
+                if (isset($fetch->idAdresse)) {
+                    $linkedEventIdAddress=$fetch->idAdresse;
+                    $req = "
+                            SELECT  nom
+                            FROM typeEvenement 
+                            WHERE idTypeEvenement = ".
+                            $event->idTypeEvenement;
+                    $res = $config->connexionBdd->requete($req);
+                    $linkedEventType=mysql_fetch_object($res)->nom;
+                    $linkedEventImg=$a->getUrlImageFromEvenement($linkedEvent, "mini");
+                    if ($linkedEventImg["url"]==$config->getUrlImage("", "transparent.gif")) {
+                        $linkedEventImg=$a->getUrlImageFromAdresse($linkedEventIdAddress, "mini");
                     }
-                    $i++;
-                }
-                $linkedEventsHTML.="</a>";
-                $linkedEventsHTML.="<br/><small><a href='$linkedEventUrl#$linkedEventPos'>";
-                if ($event->dateDebut != "0000-00-00") {
-                    $linkedEventsHTML.=$config->date->toFrench($event->dateDebut);
+                    $linkedEventUrl=$config->creerUrl("", "adresseDetail", array("archiIdAdresse"=>$linkedEventIdAddress, "archiIdEvenementGroupeAdresse"=>$linkedEvent));
+                    $linkedEventsHTML.="<li class='linkedEvents'><img src='".
+                    $linkedEventImg["url"]."' alt='' /> <div style='display:inline-block;'><a href='$linkedEventUrl'>".$linkedEventAddress;
+                    $res=$e->getInfosEvenementsLiesForAncres($e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent));
+                    $i=0;
+                    while ($rep=mysql_fetch_object($res)) {
+                        if ($rep->idEvenement == $linkedEvent) {
+                            $linkedEventPos=$i;
+                        }
+                        $i++;
+                    }
+                    $linkedEventsHTML.="</a>";
+                    $linkedEventsHTML.="<br/><small><a href='$linkedEventUrl#$linkedEventPos'>";
+                    if ($event->dateDebut != "0000-00-00") {
+                        $linkedEventsHTML.=$config->date->toFrench($event->dateDebut);
+                        if (!empty($event->titre)) {
+                            $linkedEventsHTML.=", ";
+                        }
+                    }
                     if (!empty($event->titre)) {
-                        $linkedEventsHTML.=", ";
+                        $linkedEventsHTML.=stripslashes($event->titre);
                     }
+                    $linkedEventsHTML.=", ".$linkedEventType;
+                    $linkedEventsHTML.="</a></small>";
+                    $linkedEventsHTML.="</div></li>";
                 }
-                if (!empty($event->titre)) {
-                    $linkedEventsHTML.=stripslashes($event->titre);
-                }
-                $linkedEventsHTML.=", ".$linkedEventType;
-                $linkedEventsHTML.="</a></small>";
-                $linkedEventsHTML.="</div></li>";
             }
             $linkedEventsHTML.="</ul>";
             return $linkedEventsHTML;
