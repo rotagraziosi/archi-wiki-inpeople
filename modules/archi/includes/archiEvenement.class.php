@@ -1656,7 +1656,7 @@ class archiEvenement extends config
                                 if (archiPersonne::isPerson($idEvenementGroupeAdresse)) {
                                     $typeEvenement = "";
                                 } else {
-                                    $typeEvenement=$articleAvantTypeEvenement.strtolower($res->nomTypeEvenement);
+                                    $typeEvenement=$articleAvantTypeEvenement." ".strtolower($res->nomTypeEvenement);
                                 }
 								$dateTxt=_("Date")." <time itemprop='startDate' datetime='".$datetime."'>".$typeEvenement." : $environDateDebutTxt".$this->date->toFrenchAffichage($res->dateDebut)."</time>";
                             }
