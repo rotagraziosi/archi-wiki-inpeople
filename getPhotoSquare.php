@@ -22,7 +22,10 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     $res =$config->connexionBdd->requete($req);
     $image=mysql_fetch_object($res);
     if ($image) {
-        $path="images/moyen/".$image->dateUpload."/".$_GET["id"].".jpg";
+        $tempPath="images/moyen/".$image->dateUpload."/".$_GET["id"].".jpg";
+        if (file_exists($tempPath)) {
+            $path = $tempPath;
+        }
     }     
 }
 $infos=getimagesize($path);
