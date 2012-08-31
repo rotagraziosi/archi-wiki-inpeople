@@ -13,13 +13,18 @@
  * */
 require_once "includes/framework/config.class.php";
 $config = new Config();
-$req = "
-        SELECT dateUpload
-        FROM  historiqueImage 
-        WHERE idHistoriqueImage = ".$_GET["id"];
-$res =$config->connexionBdd->requete($req);
-$image=mysql_fetch_object($res);
-$path="images/moyen/".$image->dateUpload."/".$_GET["id"].".jpg";
+$path="images/placeholder.jpg";
+if (isset($_GET["id"]) && !empty($_GET["id"])) {
+    $req = "
+            SELECT dateUpload
+            FROM  historiqueImage 
+            WHERE idHistoriqueImage = '".$_GET["id"]."'";
+    $res =$config->connexionBdd->requete($req);
+    $image=mysql_fetch_object($res);
+    if ($image) {
+        $path="images/moyen/".$image->dateUpload."/".$_GET["id"].".jpg";
+    }     
+}
 $infos=getimagesize($path);
 $input = imagecreatefromjpeg($path);
 header("Content-Type: image/jpeg");
