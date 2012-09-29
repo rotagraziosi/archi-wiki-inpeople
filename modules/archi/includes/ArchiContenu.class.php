@@ -524,7 +524,10 @@ abstract class ArchiContenu extends config
                 'onClickBoutonAjouterAdresse'            => "document.getElementById('formAjoutDossier').action='".$this->creerUrl('', 'ajoutNouveauDossier')."'",                                     
                 'onClickBoutonEnleverAdresse'            => "document.getElementById('formAjoutDossier').action='".$this->creerUrl('', 'ajoutNouveauDossier')."'", 
                 
-                
+                'onClickBoutonValider'					=> "affichePopupAttente();".$arrayJsCoordonneesFromGoogleMap['jsFunctionCall'],
+									
+									
+									'typeBoutonValidation'=>"button",
                 
                 
                 

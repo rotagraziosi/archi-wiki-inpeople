@@ -357,8 +357,7 @@ function affichePopupAttente()
 </table>
 
 <!-- END afficheAjoutEvenement -->
-
-<input type='{typeBoutonValidation}' name='{nomBoutonValidation}' value='<?_("Valider")?>' onclick="{onClickBoutonValider}" title="{msgValidation}" id="submitBtn" onMouseOut="closeContextHelp();">
+<input type='{typeBoutonValidation}' onclick="{onClickBoutonValider}" name='{nomBoutonValidation}' value='<?_("Valider")?>' title="{msgValidation}" id="submitBtn" onMouseOut="closeContextHelp();">
 
 <input type='hidden' value="{evenementGroupeAdresse}" name='evenementGroupeAdresse'>
 </form>
