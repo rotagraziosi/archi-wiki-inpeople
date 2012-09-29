@@ -1005,7 +1005,7 @@ class archiRecherche extends config {
                         $html.="<br>".$retourAdresses['nbAdresses']." "._("résultats.")."<br>";
                     }
                     
-                    $html.=$gm->getMap(array('listeCoordonnees'=>$retourConfig['arrayConfigCoordonnees'],'urlImageIcon'=>$this->urlImages."pointGM.png",'pathImageIcon'=>$this->cheminPhysique."images/pointGM.png",'setAutomaticCentering'=>true));
+                    $html.=$gm->getMap(array('listeCoordonnees'=>$retourConfig['arrayConfigCoordonnees'],'urlImageIcon'=>$this->urlImages."pointGM.png",'pathImageIcon'=>$this->getCheminPhysique()."images/pointGM.png",'setAutomaticCentering'=>true));
                     
                 
                 }
