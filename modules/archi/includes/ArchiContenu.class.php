@@ -528,13 +528,7 @@ abstract class ArchiContenu extends config
                 'onClickBoutonEnleverAdresse'            => "document.getElementById('formAjoutDossier').action='".$this->creerUrl('', 'ajoutNouveauDossier')."'", 
                 
                 'onClickBoutonValider'					=> $onClickBoutonValider,
-									
-									
-									'typeBoutonValidation'=>$typeBoutonValidation,
-                
-                
-                
-                
+                'typeBoutonValidation'=>$typeBoutonValidation,
                 'onClickBoutonChoixVille'        =>"document.getElementById('paramChampAppelantVille').value='ville';document.getElementById('calqueVille').style.top=(getScrollHeight()+150)+'px';document.getElementById('calqueVille').style.display='block';", 
                 'onChangeListeQuartier'            =>"appelAjax('".$this->creerUrl('', 'afficheSelectSousQuartier', array('noHeaderNoFooter'=>1))."&archiIdQuartier='+document.getElementById('quartiers').value, 'listeSousQuartier')", 
                 
@@ -767,7 +761,11 @@ abstract class ArchiContenu extends config
                 
                 $message="L'utilisateur suivant a créé un nouveau dossier : ";
                 $message .= $utilisateur->getMailUtilisateur($this->session->getFromSession('utilisateurConnecte'.$this->idSite))."<br>";
-                $message .="<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$arrayNewIdAdresses[0], 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresses))."'>lien vers l'article</a><br>";
+                $message .="<a href='".$this->creerUrl(
+                    '', '', array('archiAffichage'=>'adresseDetail',
+                    'archiIdAdresse'=>$arrayNewIdAdresses[0],
+                    'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresses)
+                )."'>lien vers l'article</a><br>";
                 $message .="Adresses liées au nouveau dossier :<br>";
                 
                 $i=0;
@@ -775,41 +773,83 @@ abstract class ArchiContenu extends config
                 
                 foreach ($arrayNewAdresses as $indice => $value) {
                     if ($i==0) {
-                        $adressePourSujetMail = $this->getIntituleAdresseFrom($value['idAdresse'], 'idAdresse');
+                        $adressePourSujetMail = $this->getIntituleAdresseFrom(
+                            $value['idAdresse'], 'idAdresse'
+                        );
                     }
                     
                     if ($value['newAdresse']==true) {
                         // cette adresse a été créée avec le dossier
-                        $message .="<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresses, 'archiIdAdresse'=>$value['idAdresse']))."'>".$this->getIntituleAdresseFrom($value['idAdresse'], 'idAdresse')." (nouvelle adresse)</a><br>";
+                        $message .="<a href='".$this->creerUrl(
+                            '', '', array('archiAffichage'=>'adresseDetail',
+                            'archiIdEvenementGroupeAdresse'
+                                =>$idEvenementGroupeAdresses,
+                                'archiIdAdresse'=>$value['idAdresse'])
+                        )."'>".$this->getIntituleAdresseFrom(
+                            $value['idAdresse'], 'idAdresse'
+                        )." (nouvelle adresse)</a><br>";
                     } else {
-                        // cette adresse a été créée précédemment et est utilisée sur ce dossier
-                        $message .="<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresses, 'archiIdAdresse'=>$value['idAdresse']))."'>".$this->getIntituleAdresseFrom($value['idAdresse'], 'idAdresse')." (cette adresse existait déjà avant la création du dossier)</a><br>";
+                        /* cette adresse a été créée précédemment
+                         * et est utilisée sur ce dossier
+                         * */
+                        $message .="<a href='".$this->creerUrl(
+                            '', '', array('archiAffichage'=>'adresseDetail',
+                            'archiIdEvenementGroupeAdresse'
+                                =>$idEvenementGroupeAdresses,
+                            'archiIdAdresse'=>$value['idAdresse'])
+                        )."'>".$this->getIntituleAdresseFrom(
+                            $value['idAdresse'], 'idAdresse'
+                        )." (cette adresse existait déjà ".
+                        "avant la création du dossier)".
+                        "</a><br>";
                     }
                 }
                 $mail = new mailObject();
-                $mail->sendMailToAdministrators($mail->getSiteMail(), 'archi-strasbourg.org : un utilisateur a créé un nouveau dossier - '.$adressePourSujetMail, $message, " and alerteMail='1' ", true);
+                $mail->sendMailToAdministrators(
+                    $mail->getSiteMail(),
+                    "archi-strasbourg.org : ".
+                    "un utilisateur a créé un nouveau dossier - ".
+                    $adressePourSujetMail, $message, " and alerteMail='1' ", true
+                );
                 $u = new archiUtilisateur();
-                $u->ajouteMailEnvoiRegroupesAdministrateurs(array('contenu'=>$message, 'idTypeMailRegroupement'=>3, 'criteres'=>" and alerteMail='1' "));
-                // *************************************************************************************************************************************************************
-                // envoi mail aussi au moderateur si ajout sur adresse de ville que celui ci modere
+                $u->ajouteMailEnvoiRegroupesAdministrateurs(
+                    array('contenu'=>$message, 'idTypeMailRegroupement'=>3,
+                    'criteres'=>" and alerteMail='1' ")
+                );
+                /* envoi mail aussi au moderateur si ajout
+                 * sur adresse de ville que celui ci modere
+                 * */
                 
                 
-                $arrayListeModerateurs = $u->getArrayIdModerateursActifsFromVille($this->variablesPost['ville'], array("sqlWhere"=>" AND alerteMail='1' "));
+                $arrayListeModerateurs = $u->getArrayIdModerateursActifsFromVille(
+                    $this->variablesPost['ville'],
+                    array("sqlWhere"=>" AND alerteMail='1' ")
+                );
                 if (count($arrayListeModerateurs)>0) {
                     foreach ($arrayListeModerateurs as $indice => $idModerateur) {
-                        if ($this->session->getFromSession('utilisateurConnecte'.$this->idSite)!=$idModerateur) {
+                        if ($this->session->getFromSession(
+                            "utilisateurConnecte".$this->idSite
+                        )!=$idModerateur) {
                             $mailModerateur = $u->getMailUtilisateur($idModerateur);
                             if ($u->isMailEnvoiImmediat($idModerateur)) {
-                                $mail->sendMail($mail->getSiteMail(), $mailModerateur, 'archi-strasbourg.org : un utilisateur a créé un nouveau dossier - '.$adressePourSujetMail, $message, true);
+                                $mail->sendMail(
+                                    $mail->getSiteMail(), $mailModerateur,
+                                    "archi-strasbourg.org : ".
+                                    "un utilisateur a créé un nouveau dossier - ".
+                                    $adressePourSujetMail, $message, true
+                                );
                             } else {
                                 // envoi regroupé
-                                $u->ajouteMailEnvoiRegroupes(array('contenu'=>$message, 'idDestinataire'=>$idModerateur, 'idTypeMailRegroupement'=>3));
+                                $u->ajouteMailEnvoiRegroupes(
+                                    array('contenu'=>$message,
+                                    'idDestinataire'=>$idModerateur,
+                                    'idTypeMailRegroupement'=>3)
+                                );
                             }
                         }
                         
                     }
                 }
-                // *************************************************************************************************************************************************************
             }
             
             
@@ -817,9 +857,20 @@ abstract class ArchiContenu extends config
             //echo $retourEvenement["html"];
             if ($type=="personne") {
                 //?archiAffichage=evenementListe&selection=personne&id=
-                header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'evenementListe', 'selection'=>"personne", 'id'=>$idAdresse),  false,  false));
+                header(
+                    "Location: ".$this->creerUrl(
+                        '', '', array('archiAffichage'=>'evenementListe',
+                        'selection'=>"personne", 'id'=>$idAdresse),  false,  false
+                    )
+                );
             } else {
-                header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresses, 'archiIdAdresse'=>$value['idAdresse']),  false,  false));
+                header(
+                    "Location: ".$this->creerUrl(
+                        '', '', array('archiAffichage'=>'adresseDetail',
+                        'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresses,
+                        'archiIdAdresse'=>$value['idAdresse']),  false,  false
+                    )
+                );
             }
         }
     }
