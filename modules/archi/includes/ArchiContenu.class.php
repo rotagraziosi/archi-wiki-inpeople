@@ -507,6 +507,9 @@ abstract class ArchiContenu extends config
         $recherche = new archiRecherche();
         $source = new archiSource();
         
+        $onClickBoutonValider=$type=="adresse"?"affichePopupAttente();".$arrayJsCoordonneesFromGoogleMap['jsFunctionCall']:"";
+        $typeBoutonValidation=$type=="adresse"?"button":"submit";
+        
         $t->assign_vars(
             array(
                 'formAction'                    => $this->creerUrl($formAction), 
@@ -524,10 +527,10 @@ abstract class ArchiContenu extends config
                 'onClickBoutonAjouterAdresse'            => "document.getElementById('formAjoutDossier').action='".$this->creerUrl('', 'ajoutNouveauDossier')."'",                                     
                 'onClickBoutonEnleverAdresse'            => "document.getElementById('formAjoutDossier').action='".$this->creerUrl('', 'ajoutNouveauDossier')."'", 
                 
-                'onClickBoutonValider'					=> "affichePopupAttente();".$arrayJsCoordonneesFromGoogleMap['jsFunctionCall'],
+                'onClickBoutonValider'					=> $onClickBoutonValider,
 									
 									
-									'typeBoutonValidation'=>"button",
+									'typeBoutonValidation'=>$typeBoutonValidation,
                 
                 
                 
