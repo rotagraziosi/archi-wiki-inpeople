@@ -536,8 +536,8 @@ class ArchiAuthentification extends config
             $res = $config->connexionBdd->requete(
                 "SELECT id
                 FROM login
-                WHERE user='".mysql_escape_string($login)."' 
-                AND id='".mysql_escape_string($id)."'"
+                WHERE user='".mysql_real_escape_string($login)."' 
+                AND id='".mysql_real_escape_string($id)."'"
             );
             $fetch = mysql_fetch_object($res);
             if (isset($fetch->id) && $fetch->id==$id) {
