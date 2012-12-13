@@ -555,7 +555,7 @@ class archiAccueil extends config
                             'descriptionAdresse1'=>"<div><a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).' '.$intituleAdresse."</a><br>".($string->sansBalises(stripslashes($string->coupureTexte($evenement->getDescription($value['idEvenement']), 20))))."</div>"
                             ));
             } else {
-                $tDemolitions->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).' '.$intituleAdresse."</a>"));
+                $tDemolitions->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'><span class='date'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).'</span> '.$intituleAdresse."</a>"));
             }
         }
         
@@ -600,7 +600,7 @@ class archiAccueil extends config
                             'descriptionAdresse1'=>"<div><a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).' '.$intituleAdresse."</a><br>".($string->sansBalises(stripslashes($string->coupureTexte($evenement->getDescription($value['idEvenement']), 20))))."</div>"
                             ));
             } else {
-                $tTravaux->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).' '.$intituleAdresse."</a>"));
+                $tTravaux->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'><span class='date'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).'</span> '.$intituleAdresse."</a>"));
             }
         }        
         ob_start();
@@ -646,7 +646,7 @@ class archiAccueil extends config
                             'descriptionAdresse1'=>"<div><a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).' '.$intituleAdresse."</a><br>".($string->sansBalises(stripslashes($string->coupureTexte($evenement->getDescription($value['idEvenement']), 20))))."</div>"
                             ));
             } else {
-                $tCulturel->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).' '.$intituleAdresse."</a>"));
+                $tCulturel->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'><span class='date'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).'</span> '.$intituleAdresse."</a>"));
             }
         }
         
@@ -700,7 +700,7 @@ class archiAccueil extends config
                 
                 }
             } else {
-                $tDernieresAdresses->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationAdresse'])).' '.$intituleAdresse."</a>"));
+                $tDernieresAdresses->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."' style='font-size:12px;'><span class='date'>".date('d/m/Y', strtotime($value['dateCreationAdresse'])).'</span> '.$intituleAdresse."</a>"));
             }
         }
         
@@ -754,7 +754,7 @@ class archiAccueil extends config
                             "descriptionAdresse1"=>"<a href='".$this->creerUrl('', 'imageDetail', array("archiIdImage"=>$value['idImage'], "archiRetourAffichage"=>'evenement', "archiRetourIdName"=>'idEvenement', "archiRetourIdValue"=>$value['idEvenementGroupeAdresse']))."'>".date('d/m/Y', strtotime($value['dateUpload']))." ".$intituleAdresseVueSur."</a><br>Pris depuis ".$intituleAdressePrisDepuis."<br>".$string->coupureTexte($bbCode->convertToDisplay(array('text'=>$image->getDescriptionFromIdImage(array("idImage"=>$value['idImage'])))), 5)
                     ));
                 } else {
-                    $tDernieresVues->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a style='font-size:12px;' href='".$this->creerUrl('', 'imageDetail', array("archiIdImage"=>$value['idImage'], "archiRetourAffichage"=>'evenement', "archiRetourIdName"=>'idEvenement', "archiRetourIdValue"=>$value['idEvenementGroupeAdresse']))."'>".date('d/m/Y', strtotime($value['dateUpload']))." ".$intituleAdresseVueSur."</a>"));
+                    $tDernieresVues->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a style='font-size:12px;' href='".$this->creerUrl('', 'imageDetail', array("archiIdImage"=>$value['idImage'], "archiRetourAffichage"=>'evenement', "archiRetourIdName"=>'idEvenement', "archiRetourIdValue"=>$value['idEvenementGroupeAdresse']))."'><span class='date'>".date('d/m/Y', strtotime($value['dateUpload']))."</span> ".$intituleAdresseVueSur."</a>"));
                 
                 
                 }
@@ -914,7 +914,7 @@ class archiAccueil extends config
                         
                         // by fabien le 23/03/2012 : ajout de stripslashes pour virer les \ sur la page d'acceuil
                         
-                    $tActualites->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a style='font-size:12px;' href='".$url."'>".$d->toFrenchAffichage($value['date'])." ".stripslashes($value['titre'])."</a>"));
+                    $tActualites->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a style='font-size:12px;' href='".$url."'><span class='date'>".$d->toFrenchAffichage($value['date'])."</span> ".stripslashes($value['titre'])."</a>"));
                 }
                 
                 $i++;

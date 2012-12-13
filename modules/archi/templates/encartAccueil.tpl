@@ -2,17 +2,18 @@
 <h3 class="titreEncart">{titre} <a href="rss.php?type={type}" title="<?_("Flux RSS")?>"><img  src="images/Advisa/rss.png" alt="(<?_("Flux RSS")?>)" /></a></h3>
 
 <!-- BEGIN premiereAdresseAvecPhoto -->
-<div>{photoAdresse1}<div style="font-size:12px;">{descriptionAdresse1}</div></div>
-<br>
-<div class="clear">
+<div>{photoAdresse1}<div class="desc" style="font-size:12px;">{descriptionAdresse1}</div></div>
+<div>
 <!-- END premiereAdresseAvecPhoto -->
 
 <div>
+<ul>
 <!-- BEGIN listeAdressesSuivantes -->
-	{listeAdressesSuivantes.lien}<br>
+	<li>{listeAdressesSuivantes.lien}</li>
 <!-- END listeAdresses -->
+</ul>
 <br>
-<div style='text-align:right;font-size:12px;'>{lienVersTout}</div>
+<div class="clear linkAll">{lienVersTout}</div>
 </div>
 </div>
 </div>
