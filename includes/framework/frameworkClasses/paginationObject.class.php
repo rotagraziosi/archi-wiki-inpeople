@@ -124,7 +124,7 @@ class paginationObject extends config
 				
 				foreach($tabLettresAlpha as $indice => $lettre)
 				{
-					$listeLiensAlphabetiques.=" <a href='".$this->creerUrl('','',array_merge($GET,array($nomParametreLettreCourante=>$lettre)))."'>$lettre</a>&nbsp;";
+					$listeLiensAlphabetiques.=" <a href='".$this->creerUrl('','',array_merge($GET,array($nomParametreLettreCourante=>$lettre)))."'>".strtoupper($lettre)."</a>&nbsp;";
 				}
 				
 				

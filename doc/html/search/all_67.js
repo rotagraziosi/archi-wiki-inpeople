@@ -75,6 +75,7 @@ var searchData=
   ['getprofilcourantformulaire',['getProfilCourantFormulaire',['../classDroitsObject.html#af993e82b7eebfbcdd542962e86a74555',1,'DroitsObject']]],
   ['getprofilfromidprofil',['getProfilFromIdProfil',['../classDroitsObject.html#a8c809a2b3011346d72e64133a87dba1a',1,'DroitsObject']]],
   ['getreccursivestyle',['getReccursiveStyle',['../classstyleHTML.html#afc6753e16623311bbaf16bb28f9f3610',1,'styleHTML']]],
+  ['getrelatedpeople',['getRelatedPeople',['../classArchiPersonne.html#a97dd0f31b9fbd48edc9373d797f342fc',1,'ArchiPersonne']]],
   ['getresultfromfile',['getResultFromFile',['../classConnexionBdd.html#a7d9069d3f168e49453c2b26e24d0163c',1,'ConnexionBdd']]],
   ['getsitemail',['getSiteMail',['../classMailObject.html#a63c22e064192099129f2f13da33035b7',1,'MailObject']]],
   ['getsvgstyle',['getSvgStyle',['../classstyleHTML.html#ad222a8ce4ec2e75a2106dd567b07198b',1,'styleHTML']]],

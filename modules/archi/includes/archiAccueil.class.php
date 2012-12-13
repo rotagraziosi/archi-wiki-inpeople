@@ -104,7 +104,7 @@ class archiAccueil extends config
                 
                 $arrayInfosModifs = $utilisateur->getInfosModifsPerso($auth->getIdUtilisateur());
                 
-                $monArchi="<table border=''><tr><td width=500><h2>"._("Mon Archi")."</h2></td><td><img src='".$this->getUrlImage(null, "trombone.jpg")."'></td></tr></table>";
+                $monArchi="<table border=''><tr><td width=500><h2>"._("Mon Archi")."</h2></td></tr></table>";
                 if (mysql_fetch_assoc($this->connexionBdd->requete("SELECT idImage FROM historiqueImage WHERE idUtilisateur = '".$auth->getIdUtilisateur()."' AND licence = '3'"))) {
                     $monArchi.= "<strong>"._("Certaines de vos images ne sont pas librement réutilisables !")."</strong>";
                     $monArchi.="<br/>";
@@ -546,12 +546,12 @@ class archiAccueil extends config
             $intituleAdresseAlt=strip_tags(str_replace("\"", "'", $intituleAdresse));
             if (isset($params['indiceEvenementsPremierePositions']['demolition']) && $indice == $params['indiceEvenementsPremierePositions']['demolition'])
             {
-                $urlImage = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$params['imagesEvenementsPremieresPositions']['demolition']['dateUpload'].'-'.$params['imagesEvenementsPremieresPositions']['demolition']['idHistoriqueImage'].'-'.$format.'.jpg';
+                $urlImage = 'getPhotoSquare.php?id='.$params['imagesEvenementsPremieresPositions']['demolition']['idHistoriqueImage'];
                 
                 $tDemolitions->assign_block_vars("premiereAdresseAvecPhoto", array());
                 
                 $tDemolitions->assign_vars(array(
-                            'photoAdresse1'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."'><img style='border:1px #000000 solid;margin-right:2px;float:left;' src='".$urlImage."' alt=\"".$intituleAdresseAlt."\" title=\"".$intituleAdresseAlt."\"></a>", 
+                            'photoAdresse1'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."'><img style='margin-right:2px;float:left;' src='".$urlImage."' alt=\"".$intituleAdresseAlt."\" title=\"".$intituleAdresseAlt."\"></a>", 
                             'descriptionAdresse1'=>"<div><a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."#".$value['positionEvenement']."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationEvenement'])).' '.$intituleAdresse."</a><br>".($string->sansBalises(stripslashes($string->coupureTexte($evenement->getDescription($value['idEvenement']), 20))))."</div>"
                             ));
             } else {
@@ -591,7 +591,7 @@ class archiAccueil extends config
             $intituleAdresseAlt=strip_tags(str_replace("\"", "'", $intituleAdresse));
             if (isset($params['indiceEvenementsPremierePositions']['construction']) && $indice == $params['indiceEvenementsPremierePositions']['construction'])
             {
-                $urlImage = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$params['imagesEvenementsPremieresPositions']['construction']['dateUpload'].'-'.$params['imagesEvenementsPremieresPositions']['construction']['idHistoriqueImage'].'-'.$format.'.jpg';
+                $urlImage = 'getPhotoSquare.php?id='.$params['imagesEvenementsPremieresPositions']['construction']['idHistoriqueImage'];
                 
                 $tTravaux->assign_block_vars("premiereAdresseAvecPhoto", array());
                 
@@ -637,7 +637,7 @@ class archiAccueil extends config
             if (isset($params['indiceEvenementsPremierePositions']['culturel']) && $indice == $params['indiceEvenementsPremierePositions']['culturel'])
             {
                 
-                $urlImage = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$params['imagesEvenementsPremieresPositions']['culturel']['dateUpload'].'-'.$params['imagesEvenementsPremieresPositions']['culturel']['idHistoriqueImage'].'-'.$format.'.jpg';
+                $urlImage = 'getPhotoSquare.php?id='.$params['imagesEvenementsPremieresPositions']['culturel']['idHistoriqueImage'];
                 
                 $tCulturel->assign_block_vars("premiereAdresseAvecPhoto", array());
                 
@@ -683,7 +683,7 @@ class archiAccueil extends config
             if (isset($params['indiceEvenementsPremierePositions']['dernieresAdresses']) && $indice == $params['indiceEvenementsPremierePositions']['dernieresAdresses'])
             {
                 
-                $urlImage = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$params['imagesEvenementsPremieresPositions']['dernieresAdresses']['dateUpload'].'-'.$params['imagesEvenementsPremieresPositions']['dernieresAdresses']['idHistoriqueImage'].'-'.$format.'.jpg';
+                $urlImage = 'getPhotoSquare.php?id='.$params['imagesEvenementsPremieresPositions']['dernieresAdresses']['idHistoriqueImage'];
                 
                 $tDernieresAdresses->assign_block_vars("premiereAdresseAvecPhoto", array());
                 if ($params['imagesEvenementsPremieresPositions']['dernieresAdresses']['idHistoriqueImage']!='')
@@ -747,7 +747,7 @@ class archiAccueil extends config
                 
                 if ($i==0)
                 {
-                    $urlImage = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse1Adresse).'-'.$value['dateUpload'].'-'.$value['idHistoriqueImage'].'-'.$format.'.jpg';
+                    $urlImage = 'getPhotoSquare.php?id='.$value['idHistoriqueImage'];
                     $tDernieresVues->assign_block_vars("premiereAdresseAvecPhoto", array());
                     $tDernieresVues->assign_vars(array(
                             "photoAdresse1"=>"<a href='".$this->creerUrl('', 'imageDetail', array("archiIdImage"=>$value['idImage'], "archiRetourAffichage"=>'evenement', "archiRetourIdName"=>'idEvenement', "archiRetourIdValue"=>$value['idEvenementGroupeAdresse']))."'><img style='border:1px #000000 solid;margin-right:2px;float:left;' src='".$urlImage."' title=\"".$intituleAdresseAlt."\" alt=\"".$intituleAdresseAlt."\"></a>", 

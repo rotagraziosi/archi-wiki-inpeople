@@ -1,5 +1,5 @@
 <!-- BEGIN isCarteGoogle -->
-<table border=0 style='margin-bottom:0;width:700px;'>
+<table border=0 style='margin-bottom:0;width:500px;'>
 <tr>
 <td style='padding:0;margin:0;vertical-align:top; text-align:center;'><iframe src='{isCarteGoogle.src}' id='iFrameGoogleMap' style='padding:0;margin:0;width:275px;height:275px;'></iframe><br>{isCarteGoogle.lienVoirCarteGrand}{isCarteGoogle.popupGoogleMap}</td>
 

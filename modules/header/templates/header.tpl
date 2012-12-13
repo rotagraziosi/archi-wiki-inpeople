@@ -17,7 +17,7 @@
 <link rel="alternate" href="rss.php?type=demolitions" type="application/rss+xml" title="Dernières démolitions" />
 <link rel="alternate" href="rss.php?type=culture" type="application/rss+xml" title="Derniers événements culturels" />
 <link rel="alternate" href="rss.php?type=dernieresVues" type="application/rss+xml" title="Dernières vues" />
-
+<link rel="icon" href="favicon.png" type="image/png"  />
 <script src='includes/datePicker.js'></script>
 <script src='includes/bbcode.js'></script>
 {ajaxFunctions}
@@ -36,7 +36,7 @@
 </head>
 
 
-<body style="background-color:#FFFFFF;" onload="{onload}">
+<body onload="{onload}">
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -48,15 +48,17 @@
 <div id="outer" class="outer">
 	
 	<div id="header" class="header">
-    <a href="./">
+    <!--<a href="./">
     <img src="images/logo_archi.png" alt="">
-    </a>
+    </a>-->
 	<div class="inline-block homeTitle">
     <a href="./">
-    <div class="title"><h1 class="h1">{titreSite}</h1><h2 class="h2">Version 2.3</h2></div>
+    <div class="title"><h1 class="h1"><img src="images/Advisa/logo-archi-strasbourg.png" alt="{titreSite}" /></h1><!--<h2 class="h2">Version 2.3</h2>--><?_("Architecture et histoire des lieux de Strasbourg")?></div>
     </a>
-	<div class="title">{urlCheminSite}</div>
+	<!--<div class="title">{urlCheminSite}</div>-->
     </div>
+    <div class="infos"><a href="statistiques-adresses-photos-architectes-strasbourg.html">{infos}</a></div>
+    <!--
     <script>
 	$(function() {
 		$( "#progressbar" ).progressbar({
@@ -64,6 +66,7 @@
 		});
 	});
 	</script>
+    
     <div class='barredons'>
     <a href="actualites-archi-strasbourg-30.html">
     Dons :
@@ -72,6 +75,7 @@
     <span class="euros">11850 € restants</span>
     </a>
 	</div>
+    -->
     
 	<nav id="menu" class="menu">
             
@@ -94,7 +98,7 @@
             </div>
 
 		<ul>
-			<li class="first"><a href="./" accesskey="1"><?_("Accueil")?></a></li>
+			<li class="first"><a href="./" accesskey="1"><img src="images/Advisa/maison.png" alt="<?_("Accueil")?>" /></a></li>
 			<!-- BEGIN isAdmin -->
 			<li><a href="{listeUtilisateurs}" accesskey="2"><?_("Utilisateurs")?></a></li>
 			
@@ -105,7 +109,7 @@
 			<li><a href="{administration}"><?_("Administration")?></a></li>
 			<!-- END afficheAdministrationMenu -->
 			
-			<li><a href="{recherche}" accesskey="4" title=""><?_("Recherche")?></a></li>
+			<!--<li><a href="{recherche}" accesskey="4" title=""><?_("Recherche")?></a></li>-->
             <li class="flag"><a href="?lang=fr_FR"><img alt="Français" title="<?_("Français")?>" src="images/flags/fr.png" /></a></li>
             <li class="flag"><a href="?lang=en_US"><img alt="English" title="<?_("Anglais")?>" src="images/flags/en.png" /></a></li>
             
@@ -117,7 +121,7 @@
 		<div id="primaryContentContainer">
 			<div id="secondaryContent" class="secondaryContent" style='padding-left:10px;'>
 				<div class="box boxA">
-					<h2><?_("Rechercher")?></h2>
+					<!--<h2><?_("Rechercher")?></h2>-->
 					<div class="boxContent center">
 						{formulaireRecherche}
 						{lienRechercheParCarte}
@@ -147,13 +151,17 @@
 				</ul>
 				
 				</nav>
-                <div class="center subbox">
-				<a href='{faireUnDon}'><img src='https://www.paypalobjects.com/{lang}/i/btn/btn_donate_LG.gif' alt="<?_("Faire un don")?>"></a>
+                <div class="subbox paypal">
+				<a href='{faireUnDon}' >
+                <!--<img src='https://www.paypalobjects.com/{lang}/i/btn/btn_donate_LG.gif' alt="-->
+                <?_("Faire un don")?>
+                <!--">-->
+                </a>
                 </div>
                 <br/>
-				<div class="fb-like-box" data-href="https://www.facebook.com/pages/Association-Archi-Strasbourg/215793091822502" data-width="174" data-height="170" data-show-faces="true" data-stream="false" data-header="true"></div>
+				<div class="fb-like-box reseauSocial" data-href="https://www.facebook.com/pages/Association-Archi-Strasbourg/215793091822502" data-width="215" data-stream="false" data-header="true"></div>
                 <br/>
-                <div>
+                <div class="reseauSocial">
                 <script charset="utf-8" src="https://widgets.twimg.com/j/2/widget.js"></script>
                 <script>
                 new TWTR.Widget({
@@ -161,17 +169,17 @@
                   type: 'profile',
                   rpp: 2,
                   interval: 30000,
-                  width: 174,
+                  width: 215,
                   height: 170,
                   theme: {
                     shell: {
-                      background: '#006699',
-                      color: '#ffffff'
+                      background: '#819395',
+                      color: '#D4E0E0'
                     },
                     tweets: {
                       background: '#ffffff',
-                      color: '#000000',
-                      links: '#006699'
+                      color: '#8C8C8C',
+                      links: '#6D89A1'
                     }
                   },
                   features: {
@@ -190,8 +198,8 @@
 				</div>
 				
 				<!-- ajout fabien du 03/04/2012 nouveau bandeau de pub-->
-				<div class="box">
-				<a href="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence" title="<?_("Le texte de ce site est disponible selon les termes de la Licence ouverte.")?>"><img src="images/Licence-Ouverte-Open-Licence_article.png" width="174" alt="Licence ouverte"/>
+				<div class="box licenceLogo">
+				<a href="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence" title="<?_("Le texte de ce site est disponible selon les termes de la Licence ouverte.")?>"><img src="images/Advisa/openlicence.png" alt="Licence ouverte"/>
                 </a>
 				</div>
 				

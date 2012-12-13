@@ -18,13 +18,12 @@
 	<table class="results">
 	<tr>
 	<!-- BEGIN liens -->
-		<td><a href="{t.liens.url}" onclick="{t.liens.urlOnClick}">{t.liens.titre}</a> <a href="{t.liens.urlDesc}" onclick="{t.liens.urlDescOnClick}">&darr;</a> <a href="{t.liens.urlAsc}" onclick="{t.liens.urlAscOnClick}">&uarr;</a></td>
+		<td><a href="{t.liens.url}" onclick="{t.liens.urlOnClick}">{t.liens.titre}</a> <a href="{t.liens.urlDesc}" onclick="{t.liens.urlDescOnClick}"><img src="images/Advisa/balisebas.png" alt="&darr;" /></a> <a href="{t.liens.urlAsc}" onclick="{t.liens.urlAscOnClick}"><img src="images/Advisa/balisehaut.png" alt="&uarr;" /></a></td>
 	<!-- END liens -->
 	</tr>
 	<!-- BEGIN adresses -->
-	<tr>
-		<td><a href="{t.adresses.urlDetailHref}" onclick="{t.adresses.urlDetailOnClick}">{t.adresses.nom}</a><div style='font-size:11px;'>{t.adresses.titresEvenements}</div></td>
-		<td><a href="{t.adresses.urlDetailHref}"><img src='{t.adresses.urlImageIllustration}' border=0 alt="{t.adresses.alt}" title="{t.adresses.alt}"></a></td>
+	<tr class="listAddressItem">
+        <td><a href="{t.adresses.urlDetailHref}"><img src='{t.adresses.urlImageIllustration}' border=0 alt="{t.adresses.alt}" title="{t.adresses.alt}"></a> <span><br/><a href="{t.adresses.urlDetailHref}" onclick="{t.adresses.urlDetailOnClick}">{t.adresses.nom}</a></span><br/><span style='font-size:11px;'>{t.adresses.titresEvenements}</span></td>
 		<!--<td><a href="{t.adresses.urlNomRue}" onclick="{t.adresses.urlNomRueOnClick}">{t.adresses.nomRue}</a></td>
 		<td><a href="{t.adresses.urlNomSousQuartier}" onclick="{t.adresses.urlNomSousQuartierOnClick}">{t.adresses.nomSousQuartier}</a></td>
 		<td><a href="{t.adresses.urlNomQuartier}" onclick="{t.adresses.urlNomQuartierOnClick}">{t.adresses.nomQuartier}</a></td>

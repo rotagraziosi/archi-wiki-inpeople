@@ -59,14 +59,14 @@ function affichePopupAttente()
 
 {liensModifEvenements}
 
-<h2>{typeTitre}</h2>
+<!--<h2>{typeTitre}</h2>-->
 <h1>{titrePage}</h1>
 
 <form action="{formAction}" name='formAjoutDossier' id='formAjoutDossier' method='POST' enctype='multipart/form-data'>
 
 <!-- BEGIN ajoutPersonne -->
 <input type='hidden' name='submit' id='submit' />
-<table style='border:solid 2px #666666;' width='700'>
+<table class="event" width='700'>
 <tr>
 <td>
 <h2><?_("Personne")?></h2>
@@ -105,7 +105,7 @@ function affichePopupAttente()
 
 <!-- BEGIN isNotAjoutSousEvenement -->
 
-<table style='border:solid 2px #666666;' width='700'>
+<table class="event" width='700'>
 <tr>
 <td>
 <input type='submit' value="+" name='ajouterAdresse' onclick="{onClickBoutonAjouterAdresse}"  title="{msgButtonAddAdresse}" onMouseOut="closeContextHelp();">
@@ -194,7 +194,7 @@ function affichePopupAttente()
 <!-- BEGIN afficheAjoutEvenement -->
 <br>
 
-<table style='border:solid 2px #666666;'  width='700'>
+<table class="event"  width='700'>
 <tr>
 <td>
 

@@ -2,7 +2,7 @@
 	<div class='evenement' itemprop='event' itemscope itemtype="http://schema.org/Event" style='position:relative;display:table;'>
 	{urlEvenementExterne}
 	<!-- BEGIN menuAction -->
-	<div style="margin-left:1em;float:right;border:dotted 1px;padding:5px;display:{divDisplayMenuAction};background-color:#F1F1F1;">
+	<div class="menuAction" style="margin-left:1em;float:right;padding:5px;display:{divDisplayMenuAction};">
 	
 	<ul style='margin:0px;display:table;'>
 		<li class='actionEvent'><?_("Ajouter")?></li>
@@ -39,15 +39,18 @@
 	
 	
 	<div style='min-height:150px;'>
-    {titre}
-	<p>{txtEnvoi} par {utilisateur} {dateEnvoi} {lienHistoriqueEvenementCourant}</p>
+    {titre} - {txtEnvoi} par {utilisateur} {dateEnvoi} {lienHistoriqueEvenementCourant}
 	
 	
 	
-	
+	<div class="event">
 	<p>
-    <span>{dates}</span><br/>
-    {source}{typeStructure}<?_("Type d'Évènement :")?> <a href="{urlTypeEvenement}">{typeEvenement}</a><br>
+    <ul>
+    <li>{dates}</li>
+    <li>{source}</li>
+    <li>{typeStructure}</li>
+    <li><?_("Type d'Évènement :")?> <a href="{urlTypeEvenement}">{typeEvenement}</a></li>
+    </ul>
 	{numeroArchive}
 	<!-- BEGIN pers -->
 		{simple.pers.metier} <a href="{simple.pers.urlEvenement}">{simple.pers.prenom} {simple.pers.nom}</a><br>
@@ -56,7 +59,7 @@
 	<p>{description}</p>
 	<!-- BEGIN isCourantArchi -->
 		<div class="courantAchitectural">
-		<h3><?_("Courant Architectural")?></h3>
+		<h4><?_("Courant Architectural")?></h3>
 		<ul>
 		<!-- BEGIN archi -->
 			<li><a href="{simple.isCourantArchi.archi.url}">{simple.isCourantArchi.archi.nom}</a></li>
@@ -78,6 +81,7 @@
     {evenementsLiesPersonne}
 	</div>
 	</div>
+    </div>
 <!-- END simple -->
 
 
@@ -106,8 +110,11 @@
 </tr>
 <tr>
 <td style='margin:0;padding:0;text-align:right;font-size:12px;vertical-align:bottom;'>
-<a href="{urlAutresBiensRue}"><?_("Voir tous les bâtiments de cette rue...")?></a><br>
-<a href="{urlAutresBiensQuartier}"><?_("Voir tous les bâtiments de ce quartier...")?></a></td>
+<ul>
+<li class="seeAll"><a href="{urlAutresBiensRue}"><?_("Voir tous les bâtiments de cette rue...")?></a></li>
+<li class="seeAll"><a href="{urlAutresBiensQuartier}"><?_("Voir tous les bâtiments de ce quartier...")?></a></li>
+</ul>
+</td>
 </tr>
 </table>
 <!-- END adresses -->
@@ -121,34 +128,34 @@
 <!-- END noSimple -->
 
 <!-- BEGIN noSimple -->
-<table style='border:2px solid #666666;' border="" class="large">
-<tr><td><h2><?_("Historique des évènements")?></h2></td><td rowspan='{nbEvenements}' style='vertical-align:top;'><div style='float:right;font-size:13px;vertical-align:top;'>
+<table class="large">
+<tr><td><h2 class="black"><?_("Historique des évènements")?></h2></td></tr>
+<tr><td>
 <ul>
-<li><a href="{urlAjouterEvenement}" style='white-space:nowrap;'><?_("Ajouter un évènement")?></a></li>
+<!-- BEGIN ancres -->
+<li class="inside square" style='color:#000000;font-size:12px;'><a  href='{noSimple.ancres.url}'>{noSimple.ancres.titre}</a></li>
+<!-- END ancres -->
+</ul>
+</td><td rowspan='{nbEvenements}' style='vertical-align:top;'><div style='float:right;font-size:13px;vertical-align:top;'>
+<ul>
+<li class="addEvent"><a href="{urlAjouterEvenement}" style='white-space:nowrap;'><?_("Ajouter un évènement")?></a></li>
 <!-- BEGIN isConnected -->
 <!-- BEGIN afficheLienSelectionImages -->
-<li><a href="{urlDeplacerImages}" style='white-space:nowrap;{styleModeDeplacementImageActif}'><?_("Sélectionner des images")?></a></li>
+<li class="addEvent"><a href="{urlDeplacerImages}" style='white-space:nowrap;{styleModeDeplacementImageActif}'><?_("Sélectionner des images")?></a></li>
 <!-- END afficheLienSelectionImages -->
 <!-- BEGIN afficheLienSelectionImagePrincipale -->
-<li><a href="{urlSelectionImagePrincipale}" style='white-space:nowrap;{styleModeSelectionImagePrincipale}'><?_("Sélectionner l'image principale")?></a></li>
+<li class="addEvent"><a href="{urlSelectionImagePrincipale}" style='white-space:nowrap;{styleModeSelectionImagePrincipale}'><?_("Sélectionner l'image principale")?></a></li>
 <!-- END afficheLienSelectionImagePrincipale -->
 <!-- BEGIN afficheLienSelectionTitre -->
-<li><a href="{urlSelectionTitreAdresse}" style='white-space:nowrap;{styleModeChoixTitre}'><?_("Sélectionner le titre")?></a></li>
+<li class="addEvent"><a href="{urlSelectionTitreAdresse}" style='white-space:nowrap;{styleModeChoixTitre}'><?_("Sélectionner le titre")?></a></li>
 <!-- END afficheLienSelectionTitre -->
 <!-- BEGIN afficheLienPositionnementEvenements -->
-<li><a href='{urlPositionnementEvenements}' style='white-space:nowrap;{styleModePositionnementEvenements}'><?_("Repositionner les évènements")?></a></li>
+<li class="addEvent"><a href='{urlPositionnementEvenements}' style='white-space:nowrap;{styleModePositionnementEvenements}'><?_("Repositionner les évènements")?></a></li>
 <!-- END afficheLienPositionnementEvenements -->
 
 <!-- END isConnected -->
 </ul>
 </div></td></tr>
-<tr><td>
-<ul>
-<!-- BEGIN ancres -->
-<li class="inside square" style='color:#000000;font-size:12px;'><a href='{noSimple.ancres.url}'>{noSimple.ancres.titre}</a></li>
-<!-- END ancres -->
-</ul>
-</td></tr>
 <!-- BEGIN modePositionnementEvenements -->
 <tr>
 <td>
@@ -199,21 +206,21 @@
 
 <!-- BEGIN evenementLie -->
 <a id='{evenementLie.numeroAncre}'></a>
-<div style="border:none; border-left:2px solid #007799; border-top:10px solid #007799; margin:5px 0; padding:3px;">{evenementLie.evenement}</div>
+<div>{evenementLie.evenement}</div>
 <!-- END evenementLie -->
 
 
 <!-- BEGIN noSimple -->
 
 	<!-- BEGIN autresVuesSur -->
-	<div style="border:none; border-left:2px solid #007799; border-top:10px solid #007799; margin:5px 0; padding:3px;">
+	<div class="event">
 	<H5><?_("Autres vues sur")?> {listeAdressesCourantes}</H5>
 	{noSimple.autresVuesSur.value}
 	</div>
 	<!-- END autresVuesSur -->
 	
 	<!-- BEGIN autresPrisesDepuis -->
-	<div style="border:none; border-left:2px solid #007799; border-top:10px solid #007799; margin:5px 0; padding:3px;">
+	<div class="event">
 	<H5><?_("Vues prises depuis")?> {listeAdressesCourantes}</H5>
 	{noSimple.autresPrisesDepuis.value}
 	</div>

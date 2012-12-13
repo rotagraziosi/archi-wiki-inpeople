@@ -1695,6 +1695,129 @@ class archiAdresse extends ArchiContenu
 		}
 		return $url;
 	}
+    
+    public function getIdImageFromRue($idRue,$format='mini')
+	{
+		$url="";
+		$string = new stringObject();
+		switch($format)
+		{
+			case 'mini':
+				$chemin = $this->getUrlImage("mini");
+			break;
+			case 'moyen':
+				$chemin = $this->getUrlImage("moyen");
+			break;
+			case 'grand':
+				$chemin = $this->getUrlImage("grand");
+			break;
+		}
+		
+
+		// on regarde s'il y a une image de position 1
+		$queryAdresse="
+		
+		SELECT hi1.idHistoriqueImage as idHistoriqueImage , hi1.idImage as idImage, hi1.nom as nom , hi1.dateUpload as dateUpload , hi1.dateCliche as dateCliche
+		FROM historiqueAdresse ha2,historiqueAdresse ha1
+		
+		LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
+		LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+		LEFT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
+		
+		RIGHT JOIN historiqueImage hi1 ON hi1.idImage = ei.idImage
+		RIGHT JOIN historiqueImage hi2 ON hi2.idImage = hi1.idImage
+		
+		WHERE ha1.idRue='".$idRue."'
+		AND ha2.idAdresse = ha1.idAdresse
+		AND ei.position='1'
+		GROUP BY hi1.idImage,ha1.idAdresse, hi1.idHistoriqueImage,ha1.idHistoriqueAdresse
+		HAVING hi1.idHistoriqueImage = max(hi2.idHistoriqueImage) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+		LIMIT 1
+		";
+		
+		
+		
+		
+		
+	
+		$resAdresse = $this->connexionBdd->requete($queryAdresse);
+		if(mysql_num_rows($resAdresse)==1)
+		{
+			$fetchAdresse = mysql_fetch_assoc($resAdresse);
+			//$url = $chemin.$fetchAdresse['dateUpload'].'/'.$fetchAdresse['idHistoriqueImage'].".jpg";
+			$intituleAdresse = $this->getIntituleAdresseFrom($idRue,'idRue',array('debug'=>true,'noQuartier'=>true,'noSousQuartier'=>true,'styleCSSTitreAdresse'=>'','displayFirstTitreAdresse'=>false,'setSeparatorAfterTitle'=>'_'));
+			$url = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetchAdresse['dateUpload'].'-'.$fetchAdresse['idHistoriqueImage'].'-'.$format.'.jpg';
+		}
+		else
+		{
+			// on recherche une image appartenant a un evenement de l'adresse
+			// recherche des evenements de l'adresse:
+			//$queryEvenements ="SELECT idEvenement FROM _adresseEvenement WHERE idAdresse = '".$idAdresse."'";
+			
+			$queryEvenements="
+								SELECT ae.idEvenement as idEvenement
+								FROM historiqueAdresse ha2, historiqueAdresse ha
+								RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
+								WHERE ha2.idAdresse = ha.idAdresse
+								AND ha.idRue = '".$idRue."'
+								GROUP BY ha.idAdresse , ha.idHistoriqueAdresse
+								HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+							";
+			
+
+			//echo $queryEvenements."<br>";
+			$resEvenements = $this->connexionBdd->requete($queryEvenements);
+			$arrayListeEvenementsGroupeAdresse=array();
+			while($fetchEvenement = mysql_fetch_assoc($resEvenements))
+			{
+				$arrayListeEvenementsGroupeAdresse[] = $fetchEvenement['idEvenement'];
+			}
+			
+			if(count($arrayListeEvenementsGroupeAdresse)>0)
+			{
+				// on recherche les evenements du groupe d'adresses
+				$listeEvenementsGroupeAdresse = implode("','",$arrayListeEvenementsGroupeAdresse);
+				$queryEvenementAssocies = "
+									SELECT idEvenementAssocie FROM _evenementEvenement WHERE idEvenement in ('".$listeEvenementsGroupeAdresse."')
+				";
+				
+				$resEvenementsAssocies = $this->connexionBdd->requete($queryEvenementAssocies);
+				
+				$arrayListeEvenementsAssocies=array();
+				while($fetchEvenementsAssocies = mysql_fetch_assoc($resEvenementsAssocies))
+				{
+					$arrayListeEvenementsAssocies[] = $fetchEvenementsAssocies['idEvenementAssocie'];
+				
+				}
+			
+				$listeEvenementsAssocies = implode("','",$arrayListeEvenementsAssocies);
+				
+				$queryImage = "	SELECT hi.idImage as idImage , hi.idHistoriqueImage as idHistoriqueImage, hi.dateUpload as dateUpload
+								FROM historiqueImage hi2, historiqueImage hi
+								RIGHT JOIN _evenementImage ei ON ei.idImage = hi.idImage
+								WHERE ei.idEvenement in ('".$listeEvenementsAssocies."')
+								AND hi2.idImage = hi.idImage
+								GROUP BY hi.idImage , hi.idHistoriqueImage
+								HAVING hi.idHistoriqueImage = max(hi2.idHistoriqueImage)
+								LIMIT 1
+				"; // on limit a 1 sinon cela peut prendre du temps
+				
+				$resImage = $this->connexionBdd->requete($queryImage);
+				if(mysql_num_rows($resImage)>0)
+				{
+					$fetchImage = mysql_fetch_assoc($resImage);
+					//$url = $chemin.$fetchImage['dateUpload'].'/'.$fetchImage['idHistoriqueImage'].".jpg";
+					$intituleAdresse = $this->getIntituleAdresseFrom($idRue,'idRue',array('noQuartier'=>true,'noSousQuartier'=>true,'styleCSSTitreAdresse'=>'','displayFirstTitreAdresse'=>false,'setSeparatorAfterTitle'=>'_'));
+					$url = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetchImage['dateUpload'].'-'.$fetchImage['idHistoriqueImage'].'-'.$format.'.jpg';
+				}
+				else
+				{
+					$url = $this->getUrlImage()."/transparent.gif";
+				}
+			}
+		}
+		return $fetchImage['idHistoriqueImage'];
+	}
 	// ***************************************************************************************************************************************
 	// recuperation d'une image appartenant a une adresse de la rue
 	// ***************************************************************************************************************************************
@@ -5352,7 +5475,7 @@ class archiAdresse extends ArchiContenu
 				$nbEnregistrementTotaux = count($arrayIdRuesNotEmptyWithSelection);
 				
 				// nombre d'images affichées sur une page
-				$nbEnregistrementsParPage = 12;
+				$nbEnregistrementsParPage = 40;
 				$pagination = new paginationObject();
 				
 				if(isset($this->variablesGet['archiIdQuartier']))
@@ -5407,7 +5530,8 @@ class archiAdresse extends ArchiContenu
 				
 				
 					$htmlPhoto='';
-					$urlPhoto = $this->getUrlImageFromRue($fetch['idRue'],'moyen');
+					//$urlPhoto = $this->getUrlImageFromRue($fetch['idRue'],'moyen');
+                    $urlPhoto="getPhotoSquare.php?id=".$this->getIdImageFromRue($fetch['idRue']);
 					if(!pia_ereg("transparent.gif",$urlPhoto))  // la fonction renvoi le lien vers une photo transparente si elle ne trouve pas de photo de la rue
 					{
 						$htmlPhoto = "<a href='".$this->creerUrl('', 'adresseListe', array('recherche_rue'=>$fetch['idRue']))."'><img src='".$urlPhoto."' border=0></a><br>";
@@ -5426,7 +5550,7 @@ class archiAdresse extends ArchiContenu
 					
 				}
 				
-				$t->assign_vars(array('elements'=>$tableau->createHtmlTableFromArray(3)));
+				$t->assign_vars(array('elements'=>$tableau->createHtmlTableFromArray(5)));
 
 			break;
 			
@@ -6397,20 +6521,21 @@ class archiAdresse extends ArchiContenu
             $urlSuivant = $this->creerUrl('', '', array_merge($this->variablesGet,  array('debut' => $valDebutSuivant)));
             $urlSuivantOnClick = "";
             $tabTempo = array(
+                /*array(   'url'     => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'image'))), 
+                    'urlOnClick' => '', 
+                    'titre'   => 'Image', 
+                    'urlDesc' => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'image',  'tri'   => 'desc'))), 
+                    'urlDescOnClick' => '', 
+                    'urlAsc'  => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'image',  'tri'   => 'asc'))), 
+                    'urlAscOnClick' => ''),*/
                 array(   'url'     => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'nom'))), 
                     'urlOnClick' => '', 
                     'titre'   => 'Titre', 
                     'urlDesc' => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'nom',  'tri'   => 'desc'))), 
                     'urlDescOnClick' => '', 
                     'urlAsc'  => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'nom',  'tri'   => 'asc'))), 
-                    'urlAscOnClick' => ''), 
-                array(   'url'     => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'image'))), 
-                    'urlOnClick' => '', 
-                    'titre'   => 'Image', 
-                    'urlDesc' => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'image',  'tri'   => 'desc'))), 
-                    'urlDescOnClick' => '', 
-                    'urlAsc'  => $this->creerUrl('', '', array_merge($this->variablesGet,  array('ordre' => 'image',  'tri'   => 'asc'))), 
                     'urlAscOnClick' => '')
+                
                 
             );
         }
@@ -6992,8 +7117,9 @@ class archiAdresse extends ArchiContenu
                             'urlNomPaysOnClick'    => $urlNomPaysOnClick, 
                             'urlDetailHref'        => $urlDetailHref, 
                             'urlDetailOnClick'     => $urlDetailOnClick, 
-                            'urlImageIllustration'    => $illustration['url'], 
-                            'alt'=>str_replace("'", " ", $nomAdresseNoStyle)
+                            'urlImageIllustration'    => 'getPhotoSquare.php?id='.$illustration['idHistoriqueImage'], 
+                            'alt'=>''
+                            //'alt'=>str_replace("'", " ", $nomAdresseNoStyle)
                         )
                     );
                     
@@ -9104,7 +9230,7 @@ class archiAdresse extends ArchiContenu
 		$tabCommentaires = array(	'titrePage'=>_("Ajouter un commentaire"),
 									'formName'=>'formAjoutCommentaire',
 									'formAction'=>$this->creerUrl('enregistreCommentaire','',array()),
-									'tableHtmlCode'=>" style='border:2px #007799 solid; width:700px;' ",
+									'tableHtmlCode'=>" class='formAjoutCommentaire'",
 									'codeHtmlInFormAfterFields'=>_("Prévisualisation :")."<div id='apercu'></div><div id='helpCalque' style='background-color:#FFFFFF; border:2px solid #000000;padding:10px;float:left;display:none;'><img src='images/aide.jpg' style='float:left;padding-right:3px;' valign='middle'><div id='helpCalqueTxt' style='padding-top:7px;'></div></div><script type='text/javascript' >
 									bbcode_keyup(document.forms['formAjoutCommentaire'].elements['commentaire'], 'apercu');setTimeout('majDescription()',1000);
 									function majDescription()
@@ -9150,7 +9276,7 @@ class archiAdresse extends ArchiContenu
 		$res = $this->connexionBdd->requete($req);
 		
 		
-		$t->assign_vars(array('tableHtmlCode'=>" style='border:2px #007799 solid; width:700px;' "));
+		$t->assign_vars(array('tableHtmlCode'=>"  "));
 		
 		if(mysql_num_rows($res)==0)
 		{
@@ -9189,7 +9315,6 @@ class archiAdresse extends ArchiContenu
 				$boutonSupprimer = "<input type='button' value='supprimer' onclick=\"location.href='".$this->creerUrl('supprimerCommentaire','',array('archiIdCommentaire'=>$fetch['idCommentaire'],'archiIdAdresse'=>$archiIdAdresse))."';\">";
 				$adresseMail = "<br><a style='font-size:9px;color:#FFFFFF;' itemprop='email' href='mailto:".$fetch['email']."'>".$fetch['email']."</a>";
 			}
-			
 			$t->assign_block_vars('commentaires',array(
 				'infosPersonne'=>"".$fetch['dateF'].' : <span itemprop="name">'.$fetch['nom'].' '.$fetch['prenom']."</span>",
 				'adresseMail'=>$adresseMail,
@@ -9269,7 +9394,7 @@ class archiAdresse extends ArchiContenu
 			else
 			{
 				$t->set_filenames(array('derniersCommentaires'=>'encartAccueilCommentaires.tpl'));
-				$t->assign_vars(array('urlTousLesCommentaires'=>"<a style='text-decoration: none; color: rgb(0, 119, 153);' href='".$this->creerUrl('','tousLesCommentaires')."'>"._("Tous les commentaires")."</a>"));
+				$t->assign_vars(array('urlTousLesCommentaires'=>"<a style='text-decoration: none; color: rgb(0, 119, 153);' href='".$this->creerUrl('','tousLesCommentaires')."'><img src='images/Advisa/comment_bas.png' alt='"._("Tous les commentaires")."' /></a>"));
 			}
 			
 			if(isset($params['afficherTous']) && $params['afficherTous']==true)
@@ -12334,7 +12459,7 @@ class archiAdresse extends ArchiContenu
 			$newWPetit = round(35*$w/100);
 			$newHPetit = round(35*$h/100);
 			
-			$t->assign_vars(array('image2'=>"<div id='divImagePetit2' style='display:none;'><img src='".$arrayImage2['url']."' alt='' width=$newWPetit height=$newHPetit id='image2Petit'></div><div id='divImageGrand2' style='display:block;'><img src='".$arrayImage2['url']."' alt='' width=$newWGrand height=$newHGrand id='image2Grand' itemprop='image'></div>"));
+			$t->assign_vars(array('image2'=>"<div id='divImagePetit2' style='display:none;'><img src='".$arrayImage2['url']."' alt='' width=$newWPetit height=$newHPetit id='image2Petit'></div><div id='divImageGrand2' style='display:block;'><img src='getPhotoSquare.php?id=".$arrayImage2['idHistoriqueImage']."' alt=''  id='image2Grand' itemprop='image'></div>"));
 			
 			
 
@@ -12442,7 +12567,7 @@ class archiAdresse extends ArchiContenu
 						}
 						else
 						{
-							$txtAdresses.="<a href='".$infosNumero['url']."' style='color:red;'>".$infosNumero['numero'].$infosNumero['indicatif']."</a><span style='color:#4b4b4b'>-</span>";
+							$txtAdresses.="<a href='".$infosNumero['url']."'>".$infosNumero['numero'].$infosNumero['indicatif']."</a><span style='color:#4b4b4b'>-</span>";
 							$isSelectedRue = true;
 						}
 					}
@@ -12466,7 +12591,7 @@ class archiAdresse extends ArchiContenu
 			{
 				if($isSelectedRue)
 				{
-					$txtAdresses.="<span style='color:red;'>".$intituleRue."</span><br>";
+					$txtAdresses.="<span >".$intituleRue."</span><br>";
 				}
 				else
 				{
@@ -12788,7 +12913,7 @@ class archiAdresse extends ArchiContenu
 				$newHPetit = round(35*$h/100);
 				
 				
-				$image = "<div id='divImagePetit".$numeroImage."' style='display:block;'><img src='".$arrayImage['url']."'  width=$newWPetit height=$newHPetit id='image".$numeroImage."Petit' alt=''></div><div id='divImageGrand".$numeroImage."' style='display:none;'><a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdAdresse'=>$params['idAdresse'],'archiIdEvenementGroupeAdresse'=>$params['idEvenementGroupeAdresse']))."'><img src='".$arrayImage['url']."'  width=$newWGrand height=$newHGrand alt='' id='image".$numeroImage."Grand'></a></div>";
+				$image = "<div id='divImagePetit".$numeroImage."' style='display:block;'><img src='".$arrayImage['url']."'  width=$newWPetit height=$newHPetit id='image".$numeroImage."Petit' alt=''></div><div id='divImageGrand".$numeroImage."' style='display:none;'><a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdAdresse'=>$params['idAdresse'],'archiIdEvenementGroupeAdresse'=>$params['idEvenementGroupeAdresse']))."'><img src='getPhotoSquare.php?id=".$arrayImage['idHistoriqueImage']."'   height=$newHGrand alt='' id='image".$numeroImage."Grand'></a></div>";
 			}
 			else
 			{

@@ -283,9 +283,29 @@ if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail') 
         )
     );
 }
+
+$infos = "";
+// recherche du nombre d'evenements
+$reqEvenements = "SELECT DISTINCT idEvenement as nbEvenements FROM historiqueEvenement;";
+$resEvenements = $config->connexionBdd->requete($reqEvenements);
+$infos .= "<b>"._("Évènements :")."</b> ".mysql_num_rows($resEvenements).'<br/>';
+
+// recherche du nombre d'adresses
+$reqAdresses = "SELECT DISTINCT idAdresse as nbAdresses FROM historiqueAdresse;";
+$resAdresses = $config->connexionBdd->requete($reqAdresses);
+$infos .= "<b>"._("Adresses :")."</b> ".mysql_num_rows($resAdresses).'<br/>';
+
+// recherche du nombre de photos
+$reqPhotos = "SELECT DISTINCT idImage as nbImages FROM historiqueImage;";
+$resPhotos = $config->connexionBdd->requete($reqPhotos);
+$infos .= "<b>"._("Photos :")."</b> ".mysql_num_rows($resPhotos);
+
 $t->assign_vars(
-    array("mailContact"=>$config->mail, "authorLink"=>$config->authorLink)
+    array("mailContact"=>$config->mail, "authorLink"=>$config->authorLink,
+    "infos"=>$infos)
 );
+
+
 
 ob_start();
 $t->pparse('header');

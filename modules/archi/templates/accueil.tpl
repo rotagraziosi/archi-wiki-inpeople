@@ -1,18 +1,22 @@
 ﻿<div style='display:table;'>
-<div class="center">
-<A HREF='actualites-archi-strasbourg-30.html'><IMG alt="<?_("Pour pérenniser le site et assurer les nouveaux développements, merci de votre soutien financier qui nous est indispensable pour continuer à exister.")?>" SRC="images/20120326appeldons/20120401_bandeau_faire_un_don.jpg"></A>
+
+<div class="pub">
+    <strong><a href="http://m.archi-strasbourg.org/"><?_("Découvrez la version smartphone de notre site sur ")?><i>m.archi-strasbourg.org</i></a></strong><br/><br/>
+    <a href="https://itunes.apple.com/fr/app/id557893157?mt=8&affId=1578782"><img src="images/Advisa/AR_appstore.jpg" alt="<?_("Disponible sur l'App Store")?>" /></a> <a href="https://play.google.com/store/apps/details?id=archi.strasbourg.dev&feature=search_result#?t=W251bGwsMSwyLDEsImFyY2hpLnN0cmFzYm91cmcuZGV2Il0."><img src="images/Advisa/AR_googleplay.jpg" alt="<?_("Disponible sur Google Play")?>" /></a>
 </div>
+
 <!--<TABLE>
 <TR><TD></TD></TR>
 </TABLE>-->
 <P></P>
 
-
+<!--
 <div style='text-align:center;'>{infos}</div>
+-->
 
 <P></P>
 
-
+<!--
 <div style="padding-top:7px;height:20px;width:200px;display:table;
 <!-- BEGIN estConnecte -->
 float:left;
@@ -29,17 +33,17 @@ background-color:#666666;color:#FFFFFF;text-align:center;font-size:12px;font-wei
 {onglet3}
 </div>
 <!-- END estConnecte -->
-
+-->
 
 <!-- BEGIN afficheEncarts -->
 <div style='display:table;' class="clear">
-<table border="" style='border:solid 2px #666666;border-spacing: 0;' class="homeTable"><tr>
-
-<td  style='border:solid 1px #666666;'>{encart1}</td><td  style='border:solid 1px #666666;'>{encart2}</td></tr>
-<tr>
-<td  style='border:solid 1px #666666;'>{encart3}</td><td  style='border:solid 1px #666666;'>{encart4}</td></tr>
-<tr>
-<td  style='border:solid 1px #666666;'>{encart5}</td><td  style='border:solid 1px #666666;'>{encart6}</td>
+<div class="homeTable">
+{encart1}
+{encart2}
+{encart3}
+{encart4}
+{encart5}
+{encart6}
 
 </tr></table>
 </div>
@@ -47,8 +51,8 @@ background-color:#666666;color:#FFFFFF;text-align:center;font-size:12px;font-wei
 
 
 <!-- BEGIN afficheProfil -->
-<div style='width:700px;display:table;'>
-<table border="" style='border:solid 3px #007799;width:730px;border-spacing: 0;'><tr>
+<div class="monProfil">
+<table><tr>
 <td>
 {htmlProfil}
 </td>
@@ -58,8 +62,8 @@ background-color:#666666;color:#FFFFFF;text-align:center;font-size:12px;font-wei
 
 
 <!-- BEGIN afficheMonArchi -->
-<div style='width:700px;display:table;'>
-<table border="" style='border:solid 3px #FF8800;width:730px;border-spacing: 0;'><tr>
+<div class="monArchi">
+<table><tr>
 <td>
 {htmlMonArchi}
 </td></tr></table>
@@ -71,20 +75,6 @@ background-color:#666666;color:#FFFFFF;text-align:center;font-size:12px;font-wei
 <br>
 -->
 
-<?_("Ils nous soutiennent et nous les remercions :")?>
-<br>
-<TABLE>
-<TR>
-<TD><a target=_blank href="http://archives.strasbourg.eu/"><IMG  alt="Archives de la ville de Strasbourg" SRC="images/20120326appeldons/mini_Archives_de_la_ville.jpg"></a></TD>
-<TD><a target=_blank href="http://amisvieuxstrasbourg.free.fr/"><IMG alt="Amis du vieux Strasbourg"  SRC="images/20120326appeldons/mini_avs.jpg"></a></TD>
-<TD><a target=_blank href="http://www.strasbourg.archi.fr/"><IMG  alt="Ecole d'architecture de Strasbourg" SRC="images/20120326appeldons/mini_ecole_architecture.jpg"></a></TD>
-<TD><a target=_blank href="http://www.misha.fr"><IMG  alt="MISHA" SRC="images/20120326appeldons/mini_misha.jpg"></a></TD>
-<TD><a target=_blank href="http://www.architectes.org/connaitre-l-ordre/presentation-de-l-ordre-des-architectes/les-26-conseils-regionaux/conseil-regional-d-alsace/conseil-regional-d-alsace"><IMG  alt="Ordre des architectes" SRC="images/20120326appeldons/mini_ordre_architecte.jpg"></a></TD>
-<TD><a target=_blank href="http://www.otstrasbourg.fr/"><IMG alt="Office de tourisme de Strasbourg"  SRC="images/20120326appeldons/mini_ot.jpg"></a></TD>
-<TD><a target=_blank href="http://patrimoine.region-alsace.eu/"><IMG alt="Région Alsace"  SRC="images/20120326appeldons/mini_region_alsace.jpg"></a></TD>
-<TD><a target=_blank href="http://www.unistra.fr/index.php?id=accueil"><IMG alt="Université de Strasbourg"  SRC="images/20120326appeldons/mini_universite.jpg"></a></TD>
-</TR>
-</TABLE>
 
 
 <!--

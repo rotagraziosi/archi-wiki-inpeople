@@ -13,6 +13,9 @@
  * @link     https://archi-strasbourg.org/
  * 
  * */
+ 
+//Debug mode ?
+error_reporting(E_ERROR);
 
 /* 'noHeaderNoFooter' permet de ne pas retourner
  * et inclure les fichiers qui sont inutiles lors d'un appel ajax

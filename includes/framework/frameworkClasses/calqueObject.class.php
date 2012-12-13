@@ -134,7 +134,7 @@ class calqueObject extends config
 			$retour.="</div>";
 			
 			
-			$retour.="<div id='popupDiv".$this->idPopup."' style='z-index:10001;display:none;position:absolute;background-color:white;top:".$top."px;left:".$left."px;height:".$height."px;width:".$width."px;padding:0px;margin:0px;'>".$params['contenu']."</div>";
+			$retour.="<div class='popupDiv' id='popupDiv".$this->idPopup."' style='z-index:10001;display:none;position:absolute;top:".$top."px;left:".$left."px;height:".$height."px;width:".$width."px;padding:0px;margin:0px;'>".$params['contenu']."</div>";
 			
 			
 			return $retour;

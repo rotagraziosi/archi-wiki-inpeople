@@ -1750,9 +1750,9 @@ class archiImage extends config
             {
                 if ($idAdresseCourante !=0)
                 {
-                    $tabTemp[$i]['celluleBas'] = "<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant'],  'archiIdAdresse'=>$idAdresseCourante))."'><img src='".$this->getUrlImage()."picto_loupe.jpg"."' alt=''></a>&nbsp;Pris depuis ".implode(" / ",  $liensAdresses).$descriptionImage;
+                    $tabTemp[$i]['celluleBas'] = "<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant'],  'archiIdAdresse'=>$idAdresseCourante))."'><img src='".$this->getUrlImage()."Advisa/loupe.png"."' alt='' /></a>&nbsp;Pris depuis ".implode(" / ",  $liensAdresses).$descriptionImage;
                 } else {
-                    $tabTemp[$i]['celluleBas'] = "<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']))."'><img src='".$this->getUrlImage("picto_loupe.jpg")."' alt=''p></a>&nbsp;Pris depuis ".implode(" / ",  $liensAdresses).$descriptionImage;
+                    $tabTemp[$i]['celluleBas'] = "<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']))."'><img src='".$this->getUrlImage()."Advisa/loupe.png"."' alt='' /></a>&nbsp;Pris depuis ".implode(" / ",  $liensAdresses).$descriptionImage;
                 }
             }
             else
@@ -1815,7 +1815,7 @@ class archiImage extends config
             }
             else
             {
-                $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;' $htmlOnClick><img style='border-color:#007799;border-width:2px;cursor:pointer;' class='eventImage' src='photos-".$string->convertStringToUrlRewrite($intituleAdressePhoto)."-".$valuesPhoto['infosImage']['dateUpload']."-".$valuesPhoto['infosImage']['idHistoriqueImage']."-".$format.".jpg' id='image_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."' alt='' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."'><div id='divZones_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."' style='position:absolute;top:0px;left:0px;cursor:pointer;'></div></div>";
+                $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;' $htmlOnClick><img style='border-color:#007799;border-width:2px;cursor:pointer;' class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt='' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."'><div id='divZones_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."' style='position:absolute;top:0px;left:0px;cursor:pointer;'></div></div>";
             }
             
             $zones[$i] = $arrayZones['htmlDivs'];
@@ -2028,7 +2028,7 @@ class archiImage extends config
                 }
             }
             
-            $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;' $htmlOnClick><img style='border-color:#007799;border-width:2px;' class='eventImage' src='photos-".$string->convertStringToUrlRewrite($intituleAdressePhoto)."-".$valuesPhoto['infosImage']['dateUpload']."-".$valuesPhoto['infosImage']['idHistoriqueImage']."-".$format.".jpg' id='imageEvenement_".$valuesPhoto['infosImage']['idImage']."' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage']."' alt=''><div id='divZones_".$valuesPhoto['infosImage']['idImage']."' style='position:absolute;top:0px;left:0px;'></div></div>";
+            $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;' $htmlOnClick><img style='border-color:#007799;border-width:2px;' class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage']."' alt=''><div id='divZones_".$valuesPhoto['infosImage']['idImage']."' style='position:absolute;top:0px;left:0px;'></div></div>";
             $tabTemp[$i]['celluleHaut'] .=$arrayZones['htmlDivs'];
             $tabTemp[$i]['celluleHaut'] .=$arrayZones['htmlMaps'];
             $tabTemp[$i]['celluleHaut'] .=$arrayZones['htmlJs'];
@@ -2287,7 +2287,7 @@ class archiImage extends config
                 $sizes['x'] = $arrayImageSizeAff[0];
                 $sizes['y'] = $arrayImageSizeAff[1];
             }
-            $imageHTML .= '<a '.$hrefImage.' onClick="'.$onClickImage.'"><img itemprop="image" id="image'.$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'" title="'.htmlspecialchars($title).'" alt="'.htmlspecialchars($alt).'"  src="images/'.$formatAffichagePhoto.'/'.$valuesImage['dateUpload'].'/'.$valuesImage['idHistoriqueImage'].'.jpg" class="eventImage"></a><br>'.$bbCode->convertToDisplay(array('text'=>$valuesImage['description']));//src=\'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].'-'.$formatAffichagePhoto.'.jpg\'
+            $imageHTML .= '<a '.$hrefImage.' onClick="'.$onClickImage.'"><img itemprop="image" id="image'.$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'" title="'.htmlspecialchars($title).'" alt="'.htmlspecialchars($alt).'"  src="getPhotoSquare.php?id='.$valuesImage['idHistoriqueImage'].'" class="eventImage"></a><br>'.$bbCode->convertToDisplay(array('text'=>$valuesImage['description']));//src=\'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].'-'.$formatAffichagePhoto.'.jpg\'
         
             $tab->addValue($imageHTML,  '',  $sizes);
         }
@@ -2315,10 +2315,10 @@ class archiImage extends config
         {
             // si on est connecté ,  on laisse un padding top pour que les photos ne se chevauches pas avec le menu des evenements
             //$html = "<div style='display:table;padding-top:50px;'>".$tab->createHtmlTableFromArray(3,  '',  '',  'align="center" valign="top" style="font-size:13px;"')."</div>";
-            $html = "<div style='display:table;padding-top:50px;position:relative;width:700px;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative;",  "nbColonnes"=>3,  "largeurLigne"=>700))."<div style='clear:both;'></div></div>";
+            $html = "<div style='display:table;padding-top:50px;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative;",  "nbColonnes"=>3,  "largeurLigne"=>500))."<div style='clear:both;'></div></div>";
         } else {
             //$html = "<div style='display:table;'>".$tab->createHtmlTableFromArray(3,  '',  '',  'align="center" valign="top" style="font-size:13px;"')."</div>";
-            $html = "<div style='display:table;position:relative;width:700px;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative;",  "nbColonnes"=>3,  "largeurLigne"=>700))."<div style='clear:left;'></div></div>";
+            $html = "<div style='display:table;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative;",  "nbColonnes"=>3,  "largeurLigne"=>500))."<div style='clear:left;'></div></div>";
         }
         
         return $html.$zonesHTML;

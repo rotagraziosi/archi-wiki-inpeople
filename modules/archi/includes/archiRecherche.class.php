@@ -293,9 +293,9 @@ class archiRecherche extends config {
         )
         {
             $html.="<h2>Selection d'adresses:</h2><br>";
-            $html .= "<div style='width:700px;text-align:center'>".$this->afficheFormulaire($tabForm,0,array('noDisplayRechercheAvancee'=>true,'noDisplayCheckBoxResultatsCarte'=>true))."</div>"; // n'affiche pas le titre et les liens vers la recherche par carte etc ...
+            $html .= "<div style='width:(00px;text-align:center'>".$this->afficheFormulaire($tabForm,0,array('noDisplayRechercheAvancee'=>true,'noDisplayCheckBoxResultatsCarte'=>true))."</div>"; // n'affiche pas le titre et les liens vers la recherche par carte etc ...
         } else {
-            $html .= "<div style='width:700px;text-align:center'>".$this->afficheFormulaire($tabForm,1,array('isCheckBoxAfficheResultatSurCarteChecked'=>$checkedCheckBox))."</div>";
+            $html .= "<div>".$this->afficheFormulaire($tabForm,1,array('isCheckBoxAfficheResultatSurCarteChecked'=>$checkedCheckBox))."</div>";
         }
         
         //$html .= $resAvEvenement;

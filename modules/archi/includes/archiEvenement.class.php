@@ -1801,7 +1801,7 @@ class archiEvenement extends config
                     $typeEvenement=$res->nomTypeEvenement;
                     $urlTypeEvenement=$this->creerUrl('', 'evenementListe', array('selection' => 'typeEvenement', 'id' => $res->idTypeEvenement));
                 }
-                $titre=empty($res->titre)?"<meta itemprop='name' content='".$fetchTypeEvenement['nom']."' />":"<h2 class='h1' itemprop='name'>".htmlspecialchars(stripslashes($res->titre))."</h2>";
+                $titre=empty($res->titre)?"<meta itemprop='name' content='".$fetchTypeEvenement['nom']."' />":"<h3 itemprop='name'>".htmlspecialchars(stripslashes($res->titre))."</h3>";
 				//
 				$t->assign_vars(array(
 					'txtEnvoi'	  => $txtEnvoi,
@@ -1985,7 +1985,7 @@ class archiEvenement extends config
                             
                         $t->assign_block_vars('noSimple.isCarteGoogle',array(
                                         'src'=>$this->creerUrl('','afficheGoogleMapIframe',array('noHeaderNoFooter'=>1,'longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement)),
-                                        'lienVoirCarteGrand'=>"<a href='#' onclick=\"".$calqueGoogleMap->getJsOpenPopupNoDraggableWithBackgroundOpacity()."document.getElementById('iFrameDivPopupGM').src='".$this->creerUrl('','afficheGoogleMapIframe',array('longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'noHeaderNoFooter'=>true,'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement,'modeAffichage'=>'popupDetailAdresse'))."';\" style='font-size:11px;'>"._("voir la carte en + grand")."</a>",
+                                        'lienVoirCarteGrand'=>"<a href='#' onclick=\"".$calqueGoogleMap->getJsOpenPopupNoDraggableWithBackgroundOpacity()."document.getElementById('iFrameDivPopupGM').src='".$this->creerUrl('','afficheGoogleMapIframe',array('longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'noHeaderNoFooter'=>true,'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement,'modeAffichage'=>'popupDetailAdresse'))."';\" class='bigger' style='font-size:11px;'>"._("Voir la carte en + grand")."</a>",
                                         'popupGoogleMap'=>$calqueGoogleMap->getDivNoDraggableWithBackgroundOpacity(array('top'=>20,'lienSrcIFrame'=>'','contenu'=>$contenuIFramePopup))
                         ));//'popupGoogleMap'=>$calqueGoogleMap->getDiv(array('width'=>550,'height'=>570,'lienSrcIFrame'=>''))."<script  >".$calqueGoogleMap->getJsToDragADiv()."</script>"
                         $t->assign_vars(array('largeurTableauResumeAdresse'=>415,'hauteurRecapAdresse'=>'270'));
@@ -2375,7 +2375,7 @@ class archiEvenement extends config
 		// ********************************************************************************************************************************
 		// formulaire de modification des coordonnees
 
-		$contenuIFramePopup .= "<table border=1 style='padding:0px;margin:0px;background-color:white;'><tr><td colspan=2><a href='#' onclick=\"".$calqueGoogleMap->getJsClosePopupNoDraggableWithBackgroundOpacity()."\">Fermer</a></td></tr><tr><td style='width:200px;'>";
+		$contenuIFramePopup .= "<table border=1 style='padding:0px;margin:0px;'><tr><td colspan=2><a href='#' onclick=\"".$calqueGoogleMap->getJsClosePopupNoDraggableWithBackgroundOpacity()."\">Fermer</a></td></tr><tr><td style='width:200px;'>";
 		
 		// affichage des adresses et du titre
 		$contenuIFramePopup.="<span style='font-size:11px;'>".$adresse->getIntituleAdresseFrom($idEvenementGroupeAdresseCourant,'idEvenementGroupeAdresse',array("noQuartier"=>true,"noVille"=>true,"noSousQuartier"=>true,"ifTitreAfficheTitreSeulement"=>true))."</span>";

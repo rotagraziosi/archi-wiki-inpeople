@@ -463,7 +463,7 @@ class googleMap extends config
 	public function getHTML()
 	{
 	
-			$html="<div id='".$this->googleMapNameId."' style='width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px; background-color:lime;".$this->divStyle."'>Veuilliez patienter pendant le chargement de la carte...</div>";
+			$html="<div id='".$this->googleMapNameId."' style='width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px; ".$this->divStyle."'>Veuilliez patienter pendant le chargement de la carte...</div>";
 	
 		//$html.="<script  >";
 /*
@@ -1592,7 +1592,7 @@ acl.getManyElements=function(s){
 			{
 				$html.="<div id='".$params['idDivDisplayEtapesText']."' style=''></div>";
 			}
-			$html.="<script  >load();</script>";
+			$html.="<script>load();</script>";
 		}
 		
 		if(isset($params['noScriptBalises']) && $params['noScriptBalises']==true)
@@ -1601,13 +1601,12 @@ acl.getManyElements=function(s){
 		}
 		else
 		{
-			$html.="<script  >";
+			$html.="<script>";
 		}
 		
 		if(isset($params['urlImageIcon']) && isset($params['pathImageIcon']))
 		{
 			$urlImage = $params['urlImageIcon'];
-
 			list($imageSizeX, $imageSizeY, $typeImage, $attrImage) = getimagesize($params['pathImageIcon']);
 			
 			$html.="

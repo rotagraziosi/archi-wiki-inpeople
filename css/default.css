@@ -4,16 +4,23 @@
     Released for free under a Creative Commons Attribution 2.5 License
 */
 
-/*Modifié par Pierre Rudloff en mai 2012*/
+/*Modifié par Pierre Rudloff (http://rudloff.pro) en mai 2012 puis en octobre 2012*/
 
 /* Basic */
+
+body {
+    background-color:#8FA3A4;
+}
 
 h1 {
     margin: 0;
     padding: 0;
     font-size: 1.6em;
-    font-weight: bold;
-    color: #444;
+    font-weight: normal;
+    color: #EEE;
+    margin-top:1em;
+    margin-bottom:1em;
+    border-bottom:thin solid #EEE;
 }
 
 h4,
@@ -25,10 +32,9 @@ h6 {
 }
 
 h3 {
-    margin: 0;
     padding: 0;
-    font-size: 1em;
-    color: #444;
+    color:#EEE;
+    display:inline;
 }
 
 h3 a img {
@@ -36,10 +42,11 @@ h3 a img {
 }
 
 h2 {
-    margin: 0;
-    padding: 0;
     font-size: 1.25em;
-    color: #444;
+    color: #EEE;
+    border-bottom:thin solid white;
+    margin-top:1em;
+    padding-bottom:0.5em;
 }
 
 table td,
@@ -99,6 +106,10 @@ a:hover {
 .outer {
     width: 100%;
     margin: 0 auto 0 auto;
+    background-image:url("../images/Advisa/fond.jpg");
+    background-repeat:repeat-x;
+    background-color:#8FA3A4;
+    background-position:400px 66px;
 }
 
 /* Header */
@@ -106,14 +117,20 @@ a:hover {
 .header {
     margin: 0;
     padding: 44px 0 0 0;
+    background-color:#111;
+    background-color:rgba(10, 10, 10, 0.6);
+    padding-bottom:1em;
 }
 
 .header .title {
     padding-left: 30px;
+    font-size:1.2em;
+    color:#EEE;
 }
 
 .header img {
-    vertical-align: top;
+    vertical-align: -10px;
+    margin-right:0.7em;
 }
 
 .header .homeTitle {
@@ -132,6 +149,8 @@ a:hover {
     display: inline;
     font-size: 1.9em;
     letter-spacing: -0.05em;
+    color: #EEE;
+    border-bottom:none;
 }
 
 .header .h1 a {
@@ -146,8 +165,9 @@ a:hover {
     top: 0;
     left: 0;
     width: 100%;
-    border-bottom: solid 1px #336600;
-    background-color: #558800;
+    border-bottom: solid 1px #EEE;
+    background-color: #262E31;
+    height:65px;
 }
 
 .menu ul {
@@ -166,12 +186,25 @@ a:hover {
 }
 
 .menu li a {
-    color: #fff;
+    color: #E06A00;
     background-color: inherit;
 }
 
 .menu li a:hover {
-    border-bottom: solid 1px #558800;
+    color:#EEE;
+    /*border-bottom: solid 1px #558800;*/
+}
+
+.menu input {
+    border-radius:20px;
+    border-width:thin;
+}
+
+.loginForm .nopadding {
+    margin-top:0.5em;
+    padding-top:0.5em;
+    margin-bottom:0.3em;
+    border-top:thin solid #EEE;
 }
 
 /* Content */
@@ -189,17 +222,17 @@ a:hover {
 .boxContent {
     margin-top: 0.5em;
     padding: 0.25em 1em 0.25em 1em;
-    background: #ffffff url('images/a1.gif') top left repeat-x;
+    /*background: #ffffff url('images/a1.gif') top left repeat-x;*/
 }
 
 /** boxA **/
 
 .boxA .boxContent {
     margin-top: 0;
-    padding: 1em 1.5em 1em 1em;
-    border-bottom: solid 1px #bb6600;
+    padding: 1em 0 1em 1.5em;
+    /*border-bottom: solid 1px #bb6600;*/
     color: #fff;
-    background: #ff8800;
+    /*background: #ff8800;*/
 }
 
 .boxA span {
@@ -223,8 +256,9 @@ a:hover {
     vertical-align: middle;
 }
 
-.box input {
-    max-width: 130px;
+.box .searchInput {
+    max-width: 160px;
+    margin-left:10px;
 }
 
 .boxA input.text {
@@ -278,8 +312,14 @@ a:hover {
     line-height: 1.5em;
 }
 
+.content a,
+.content b,
 .content strong {
-    color: #444;
+    color: #EEE;
+}
+
+.content a:hover {
+    color:#111;
 }
 
 .content ul {
@@ -349,6 +389,7 @@ a:hover {
     margin: 0 0 0 200px;
     margin-right: 25px;
     padding: 0 0 0 5px;
+    margin-left:300px;
 }
 
 /* Secondary Content */
@@ -358,7 +399,7 @@ a:hover {
 .secondaryContent {
     float: left;
     padding: 2.5em 2.5em 1.5em 2.5em;
-    max-width: 130px;
+    /*max-width: 130px;*/
 }
 
 /* Footer */
@@ -368,9 +409,18 @@ a:hover {
     bottom: 0;
     padding-top: 0.4em;
     padding-left: 1em;
-    border-top: solid 1px #e5e5e5;
+    border-top: solid 1px #EEE;
     text-align: center;
-    background-color: white;
+    /*background-color: white;*/
+    clear:both;
+}
+
+.footer a {
+    color: #111;
+}
+
+.footer a:hover {
+    color: #EEE;
 }
 
 .clear {
@@ -439,7 +489,7 @@ a:hover {
 .enteteAuthentificationNoCompact {
     font-size: 12px;
     color: #FFFFFF;
-    background-color: #006699;
+    /*background-color: #006699;*/
 }
 
 .enteteAuthentificationCompact {
@@ -493,10 +543,11 @@ a:hover {
 }
 
 /* tableau recapitulatif des adresses de l'evenement */
-
+/*
 .tableauResumeAdresse {
     border: 2px solid rgb(102,102,102);
 }
+* */
 
 /* tableau entourant le descritif de l'evenement */
 
@@ -549,7 +600,7 @@ img {
 }
 
 .boxContent {
-    min-width: 140px;
+    min-width: 200px;
 }
 
 .center {
@@ -565,10 +616,14 @@ img {
     vertical-align: top;
 }
 
-.results {
-    width: 100%;
-    margin: auto;
-    max-width: 1000px;
+.results,
+.results td {
+    width:100%;
+}
+
+.listAddressItem td {
+    display:block;
+    min-height:150px;
 }
 
 .flag img {
@@ -641,7 +696,9 @@ img {
 .actionEvent {
     padding-left: 1em;
     list-style-type: none;
-    background-color: #E1E1E1;
+    /*background-color: #E1E1E1;*/
+    border-bottom: thin solid #BBB;
+    font-weight:bold;
 }
 
 .onglet {
@@ -657,11 +714,16 @@ img {
 }
 
 .commentHeader {
-    border-bottom: 2px solid #007799;
+    border-bottom: thin solid #BBB;
     font-size: 12px;
     font-weight: bold;
     color: #FFFFFF;
-    background-color: #007799;
+    /*background-color: #007799;*/
+}
+.commentWrapper {
+    background-color: #99ACB0;
+    width:500px;
+    border-radius:5px;
 }
 
 .commentHeader,
@@ -669,9 +731,11 @@ img {
     padding: 0.5em;
 }
 
+/*
 .eventImage {
     border: solid 2px #007799;
 }
+*/
 
 .calque,
 .calquePersonne,
@@ -696,6 +760,7 @@ img {
 
 .footer nav li:after {
     content: " |";
+    color:#EEE;
 }
 
 .footer nav li:last-child:after {
@@ -710,12 +775,6 @@ img {
     margin-left: 0.5em;
 }
 
-.footer .right {
-    margin-right: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    vertical-align: top;
-}
 
 .footer .fb_ltr,
 .footer .twitter-follow-button {
@@ -757,7 +816,8 @@ img {
     max-width: 50%;
     min-height: 35px;
     border: thin solid #BBB;
-    background-color: #EEE;
+    background-color:#99ACB0;
+    border-radius:5px;
 }
 
 .licence img {
@@ -775,4 +835,324 @@ img {
 .linkedEvents {
     margin-bottom: 0.2em;
     list-style-type: square;
+}
+
+.searchInput {
+    border-radius:20px;
+    background-color:#5D686A;
+    color:#EEE;
+    border-color: #465052;
+    padding:0.2em;
+    padding-left:1em;
+    padding-right:1em;
+    border-width:thin;
+    height:18px;
+}
+
+.loupe {
+    vertical-align:bottom;
+}
+
+.paypal,
+.boxContent li {
+    background-image:url(../images/Advisa/btn_gauche.png);
+    background-repeat:no-repeat;
+    list-style-type:none;
+    width:216px;
+    height:27px;
+    margin-bottom:0.5em;
+}
+
+.paypal a,
+.boxContent li a {
+    color:#EEE;
+    display:block;
+    padding:0.1em;
+    padding-left:2em;
+}
+
+.paypal a:hover,
+.boxContent li a:hover {
+    color:#111;
+}
+
+.paypal {
+    background-image:url(../images/Advisa/btn_don.png);
+    margin-left:2em;
+}
+
+.paypal a {
+    padding-top:0.2em;
+}
+
+.reseauSocial {
+    margin-top:1em;
+}
+
+.reseauSocial,
+.licenceLogo {
+    margin-left:2em;
+}
+
+.homeComment,
+.titreEncartCommentaire {
+    width:216px;
+}
+
+.homeComment {
+    margin-left:2em;
+}
+
+.titreEncartCommentaire {
+    background-image:url(../images/Advisa/comment_haut.png);
+    height:37px;
+    font-size:0;
+    background-repeat:no-repeat;
+}
+
+
+.homeCommentLine {
+    padding: 0.5em;
+    font-size:11px;
+}
+
+.homeCommentLine:nth-child(even) {
+    background-color: #E5E9EA;
+}
+.homeCommentLine:nth-child(odd) {
+    background-color: white;
+}
+
+.content .homeCommentLineWrapper {
+margin:0; padding:0;width:216px;
+}
+
+.bigFooter {
+    background-color:white;
+    padding:2em;
+    margin-bottom:10em;
+}
+
+.bigFooter .right {
+    margin-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    vertical-align: top;
+}
+
+.bigFooter .left,
+.bigFooter .right {
+    width:160px;
+}
+
+
+.bigFooter .left {
+    border-right: thin solid #8FA3A4;
+    padding-right:3em;
+}
+
+.bigFooter .left img {
+    margin:1em;
+    margin-right:0;
+}
+
+.partners {
+    margin:auto;
+    text-align:center;
+}
+
+.partners img{
+    margin:0.5em;
+}
+
+.footer nav {
+    margin:2em;
+}
+
+.footer .networks {
+    float:right;
+    margin-right:1em;
+    margin-top:0.5em;
+    position:absolute;
+    right:0;
+}
+
+.pagination {
+    background-image:url(../images/Advisa/abcd.png);
+    background-repeat:no-repeat;
+    background-position:center top;
+    padding-top:0.1em;
+    border-bottom:thin dotted #EEE;
+    padding-bottom:2em;
+}
+
+.pagination a {
+    color:#111;
+}
+
+.pagination a:hover {
+    color:gray;
+}
+
+.results a{
+    color:#111;
+}
+
+.results a:hover{
+    color:#EEE;
+}
+
+
+.seeAll,
+.bigger,
+.addEvent {
+    color:#EEE;
+    list-style-type:none;
+    width:246px;
+    height:28px;
+    background-repeat:no-repeat;
+    text-align:center;
+    padding-top:0.2em;
+    display:block;
+}
+
+.addEvent{
+    background-image:url(../images/Advisa/btn_ajouterevent.png);
+}
+
+.bigger{
+    background-image:url(../images/Advisa/btn_voircarte.png);
+    width:180px;
+    padding-top:0.4em;
+    text-align:left;
+    padding-left:1em;
+}
+
+
+.seeAll{
+    background-image:url(../images/Advisa/btn_voirbatiments.png);
+    font-size:smaller;
+    padding-top:0.4em;
+    float:right;
+}
+
+.black {
+    color:#111;
+}
+
+a.white,
+.white {
+    color:#EEE;
+}
+
+a.white:hover {
+    color:#111;
+}
+
+.event{
+    background-color:#99ACB0;
+    padding:1em;
+    margin-bottom:3em;
+    border-radius:5px;
+}
+
+
+
+li:empty {
+	display:none;
+}
+
+.formAjoutCommentaire textarea,
+.formAjoutCommentaire input {
+    border-radius:20px;
+    padding:0.2em;
+    padding-left:0.5em;
+    padding-right:0.5em;
+    border-width:thin;
+}
+
+.menuAction{
+    background-color:#99ACB0;
+    border:thin solid #BBB;
+    border-radius:5px;
+}
+.menuAction li{
+    list-style-type:none;
+}   
+
+
+.titreEncart{
+    color:#111;
+}
+
+.encart {
+    border-bottom:thin solid #EEE;
+    padding-bottom:1em;
+    margin-bottom:2.5em;
+}
+
+.encart:last-child {
+    border-bottom:none;
+}
+
+.header .infos {
+    float:right;
+    color:white;
+    margin-top:50px;
+    margin-right:3em;
+    text-align:center;
+}
+
+.header .infos a {
+    color:#EEE;
+}
+
+.header .infos a:hover {
+    color:#111;
+}
+
+.pub {
+    background-color: #A9BEC1;
+    width:500px;
+    border-radius:15px;
+    padding:1em;
+    text-align:center;
+    margin:auto;
+}
+
+.pub img {
+    vertical-align:middle;
+}
+
+.listAddressItem{
+    margin-top:1em;
+    border-bottom:thin dotted #EEE;
+    display:block;
+}
+
+.listAddressItem img{
+    margin-right:1em;
+    vertical-align:top;
+    margin-bottom:1em;
+    float:left;
+}
+
+.monProfil,
+.monArchi {
+    background-color: #99ACB0;
+    border-radius:5px;
+    min-width:700px;
+}
+
+.encart a img {
+    border:thin solid black;
+}
+
+.encart .titreEncart a img {
+    border:none;
+}
+
+.popupDiv table{
+    background-color:#99ACB0;
+    border-radius:10px;
 }
