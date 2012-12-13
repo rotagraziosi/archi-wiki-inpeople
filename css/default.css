@@ -1083,6 +1083,8 @@ li:empty {
 
 .titreEncart{
     color:#111;
+    margin-bottom:1em;
+    display:block;
 }
 
 .encart {
@@ -1155,4 +1157,28 @@ li:empty {
 .popupDiv table{
     background-color:#99ACB0;
     border-radius:10px;
+}
+
+.encart .desc,
+.encart li {
+    padding-left:150px;
+}
+
+.encart .desc {
+    margin-bottom:0.5em;
+}
+
+.encart {
+    font-size:12px;
+}
+
+.encart .linkAll a {
+    text-decoration:underline;
+}
+.encart .linkAll {
+    padding-top:0.5em;
+}
+
+.encart .date {
+    color:#111;
 }
