@@ -1745,8 +1745,9 @@ class archiAdresse extends ArchiContenu
 		{
 			$fetchAdresse = mysql_fetch_assoc($resAdresse);
 			//$url = $chemin.$fetchAdresse['dateUpload'].'/'.$fetchAdresse['idHistoriqueImage'].".jpg";
-			$intituleAdresse = $this->getIntituleAdresseFrom($idRue,'idRue',array('debug'=>true,'noQuartier'=>true,'noSousQuartier'=>true,'styleCSSTitreAdresse'=>'','displayFirstTitreAdresse'=>false,'setSeparatorAfterTitle'=>'_'));
-			$url = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetchAdresse['dateUpload'].'-'.$fetchAdresse['idHistoriqueImage'].'-'.$format.'.jpg';
+			//$intituleAdresse = $this->getIntituleAdresseFrom($idRue,'idRue',array('debug'=>true,'noQuartier'=>true,'noSousQuartier'=>true,'styleCSSTitreAdresse'=>'','displayFirstTitreAdresse'=>false,'setSeparatorAfterTitle'=>'_'));
+			//$url = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetchAdresse['dateUpload'].'-'.$fetchAdresse['idHistoriqueImage'].'-'.$format.'.jpg';
+            $idImage=$fetchAdresse['idHistoriqueImage'];
 		}
 		else
 		{
@@ -1772,7 +1773,6 @@ class archiAdresse extends ArchiContenu
 			{
 				$arrayListeEvenementsGroupeAdresse[] = $fetchEvenement['idEvenement'];
 			}
-			
 			if(count($arrayListeEvenementsGroupeAdresse)>0)
 			{
 				// on recherche les evenements du groupe d'adresses
@@ -1807,8 +1807,9 @@ class archiAdresse extends ArchiContenu
 				{
 					$fetchImage = mysql_fetch_assoc($resImage);
 					//$url = $chemin.$fetchImage['dateUpload'].'/'.$fetchImage['idHistoriqueImage'].".jpg";
-					$intituleAdresse = $this->getIntituleAdresseFrom($idRue,'idRue',array('noQuartier'=>true,'noSousQuartier'=>true,'styleCSSTitreAdresse'=>'','displayFirstTitreAdresse'=>false,'setSeparatorAfterTitle'=>'_'));
-					$url = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetchImage['dateUpload'].'-'.$fetchImage['idHistoriqueImage'].'-'.$format.'.jpg';
+					//$intituleAdresse = $this->getIntituleAdresseFrom($idRue,'idRue',array('noQuartier'=>true,'noSousQuartier'=>true,'styleCSSTitreAdresse'=>'','displayFirstTitreAdresse'=>false,'setSeparatorAfterTitle'=>'_'));
+					//$url = 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetchImage['dateUpload'].'-'.$fetchImage['idHistoriqueImage'].'-'.$format.'.jpg';
+                    $idImage=$fetchImage['idHistoriqueImage'];
 				}
 				else
 				{
@@ -1816,7 +1817,7 @@ class archiAdresse extends ArchiContenu
 				}
 			}
 		}
-		return $fetchImage['idHistoriqueImage'];
+		return $idImage;
 	}
 	// ***************************************************************************************************************************************
 	// recuperation d'une image appartenant a une adresse de la rue
