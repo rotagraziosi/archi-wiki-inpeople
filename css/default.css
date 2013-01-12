@@ -724,11 +724,16 @@ img {
     background-color: #99ACB0;
     width:500px;
     border-radius:5px;
+    margin-bottom:1em;
+    display:block;
 }
 
 .commentHeader,
 .comment {
     padding: 0.5em;
+}
+.comment {
+    min-height:120px;
 }
 
 /*
