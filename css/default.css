@@ -1202,6 +1202,7 @@ li:empty {
 .menu .leftpart {
     margin-top:2em;
     float:left;
+    min-width:180px;
 }
 
 .menu .wrapper div {
