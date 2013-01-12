@@ -116,6 +116,7 @@
             </ul>
             <!-- END utilisateurNonConnecte -->
             <!-- BEGIN utilisateurConnecte -->
+            <ul></ul>
             <ul>
             <li><a href="{urlMonProfil}">{txtMonProfil}</a></li>
             <li><a href="{urlMonArchi}">{txtMonArchi}</a></li>
@@ -124,7 +125,9 @@
             <!-- END utilisateurConnecte -->
             </div>
               <div class="browserid">
+              <!-- BEGIN utilisateurNonConnecte -->
         <a class="persona-button dark" id="browserid" title="<?_("Se connecter avec BrowserID")?>" title="<?_("Se connecter avec BrowserID")?>" ><span><?_("Connexion")?></span></a> 
+        <!-- END utilisateurNonConnecte -->
         </div> 
 		</div>
 	</nav>
