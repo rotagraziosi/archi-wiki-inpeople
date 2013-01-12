@@ -165,9 +165,14 @@ a:hover {
     top: 0;
     left: 0;
     width: 100%;
-    border-bottom: solid 1px #EEE;
+    border-bottom: solid 1px #587885;
     background-color: #262E31;
     height:65px;
+}
+
+.menu .wrapper {
+    margin:auto;
+    width:1000px;
 }
 
 .menu ul {
@@ -204,7 +209,7 @@ a:hover {
     margin-top:0.5em;
     padding-top:0.5em;
     margin-bottom:0.3em;
-    border-top:thin solid #EEE;
+    border-top:thin solid #686C6D;
 }
 
 /* Content */
@@ -380,9 +385,8 @@ a:hover {
 /* Primary Content */
 
 .primaryContentContainer {
-    float: right;
-    width: 100%;
-    margin-left: -19em;
+    margin:auto;
+    width:1100px;
 }
 
 .primaryContent {
@@ -398,7 +402,7 @@ a:hover {
 
 .secondaryContent {
     float: left;
-    padding: 2.5em 2.5em 1.5em 2.5em;
+    /*padding: 2.5em 2.5em 1.5em 2.5em;*/
     /*max-width: 130px;*/
 }
 
@@ -654,7 +658,6 @@ img {
 }
 
 .loginForm {
-    float: right;
     padding-right: 1em;
     line-height: 11px;
     color: white;
@@ -887,7 +890,7 @@ img {
 }
 
 .paypal a {
-    padding-top:0.2em;
+    padding-top:0.3em;
 }
 
 .reseauSocial {
@@ -919,6 +922,7 @@ img {
 .homeCommentLine {
     padding: 0.5em;
     font-size:11px;
+    color:#666;
 }
 
 .homeCommentLine:nth-child(even) {
@@ -1186,4 +1190,33 @@ li:empty {
 
 .encart .date {
     color:#111;
+}
+
+
+.menu .home {
+    float:right;
+    padding-right:3em;
+}
+
+.menu .leftpart {
+    margin-top:2em;
+    float:left;
+}
+
+.menu .wrapper div {
+    display:inline-block;
+}
+
+.menu .browserid {
+    margin-left:2em;
+    font-size:smaller;
+}
+.menu .browserid a{
+    margin-bottom:15px;
+    font-size:11px;
+}
+
+.header2 {
+    margin:auto;
+    width:1100px;
 }

@@ -7,6 +7,7 @@
 <meta name="robots" content="index follow, all" />
 <meta name="keywords" content="<?_("architectures,architecture,neudorf,contades,centre,strasbourg,photos,immeubles,monuments,immobilier,alsace")?>{motsCle}" />
 <link href="css/default.css" rel="stylesheet" type="text/css" />
+<link href="css/persona-buttons.css" rel="stylesheet" type="text/css" />
 <link rel="author" href="index.php?archiAffichage=contact" />
 <link rel="author" href="mailto:{mailContact}" />
 <link rel="author" href="{authorLink}" />
@@ -51,6 +52,7 @@
     <!--<a href="./">
     <img src="images/logo_archi.png" alt="">
     </a>-->
+    <div class="header2">
 	<div class="inline-block homeTitle">
     <a href="./">
     <div class="title"><h1 class="h1"><img src="images/Advisa/logo-archi-strasbourg.png" alt="{titreSite}" /></h1><!--<h2 class="h2">Version 2.3</h2>--><?_("Architecture et histoire des lieux de Strasbourg")?></div>
@@ -58,6 +60,7 @@
 	<!--<div class="title">{urlCheminSite}</div>-->
     </div>
     <div class="infos"><a href="statistiques-adresses-photos-architectes-strasbourg.html">{infos}</a></div>
+    </div>
     <!--
     <script>
 	$(function() {
@@ -78,7 +81,31 @@
     -->
     
 	<nav id="menu" class="menu">
+            <div class="wrapper">
             
+            <div class="leftpart">
+            <ul>
+			
+			<!-- BEGIN isAdmin -->
+			<li><a href="{listeUtilisateurs}" accesskey="2"><?_("Utilisateurs")?></a></li>
+			
+			<li><a href="{logsMails}"><?_("Logs Mails")?></a></li>
+			<!-- END isAdmin -->
+			
+			<!-- BEGIN afficheAdministrationMenu -->
+			<li><a href="{administration}"><?_("Administration")?></a></li>
+			<!-- END afficheAdministrationMenu -->
+			
+			<!--<li><a href="{recherche}" accesskey="4" title=""><?_("Recherche")?></a></li>-->
+            <li class="flag"><a href="?lang=fr_FR" title="Français">FR</a></li>
+            <li class="flag"><a href="?lang=en_US"  title="English">EN</a></li>
+            
+            <li class="home"><a href="./" accesskey="1"><img src="images/Advisa/maison.png" alt="<?_("Accueil")?>" /></a></li>
+            
+            
+		</ul>
+        </div>
+      
 			<div class="loginForm">
             <!-- BEGIN utilisateurNonConnecte -->
             
@@ -96,30 +123,15 @@
             </ul>
             <!-- END utilisateurConnecte -->
             </div>
-
-		<ul>
-			<li class="first"><a href="./" accesskey="1"><img src="images/Advisa/maison.png" alt="<?_("Accueil")?>" /></a></li>
-			<!-- BEGIN isAdmin -->
-			<li><a href="{listeUtilisateurs}" accesskey="2"><?_("Utilisateurs")?></a></li>
-			
-			<li><a href="{logsMails}"><?_("Logs Mails")?></a></li>
-			<!-- END isAdmin -->
-			
-			<!-- BEGIN afficheAdministrationMenu -->
-			<li><a href="{administration}"><?_("Administration")?></a></li>
-			<!-- END afficheAdministrationMenu -->
-			
-			<!--<li><a href="{recherche}" accesskey="4" title=""><?_("Recherche")?></a></li>-->
-            <li class="flag"><a href="?lang=fr_FR"><img alt="Français" title="<?_("Français")?>" src="images/flags/fr.png" /></a></li>
-            <li class="flag"><a href="?lang=en_US"><img alt="English" title="<?_("Anglais")?>" src="images/flags/en.png" /></a></li>
-            
-            
-		</ul>
+              <div class="browserid">
+        <a class="persona-button dark" id="browserid" title="<?_("Se connecter avec BrowserID")?>" title="<?_("Se connecter avec BrowserID")?>" ><span><?_("Connexion")?></span></a> 
+        </div> 
+		</div>
 	</nav>
     </div>
 	<div id="content" class="content">
-		<div id="primaryContentContainer">
-			<div id="secondaryContent" class="secondaryContent" style='padding-left:10px;'>
+		<div id="primaryContentContainer" class="primaryContentContainer">
+			<div id="secondaryContent" class="secondaryContent">
 				<div class="box boxA">
 					<!--<h2><?_("Rechercher")?></h2>-->
 					<div class="boxContent center">

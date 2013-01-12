@@ -9443,7 +9443,7 @@ class archiAdresse extends ArchiContenu
 				}
 				$t->assign_block_vars('commentaires',array(
 													'commentaire'=>$bbCode->convertToDisplay(array('text'=>$txtCommentaire)),
-													'pseudo'=>"<div style='display:block;overflow:auto;text-decoration:none;font-weight:normal;'>".$imageSurListeTousLesCommentaires."<span style='display:block;font-weight:normal;'>".$fetch['dateF']." "._("de")." <span style='color:#007799;font-size:9px;font-weight:normal;'>".$fetch['nom'].' '.$fetch['prenom']."</span>"."<br>"._("pour")." <a href=\"".$urlAdresse."\" style='color:#007799;font-size:9px;'>".str_replace("( - )", "", implode(" / ", $arrayIntituleAdresses))."</a></span></div><div style='clear:both;'></div>"
+													'pseudo'=>"<div style='display:block;overflow:auto;text-decoration:none;font-weight:normal;'>".$imageSurListeTousLesCommentaires."<span style='display:block;font-weight:normal;'>".$fetch['dateF']." "._("de")." <span style='color:#507391;font-size:9px;font-weight:normal;'>".$fetch['nom'].' '.$fetch['prenom']."</span>"."<br>"._("pour")." <a href=\"".$urlAdresse."\" style='color:#507391;font-size:9px;'>".str_replace("( - )", "", implode(" / ", $arrayIntituleAdresses))."</a></span></div><div style='clear:both;'></div>"
 													));
 			}
 

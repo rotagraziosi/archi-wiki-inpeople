@@ -14,7 +14,7 @@
 </table>
 <div>
 <?_("Vous pouvez également vous connecter avec")?> <a href="https://browserid.org/">BrowserID</a><?_(" :")?><br/>
-<input type="image" class="imgBtn" id="browserid2" title="<?_("Se connecter avec BrowserID")?>" src="https://browserid.org/i/sign_in_green.png" alt="<?_("Se connecter avec BrowserID")?>" />  
+<a class="persona-button dark" id="browserid" title="<?_("Se connecter avec BrowserID")?>" title="<?_("Se connecter avec BrowserID")?>" ><span><?_("Connexion")?></span></a>  
 </div>
 <br/>
 {msg}
@@ -32,7 +32,7 @@
 <input type='checkbox' name='cookie' id="cookie" /><label for="cookie" ><?_("Rester connecté")?></label>
 <input type='submit' name='validAuthentification' value='<?_("Se connecter")?>' />
 
-<input type="image" class="imgBtn" id="browserid" title="<?_("Se connecter avec BrowserID")?>" src="https://browserid.org/i/sign_in_green.png" alt="<?_("Se connecter avec BrowserID")?>" />  
+
 <!-- END compact -->
 
 </form>
