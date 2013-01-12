@@ -97,10 +97,11 @@
 			<!-- END afficheAdministrationMenu -->
 			
 			<!--<li><a href="{recherche}" accesskey="4" title=""><?_("Recherche")?></a></li>-->
+            <li class="home"><a href="./" accesskey="1"><img src="images/Advisa/maison.png" alt="<?_("Accueil")?>" /></a></li>
             <li class="flag"><a href="?lang=fr_FR" title="Français">FR</a></li>
             <li class="flag"><a href="?lang=en_US"  title="English">EN</a></li>
             
-            <li class="home"><a href="./" accesskey="1"><img src="images/Advisa/maison.png" alt="<?_("Accueil")?>" /></a></li>
+            
             
             
 		</ul>

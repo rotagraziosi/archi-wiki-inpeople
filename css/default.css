@@ -129,7 +129,7 @@ a:hover {
 }
 
 .header img {
-    vertical-align: -10px;
+    vertical-align: -6px;
     margin-right:0.7em;
 }
 
@@ -630,8 +630,8 @@ img {
     min-height:150px;
 }
 
-.flag img {
-    vertical-align: middle;
+.menu .flag {
+    font-size:12px;
 }
 
 .puce {
@@ -1196,7 +1196,7 @@ li:empty {
 
 .menu .home {
     float:right;
-    padding-right:3em;
+    padding-right:2em;
 }
 
 .menu .leftpart {
