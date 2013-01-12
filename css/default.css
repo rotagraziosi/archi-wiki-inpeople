@@ -1213,8 +1213,7 @@ li:empty {
     font-size:smaller;
 }
 .menu .browserid a{
-    position:relative;
-    top:-20px;
+    vertical-align:20px;
     font-size:11px;
 }
 
