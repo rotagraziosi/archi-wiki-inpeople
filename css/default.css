@@ -661,7 +661,7 @@ img {
     padding-right: 1em;
     line-height: 11px;
     color: white;
-    width:650px;
+    width:630px;
 }
 
 .loginForm .imgBtn {
@@ -1205,6 +1205,7 @@ li:empty {
 }
 
 .menu .wrapper div {
+    display:inline;
     display:inline-block;
 }
 
@@ -1213,7 +1214,8 @@ li:empty {
     font-size:smaller;
 }
 .menu .browserid a{
-    margin-bottom:15px;
+    position:relative;
+    top:-20px;
     font-size:11px;
 }
 
