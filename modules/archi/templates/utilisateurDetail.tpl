@@ -44,6 +44,10 @@
 		<tr><td><?_("Permettre à l'utilisateur de renseigner le champs date fin (uniquement profil utilisateur)")?></td><td>
 				<input type='radio' name='displayDateFinField' value='1' {checkDisplayDateFinFieldOui} /> <?_("Oui")?>
 				<input type='radio' name='displayDateFinField' value='0' {checkDisplayDateFinFieldNon} /> <?_("Non")?></td></tr>
+            <tr><td><?_("L'utilisateur peut mettre des images sous copyright")?></td><td>
+			<input type='radio' name='canCopyright' value='1' {canCopyright1} id="canCopyright1" /> <label for="canCopyright1"><?_("Oui")?></label>
+			<input type='radio' name='canCopyright' value='0' {canCopyright0} id="canCopyright0" /> <label for="canCopyright0"><?_("Non")?></label>
+		</td></tr>
 		<!-- END utilisateurCourantIsAdmin -->
 		<!-- BEGIN banissementUtilisateurParAdmin -->
 		<tr><td><?_("Bannir l'utilisateur (le compte devient inactif)")?></td><td>

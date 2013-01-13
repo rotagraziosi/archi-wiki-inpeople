@@ -2825,7 +2825,8 @@ class archiImage extends config
                 
                 $licence=$this->getLicence($fetch['idImage']);
                 $idUtilisateur=$authentification->getIdUtilisateur();
-                if ($licence["id"]==3 && !$utilisateur->isAuthorized('admin_licences', $idUtilisateur)) {
+                $utilisateur=new ArchiUtilisateur();
+                if ($licence["id"]==3 && !$utilisateur->isAuthorized('admin_licences', $idUtilisateur) && !$utilisateur->canCopyright(array('idUtilisateur'=>$idUtilisateur))) {
                     $selectLicenceHTML="<span title='".htmlspecialchars(_("Seul l'auteur peut changer la licence de cette image."), ENT_QUOTES)."'>".$licence["name"]."</span>";
                     $enableAuthor="disabled='disabled'";
                 } else {
@@ -2833,7 +2834,7 @@ class archiImage extends config
                     $reqLicence=$this->connexionBdd->requete("SELECT * FROM licences");
                     $selectLicenceHTML="";
                     while ($fetchLicence=mysql_fetch_assoc($reqLicence)) {
-                        if ($fetchLicence["id"]!=3 || $utilisateur->isAuthorized('admin_licences', $idUtilisateur)) {
+                        if ($fetchLicence["id"]!=3 || $utilisateur->isAuthorized('admin_licences', $idUtilisateur) || $utilisateur->canCopyright(array('idUtilisateur'=>$idUtilisateur))) {
                             $selectLicenceHTML.="<input type='radio' value='".$fetchLicence["id"]."' id='licence_".$fetchLicence["id"]."' name='licence_".$fetch['idHistoriqueImage']."'";
                             if ($fetchLicence["id"]==$licence["id"]) {
                                 $selectLicenceHTML.=" checked='checked' ";

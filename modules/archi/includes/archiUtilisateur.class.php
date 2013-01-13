@@ -79,7 +79,8 @@ class archiUtilisateur extends config {
             'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
             'displayNumeroArchiveField'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
             'displayDateFinField'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'bannirUtilisateur'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio')
+            'bannirUtilisateur'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
+            'canCopyright'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio')
         );
     
     }
@@ -206,6 +207,7 @@ class archiUtilisateur extends config {
                                     idProfil="'.$tabForm['idProfil']['value'].'",
                                     alerteMail="'.$tabForm['alerteMail']['value'].'",
                                     idVilleFavoris="'.$tabForm['ville']['value'].'",
+                                    canCopyright="'.$tabForm['canCopyright']['value'].'",
                                     alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'",
                                     idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'",
                                     alerteAdresses="'.$tabForm['alerteAdresses']['value'].'",
@@ -229,6 +231,7 @@ class archiUtilisateur extends config {
                                     idProfil="'.$tabForm['idProfil']['value'].'",
                                     alerteMail="'.$tabForm['alerteMail']['value'].'",
                                     idVilleFavoris="'.$tabForm['ville']['value'].'",
+                                    canCopyright="'.$tabForm['canCopyright']['value'].'",
                                     idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'",
                                     alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'",
                                     alerteAdresses="'.$tabForm['alerteAdresses']['value'].'",
@@ -237,7 +240,6 @@ class archiUtilisateur extends config {
                                     '.$sqlChampDisplayDateFinField.'
                                 where idUtilisateur="'.$this->variablesPost['idUtilisateurModif'].'"
                             ';
-                            
 
                         if ($resUpdate = $this->connexionBdd->requete($reqUpdate))
                             $majOK=true;
@@ -245,7 +247,7 @@ class archiUtilisateur extends config {
                     
                     if (isset($this->variablesGet['modeAffichage']) && $this->variablesGet['modeAffichage']=='utilisateurDetail')
                     {
-                        // si un utilisateur est banni , on inactive sont compte et on met le champs compteBanni à 1
+                        // Si un utilisateur est banni, on inactive son compte et on met le champs compteBanni à 1
                         $this->majBannissementUtilisateur(array('idUtilisateur'=>$this->variablesPost['idUtilisateurModif'],'champsBanissementApresValidationFormulaire'=>$tabForm['bannirUtilisateur']['value']));
                     }
                 }
@@ -641,6 +643,15 @@ class archiUtilisateur extends config {
                         else
                         {
                             $t->assign_vars(array('checkDisplayDateFinFieldNon'=>'checked'));
+                        }
+                        
+                        if ($this->canCopyright(array('idUtilisateur'=>$idUtilisateur)))
+                        {
+                            $t->assign_vars(array('canCopyright1'=>'checked'));
+                        }
+                        else
+                        {
+                            $t->assign_vars(array('canCopyright0'=>'checked'));
                         }
                         
                     }
@@ -2276,6 +2287,29 @@ class archiUtilisateur extends config {
             $res = $this->connexionBdd->requete($req);
             $fetch = mysql_fetch_assoc($res);
             if ($fetch['displayDateFinFieldInSaisieEvenement']=='1') {
+                $retour = true;
+            }
+        }
+        
+        return $retour;
+    }
+    
+    
+    public function canCopyright($params = array())
+    {
+        $retour = false;
+        
+        $authentification = new archiAuthentification();
+        
+        
+        if ($authentification->estAdmin(array('idUtilisateur'=>$params['idUtilisateur'])) || $authentification->estModerateur(array('idUtilisateur'=>$params['idUtilisateur']))) {
+            $retour = true;
+        } else {
+            // cas d'un profil d'utilisateur
+            $req = "SELECT canCopyright FROM utilisateur WHERE idUtilisateur = '".$params['idUtilisateur']."'";
+            $res = $this->connexionBdd->requete($req);
+            $fetch = mysql_fetch_assoc($res);
+            if ($fetch['canCopyright']=='1') {
                 $retour = true;
             }
         }
