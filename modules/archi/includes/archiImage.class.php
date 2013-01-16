@@ -1810,7 +1810,7 @@ class archiImage extends config
                 // dans ce cas on fabrique le zoom sur la zone de l'image concernée par l'adresse courante
                 $imageZoom = "<img style='border-color:#007799;border-width:2px;cursor:pointer;' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
                 
-                $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;' $htmlOnClick>$imageZoom</div>";
+                $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;'><a href='".$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']))."'$imageZoom</div>";
                 
             }
             else
