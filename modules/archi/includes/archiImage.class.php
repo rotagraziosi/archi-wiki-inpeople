@@ -1783,24 +1783,24 @@ class archiImage extends config
             $htmlOnClick="";
             if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA)
             {
-                $htmlOnClick="title=\"".$intituleAdressePhoto."\" onclick=\"location.href='".$url."';\"";
+                $htmlOnClick=$url;
             }
             elseif (count($arrayTestDivsJs)>0)
             {
                 if (isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1')
                 {
-                    $htmlOnClick="onclick=\"location.href='".$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']))."';\"";
+                    $htmlOnClick=$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']));
                 } else {
-                    $htmlOnClick="title=\"".$intituleAdressePhoto."\" onclick=\"if (".implode(" && ",  $arrayTestDivsJs)."){location.href='".$url."';}\"";
+                    $htmlOnClick=$url;
                 }
             }
             else
             {
                 if (isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1')
                 {
-                    $htmlOnClick="onclick=\"location.href='".$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']))."';\"";
+                    $htmlOnClick=$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']));
                 } else {
-                    $htmlOnClick="title=\"".$intituleAdressePhoto."\" onclick=\"location.href='".$url."';\"";
+                    $htmlOnClick=$url;
                 }
             }
             
@@ -1810,12 +1810,12 @@ class archiImage extends config
                 // dans ce cas on fabrique le zoom sur la zone de l'image concernée par l'adresse courante
                 $imageZoom = "<img style='border-color:#007799;border-width:2px;cursor:pointer;' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
                 
-                $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;'><a href='".$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']))."'$imageZoom</div>";
+                $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'>$imageZoom</a></div>";
                 
             }
             else
             {
-                $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;' $htmlOnClick><img style='border-color:#007799;border-width:2px;cursor:pointer;' class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt='' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."'><div id='divZones_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."' style='position:absolute;top:0px;left:0px;cursor:pointer;'></div></div>";
+                $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'><img style='border-color:#007799;border-width:2px;cursor:pointer;' class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt='' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."'></a></div>";
             }
             
             $zones[$i] = $arrayZones['htmlDivs'];
