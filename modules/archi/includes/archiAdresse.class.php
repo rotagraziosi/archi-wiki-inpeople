@@ -9395,7 +9395,7 @@ class archiAdresse extends ArchiContenu
 			else
 			{
 				$t->set_filenames(array('derniersCommentaires'=>'encartAccueilCommentaires.tpl'));
-				$t->assign_vars(array('urlTousLesCommentaires'=>"<a style='text-decoration: none; color: rgb(0, 119, 153);' href='".$this->creerUrl('','tousLesCommentaires')."'><img src='images/Advisa/comment_bas.png' alt='"._("Tous les commentaires")."' /></a>"));
+				$t->assign_vars(array('urlTousLesCommentaires'=>"<a href='".$this->creerUrl('','tousLesCommentaires')."'>"._("Tous les commentaires")."</a>"));
 			}
 			
 			if(isset($params['afficherTous']) && $params['afficherTous']==true)

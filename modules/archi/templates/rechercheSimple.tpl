@@ -18,7 +18,7 @@
 <input type='hidden' name="{parametres.nom}" id="{parametres.id}" value="{parametres.value}">
 <!-- END parametres -->
 
-<input type="text" accesskey="F"  name="motcle" value="{motcle}" style='{motCleStyle}' placeholder="<?_("Adresse ou nom de lieu")?>" class="searchInput" /><input type="image" src="images/Advisa/loupe.png" name="submit" class="loupe" value="<?_("Rechercher")?>" />&nbsp;
+<input type="text" accesskey="F"  name="motcle" value="{motcle}" style='{motCleStyle}' placeholder="<?_("Adresse ou lieu")?>" class="searchInput" /><input type="image" src="images/Advisa/loupe.png" name="submit" class="loupe" value="<?_("Rechercher")?>" />&nbsp;
 <!-- BEGIN displayRechercheAvancee -->
 <a href='{urlRechercheAvancee}'><?_("Recherche avancée")?></a><br />
 <!-- END displayRechercheAvancee -->

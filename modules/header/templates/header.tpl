@@ -175,7 +175,7 @@
                 </a>
                 </div>
                 <br/>
-				<div class="fb-like-box reseauSocial" data-href="https://www.facebook.com/pages/Association-Archi-Strasbourg/215793091822502" data-width="215" data-stream="false" data-header="true"></div>
+				<div class="fb-like-box reseauSocial" data-href="https://www.facebook.com/pages/Association-Archi-Strasbourg/215793091822502" data-width="190" data-stream="false" data-header="true"></div>
                 <br/>
                 <div class="reseauSocial">
                 <script charset="utf-8" src="https://widgets.twimg.com/j/2/widget.js"></script>
@@ -185,7 +185,7 @@
                   type: 'profile',
                   rpp: 2,
                   interval: 30000,
-                  width: 215,
+                  width: 190,
                   height: 170,
                   theme: {
                     shell: {

@@ -1808,7 +1808,7 @@ class archiImage extends config
             if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA)
             {
                 // dans ce cas on fabrique le zoom sur la zone de l'image concernée par l'adresse courante
-                $imageZoom = "<img style='border-color:#007799;border-width:2px;cursor:pointer;' src='".$this->getUrlRacine()."imageZoomZone.php?idImage=".$valuesPhoto['infosImage']['idImage']."&idEvenementGroupeAdresse=".$params['idGroupeAdresseEvenementAffiche']."&idAdresseCourante=".$idAdresseCourante."&date=".$valuesPhoto['infosImage']['dateUpload']."&idHistorique=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
+                $imageZoom = "<img style='border-color:#007799;border-width:2px;cursor:pointer;' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
                 
                 $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;' $htmlOnClick>$imageZoom</div>";
                 
@@ -1843,7 +1843,7 @@ class archiImage extends config
             }*/
             if ($i>0)
             {
-                $html="<table style='font-size:12px;width:200px;'><tr><td style='padding:0;'>";
+                $html="<table><tr><td style='padding:0;'>";
                 $html.=$tabTemp[0]['celluleHaut'];
                 $html.="</td></tr><tr><td>";
                 $html.=$tabTemp[0]['celluleBas'];

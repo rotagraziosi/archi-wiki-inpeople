@@ -225,7 +225,7 @@ a:hover {
 
 .boxContent {
     margin-top: 0.5em;
-    padding: 0.25em 1em 0.25em 1em;
+    padding: 0;
     /*background: #ffffff url('images/a1.gif') top left repeat-x;*/
 }
 
@@ -233,7 +233,7 @@ a:hover {
 
 .boxA .boxContent {
     margin-top: 0;
-    padding: 1em 0 1em 1.5em;
+    /*padding: 1em 0 1em 1.5em;*/
     /*border-bottom: solid 1px #bb6600;*/
     color: #fff;
     /*background: #ff8800;*/
@@ -261,8 +261,8 @@ a:hover {
 }
 
 .box .searchInput {
-    max-width: 160px;
-    margin-left:10px;
+    max-width: 130px;
+    /*margin-left:10px;*/
 }
 
 .boxA input.text {
@@ -392,7 +392,7 @@ a:hover {
     margin: 0 0 0 200px;
     margin-right: 25px;
     padding: 0 0 0 5px;
-    margin-left:300px;
+    margin-left:220px;
 }
 
 /* Secondary Content */
@@ -601,9 +601,13 @@ a:hover {
 img {
     border: 0;
 }
-
+/*
 .boxContent {
     min-width: 200px;
+}
+*/
+.boxContent ul {
+    padding:0;
 }
 
 .center {
@@ -862,12 +866,15 @@ img {
 
 .paypal,
 .boxContent li {
-    background-image:url(../images/Advisa/btn_gauche.png);
+    /*background-image:url(../images/Advisa/btn_gauche.png);*/
     background-repeat:no-repeat;
     list-style-type:none;
-    width:216px;
+    width:190px;
     height:27px;
     margin-bottom:0.5em;
+    background-color:#829395;
+    border-radius:25px;
+    box-shadow: 1px 1px #3E484B, -1px -1px #C1C9CA;
 }
 
 .paypal a,
@@ -884,8 +891,9 @@ img {
 }
 
 .paypal {
-    background-image:url(../images/Advisa/btn_don.png);
-    margin-left:2em;
+    /*background-image:url(../images/Advisa/btn_don.png);*/
+    /*margin-left:2em;*/
+    background-color: #FF8800;
 }
 
 .paypal a {
@@ -895,26 +903,47 @@ img {
 .reseauSocial {
     margin-top:1em;
 }
-
+/*
 .reseauSocial,
 .licenceLogo {
     margin-left:2em;
 }
-
+*/
 .homeComment,
 .titreEncartCommentaire {
-    width:216px;
+    width:190px;
 }
-
+/*
 .homeComment {
     margin-left:2em;
 }
+*/
+.footEncartCommentaire,
+.titreEncartCommentaire {
+    
+    height:27px;
+    background-repeat:no-repeat;
+    background-color: #829395;
+    color: #FFF;
+    text-align:center;
+    padding-top:10px;
+}
 
 .titreEncartCommentaire {
-    background-image:url(../images/Advisa/comment_haut.png);
-    height:37px;
-    font-size:0;
-    background-repeat:no-repeat;
+    /*background-image:url(../images/Advisa/comment_haut.png);*/
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+    box-shadow:-1px 0 #6B7A7B, 1px -1px #C1C9CA;
+}
+
+.footEncartCommentaire {
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
+    box-shadow:-1px 1px #6B7A7B, 1px 0 #C1C9CA;
+}
+
+.footEncartCommentaire a:hover{
+    text-decoration:none;
 }
 
 
