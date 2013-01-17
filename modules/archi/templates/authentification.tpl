@@ -4,7 +4,7 @@
 
 <!-- BEGIN noCompact -->
 <br><br>
-<div align='center' style='width:780px;'>
+<div align='center'>
 <div style='color:#000000;'>{etatConnexion}</div>
 <table border="" align='center' class="authentification">
 <tr><td class="enteteAuthentificationNoCompact borduresAuthentification">Login (mail) :</td><td class='borduresAuthentification'><input type='text' name='archiLogin' value='' /></td></tr>

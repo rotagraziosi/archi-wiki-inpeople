@@ -4353,10 +4353,10 @@ class archiEvenement extends config
 		
 		foreach($liens as $titre => $elementsLiens)
 		{
-			$couleur = "#558800";
+			$couleur = "";
 			if(isset($this->variablesGet['archiAffichage']) && $this->variablesGet['archiAffichage']==$elementsLiens['archiAffichage'])
 			{
-				$couleur = "#FF8800";
+				$couleur = "current";
 			}
 			$t->assign_block_vars("liens",array("couleur"=>$couleur,"titre"=>$titre,"url"=>$elementsLiens['url']));
 		}

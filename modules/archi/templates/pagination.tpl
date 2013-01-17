@@ -8,11 +8,11 @@
 
 <!-- BEGIN pages -->
 <!-- BEGIN isNotPageCourante -->
-<a href="{pages.isNotPageCourante.url}" class="white" onclick="{pages.isNotPageCourante.onClick}">{pages.numero}</a>
+<a href="{pages.isNotPageCourante.url}" onclick="{pages.isNotPageCourante.onClick}">{pages.numero}</a>
 <!-- END isNotPageCourante --> 
 
 <!-- BEGIN isPageCourante -->
-{pages.numero}
+<b>{pages.numero}</b>
 <!-- END isPageCourante -->
 <!-- END pages -->
 

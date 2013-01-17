@@ -12,6 +12,7 @@ body {
     background-color:#8FA3A4;
 }
 
+
 h1 {
     margin: 0;
     padding: 0;
@@ -385,7 +386,7 @@ a:hover {
 
 .primaryContentContainer {
     margin:auto;
-    width:1100px;
+    width:950px;
 }
 
 .primaryContent {
@@ -403,6 +404,7 @@ a:hover {
     float: left;
     /*padding: 2.5em 2.5em 1.5em 2.5em;*/
     /*max-width: 130px;*/
+    padding:0.1em;
 }
 
 /* Footer */
@@ -664,6 +666,10 @@ img {
     padding-right: 1em;
     line-height: 11px;
     color: white;
+}
+
+.loginForm.connected{
+    float:right;
 }
 
 .loginForm .imgBtn {
@@ -1248,5 +1254,24 @@ li:empty {
 
 .header2 {
     margin:auto;
-    width:1100px;
+    width:950px;
+}
+
+.header, .menu, .outer {
+    min-width:1000px;
+}
+
+.breadcrumbs {
+    margin-top:1em;
+}
+
+.onglet {
+    background-color: #829395;
+}
+.onglet.current {
+    background-color: #99ACB0;
+}
+
+.pagination b {
+    color:black;
 }

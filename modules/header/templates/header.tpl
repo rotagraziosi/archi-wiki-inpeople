@@ -57,7 +57,6 @@
     <a href="./">
     <div class="title"><h1 class="h1"><img src="images/Advisa/logo-archi-strasbourg.png" alt="{titreSite}" /></h1><!--<h2 class="h2">Version 2.3</h2>--><?_("Architecture et histoire des lieux de Strasbourg")?></div>
     </a>
-	<!--<div class="title">{urlCheminSite}</div>-->
     </div>
     <div class="infos"><a href="statistiques-adresses-photos-architectes-strasbourg.html">{infos}</a></div>
     </div>
@@ -107,24 +106,27 @@
 		</ul>
         </div>
       
-			<div class="loginForm">
+			
             <!-- BEGIN utilisateurNonConnecte -->
-            
+            <div class="loginForm">
             {formulaireConnexion}
             <ul class="nopadding">
             <li><a href="{urlMotDePasseOublie}"><?_("Mot de passe oublié ?")?></a></li>
             <li><a href="{urlInscriptDeconnexion}">{inscriptionDeconnexion}</a></li>
             </ul>
+            </div>
             <!-- END utilisateurNonConnecte -->
             <!-- BEGIN utilisateurConnecte -->
+            <div class="loginForm connected">
             <ul></ul>
-            <ul>
+            <ul class="connected">
             <li><a href="{urlMonProfil}">{txtMonProfil}</a></li>
             <li><a href="{urlMonArchi}">{txtMonArchi}</a></li>
             <li><a href="{urlInscriptDeconnexion}">{inscriptionDeconnexion}</a></li>
             </ul>
-            <!-- END utilisateurConnecte -->
             </div>
+            <!-- END utilisateurConnecte -->
+            
               <div class="browserid">
               <!-- BEGIN utilisateurNonConnecte -->
         <a class="persona-button dark" id="browserid" title="<?_("Se connecter avec BrowserID")?>" title="<?_("Se connecter avec BrowserID")?>" ><span><?_("Connexion")?></span></a> 
@@ -226,3 +228,4 @@
 			<div id="primaryContent" class="primaryContent" {microdata}>
             {GeoCoordinates}
 			{bandeauPublicite}
+            <div class="title breadcrumbs">{urlCheminSite}</div>
