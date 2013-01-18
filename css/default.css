@@ -358,6 +358,7 @@ a:hover {
 
 .content table {
     margin-bottom: 1.5em;
+    width:100%;
 }
 
 .content table th {
@@ -386,7 +387,6 @@ a:hover {
 
 .primaryContentContainer {
     margin:auto;
-    width:950px;
 }
 
 .primaryContent {
@@ -734,7 +734,7 @@ img {
 }
 .commentWrapper {
     background-color: #99ACB0;
-    width:770px;
+    width:100%;
     border-radius:5px;
     margin-bottom:1em;
     display:block;
@@ -1254,7 +1254,6 @@ li:empty {
 
 .header2 {
     margin:auto;
-    width:950px;
 }
 
 .header, .menu, .outer {
@@ -1274,4 +1273,10 @@ li:empty {
 
 .pagination b {
     color:black;
+}
+
+.primaryContentContainer,
+.header2 {
+    width:1100px;
+    max-width:98%;
 }
