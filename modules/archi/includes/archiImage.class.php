@@ -2318,7 +2318,7 @@ class archiImage extends config
             $html = "<div style='display:table;padding-top:50px;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px;",  "nbColonnes"=>4))."<div style='clear:both;'></div></div>";
         } else {
             //$html = "<div style='display:table;'>".$tab->createHtmlTableFromArray(3,  '',  '',  'align="center" valign="top" style="font-size:13px;"')."</div>";
-            $html = "<div style='display:table;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px;",  "nbColonnes"=>4))."<div style='clear:left;'></div></div>";
+            $html = "<div style='display:table;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px;",  "nbColonnes"=>5))."<div style='clear:left;'></div></div>";
         }
         
         return $html.$zonesHTML;
