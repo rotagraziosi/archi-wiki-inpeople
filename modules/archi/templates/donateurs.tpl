@@ -6,6 +6,28 @@
 
 <tr>
 <td>
+<img border=0 src='http://www.archi-strasbourg.org/images/donateurs/recto_verso200.jpg'>
+</td>
+<!--<td class='textePetit'>-->
+<td>
+<font size=2>
+<b>Recto - Verso</b>
+<br>
+Nous remercions M. Vincent Kauffmann pour le don des droits sur plusieurs centaines de cartes postales anciennes de sa collection qui ont pu être mises en ligne.<br><br>
+
+Pour visiter sa boutique de cartes postales anciennes :<br>
+Recto - Verso<br>
+3 place Henry Dunant<br>
+67000 STRASBOURG<br>
+<br>
+03 88 25 61 80<br>
+<a href="mailto:rectoverso67%40orange.fr">rectoverso67 (at) orange.fr</a>
+
+</td>
+</tr>
+
+<tr>
+<td>
 <a href='http://www.raphaelimmo.com' target=_blank><img alt="" src='http://www.archi-strasbourg.org/images/donateurs/logo_raphaelimmo.jpg'></a>
 </td>
 <!--<td class='textePetit'>-->

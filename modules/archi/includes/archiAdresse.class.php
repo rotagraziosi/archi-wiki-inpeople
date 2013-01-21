@@ -13636,6 +13636,12 @@ class archiAdresse extends ArchiContenu
 		
 		$s = new stringObject();
 		
+		// ajouté par fabien le 23/11/2012 suite discussion avec l'office du tourisme (Annie Dumoulin)
+		$html.="<br>Les six parcours 'Médiéval', 'Renaissance', 'au 18ème', 'Romantique', 'Impérial', 'Moderne et contemporain' sont basés sur le livret <a href=https://archi-strasbourg.org/?archiAffichage=listeAdressesFromSource&source=6&submit=Rechercher>Balades strasbourgeoises</a> que l'on peut trouver à l'office de tourisme (vendu pour votre information 4,50 euros).<br>";
+		$html.="Les bâtiments listés sont faciles à repérer grâce aux plaques qui y sont apposées.<br><br>";
+		$html.="Les autres parcours ont été créés par les membres d'Archi-Strasbourg.<br><br>";
+		$html.="Ces parcours ont été prévus pour être consultés avec un smartphone soit via <a target=_blank href='http://m.archi-strasbourg.org'>m.archi-strasbourg.org</a> ou les applications :<br>";
+		$html.="<a target=_blank href='https://itunes.apple.com/fr/app/id557893157?mt=8&affId=1578782'><img WIDTH=176 src='/images/20121106smartphone/appstore.jpg'></a>". "           "."<a target=_blank href='https://play.google.com/store/apps/details?id=archi.strasbourg.dev&feature=search_result#?t=W251bGwsMSwyLDEsImFyY2hpLnN0cmFzYm91cmcuZGV2Il0.'><img WIDTH=176 src='/images/20121106smartphone/googleplay.jpg'></a><br>";
 		
 		$i=0;
 		while($fetchParcours = mysql_fetch_assoc($resParcours))
