@@ -270,7 +270,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                     if ($is1==0) {
                         $message .= "Nouvelles Adresses : <br>";
                     }
-                    $message .= "<a href='".$valueAdresse['url']."'>".$valueAdresse['libelle']."</a><br>";
+                    $message .= "<a href='".$valueAdresse['url']."'>".$valueAdresse['libelle']."</a><br>".PHP_EOL;
                     $adressesModifieesAffichees[] = $valueAdresse['idEvenementGroupeAdresse'];
                     $is1++;
                 }
@@ -286,7 +286,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                         }
                         $titre                        = "";
                         $titre                        = $a->getIntituleAdresseFrom($valueAdresse['idEvenementGroupeAdresse'], 'idEvenementGroupeAdresse', array('displayFirstTitreAdresse'=>true));
-                        $message                     .= "<a href='".$valueAdresse['url']."'>".$titre."</a><br>";
+                        $message                     .= "<a href='".$valueAdresse['url']."'>".$titre."</a><br>".PHP_EOL;
                         $adressesModifieesAffichees[] = $valueAdresse['idEvenementGroupeAdresse'];
                         $adressesModifieesAffichees   = array_unique($adressesModifieesAffichees);
                         $is2++;
@@ -302,7 +302,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                     if ($iv1==0) {
                         $message .= "Nouvelles Adresses : <br>";
                     }
-                    $message .= "<a href='".$valueAdresse['url']."'>".$valueAdresse['libelle']."</a><br>";
+                    $message .= "<a href='".$valueAdresse['url']."'>".$valueAdresse['libelle']."</a><br>".PHP_EOL;
                     $adressesModifieesAffichees[] = $valueAdresse['idEvenementGroupeAdresse'];
                     $iv1++;
                 }
@@ -325,7 +325,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                                 $titre .= ' - ';
                             }
                         }
-                        $message                     .= "<a href='".$valueAdresse['url']."'>".$titre.$valueAdresse['libelle']."</a><br>";
+                        $message                     .= "<a href='".$valueAdresse['url']."'>".$titre.$valueAdresse['libelle']."</a><br>".PHP_EOL;
                         $adressesModifieesAffichees[] = $valueAdresse['idEvenementGroupeAdresse'];
                         $adressesModifieesAffichees   = array_unique($adressesModifieesAffichees);
                         $iv2++;
@@ -356,7 +356,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                                 $titre .= ' - ';
                             }
                         }
-                        $messageStrasModif           .= "<a href='".$valueAdresse['url']."'>".$titre.$valueAdresse['libelle']."</a><br>";
+                        $messageStrasModif           .= "<a href='".$valueAdresse['url']."'>".$titre.$valueAdresse['libelle']."</a><br>".PHP_EOL;
                         $adressesModifieesAffichees[] = $valueAdresse['idEvenementGroupeAdresse'];
                         $adressesModifieesAffichees   = array_unique($adressesModifieesAffichees);
                         $is3++;
@@ -379,7 +379,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                                 $titre .= ' - ';
                             }
                         }
-                        $messageAutresModif          .= "<a href='".$valueAdresse['url']."'>".$titre.$valueAdresse['libelle']."</a><br>";
+                        $messageAutresModif          .= "<a href='".$valueAdresse['url']."'>".$titre.$valueAdresse['libelle']."</a><br>".PHP_EOL;
                         $adressesModifieesAffichees[] = $valueAdresse['idEvenementGroupeAdresse'];
                         $adressesModifieesAffichees   = array_unique($adressesModifieesAffichees);
                         $iv3++;
@@ -413,7 +413,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
     $messagePeople="<h4>Nouvelles personnes :</h4>
     <ul>";
     while ($newPerson= mysql_fetch_object($resNewPeople)) {
-        $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$newPerson->idPersonne))."'>".$newPerson->prenom." ".$newPerson->nom."</a></li>";
+        $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$newPerson->idPersonne))."'>".$newPerson->prenom." ".$newPerson->nom."</a></li>".PHP_EOL;
     }
     $messagePeople.="</ul>";
     
