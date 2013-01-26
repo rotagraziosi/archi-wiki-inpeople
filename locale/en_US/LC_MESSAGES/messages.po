@@ -3,30 +3,27 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ArchiWiki 2.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-08 15:09+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2013-01-26 12:34+0100\n"
+"Last-Translator: Pierre Rudloff <rudloff@strasweb.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: header.tpl:9 ../../../modules/header/templates/header.tpl:9
+#: header.tpl:9
+#: ../../../modules/header/templates/header.tpl:9
 #: ../../../modules/header/templates/header.tpl:8
-msgid ""
-"architectures,architecture,neudorf,contades,centre,strasbourg,photos,"
-"immeubles,monuments,immobilier,alsace"
-msgstr ""
-"architecture, Neudorf, Contades, city center, Strasbourg, pictures, "
-"buildings, monuments, realty, Alsace"
+msgid "architectures,architecture,neudorf,contades,centre,strasbourg,photos,immeubles,monuments,immobilier,alsace"
+msgstr "architecture, Neudorf, Contades, city center, Strasbourg, pictures, buildings, monuments, realty, Alsace"
 
-#: header.tpl:35 ../../../modules/header/templates/header.tpl:35
+#: header.tpl:35
+#: ../../../modules/header/templates/header.tpl:35
 #: ../../../modules/header/templates/header.tpl:42
 #: ../../../modules/header/index.php:222
 #: ../../../modules/header/templates/header.tpl:51
@@ -36,7 +33,8 @@ msgstr ""
 msgid "Accueil"
 msgstr "Home"
 
-#: header.tpl:37 ../../../modules/header/templates/header.tpl:37
+#: header.tpl:37
+#: ../../../modules/header/templates/header.tpl:37
 #: ../../../modules/archi/templates/listeUtilisateur.tpl:8
 #: ../../../modules/header/templates/header.tpl:44
 #: ../../../modules/header/templates/header.tpl:53
@@ -46,7 +44,8 @@ msgstr "Home"
 msgid "Utilisateurs"
 msgstr "Users"
 
-#: header.tpl:43 ../../../modules/header/templates/header.tpl:43
+#: header.tpl:43
+#: ../../../modules/header/templates/header.tpl:43
 #: ../../../modules/archi/templates/administration.tpl:1
 #: ../../../modules/header/templates/header.tpl:50
 #: ../../../modules/header/templates/header.tpl:59
@@ -55,7 +54,8 @@ msgstr "Users"
 msgid "Administration"
 msgstr "Administration"
 
-#: header.tpl:46 ../../../modules/header/templates/header.tpl:46
+#: header.tpl:46
+#: ../../../modules/header/templates/header.tpl:46
 #: ../../../modules/header/templates/header.tpl:53
 #: ../../../modules/archi/templates/rechercheFormulaire.tpl:30
 #: ../../../modules/archi/templates/rechercheSimple.tpl:2
@@ -65,7 +65,8 @@ msgstr "Administration"
 msgid "Recherche"
 msgstr "Search"
 
-#: header.tpl:53 ../../../modules/header/templates/header.tpl:53
+#: header.tpl:53
+#: ../../../modules/header/templates/header.tpl:53
 #: ../../../modules/header/templates/header.tpl:55
 #: ../../../modules/header/templates/header.tpl:64
 #: ../../../modules/archi/templates/rechercheSimple.tpl:21
@@ -75,12 +76,14 @@ msgstr "Search"
 msgid "Rechercher"
 msgstr "Search"
 
-#: header.tpl:62 ../../../modules/header/templates/header.tpl:62
+#: header.tpl:62
+#: ../../../modules/header/templates/header.tpl:62
 #: ../../../modules/header/templates/header.tpl:64
 msgid "Connectez-vous !"
 msgstr "Login now!"
 
-#: header.tpl:84 ../../../modules/header/templates/header.tpl:84
+#: header.tpl:84
+#: ../../../modules/header/templates/header.tpl:84
 #: ../../../modules/header/templates/header.tpl:86
 #: ../../../modules/archi/templates/edito.tpl:1
 #: ../../../modules/header/templates/header.tpl:92
@@ -89,7 +92,8 @@ msgstr "Login now!"
 msgid "Edito"
 msgstr "Column"
 
-#: header.tpl:85 ../../../modules/header/templates/header.tpl:85
+#: header.tpl:85
+#: ../../../modules/header/templates/header.tpl:85
 #: ../../../modules/header/templates/header.tpl:87
 #: ../../../modules/header/templates/header.tpl:93
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:1
@@ -99,7 +103,8 @@ msgstr "Column"
 msgid "Qui sommes nous ?"
 msgstr "Who are we?"
 
-#: header.tpl:86 ../../../modules/header/templates/header.tpl:86
+#: header.tpl:86
+#: ../../../modules/header/templates/header.tpl:86
 #: ../../../modules/header/templates/header.tpl:88
 #: ../../../modules/archi/templates/faq.tpl:2
 #: ../../../modules/header/templates/header.tpl:94
@@ -108,7 +113,8 @@ msgstr "Who are we?"
 msgid "FAQ"
 msgstr "FAQ"
 
-#: header.tpl:87 ../../../modules/header/templates/header.tpl:87
+#: header.tpl:87
+#: ../../../modules/header/templates/header.tpl:87
 #: ../../../modules/header/templates/header.tpl:89
 #: ../../../modules/header/templates/header.tpl:95
 #: ../../../modules/header/templates/header.tpl:104
@@ -116,7 +122,8 @@ msgstr "FAQ"
 msgid "Inscription"
 msgstr "Signup"
 
-#: header.tpl:88 ../../../modules/header/templates/header.tpl:88
+#: header.tpl:88
+#: ../../../modules/header/templates/header.tpl:88
 #: ../../../modules/header/templates/header.tpl:90
 #: ../../../modules/archi/templates/evenement.tpl:28
 #: ../../../modules/header/templates/header.tpl:96
@@ -127,7 +134,8 @@ msgstr "Signup"
 msgid "Adresses"
 msgstr "Addresses"
 
-#: header.tpl:94 ../../../modules/header/templates/header.tpl:94
+#: header.tpl:94
+#: ../../../modules/header/templates/header.tpl:94
 #: ../../../modules/header/templates/header.tpl:96
 #: ../../../modules/header/templates/header.tpl:102
 #: ../../../modules/header/templates/header.tpl:111
@@ -137,7 +145,8 @@ msgstr "Addresses"
 msgid "Ajoutez votre adresse"
 msgstr "Add your address"
 
-#: header.tpl:95 ../../../modules/header/templates/header.tpl:95
+#: header.tpl:95
+#: ../../../modules/header/templates/header.tpl:95
 #: ../../../modules/header/templates/header.tpl:97
 #: ../../../modules/header/templates/header.tpl:103
 #: ../../../modules/archi/includes/archiSource.class.php:656
@@ -149,7 +158,8 @@ msgstr "Add your address"
 msgid "Nos sources"
 msgstr "Our sources"
 
-#: header.tpl:96 ../../../modules/header/templates/header.tpl:96
+#: header.tpl:96
+#: ../../../modules/header/templates/header.tpl:96
 #: ../../../modules/header/templates/header.tpl:98
 #: ../../../modules/header/templates/header.tpl:104
 #: ../../../modules/header/templates/header.tpl:113
@@ -157,7 +167,8 @@ msgstr "Our sources"
 msgid "Nous contacter"
 msgstr "Contact us"
 
-#: header.tpl:97 ../../../modules/header/templates/header.tpl:97
+#: header.tpl:97
+#: ../../../modules/header/templates/header.tpl:97
 #: ../../../modules/header/templates/header.tpl:99
 #: ../../../modules/header/templates/header.tpl:105
 #: ../../../modules/header/templates/header.tpl:114
@@ -167,7 +178,8 @@ msgstr "Contact us"
 msgid "Les médias parlent de nous..."
 msgstr "The media talk about us..."
 
-#: header.tpl:98 ../../../modules/header/templates/header.tpl:98
+#: header.tpl:98
+#: ../../../modules/header/templates/header.tpl:98
 #: ../../../modules/header/templates/header.tpl:100
 #: ../../../modules/header/templates/header.tpl:106
 #: ../../../modules/header/templates/header.tpl:115
@@ -177,7 +189,8 @@ msgstr "The media talk about us..."
 msgid "Nos donateurs"
 msgstr "Our donors"
 
-#: header.tpl:39 ../../../modules/header/templates/header.tpl:39
+#: header.tpl:39
+#: ../../../modules/header/templates/header.tpl:39
 #: ../../../modules/header/templates/header.tpl:46
 #: ../../../modules/header/templates/header.tpl:55
 #: ../../../modules/header/templates/header.tpl:78
@@ -241,8 +254,7 @@ msgstr "Donate"
 #: ../../../modules/header/templates/header.tpl:160
 #: ../../../modules/header/templates/header.tpl:182
 msgid "Pour continuer à lire du contenu gratuit et de qualité, faites un don."
-msgstr ""
-"If you want to continue to be able to read free content, please donate."
+msgstr "If you want to continue to be able to read free content, please donate."
 
 #: ../../../includes/framework/config.class.php:1566
 #: ../../../includes/framework/config.class.php:1664
@@ -343,8 +355,7 @@ msgstr "You can precise your search by choosing a sub-district"
 #: ../../../includes/framework/config.class.php:1591
 #: ../../../includes/framework/config.class.php:1689
 msgid "Choisissez la rue et le numéro de l'adresse dont vous voulez parler"
-msgstr ""
-"Please choose the street and the number of the address you want to talk about"
+msgstr "Please choose the street and the number of the address you want to talk about"
 
 #: ../../../includes/framework/config.class.php:1582
 #: ../../../includes/framework/config.class.php:1583
@@ -367,9 +378,7 @@ msgstr "You can add a title for your article"
 #: ../../../includes/framework/config.class.php:1598
 #: ../../../includes/framework/config.class.php:1615
 #: ../../../includes/framework/config.class.php:1616
-msgid ""
-"Selectionnez une partie de votre texte et cliquez sur ce bouton pour mettre "
-"le texte en gras"
+msgid "Selectionnez une partie de votre texte et cliquez sur ce bouton pour mettre le texte en gras"
 msgstr "Select a piece of text and click this button to make it bold"
 
 #: ../../../includes/framework/config.class.php:1589
@@ -381,9 +390,7 @@ msgstr "Select a piece of text and click this button to make it bold"
 #: ../../../includes/framework/config.class.php:1602
 #: ../../../includes/framework/config.class.php:1619
 #: ../../../includes/framework/config.class.php:1620
-msgid ""
-"Selectionnez une partie de votre texte et cliquez sur ce bouton pour mettre "
-"le texte en italique"
+msgid "Selectionnez une partie de votre texte et cliquez sur ce bouton pour mettre le texte en italique"
 msgstr "Select a piece of text and click this button to make it italic"
 
 #: ../../../includes/framework/config.class.php:1593
@@ -395,9 +402,7 @@ msgstr "Select a piece of text and click this button to make it italic"
 #: ../../../includes/framework/config.class.php:1606
 #: ../../../includes/framework/config.class.php:1623
 #: ../../../includes/framework/config.class.php:1624
-msgid ""
-"Selectionnez une partie de votre texte et cliquez sur ce bouton pour "
-"souligner le texte selectionné"
+msgid "Selectionnez une partie de votre texte et cliquez sur ce bouton pour souligner le texte selectionné"
 msgstr "Select a piece of text and click this button to underline it"
 
 #: ../../../includes/framework/config.class.php:1597
@@ -409,9 +414,7 @@ msgstr "Select a piece of text and click this button to underline it"
 #: ../../../includes/framework/config.class.php:1610
 #: ../../../includes/framework/config.class.php:1627
 #: ../../../includes/framework/config.class.php:1628
-msgid ""
-"Sélectionnez une partie de texte à mettre entre cotes et cliquez sur ce "
-"bouton"
+msgid "Sélectionnez une partie de texte à mettre entre cotes et cliquez sur ce bouton"
 msgstr "Select a piece of text and click this button to add curly braces"
 
 #: ../../../includes/framework/config.class.php:1601
@@ -466,10 +469,7 @@ msgstr "Text of your article"
 #: ../../../includes/framework/config.class.php:1649
 #: ../../../includes/framework/config.class.php:1644
 #: ../../../includes/framework/config.class.php:1650
-msgid ""
-"Datez votre article : vous pouvez préciser une date de plusieurs "
-"manières<br> Exemple : <br>Une année 1900<br>Un mois et une année "
-"03/2008<br>Avec le jour 02/08/2008"
+msgid "Datez votre article : vous pouvez préciser une date de plusieurs manières<br> Exemple : <br>Une année 1900<br>Un mois et une année 03/2008<br>Avec le jour 02/08/2008"
 msgstr "In your article: you can add a year or a complete date (dd/mm/yyy)"
 
 #: ../../../includes/framework/config.class.php:1622
@@ -481,9 +481,7 @@ msgstr "In your article: you can add a year or a complete date (dd/mm/yyy)"
 #: ../../../includes/framework/config.class.php:1635
 #: ../../../includes/framework/config.class.php:1655
 #: ../../../includes/framework/config.class.php:1656
-msgid ""
-"Vous pouvez préciser une source à partir de laquelle vous vous êtes "
-"inspiré<br> pour écrire votre article"
+msgid "Vous pouvez préciser une source à partir de laquelle vous vous êtes inspiré<br> pour écrire votre article"
 msgstr "You can indicate a source that you used to<br> write this article"
 
 #: ../../../includes/framework/config.class.php:1626
@@ -515,12 +513,8 @@ msgstr "Please precise the type of event linked to your article"
 #: ../../../includes/framework/config.class.php:1637
 #: ../../../includes/framework/config.class.php:1643
 #: ../../../includes/framework/config.class.php:1645
-msgid ""
-"Le bâtiment est-il inscrit à l'Inventaire Supplémentaire des Monuments "
-"Historiques"
-msgstr ""
-"Is this building registered at the Inventaire Supplémentaire des Monuments "
-"Historiques?"
+msgid "Le bâtiment est-il inscrit à l'Inventaire Supplémentaire des Monuments Historiques"
+msgstr "Is this building registered at the Inventaire Supplémentaire des Monuments Historiques?"
 
 #: ../../../includes/framework/config.class.php:1636
 #: ../../../includes/framework/config.class.php:1637
@@ -532,8 +526,7 @@ msgstr ""
 #: ../../../includes/framework/config.class.php:1669
 #: ../../../includes/framework/config.class.php:1670
 msgid "Le bâtiment est-il inscrit au Monuments Historiques"
-msgstr ""
-"Is this building registered at the Inventaire général du patrimoine culturel?"
+msgstr "Is this building registered at the Inventaire général du patrimoine culturel?"
 
 #: ../../../includes/framework/config.class.php:1642
 #: ../../../includes/framework/config.class.php:1643
@@ -554,13 +547,8 @@ msgstr "You can add the architectural movement of the building"
 #: ../../../includes/framework/config.class.php:1650
 #: ../../../includes/framework/config.class.php:1656
 #: ../../../includes/framework/config.class.php:1658
-msgid ""
-"Précisez si une personnalité est liée à l'évènement en cliquant sur "
-"choisir<br><font color=red>Cliquez sur une personne de la liste pour la "
-"retirer de la liste.</font>"
-msgstr ""
-"Indicate if a person is linked to the event by clicking on Choose.<br><font "
-"color=red>Click on a person in the list to remove it from the list.</font>"
+msgid "Précisez si une personnalité est liée à l'évènement en cliquant sur choisir<br><font color=red>Cliquez sur une personne de la liste pour la retirer de la liste.</font>"
+msgstr "Indicate if a person is linked to the event by clicking on Choose.<br><font color=red>Click on a person in the list to remove it from the list.</font>"
 
 #: ../../../includes/framework/config.class.php:1651
 #: ../../../includes/framework/config.class.php:1652
@@ -581,12 +569,8 @@ msgstr "Confirm your article"
 #: ../../../includes/framework/config.class.php:1659
 #: ../../../includes/framework/config.class.php:1665
 #: ../../../includes/framework/config.class.php:1667
-msgid ""
-"Renseignez dans cette case le numéro d'archive fourni par les archives "
-"municipales si vous le connaissez. Exemple : 44W250"
-msgstr ""
-"Write here the number provided by the municipal archives, if you have it. "
-"(Example: 44W250)"
+msgid "Renseignez dans cette case le numéro d'archive fourni par les archives municipales si vous le connaissez. Exemple : 44W250"
+msgstr "Write here the number provided by the municipal archives, if you have it. (Example: 44W250)"
 
 #: ../../../includes/framework/config.class.php:1680
 #: ../../../includes/framework/config.class.php:1681
@@ -717,9 +701,7 @@ msgid "Anglais"
 msgstr "English"
 
 #: ../../../modules/archi/templates/accueil.tpl:3
-msgid ""
-"Pour pérenniser le site et assurer les nouveaux développements, merci de "
-"votre soutien financier qui nous est indispensable pour continuer à exister."
+msgid "Pour pérenniser le site et assurer les nouveaux développements, merci de votre soutien financier qui nous est indispensable pour continuer à exister."
 msgstr "In order to maintain and improve this website, we need your support !"
 
 #: ../../../modules/archi/templates/accueil.tpl:74
@@ -908,12 +890,8 @@ msgid "Detail de l'image"
 msgstr "Picture details"
 
 #: ../../../modules/archi/templates/detailImage.tpl:16
-msgid ""
-"L'utilisation des images est autorisée dans un but non commercial et sous "
-"condition d'indiquer la source : www.archi-strasbourg.org"
-msgstr ""
-"You can reuse these pictures for a non-commercial use, as long as you "
-"indicate the source (www.archi-strasbourg.org)"
+msgid "L'utilisation des images est autorisée dans un but non commercial et sous condition d'indiquer la source : www.archi-strasbourg.org"
+msgstr "You can reuse these pictures for a non-commercial use, as long as you indicate the source (www.archi-strasbourg.org)"
 
 #: ../../../modules/archi/templates/detailImage.tpl:27
 #: ../../../modules/archi/templates/detailImage.tpl:29
@@ -950,21 +928,15 @@ msgid "Donateurs"
 msgstr "Donors"
 
 #: ../../../modules/archi/templates/donateurs.tpl:3
-msgid ""
-"Vous trouverez ci-dessous la liste de nos mécènes et donateurs (par ordre de "
-"don, du plus récent au plus ancien) :"
-msgstr ""
-"Here is the list of our sponsors and donors (in order of donation, from "
-"newest to oldest):"
+msgid "Vous trouverez ci-dessous la liste de nos mécènes et donateurs (par ordre de don, du plus récent au plus ancien) :"
+msgstr "Here is the list of our sponsors and donors (in order of donation, from newest to oldest):"
 
 #: ../../../modules/archi/templates/donateurs.tpl:13
 msgid "Agence Raphaëlimmo"
 msgstr "Agence Raphaëlimmo"
 
 #: ../../../modules/archi/templates/donateurs.tpl:15
-msgid ""
-"Raphaëlimmo est une agence immobilière spécialisée où vous trouverez des "
-"biens immobiliers dans la région de Strasbourg"
+msgid "Raphaëlimmo est une agence immobilière spécialisée où vous trouverez des biens immobiliers dans la région de Strasbourg"
 msgstr "Raphaëlimmo is a real estate specialist of the Strasbourg area"
 
 #: ../../../modules/archi/templates/donateurs.tpl:17
@@ -977,9 +949,7 @@ msgstr "Association Villa 17"
 
 #: ../../../modules/archi/templates/donateurs.tpl:32
 msgid "Villa 17 est une association pour la défense du patrimoine Wilhelmien."
-msgstr ""
-"Villa 17 is nonprofit organization for the protection of the Wilhelminian "
-"heritage."
+msgstr "Villa 17 is nonprofit organization for the protection of the Wilhelminian heritage."
 
 #: ../../../modules/archi/templates/donateurs.tpl:34
 #: ../../../modules/archi/templates/donateurs.tpl:49
@@ -988,29 +958,18 @@ msgstr "Go to their website"
 
 #: ../../../modules/archi/templates/donateurs.tpl:44
 #: ../../../modules/archi/templates/donateurs.tpl:56
-msgid ""
-"Merci à tout nos mécènes et donateurs qui permettent au site de continuer à "
-"exister."
+msgid "Merci à tout nos mécènes et donateurs qui permettent au site de continuer à exister."
 msgstr "Thanks to all our donors, this website could not exist without them."
 
 #: ../../../modules/archi/templates/donateurs.tpl:46
 #: ../../../modules/archi/templates/donateurs.tpl:58
-msgid ""
-"Pour faire partie de nos mécènes et ainsi bénéficier de votre logo et d'un "
-"lien vers votre site (entreprise et association), vous pouvez soutenir notre "
-"association par un don à partir de 80 euros pour une année."
-msgstr ""
-"In order to become our sponsor and have your logo and a link to your website "
-"on our website, you can support us by donating 80 €/year."
+msgid "Pour faire partie de nos mécènes et ainsi bénéficier de votre logo et d'un lien vers votre site (entreprise et association), vous pouvez soutenir notre association par un don à partir de 80 euros pour une année."
+msgstr "In order to become our sponsor and have your logo and a link to your website on our website, you can support us by donating 80 €/year."
 
 #: ../../../modules/archi/templates/donateurs.tpl:47
 #: ../../../modules/archi/templates/donateurs.tpl:59
-msgid ""
-"Les particuliers peuvent aussi nous aider, à partir de 40 euros pour un "
-"membre donateur, et ainsi figurer s'il le souhaite, sur cette page."
-msgstr ""
-"Individuals can help us too, for 40 €/year, and appear (if they want to) on "
-"this list."
+msgid "Les particuliers peuvent aussi nous aider, à partir de 40 euros pour un membre donateur, et ainsi figurer s'il le souhaite, sur cette page."
+msgstr "Individuals can help us too, for 40 €/year, and appear (if they want to) on this list."
 
 #: ../../../modules/archi/templates/donateurs.tpl:50
 #: ../../../modules/archi/templates/donateurs.tpl:62
@@ -1026,89 +985,35 @@ msgid "Historique d'Archi-Strasbourg"
 msgstr "History of Archi-Strasbourg"
 
 #: ../../../modules/archi/templates/edito.tpl:4
-msgid ""
-"Archi-Strasbourg existe depuis 2003. Le site a nécessité pour sa première "
-"version en ligne, un mois de développement. C'est très court et je tiens "
-"tout de suite à remercier Romain qui a développé cette première version."
-msgstr ""
-"Archi-Strasbourg was created in 2003. The first version was developed in a "
-"month. This is very short and I really want to thank Romain who created this "
-"first version."
+msgid "Archi-Strasbourg existe depuis 2003. Le site a nécessité pour sa première version en ligne, un mois de développement. C'est très court et je tiens tout de suite à remercier Romain qui a développé cette première version."
+msgstr "Archi-Strasbourg was created in 2003. The first version was developed in a month. This is very short and I really want to thank Romain who created this first version."
 
 #: ../../../modules/archi/templates/edito.tpl:6
-msgid ""
-"Au départ l'idée était de présenter des photos des édifices les plus "
-"remarquables. Dans cette version il était déjà prévu que plusieurs "
-"administrateurs puissent ajouter ou modifier des photos. En pratique, faute "
-"d'une utilisation aisée, j'étais le seul à rajouter des photos ou "
-"informations."
-msgstr ""
-"At first, the idea was to publish pictures of the most remarkable buildings. "
-"In this version, we already planned to let multiple admins add or modify "
-"pictures. But, because the website was quite complex, I was the only one to "
-"add pictures or information."
+msgid "Au départ l'idée était de présenter des photos des édifices les plus remarquables. Dans cette version il était déjà prévu que plusieurs administrateurs puissent ajouter ou modifier des photos. En pratique, faute d'une utilisation aisée, j'étais le seul à rajouter des photos ou informations."
+msgstr "At first, the idea was to publish pictures of the most remarkable buildings. In this version, we already planned to let multiple admins add or modify pictures. But, because the website was quite complex, I was the only one to add pictures or information."
 
 #: ../../../modules/archi/templates/edito.tpl:8
-msgid ""
-"Au fur et à mesure de mes connaissances j'ai pris en photos tout type "
-"d'immeuble, parc et monument. J'ai eu envie de partager ce que je voyais "
-"dans la rue : les rénovations, les ravalements, les travaux de voirie, "
-"etc... bref tout ce que l'espace public rendait accessible à mon appareil "
-"photo. La rue au quotidien n'inspire peut être rien mais mis bout à bout "
-"chaque épisode du quotidien nous raconte une histoire. Prendre ces photos "
-"pour les garder dans un recoin de mon disque dur n'avais aucun intérêt."
-msgstr ""
-"While I was learning more about urbanism, I took pictures of all kind of "
-"buildings, parks or monuments. I grew the will to share what I saw in the "
-"street:  renovations, road works, etc, everything that public space had to "
-"offer to my camera. The everyday street might seem irrelevant, but as a "
-"whole it tells us a story. Taking these pictures just to let them sleep on "
-"my hard drive would have been uninteresting."
+msgid "Au fur et à mesure de mes connaissances j'ai pris en photos tout type d'immeuble, parc et monument. J'ai eu envie de partager ce que je voyais dans la rue : les rénovations, les ravalements, les travaux de voirie, etc... bref tout ce que l'espace public rendait accessible à mon appareil photo. La rue au quotidien n'inspire peut être rien mais mis bout à bout chaque épisode du quotidien nous raconte une histoire. Prendre ces photos pour les garder dans un recoin de mon disque dur n'avais aucun intérêt."
+msgstr "While I was learning more about urbanism, I took pictures of all kind of buildings, parks or monuments. I grew the will to share what I saw in the street:  renovations, road works, etc, everything that public space had to offer to my camera. The everyday street might seem irrelevant, but as a whole it tells us a story. Taking these pictures just to let them sleep on my hard drive would have been uninteresting."
 
 #: ../../../modules/archi/templates/edito.tpl:10
-msgid ""
-"Entre la première version (celle de Romain) et ce jusqu'en Avril 2008 il n'y "
-"a quasiment pas eu d'amélioration, preuve que dès l'origine le modèle était "
-"bien pensé. A mesure que le nombre de photos et d'adresses croissaient, les "
-"visites sur le site ont augmenté pour atteindre en moyenne 400 visiteurs "
-"uniques par jour."
-msgstr ""
-"The first version was not updated until April 2008, showing that the website "
-"was already well thought. With a growing number of pictures and addresses, "
-"the website reached an average of 400 visitors per day."
+msgid "Entre la première version (celle de Romain) et ce jusqu'en Avril 2008 il n'y a quasiment pas eu d'amélioration, preuve que dès l'origine le modèle était bien pensé. A mesure que le nombre de photos et d'adresses croissaient, les visites sur le site ont augmenté pour atteindre en moyenne 400 visiteurs uniques par jour."
+msgstr "The first version was not updated until April 2008, showing that the website was already well thought. With a growing number of pictures and addresses, the website reached an average of 400 visitors per day."
 
 #: ../../../modules/archi/templates/edito.tpl:12
-msgid ""
-"Le nombre de visites croissant a entrainé de plus en plus de contacts avec "
-"les internautes, notamment pour me poser des questions mais aussi pour me "
-"proposer des photos à ajouter sur le site."
-msgstr ""
-"The growth of the number of visitors caused more and more interaction with "
-"the users that were asking me questions and sending me pictures to add on "
-"the website."
+msgid "Le nombre de visites croissant a entrainé de plus en plus de contacts avec les internautes, notamment pour me poser des questions mais aussi pour me proposer des photos à ajouter sur le site."
+msgstr "The growth of the number of visitors caused more and more interaction with the users that were asking me questions and sending me pictures to add on the website."
 
 #: ../../../modules/archi/templates/edito.tpl:15
 msgid "L'évolution :"
 msgstr "Evolution:"
 
 #: ../../../modules/archi/templates/edito.tpl:17
-msgid ""
-"Pour palier aux principaux inconvénients de la version d'origine (2003) il a "
-"été décidé de créer une nouvelle version ou chaque internaute pourrait "
-"contribuer gratuitement. L'idée de cette nouvelle version est née depuis "
-"longtemps. En fait depuis l'origine du projet il était question que "
-"quiconque puisse rajouter des photos. Mais cette version a tardé par manque "
-"de temps..."
-msgstr ""
-"To correct some limits of the original version (2003), it was decided to "
-"create a new version where each user could contribute freely. This idea had "
-"been around since the beginning of the project but had not been implemented "
-"due to a lack of time."
+msgid "Pour palier aux principaux inconvénients de la version d'origine (2003) il a été décidé de créer une nouvelle version ou chaque internaute pourrait contribuer gratuitement. L'idée de cette nouvelle version est née depuis longtemps. En fait depuis l'origine du projet il était question que quiconque puisse rajouter des photos. Mais cette version a tardé par manque de temps..."
+msgstr "To correct some limits of the original version (2003), it was decided to create a new version where each user could contribute freely. This idea had been around since the beginning of the project but had not been implemented due to a lack of time."
 
 #: ../../../modules/archi/templates/edito.tpl:19
-msgid ""
-"Archi-Strasbourg nouvelle version permet donc à chaque internaute "
-"enregistré :"
+msgid "Archi-Strasbourg nouvelle version permet donc à chaque internaute enregistré :"
 msgstr "The new version of Archi-Strasbourg lets every registered user:"
 
 #: ../../../modules/archi/templates/edito.tpl:21
@@ -1120,17 +1025,12 @@ msgid "d'ajouter des actualités et des informations complémentaires"
 msgstr "add news and information"
 
 #: ../../../modules/archi/templates/edito.tpl:24
-msgid ""
-"Un internaute de passage sur le site (non enregistré) peut s'il le souhaite "
-"ajouter des commentaires sur chaque événement."
+msgid "Un internaute de passage sur le site (non enregistré) peut s'il le souhaite ajouter des commentaires sur chaque événement."
 msgstr "A guest (non-registered user) can add comments on each event."
 
 #: ../../../modules/archi/templates/edito.tpl:26
-msgid ""
-"La nouvelle version permet de multiplier les possibilités d'ajout et de "
-"recherche d'information. La recherche s'effectue de 2 façons :"
-msgstr ""
-"The new version adds new ways of searching the information. You can search:"
+msgid "La nouvelle version permet de multiplier les possibilités d'ajout et de recherche d'information. La recherche s'effectue de 2 façons :"
+msgstr "The new version adds new ways of searching the information. You can search:"
 
 #: ../../../modules/archi/templates/edito.tpl:28
 msgid "sur critères (architecture, style architectural, époque)"
@@ -1149,36 +1049,15 @@ msgid "Panorama des sites existants"
 msgstr "Other websites"
 
 #: ../../../modules/archi/templates/edito.tpl:35
-msgid ""
-"C'est parce que sur le web aucun site ne répondait à mes attentes que l'idée "
-"de développer un site spécifique sur les archives du patrimoine et de "
-"l'architecture m'est venu."
-msgstr ""
-"It is because I did not find any website that fitted my needs that I decided "
-"to start a website about patrimony and architecture."
+msgid "C'est parce que sur le web aucun site ne répondait à mes attentes que l'idée de développer un site spécifique sur les archives du patrimoine et de l'architecture m'est venu."
+msgstr "It is because I did not find any website that fitted my needs that I decided to start a website about patrimony and architecture."
 
 #: ../../../modules/archi/templates/edito.tpl:37
-msgid ""
-"Plusieurs sites présentent tel ou tel immeuble, parc ou édifice mais aucun "
-"ne présente de façon structurée un catalogue d'archives. Les archives "
-"municipales répondent de façon quasi exhaustive à l'évolution du patrimoine "
-"pour ces 100 dernières années, mais le soucis c'est l'accès et surtout la "
-"disponibilité de l'information. Il fallait donc un support moderne pour "
-"qu'avec un site unique on puisse avoir un panorama complet sur l'évolution "
-"complète d'une ville ces 100, 200, 300 et d'avantage d'années... En allant à "
-"l'extrême jusqu'à la création de Strasbourg ville romaine."
-msgstr ""
-"Several websites talk about a particular building, park, etc, but none of "
-"theme presents a structured archive. The communal archives presents the "
-"patrimony's evolution over the last 100 years, but the information is not "
-"accessible enough. So we needed a modern media in order to have on one "
-"place, a panorama of the evolution of a city over the last 100, 200, 300 or "
-"more years, until the creation of Strasbourg as a Roman city."
+msgid "Plusieurs sites présentent tel ou tel immeuble, parc ou édifice mais aucun ne présente de façon structurée un catalogue d'archives. Les archives municipales répondent de façon quasi exhaustive à l'évolution du patrimoine pour ces 100 dernières années, mais le soucis c'est l'accès et surtout la disponibilité de l'information. Il fallait donc un support moderne pour qu'avec un site unique on puisse avoir un panorama complet sur l'évolution complète d'une ville ces 100, 200, 300 et d'avantage d'années... En allant à l'extrême jusqu'à la création de Strasbourg ville romaine."
+msgstr "Several websites talk about a particular building, park, etc, but none of theme presents a structured archive. The communal archives presents the patrimony's evolution over the last 100 years, but the information is not accessible enough. So we needed a modern media in order to have on one place, a panorama of the evolution of a city over the last 100, 200, 300 or more years, until the creation of Strasbourg as a Roman city."
 
 #: ../../../modules/archi/templates/edito.tpl:39
-msgid ""
-"Voici quelques sites qui répondent à chaque fois de façon partielle au sujet "
-"qui me tient à coeur - l'évolution de la ville :"
+msgid "Voici quelques sites qui répondent à chaque fois de façon partielle au sujet qui me tient à coeur - l'évolution de la ville :"
 msgstr "Here are some websites that partially cover the subject:"
 
 #: ../../../modules/archi/templates/edito.tpl:41
@@ -1204,28 +1083,16 @@ msgid "Inconvénients :"
 msgstr "Disadvantages:"
 
 #: ../../../modules/archi/templates/edito.tpl:44
-msgid ""
-"pas d'historique, pas de notion d'architecture ni de date, les photos sont "
-"petites et de mauvaise qualité"
-msgstr ""
-"no history, no information about the architecture, no dates, the pictures "
-"are too small"
+msgid "pas d'historique, pas de notion d'architecture ni de date, les photos sont petites et de mauvaise qualité"
+msgstr "no history, no information about the architecture, no dates, the pictures are too small"
 
 #: ../../../modules/archi/templates/edito.tpl:47
-msgid ""
-"Ce type de site est efficace pour l'envoi des photos par les internautes, "
-"mais ne permet pas une recherche efficace (architecte, style architecturale, "
-"adresse)."
-msgstr ""
-"This kind of website is useful to get pictures from Internet users, but does "
-"not allow an efficient search (architect, architectural style, address)."
+msgid "Ce type de site est efficace pour l'envoi des photos par les internautes, mais ne permet pas une recherche efficace (architecte, style architecturale, adresse)."
+msgstr "This kind of website is useful to get pictures from Internet users, but does not allow an efficient search (architect, architectural style, address)."
 
 #: ../../../modules/archi/templates/edito.tpl:49
-msgid ""
-"le site bénéficie de la notoriété des DNA (Dernière Nouvelles d'Alsace)."
-msgstr ""
-"the website benefits from the reputation of the DNA (Dernières Nouvelles "
-"d'Alsace)."
+msgid "le site bénéficie de la notoriété des DNA (Dernière Nouvelles d'Alsace)."
+msgstr "the website benefits from the reputation of the DNA (Dernières Nouvelles d'Alsace)."
 
 #: ../../../modules/archi/templates/edito.tpl:50
 #: ../../../modules/archi/templates/edito.tpl:55
@@ -1237,12 +1104,8 @@ msgid "moteur de recherche inefficace, pas d'historique"
 msgstr "ineffective search engine, no history"
 
 #: ../../../modules/archi/templates/edito.tpl:53
-msgid ""
-"très complet pour l'information d'immeubles remarquables mais ne permet pas "
-"une recherche efficace (par style architectural, architecte, époque, etc...) "
-msgstr ""
-"comprehensive information about remarkable buildings does not allow an "
-"efficient search (by architectural style, architect, period, etc)"
+msgid "très complet pour l'information d'immeubles remarquables mais ne permet pas une recherche efficace (par style architectural, architecte, époque, etc...) "
+msgstr "comprehensive information about remarkable buildings does not allow an efficient search (by architectural style, architect, period, etc)"
 
 #: ../../../modules/archi/templates/edito.tpl:55
 msgid "trop général pour le sujet traité"
@@ -1253,382 +1116,172 @@ msgid "modification simple et efficace"
 msgstr "simple and effective way to contribute"
 
 #: ../../../modules/archi/templates/edito.tpl:60
-msgid ""
-"Il existe beaucoup d'autres sites qui à chaque fois sont plus ou moins "
-"générals et parlent d'un ou plusieurs sujets intéressant. Tous les citer ne "
-"serait pas possible et n'aurait pas d'intérêt."
-msgstr ""
-"There is a lot of more or less comprehensive websites on this subject but we "
-"could not cite them all."
+msgid "Il existe beaucoup d'autres sites qui à chaque fois sont plus ou moins générals et parlent d'un ou plusieurs sujets intéressant. Tous les citer ne serait pas possible et n'aurait pas d'intérêt."
+msgstr "There is a lot of more or less comprehensive websites on this subject but we could not cite them all."
 
 #: ../../../modules/archi/templates/edito.tpl:62
 msgid "Développement"
 msgstr "Development"
 
 #: ../../../modules/archi/templates/edito.tpl:64
-msgid ""
-"Avant d'entreprendre le développement d'un projet aussi important qu'archi-"
-"strasbourg.org 2éme édition, une seconde étude de l'existant a été effectuée."
-msgstr ""
-"Before starting the huge work on the second version, we analyzed the "
-"existing website."
+msgid "Avant d'entreprendre le développement d'un projet aussi important qu'archi-strasbourg.org 2éme édition, une seconde étude de l'existant a été effectuée."
+msgstr "Before starting the huge work on the second version, we analyzed the existing website."
 
 #: ../../../modules/archi/templates/edito.tpl:66
-msgid ""
-"Cette seconde étude c'est donnée comme objectif d'identifier un ou plusieurs "
-"sites existant suffisamment souples et ouverts pour permettre de saisir les "
-"informations dont j'avais besoin tout en évitant un développement"
-msgstr ""
-"This study aimed at identifying one or more existing websites that would be "
-"open enough to add all the necessary information without having to develop a "
-"new website"
+msgid "Cette seconde étude c'est donnée comme objectif d'identifier un ou plusieurs sites existant suffisamment souples et ouverts pour permettre de saisir les informations dont j'avais besoin tout en évitant un développement"
+msgstr "This study aimed at identifying one or more existing websites that would be open enough to add all the necessary information without having to develop a new website"
 
 #: ../../../modules/archi/templates/edito.tpl:68
 msgid "Le seul site qui aurait pu répondre à ce besoin est fr.wikipedia.org"
 msgstr "The only website that could have fitted was wikipedia.org"
 
 #: ../../../modules/archi/templates/edito.tpl:70
-msgid ""
-"Néanmoins victime de sa trop grande souplesse, fr.wikipedia.org n'a "
-"finalement pas été retenu en raison d'une limitation trop importante dans "
-"les recherches et les classements des catégories. Tout étant géré de façon "
-"manuelle la saisie et surtout la remontée d'informations aurait été trop "
-"laborieuse. Le site est trop général et le sujet archi-strasbourg.org trop "
-"vaste pour encombrer un site déjà bien fourni. Souhaitons toutefois beaucoup "
-"de bien à l'évolution de wikipedia qui est très réussi et riche "
-"d'information."
-msgstr ""
-"However, Wikipedia was not selected because its search and category system "
-"was too limited. Everything being done manually, it would have been too much "
-"work. Moreover, the website is too general and the subject of archi-"
-"strasbourg.org too wide. However, we wish well to the Wikipedia project."
+msgid "Néanmoins victime de sa trop grande souplesse, fr.wikipedia.org n'a finalement pas été retenu en raison d'une limitation trop importante dans les recherches et les classements des catégories. Tout étant géré de façon manuelle la saisie et surtout la remontée d'informations aurait été trop laborieuse. Le site est trop général et le sujet archi-strasbourg.org trop vaste pour encombrer un site déjà bien fourni. Souhaitons toutefois beaucoup de bien à l'évolution de wikipedia qui est très réussi et riche d'information."
+msgstr "However, Wikipedia was not selected because its search and category system was too limited. Everything being done manually, it would have been too much work. Moreover, the website is too general and the subject of archi-strasbourg.org too wide. However, we wish well to the Wikipedia project."
 
 #: ../../../modules/archi/templates/edito.tpl:72
-msgid ""
-"N'étant pas convaincu par wikipedia, j'ai également imaginé d'améliorer et "
-"de redévelopper partiellement le code source d'Archi-Strasbourg.org 1ére "
-"version. Après plusieurs discussions notamment avec Romain, le concepteur "
-"original, j'ai laissé tomber cette possibilité. Le site de part son "
-"architecture était trop ancien et trop de notion nouvelle aurais remis en "
-"cause le modèle existant."
-msgstr ""
-"Unconvinced by Wikipedia, I also envisioned to improve and redevelop "
-"partially the source code of Archi-Strasbourg.org's 1st version. After "
-"several discussions with Romain, the original developer, I gave up on that. "
-"The website's architecture was too old and we had too many new concepts to "
-"add."
+msgid "N'étant pas convaincu par wikipedia, j'ai également imaginé d'améliorer et de redévelopper partiellement le code source d'Archi-Strasbourg.org 1ére version. Après plusieurs discussions notamment avec Romain, le concepteur original, j'ai laissé tomber cette possibilité. Le site de part son architecture était trop ancien et trop de notion nouvelle aurais remis en cause le modèle existant."
+msgstr "Unconvinced by Wikipedia, I also envisioned to improve and redevelop partially the source code of Archi-Strasbourg.org's 1st version. After several discussions with Romain, the original developer, I gave up on that. The website's architecture was too old and we had too many new concepts to add."
 
 #: ../../../modules/archi/templates/edito.tpl:74
-msgid ""
-"C'est ainsi qu'Archi-Strasbourg v2 a été redéveloppé de zéro ou presque. "
-"Nous avons juste utilisé un template, c'est à dire un modèle, qui gérait "
-"déjà la partie connexion/déconnexion ainsi que la gestion des utilisateurs."
-msgstr ""
-"This is how Archi-Strasbourg v2 was more or less rebuild from the ground. We "
-"just used an existing template for user session management."
+msgid "C'est ainsi qu'Archi-Strasbourg v2 a été redéveloppé de zéro ou presque. Nous avons juste utilisé un template, c'est à dire un modèle, qui gérait déjà la partie connexion/déconnexion ainsi que la gestion des utilisateurs."
+msgstr "This is how Archi-Strasbourg v2 was more or less rebuild from the ground. We just used an existing template for user session management."
 
 #: ../../../modules/archi/templates/edito.tpl:76
 msgid "Objectifs du site"
 msgstr "Objectives of the website"
 
 #: ../../../modules/archi/templates/edito.tpl:78
-msgid ""
-"L'objectif d'Archi-Strasbourg.org est d'inventorier l'ensemble des "
-"immeubles, parcs et monuments de l'agglomération de Strasbourg"
-msgstr ""
-"The goal was to list all the buildings, parks and monuments of Strasbourg "
-"and around."
+msgid "L'objectif d'Archi-Strasbourg.org est d'inventorier l'ensemble des immeubles, parcs et monuments de l'agglomération de Strasbourg"
+msgstr "The goal was to list all the buildings, parks and monuments of Strasbourg and around."
 
 #: ../../../modules/archi/templates/edito.tpl:80
-msgid ""
-"Dans quel intérêt les plus sceptiques d'entre vous vont certainement se "
-"demander ?"
+msgid "Dans quel intérêt les plus sceptiques d'entre vous vont certainement se demander ?"
 msgstr "But what is the point, you may ask?"
 
 #: ../../../modules/archi/templates/edito.tpl:82
-msgid ""
-"De la même façon qu'un dictionnaire donne la définition de tous les mots, "
-"Archi-Strasbourg.org se donne pour ambition d'informatiser l'ensemble des "
-"adresses de la ville, avec à chaque fois au moins une photo pour illustrer "
-"le propos. Je me souviens des débuts de Wikipédia, lorsqu'il n'y avait que "
-"quelques lettres... aujourd'hui en moins de 10 ans il s'agit certainement de "
-"la plus grande base de connaissance accessible depuis le web."
-msgstr ""
-"In the same way a dictionnery gives the definition of every word, Archi-"
-"Strasbourg aims at computerizing every address of the city, with at least "
-"one picture to illustrate it. I remember that at the beginning Wikipedia "
-"just had some letters, and now it is definitely the widest knowledge base on "
-"the Web."
+msgid "De la même façon qu'un dictionnaire donne la définition de tous les mots, Archi-Strasbourg.org se donne pour ambition d'informatiser l'ensemble des adresses de la ville, avec à chaque fois au moins une photo pour illustrer le propos. Je me souviens des débuts de Wikipédia, lorsqu'il n'y avait que quelques lettres... aujourd'hui en moins de 10 ans il s'agit certainement de la plus grande base de connaissance accessible depuis le web."
+msgstr "In the same way a dictionnery gives the definition of every word, Archi-Strasbourg aims at computerizing every address of the city, with at least one picture to illustrate it. I remember that at the beginning Wikipedia just had some letters, and now it is definitely the widest knowledge base on the Web."
 
 #: ../../../modules/archi/templates/edito.tpl:85
 msgid "Faire vivre nos rues : les événements"
 msgstr "Life in our streets: the events"
 
 #: ../../../modules/archi/templates/edito.tpl:87
-msgid ""
-"La notion d'événement est au coeur du projet. Cette notion d'événement "
-"concerne aussi bien les actualités des bâtiments et des monuments, que les "
-"extensions, les démolitions ou autres ravalements."
-msgstr ""
-"The concept of events is the heart of the project. It applies to new "
-"buildings and monuments, extensions, demolitions, renovations, etc."
+msgid "La notion d'événement est au coeur du projet. Cette notion d'événement concerne aussi bien les actualités des bâtiments et des monuments, que les extensions, les démolitions ou autres ravalements."
+msgstr "The concept of events is the heart of the project. It applies to new buildings and monuments, extensions, demolitions, renovations, etc."
 
 #: ../../../modules/archi/templates/edito.tpl:89
-msgid ""
-"Les événements font vivre le site et reflètent les changements dans nos rues "
-"et quartiers. Il existe deux grands types d'événements : les travaux et les "
-"événements culturels"
-msgstr ""
-"The events are what makes this website dynamic and reflect changes on our "
-"streets and neighbourhood. There are two main types of events: works and "
-"cultural events"
+msgid "Les événements font vivre le site et reflètent les changements dans nos rues et quartiers. Il existe deux grands types d'événements : les travaux et les événements culturels"
+msgstr "The events are what makes this website dynamic and reflect changes on our streets and neighbourhood. There are two main types of events: works and cultural events"
 
 #: ../../../modules/archi/templates/edito.tpl:91
 msgid "Un évènement égal une source"
 msgstr "You have to give at least one source per event"
 
 #: ../../../modules/archi/templates/edito.tpl:93
-msgid ""
-"Pour chaque événements il est vivement recommandé d'associer une source, "
-"c'est à dire de citer la référence. La source peut être un quotidien, un "
-"livre, un magazine ou encore un site web."
-msgstr ""
-"For each event, you are encouraged to add a source (i.e. a reference). It "
-"can be a newspaper, a book, a magazine or a website."
+msgid "Pour chaque événements il est vivement recommandé d'associer une source, c'est à dire de citer la référence. La source peut être un quotidien, un livre, un magazine ou encore un site web."
+msgstr "For each event, you are encouraged to add a source (i.e. a reference). It can be a newspaper, a book, a magazine or a website."
 
 #: ../../../modules/archi/templates/edito.tpl:95
-msgid ""
-"Plus les événements seront vérifiables et plus le site sera crédible. Qui "
-"voudrais consulter un site dont les informations ne sont pas certaines ? En "
-"cas de doute sur une information il convient soit :"
-msgstr ""
-"More events will be verified and the site will be more credible. Who would "
-"visit a site whose information is not certain? If in doubt please:"
+msgid "Plus les événements seront vérifiables et plus le site sera crédible. Qui voudrais consulter un site dont les informations ne sont pas certaines ? En cas de doute sur une information il convient soit :"
+msgstr "More events will be verified and the site will be more credible. Who would visit a site whose information is not certain? If in doubt please:"
 
 #: ../../../modules/archi/templates/edito.tpl:97
 msgid "de s'abstenir"
 msgstr "to refrain"
 
 #: ../../../modules/archi/templates/edito.tpl:98
-msgid ""
-"de préciser que l'on est pas sûr, dans l'attente qu'un autre internaute ou "
-"que vous même puissiez vérifier l'information"
-msgstr ""
-"indicate that you are not sure and wait for another user (or yourself) to "
-"check the information"
+msgid "de préciser que l'on est pas sûr, dans l'attente qu'un autre internaute ou que vous même puissiez vérifier l'information"
+msgstr "indicate that you are not sure and wait for another user (or yourself) to check the information"
 
 #: ../../../modules/archi/templates/edito.tpl:100
-msgid ""
-"A titre d'exemple, le site Wikipédia a été victime à de nombreuses reprise "
-"de son succès : le site étant mis à jour par de nombreux internautes, "
-"certaines informations se sont avérées fausses, ce qui a entrainé une "
-"décrédibilisation du site. Actuellement Wikipédia tente de regagner la "
-"confiance des internautes en étant plus vigilant sur son contenu et en "
-"multipliant les demandes de sources (références)"
-msgstr ""
-"For example, Wikipedia has been a victim of its success: the website being "
-"update by many different users, some information has been proven wrong, "
-"which led to a loss of credibility of the website. Now, Wikipedia is trying "
-"to regain the confidence of Internet users by being more careful about its "
-"content and systematically asking for sources/references."
+msgid "A titre d'exemple, le site Wikipédia a été victime à de nombreuses reprise de son succès : le site étant mis à jour par de nombreux internautes, certaines informations se sont avérées fausses, ce qui a entrainé une décrédibilisation du site. Actuellement Wikipédia tente de regagner la confiance des internautes en étant plus vigilant sur son contenu et en multipliant les demandes de sources (références)"
+msgstr "For example, Wikipedia has been a victim of its success: the website being update by many different users, some information has been proven wrong, which led to a loss of credibility of the website. Now, Wikipedia is trying to regain the confidence of Internet users by being more careful about its content and systematically asking for sources/references."
 
 #: ../../../modules/archi/templates/edito.tpl:102
 msgid "Devenir une référence"
 msgstr "Become a reference"
 
 #: ../../../modules/archi/templates/edito.tpl:104
-msgid ""
-"Avec Archi-Strasbourg l'information qui constitue l'espace public est "
-"organisée. C'est le propre de l'informatique que d'essayer de rationaliser "
-"l'information. Rendre l'information accessible et compréhensible par tous."
-msgstr ""
-"With Archi-Strasbourg, public information is organized. It is the role of a "
-"computer to streamline information, make it accessible and understandable to "
-"everyone."
+msgid "Avec Archi-Strasbourg l'information qui constitue l'espace public est organisée. C'est le propre de l'informatique que d'essayer de rationaliser l'information. Rendre l'information accessible et compréhensible par tous."
+msgstr "With Archi-Strasbourg, public information is organized. It is the role of a computer to streamline information, make it accessible and understandable to everyone."
 
 #: ../../../modules/archi/templates/edito.tpl:106
-msgid ""
-"Il est aujourd'hui difficile de se représenter ce qu'était telle ou telle "
-"place avant les guerres ou avant les grands projets d'urbanisme."
-msgstr ""
-"Today, it is difficult to imagine what this or that place was before the war "
-"or before the major urban development projects."
+msgid "Il est aujourd'hui difficile de se représenter ce qu'était telle ou telle place avant les guerres ou avant les grands projets d'urbanisme."
+msgstr "Today, it is difficult to imagine what this or that place was before the war or before the major urban development projects."
 
 #: ../../../modules/archi/templates/edito.tpl:108
-msgid ""
-"Archi-Strasbourg.org se donne comme ambition de présenter l'historique de "
-"chaque immeuble ou monument. Des photos ou des croquis d'époque "
-"accompagnerons le plus souvent chaque adresse."
-msgstr ""
-"Archi-Strasbourg.org aims at presenting the history of each building or "
-"monument, with old pictures or sketches for each address."
+msgid "Archi-Strasbourg.org se donne comme ambition de présenter l'historique de chaque immeuble ou monument. Des photos ou des croquis d'époque accompagnerons le plus souvent chaque adresse."
+msgstr "Archi-Strasbourg.org aims at presenting the history of each building or monument, with old pictures or sketches for each address."
 
 #: ../../../modules/archi/templates/edito.tpl:110
 msgid "Gratuité du service"
 msgstr "A free service"
 
 #: ../../../modules/archi/templates/edito.tpl:112
-msgid ""
-"Archi-Strasbourg.org est gratuit, cela concerne aussi bien la mise à jour "
-"que l'accès à l'ensemble du site. Il n'est toutefois pas exclu que d'ici "
-"quelques mois un lien 'faites un don' et de petits bandeaux de pub fassent "
-"leur apparition (pas de popup, mais sans doute de petites vignettes type "
-"google ad words). Ces bandeaux seront fonction du succès des dons et surtout "
-"de l'avis des utilisateurs."
-msgstr ""
-"Archi-Strasbourg.org is enteriley free (as in beer). However, it is not "
-"excluded that we had some ads if we don't get enough donations."
+msgid "Archi-Strasbourg.org est gratuit, cela concerne aussi bien la mise à jour que l'accès à l'ensemble du site. Il n'est toutefois pas exclu que d'ici quelques mois un lien 'faites un don' et de petits bandeaux de pub fassent leur apparition (pas de popup, mais sans doute de petites vignettes type google ad words). Ces bandeaux seront fonction du succès des dons et surtout de l'avis des utilisateurs."
+msgstr "Archi-Strasbourg.org is enteriley free (as in beer). However, it is not excluded that we had some ads if we don't get enough donations."
 
 #: ../../../modules/archi/templates/edito.tpl:114
 msgid "Actuellement le site ne coûte rien car hébergé gratuitement au sein de"
-msgstr ""
-"Currently, the website does not cost anything because it is hosted for free "
-"by"
+msgstr "Currently, the website does not cost anything because it is hosted for free by"
 
 #: ../../../modules/archi/templates/edito.tpl:114
 msgid "ma société"
 msgstr "my company"
 
 #: ../../../modules/archi/templates/edito.tpl:114
-msgid ""
-"cependant à terme pour prendre son autonomie le site aura besoin de son "
-"propre serveur. Les besoins en stockage d'archi-strasbourg.org augmenterons "
-"avec sa notoriété. Le plus gros consommateur de ressource c'est le poids des "
-"images sur le serveur."
-msgstr ""
-"however, the website will eventually need its own server, as the storage "
-"requirements are growing exponentially, most of it being for the pictures."
+msgid "cependant à terme pour prendre son autonomie le site aura besoin de son propre serveur. Les besoins en stockage d'archi-strasbourg.org augmenterons avec sa notoriété. Le plus gros consommateur de ressource c'est le poids des images sur le serveur."
+msgstr "however, the website will eventually need its own server, as the storage requirements are growing exponentially, most of it being for the pictures."
 
 #: ../../../modules/archi/templates/edito.tpl:116
 msgid "Améliorations et développements futurs"
 msgstr "Improvements and future development"
 
 #: ../../../modules/archi/templates/edito.tpl:118
-msgid ""
-"A terme en fonction du succès de la nouvelle version il est envisageable que "
-"le site soit étendu à d'autres agglomérations."
-msgstr ""
-"Depending on the success of the new version, it is possible that the site "
-"will eventually be extended to other cities."
+msgid "A terme en fonction du succès de la nouvelle version il est envisageable que le site soit étendu à d'autres agglomérations."
+msgstr "Depending on the success of the new version, it is possible that the site will eventually be extended to other cities."
 
 #: ../../../modules/archi/templates/edito.tpl:120
-msgid ""
-"On peut imaginer intégrer les archives de la ville sur le site après un "
-"travail de numérisation et un accord avec la ville. Cet accord permettrait "
-"d'accréditer le caractère historique et procurerait nombre de croquis et "
-"schémas aujourd'hui difficiles d'accès. Actuellement pour avoir les plans "
-"des façades d'époque il faut le plus souvent se déplacer physiquement et "
-"faire des recherches pour savoir ou se trouve le document. Avec Archi-"
-"Strasbourg.org ce serait possible quasiment tout de suite."
-msgstr ""
-"We could imagine having the communal archives on the website, with a "
-"partnership with the city. This partnership could provide us sketches and "
-"diagrams that are to find. In order to get old plans, you need to move "
-"physically and now exactly where to find the document. With Archi-Strasbourg."
-"org it would be available instantly."
+msgid "On peut imaginer intégrer les archives de la ville sur le site après un travail de numérisation et un accord avec la ville. Cet accord permettrait d'accréditer le caractère historique et procurerait nombre de croquis et schémas aujourd'hui difficiles d'accès. Actuellement pour avoir les plans des façades d'époque il faut le plus souvent se déplacer physiquement et faire des recherches pour savoir ou se trouve le document. Avec Archi-Strasbourg.org ce serait possible quasiment tout de suite."
+msgstr "We could imagine having the communal archives on the website, with a partnership with the city. This partnership could provide us sketches and diagrams that are to find. In order to get old plans, you need to move physically and now exactly where to find the document. With Archi-Strasbourg.org it would be available instantly."
 
 #: ../../../modules/archi/templates/edito.tpl:122
 msgid "Pour conclure..."
 msgstr "To conclude..."
 
 #: ../../../modules/archi/templates/edito.tpl:124
-msgid ""
-"Cette idée de créer une bibliothèque d'images de nos rues n'est pas nouvelle "
-"et j'en suis bien conscient. En son temps le banquier Albert Kahn avait créé "
-"un fond appelé 'Archives de la Planète' (1907-1930). Ce mécène avait payé "
-"des photographes, la plupart de jeunes étudiants qu'il avait formé, pour "
-"photographier plus de 50 pays de façon à ramener, je cite « un maximum de "
-"souvenirs d'une vie qui allait bientôt changer ». Il avait vu juste. Ce "
-"visionnaire à permis de collecter 70000 photographies qui constituent un "
-"fond unique et représentent une mémoire sur la vie des générations passées."
-msgstr ""
-"I am aware that the idea of creating of library of pictures of our streets "
-"is not new. In his time, the banker Albert Kahn had created a fund called "
-"'Archives of the Planet' (1907-1930). He had payed young photographers, "
-"mostly young students he had trained, in order to take pictures of more than "
-"50 pays, in order to bring \"a maximum of memories of a life that would soon "
-"change\". And he was right. He helped collect 70,000 pictures that would be "
-"part of a unique fund and represent the memories of the past generations."
+msgid "Cette idée de créer une bibliothèque d'images de nos rues n'est pas nouvelle et j'en suis bien conscient. En son temps le banquier Albert Kahn avait créé un fond appelé 'Archives de la Planète' (1907-1930). Ce mécène avait payé des photographes, la plupart de jeunes étudiants qu'il avait formé, pour photographier plus de 50 pays de façon à ramener, je cite « un maximum de souvenirs d'une vie qui allait bientôt changer ». Il avait vu juste. Ce visionnaire à permis de collecter 70000 photographies qui constituent un fond unique et représentent une mémoire sur la vie des générations passées."
+msgstr "I am aware that the idea of creating of library of pictures of our streets is not new. In his time, the banker Albert Kahn had created a fund called 'Archives of the Planet' (1907-1930). He had payed young photographers, mostly young students he had trained, in order to take pictures of more than 50 pays, in order to bring \"a maximum of memories of a life that would soon change\". And he was right. He helped collect 70,000 pictures that would be part of a unique fund and represent the memories of the past generations."
 
 #: ../../../modules/archi/templates/edito.tpl:126
-msgid ""
-"Plus proche de nous, Adolphe Seyboth, a rédigé en 1890 puis 1894 deux "
-"ouvrages sur les rues de Strasbourg. Ces ouvrages sont illustrés de "
-"nombreuses gravures du vieux Strasbourg. Seyboth conscient des changements "
-"de son époque, nous a laissé deux ouvrages passionnés qui racontent la vie "
-"de ses contemporains au détour de chaque rue du vieux Strasbourg. Les "
-"volumes de Seyboth font encore référence aujourd'hui pour celui qui "
-"s'intéresse au Strasbourg d'avant 1870."
-msgstr ""
-"Closer to us, Adolphe Seyboth has written in 1890 and in 1894 two books "
-"about the streets of Strasbourg. These books are illustrated with several "
-"engravings of the old city. Seyboth, aware of the changes of his time, left "
-"us two passionate books telling us about the life of his contemporaries "
-"around every street of the old Strasbourg. Seyboth's books are still a "
-"reference for anyone who is interested in Strasbourg before 1870."
+msgid "Plus proche de nous, Adolphe Seyboth, a rédigé en 1890 puis 1894 deux ouvrages sur les rues de Strasbourg. Ces ouvrages sont illustrés de nombreuses gravures du vieux Strasbourg. Seyboth conscient des changements de son époque, nous a laissé deux ouvrages passionnés qui racontent la vie de ses contemporains au détour de chaque rue du vieux Strasbourg. Les volumes de Seyboth font encore référence aujourd'hui pour celui qui s'intéresse au Strasbourg d'avant 1870."
+msgstr "Closer to us, Adolphe Seyboth has written in 1890 and in 1894 two books about the streets of Strasbourg. These books are illustrated with several engravings of the old city. Seyboth, aware of the changes of his time, left us two passionate books telling us about the life of his contemporaries around every street of the old Strasbourg. Seyboth's books are still a reference for anyone who is interested in Strasbourg before 1870."
 
 #: ../../../modules/archi/templates/edito.tpl:128
-msgid ""
-"Pour le Strasbourg d'aujourd'hui il existe une bible dont je me sers très "
-"fréquemment intitulé 'Dictionnaire Historique des rues de Strasbourg' "
-"coécrit par Léon Daul, Maurice Moszberger et Théodore Rieger"
-msgstr ""
-"About the modern Strasbourg, there is a reference book that I use frequently "
-"called 'Dictionnaire Historique des rues de Strasbourg', writtent by Léon "
-"Daul, Maurice Moszberger and Théodore Rieger"
+msgid "Pour le Strasbourg d'aujourd'hui il existe une bible dont je me sers très fréquemment intitulé 'Dictionnaire Historique des rues de Strasbourg' coécrit par Léon Daul, Maurice Moszberger et Théodore Rieger"
+msgstr "About the modern Strasbourg, there is a reference book that I use frequently called 'Dictionnaire Historique des rues de Strasbourg', writtent by Léon Daul, Maurice Moszberger and Théodore Rieger"
 
 #: ../../../modules/archi/templates/edito.tpl:130
-msgid ""
-"Archi-Strasbourg.org doit se positionner dans la même optique, avec les "
-"outils d'aujourd'hui. En structurant l'information dans un modèle logique, "
-"nous la rendons accessible au plus grand nombre. Archi-Strasbourg.org est un "
-"outil. Un outil du savoir et de la connaissance. C'est un outil pratique "
-"dont l'usage est accessible à tous."
-msgstr ""
-"Archi-Strasbourg.org must act in the same way, with today's tools. By "
-"structuring the information in a logical model, we make it accessible to the "
-"greatest number. Archi-Strasbourg.org is a tool. A tool for learning and "
-"knowledge. This is a handy tool who is accessible to everyone."
+msgid "Archi-Strasbourg.org doit se positionner dans la même optique, avec les outils d'aujourd'hui. En structurant l'information dans un modèle logique, nous la rendons accessible au plus grand nombre. Archi-Strasbourg.org est un outil. Un outil du savoir et de la connaissance. C'est un outil pratique dont l'usage est accessible à tous."
+msgstr "Archi-Strasbourg.org must act in the same way, with today's tools. By structuring the information in a logical model, we make it accessible to the greatest number. Archi-Strasbourg.org is a tool. A tool for learning and knowledge. This is a handy tool who is accessible to everyone."
 
 #: ../../../modules/archi/templates/edito.tpl:132
-msgid ""
-"En permettant un accès plus aisé à l'information de notre ville nous "
-"donnerons un accès plus aisé à la culture et permettrons d'améliorer notre "
-"quotidien en évitant de renouveler les erreurs du passé."
-msgstr ""
-"By allowing easier access to information about our city, we will give easier "
-"access to culture and we will help improve our daily life, by avoiding "
-"mistakes of the past."
+msgid "En permettant un accès plus aisé à l'information de notre ville nous donnerons un accès plus aisé à la culture et permettrons d'améliorer notre quotidien en évitant de renouveler les erreurs du passé."
+msgstr "By allowing easier access to information about our city, we will give easier access to culture and we will help improve our daily life, by avoiding mistakes of the past."
 
 #: ../../../modules/archi/templates/edito.tpl:134
-msgid ""
-"En son temps Vauban avait besoin de fabriquer des plans reliefs pour "
-"anticiper les conflits et organiser les défenses appropriées. Les "
-"architectes d'aujourd'hui construisent de nouveaux immeubles en tenant "
-"compte de l'environnement actuel et passé. Archi-Strasbourg.org représente à "
-"cet effet un formidable outil. Les urbanismes à une échelle encore plus "
-"globale ont besoin d'un maximum de renseignements sur l'état actuel et passé "
-"de notre ville pour préparer son avenir."
-msgstr ""
-"Vauban in his time needed to make plans in order to anticipate conflicts and "
-"organize appriopriate defenses. Today's architects are building new "
-"buildings taking into account the current and past environment. For this, "
-"Archi-Strasbourg.org is a wonderful tool. The urban planning to a more "
-"global scale needs as much information on the past and current state of our "
-"city as possible, in order to prepare its future."
+msgid "En son temps Vauban avait besoin de fabriquer des plans reliefs pour anticiper les conflits et organiser les défenses appropriées. Les architectes d'aujourd'hui construisent de nouveaux immeubles en tenant compte de l'environnement actuel et passé. Archi-Strasbourg.org représente à cet effet un formidable outil. Les urbanismes à une échelle encore plus globale ont besoin d'un maximum de renseignements sur l'état actuel et passé de notre ville pour préparer son avenir."
+msgstr "Vauban in his time needed to make plans in order to anticipate conflicts and organize appriopriate defenses. Today's architects are building new buildings taking into account the current and past environment. For this, Archi-Strasbourg.org is a wonderful tool. The urban planning to a more global scale needs as much information on the past and current state of our city as possible, in order to prepare its future."
 
 #: ../../../modules/archi/templates/edito.tpl:136
-msgid ""
-"Archi-Strasbourg.org c'est le passé, le présent et l'avenir de notre ville !"
-msgstr ""
-"Archi-Strasbourg.org is the past, the present and the future of your city!"
+msgid "Archi-Strasbourg.org c'est le passé, le présent et l'avenir de notre ville !"
+msgstr "Archi-Strasbourg.org is the past, the present and the future of your city!"
 
 #: ../../../modules/archi/templates/edito.tpl:139
-msgid ""
-"Passionné d'architecture & d'urbanisme Concepteur du projet Archi-Strasbourg."
-"org"
-msgstr ""
-"Passionate about architecture & urbanism; founder of Archi-Strasbourg.org"
+msgid "Passionné d'architecture & d'urbanisme Concepteur du projet Archi-Strasbourg.org"
+msgstr "Passionate about architecture & urbanism; founder of Archi-Strasbourg.org"
 
 #: ../../../modules/archi/templates/encartAccueilCommentaires.tpl:3
 msgid "Derniers commentaires"
@@ -1881,27 +1534,16 @@ msgid "Qu'est ce que Archi-Strasbourg ?"
 msgstr "What is Archi-Strasbourg?"
 
 #: ../../../modules/archi/templates/faq.tpl:5
-msgid ""
-"Archi-strasbourg est un site internet proposant d'inventorier l'ensemble des "
-"immeubles, parcs et monuments de Strasbourg et son agglomération."
-msgstr ""
-"Archi-Strasbourg is a website offering an inventory of all buildings, parks "
-"and monuments in Strasbourg and its suburbs."
+msgid "Archi-strasbourg est un site internet proposant d'inventorier l'ensemble des immeubles, parcs et monuments de Strasbourg et son agglomération."
+msgstr "Archi-Strasbourg is a website offering an inventory of all buildings, parks and monuments in Strasbourg and its suburbs."
 
 #: ../../../modules/archi/templates/faq.tpl:7
 msgid "Pourquoi Archi-Strasbourg ?"
 msgstr "Why Archi-Strasbourg?"
 
 #: ../../../modules/archi/templates/faq.tpl:9
-msgid ""
-"Archi-strasbourg est né d'une volonté de partage de la connaissance et de "
-"l'information. Sur internet on trouve presque tout sur tout de façon "
-"éparpillée. Archi-strasbourg se donne donc comme but de classer "
-"l'information de façon rationnelle."
-msgstr ""
-"Archi-strasbourg was born of a desire to share knowledge and information. On "
-"the Internet you can find almost everything about everything, scattered. "
-"Archi-Strasbourg aims at organizing information in a rational way."
+msgid "Archi-strasbourg est né d'une volonté de partage de la connaissance et de l'information. Sur internet on trouve presque tout sur tout de façon éparpillée. Archi-strasbourg se donne donc comme but de classer l'information de façon rationnelle."
+msgstr "Archi-strasbourg was born of a desire to share knowledge and information. On the Internet you can find almost everything about everything, scattered. Archi-Strasbourg aims at organizing information in a rational way."
 
 #: ../../../modules/archi/templates/faq.tpl:10
 msgid "Que trouve-t-on comme information ?"
@@ -1932,14 +1574,8 @@ msgid "Comment est classée l'information ?"
 msgstr "How is the information categorized?"
 
 #: ../../../modules/archi/templates/faq.tpl:23
-msgid ""
-"L'information est classée par adresse. Chaque adresse possède un ou "
-"plusieurs événements. Chaque adresse est rangée dans une rue. La rue est "
-"rangée dans un sous quartier et le sous quartier dans un quartier."
-msgstr ""
-"Information is categorized by address. Each address contans one or more "
-"events. Each address is in a street. Each street is in a sub-district and "
-"each sub-district is in a neighbourhood."
+msgid "L'information est classée par adresse. Chaque adresse possède un ou plusieurs événements. Chaque adresse est rangée dans une rue. La rue est rangée dans un sous quartier et le sous quartier dans un quartier."
+msgstr "Information is categorized by address. Each address contans one or more events. Each address is in a street. Each street is in a sub-district and each sub-district is in a neighbourhood."
 
 #: ../../../modules/archi/templates/faq.tpl:26
 msgid "Comment trouver l'information ?"
@@ -1962,44 +1598,31 @@ msgid "carte de type google maps"
 msgstr "a Google Maps map"
 
 #: ../../../modules/archi/templates/faq.tpl:28
-msgid ""
-"Pour chaque événement il est possible et recommandé d'indiquer une source "
-"c'est à dire d'où vient l'information."
-msgstr ""
-"For each, you can indicate a source (i.e. where the information comes from)."
+msgid "Pour chaque événement il est possible et recommandé d'indiquer une source c'est à dire d'où vient l'information."
+msgstr "For each, you can indicate a source (i.e. where the information comes from)."
 
 #: ../../../modules/archi/templates/faq.tpl:32
 msgid "Qui peut mettre à jour Archi-Strasbourg ?"
 msgstr "Who can contribute to Archi-Strasbourg ?"
 
 #: ../../../modules/archi/templates/faq.tpl:34
-msgid ""
-"Tout utilisateur enregistré. L'enregistrement est gratuit il suffit de "
-"communiquer son email et de choisir un mot de passe. Une fois l'email validé "
-"vous pouvez saisir de nouveaux événements. Pour s'enregistrer"
-msgstr ""
-"Any registered user. Registration is free, simply enter your email address "
-"and choose a password. Once your email address is validated, you can add new "
-"events. To register"
+msgid "Tout utilisateur enregistré. L'enregistrement est gratuit il suffit de communiquer son email et de choisir un mot de passe. Une fois l'email validé vous pouvez saisir de nouveaux événements. Pour s'enregistrer"
+msgstr "Any registered user. Registration is free, simply enter your email address and choose a password. Once your email address is validated, you can add new events. To register"
 
 #: ../../../modules/archi/templates/faq.tpl:34
 msgid "cliquez ici"
 msgstr "click here"
 
 #: ../../../modules/archi/templates/faq.tpl:36
-msgid ""
-"Un utilisateur non enregistré (internaute) peut laisser sur chaque événement "
-"un commentaire un peu à la façon d'un blog"
-msgstr ""
-"A non-registered user (guest) can comment on each event (like on a blog)"
+msgid "Un utilisateur non enregistré (internaute) peut laisser sur chaque événement un commentaire un peu à la façon d'un blog"
+msgstr "A non-registered user (guest) can comment on each event (like on a blog)"
 
 #: ../../../modules/archi/templates/faq.tpl:40
 msgid "Archi-Strasbourg est t-il gratuit ?"
 msgstr "Is Archi-Strasbourg free (as in beer) ?"
 
 #: ../../../modules/archi/templates/faq.tpl:42
-msgid ""
-"Archi-Strasbourg est totalement gratuit, il est maintenu et hébergé par "
+msgid "Archi-Strasbourg est totalement gratuit, il est maintenu et hébergé par "
 msgstr "Archi-Strasbourg is totally free, it is maintained and hosted by "
 
 #: ../../../modules/archi/templates/faq.tpl:42
@@ -2137,15 +1760,8 @@ msgid "Fichier"
 msgstr "File"
 
 #: ../../../modules/archi/templates/inscription.tpl:5
-msgid ""
-"L'inscription sur www.archi-strasbourg.com vous permet de contribuer au site "
-"en donnant des informations sur un immeuble, une adresse, en ajoutant des "
-"photos, ou en modifiant les articles existants. Vous pourrez aussi recevoir "
-"les nouvelles adresses par mail."
-msgstr ""
-"An account on www.archi-strasbourg.com allows you to contribute by adding "
-"informations on buildings and addresses, or pictures. You can also receive "
-"mail alerts."
+msgid "L'inscription sur www.archi-strasbourg.com vous permet de contribuer au site en donnant des informations sur un immeuble, une adresse, en ajoutant des photos, ou en modifiant les articles existants. Vous pourrez aussi recevoir les nouvelles adresses par mail."
+msgstr "An account on www.archi-strasbourg.com allows you to contribute by adding informations on buildings and addresses, or pictures. You can also receive mail alerts."
 
 #: ../../../modules/archi/templates/inscription.tpl:14
 #: ../../../modules/archi/templates/listePersonnes.tpl:21
@@ -2362,12 +1978,8 @@ msgid "Suppr"
 msgstr "Del"
 
 #: ../../../modules/archi/templates/nouveauDossier.tpl:141
-msgid ""
-"Si vous souhaitez que nous ajoutions une rue, un quartier, un sous quartier "
-"ou une ville, faites nous en part grâce au formulaire de"
-msgstr ""
-"If you want us to add a street, a neighbouhood, a sub-district ,or a city, "
-"please tell us with the form:"
+msgid "Si vous souhaitez que nous ajoutions une rue, un quartier, un sous quartier ou une ville, faites nous en part grâce au formulaire de"
+msgstr "If you want us to add a street, a neighbouhood, a sub-district ,or a city, please tell us with the form:"
 
 #: ../../../modules/archi/templates/nouveauDossier.tpl:141
 msgid "contact"
@@ -2474,9 +2086,7 @@ msgid "Vous pouvez ajouter une personne ici."
 msgstr "You can add a person here."
 
 #: ../../../modules/archi/templates/personneFormulaire.tpl:3
-msgid ""
-"Remplissez le champ métier pour ajouter un nouveau métier. Sinon, prenez-en "
-"un existant."
+msgid "Remplissez le champ métier pour ajouter un nouveau métier. Sinon, prenez-en un existant."
 msgstr "Fill the field to add a new job or choose an existing job."
 
 #: ../../../modules/archi/templates/personneFormulaire.tpl:21
@@ -2563,7 +2173,8 @@ msgstr "None"
 
 #: ../../../modules/archi/templates/rechercheSimple.tpl:23
 #: ../../../modules/archi/includes/archiRecherche.class.php:1370
-#: ../../../modules/header/index.php:245 ../../../modules/header/index.php:250
+#: ../../../modules/header/index.php:245
+#: ../../../modules/header/index.php:250
 msgid "Recherche avancée"
 msgstr "Advanced search"
 
@@ -2580,12 +2191,8 @@ msgid "Type :"
 msgstr "Type:"
 
 #: ../../../modules/archi/templates/sourceFormulaire.tpl:3
-msgid ""
-"Vous pouvez ajouter une source ici, si vous entrez un type de source dans le "
-"champ approprié, vous ajouterez un nouveau type de source."
-msgstr ""
-"You can add a source here. If you fill the Source type field, you will add a "
-"new type."
+msgid "Vous pouvez ajouter une source ici, si vous entrez un type de source dans le champ approprié, vous ajouterez un nouveau type de source."
+msgstr "You can add a source here. If you fill the Source type field, you will add a new type."
 
 #: ../../../modules/archi/templates/sourceFormulaire.tpl:14
 msgid "Type de source"
@@ -2596,33 +2203,16 @@ msgid "Nouveau type de source"
 msgstr "New source type"
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:4
-msgid ""
-"Archi-strasbourg.org vous aide dans vos recherches ? Alors aidez notre "
-"association (à but non lucratif) en faisant un don. Même un don de 1 €  sera "
-"toujours apprécié !"
-msgstr ""
-"Archi-strasbourg.org helps you in your research? So help our (nonprofit) "
-"organization by making a donation. Even a 1 € donation is always appreciated!"
+msgid "Archi-strasbourg.org vous aide dans vos recherches ? Alors aidez notre association (à but non lucratif) en faisant un don. Même un don de 1 €  sera toujours apprécié !"
+msgstr "Archi-strasbourg.org helps you in your research? So help our (nonprofit) organization by making a donation. Even a 1 € donation is always appreciated!"
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:6
-msgid ""
-"Archi-strasbourg.org est un site gratuit, mis à jour par ses membres "
-"bénévoles. Pour continuer à assurer les nouveaux développements et prendre "
-"en charge les coûts d'hébergement et de maintenance, nous avons besoin de "
-"vous."
-msgstr ""
-"Archi-strasbourg.org is a free website, updated by volunteers. We need you "
-"to continue to ensure new developments and support the hosting and "
-"maintenance costs."
+msgid "Archi-strasbourg.org est un site gratuit, mis à jour par ses membres bénévoles. Pour continuer à assurer les nouveaux développements et prendre en charge les coûts d'hébergement et de maintenance, nous avons besoin de vous."
+msgstr "Archi-strasbourg.org is a free website, updated by volunteers. We need you to continue to ensure new developments and support the hosting and maintenance costs."
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:8
-msgid ""
-"En faisant un don vous participez à la pérennisation du site – jamais "
-"acquise - et à la construction d'un vieil idéal sur le web : fournir un "
-"contenu de qualité gratuitement."
-msgstr ""
-"By donating, you are keeping the website alive and building an ideal on the "
-"Web: provide quality content for free."
+msgid "En faisant un don vous participez à la pérennisation du site – jamais acquise - et à la construction d'un vieil idéal sur le web : fournir un contenu de qualité gratuitement."
+msgstr "By donating, you are keeping the website alive and building an ideal on the Web: provide quality content for free."
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:10
 msgid "Pour nous aider financièrement, vous pouvez faire un don de 3 façons :"
@@ -2661,12 +2251,8 @@ msgid "Télécharger le RIB au format PDF"
 msgstr "Download the BBAN in PDF"
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:38
-msgid ""
-"par chèque à l'ordre de <i>Association Archi-strasbourg</i> en l'envoyant au "
-"siège de l'association :"
-msgstr ""
-"with a check to  <i>Association Archi-strasbourg</i> sent to the "
-"association's office:"
+msgid "par chèque à l'ordre de <i>Association Archi-strasbourg</i> en l'envoyant au siège de l'association :"
+msgstr "with a check to  <i>Association Archi-strasbourg</i> sent to the association's office:"
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
 msgid "IMPORTANT :"
@@ -2674,28 +2260,16 @@ msgstr "IMPORTANT:"
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
 #, php-format
-msgid ""
-"Notre association est reconnu d'intérêt général, dès réception du don vous "
-"recevrez un reçu fiscal vous permettant de déduire 66% de votre don."
-msgstr ""
-"Upon receipt of the donation you will receive a tax receipt allowing you to "
-"deduct 66% of your donation."
+msgid "Notre association est reconnu d'intérêt général, dès réception du don vous recevrez un reçu fiscal vous permettant de déduire 66% de votre don."
+msgstr "Upon receipt of the donation you will receive a tax receipt allowing you to deduct 66% of your donation."
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
 #, php-format
-msgid ""
-"Exemple : pour un don de 50 € le coût à votre charge sera de 17€ après "
-"réduction d'impôts. Pour les entreprises les dons sont déductible à 60% dans "
-"la limite de 0,5% du chiffre d'affaire."
-msgstr ""
-"Example: For a 50 € donation, the real cost for you will be 17 € after tax "
-"cut. For business, 60 % of donations are deductible, within 0.5 % of "
-"turnover."
+msgid "Exemple : pour un don de 50 € le coût à votre charge sera de 17€ après réduction d'impôts. Pour les entreprises les dons sont déductible à 60% dans la limite de 0,5% du chiffre d'affaire."
+msgstr "Example: For a 50 € donation, the real cost for you will be 17 € after tax cut. For business, 60 % of donations are deductible, within 0.5 % of turnover."
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
-msgid ""
-"Possibilité d'apparaitre dans notre rubrique donateur avec nom et lien sur "
-"votre site."
+msgid "Possibilité d'apparaitre dans notre rubrique donateur avec nom et lien sur votre site."
 msgstr "We can add your name and website in your donor section."
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:45
@@ -2703,12 +2277,8 @@ msgid "Voir notre rubrique donateur"
 msgstr "See our Donors page"
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:48
-msgid ""
-"Vous pouvez aussi nous aider en rejoignant notre association et en "
-"participant à nos activités bénévoles. Merci de "
-msgstr ""
-"You can also help us by joining our association and participate in our "
-"volunteer activities. Please "
+msgid "Vous pouvez aussi nous aider en rejoignant notre association et en participant à nos activités bénévoles. Merci de "
+msgstr "You can also help us by joining our association and participate in our volunteer activities. Please "
 
 #: ../../../modules/archi/templates/staticFaireUnDon.tpl:48
 msgid "prendre contact avec nous"
@@ -2736,21 +2306,14 @@ msgid ""
 "ont décidés de se constituer en association pour mieux\r\n"
 "faire connaître leurs actions auprès des élus,\r\n"
 "institutions, chercheurs et le public."
-msgstr ""
-"was at first a private initiative (2003) before becoming a collaborative "
-"website (2008). Joined by a dozen of contributors who contributed to the "
-"success of the site, the users decided to form a nonprofit association in "
-"order to better promote their action to elected representatives, "
-"institutions, researchers and the public."
+msgstr "was at first a private initiative (2003) before becoming a collaborative website (2008). Joined by a dozen of contributors who contributed to the success of the site, the users decided to form a nonprofit association in order to better promote their action to elected representatives, institutions, researchers and the public."
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:14
 msgid ""
 "Ainsi est\r\n"
 "née l'association Archi-Strasbourg le 23 septembre 2011, dont\r\n"
 "l'objet est le suivant :"
-msgstr ""
-"Thus was born the association Archi-Strasbourg on 23 September 2011, whose "
-"purpose is:"
+msgstr "Thus was born the association Archi-Strasbourg on 23 September 2011, whose purpose is:"
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:17
 msgid ""
@@ -2758,10 +2321,7 @@ msgid ""
 "est constituée pour faciliter l'accès à\r\n"
 "l'information historique, architecturale et patrimoniale de la ville\r\n"
 "de Strasbourg et des communes environnantes."
-msgstr ""
-"The association is established in order to facilitate access to historical "
-"and architectural information about the city of Strasbourg and the "
-"surrounding communities."
+msgstr "The association is established in order to facilitate access to historical and architectural information about the city of Strasbourg and the surrounding communities."
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:21
 msgid ""
@@ -2769,28 +2329,21 @@ msgid ""
 "est de constituer une base de données des bâtiments et\r\n"
 "lieux de Strasbourg, accessible au plus grand nombre, par internet ou\r\n"
 "tout autre support."
-msgstr ""
-"The goal is to build a database of buildings and places of Strasbourg, "
-"accessible to as many people as possible, via the Internet or any other "
-"media."
+msgstr "The goal is to build a database of buildings and places of Strasbourg, accessible to as many people as possible, via the Internet or any other media."
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:25
 msgid ""
 "Les\r\n"
 "bâtiments et lieux de Strasbourg, sont répertoriés\r\n"
 "quelle que soit l'époque, le style et le type de bâtiment."
-msgstr ""
-"Buildings and places of Strasbourg are listed regardless of the period, "
-"style and type."
+msgstr "Buildings and places of Strasbourg are listed regardless of the period, style and type."
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:28
 msgid ""
 "L'association\r\n"
 "s'intéresse au Strasbourg disparu, aux bâtiments actuels\r\n"
 "et au futur de la ville."
-msgstr ""
-"The association is interested in the ancient Strasbourg, existing buildings "
-"and the future of the city."
+msgstr "The association is interested in the ancient Strasbourg, existing buildings and the future of the city."
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:33
 msgid ""
@@ -2952,12 +2505,8 @@ msgstr ""
 "making a donation"
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:102
-msgid ""
-"Rencontre public du 26 novembre 2011 avec les internautes au café Michel. "
-"Liste de nos membres fondateurs par ordre alphabétique :"
-msgstr ""
-"Public meeting of 26 November 2011 with the users at cafe Michel. List of "
-"our founding members in alphabetical order:"
+msgid "Rencontre public du 26 novembre 2011 avec les internautes au café Michel. Liste de nos membres fondateurs par ordre alphabétique :"
+msgstr "Public meeting of 26 November 2011 with the users at cafe Michel. List of our founding members in alphabetical order:"
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:133
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:132
@@ -2966,9 +2515,7 @@ msgid ""
 "demain www.archi-strasbourg.org continue d'exister, se développe,\r\n"
 "et fournisse un contenu gratuit et de qualité, soutenez-nous\r\n"
 "et engagez-vous !"
-msgstr ""
-"For www.archi-strasbourg.org to continue to exist, grow, and provide quality "
-"content for free , support us and get involved!"
+msgstr "For www.archi-strasbourg.org to continue to exist, grow, and provide quality content for free , support us and get involved!"
 
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:141
 #: ../../../modules/archi/templates/staticQuiSommesNous.tpl:140
@@ -2982,12 +2529,8 @@ msgid "Statistiques"
 msgstr "Stats"
 
 #: ../../../modules/archi/templates/statistiquesAccueil.tpl:11
-msgid ""
-"La base archi-strasbourg comprend <b>{nbAdresses}</b> adresses sur environ "
-"20000 recensées sur Strasbourg."
-msgstr ""
-"The Archi-Strasbourg database includes  <b>{nbAdresses}</b> of about 20,000 "
-"addresses identified in Strasbourg."
+msgid "La base archi-strasbourg comprend <b>{nbAdresses}</b> adresses sur environ 20000 recensées sur Strasbourg."
+msgstr "The Archi-Strasbourg database includes  <b>{nbAdresses}</b> of about 20,000 addresses identified in Strasbourg."
 
 #: ../../../modules/archi/templates/statistiquesAccueil.tpl:12
 msgid "Il y a en tout"
@@ -3117,9 +2660,7 @@ msgid "Permettre à l'utilisateur de renseigner le champ numero d'archive"
 msgstr "Allow this user to fill the Archive number field"
 
 #: ../../../modules/archi/templates/utilisateurDetail.tpl:44
-msgid ""
-"Permettre à l'utilisateur de renseigner le champs date fin (uniquement "
-"profil utilisateur)"
+msgid "Permettre à l'utilisateur de renseigner le champs date fin (uniquement profil utilisateur)"
 msgstr "Allow this user to fill the End date field (user profile only)"
 
 #: ../../../modules/archi/templates/utilisateurDetail.tpl:49
@@ -3153,12 +2694,8 @@ msgid "Il faut au moins préciser un quartier pour l'adresse."
 msgstr "You have to specify at least a neighbourhood."
 
 #: ../../../modules/archi/templates/nouveauDossier.tpl:33
-msgid ""
-"Pour valider une adresse il faut préciser une rue ou au moins un quartier ou "
-"un sous quartier en plus de la ville."
-msgstr ""
-"In order to validate an address, you need to indicate a street or at least a "
-"neighbourhood or a sub-district."
+msgid "Pour valider une adresse il faut préciser une rue ou au moins un quartier ou un sous quartier en plus de la ville."
+msgstr "In order to validate an address, you need to indicate a street or at least a neighbourhood or a sub-district."
 
 #: ../../../modules/archi/templates/nouveauDossier.tpl:18
 msgid "Une ville doit être précisée."
@@ -3194,8 +2731,7 @@ msgstr "jobs"
 
 #: ../../../modules/archi/includes/archiAdministration.class.php:44
 msgid "ajout d'element d'adresse (rue, sous-quartier, quartier, ville, pays)"
-msgstr ""
-"add address elements (street, sub-district, neighbourhood, city, country)"
+msgstr "add address elements (street, sub-district, neighbourhood, city, country)"
 
 #: ../../../modules/archi/includes/archiAdministration.class.php:47
 msgid "modifier une personne"
@@ -3270,8 +2806,7 @@ msgid "Votre demande d'inscription sur archi-strasbourg"
 msgstr "Your application on Archi-Strasbourg"
 
 #: ../../../modules/archi/includes/archiAuthentification.class.php:131
-msgid ""
-"Inscription prise en compte, vous allez recevoir un mail de confirmation."
+msgid "Inscription prise en compte, vous allez recevoir un mail de confirmation."
 msgstr "Account registered, you will receive a confirmation email."
 
 #: ../../../modules/archi/includes/archiRecherche.class.php:991
@@ -3296,27 +2831,22 @@ msgstr "Show the first 100 results on a map."
 
 #: ../../../modules/archi/includes/archiSource.class.php:657
 #: ../../../modules/archi/includes/archiSource.class.php:659
-msgid ""
-"L'une des difficultés d'un site collaboratif, c'est la crédibilité que l'on "
-"peut apporter aux informations renseignées par chaque internaute. C'est "
-"pourquoi, par soucis de transparence, nous vous livrons ici de façon "
-"exhaustive l'ensemble des sources qui sont consultées pour enrichir le site :"
-msgstr ""
-"One of the challenges of a collaborative website, is the credibility that we "
-"can add to the information written by each user. Therefore, for the sake of "
-"transparency, we deliver here an exhaustive list of all the sources that are "
-"used on the website."
+msgid "L'une des difficultés d'un site collaboratif, c'est la crédibilité que l'on peut apporter aux informations renseignées par chaque internaute. C'est pourquoi, par soucis de transparence, nous vous livrons ici de façon exhaustive l'ensemble des sources qui sont consultées pour enrichir le site :"
+msgstr "One of the challenges of a collaborative website, is the credibility that we can add to the information written by each user. Therefore, for the sake of transparency, we deliver here an exhaustive list of all the sources that are used on the website."
 
-#: ../../../modules/header/index.php:194 ../../../modules/header/index.php:199
+#: ../../../modules/header/index.php:194
+#: ../../../modules/header/index.php:199
 #: ../../../modules/header/index.php:196
 msgid "Vous êtes connecté!"
 msgstr "You are logged in!"
 
-#: ../../../modules/header/index.php:198 ../../../modules/header/index.php:203
+#: ../../../modules/header/index.php:198
+#: ../../../modules/header/index.php:203
 msgid "Vous n'êtes pas connecté"
 msgstr "You are not logged in"
 
-#: ../../../modules/header/index.php:203 ../../../modules/header/index.php:208
+#: ../../../modules/header/index.php:203
+#: ../../../modules/header/index.php:208
 #: ../../../modules/header/index.php:204
 msgid "Inscrivez-vous !"
 msgstr "Signup!"
@@ -3400,7 +2930,8 @@ msgstr "News"
 #: ../../../modules/archi/includes/archiAccueil.class.php:458
 #: ../../../modules/archi/includes/archiAccueil.class.php:70
 #: ../../../modules/archi/includes/archiAccueil.class.php:99
-#: ../../../modules/header/index.php:224 ../../../modules/header/index.php:229
+#: ../../../modules/header/index.php:224
+#: ../../../modules/header/index.php:229
 #: ../../../modules/archi/includes/archiAccueil.class.php:68
 #: ../../../modules/archi/includes/archiAccueil.class.php:95
 #: ../../../modules/archi/includes/archiAccueil.class.php:460
@@ -3411,7 +2942,8 @@ msgstr "My Profile"
 #: ../../../modules/archi/includes/archiAccueil.class.php:71
 #: ../../../modules/archi/includes/archiAccueil.class.php:100
 #: ../../../modules/archi/includes/archiAccueil.class.php:111
-#: ../../../modules/header/index.php:226 ../../../modules/header/index.php:231
+#: ../../../modules/header/index.php:226
+#: ../../../modules/header/index.php:231
 #: ../../../modules/archi/includes/archiAccueil.class.php:69
 #: ../../../modules/archi/includes/archiAccueil.class.php:96
 #: ../../../modules/archi/includes/archiAccueil.class.php:107
@@ -3555,7 +3087,8 @@ msgstr "PDF version of the text."
 msgid "Actualités"
 msgstr "News"
 
-#: ../../../modules/header/index.php:218 ../../../modules/header/index.php:223
+#: ../../../modules/header/index.php:218
+#: ../../../modules/header/index.php:223
 msgid "Déconnexion"
 msgstr "Logout"
 
@@ -3703,13 +3236,8 @@ msgstr "BrowserID returned an error"
 
 #: ../../../modules/archi/includes/archiAuthentification.class.php:389
 #: ../../../modules/archi/includes/archiAuthentification.class.php:394
-msgid ""
-"Afin de pouvoir ajouter une adresse ou en modifier une existante vous devez, "
-"au préalable, créer votre compte personnel sur www.archi-strasbourg.org. "
-"Pour cela inscrivez-vous en cliquant"
-msgstr ""
-"In order to add an address or edit an existing one you must, first, create "
-"your personal account on www.archi-strasbourg.org. In order to signup, click"
+msgid "Afin de pouvoir ajouter une adresse ou en modifier une existante vous devez, au préalable, créer votre compte personnel sur www.archi-strasbourg.org. Pour cela inscrivez-vous en cliquant"
+msgstr "In order to add an address or edit an existing one you must, first, create your personal account on www.archi-strasbourg.org. In order to signup, click"
 
 #: ../../../modules/archi/includes/archiAuthentification.class.php:389
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1638
@@ -3734,20 +3262,8 @@ msgid "Valider"
 msgstr "Validate"
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:114
-msgid ""
-"En ajoutant votre adresse vous contribuez au développement du site. Mais d"
-"\\'abord qu\\'entend t-on par \"votre adresse\" ? Et bien cela peut être l"
-"\\'immeuble ou la maison que vous occupez. Un immeuble que vous aimez mais "
-"que vous ne trouvez pas sur le site. Avec le développement des appareils "
-"photo numériques, il devient très simple de prendre une photo, et de la "
-"copier sur l\\'ordinateur. Ajouter une adresse dans www.archi-strasbourg.org "
-"ne prend pas plus de 20 secondes. Copier la photo 10 secondes de plus..."
-msgstr ""
-"By adding your address you contribute to the development of the site. This "
-"address can be the building or the house you live in, a building that you "
-"like but is not on the website yet. It nowadays very easy to take picture "
-"and copy it on a computer. Adding an address on www.archi-strasbourg.org "
-"takes no more than 20 seconds. Copying a photo 10 more seconds..."
+msgid "En ajoutant votre adresse vous contribuez au développement du site. Mais d\\'abord qu\\'entend t-on par \"votre adresse\" ? Et bien cela peut être l\\'immeuble ou la maison que vous occupez. Un immeuble que vous aimez mais que vous ne trouvez pas sur le site. Avec le développement des appareils photo numériques, il devient très simple de prendre une photo, et de la copier sur l\\'ordinateur. Ajouter une adresse dans www.archi-strasbourg.org ne prend pas plus de 20 secondes. Copier la photo 10 secondes de plus..."
+msgstr "By adding your address you contribute to the development of the site. This address can be the building or the house you live in, a building that you like but is not on the website yet. It nowadays very easy to take picture and copy it on a computer. Adding an address on www.archi-strasbourg.org takes no more than 20 seconds. Copying a photo 10 more seconds..."
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:114
 #: ../../../modules/archi/includes/archiAccueil.class.php:116
@@ -3761,9 +3277,7 @@ msgstr "You can add pictures to illustrate an address."
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:116
 #: ../../../modules/archi/includes/archiAccueil.class.php:118
-msgid ""
-"Vous pouvez ajouter des évènements sur toute adresse qu'un autre utilisateur "
-"a créée."
+msgid "Vous pouvez ajouter des évènements sur toute adresse qu'un autre utilisateur a créée."
 msgstr "You can add events to any address that another user has created."
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:116
@@ -3772,12 +3286,8 @@ msgid "ajouter des évènements à une adresse"
 msgstr "add events to an address"
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:117
-msgid ""
-"En activant votre alerte mail sur les adresses, vous serez prevenu de toute "
-"modification sur une adresse dont vous êtes l'auteur"
-msgstr ""
-"By activating your email alert on addresses, you will be accused of any "
-"change on an address you added"
+msgid "En activant votre alerte mail sur les adresses, vous serez prevenu de toute modification sur une adresse dont vous êtes l'auteur"
+msgstr "By activating your email alert on addresses, you will be accused of any change on an address you added"
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:117
 #: ../../../modules/archi/includes/archiAccueil.class.php:119
@@ -3785,12 +3295,8 @@ msgid "être prévenu par mail d'une modification de vos participations"
 msgstr "be notified by mail of a change in your contributions"
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:118
-msgid ""
-"En acceptant de recevoir les mails concernant les nouvelles adresses, vous "
-"serez prévenu de l'ajout d'une nouvelle adresse sur le site."
-msgstr ""
-"By agreeing to receive emails about new addresses, you will be notified of "
-"the addition of a new address on the website."
+msgid "En acceptant de recevoir les mails concernant les nouvelles adresses, vous serez prévenu de l'ajout d'une nouvelle adresse sur le site."
+msgstr "By agreeing to receive emails about new addresses, you will be notified of the addition of a new address on the website."
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:118
 #: ../../../modules/archi/includes/archiAccueil.class.php:120
@@ -3798,16 +3304,12 @@ msgid "être averti des nouvelles adresses"
 msgstr "be notified of new addresses"
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:119
-msgid ""
-"Grâce à l'alerte par mail sur les commentaires, vous pouvez débattre avec "
-"les autres utilisateurs."
+msgid "Grâce à l'alerte par mail sur les commentaires, vous pouvez débattre avec les autres utilisateurs."
 msgstr "With the email alerts on comments, you can discuss with other users."
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:119
 #: ../../../modules/archi/includes/archiAccueil.class.php:121
-msgid ""
-"être averti des nouveaux commentaires ajoutés sur une adresse que vous avez "
-"créée."
+msgid "être averti des nouveaux commentaires ajoutés sur une adresse que vous avez créée."
 msgstr "be notified of new comments added to an address that you created."
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:115
@@ -3857,9 +3359,7 @@ msgid "Exactement le même enregistrement existe déjà !"
 msgstr "Exactly the same record already exists!"
 
 #: ../../../modules/archi/includes/archiEvenement.class.php:1033
-msgid ""
-"Cet évènement est déjà en cours d'édition. Veuillez retenter dans quelques "
-"minutes."
+msgid "Cet évènement est déjà en cours d'édition. Veuillez retenter dans quelques minutes."
 msgstr "This event is already being edited. Please retry in a few minutes."
 
 #: ../../../modules/archi/includes/archiEvenement.class.php:1636
@@ -3929,12 +3429,14 @@ msgid "Votre nom ou pseudo :"
 msgstr "Your name or pseudo:"
 
 #: ../../../modules/archi/includes/archiAdresse.class.php:62
-#: ../../../modules/archi/index.php:11 ../../../modules/archi/index.php:23
+#: ../../../modules/archi/index.php:11
+#: ../../../modules/archi/index.php:23
 msgid "Votre prénom :"
 msgstr "Your first name:"
 
 #: ../../../modules/archi/includes/archiAdresse.class.php:63
-#: ../../../modules/archi/index.php:12 ../../../modules/archi/index.php:24
+#: ../../../modules/archi/index.php:12
+#: ../../../modules/archi/index.php:24
 msgid "Votre e-mail :"
 msgstr "Your email:"
 
@@ -3983,12 +3485,8 @@ msgstr "You forgot your password"
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1597
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1598
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1592
-msgid ""
-"Une fois ce formulaire validé, un mail contenant un lien vous permettant de "
-"choisir un nouveau mot de passe vous sera envoyé."
-msgstr ""
-"Once you form have validated this form, you will get an email with a link to "
-"choose a new password."
+msgid "Une fois ce formulaire validé, un mail contenant un lien vous permettant de choisir un nouveau mot de passe vous sera envoyé."
+msgstr "Once you form have validated this form, you will get an email with a link to choose a new password."
 
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1609
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1610
@@ -4041,28 +3539,20 @@ msgstr "Password request on"
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1656
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1657
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1649
-msgid ""
-"Un mail vous a été envoyé contenant un lien pour redéfinir votre mot de "
-"passe."
+msgid "Un mail vous a été envoyé contenant un lien pour redéfinir votre mot de passe."
 msgstr "An email has been sent with a link to reset your password."
 
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1661
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1662
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1654
-msgid ""
-"Attention, plusieurs comptes ont ce mail comme identifiant. Merci de "
-"contacter l'administrateur du site."
-msgstr ""
-"Warning, several accounts use this email as an identifier. Please contact "
-"the site."
+msgid "Attention, plusieurs comptes ont ce mail comme identifiant. Merci de contacter l'administrateur du site."
+msgstr "Warning, several accounts use this email as an identifier. Please contact the site."
 
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1665
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1666
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1658
-msgid ""
-"Le mail n'a pas été trouvé dans la base de données, merci de vérifier le mail"
-msgstr ""
-"This email address was not found in the database, please check the address"
+msgid "Le mail n'a pas été trouvé dans la base de données, merci de vérifier le mail"
+msgstr "This email address was not found in the database, please check the address"
 
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1704
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1705
@@ -4111,12 +3601,8 @@ msgstr "Warning, the password and verification do not match."
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1761
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1762
 #: ../../../modules/archi/includes/archiUtilisateur.class.php:1750
-msgid ""
-"Problème changement de mot de passe : il y a un problème avec le formulaire. "
-"Merci de contacter l'administrateur."
-msgstr ""
-"Could not change the password: there is a problem with the form. Please "
-"contact the administrator."
+msgid "Problème changement de mot de passe : il y a un problème avec le formulaire. Merci de contacter l'administrateur."
+msgstr "Could not change the password: there is a problem with the form. Please contact the administrator."
 
 #: ../../../modules/archi/includes/archiAdresse.class.php:6571
 #: ../../../modules/archi/includes/archiAdresse.class.php:6701
@@ -4142,9 +3628,7 @@ msgid "L'image ci-dessus est un zoom de l'image ci-dessous :"
 msgstr "The above image is a zoom of the image below:"
 
 #: ../../../modules/archi/includes/archiSource.class.php:93
-msgid ""
-"Ajout de source : type de source incorrect ! Utilisateur du choix par défaut "
-"= 1"
+msgid "Ajout de source : type de source incorrect ! Utilisateur du choix par défaut = 1"
 msgstr "Adding source: source type is incorrect! User's default choice = 1"
 
 #: ../../../modules/archi/includes/archiSource.class.php:94
@@ -4182,15 +3666,18 @@ msgstr "Sources"
 msgid "Nombre de liaisons (articles ou photos)"
 msgstr "Number of links (articles or pictures)"
 
-#: ../../../modules/archi/index.php:10 ../../../modules/archi/index.php:22
+#: ../../../modules/archi/index.php:10
+#: ../../../modules/archi/index.php:22
 msgid "Votre nom :"
 msgstr "Your name:"
 
-#: ../../../modules/archi/index.php:13 ../../../modules/archi/index.php:25
+#: ../../../modules/archi/index.php:13
+#: ../../../modules/archi/index.php:25
 msgid "Votre message :"
 msgstr "Your message:"
 
-#: ../../../modules/archi/index.php:16 ../../../modules/archi/index.php:28
+#: ../../../modules/archi/index.php:16
+#: ../../../modules/archi/index.php:28
 msgid "Contactez-nous"
 msgstr "Contact us"
 
@@ -4204,25 +3691,30 @@ msgstr "Address search"
 msgid "Bienvenue sur votre profil"
 msgstr "Welcome on your profile"
 
-#: ../../../modules/archi/index.php:88 ../../../modules/archi/index.php:98
+#: ../../../modules/archi/index.php:88
+#: ../../../modules/archi/index.php:98
 msgid "Merci pour votre commentaire."
 msgstr "Thanks for your comment."
 
-#: ../../../modules/archi/index.php:88 ../../../modules/archi/index.php:98
-msgid ""
-"Il va ête lu par un administrateur du site et mis en ligne prochainement."
+#: ../../../modules/archi/index.php:88
+#: ../../../modules/archi/index.php:98
+msgid "Il va ête lu par un administrateur du site et mis en ligne prochainement."
 msgstr "It will be read by an administrator and will be online soon."
 
-#: ../../../modules/archi/index.php:161 ../../../modules/archi/index.php:158
+#: ../../../modules/archi/index.php:161
+#: ../../../modules/archi/index.php:158
 msgid "Erreur lors de l'enregistrement."
 msgstr "Error when registering."
 
-#: ../../../modules/archi/index.php:188 ../../../modules/archi/index.php:221
-#: ../../../modules/archi/index.php:182 ../../../modules/archi/index.php:212
+#: ../../../modules/archi/index.php:188
+#: ../../../modules/archi/index.php:221
+#: ../../../modules/archi/index.php:182
+#: ../../../modules/archi/index.php:212
 msgid "Enregistrement effectué"
 msgstr "Registered"
 
-#: ../../../modules/header/index.php:38 ../../../modules/header/index.php:49
+#: ../../../modules/header/index.php:38
+#: ../../../modules/header/index.php:49
 msgid "Architecture et photos à Strasbourg"
 msgstr "Architecture and pictures in Strasbourg"
 
@@ -4230,11 +3722,13 @@ msgstr "Architecture and pictures in Strasbourg"
 msgid "Architecture, photos et patrimoine de Strasbourg."
 msgstr "Architecture, pictures and patrimony in Strasbourg"
 
-#: ../../../modules/header/index.php:45 ../../../modules/header/index.php:55
+#: ../../../modules/header/index.php:45
+#: ../../../modules/header/index.php:55
 msgid "Architecture et photos à"
 msgstr "Architecture and pictures in"
 
-#: ../../../modules/header/index.php:46 ../../../modules/header/index.php:56
+#: ../../../modules/header/index.php:46
+#: ../../../modules/header/index.php:56
 msgid "Architecture, photos et patrimoine de"
 msgstr "Architecture, pictures and patrimony in"
 
@@ -4286,9 +3780,7 @@ msgstr ""
 
 #: ../../../includes/framework/config.class.php:1665
 #: ../../../includes/framework/config.class.php:1666
-msgid ""
-"Le bâtiment est-il inscrit à l’Inventaire Supplémentaire des Monuments "
-"Historiques"
+msgid "Le bâtiment est-il inscrit à l’Inventaire Supplémentaire des Monuments Historiques"
 msgstr ""
 
 #: ../../../includes/framework/config.class.php:1672
@@ -4298,17 +3790,12 @@ msgstr ""
 
 #: ../../../includes/framework/config.class.php:1678
 #: ../../../includes/framework/config.class.php:1679
-msgid ""
-"Précisez si une personnalité est liée à l’évènement en cliquant sur "
-"choisir<br><font color=red>Cliquez sur une personne de la liste pour la "
-"retirer de la liste.</font>"
+msgid "Précisez si une personnalité est liée à l’évènement en cliquant sur choisir<br><font color=red>Cliquez sur une personne de la liste pour la retirer de la liste.</font>"
 msgstr ""
 
 #: ../../../includes/framework/config.class.php:1687
 #: ../../../includes/framework/config.class.php:1688
-msgid ""
-"Renseignez dans cette case le numéro d’archive fourni par les archives "
-"municipales si vous le connaissez. Exemple : 44W250"
+msgid "Renseignez dans cette case le numéro d’archive fourni par les archives municipales si vous le connaissez. Exemple : 44W250"
 msgstr ""
 
 #: ../../../includes/framework/config.class.php:1721
@@ -4339,8 +3826,7 @@ msgid "StrasWeb est une association d'étudiants passionnés par le Web."
 msgstr ""
 
 #: ../../../modules/header/templates/header.tpl:190
-msgid ""
-"Le texte de ce site est disponible selon les termes de la Licence ouverte."
+msgid "Le texte de ce site est disponible selon les termes de la Licence ouverte."
 msgstr ""
 
 #: ../../../modules/archi/templates/detailImage.tpl:17
@@ -4360,15 +3846,11 @@ msgid "Attention :"
 msgstr ""
 
 #: ../../../modules/archi/templates/imageUploadFormulaire.tpl:69
-msgid ""
-"Si vous êtes l'auteur de l'image, vous devez accepter de la publier sous "
-"licence"
+msgid "Si vous êtes l'auteur de l'image, vous devez accepter de la publier sous licence"
 msgstr ""
 
 #: ../../../modules/archi/templates/imageUploadFormulaire.tpl:70
-msgid ""
-"Si vous n'êtes pas l'auteur de l'image, assurez-vous que celle-ci soit libre "
-"ou dans le domaine public."
+msgid "Si vous n'êtes pas l'auteur de l'image, assurez-vous que celle-ci soit libre ou dans le domaine public."
 msgstr ""
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:109
@@ -4384,32 +3866,19 @@ msgid "pour les publier sous licence libre."
 msgstr ""
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:116
-msgid ""
-"En ajoutant votre adresse vous contribuez au développement du site. Mais d"
-"\\'abord qu\\'entend t-on par \"votre adresse\" ? Et bien cela peut être l"
-"\\'immeuble ou la maison que vous occupez. Un immeuble que vous aimez mais "
-"que vous ne trouvez pas sur le site. Avec le développement des appareils "
-"photo numériques,  il devient très simple de prendre une photo,  et de la "
-"copier sur l\\'ordinateur. Ajouter une adresse dans www.archi-strasbourg.org "
-"ne prend pas plus de 20 secondes. Copier la photo 10 secondes de plus..."
+msgid "En ajoutant votre adresse vous contribuez au développement du site. Mais d\\'abord qu\\'entend t-on par \"votre adresse\" ? Et bien cela peut être l\\'immeuble ou la maison que vous occupez. Un immeuble que vous aimez mais que vous ne trouvez pas sur le site. Avec le développement des appareils photo numériques,  il devient très simple de prendre une photo,  et de la copier sur l\\'ordinateur. Ajouter une adresse dans www.archi-strasbourg.org ne prend pas plus de 20 secondes. Copier la photo 10 secondes de plus..."
 msgstr ""
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:119
-msgid ""
-"En activant votre alerte mail sur les adresses,  vous serez prevenu de toute "
-"modification sur une adresse dont vous êtes l'auteur"
+msgid "En activant votre alerte mail sur les adresses,  vous serez prevenu de toute modification sur une adresse dont vous êtes l'auteur"
 msgstr ""
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:120
-msgid ""
-"En acceptant de recevoir les mails concernant les nouvelles adresses,  vous "
-"serez prévenu de l'ajout d'une nouvelle adresse sur le site."
+msgid "En acceptant de recevoir les mails concernant les nouvelles adresses,  vous serez prévenu de l'ajout d'une nouvelle adresse sur le site."
 msgstr ""
 
 #: ../../../modules/archi/includes/archiAccueil.class.php:121
-msgid ""
-"Grâce à l'alerte par mail sur les commentaires,  vous pouvez débattre avec "
-"les autres utilisateurs."
+msgid "Grâce à l'alerte par mail sur les commentaires,  vous pouvez débattre avec les autres utilisateurs."
 msgstr ""
 
 #: ../../../modules/archi/includes/archiAdministration.class.php:70
@@ -4423,3 +3892,4 @@ msgstr ""
 #: ../../../modules/archi/includes/archiImage.class.php:2782
 msgid "Seul l'auteur peut changer la licence de cette image."
 msgstr ""
+
