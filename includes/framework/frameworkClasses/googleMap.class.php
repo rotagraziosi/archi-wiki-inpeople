@@ -1966,7 +1966,7 @@ acl.getManyElements=function(s){
 
 
 
-			$html.="gdir.loadFromWaypoints(wp,options); ";
+			//$html.="gdir.loadFromWaypoints(wp,options); ";
             $html.="var encodedPolyline = new GPolyline.fromEncoded({
                         points: '".$params['polyline']."',
                         levels: '".$params['levels']."',
