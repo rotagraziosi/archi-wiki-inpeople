@@ -367,12 +367,12 @@ a:hover {
     font-weight: bold;
     color: #444;
 }
-
+/*
 .content table td {
     padding: 0.5em;
     padding-bottom: 0;
 }
-
+*/
 .content table .rowA {
     color: inherit;
     background-color: #efefef;
@@ -590,10 +590,8 @@ a:hover {
 .divConsultationHistoriqueEvenement {
     margin-bottom: 10px;
     padding-left: 5px;
-    border-top: 10px solid #007799;
     border-right: 0;
     border-bottom: 0;
-    border-left: 2px solid #007799;
 }
 
 .inline-block {
