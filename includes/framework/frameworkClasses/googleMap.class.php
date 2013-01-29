@@ -643,7 +643,7 @@ class googleMap extends config
 		// pour preciser que l'on veut une version stable : v=2.s
 		// la derniere version v=2.x
 		// version chaipakoi v=2   
-		$html.="<script src=\"https://maps.google.com/maps?file=api&amp;v=2&amp;key=".$this->googleMapKeyProperty."\" type=\"text/javascript\"></script>";
+		$html.="<script src=\"http://maps.google.com/maps?file=api&amp;v=2&amp;key=".$this->googleMapKeyProperty."\" type=\"text/javascript\"></script>";
 		$html.="<script>
 				var map;
 				var geocoder;
