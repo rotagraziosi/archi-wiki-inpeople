@@ -1,4 +1,4 @@
-<div id='calqueRue' class='calqueRue' style='display:none;background-color:#C0C0C0;position:absolute;top:50px; left:100px;'>
+<div id='calqueRue' class='calqueRue' style='display:none;position:absolute;top:50px; left:100px;'>
 	<input type='hidden' name='paramChampAppelantRue' id='paramChampAppelantRue' value='' />
 	<table cellspacing=0 cellpadding=0 border=1>
 	<tr>

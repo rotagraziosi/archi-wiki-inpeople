@@ -1,4 +1,4 @@
-<div id='calquePersonne' class="calquePersonne" style='display:none;background-color:#C0C0C0;position:absolute;top:50px; left:100px;'>
+<div id='calquePersonne' class="calquePersonne" style='display:none;position:absolute;top:50px; left:100px;'>
 	<input type='hidden' name='paramChampsAppelantPersonne' id='paramChampsAppelantPersonne' value='' />
 	<table cellpadding=0 cellspacing=0 border=1>
 	<tr>

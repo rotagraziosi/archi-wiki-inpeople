@@ -758,6 +758,7 @@ if (isset($_GET['archiAffichage'])) {
             echo $r->rechercheAvanceeEvenement($criteres);
             break;
         case 'afficheCalendrier':
+            print('<div class="calendar">');
             include 'includes/calendar/calendar.php';
             calendar(
                 array(
@@ -766,6 +767,7 @@ if (isset($_GET['archiAffichage'])) {
                     "LANGUAGE_CODE"=>"fr"
                 )
             );
+            print('</div>');
             break;
         // liste d'adresses regroupee , pseudo dossier par rue
         case 'listeDossiers':

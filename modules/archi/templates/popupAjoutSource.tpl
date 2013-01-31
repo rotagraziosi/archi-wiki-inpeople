@@ -1,4 +1,4 @@
-<div id='calqueAjoutSource' style='display:none;background-color:#C0C0C0;position:absolute;top:50px; left:100px;'>
+<div id='calqueAjoutSource' style='display:none;position:absolute;top:50px; left:100px;'>
 	<input type='text' name='paramChampsAppelantAjoutSource' id='paramChampsAppelantAjoutSource' value='' />
 	<table>
 	<tr>

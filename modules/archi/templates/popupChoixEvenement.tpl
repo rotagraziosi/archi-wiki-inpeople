@@ -14,7 +14,7 @@
 //]]>
 </script>
 
-<div id='calqueEvenement' style='display:none;background-color:#C0C0C0;position:absolute; top:50px; left:100px;'>
+<div id='calqueEvenement' style='display:none;position:absolute; top:50px; left:100px;'>
 	<input type='hidden' name='paramChampsAppelantEvenement' id='paramChampsAppelantEvenement' value='' />
 	<table>
 	<tr>

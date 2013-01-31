@@ -15,7 +15,7 @@
 //]]>
 </script>
 
-<div id='calqueAdresse' style='display:none;background-color:#C0C0C0;position:absolute;top:50px; left:100px;'>
+<div id='calqueAdresse' style='display:none;position:absolute;top:50px; left:100px;'>
 	<input type='text' name='paramChampsAppelantAdresse' id='paramChampsAppelantAdresse' value='' />
 	<table>
 	<tr>

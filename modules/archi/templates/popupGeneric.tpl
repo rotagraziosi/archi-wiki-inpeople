@@ -1,4 +1,4 @@
-<div id='{divIdPopup}' class="calque" style='display:none;background-color:#C0C0C0;position:absolute;top:{top}px; left:{left}px;'>
+<div id='{divIdPopup}' class="calque" style='display:none;position:absolute;top:{top}px; left:{left}px;'>
 		
 		{hiddenFields}
 		

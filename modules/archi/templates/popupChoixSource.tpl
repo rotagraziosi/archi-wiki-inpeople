@@ -1,4 +1,4 @@
-<div id='calqueSource' class="calqueSource" style='display:none;background-color:#C0C0C0;position:absolute;top:50px; left:100px;'>
+<div id='calqueSource' class="calqueSource" style='display:none;position:absolute;top:50px; left:100px;'>
 	<input type='hidden' name='paramChampsAppelantSource' id='paramChampsAppelantSource' value='' />
 	<table cellspacing=0 cellpadding=0 border=1>
 	<tr>
