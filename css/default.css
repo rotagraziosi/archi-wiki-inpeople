@@ -872,7 +872,9 @@ img {
     height:18px;
 }
 
-.searchInput:-webkit-placeholder,
+.searchInput:-webkit-placeholder {
+    color: darkgray;
+}
 .searchInput:-moz-placeholder {
     color: darkgray;
 }
