@@ -888,9 +888,9 @@ class archiAccueil extends config
                     @list($w, $h) = getimagesize($this->getCheminPhysique()."images/actualites/".$value['idActualite']."/".$value['photoIllustration']);
                     
                     if ($w>$h) {
-                        $dimensionImage = "width=200";
+                        $dimensionImage = "width=130";    // modif par fabien pour que l'image soit au même format que les autres rubriques (01/02/2013)
                     } else {
-                        $dimensionImage = "height=200";
+                        $dimensionImage = "height=130";
                     }
                     
                     $urlImage = $this->getUrlRacine()."images/actualites/".$value['idActualite']."/".$value['photoIllustration'];
