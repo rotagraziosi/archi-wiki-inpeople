@@ -598,7 +598,7 @@ a:hover {
 }
 
 img {
-    border: 0;
+    border: thin solid transparent;
 }
 /*
 .boxContent {
