@@ -415,7 +415,7 @@ class OngletObject extends config
                     $styleDisplay='none';    
                 }
                 $testedFieldValue=="<table cellspacing='0' cellpadding='0' ".
-                "border='0'></table>"
+                "border='0'></table>";
                 // cas ou il n'y a pas de photo dans la liste
                 if ($fieldValue==$testedFieldValue) {
                     $fieldValue="<table cellspacing='0' width='100%' ".
@@ -568,7 +568,6 @@ class OngletObject extends config
         $this->hauteurEtiquettes = $hauteur;
     }
     
-    
     /**
      * Définit le style des contours du contenu
      * 
@@ -576,11 +575,13 @@ class OngletObject extends config
      * 
      * @return void
      * */
-    function setStyleContoursContenu(
-        $style="style='border-left:1px solid #000000;".
-        "border-right:1px solid #000000;".
-        "border-bottom:1px solid #000000;'"
-    ) {
+    function setStyleContoursContenu($style=null)
+    {
+        if (!isset($style)) {
+            $style="style='border-left:1px solid #000000;".
+            "border-right:1px solid #000000;".
+            "border-bottom:1px solid #000000;'";
+        }
         $this->styleContoursContenu = $style;
     }
     
