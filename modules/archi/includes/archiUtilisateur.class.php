@@ -736,14 +736,7 @@ class archiUtilisateur extends config {
         $onglets->setStyleContoursContenu("style='border-left:#007799 solid 2px;border-right:#007799 solid 2px;border-bottom:#007799 solid 2px;'");
         $onglets->setStyleTable("style='margin:0;padding:0;'");
         $onglets->setStyleTableEtiquettes("style='margin:0;padding:0;'");
-        $onglets->setStylesOnglets("
-            <style>
-                .OngletOn{ background-color: #007799; border-top:2px solid #007799;border-right:2px solid #007799;font-weight:bold; border-left:2px solid #007799; }
-                .OngletOn a{color:#FFFFFF;}
-                .OngletOff{ background-color:#557799; border-bottom:1px solid #557799;border-top:2px solid #557799;border-right:2px solid #557799;font-weight:bold;border-left:2px solid #557799; }
-                .OngletOff a{color:#FFFFFF;}
-            </style>        
-        ");
+        $onglets->setStylesOnglets('');
         $onglets->setStyleBorderHautContenu("style='border-bottom:2px solid #007799;'");
         
         

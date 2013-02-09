@@ -1299,3 +1299,29 @@ li:empty {
     height:100%;
     background-color:#829395;
 }
+
+.OngletOff{
+    background-color: rgb(180, 193, 205); 
+}
+.OngletOn{
+    background-color:#99ACB0; 
+}
+
+
+.OngletOn, .OngletOff {
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+}
+.onglets {
+    margin-left:1em;
+    margin-top:1em;
+    display:block;
+}
+
+
+
+
+
+
+
+

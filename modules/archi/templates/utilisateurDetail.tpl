@@ -14,7 +14,7 @@
 	<tr><td><?_("Prénom")?></td><td><input type='text' name='prenom' value="{detailUtilisateur.prenom}" /></td><td>{prenom-error}</td></tr>
 	<tr><td><?_("Adresse e-mail")?></td><td><input type='text' name='mail' value='{detailUtilisateur.email}' /></td><td>{detailUtilisateur.email-error}</td></tr>
 	<tr><td><?_("URL de votre site")?></td><td><input type='text' name='urlSiteWeb' value='{detailUtilisateur.urlSiteWeb}' /></td><td>{detailUtilisateur.urlSiteWeb-error}</td></tr>
-	<tr><td valign=middle><?_("Votre avatar")?></td><td valign=middle style='background-color:grey;'><div style='float:left;padding-top:50px;'><INPUT type=hidden name=MAX_FILE_SIZE  VALUE=8388608><input type='file' name='fichierAvatar' value=''><br><?_("Taille de fichier max :")?> 5 Mo<br><?_("Cochez pour supprimer")?>&nbsp;<input type='checkbox' name='supprFichierAvatar' value='1'></div>{detailUtilisateur.imageAvatar}</td><td>{detailUtilisateur.imageAvatar-error}</td></tr>
+	<tr><td valign=middle><?_("Votre avatar")?></td><td valign=middle><div style='float:left;padding-top:50px;'><INPUT type=hidden name=MAX_FILE_SIZE  VALUE=8388608><input type='file' name='fichierAvatar' value=''><br><?_("Taille de fichier max :")?> 5 Mo<br><?_("Cochez pour supprimer")?>&nbsp;<input type='checkbox' name='supprFichierAvatar' value='1'></div>{detailUtilisateur.imageAvatar}</td><td>{detailUtilisateur.imageAvatar-error}</td></tr>
 	<tr><td><?_("Ville favorite")?></td><td>
 	<input type='text' name="villetxt" id="villetxt" value="{detailUtilisateur.villetxt}" readonly>
 	<input type='hidden' name="ville" id="ville" value="{detailUtilisateur.ville}">

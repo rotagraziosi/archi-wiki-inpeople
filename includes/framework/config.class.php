@@ -98,9 +98,7 @@ class Config
     public $siteMail = 'contact@archi-strasbourg.org';
 
 
-    public $googleMapKey 
-        = "ABQIAAAATju71H_OfvJeYu7FlqKiwxSrxNZs5Xz2W8J
-        ugOIsInCdzeTV3BSwdXfv4ng_9bsN6-b8p5tJ_xVbew";
+    
 
 
     /*  public $cheminPhysiqueFrameWork             
