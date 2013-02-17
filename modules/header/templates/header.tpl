@@ -99,6 +99,7 @@
             <li class="home"><a href="./" accesskey="1"><img src="images/Advisa/maison.png" alt="<?_("Accueil")?>" /></a></li>
             <li class="flag"><a href="?lang=fr_FR" title="Français">FR</a></li>
             <li class="flag"><a href="?lang=en_US"  title="English">EN</a></li>
+            <li class="flag"><a href="?lang=de_DE"  title="English">EN</a></li>
             
             
             
