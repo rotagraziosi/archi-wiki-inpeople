@@ -869,7 +869,6 @@ img {
     padding-left:1em;
     padding-right:1em;
     border-width:thin;
-    height:18px;
 }
 
 .searchInput:-webkit-placeholder {
@@ -1115,7 +1114,7 @@ a.white:hover {
 
 
 li:empty {
-	display:none;
+    display:none;
 }
 
 .formAjoutCommentaire textarea,
