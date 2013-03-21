@@ -176,7 +176,7 @@ a:hover {
 }
 
 .menu ul {
-    padding: 1em 1em 1em 4.5em;
+    padding: 1em 1em 1em 0;
     list-style: none;
 }
 
@@ -1239,15 +1239,14 @@ li:empty {
 }
 
 
-.menu .home {
-    float:right;
-    padding-right:2em;
+.menu .home img {
+   vertical-align:bottom;
 }
 
 .menu .leftpart {
     margin-top:2em;
     float:left;
-    min-width:180px;
+    min-width:220px;
 }
 
 .menu .wrapper div {
