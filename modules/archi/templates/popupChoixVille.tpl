@@ -1,4 +1,4 @@
-<div id='calqueVille' style='display:none;position:absolute;top:50px; left:100px;'>
+<div id='calqueVille' class="calqueVille" style='display:none;position:absolute;top:50px; left:100px;'>
 <input type='hidden' name='paramChampAppelantVille' id='paramChampAppelantVille' value='' /><input type='hidden' name='paramChampVilleIdentifiantUnique' id='paramChampVilleIdentifiantUnique' value='' />
 
 

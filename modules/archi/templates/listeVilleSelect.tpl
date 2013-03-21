@@ -1,5 +1,5 @@
-<script  >
-	{javascript}
+<script>
+    {javascript}
 </script>
 <select name='ville{identifiantUnique}' id='ville{identifiantUnique}' onChange="{onChangeListeVille}">
 <option value='0'>Aucun</option>

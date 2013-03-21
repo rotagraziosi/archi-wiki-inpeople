@@ -15,21 +15,43 @@
  * */
 $authentification = new archiAuthentification();
 
-$afficheAuthentificationAction=false; //cette variable sert a ne pas appeler deux fois le formulaire d'authentification s'il est requis aussi pour les 'affichages' et les 'actions'
+/* Cette variable sert a ne pas appeler deux fois le formulaire d'authentification
+ * s'il est requis aussi pour les 'affichages' et les 'actions'
+ * */
+$afficheAuthentificationAction=false; 
 
 // definition des champs du formulaire de contact
 $fieldsContactForm = array(
-                        'nom'=>array('type'=>'text', 'default'=>'', 'htmlCode'=>'', 'libelle'=>_("Votre nom :"), 'required'=>false, 'error'=>'', 'value'=>''),
-                        'prenom'=>array('type'=>'text', 'default'=>'', 'htmlCode'=>'', 'libelle'=>_("Votre prénom :"), 'required'=>false, 'error'=>'', 'value'=>''),
-                        'email'=>array('type'=>'text', 'default'=>'', 'htmlCode'=>"style='width:250px;'", 'libelle'=>_("Votre e-mail :"), 'required'=>true, 'error'=>'', 'value'=>''),
-                        'message'=>array('type'=>'bigText', 'default'=>'', 'htmlCode'=>'cols=40 rows=8', 'libelle'=>_("Votre message :"), 'required'=>true, 'error'=>'', 'value'=>'')
+                        'nom'=>array('type'=>'text', 'default'=>'',
+                        'htmlCode'=>'', 'libelle'=>_("Votre nom :"),
+                        'required'=>false, 'error'=>'', 'value'=>''),
+                        'prenom'=>array('type'=>'text', 'default'=>'',
+                        'htmlCode'=>'', 'libelle'=>_("Votre prénom :"),
+                        'required'=>false, 'error'=>'', 'value'=>''),
+                        'email'=>array('type'=>'text', 'default'=>'',
+                        'htmlCode'=>"style='width:250px;'",
+                        'libelle'=>_("Votre e-mail :"), 'required'=>true,
+                        'error'=>'', 'value'=>''),
+                        'message'=>array('type'=>'bigText', 'default'=>'',
+                        'htmlCode'=>'cols=40 rows=8',
+                        'libelle'=>_("Votre message :"),
+                        'required'=>true, 'error'=>'', 'value'=>'')
 );
 
-$configFormContact = array('logMails'=>true, 'titrePage'=>_("Contactez-nous"), 'fields'=>$fieldsContactForm, 'submitButtonValue'=>_("Envoyer"), 'formAction'=>$authentification->creerUrl('handleFormulaireContact', ''));
+$configFormContact = array(
+    'logMails'=>true, 'titrePage'=>_("Contactez-nous"),
+    'fields'=>$fieldsContactForm, 'submitButtonValue'=>_("Envoyer"),
+    'formAction'=>$authentification->creerUrl('handleFormulaireContact', '')
+);
 
 
 
-$listeActionsAuthentificationNonRequise=array('handleMotDePasseOublieNouveauMotDePasse', 'validAuthentification', 'handleMotDePasseOublie', 'confirmInscription', 'deconnexion', 'validInscription', 'handleFormulaireContact', 'enregistreCommentaire', 'enregistrerEntreeSondage');
+$listeActionsAuthentificationNonRequise=array(
+    'handleMotDePasseOublieNouveauMotDePasse', 'validAuthentification',
+    'handleMotDePasseOublie', 'confirmInscription', 'deconnexion',
+    'validInscription', 'handleFormulaireContact',
+    'enregistreCommentaire', 'enregistrerEntreeSondage'
+);
 
 
 //$s = new objetSession();
@@ -39,7 +61,7 @@ $listeActionsAuthentificationNonRequise=array('handleMotDePasseOublieNouveauMotD
 if (isset($_GET['archiAction'])) {
     $archiAction=$_GET['archiAction'];
     
-    // authentification non requise pour ces actions : 
+    // Authentification non requise pour ces actions : 
     switch($archiAction) {
     case 'ajouterActu':
         $admin = new archiAdministration();
@@ -87,15 +109,14 @@ if (isset($_GET['archiAction'])) {
         $a = new archiAdresse();
         $a->enregistreCommentaire();
         
-        //echo "je suis passé ici";
-        
-        
-        //echo "<SCRIPT LANGUAGE=\"JavaScript\">";
-        //echo "alert('Merci pour votre commentaire\nIl va ête lu par un administrateur du site et mis en ligne prochainement.\nA bientôt');";
-        //echo "</SCRIPT>";
         
         echo "<SCRIPT>";
-        echo "alert('"._("Merci pour votre commentaire.")."\\n"._("Il va ête lu par un administrateur du site et mis en ligne prochainement.")."\\n"."A bientôt !')";
+        echo "alert('"._("Merci pour votre commentaire.")."\\n".
+        _(
+            "Il va ête lu par un administrateur du site ".
+            "et mis en ligne prochainement."
+        ).
+        "\\n"."A bientôt !')";
         //echo "alert(\"salut\")";
         echo "</SCRIPT>";
 
@@ -113,12 +134,23 @@ if (isset($_GET['archiAction'])) {
             $connexionUtilisateur->connexion($login, $mdp, $cookie);
             echo $connexionUtilisateur->erreurs->afficher();
         }
-        if (isset($_GET['archiActionPrecedente']) && ($_GET['archiActionPrecedente']=='' || $_GET['archiActionPrecedente']=='validAuthentification' || $_GET['archiActionPrecedente']=='deconnexion') && !$connexionUtilisateur->erreurs->existe()) {
-            if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='ajoutNouveauDossier') {
+        if (isset($_GET['archiActionPrecedente']) 
+            && ($_GET['archiActionPrecedente']==''
+            || $_GET['archiActionPrecedente']=='validAuthentification'
+            || $_GET['archiActionPrecedente']=='deconnexion')
+            && !$connexionUtilisateur->erreurs->existe()
+        ) {
+            if (isset($_GET['archiAffichage'])
+                && $_GET['archiAffichage']=='ajoutNouveauDossier'
+            ) {
                 $_GET['archiAffichage'] = 'ajoutNouveauDossier';
-            } elseif (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='imageDetail') {
+            } elseif (isset($_GET['archiAffichage'])
+                && $_GET['archiAffichage']=='imageDetail'
+            ) {
                 $_GET['archiAffichage'] = 'imageDetail';
-            } elseif (isset($_GET['archiAffichage']) && $_GET['archiAffichage']!='adresseDetail') {
+            } elseif (isset($_GET['archiAffichage']) 
+                && $_GET['archiAffichage']!='adresseDetail'
+            ) {
                 $_GET['archiAffichage'] = 'afficheAccueil';
                 $_GET['modeAffichage'] = 'monArchi';
             } elseif (!isset($_GET['archiAffichage'])) {
@@ -129,11 +161,18 @@ if (isset($_GET['archiAction'])) {
         break;
     }
     
-    // archiActionPrecedente permet de recuperer l'action precedente pour le formulaire d'authentification , et permettra de lancer l'action requerant une authentification apres la validation de ce formulaire d'authentification
-    if (isset($_GET['archiActionPrecedente']) && $_GET['archiActionPrecedente']!='')
+    /* archiActionPrecedente permet de recuperer l'action precedente
+     * pour le formulaire d'authentification
+     * et permettra de lancer l'action requerant une authentification
+     * apres la validation de ce formulaire d'authentification
+     * */
+    if (isset($_GET['archiActionPrecedente']) 
+        && $_GET['archiActionPrecedente']!=''
+    ) {
         $archiAction = $_GET['archiActionPrecedente'];
+    }
     
-    // authentification requise pour ces actions :
+    // Authentification requise pour ces actions :
     if ($authentification->estConnecte()) {
         switch($archiAction) {
         case 'refreshCache':
@@ -146,14 +185,29 @@ if (isset($_GET['archiAction'])) {
             break;
         case 'administration':
             $administration = new archiAdministration();
-            echo $administration->administre(array('tableName'=>$_GET['tableName'], 'noAjouterButton'=>1, 'noSupprimerButton'=>1), 'action'); // affichage de la liste des données de la table selectionnée
+            // Affichage de la liste des données de la table selectionnée
+            echo $administration->administre(
+                array('tableName'=>$_GET['tableName'], 'noAjouterButton'=>1,
+                'noSupprimerButton'=>1), 'action'
+            ); 
             break;
         case 'adminEnregistreModifAdresse':
             $adresse = new archiAdresse();
             $errors = $adresse->enregistreModificationAdresse();
             if (count($errors)==0) {
                 $generateur = new formGenerator();
-                echo $generateur->afficheFormulaireListe(array_merge($_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail","actionAffichageFormulaireIfSubmit"=>$adresse->creerUrl('', 'adminElementAdresse', array('tableName'=>$_GET['tableName'])))));
+                echo $generateur->afficheFormulaireListe(
+                    array_merge(
+                        $_GET, array(
+                            'modeAffichageLienDetail'=>"adminAdresseDetail",
+                            "actionAffichageFormulaireIfSubmit"
+                                =>$adresse->creerUrl(
+                                    '', 'adminElementAdresse',
+                                    array('tableName'=>$_GET['tableName'])
+                                )
+                        )
+                    )
+                );
             } else {
                 echo _("Erreur lors de l'enregistrement.")."<br>";
             }
@@ -167,18 +221,22 @@ if (isset($_GET['archiAction'])) {
             $adresse->ajoutNouvelleAdresse();
             if ($adresse->erreurs->existe()) {
                 echo $adresse->erreurs->afficher();
-                // affichage du formulaire permettant d'ajouter de nouvelle rues, sousquartier, quartier, ville, pays ...
+                /* Affichage du formulaire permettant d'ajouter
+                 * de nouvelle rues, sousquartier, quartier, ville, pays, etc.
+                 * */
                 $criteres=array();
             
-                if (isset($_GET['typeNew']))
+                if (isset($_GET['typeNew'])) {
                     $criteres['typeNew']=$_GET['typeNew'];
+                }
             
                 echo $adresse -> afficheFormulaireNouvelleAdresse($criteres);
             } else {
                 $criteres=array();
             
-                if (isset($_GET['typeNew']))
+                if (isset($_GET['typeNew'])) {
                     $criteres['typeNew']=$_GET['typeNew'];
+                }
                 echo _("Enregistrement effectué");
                 echo $adresse ->afficheFormulaireNouvelleAdresse($criteres);
             }
@@ -210,17 +268,28 @@ if (isset($_GET['archiAction'])) {
                 echo $personne->afficherFormulaire();
             } else {
                 echo _("Enregistrement effectué");
-                echo $personne->afficherListe(array("newIdPersonneAdded"=>$newIdPersonne));
+                echo $personne->afficherListe(
+                    array("newIdPersonneAdded"=>$newIdPersonne)
+                );
             }
             break;    
         case 'ajouterSource':
             $source = new archiSource();
             $newIdSource = $source->ajouter();
-            if ($source->erreurs->existe() || $source->erreurs->tabFormExiste()) {
+            if ($source->erreurs->existe()
+                || $source->erreurs->tabFormExiste()
+            ) {
                 echo $source->erreurs->afficher();
                 echo $source->afficherFormulaire();
             } else {
-                echo $source->afficherListe(array("newIdSourceAdded"=>$newIdSource)); // on transmet le nouveau idSource crée pour le renvoi automatique de la popup apres creation d'une nouvelle source (si on est en mode popup suivant le mode affichage)
+                /* On transmet le nouveau idSource crée
+                 * pour le renvoi automatique de la popup
+                 * apres creation d'une nouvelle source
+                 * (si on est en mode popup suivant le mode affichage)
+                 * */
+                echo $source->afficherListe(
+                    array("newIdSourceAdded"=>$newIdSource)
+                ); 
             }
             break;    
 
@@ -252,7 +321,12 @@ if (isset($_GET['archiAction'])) {
             break;
         case 'supprimerAdresse':
             $adresse = new archiAdresse();
-            echo $adresse->supprimer($_GET['archiIdAdresse']); // note de laurent : attention cette fonction ne fais pas forcement ce qui est attendu , a verifier ....(pas sur qu'elle soit utilisee)
+            /* Note de laurent :
+             * Attention cette fonction ne fais pas forcement
+             * ce qui est attendu, à vérifier.
+             * (Pas sûr qu'elle soit utilisée.)
+             * */
+            echo $adresse->supprimer($_GET['archiIdAdresse']); 
             break;
         case 'supprimerAdresseHistorique':
             $adresse = new archiAdresse();
@@ -260,7 +334,11 @@ if (isset($_GET['archiAction'])) {
             break;
         case 'supprimerAdresseFromAdminRue':
             $adresse = new archiAdresse();
-            $adresse->supprimerAdresseFromAdminRue();    // cette fonction va supprimer une adresse et son historique de la table historiqueAdresse , s'il n'y a plus rien qui y est lié
+            /* Cette fonction va supprimer une adresse
+             * et son historique de la table historiqueAdresse,
+             * s'il n'y a plus rien qui y est lié.
+             * */
+            $adresse->supprimerAdresseFromAdminRue();    
             break;
         case 'supprimerRueFromAdminRue':
             $adresse = new archiAdresse();
@@ -275,11 +353,12 @@ if (isset($_GET['archiAction'])) {
             echo $evenement->supprimer('', $_GET['archiIdHistoriqueEvenement']);
             break;
 
-        // **************************************************************************************************************************************
         case 'ajoutNouveauDossier':
             $adresses = new archiAdresse();
             $adresses->ajouterNouveauDossier();
-            if ($adresses->erreurs->existe() || $adresses->erreurs->tabFormExiste()) {
+            if ($adresses->erreurs->existe()
+                || $adresses->erreurs->tabFormExiste()
+            ) {
                 echo $adresses->erreurs->afficher();
                 echo $adresses->afficheFormulaireNouveauDossier();
             }
@@ -287,18 +366,25 @@ if (isset($_GET['archiAction'])) {
         case 'ajoutNouvelPersonne':
             $personne = new archiPersonne();
             $personne->ajouterNouveauDossier("personne");
-            if ($personne->erreurs->existe() || $personne->erreurs->tabFormExiste()) {
+            if ($personne->erreurs->existe()
+                || $personne->erreurs->tabFormExiste()
+            ) {
                 echo $personne->erreurs->afficher();
                 echo $personne->afficheFormulaireNouveauDossier(array(), "personne");
             }
             break;
         case 'enregistreGroupeAdresses':
             $adresses = new archiAdresse();
-            $adresses->enregistreGroupeAdresses($_GET['archiIdEvenementGroupeAdresses']);
+            $adresses->enregistreGroupeAdresses(
+                $_GET['archiIdEvenementGroupeAdresses']
+            );
             break;
         case 'deleteImage':
             $image = new archiImage();
-            $image->deleteImage($_GET['archiIdImage'], array('retourSurGroupeAdresse'=>true));
+            $image->deleteImage(
+                $_GET['archiIdImage'],
+                array('retourSurGroupeAdresse'=>true)
+            );
             break;
         case 'supprimerCommentaire':
             if ($authentification->estAdmin()) {
@@ -403,7 +489,8 @@ if (isset($_GET['archiAction'])) {
     } else {
         if (!in_array($archiAction, $listeActionsAuthentificationNonRequise)) {
             echo $authentification->afficheFormulaireAuthentification();
-            $afficheAuthentificationAction=true; // on appel le formulaire d'authentification 
+            // On appelle le formulaire d'authentification 
+            $afficheAuthentificationAction=true; 
         }
     }
 }
@@ -411,16 +498,28 @@ if (isset($_GET['archiAction'])) {
 
 
 
-//******************************************************************************************************************************************************
-// liste des affichages qui ont besoin d'une authentification
-$modesAffichagesAvecAuthentification = array('ajoutImageBibliotheque', 'ajoutImageEvenement', 'ajouterEvenement', 'ajoutImageAdresse', 'ajouterEvenementSurAdresse', 'ajouterSousEvenement', 'ajoutNouvelleAdresse', 'modifierImagesUtilisateur', 'modifierImageEvenement', 'modifierImageAdresse', 'modifierImage', 'modifierEvenement', 'modifierAdresse', 'utilisateurDetail', 'formulaireGroupeAdresses', 'afficheSelectTypeEvenement', 'afficheSelectSousQuartier', 'afficheSelectQuartier', 'afficheChoixRue', 'afficheChoixVille', 'ajoutNouveauDossier', 'afficherAjouterPersonne', 'afficherAjouterSource', 'administration', 'comparaisonEvenement', 'afficheLogsMails', 'adminDroits', 'adminSondages', 'adminParcours', 'administrationAfficheAjout', 'listeTypeSourceDependancesSourcesAdmin');
-//******************************************************************************************************************************************************
+// Liste des affichages qui ont besoin d'une authentification
+$modesAffichagesAvecAuthentification = array('ajoutImageBibliotheque',
+'ajoutImageEvenement', 'ajouterEvenement', 'ajoutImageAdresse',
+'ajouterEvenementSurAdresse', 'ajouterSousEvenement', 'ajoutNouvelleAdresse',
+'modifierImagesUtilisateur', 'modifierImageEvenement', 'modifierImageAdresse',
+'modifierImage', 'modifierEvenement', 'modifierAdresse', 'utilisateurDetail',
+'formulaireGroupeAdresses', 'afficheSelectTypeEvenement',
+'afficheSelectSousQuartier', 'afficheSelectQuartier', 'afficheChoixRue',
+'afficheChoixVille', 'ajoutNouveauDossier', 'afficherAjouterPersonne',
+'afficherAjouterSource', 'administration', 'comparaisonEvenement',
+'afficheLogsMails', 'adminDroits', 'adminSondages', 'adminParcours',
+'administrationAfficheAjout', 'listeTypeSourceDependancesSourcesAdmin');
 
 if (isset($_GET['archiAffichage'])) {
     $archiAffichage=$_GET['archiAffichage'];
     
-    if (in_array($archiAffichage, $modesAffichagesAvecAuthentification) && !$authentification->estConnecte()) {
-        // le formulaire a til deja ete appelé par une 'action' requerant une connexion ?
+    if (in_array($archiAffichage, $modesAffichagesAvecAuthentification) 
+        && !$authentification->estConnecte()
+    ) {
+        /* Le formulaire a-t-il deja ete appelé
+         * par une 'action' requerant une connexion ?
+         * */
         if (!$afficheAuthentificationAction) {
             echo $authentification->afficheFormulaireAuthentification();
         }
@@ -431,10 +530,18 @@ if (isset($_GET['archiAffichage'])) {
         {
         case 'administration':
             $administration = new archiAdministration();
-            if (!isset($_GET['tableName']))
-                echo $administration->afficheMenu(); // affiche le menu qui permet de selectionner la table que l'on administrer
-            else
-                echo $administration->administre(array('tableName'=>$_GET['tableName'], 'noSupprimerButton'=>1), 'liste'); // affichage de la liste des données de la table selectionnée
+            if (!isset($_GET['tableName'])) {
+                /* Affiche le menu qui permet de selectionner
+                 * la table que l'on administrer
+                 * */
+                echo $administration->afficheMenu(); 
+            } else {
+                // Affichage de la liste des données de la table selectionnée
+                echo $administration->administre(
+                    array('tableName'=>$_GET['tableName'],
+                    'noSupprimerButton'=>1), 'liste'
+                ); 
+            }
             break;
         case 'adminSondages':
             $archiAccueil = new archiAccueil();
@@ -443,70 +550,29 @@ if (isset($_GET['archiAffichage'])) {
         case 'adminElementAdresse':
             switch($_GET['tableName']) {
             case 'rue':
-                /*$optionsModerateur=array();
-                if ($authentification->getIdProfil()==3) // l'utilisateur courant est moderateur : on ne va donc afficher que la liste des rues que cette personne modere
-                {
-                    $arrayVillesFromModerateur = $u->getArrayVillesModereesPar($authentification->getIdUtilisateur());
-                    
-                    if (count($arrayVillesFromModerateur)>0)
-                        $optionsModerateur=array('sqlWhere'=>" AND idSousQuartier in (SELECT idSousQuartier FROM sousQuartier WHERE idQuartier IN (SELECT idQuartier FROM quartier WHERE idVille in (".implode(",", $arrayVillesFromModerateur)."))) ");
-                    else
-                        $optionsModerateur=array('sqlWhere'=>" AND idRue='0' ");
-                }
-            
-                //    'idSousQuartier'=>array('externalLink'=>true, 'externalFieldPrimaryKey'=>'idSousQuartier', 'externalTable'=>'sousQuartier', 'externalFieldToDisplay'=>'nom'),
-                $liensExternes=array(                            
-                    'idSousQuartier'=>array('externalLeftJoin'=>true, 'sqlLeftJoin'=>"left join sousQuartier sq ON sq.idSousQuartier = rue.idSousQuartier","fieldAliasToDisplay"=>"sq.nom as nomSousQuartier","fieldToDisplay"=>"nomSousQuartier"),
-                    'idQuartier'=>array('externalLeftJoin'=>true, 'sqlLeftJoin'=>"left join quartier q ON q.idQuartier = sq.idQuartier","fieldAliasToDisplay"=>"q.nom as nomQuartier","fieldToDisplay"=>"nomQuartier"),
-                    'idVille'=>array('externalLeftJoin'=>true, 'sqlLeftJoin'=>"left join ville v ON v.idVille = q.idVille","fieldAliasToDisplay"=>"v.nom as nomVille","fieldToDisplay"=>"nomVille")
-                );
-                $generateur = new formGenerator();
-                
-                $dependances[0] = array('table'=>'historiqueAdresse', 'champLie'=>'idRue', 'message'=>"Attention il existe des dépendances au niveau de la table historiqueAdresse");
-
-                echo $generateur->afficheFormulaireListe(array_merge($_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail","replaceAjouterButtonBy"=>"<input type='button' name='ajouter' value='ajouter' onclick=\"location.href='".$generateur->creerUrl('', 'ajoutNouvelleAdresse')."';\">"), $optionsModerateur),
-                $liensExternes,
-                $dependances);
-                */
                 $administration=new archiAdministration();
                 echo $administration->getAdminListeRues();
                 
                 break;
             case 'sousQuartier':
-                /*
-                $optionsModerateur=array();
-                if ($authentification->getIdProfil()==3) // l'utilisateur courant est moderateur : on ne va donc afficher que la liste des quartiers que cette personne modere pour sa ou ses villes
-                {
-                    $arrayVillesFromModerateur = $u->getArrayVillesModereesPar($authentification->getIdUtilisateur());
-                    
-                    if (count($arrayVillesFromModerateur)>0)
-                        $optionsModerateur=array('sqlWhere'=>" AND idQuartier in (SELECT idQuartier FROM quartier WHERE idVille in (".implode(",", $arrayVillesFromModerateur).")) ");
-                    else
-                        $optionsModerateur=array('sqlWhere'=>" AND idQuartier='0' ");
-                }
-            
-            
-                $liensExternes=array(
-                    'idQuartier'=>array('externalLink'=>true, 'externalFieldPrimaryKey'=>'idQuartier', 'externalTable'=>'quartier', 'externalFieldToDisplay'=>'nom'));
-                
-                $dependances[0] = array('table'=>'rue', 'champLie'=>'idSousQuartier', 'message'=>"Attention il existe des dépendances au niveau de la table des rues");
-                $dependances[1] = array('table'=>'historiqueAdresse', 'champLie'=>'idSousQuartier', 'message'=>"Attention il existe des dépendances au niveau de la table historiqueAdresse");
-
-                $generateur = new formGenerator();
-                echo $generateur->afficheFormulaireListe(array_merge($_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail","replaceAjouterButtonBy"=>"<input type='button' name='ajouter' value='ajouter' onclick=\"location.href='".$generateur->creerUrl('', 'ajoutNouvelleAdresse', array("typeNew"=>"newSousQuartier"))."';\">"), $optionsModerateur), $liensExternes, $dependances);
-                */
                 $administration = new archiAdministration();
                 echo $administration->getAdminListeSousQuartiers();
                 break;
             case 'quartier':
             
                 $optionsModerateur=array();
-                // l'utilisateur courant est moderateur : on ne va donc afficher que la liste des quartiers que cette personne modere pour sa ou ses villes
+                /* L'utilisateur courant est moderateur :
+                 * on ne va donc afficher que la liste des quartiers
+                 * que cette personne modere pour sa ou ses villes
+                 * */
                 if ($authentification->getIdProfil()==3) {
-                    $arrayVillesFromModerateur = $u->getArrayVillesModereesPar($authentification->getIdUtilisateur());
+                    $arrayVillesFromModerateur = $u->getArrayVillesModereesPar(
+                        $authentification->getIdUtilisateur()
+                    );
                     
                     if (count($arrayVillesFromModerateur)>0) {
-                        $optionsModerateur=array('sqlWhere'=>" AND idVille in (".implode(",", $arrayVillesFromModerateur).") ");
+                        $optionsModerateur=array('sqlWhere'=>" AND idVille in (".
+                        implode(",", $arrayVillesFromModerateur).") ");
                     } else {
                         $optionsModerateur=array('sqlWhere'=>" AND idVille='0' ");
                     }
@@ -514,83 +580,162 @@ if (isset($_GET['archiAffichage'])) {
             
             
                 $liensExternes=array(
-                    'idVille'=>array('externalLink'=>true, 'externalFieldPrimaryKey'=>'idVille', 'externalTable'=>'ville', 'externalFieldToDisplay'=>'nom'));
-                $dependances[0] = array('table'=>'sousQuartier', 'champLie'=>'idQuartier', 'message'=>"Attention il existe des dépendances au niveau de la table des sous quartiers");
-                $dependances[1] = array('table'=>'historiqueAdresse', 'champLie'=>'idQuartier', 'message'=>"Attention il existe des dépendances au niveau de la table historiqueAdresse");
+                    'idVille'=>array('externalLink'=>true,
+                    'externalFieldPrimaryKey'=>'idVille',
+                    'externalTable'=>'ville',
+                    'externalFieldToDisplay'=>'nom'));
+                $dependances[0] = array('table'=>'sousQuartier',
+                'champLie'=>'idQuartier',
+                'message'=>"Attention il existe des dépendances ".
+                "au niveau de la table des sous quartiers");
+                $dependances[1] = array('table'=>'historiqueAdresse',
+                'champLie'=>'idQuartier',
+                'message'=>"Attention il existe des dépendances au niveau".
+                " de la table historiqueAdresse");
                 $generateur = new formGenerator();
-                echo $generateur->afficheFormulaireListe(array_merge($_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail","replaceAjouterButtonBy"=>"<input type='button' name='ajouter' value='ajouter' onclick=\"location.href='".$generateur->creerUrl('', 'ajoutNouvelleAdresse', array("typeNew"=>"newQuartier"))."';\">"), $optionsModerateur), $liensExternes, $dependances);
+                echo $generateur->afficheFormulaireListe(
+                    array_merge(
+                        $_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail",
+                        "replaceAjouterButtonBy"
+                            =>"<input type='button' name='ajouter' ".
+                        "value='ajouter' onclick=\"location.href='".
+                        $generateur->creerUrl(
+                            '', 'ajoutNouvelleAdresse',
+                            array("typeNew"=>"newQuartier")
+                        )
+                        ."';\">"
+                        ), $optionsModerateur
+                    ), $liensExternes, $dependances
+                );
                 break;
             case 'ville':
                 $liensExternes=array(
-                    'idPays'=>array('externalLink'=>true, 'externalFieldPrimaryKey'=>'idPays', 'externalTable'=>'pays', 'externalFieldToDisplay'=>'nom'));
+                    'idPays'=>array('externalLink'=>true,
+                    'externalFieldPrimaryKey'=>'idPays',
+                    'externalTable'=>'pays',
+                    'externalFieldToDisplay'=>'nom'));
                 
-                $dependances[0] = array('table'=>'quartier', 'champLie'=>'idVille', 'message'=>"Attention il existe des dépendances au niveau de la table des quartiers");
-                $dependances[1] = array('table'=>'historiqueAdresse', 'champLie'=>'idVille', 'message'=>"Attention il existe des dépendances au niveau de la table historiqueAdresse");
+                $dependances[0] = array('table'=>'quartier', 'champLie'=>'idVille',
+                'message'=>"Attention il existe des dépendances au ".
+                "niveau de la table des quartiers");
+                $dependances[1] = array('table'=>'historiqueAdresse',
+                'champLie'=>'idVille', 'message'=>"Attention il existe ".
+                "des dépendances au niveau de la table historiqueAdresse");
 
                 $generateur = new formGenerator();
-                echo $generateur->afficheFormulaireListe(array_merge($_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail","replaceAjouterButtonBy"=>"<input type='button' name='ajouter' value='ajouter' onclick=\"location.href='".$generateur->creerUrl('', 'ajoutNouvelleAdresse', array("typeNew"=>"newVille"))."';\">")), $liensExternes, $dependances);
+                echo $generateur->afficheFormulaireListe(
+                    array_merge(
+                        $_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail",
+                        "replaceAjouterButtonBy"
+                            =>"<input type='button' name='ajouter' value='ajouter' ".
+                            "onclick=\"location.href='".
+                            $generateur->creerUrl(
+                                '', 'ajoutNouvelleAdresse',
+                                array("typeNew"=>"newVille")
+                            )."';\">")
+                    ), $liensExternes, $dependances
+                );
                 break;
             case 'pays':
-                $dependances[0] = array('table'=>'ville', 'champLie'=>'idPays', 'message'=>"Attention il existe des dépendances au niveau de la table des villes");
-                $dependances[1] = array('table'=>'historiqueAdresse', 'champLie'=>'idPays', 'message'=>"Attention il existe des dépendances au niveau de la table historiqueAdresse");
+                $dependances[0] = array('table'=>'ville', 'champLie'=>'idPays',
+                'message'=>"Attention il existe des dépendances ".
+                "au niveau de la table des villes");
+                $dependances[1] = array('table'=>'historiqueAdresse',
+                'champLie'=>'idPays',
+                'message'=>"Attention il existe des dépendances ".
+                "au niveau de la table historiqueAdresse");
 
                 $generateur = new formGenerator();
-                echo $generateur->afficheFormulaireListe(array_merge($_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail")), array(), $dependances);
+                echo $generateur->afficheFormulaireListe(
+                    array_merge(
+                        $_GET, array('modeAffichageLienDetail'=>"adminAdresseDetail")
+                    ),
+                    array(), $dependances
+                );
                 break;
 
             }
             break;
         case 'adminAdresseDetail':
             $adresse = new archiAdresse();
-            $params = array('tableName'=>$_GET['tableName'], 'id'=>$_GET['idModification']);
+            $params = array(
+                'tableName'=>$_GET['tableName'],
+                'id'=>$_GET['idModification']
+            );
             echo $adresse->afficheFormulaireModificationElementAdresse($params);
             break;        
         case 'administrationAfficheModification':
             $administration = new archiAdministration();
-            echo $administration->administre(array('tableName'=>$_GET['tableName'], 'id'=>$_GET['idModification']), 'modification');
+            echo $administration->administre(
+                array('tableName'=>$_GET['tableName'],
+                'id'=>$_GET['idModification']), 'modification'
+            );
              
             break;
         case 'administrationAfficheAjout':
             $administration = new archiAdministration();
-            echo $administration->administre(array('tableName'=>$_GET['tableName']), 'ajout');
+            echo $administration->administre(
+                array('tableName'=>$_GET['tableName']), 'ajout'
+            );
             
             break;
         case 'adminPersonne':
             $liensExternes=array(
-                    'idMetier'=>array('externalLink'=>true, 'externalFieldPrimaryKey'=>'idMetier', 'externalTable'=>'metier', 'externalFieldToDisplay'=>'nom'
+                    'idMetier'=>array('externalLink'=>true,
+                    'externalFieldPrimaryKey'=>'idMetier',
+                    'externalTable'=>'metier',
+                    'externalFieldToDisplay'=>'nom'
             ));
             $parametres['tableName']='personne';
             $parametres['modeAffichageLienDetail']='adminPersonneDetail';
-            $parametres['replaceAjouterButtonBy'] = "<input type='button' name='boutonAjouter' value='Ajouter une personne' onClick=\"location.href='index.php?archiAffichage=adminAjoutPersonneDetail';\">";
+            $parametres['replaceAjouterButtonBy'] = "<input type='button' ".
+            "name='boutonAjouter' value='Ajouter une personne' ".
+            "onClick=\"location.href='index.php?".
+            "archiAffichage=adminAjoutPersonneDetail';\">";
             $parametres['displayWithBBCode'] = true;
             $generateur = new formGenerator();
             echo $generateur->afficheFormulaireListe($parametres, $liensExternes);
             break;
         case "adminPersonneDetail":
             $liensExternes=array(
-                    'idMetier'=>array('externalLink'=>true, 'externalFieldPrimaryKey'=>'idMetier', 'externalTable'=>'metier', 'externalFieldToDisplay'=>'nom'
+                    'idMetier'=>array('externalLink'=>true,
+                    'externalFieldPrimaryKey'=>'idMetier',
+                    'externalTable'=>'metier',
+                    'externalFieldToDisplay'=>'nom'
             ));
             $parametres['tableName']='personne';
             $parametres['modeAffichageLienDetail']='adminPersonneDetail';
             $parametres['id']=$_GET['idModification'];
             $parametres['afficheMiseEnFormeLongText']=true;
             $generateur = new formGenerator();
-            echo $generateur->afficheFormulaireModification($parametres, $liensExternes);
+            echo $generateur->afficheFormulaireModification(
+                $parametres, $liensExternes
+            );
             
             break;
         case "adminAjoutPersonneDetail":
             $liensExternes=array(
-                    'idMetier'=>array('externalLink'=>true, 'externalFieldPrimaryKey'=>'idMetier', 'externalTable'=>'metier', 'externalFieldToDisplay'=>'nom'
-            ));
+                'idMetier'=>array(
+                    'externalLink'=>true,
+                    'externalFieldPrimaryKey'=>'idMetier',
+                    'externalTable'=>'metier',
+                    'externalFieldToDisplay'=>'nom'
+                )
+            );
             $parametres['tableName']='personne';
             $parametres['modeAffichageLienDetail']='adminPersonneDetail';
             $parametres['afficheMiseEnFormeLongText']=true;
             $generateur = new formGenerator();
-            echo $generateur->afficheFormulaireAjout($parametres, $liensExternes);
+            echo $generateur->afficheFormulaireAjout(
+                $parametres, $liensExternes
+            );
             break;
         case 'accueil':
             $derniersEvenements = new archiEvenement();
-            echo $derniersEvenements->afficherListe(array('ordre'=>'dateCreation', 'tri'=>'desc'), 'derniersEvenements.tpl');
+            echo $derniersEvenements->afficherListe(
+                array('ordre'=>'dateCreation', 'tri'=>'desc'),
+                'derniersEvenements.tpl'
+            );
             break;
         case 'afficheChoixAdresse':
             $criteres=array();
@@ -601,17 +746,30 @@ if (isset($_GET['archiAffichage'])) {
             echo $a->afficheChoixAdresse($criteres);
             break;
         case 'authentification':
-            // le formulaire a til deja ete appelé par une 'action' requerant une connexion ? 
+            /* Le formulaire a-t-il deja ete appelé par
+             * une 'action' requerant une connexion ? 
+             * */
             if (!$afficheAuthentificationAction) {
                 $auth = new archiAuthentification();
                 echo $auth->afficheFormulaireAuthentification();
             }
             break;
         case 'authentificationImage':
-            // le formulaire a til deja ete appelé par une 'action' requerant une connexion ? 
+            /* Le formulaire a-t-il deja ete appelé par
+             * une 'action' requerant une connexion ? 
+             * */
             if (!$afficheAuthentificationAction) {
                 $auth = new archiAuthentification();
-                echo $auth->afficheFormulaireAuthentification('noCompact', array('msg'=>"<b>Pour voir les photos au format moyen ou l'original vous devez être connecté. Si vous n'avez pas encore de compte utilisateur pour vous connecter, cliquez <a href='".$auth->creerUrl('', 'inscription')."'>ici</a></b>"));
+                echo $auth->afficheFormulaireAuthentification(
+                    'noCompact',
+                    array(
+                        'msg'=>"<b>Pour voir les photos au format moyen ".
+                        "ou l'original vous devez être connecté. ".
+                        "Si vous n'avez pas encore de compte utilisateur".
+                        " pour vous connecter, cliquez <a href='".
+                        $auth->creerUrl('', 'inscription')."'>ici</a></b>"
+                    )
+                );
             }
             break;
         case 'evenementListe':
@@ -667,7 +825,9 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'historiqueEvenementDetail':
             $evenement = new archiEvenement();
-            echo $evenement->afficherHistoriqueDetail($_GET['idHistoriqueEvenement']);
+            echo $evenement->afficherHistoriqueDetail(
+                $_GET['idHistoriqueEvenement']
+            );
             break;
         case 'personneListe':
             $p = new archiPersonne();
@@ -688,7 +848,9 @@ if (isset($_GET['archiAffichage'])) {
         case 'recherche':
             $a = new archiRecherche();
             echo $a->rechercher();
-            if (isset($_GET["motcle"]) && $_GET["modeAffichage"]!="popupRechercheAdresseVueSur") {
+            if (isset($_GET["motcle"]) 
+                && $_GET["modeAffichage"]!="popupRechercheAdresseVueSur"
+            ) {
                 $pos=isset($_GET["pos"])?$_GET["pos"]:1;
                 echo archiPersonne::search($_GET["motcle"], $pos);
             }
@@ -706,7 +868,9 @@ if (isset($_GET['archiAffichage'])) {
         case "sourceListe":
             $s  = new archiSource();
             $criteres=array();
-            if (isset($_POST['archiTypeSource']) && $_POST['archiTypeSource'] != '0') {
+            if (isset($_POST['archiTypeSource']) 
+                && $_POST['archiTypeSource'] != '0'
+            ) {
                 $criteres['archiTypeSource'] = $_POST['archiTypeSource'];
             }
             
@@ -750,10 +914,11 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'rechercheAvEvenementPopup':
             $r= new archiRecherche();
-            if (isset($_GET['modeAffichage']))
+            if (isset($_GET['modeAffichage'])) {
                 $criteres['modeAffichage'] = $_GET['modeAffichage'];
-            else
+            } else {
                 $criteres['modeAffichage'] = 'calqueEvenement';
+            }
             
             echo $r->rechercheAvanceeEvenement($criteres);
             break;
@@ -769,15 +934,13 @@ if (isset($_GET['archiAffichage'])) {
             );
             print('</div>');
             break;
-        // liste d'adresses regroupee , pseudo dossier par rue
+        // Liste d'adresses regroupee, pseudo dossier par rue
         case 'listeDossiers':
             $a = new archiAdresse();
             echo $a->afficheListeRegroupee();
-            //$cachedElement = new cacheObject();
-            //echo $cachedElement->gestionCache('archiAdresse', 'afficheListeRegroupee');
             
             break;
-        // parties statiques
+        // Parties statiques
         case 'faq':
             $s = new archiStatic();
             echo $s->afficheFaq();
@@ -790,8 +953,7 @@ if (isset($_GET['archiAffichage'])) {
             $s = new archiStatic();
             echo $s->afficheQuiSommesNous();
             break;
-        //////////////////////////////////////////////////////////////////////////////////////////
-        ////// gestion des historiques de quiSommesNous : add by fabien le 26/03/2012 ///////////////////
+        //Gestion des historiques de quiSommesNous : add by fabien le 26/03/2012
         
         case 'quiSommesNousLaurent':
             $s = new archiStatic();
@@ -807,33 +969,33 @@ if (isset($_GET['archiAffichage'])) {
             echo $s->afficheQuiSommesNousCreationAssociation2011();
             break;
         
-        //////////////////////////////////////////////////////////////////////////////////////////
         
         case 'faireUnDon':
             $s = new archiStatic();
             echo $s->afficheFaireUnDon();
             break;
-        case 'donateurs':                        // ajout fabien du 30/11/2011
+        // ajout fabien du 30/11/2011
+        case 'donateurs':                        
             $s = new archiStatic();
             echo $s->afficheDonateurs();
             break;
-        //****************************************************************************************************
-        // popup source : operation ajout dans la popup
+        // Popup source : operation ajout dans la popup
         case 'afficherAjouterSource':
             $source = new archiSource();
             echo $source->afficherFormulaire();
             break;
-        //popup personne : operation ajout dans la popup
+        //Popup personne : operation ajout dans la popup
         case 'afficherAjouterPersonne':
             $personne = new archiPersonne();
             echo $personne->afficherFormulaire();
             break;
-        //****************************************************************************************************
-        // cas de l'ajout d'un nouveau dossier
-        //****************************************************************************************************
+        // Cas de l'ajout d'un nouveau dossier
         case 'ajoutNouveauDossier':
             $a = new archiAdresse();
-            echo $a->afficheFormulaireNouveauDossier(); // un dossier est une notion qui regroupe un evenement groupe d'adresse et un evenement 'construction'
+            /* Un dossier est une notion qui regroupe un evenement
+             * groupe d'adresse et un evenement 'construction'
+             * */
+            echo $a->afficheFormulaireNouveauDossier(); 
             break;    
         case "editPerson":
             include "inc/editPerson.php";
@@ -855,7 +1017,8 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'afficheChoixVille':
             $a = new archiAdresse();
-            echo $a->afficheChoixVille(); // affichage du formulaire de choix de ville par ordre alphabetique        
+            // affichage du formulaire de choix de ville par ordre alphabetique  
+            echo $a->afficheChoixVille();       
             break;
         case 'afficheChoixRue':
             $a = new archiAdresse();
@@ -879,7 +1042,9 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'formulaireGroupeAdresses':
             $a = new archiAdresse();
-            echo $a->afficheAjoutAdressesMultiple($_GET['archiIdEvenementGroupeAdresses']);
+            echo $a->afficheAjoutAdressesMultiple(
+                $_GET['archiIdEvenementGroupeAdresses']
+            );
             break;
         case 'utilisateurDetail':
             $a = new archiUtilisateur();
@@ -896,14 +1061,17 @@ if (isset($_GET['archiAffichage'])) {
             echo $html;
             break;
         case 'modifierImageMultiple':
-            // ****************************************************************************************************************************************************
-            // ATTENTION listeId correspond a une liste d'HISTORIQUE d'image , donc il faut d'abord recuperer les idImages correspondant pour les envoyer a la fonction afficherFormulaireModification
-            // ****************************************************************************************************************************************************
+            /* ATTENTION listeId correspond a une liste d'HISTORIQUE d'image,
+             * donc il faut d'abord recuperer les idImages correspondant
+             * pour les envoyer a la fonction afficherFormulaireModification
+             * */
             if (isset($_POST['listeId'])) {
                 $arrayIdImage=array();
                 $arrayIdHistoriqueImage = explode(",", $_POST['listeId']);
                 foreach ($arrayIdHistoriqueImage as $indice => $idHistoriqueImage) {
-                    // recuperation des idImages du formulaire pour les passer a l'affichage de modification
+                    /* recuperation des idImages du formulaire
+                     * pour les passer a l'affichage de modification
+                     * */
                     if (isset($_POST['idImage_'.$idHistoriqueImage])) {
                         $arrayIdImage[] = $_POST['idImage_'.$idHistoriqueImage];
                     }
@@ -911,53 +1079,74 @@ if (isset($_GET['archiAffichage'])) {
                 
                 $a = new archiImage();
                 echo $a -> afficherFormulaireModification(0, '', $arrayIdImage);
+            } else {
+                echo "index.php : modifierImageMultiple : ".
+                "il manque un parametre, veuillez contacter l'administrateur.<br>";
             }
-            else
-                echo "index.php : modifierImageMultiple : il manque un parametre, veuillez contacter l'administrateur.<br>";
-            // ****************************************************************************************************************************************************
             break;
         case 'modifierImage':
             $a = new archiImage();
-            echo $a -> afficherFormulaireModification(0, '', array($_GET['archiIdImageModification']));
+            echo $a -> afficherFormulaireModification(
+                0, '', array($_GET['archiIdImageModification'])
+            );
             break;
         case 'modifierPositionsImages':
             $a = new archiImage();
-            echo $a->afficheFormulaireModifPosition(array('idEvenement'=>$_GET['archiIdEvenement']));
+            echo $a->afficheFormulaireModifPosition(
+                array('idEvenement'=>$_GET['archiIdEvenement'])
+            );
             break;
         case 'modifierImageAdresse':
             $a = new archiImage();
-            echo $a -> afficherFormulaireModification($_GET['archiIdAdresseModification'], 'adresse');
+            echo $a -> afficherFormulaireModification(
+                $_GET['archiIdAdresseModification'], 'adresse'
+            );
             break;
         case 'modifierImageEvenement':
             $image = new archiImage();
-            echo $image->afficherFormulaireModification($_GET['archiIdEvenement'], 'evenement');
+            echo $image->afficherFormulaireModification(
+                $_GET['archiIdEvenement'], 'evenement'
+            );
             break;
         case 'modifierImagesUtilisateur':
             $authentifie = new archiAuthentification();
             $image = new archiImage();
-            echo  $image->afficherFormulaireModification($authentifie->getIdUtilisateur(), 'utilisateur');
+            echo  $image->afficherFormulaireModification(
+                $authentifie->getIdUtilisateur(), 'utilisateur'
+            );
             break;
         case 'ajoutNouvelleAdresse':
-            // affichage du formulaire permettant d'ajouter de nouvelle rues, sousquartier, quartier, ville, pays ...
+            /* affichage du formulaire permettant d'ajouter
+             * de nouvelle rues, sousquartier, quartier, ville, pays ...
+             * */
             $criteres=array();
             
-            if (isset($_GET['typeNew']))
+            if (isset($_GET['typeNew'])) {
                 $criteres['typeNew']=$_GET['typeNew'];
+            }
             
             $adresse = new archiAdresse();
             echo $adresse -> afficheFormulaireNouvelleAdresse($criteres);
             break;
         case 'ajouterSousEvenement':
             $evenement = new archiEvenement();
-            echo $evenement->afficheFormulaire($evenement->getEvenementFields('nouveauDossier'), '', $_GET['archiIdEvenement'], 'evenement');
+            echo $evenement->afficheFormulaire(
+                $evenement->getEvenementFields('nouveauDossier'), '',
+                $_GET['archiIdEvenement'], 'evenement'
+            );
             break;
         case 'ajouterEvenementSurAdresse':
             $evenement = new archiEvenement();
-            echo $evenement->afficheFormulaire($evenement->getEvenementFields('nouveauDossier'), '', $_GET['archiIdAdresse'], 'adresse');
+            echo $evenement->afficheFormulaire(
+                $evenement->getEvenementFields('nouveauDossier'), '',
+                $_GET['archiIdAdresse'], 'adresse'
+            );
             break;
         case 'ajoutImageAdresse':
             $image = new archiImage();
-            echo $image->afficherFormulaireAjout($_GET['archiIdAdresse'], 'adresse');
+            echo $image->afficherFormulaireAjout(
+                $_GET['archiIdAdresse'], 'adresse'
+            );
             break;
         case 'ajouterEvenement':
             $ev = new archiEvenement();
@@ -965,7 +1154,9 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'ajoutImageEvenement':
             $image = new archiImage();
-            echo $image->afficherFormulaireAjout($_GET['archiIdEvenement'], 'evenement');
+            echo $image->afficherFormulaireAjout(
+                $_GET['archiIdEvenement'], 'evenement'
+            );
             break;
         case 'ajoutImageBibliotheque':
             $image = new archiImage();
@@ -988,7 +1179,10 @@ if (isset($_GET['archiAffichage'])) {
             
             if ($authentification->estConnecte()) {
                 $utilisateur = new archiUtilisateur();
-                $arrayUtilisateur = $utilisateur->getArrayInfosFromUtilisateur($authentification->getIdUtilisateur());
+                $arrayUtilisateur = $utilisateur
+                    ->getArrayInfosFromUtilisateur(
+                        $authentification->getIdUtilisateur()
+                    );
                 $nom=$arrayUtilisateur['nom'];
                 $prenom=$arrayUtilisateur['prenom'];
                 $email=$arrayUtilisateur['mail'];
@@ -1006,9 +1200,12 @@ if (isset($_GET['archiAffichage'])) {
             break;
         
         case 'affichePopupAttente':
-            echo "<div style='text-align:center;border:1px solid #000000;height:148px;'>";
-            echo "<div style='padding-top:20px;'><img src='images/indicator.gif'></div>";
-            echo "<div style='padding-top:20px;'>Veuillez patienter, le chargement est en cours...</div>";
+            echo "<div style='text-align:center;".
+            "border:1px solid #000000;height:148px;'>";
+            echo "<div style='padding-top:20px;'>".
+            "<img src='images/indicator.gif'></div>";
+            echo "<div style='padding-top:20px;'>".
+                "Veuillez patienter, le chargement est en cours...</div>";
             echo "</div>";
             break;
         
@@ -1031,12 +1228,16 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'afficherListeRelative':
             $a = new archiAdresse();
-            echo $a->getAdressesMemeLocalite($_GET['archiIdAdresse'], $_GET['archiTypeLocalite']);
+            echo $a->getAdressesMemeLocalite(
+                $_GET['archiIdAdresse'], $_GET['archiTypeLocalite']
+            );
             break;
         
         case 'listeAdressesFromRue':
             $a = new archiAdresse();
-            $tab = $a->afficherListe(array('recherche_rue'=>$_GET['recherche_rue']));
+            $tab = $a->afficherListe(
+                array('recherche_rue'=>$_GET['recherche_rue'])
+            );
             echo $tab['html'];
             break;
         
@@ -1060,11 +1261,22 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'tousLesArchitectesClasses':
             $accueil = new archiAccueil();
-            echo $accueil->getListeArchitectesProductifs(array("setTitre"=>"<H1>Classement des architectes les plus productifs : </H1>"));
+            echo $accueil->getListeArchitectesProductifs(
+                array(
+                    "setTitre"=>"<H1>Classement des architectes ".
+                    "les plus productifs : </H1>"
+                )
+            );
             break;
         case 'toutesLesRuesCompletesClassees':
             $accueil = new archiAccueil();
-            echo $accueil->getListeRuesCompletes(array("setTitre"=>"<H1>Classement des rues ou figurent le plus d'adresses : </H1>"));
+            echo $accueil->getListeRuesCompletes(
+                array(
+                    "setTitre"
+                        =>"<H1>Classement des rues où".
+                        " figurent le plus d'adresses : </H1>"
+                    )
+            );
             break;
         case 'afficheLogsMails':
             $administration = new archiAdministration();
@@ -1080,7 +1292,9 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'tousLesCommentaires':
             $a = new archiAdresse();
-            echo $a->getDerniersCommentaires(array('afficherTous'=>true));
+            echo $a->getDerniersCommentaires(
+                array('afficherTous'=>true)
+            );
             break;
         case 'publiciteArticlesPresse':
             $s = new archiStatic();
@@ -1096,23 +1310,36 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'afficheFormulaireEvenementAdresseLiee':
             $e = new archiEvenement();
-            echo $e->afficheFormulaireAdresseLieeEvenement(array('idEvenement'=>$_GET['idEvenement']));
+            echo $e->afficheFormulaireAdresseLieeEvenement(
+                array('idEvenement'=>$_GET['idEvenement'])
+            );
             break;
         case 'consultationHistoriqueEvenement':
             $e = new archiEvenement();
-            echo $e->afficheHistoriqueEvenement(array('idEvenement'=>$_GET['archiIdEvenement']));
+            echo $e->afficheHistoriqueEvenement(
+                array('idEvenement'=>$_GET['archiIdEvenement'])
+            );
             break;
         case 'affichePopupSelectionZoneVueSur':
             $i = new archiImage();
-            echo $i->getImagesVueSur(array('modeAffichage'=>'affichePopupSelectionZoneVueSur', 'idImage'=>$_GET['archiIdImage']));
+            echo $i->getImagesVueSur(
+                array('modeAffichage'=>'affichePopupSelectionZoneVueSur',
+                'idImage'=>$_GET['archiIdImage'])
+            );
             break;
         case 'afficheSondageGrand':
             $a = new archiAccueil();
-            echo $a->gestionSondage(array('afficheToutLeTexte'=>true, 'modeAffichage'=>'noFormulaire'));
+            echo $a->gestionSondage(
+                array('afficheToutLeTexte'=>true,
+                'modeAffichage'=>'noFormulaire')
+            );
             break;
         case 'afficheSondageResultatGrand':
             $a  = new archiAccueil();
-            echo $a->gestionSondage(array('afficheToutLeTexte'=>true, 'modeAffichage'=>'resultatAccueil'));
+            echo $a->gestionSondage(
+                array('afficheToutLeTexte'=>true,
+                'modeAffichage'=>'resultatAccueil')
+            );
             break;
         case 'afficheGoogleMapIframe':
             $a = new archiAdresse();
@@ -1149,7 +1376,9 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'carteGoogleMapParcoursArt':
             $adresse = new archiAdresse();
-            echo $adresse->getGoogleMapParcours(array('getCoordonneesParcours'=>true));
+            echo $adresse->getGoogleMapParcours(
+                array('getCoordonneesParcours'=>true)
+            );
             break;
         case 'parcours':
             $a = new archiAdresse();
@@ -1169,7 +1398,8 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'donOk':
             echo "<h1>Faire un don</h1><br>";
-            echo "archi-strasbourg.org vous remercie pour votre don. <a href='/'>Retour</a>";
+            echo "archi-strasbourg.org vous remercie pour votre don. ".
+                "<a href='/'>Retour</a>";
             break;
         case 'afficheImagesFrom':
             $i = new archiImage();
@@ -1220,18 +1450,11 @@ if (isset($_GET['archiAffichage'])) {
     }
 }
 
-if ((count($_POST)==0 && count($_GET)==0) || (count($_GET)==1 && isset($_GET["lang"])) || (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='afficheAccueil')) {
-    //$cachedElement = new cacheObject();
-    //echo $cachedElement->gestionCache('archiAccueil', 'afficheAccueil');
-    
-    /*if ($authentification->estConnecte())
-    {
-        echo "<img src='images/publicite/bandeauRedimV4.jpg' border=0>";
-    }
-    else
-    {
-        echo "<a href='".$authentification->creerUrl('', 'authentificationImage')."'><img src='images/publicite/bandeauRedimV4.jpg' border=0></a>";
-    }*/
+if ((count($_POST)==0 && count($_GET)==0) 
+    || (count($_GET)==1 && isset($_GET["lang"]))
+    || (isset($_GET['archiAffichage'])
+    && $_GET['archiAffichage']=='afficheAccueil')
+) {
     
     
     

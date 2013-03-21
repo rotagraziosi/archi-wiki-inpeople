@@ -5672,8 +5672,7 @@ class archiAdresse extends ArchiContenu
         $reqNbVille = "
             select 0
             from ville 
-            where idPays = '1'
-            and lower(substr(nom,1,1))='".$lettre."'
+            where lower(substr(nom,1,1))='".$lettre."'
             and nom<>'autre'
             order by nom
         ";
@@ -5716,8 +5715,7 @@ class archiAdresse extends ArchiContenu
         $reqVille = "
             select idVille,nom,codepostal, lower(substr(nom,1,1)) as lettre
             from ville 
-            where idPays = '1'
-            and lower(substr(nom,1,1))='".$lettre."'
+            where lower(substr(nom,1,1))='".$lettre."'
             and nom<>'autre'
             order by nom,lettre ASC
             LIMIT ".$arrayPagination['limitSqlDebut'].",".$nbEnregistrementsParPage;
@@ -5725,7 +5723,7 @@ class archiAdresse extends ArchiContenu
         $resVille=$this->connexionBdd->requete($reqVille);
         
         
-        $html .= $this->afficheListeAlphabetique(array('champ'=>'nom','table'=>'ville','where'=>" and idPays=1 and nom<>'autre' "),$modeAffichage);
+        $html .= $this->afficheListeAlphabetique(array('champ'=>'nom','table'=>'ville','where'=>" and nom<>'autre' "),$modeAffichage);
         
         $html .=$arrayPagination['html']."<br>";
 
@@ -7223,8 +7221,7 @@ class archiAdresse extends ArchiContenu
             $where = 'WHERE 1=1 '.$criteres['where'];
         }
         
-        $req = "select distinct lower(substr(".$criteres['champ'].",1,1)) as lettre from ".$criteres['table'].' '.$join.' '.$where.' order by lettre asc';
-        
+        $req = "select distinct lower(substr(".$criteres['champ'].",1,1)) as lettre from ".$criteres['table'].' '.$join.' '.$where.' order by lettre asc';        
         
         
         $res = $this->connexionBdd->requete($req);
