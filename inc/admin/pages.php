@@ -12,7 +12,7 @@
  * 
  * */
 echo "<h2>"._("Gestion des pages")."</h2>";
-$listPages=archiPage::getList();
+$listPages=archiPage::getList(LANG);
 $htmlListPages="";
 echo "<ul>";
 foreach ($listPages as $page) {

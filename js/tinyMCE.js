@@ -1,7 +1,7 @@
 /*global tinyMCE*/
 tinyMCE.init({
     mode : "exact",
-    elements : "tinyMCE",
+    elements : "tinyMCE-fr_FR,tinyMCE-de_DE,tinyMCE-en_US",
     theme : "advanced",
     force_br_newlines : true,
     force_p_newlines : false,

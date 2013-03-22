@@ -21,27 +21,16 @@ if ($footerJS!='') {
 
 
 
-/*if(!isset($config->isSiteLocal) || $config->isSiteLocal==false)
-{
-
-	$t->assign_vars(array('googleAnalytics'=>"<script type=\"text/javascript\">
-var gaJsHost = ((\"https:\" == document.location.protocol) ? \"https://ssl.\" : \"http://www.\");
-document.write(unescape(\"%3Cscript src='\" + gaJsHost + \"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));
-</script>
-<script type=\"text/javascript\">
-try {
-var pageTracker = _gat._getTracker(\"UA-16282574-3\");
-pageTracker._trackPageview();
-} catch(err) {}</script>"));
-}*/
-
-
-$listPages=archiPage::getListFooter();
+$listPages=archiPage::getListFooter(LANG);
 $htmlListPages="";
 foreach ($listPages as $page) {
-    $htmlListPages.="<li><a href='index.php?archiAffichage=page&idPage=".$page["id"]."'>".$page["title"]."</a></li>";
+    $htmlListPages.="<li><a href='index.php?archiAffichage=page&idPage=".
+    $page["id"]."'>".$page["title"]."</a></li>";
 }
-$t->assign_vars(array("listPages"=>$htmlListPages, "faq"=>$config->creerUrl("", "faq"), "contact"=>$config->creerUrl("", "contact")));
+$t->assign_vars(
+    array("listPages"=>$htmlListPages, "faq"=>$config->creerUrl("", "faq"),
+    "contact"=>$config->creerUrl("", "contact"))
+);
 
 
 ob_start();

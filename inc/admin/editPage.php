@@ -11,21 +11,37 @@
  * @link     https://archi-strasbourg.org/
  * 
  * */
-if (isset($_GET["new"])) {
-    $page=new archiPage();
-} else {
-    $page=new archiPage($_GET["idPage"], $_GET["langPage"]);
-}
-if (isset($_POST["title"])) {
+if (isset($_POST["title-".$config->langs[0]])) {
+    if (isset($_GET["new"])) {
+        $page=new archiPage();
+    } else {
+        $page=new archiPage($_GET["idPage"], $lang);
+    }
     $page->menu=isset($_POST["menu"])?1:0;
     $page->footer=isset($_POST["footer"])?1:0;
     if (isset($_GET["new"])) {
-        $page->add($_POST["title"], $_POST["content"], $page->menu,  $page->footer);
+        foreach ($config->langs as $lang) {
+            if (isset($id)) {
+                $page->add(
+                    $_POST["title-".$lang], $_POST["content-".$lang],
+                    $page->menu,  $page->footer, $lang, $id
+                );
+            } else {
+                $page->add(
+                    $_POST["title-".$lang], $_POST["content-".$lang],
+                    $page->menu,  $page->footer, $lang
+                );
+                $id=mysql_insert_id();
+            }
+        }
         header("Location: ".$config->creerUrl("", "adminPages"));
     } else {
-        $page->update(
-            $_POST["title"], $_POST["content"], $page->menu,  $page->footer
-        );
+        foreach ($config->langs as $lang) {
+            $page->update(
+                $_POST["title-".$lang], $_POST["content-".$lang],
+                $page->menu,  $page->footer, $lang
+            );
+        }
     }
 }
 
@@ -36,11 +52,21 @@ echo "<a class='right' href='".$config->creerUrl("", "adminPages")."'>".
 _("Retour")."</a>";
 echo "<h2>"._("Edition :")." ".$page->title."</h2>";
 echo "<form method='POST'>";
-echo "<label for='title'>"._("Titre :").
-"</label> <input name='title' id='title' value='".$page->title."'/><br/><br/>";
-echo "<label for='tinyMCE'>"._("Contenu :")."</label><br/>"; 
-echo "<textarea id='tinyMCE' name='content'>".
-stripslashes($page->content)."</textarea><br/>";
+foreach ($config->langs as $lang) {
+    if (isset($_GET["new"])) {
+        $page=new archiPage();
+    } else {
+        $page=new archiPage($_GET["idPage"], $lang);
+    }
+    echo "<h3>".$lang."</h3><br/><br/>";
+    echo "<label for='title'>"._("Titre :").
+    "</label> <input name='title-".$lang."' id='title' value='".
+    $page->title."'/><br/><br/>";
+    echo "<label for='tinyMCE-".$lang."'>"._("Contenu :")."</label><br/>"; 
+    echo "<textarea id='tinyMCE-".$lang."' name='content-".$lang."'>".
+    stripslashes($page->content)."</textarea><br/>";
+    echo '<hr/>';
+}
 echo "<input type='checkbox' id='menu' name='menu'";
 if ($page->menu) {
     echo "checked='checked'";

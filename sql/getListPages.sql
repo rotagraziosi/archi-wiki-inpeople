@@ -1,1 +1,1 @@
-SELECT `title`, `id`, `lang` FROM `pages`;
+SELECT `title`, `id`, `lang` FROM `pages` WHERE lang = '%s';

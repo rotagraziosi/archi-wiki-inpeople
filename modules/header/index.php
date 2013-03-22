@@ -163,7 +163,7 @@ if ($session->isInSession('archiIdVilleGeneral') && $session->getFromSession('ar
 }
 
 
-$listPages=archiPage::getListMenu();
+$listPages=archiPage::getListMenu(LANG);
 $htmlListPages="";
 foreach ($listPages as $page) {
     $htmlListPages.="<li><a href='index.php?archiAffichage=page&idPage=".$page["id"]."'>".$page["title"]."</a></li>";
