@@ -47,13 +47,13 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div id="outer" class="outer">
-	
-	<div id="header" class="header">
+    
+    <div id="header" class="header">
     <!--<a href="./">
     <img src="images/logo_archi.png" alt="">
     </a>-->
     <div class="header2">
-	<div class="inline-block homeTitle">
+    <div class="inline-block homeTitle">
     <a href="./">
     <div class="title"><h1 class="h1"><img src="images/Advisa/logo-archi-strasbourg.png" alt="{titreSite}" /></h1><!--<h2 class="h2">Version 2.3</h2>--><?_("Architecture et histoire des lieux de Strasbourg")?></div>
     </a>
@@ -62,12 +62,12 @@
     </div>
     <!--
     <script>
-	$(function() {
-		$( "#progressbar" ).progressbar({
-			value: 66
-		});
-	});
-	</script>
+    $(function() {
+        $( "#progressbar" ).progressbar({
+            value: 66
+        });
+    });
+    </script>
     
     <div class='barredons'>
     <a href="actualites-archi-strasbourg-30.html">
@@ -76,26 +76,26 @@
     <span class="percent">68 %</span><br/>
     <span class="euros">11850 € restants</span>
     </a>
-	</div>
+    </div>
     -->
     
-	<nav id="menu" class="menu">
+    <nav id="menu" class="menu">
             <div class="wrapper">
             
             <div class="leftpart">
             <ul>
-			
-			<!-- BEGIN isAdmin -->
-			<li><a href="{listeUtilisateurs}" accesskey="2"><?_("Utilisateurs")?></a></li>
-			
-			<li><a href="{logsMails}"><?_("Logs Mails")?></a></li>
-			<!-- END isAdmin -->
-			
-			<!-- BEGIN afficheAdministrationMenu -->
-			<li><a href="{administration}"><?_("Administration")?></a></li>
-			<!-- END afficheAdministrationMenu -->
-			
-			<!--<li><a href="{recherche}" accesskey="4" title=""><?_("Recherche")?></a></li>-->
+            
+            <!-- BEGIN isAdmin -->
+            <li><a href="{listeUtilisateurs}" accesskey="2"><?_("Utilisateurs")?></a></li>
+            
+            <li><a href="{logsMails}"><?_("Logs Mails")?></a></li>
+            <!-- END isAdmin -->
+            
+            <!-- BEGIN afficheAdministrationMenu -->
+            <li><a href="{administration}"><?_("Administration")?></a></li>
+            <!-- END afficheAdministrationMenu -->
+            
+            <!--<li><a href="{recherche}" accesskey="4" title=""><?_("Recherche")?></a></li>-->
             <li class="home"><a href="./" accesskey="1"><img src="images/Advisa/maison.png" alt="<?_("Accueil")?>" /></a></li>
             <li class="flag"><a href="?lang=fr_FR" title="Français">FR</a></li>
             <li class="flag"><a href="?lang=en_US"  title="English">EN</a></li>
@@ -104,10 +104,10 @@
             
             
             
-		</ul>
+        </ul>
         </div>
       
-			
+            
             <!-- BEGIN utilisateurNonConnecte -->
             <div class="loginForm">
             {formulaireConnexion}
@@ -133,52 +133,52 @@
         <a class="persona-button dark" id="browserid" title="<?_("Se connecter avec BrowserID")?>" title="<?_("Se connecter avec BrowserID")?>" ><span><?_("Connexion")?></span></a> 
         <!-- END utilisateurNonConnecte -->
         </div> 
-		</div>
-	</nav>
+        </div>
+    </nav>
     </div>
-	<div id="content" class="content">
-		<div id="primaryContentContainer" class="primaryContentContainer">
-			<div id="secondaryContent" class="secondaryContent">
-				<div class="box boxA">
-					<!--<h2><?_("Rechercher")?></h2>-->
-					<div class="boxContent center">
-						{formulaireRecherche}
-						{lienRechercheParCarte}
-						{lienRechercheAvancee}
-					</div>
-				</div>
-				<div class="box">
+    <div id="content" class="content">
+        <div id="primaryContentContainer" class="primaryContentContainer">
+            <div id="secondaryContent" class="secondaryContent">
+                <div class="box boxA">
+                    <!--<h2><?_("Rechercher")?></h2>-->
+                    <div class="boxContent center">
+                        {formulaireRecherche}
+                        {lienRechercheParCarte}
+                        {lienRechercheAvancee}
+                    </div>
+                </div>
+                <div class="box">
                 
                 <nav class="boxContent">
-				
-				<ul>
+                
+                <ul>
                     {listPages}
-					<li><a href="{quiSommesNous}"><?_("Qui sommes nous ?")?></a></li>
-					<li><a href="{listeDossiers}"><?_("Adresses")?></a></li>
-					
-					<!-- BEGIN isParcours -->
-					<li><a href="{parcours}" title="parcours">Parcours</a></li>
-					<!-- END isParcours -->
-					
-					<li style='white-space:nowrap;'><a href="{ajoutNouveauDossier}"><?_("Ajouter une adresse")?></a></li>
-                    <li style='white-space:nowrap;'><a href="{ajoutNouvellePersonne}"><?_("Ajouter une personne")?></a></li>
-					<li style='white-space:nowrap;'><a href="{nosSources}"><?_("Nos sources")?></a></li>
-					
-					<!--<li><a href="{publiciteMedias}"><?_("Les médias parlent de nous...")?></a></li>-->
-					<li><a href="index.php?archiAffichage=donateurs"><?_("Nos donateurs")?></a></li>
+                    <li><a href="{quiSommesNous}"><?_("Qui sommes nous ?")?></a></li>
+                    <li><a href="{listeDossiers}"><?_("Adresses")?></a></li>
                     
-				</ul>
-				
-				</nav>
+                    <!-- BEGIN isParcours -->
+                    <li><a href="{parcours}" title="parcours"><?_("Parcours")?></a></li>
+                    <!-- END isParcours -->
+                    
+                    <li style='white-space:nowrap;'><a href="{ajoutNouveauDossier}"><?_("Ajouter une adresse")?></a></li>
+                    <li style='white-space:nowrap;'><a href="{ajoutNouvellePersonne}"><?_("Ajouter une personne")?></a></li>
+                    <li style='white-space:nowrap;'><a href="{nosSources}"><?_("Nos sources")?></a></li>
+                    
+                    <!--<li><a href="{publiciteMedias}"><?_("Les médias parlent de nous...")?></a></li>-->
+                    <li><a href="index.php?archiAffichage=donateurs"><?_("Nos donateurs")?></a></li>
+                    
+                </ul>
+                
+                </nav>
                 <div class="subbox paypal">
-				<a href='{faireUnDon}' >
+                <a href='{faireUnDon}' >
                 <!--<img src='https://www.paypalobjects.com/{lang}/i/btn/btn_donate_LG.gif' alt="-->
                 <?_("Faire un don")?>
                 <!--">-->
                 </a>
                 </div>
                 <br/>
-				<div class="fb-like-box reseauSocial" data-href="https://www.facebook.com/pages/Association-Archi-Strasbourg/215793091822502" data-width="190" data-stream="false" data-header="true"></div>
+                <div class="fb-like-box reseauSocial" data-href="https://www.facebook.com/pages/Association-Archi-Strasbourg/215793091822502" data-width="190" data-stream="false" data-header="true"></div>
                 <br/>
                 <div class="reseauSocial">
                 <script charset="utf-8" src="https://widgets.twimg.com/j/2/widget.js"></script>
@@ -210,23 +210,23 @@
                 }).render().setUser('ArchiStrasbourg').start();
                 </script>
                 </div>
-				<!--<A HREF="http://www.archi-strasbourg.org/?archiAffichage=faireUnDon"><IMG SRC="images/20120326appeldons/bandeau_pub_vertical.jpg" width="174" alt="<?_("Pour continuer à lire du contenu gratuit et de qualité, faites un don.")?>"></A>-->
+                <!--<A HREF="http://www.archi-strasbourg.org/?archiAffichage=faireUnDon"><IMG SRC="images/20120326appeldons/bandeau_pub_vertical.jpg" width="174" alt="<?_("Pour continuer à lire du contenu gratuit et de qualité, faites un don.")?>"></A>-->
 
-				<div class="box boxB">
-				{derniersCommentaires}
-				</div>
-				
-				<!-- ajout fabien du 03/04/2012 nouveau bandeau de pub-->
-				<div class="box licenceLogo">
-				<a href="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence" title="<?_("Le texte de ce site est disponible selon les termes de la Licence ouverte.")?>"><img src="images/Advisa/openlicence.png" alt="Licence ouverte"/>
+                <div class="box boxB">
+                {derniersCommentaires}
+                </div>
+                
+                <!-- ajout fabien du 03/04/2012 nouveau bandeau de pub-->
+                <div class="box licenceLogo">
+                <a href="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence" title="<?_("Le texte de ce site est disponible selon les termes de la Licence ouverte.")?>"><img src="images/Advisa/openlicence.png" alt="Licence ouverte"/>
                 </a>
-				</div>
-				
-				
-				
-				</div>
-			</div>
-			<div id="primaryContent" class="primaryContent" {microdata}>
+                </div>
+                
+                
+                
+                </div>
+            </div>
+            <div id="primaryContent" class="primaryContent" {microdata}>
             {GeoCoordinates}
-			{bandeauPublicite}
+            {bandeauPublicite}
             <div class="title breadcrumbs">{urlCheminSite}</div>
