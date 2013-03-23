@@ -534,7 +534,11 @@ class archiAdresse extends ArchiContenu
                 $html.="<span itemprop='address' itemscope itemtype='http://schema.org/PostalAddress'><span itemprop='streetAddress'>";
             }
             if ($address["numero"]." " != 0) {
-                $html.=$address["numero"]." ";
+                $html.=$address["numero"];
+                if (isset($address['nomIndicatif'])) {
+                    $html.=$address["nomIndicatif"];
+                }
+                $html.=' ';
             }
             $html.=$address["prefixeRue"]." ".$address["nomRue"];
             if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail') {
@@ -2708,6 +2712,7 @@ class archiAdresse extends ArchiContenu
         ha.nom as nom,
         ha.idHistoriqueAdresse as idHistoriqueAdresse,
         ha.numero as numero,
+        IF(ha.idIndicatif='0','',i.nom) as nomIndicatif,
         ha.idRue,
         IF (ha.idSousQuartier != 0, ha.idSousQuartier, r.idSousQuartier) AS idSousQuartier,
         IF (ha.idQuartier != 0, ha.idQuartier, sq.idQuartier) AS idQuartier,
@@ -2727,6 +2732,7 @@ class archiAdresse extends ArchiContenu
         LEFT JOIN sousQuartier sq   ON sq.idSousQuartier = IF(ha.idRue='0' and ha.idSousQuartier!='0' ,ha.idSousQuartier ,r.idSousQuartier )
         LEFT JOIN quartier q        ON q.idQuartier = IF(ha.idRue='0' and ha.idSousQuartier='0' and ha.idQuartier!='0' ,ha.idQuartier ,sq.idQuartier )
         LEFT JOIN ville v       ON v.idVille = IF(ha.idRue='0' and ha.idSousQuartier='0' and ha.idQuartier='0' and ha.idVille!='0' ,ha.idVille ,q.idVille )
+        LEFT JOIN indicatif i ON i.idIndicatif = ha.idIndicatif
         LEFT JOIN pays p        ON p.idPays = IF(ha.idRue='0' and ha.idSousQuartier='0' and ha.idQuartier='0' and ha.idVille='0' and ha.idPays!='0' ,ha.idPays ,v.idPays )      
 
         where ha.idAdresse = '".$idAdresse."'
