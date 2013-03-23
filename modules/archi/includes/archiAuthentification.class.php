@@ -420,7 +420,7 @@ class ArchiAuthentification extends config
         } elseif (isset($this->variablesGet['archiAffichage'])) {
             $actionAAppeler = $this->variablesGet['archiAffichage'];
         }
-        $t->assign_vars(array('ACTIONFORM'=>$this->creerUrl('validAuthentification', '', array_merge(array('archiActionPrecedente'=>$actionAAppeler)), true)));
+        $t->assign_vars(array('ACTIONFORM'=>$this->creerUrl('validAuthentification', '', array('archiActionPrecedente'=>$actionAAppeler), true)));
         ob_start();
         $t->pparse('authentification');
         $html = ob_get_contents();

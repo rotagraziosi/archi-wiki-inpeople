@@ -1152,9 +1152,8 @@ class Config
     public function getMessageDesabonnerAlerteMail()
     {
         return "<br><small>Pour ne plus recevoir les alertes mail, ".
-        "il vous suffit de vous connecter à votre profil archi-strasbourg.org. ".
-        "<br><a href='".$this->creerUrl('', 'authentification')."'>".
-        $this->creerUrl('', 'authentification')."</a></small>";
+        "il vous suffit de vous connecter à <a href='".$this->creerUrl('', 'afficheAccueil&modeAffichage=profil')."'>votre profil archi-strasbourg.org".
+        "</a>.</small>";
     }    
 
     /**

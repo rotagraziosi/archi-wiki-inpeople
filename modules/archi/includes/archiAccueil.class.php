@@ -114,7 +114,9 @@ class ArchiAccueil extends config
             if ($s->isInSession('utilisateurConnecte'.$this->idSite)) {
                 $profil = $u->afficher(array(), $s->getFromSession('utilisateurConnecte'.$this->idSite), 'utilisateurProfil');
             } else {
-                echo "<script>location.href='".$this->creerUrl('', 'authentification', array())."';</script>";
+                //header('Location: ?archiAffichage=authentification&archiActionPrecedente=afficheProfil');
+                $authentification = new ArchiAuthentification();
+                echo $authentification->afficheFormulaireAuthentification();
             }
             
             
