@@ -144,6 +144,21 @@ class ArchiPage
     }
     
     /**
+     * Supprimer à jour une page
+     * 
+     * @return void
+     * */
+    function delete ()
+    {
+        global $config;
+        $query = sprintf(
+            file_get_contents("sql/deletePage.sql"),
+            mysql_real_escape_string($this->id)
+        );
+        $config->connexionBdd->requete($query);
+    }
+    
+    /**
      * Ajouter une page
      * 
      * @param string $title  Titre
