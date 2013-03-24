@@ -509,7 +509,8 @@ $modesAffichagesAvecAuthentification = array('ajoutImageBibliotheque',
 'afficheChoixVille', 'ajoutNouveauDossier', 'afficherAjouterPersonne',
 'afficherAjouterSource', 'administration', 'comparaisonEvenement',
 'afficheLogsMails', 'adminDroits', 'adminSondages', 'adminParcours',
-'administrationAfficheAjout', 'listeTypeSourceDependancesSourcesAdmin');
+'administrationAfficheAjout', 'listeTypeSourceDependancesSourcesAdmin',
+'adminPages', 'editPage');
 
 if (isset($_GET['archiAffichage'])) {
     $archiAffichage=$_GET['archiAffichage'];
