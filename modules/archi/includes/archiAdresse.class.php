@@ -13642,7 +13642,7 @@ class archiAdresse extends ArchiContenu
         $s = new stringObject();
         
         
-        $html.=$page->content;
+        $html.=stripcslashes($page->content);
         
         $i=0;
         while($fetchParcours = mysql_fetch_assoc($resParcours))
