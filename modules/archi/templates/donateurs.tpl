@@ -13,9 +13,9 @@
 <font size=2>
 <b>Recto - Verso</b>
 <br>
-Nous remercions M. Vincent Kauffmann pour le don des droits sur plusieurs centaines de cartes postales anciennes de sa collection qui ont pu être mises en ligne.<br><br>
+<?_("Nous remercions M. Vincent Kauffmann pour le don des droits sur plusieurs centaines de cartes postales anciennes de sa collection qui ont pu être mises en ligne.")?><br><br>
 
-Pour visiter sa boutique de cartes postales anciennes :<br>
+<?_("Pour visiter sa boutique de cartes postales anciennes :")?><br>
 Recto - Verso<br>
 3 place Henry Dunant<br>
 67000 STRASBOURG<br>
