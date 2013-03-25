@@ -815,7 +815,7 @@ class ArchiAccueil extends config
         $tActualites = new Template($this->getCheminPhysique().$this->cheminTemplates);
         $tActualites->set_filenames(array('encartActualites'=>'encartAccueil.tpl'));
         
-        $tActualites->assign_vars(array('titre'=>"Actualités", "type"=>"actualites"));
+        $tActualites->assign_vars(array('titre'=>_('Actualités'), "type"=>"actualites"));
         $i=0;
         
         if (count($params['actualites'])>0) {
