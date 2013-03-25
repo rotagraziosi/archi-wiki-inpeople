@@ -1633,7 +1633,7 @@ class archiUtilisateur extends config {
                 $urlMd5 = md5("idUtilisateur=".$fetch['idUtilisateur']."_".$configFields['adresseMail']['value']);
                 // ok
                 // envoi du mail
-                $message = _("Vous avez fais une demande de nouveau mot de passe, veuillez cliquer")." <a href='".$this->creerUrl('','nouveauMotDePasse',array('check'=>$urlMd5,'mail'=>$configFields['adresseMail']['value']))."'><font color=blue>"._("ici")."</font></a> "._("pour pouvoir redéfinir votre mot de passe sur le site")." www.archi-strasbourg.com<br>";
+                $message = _("Vous avez fais une demande de nouveau mot de passe, veuillez cliquer")." <a href='".$this->creerUrl('','nouveauMotDePasse',array('check'=>$urlMd5,'mail'=>$configFields['adresseMail']['value']))."'><font color=blue>"._("ici")."</font></a> "._("pour pouvoir redéfinir votre mot de passe sur le site")." www.archi-strasbourg.org<br>";
                 $message.=_("ou copier coller le lien suivant dans votre navigateur :")." <br>";
                 $message.= "<a href='".$this->creerUrl('','nouveauMotDePasse',array('check'=>$urlMd5,'mail'=>$configFields['adresseMail']['value']))."'><font color=blue>".$this->creerUrl('','nouveauMotDePasse',array('check'=>$urlMd5,'mail'=>$configFields['adresseMail']['value']))."</font></a>";
                 $message.= "<br><br><br>"._("L'équipe archi-strasbourg.org")."<br>";
