@@ -17,6 +17,20 @@
 //Debug mode ?
 error_reporting(E_ERROR);
 
+require_once 'includes/Mobile_Detect.php';
+$detect = new Mobile_Detect();
+if ($detect->isMobile()) {
+    if (isset($_GET['archiIdEvenementGroupeAdresse'])) {
+        header(
+            'Location: http://m.archi-strasbourg.org/adresses/'.
+            $_GET['archiIdAdresse'].'/'.
+            $_GET['archiIdEvenementGroupeAdresse'].'.html'
+        );
+    } else {
+        header('Location: http://m.archi-strasbourg.org/');
+    }
+}
+
 /* 'noHeaderNoFooter' permet de ne pas retourner
  * et inclure les fichiers qui sont inutiles lors d'un appel ajax
  * */
