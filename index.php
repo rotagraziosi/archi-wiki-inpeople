@@ -17,17 +17,21 @@
 //Debug mode ?
 error_reporting(E_ERROR);
 
-require_once 'includes/Mobile_Detect.php';
-$detect = new Mobile_Detect();
-if ($detect->isMobile() && !$detect->isTablet()) {
-    if (isset($_GET['archiIdEvenementGroupeAdresse'])) {
-        header(
-            'Location: http://m.archi-strasbourg.org/adresses/'.
-            $_GET['archiIdAdresse'].'/'.
-            $_GET['archiIdEvenementGroupeAdresse'].'.html'
-        );
-    } else {
-        header('Location: http://m.archi-strasbourg.org/');
+if ($_SERVER['HTTP_REFERER'] == 'http://m.archi-strasbourg.org/') {
+    setcookie('nomobile');
+} else if (!isset($_COOKIES['nomobile'])) {
+    include_once 'includes/Mobile_Detect.php';
+    $detect = new Mobile_Detect();
+    if ($detect->isMobile() && !$detect->isTablet()) {
+        if (isset($_GET['archiIdEvenementGroupeAdresse'])) {
+            header(
+                'Location: http://m.archi-strasbourg.org/adresses/'.
+                $_GET['archiIdAdresse'].'/'.
+                $_GET['archiIdEvenementGroupeAdresse'].'.html'
+            );
+        } else {
+            header('Location: http://m.archi-strasbourg.org/');
+        }
     }
 }
 
