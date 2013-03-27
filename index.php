@@ -17,7 +17,8 @@
 //Debug mode ?
 error_reporting(E_ERROR);
 
-if ($_SERVER['HTTP_REFERER'] == 'http://m.archi-strasbourg.org/') {
+$ref = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+if ($ref == 'm.archi-strasbourg.org') {
     setcookie('nomobile');
 } else if (!isset($_COOKIE['nomobile'])) {
     include_once 'includes/Mobile_Detect.php';
