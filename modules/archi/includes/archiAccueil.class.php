@@ -1376,7 +1376,7 @@ class ArchiAccueil extends config
                 
                 $tab = new tableau();
                 if ($fetch['fichierPdf']!='') {
-                    $tab->addValue("<div style='font-size:9px;'>"._("Pour un plus grand confort de lecture téléchargez la")." <a href='".$this->getUrlImage()."actualites/".$fetch['idActualite']."/".$fetch['fichierPdf']."' target='_blank'>"._("version PDF du texte.")." <img src='".$this->getUrlImage("logo_pdf.jpg")."' width=20></a></div>");
+                    $tab->addValue("<div style='font-size:9px;'>"._("Pour un plus grand confort de lecture téléchargez la")." <a href='".$this->getUrlImage()."actualites/".$fetch['idActualite']."/".$fetch['fichierPdf']."' target='_blank'>"._("version PDF du texte.")."</a></div>");
                 }
                 $tab->addValue(stripslashes($fetch['titre']), "style='font-size:18px;font-weight:bold;'");
                 $tab->addValue(stripslashes($fetch['sousTitre']), "style='font-size:14px;font-weight:bold;'");
