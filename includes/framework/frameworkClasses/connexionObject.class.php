@@ -19,7 +19,8 @@
 // Dorer Laurent 2008
 
 // historique des versions
-// version 1.1 --- 11/06/2008 - separation de la classe de connexion de l'objet config
+// version 1.1 --- 11/06/2008 -
+* separation de la classe de connexion de l'objet config
  * 
  * @category General
  * @package  ArchiWiki
@@ -63,7 +64,8 @@ class ConnexionBdd extends config
      * */
     function connectTo($host='',$user='',$password='',$bdd='')
     {
-        $this->ressource = mysql_connect($host, $user, $password) or die(mysql_error());
+        $this->ressource 
+            = mysql_connect($host, $user, $password) or die(mysql_error());
         mysql_select_db($bdd) or die(mysql_error());
         mysql_query('SET NAMES "utf8"') or die (mysql_error());
     }
@@ -78,17 +80,24 @@ class ConnexionBdd extends config
      * */
     function requete($requete="",$silencieux=false)
     {
-        if ($silencieux==false)
+        if ($silencieux==false) {
             $res = mysql_query($requete) or die($requete.' -- '.mysql_error());
-        else
+        } else {
             $res = mysql_query($requete);
+        }
         return $res;
     }
     
     /**
-    // chaque fois qu'on appelle un getLock, il faut d'abord que l'utilisateur precedent ai fait un freeLock ( cas du blocage lors de l'enregistrement dans la base)
-    // si utilisateur a ete précisé , c'est donc que l'on tente de mettre a jour un element (evenement par exemple, ceci ne correspond pas au blocage lors de l'enregistrement dans une table)
-    // cette fonction sert donc aussi a bloquer l'edition d'un element grace a isLocked
+    * Chaque fois qu'on appelle un getLock,
+    * il faut d'abord que l'utilisateur precedent ai fait un freeLock
+    * (cas du blocage lors de l'enregistrement dans la base)
+    * Si utilisateur a ete précisé,
+    * c'est donc que l'on tente de mettre a jour un element
+    * (evenement par exemple, ceci ne correspond
+    * pas au blocage lors de l'enregistrement dans une table)
+    * Cette fonction sert donc aussi à
+    * bloquer l'edition d'un element grace a isLocked
     * 
     * @param array $tableName Nom de la table
     * @param array $config    Paramètres
@@ -103,7 +112,13 @@ class ConnexionBdd extends config
             $minutes = 1;
         }
         if (isset($config['idUtilisateur'])) {
-            $idUtilisateur = $config['idUtilisateur']; // un utilisateur a ete précisé , c'est donc que l'on tente de mettre a jour un element (evenement par exemple, ceci ne correspond pas au blocage lors de l'enregistrement dans une table)
+            $idUtilisateur = $config['idUtilisateur']; 
+            /**
+             * Un utilisateur a ete précisé,
+             * c'est donc que l'on tente de mettre a jour un element
+             * (evenement par exemple, ceci ne correspond
+             * pas au blocage lors de l'enregistrement dans une table)
+             * */
         } else {
             $idUtilisateur = 0;
         }
@@ -113,23 +128,48 @@ class ConnexionBdd extends config
         foreach ($tableName AS $nomTable) {
             
             if ($idUtilisateur != 0) {
-                $qid_delete=$this->requete("DELETE FROM verrouTable WHERE verrouName='".$nomTable."' AND timeOut<NOW()", true);
-                $reqVerif = "SELECT verrouName FROM verrouTable WHERE verrouName='".$nomTable."' AND timeOut>NOW() and idUtilisateur='".$idUtilisateur."'";
+                $qid_delete=$this->requete(
+                    "DELETE FROM verrouTable WHERE verrouName='".
+                    $nomTable."' AND timeOut<NOW()", true
+                );
+                $reqVerif = "SELECT verrouName FROM verrouTable WHERE verrouName='".
+                $nomTable."' AND timeOut>NOW() and idUtilisateur='".
+                $idUtilisateur."'";
                 $resVerif = $this->requete($reqVerif);
                 if (mysql_num_rows($resVerif)>0) {
-                    // un verrou non expiré existe , on ne va donc pas tenter d'en creer un autre du meme non pour le meme utilisateur , cela ferait bloquer le site pendant $minutes
-                    // on met juste le timeOut du verrou a jour 
+                    /**
+                     * Un verrou non expiré existe,
+                     * on ne va donc pas tenter d'en creer un autre
+                     * du meme non pour le meme utilisateur,
+                     * cela ferait bloquer le site pendant $minutes.
+                     * On met juste le timeOut du verrou a jour.
+                     * */
                     $timeOutMaj=true;
-                    $reqMaj = "update verrouTable set timeOut = NOW()+SEC_TO_TIME(".$timeOut.") where verrouName='".$nomTable."' and idUtilisateur='".$idUtilisateur."' ";
+                    $reqMaj = "update verrouTable set timeOut = NOW()+SEC_TO_TIME(".
+                    $timeOut.") where verrouName='".$nomTable.
+                    "' and idUtilisateur='".$idUtilisateur."' ";
                     $resMaj = $this->requete($reqMaj);
                 }
             }
             
             if (!$timeOutMaj) {
                 do {
-                    $qid_delete=$this->requete("DELETE FROM verrouTable WHERE verrouName='".$nomTable."' AND timeOut<NOW()", true);
-                    // le lock est valable pendant 1 minute (largement suffisement pour une operation dans la base (ajout, suppression ... ) sauf si $config['minutes'] est précisé
-                    $qid = $this->requete("insert into verrouTable (verrouName,timeOut,idUtilisateur) values ('".$nomTable."',NOW()+SEC_TO_TIME(".$timeOut."),".$idUtilisateur.")", true);
+                    $qid_delete=$this->requete(
+                        "DELETE FROM verrouTable WHERE verrouName='".
+                        $nomTable."' AND timeOut<NOW()", true
+                    );
+                    /**
+                     * Le lock est valable pendant 1 minute
+                     * (largement suffisement pour une operation dans la base
+                     * (ajout, suppression ... )
+                     * sauf si $config['minutes'] est précisé
+                     * */
+                    $qid = $this->requete(
+                        "insert into verrouTable (verrouName,timeOut,idUtilisateur)".
+                        " values ('".
+                        $nomTable."',NOW()+SEC_TO_TIME(".$timeOut."),".
+                        $idUtilisateur.")", true
+                    );
                     usleep(100000); // 100 ms ->  10 fois par seconde
                 } while (!$qid);
             }
@@ -153,13 +193,17 @@ class ConnexionBdd extends config
         }
             
         foreach ($tableName AS $nomTable) {
-            $qid_delete=$this->requete("DELETE FROM verrouTable WHERE verrouName='".$nomTable."' and idUtilisateur='".$idUtilisateur."'");
+            $qid_delete=$this->requete(
+                "DELETE FROM verrouTable WHERE verrouName='".$nomTable.
+                "' and idUtilisateur='".$idUtilisateur."'"
+            );
         }
     
     }
     
     /**
-     * Fonction qui permet de voir si une table , ou un element est bloquee , par un utilisateur ou non
+     * Fonction qui permet de voir si une table
+     * ou un element est bloqué, par un utilisateur ou non
      * 
      * @param string $tableName     Nom de la table
      * @param int    $idUtilisateur Utilisateur
@@ -173,7 +217,8 @@ class ConnexionBdd extends config
             $sqlUtilisateur = "and idUtilisateur!='".$idUtilisateur."'";
         }
         $retour=false;
-        $req = "select verrouName from verrouTable where verrouName='".$tableName."' and timeOut>NOW() ".$sqlUtilisateur;
+        $req = "select verrouName from verrouTable where verrouName='".
+        $tableName."' and timeOut>NOW() ".$sqlUtilisateur;
         $res = $this->requete($req);
 
         if (mysql_num_rows($res)>0) {
@@ -270,8 +315,23 @@ class ConnexionBdd extends config
         $req = file_get_contents($file);
         $list=array();
         $result=$config->connexionBdd->requete($req);
-        while (($list[] = mysql_fetch_assoc($result)) || array_pop($list));
+        while (($list[] = mysql_fetch_assoc($result)) || array_pop($list)) {
+            
+        }
         return $list;
+    }
+    
+    /**
+     * Permet de sécuriser les variables utilisées dans les requêtes.
+     * Attention : la fonction mysql_real_escape_string est obsolète !
+     * 
+     * @param mixed $var La variable à sécuriser
+     * 
+     * @return string Variable sécurisée
+     * */
+    function quote ($var)
+    {
+        return mysql_real_escape_string($var, $this->ressource);
     }
     
 }

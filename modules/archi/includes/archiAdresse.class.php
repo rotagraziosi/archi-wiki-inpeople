@@ -13751,6 +13751,10 @@ class archiAdresse extends ArchiContenu
                 $t->addValue(stripslashes($bbCode->convertToDisplay(array('text'=>$fetchEtapes['commentaireEtape']))));
                 $i++;
             }
+            
+            require_once(__DIR__.'/archiParcours.php');
+            $parcours = new ArchiParcours($_GET['archiIdParcours']);
+            $html.='<p>'.$parcours->desc.'</p>';
             $html.= "<br><h2>Etapes du parcours : </h2>";
             $html.= $t->createTable(4);
             
