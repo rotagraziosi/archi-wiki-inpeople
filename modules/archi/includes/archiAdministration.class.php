@@ -802,7 +802,7 @@ class ArchiAdministration extends config
             $reqNbEtapes                 = "SELECT idEtape FROM etapesParcoursArt WHERE idParcours = '".$idParcours."'";
             $resNbEtapes                 = $this->connexionBdd->requete($reqNbEtapes);
             $html                       .= "<br>nombre d'étapes : ".mysql_num_rows($resNbEtapes)."<br>";
-            $reqListeEtapes              = "SELECT idEtape,idEvenementGroupeAdresse,position,commentaireEtape FROM etapesParcoursArt WHERE idParcours = '".$idParcours."' ORDER BY position DESC,idEtape ASC";
+            $reqListeEtapes              = "SELECT idEtape,idEvenementGroupeAdresse,position,commentaireEtape FROM etapesParcoursArt WHERE idParcours = '".$idParcours."' ORDER BY position ASC,idEtape ASC";
             $resListeEtapes              = $this->connexionBdd->requete($reqListeEtapes);
             $listeTriableObject          = new imageObject();
 
@@ -898,7 +898,7 @@ class ArchiAdministration extends config
             $reqPos    = "SELECT idEtape FROM etapesParcoursArt WHERE idParcours = '".$this->variablesPost['idParcours']."'";
             $resPos    = $this->connexionBdd->requete($reqPos);
             $nbEtapes  = mysql_num_rows($resPos);
-            $position  = 0;
+            $position  = $nbEtapes+1;
             $reqInsert = "INSERT INTO etapesParcoursArt (idParcours,idEvenementGroupeAdresse,position,commentaireEtape) VALUES ('".$this->variablesPost['idParcours']."','".$this->variablesPost['idEvenementGroupeAdresse']."','".$position."',\"".mysql_real_escape_string($this->variablesPost['commentaireEtape'])."\")";
             $resInsert = $this->connexionBdd->requete($reqInsert);
             $this->enregistrerOrdresEtapes();
@@ -932,13 +932,13 @@ class ArchiAdministration extends config
     {
         $imObj      = new imageObject();
         $ordreArray = $imObj->getArrayFromPostDragAndDrop();
-        $i          = count($ordreArray);
+        $i          = 1;
         foreach ($ordreArray as $indice=>$idEtape) {
 
             // l'indice commence a 1 
             $reqUpdate = "UPDATE etapesParcoursArt SET position='".$i."' WHERE idEtape='".$idEtape."'";
             $resUpdate = $this->connexionBdd->requete($reqUpdate);
-            $i--;
+            $i++;
         }
     }
     

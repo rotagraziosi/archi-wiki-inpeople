@@ -13723,7 +13723,7 @@ class archiAdresse extends ArchiContenu
             // affichage de la liste des etapes
             $alphaChars = 'abcdefghijklmnopqrstuvwxyz'; // on fait simple
             
-            $reqEtapes = "SELECT idEtape,idEvenementGroupeAdresse,commentaireEtape,position FROM etapesParcoursArt WHERE idParcours='".$idParcours."' ORDER BY position DESC";
+            $reqEtapes = "SELECT idEtape,idEvenementGroupeAdresse,commentaireEtape,position FROM etapesParcoursArt WHERE idParcours='".$idParcours."' ORDER BY position ASC";
             $resEtapes = $this->connexionBdd->requete($reqEtapes);
             $t = new tableau();
             
