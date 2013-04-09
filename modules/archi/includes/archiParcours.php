@@ -44,6 +44,9 @@ class ArchiParcours
         $config->connexionBdd->quote($id).'";';
         $result = $config->connexionBdd->requete($query);
         $result = mysql_fetch_assoc($result);
-        $this->desc = stripslashes($result['commentaireParcours']);
+        $bbCode = new bbCodeObject();
+        $this->desc = $bbCode->convertToDisplay(
+            array('text'=>stripslashes($result['commentaireParcours']))
+        );
     }
 }
