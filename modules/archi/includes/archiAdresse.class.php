@@ -1121,7 +1121,7 @@ class archiAdresse extends ArchiContenu
                                     $nomAdresse .= ' '.ucfirst($fetch['nomQuartier']);
                                     $arrayNomQuartier[$i] = ucfirst($fetch['nomQuartier']);
                                 } else if ($fetch['nomSousQuartier']!="Ellipse insulaire") {
-                                    $nomAdresse .=") ";
+                                    //$nomAdresse .=") ";
                                 }
                             }
                             else

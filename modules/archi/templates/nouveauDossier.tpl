@@ -2,51 +2,51 @@
 // verification de la precision de l'adresse et interdiction d'ajouter une adresse avec juste une ville sans autre précision de localisation
 function testAdresseValideAndSubmit(idFormulaire)
 {
-	var noError = true;
-	
-	//calcul du nombre d'adresses affichees
-	nbAdresses=0;
-	
-	for(i=0 ; document.getElementById('rue'+i)!=null && i<20;i++)
-	{
-		nbAdresses++;
-	}
-	
-	
-	if(document.getElementById('ville').value=='0')
-	{
-		alert('<?_("Une ville doit être précisée.")?>');
-		noError=false;
-	}
-	else if(document.getElementById('ville')!='0' && document.getElementById('quartiers').value=='0' && document.getElementById('sousQuartiers').value=='0' && nbAdresses==0)
-	{
-		alert("<?_("Il faut au moins préciser un quartier pour l'adresse.")?>");
-		noError=false;
-	}
-	else if(nbAdresses>0 && document.getElementById('ville')!='0' && document.getElementById('quartiers').value=='0' && document.getElementById('sousQuartiers').value=='0')
-	{
-		// on verifie que pour les adresses ou il n'y a que la ville de précisée, qu'elles comportent bien au moins un nom de rue
-		for(i=0 ; i<nbAdresses ; i++)
-		{
-			if(document.getElementById('rue'+i).value=='0' || document.getElementById('rue'+i).value=='')
-			{
-				alert('<?_("Pour valider une adresse il faut préciser une rue ou au moins un quartier ou un sous quartier en plus de la ville.")?>');
-				noError=false;
-			}
-		}
-	}
-	
-	if(noError==true)
-	{
-		document.getElementById(idFormulaire).submit();
-	}
+    var noError = true;
+    
+    //calcul du nombre d'adresses affichees
+    nbAdresses=0;
+    
+    for(i=0 ; document.getElementById('rue'+i)!=null && i<20;i++)
+    {
+        nbAdresses++;
+    }
+    
+    
+    if(document.getElementById('ville').value=='0')
+    {
+        alert('<?_("Une ville doit être précisée.")?>');
+        noError=false;
+    }
+    else if(document.getElementById('ville')!='0' && document.getElementById('quartiers').value=='0' && document.getElementById('sousQuartiers').value=='0' && nbAdresses==0)
+    {
+        alert("<?_("Il faut au moins préciser un quartier pour l'adresse.")?>");
+        noError=false;
+    }
+    else if(nbAdresses>0 && document.getElementById('ville')!='0' && document.getElementById('quartiers').value=='0' && document.getElementById('sousQuartiers').value=='0')
+    {
+        // on verifie que pour les adresses ou il n'y a que la ville de précisée, qu'elles comportent bien au moins un nom de rue
+        for(i=0 ; i<nbAdresses ; i++)
+        {
+            if(document.getElementById('rue'+i).value=='0' || document.getElementById('rue'+i).value=='')
+            {
+                alert('<?_("Pour valider une adresse il faut préciser une rue ou au moins un quartier ou un sous quartier en plus de la ville.")?>');
+                noError=false;
+            }
+        }
+    }
+    
+    if(noError==true)
+    {
+        document.getElementById(idFormulaire).submit();
+    }
 }
 
 
 function affichePopupAttente()
 {
-		document.getElementById('popupAttente').style.top=(getScrollHeight()+200)+'px';
-		document.getElementById('popupAttente').style.display='block';
+        document.getElementById('popupAttente').style.top=(getScrollHeight()+200)+'px';
+        document.getElementById('popupAttente').style.display='block';
 }
 </script>
 
@@ -88,11 +88,11 @@ function affichePopupAttente()
 </tr>
 <tr>
 <td class='enteteAdresses'><label for="birth"><?_("Date de naissance")?></label></td>
-<td><input type='date' name='dateNaissance' id='birth' value="{birth}"></td>
+<td><input type='text' name='dateNaissance' id='birth' value="{birth}"></td>
 </tr>
 <tr>
 <td class='enteteAdresses'><label for="death"><?_("Date de décès")?></label></td>
-<td><input type='date' name='dateDeces' id='death' value="{death}"></td>
+<td><input type='text' name='dateDeces' id='death' value="{death}"></td>
 </tr>
 
 
@@ -113,30 +113,30 @@ function affichePopupAttente()
 <table border=0>
 <tr title="{msgVille}" onMouseOut="closeContextHelp();">
 <td class='enteteAdresses'><?_("Ville")?></td><td><input type='text' name='villetxt' id='villetxt' value="{villetxt}" readonly><input type='hidden' id='ville' name='ville' value="{ville}"><input type='button' value='Choisir' onclick="{onClickBoutonChoixVille}" >
-	<!--<input type='hidden' value='{latitude}' name='latitude' id='latitude'>
-	<input type='hidden' value='{longitude}' name='longitude' id='longitude'>-->
+    <!--<input type='hidden' value='{latitude}' name='latitude' id='latitude'>
+    <input type='hidden' value='{longitude}' name='longitude' id='longitude'>-->
 </td>
 </tr>
 
 
 <tr title="{msgQuartier}" onMouseOut="closeContextHelp();" style='display:{displayQuartiers};'>
 <td class='enteteAdresses'><?_("Quartier")?></td><td id='listeQuartier'>
-	<select name="quartiers" id='quartiers' onchange="{onChangeListeQuartier}">
-		<option value="0"><?_("Aucun")?></option>
-		<!-- BEGIN quartiers -->
-		<option value="{isNotAjoutSousEvenement.quartiers.id}" {isNotAjoutSousEvenement.quartiers.selected}>{isNotAjoutSousEvenement.quartiers.nom}</option>
-		<!-- END quartiers -->
-	</select>
+    <select name="quartiers" id='quartiers' onchange="{onChangeListeQuartier}">
+        <option value="0"><?_("Aucun")?></option>
+        <!-- BEGIN quartiers -->
+        <option value="{isNotAjoutSousEvenement.quartiers.id}" {isNotAjoutSousEvenement.quartiers.selected}>{isNotAjoutSousEvenement.quartiers.nom}</option>
+        <!-- END quartiers -->
+    </select>
 </td>
 </tr>
 <tr title="{msgSousQuartier}" onMouseOut="closeContextHelp();" style='display:{displaySousQuartiers};'>
 <td class='enteteAdresses'><?_("Sous-quartier")?></td><td id='listeSousQuartier'>
-	<select name="sousQuartiers" id='sousQuartiers'>
-		<option value="0"><?_("Aucun")?></option>
-		<!-- BEGIN sousQuartiers -->
-		<option value="{isNotAjoutSousEvenement.sousQuartiers.id}" {isNotAjoutSousEvenement.sousQuartiers.selected}>{isNotAjoutSousEvenement.sousQuartiers.nom}</option>
-		<!-- END sousQuartiers -->
-	</select>
+    <select name="sousQuartiers" id='sousQuartiers'>
+        <option value="0"><?_("Aucun")?></option>
+        <!-- BEGIN sousQuartiers -->
+        <option value="{isNotAjoutSousEvenement.sousQuartiers.id}" {isNotAjoutSousEvenement.sousQuartiers.selected}>{isNotAjoutSousEvenement.sousQuartiers.nom}</option>
+        <!-- END sousQuartiers -->
+    </select>
 </td>
 <td>
 &nbsp;
@@ -153,23 +153,23 @@ function affichePopupAttente()
 <tr title="{msgRue}" onMouseOut="closeContextHelp();">
 <td><input type='text' name='numero[]' id='numero{isNotAjoutSousEvenement.adresses.idUnique}' value='{isNotAjoutSousEvenement.adresses.numero}' style='width:50px;'></td>
 <td>
-	<select name='indicatif[]'>
-		<option value='0'><?_("Aucun")?></option>
-		<!-- BEGIN indicatifs -->
-		<option value="{isNotAjoutSousEvenement.adresses.indicatifs.id}" {isNotAjoutSousEvenement.adresses.indicatifs.selected}>{isNotAjoutSousEvenement.adresses.indicatifs.nom}</option>
-		<!-- END indicatifs -->
-	</select>
+    <select name='indicatif[]'>
+        <option value='0'><?_("Aucun")?></option>
+        <!-- BEGIN indicatifs -->
+        <option value="{isNotAjoutSousEvenement.adresses.indicatifs.id}" {isNotAjoutSousEvenement.adresses.indicatifs.selected}>{isNotAjoutSousEvenement.adresses.indicatifs.nom}</option>
+        <!-- END indicatifs -->
+    </select>
 </td>
 <td>
-	<input type ='text' name='ruetxt[]' id='rue{isNotAjoutSousEvenement.adresses.idUnique}txt' value="{isNotAjoutSousEvenement.adresses.nomRue}" readonly><input type ='hidden' name='rue[]' id='rue{isNotAjoutSousEvenement.adresses.idUnique}' value='{isNotAjoutSousEvenement.adresses.rue}'><input type='button' value='choisir' onclick="{isNotAjoutSousEvenement.adresses.onClickBoutonChoixRue}">
-	&nbsp;
+    <input type ='text' name='ruetxt[]' id='rue{isNotAjoutSousEvenement.adresses.idUnique}txt' value="{isNotAjoutSousEvenement.adresses.nomRue}" readonly><input type ='hidden' name='rue[]' id='rue{isNotAjoutSousEvenement.adresses.idUnique}' value='{isNotAjoutSousEvenement.adresses.rue}'><input type='button' value='choisir' onclick="{isNotAjoutSousEvenement.adresses.onClickBoutonChoixRue}">
+    &nbsp;
 </td>
 <td>
-	<input type='hidden' value='{isNotAjoutSousEvenement.adresses.idAdresse}' name='idAdresse[]'>
-	<input type='hidden' value='{isNotAjoutSousEvenement.adresses.idUnique}' name='idUnique[]'>
-	<input type='hidden' value='{isNotAjoutSousEvenement.adresses.longitude}' name='longitude[]' id='longitude_{isNotAjoutSousEvenement.adresses.idUnique}'>
-	<input type='hidden' value='{isNotAjoutSousEvenement.adresses.latitude}' name='latitude[]' id='latitude_{isNotAjoutSousEvenement.adresses.idUnique}'>
-	<input type='submit' value='-' name='enleverAdresse' onclick="{isNotAjoutSousEvenement.adresses.onClickBoutonSupprAdresse}">
+    <input type='hidden' value='{isNotAjoutSousEvenement.adresses.idAdresse}' name='idAdresse[]'>
+    <input type='hidden' value='{isNotAjoutSousEvenement.adresses.idUnique}' name='idUnique[]'>
+    <input type='hidden' value='{isNotAjoutSousEvenement.adresses.longitude}' name='longitude[]' id='longitude_{isNotAjoutSousEvenement.adresses.idUnique}'>
+    <input type='hidden' value='{isNotAjoutSousEvenement.adresses.latitude}' name='latitude[]' id='latitude_{isNotAjoutSousEvenement.adresses.idUnique}'>
+    <input type='submit' value='-' name='enleverAdresse' onclick="{isNotAjoutSousEvenement.adresses.onClickBoutonSupprAdresse}">
 </td>
 </tr>
 <!-- END adresses -->
@@ -206,14 +206,14 @@ function affichePopupAttente()
 <td class='enteteFormulaireDossier'><?_("Libellé")?></td><td><input type='text' name='titre' value="{titre}"></td><td></td>
 </tr>
 <tr><td class='enteteFormulaireDossier'><?_("Mise en forme")?></td><td colspan="2"><input type="button" value="b" style="width:50px;font-weight:bold" onclick="bbcode_ajout_balise('b', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgGras}" onMouseOut="closeContextHelp();"/>
-	<input type="button" value="i" style="width:50px;font-style:italic" onclick="bbcode_ajout_balise('i', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgItalic}" onMouseOut="closeContextHelp();"/>
-	<input type="button" value="u" style="width:50px;text-decoration:underline;" onclick="bbcode_ajout_balise('u', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgUnderline}" onMouseOut="closeContextHelp();"/>
-	<input type="button" value="quote" style="width:50px" onclick="bbcode_ajout_balise('quote', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgQuotes}" onMouseOut="closeContextHelp();"/>
-	<!--<input type="button" value="code" style="width:50px" onclick="bbcode_ajout_balise('code', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgCode}" onMouseOut="closeContextHelp();" onkeyup="bbcode_keyup(this,'apercu');"/>-->
-	<input type="button" value="url interne"  style="width:75px" onclick="bbcode_ajout_balise('url',  'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgUrl}" onMouseOut="closeContextHelp();" onkeyup="bbcode_keyup(this,'apercu');"/>
-	<input type="button" value="url externe"  style="width:80px" onclick="bbcode_ajout_balise('urlExterne',  'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgUrl}" onMouseOut="closeContextHelp();" onkeyup="bbcode_keyup(this,'apercu');"/>
+    <input type="button" value="i" style="width:50px;font-style:italic" onclick="bbcode_ajout_balise('i', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgItalic}" onMouseOut="closeContextHelp();"/>
+    <input type="button" value="u" style="width:50px;text-decoration:underline;" onclick="bbcode_ajout_balise('u', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgUnderline}" onMouseOut="closeContextHelp();"/>
+    <input type="button" value="quote" style="width:50px" onclick="bbcode_ajout_balise('quote', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgQuotes}" onMouseOut="closeContextHelp();"/>
+    <!--<input type="button" value="code" style="width:50px" onclick="bbcode_ajout_balise('code', 'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgCode}" onMouseOut="closeContextHelp();" onkeyup="bbcode_keyup(this,'apercu');"/>-->
+    <input type="button" value="url interne"  style="width:75px" onclick="bbcode_ajout_balise('url',  'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgUrl}" onMouseOut="closeContextHelp();" onkeyup="bbcode_keyup(this,'apercu');"/>
+    <input type="button" value="url externe"  style="width:80px" onclick="bbcode_ajout_balise('urlExterne',  'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgUrl}" onMouseOut="closeContextHelp();" onkeyup="bbcode_keyup(this,'apercu');"/>
     <input type="button" value="iframe"  style="width:80px" onclick="bbcode_ajout_balise('iframe',  'formAjoutDossier', 'description');bbcode_keyup(this,'apercu');" title="{msgIFrame}" onMouseOut="closeContextHelp();" onkeyup="bbcode_keyup(this,'apercu');"/>
-	</td>
+    </td>
 </tr>
 <tr title="{msgDescription}" onMouseOut="closeContextHelp();">
 <td class='enteteFormulaireDossier'><?_("Description")?></td><td><textarea id="textarea_desc" name='description' onkeyup="bbcode_keyup(this,'apercu');" cols="50" rows="15">{description}</textarea></td><td></td>
@@ -267,10 +267,10 @@ function affichePopupAttente()
 <td class='enteteFormulaireDossier'><?_("Type de structure")?></td><td>
 
 <select name='typeStructure'>
-	<option value="0"><?_("Aucun")?></option>
-	<!-- BEGIN typesStructure -->
-	<option value='{afficheAjoutEvenement.isAddress.typesStructure.id}' {afficheAjoutEvenement.isAddress.typesStructure.selected}>{afficheAjoutEvenement.isAddress.typesStructure.nom}</option>
-	<!-- END typesStructure -->
+    <option value="0"><?_("Aucun")?></option>
+    <!-- BEGIN typesStructure -->
+    <option value='{afficheAjoutEvenement.isAddress.typesStructure.id}' {afficheAjoutEvenement.isAddress.typesStructure.selected}>{afficheAjoutEvenement.isAddress.typesStructure.nom}</option>
+    <!-- END typesStructure -->
 </select>
 
 </td><td></td>
@@ -282,9 +282,9 @@ function affichePopupAttente()
 <td  class='enteteFormulaireDossier'><?_("Personnes")?></td>
 <td>
 <select name='personnes[]' id='personnes' multiple='multiple' readonly='readonly' onclick="gestionSelectElement('personnes', '<?_("Voulez vous vraiment supprimer cette personne de cet évènement ?")?>');">
-	<!-- BEGIN personnes -->
-	<option value='{afficheAjoutEvenement.personnes.id}' {afficheAjoutEvenement.personnes.selected}>{afficheAjoutEvenement.personnes.nom}</option>
-	<!-- END personnes -->
+    <!-- BEGIN personnes -->
+    <option value='{afficheAjoutEvenement.personnes.id}' {afficheAjoutEvenement.personnes.selected}>{afficheAjoutEvenement.personnes.nom}</option>
+    <!-- END personnes -->
 </select><input type="button" name="Choisir" value="Choisir" onclick="{onClickChoixPersonne}">
 </td><td></td>
 </tr>
@@ -297,57 +297,57 @@ function affichePopupAttente()
 <tr>
 <!-- BEGIN isAddress -->
 <td colspan=3 style="border-top:1px #000000 solid;border-bottom:1px #000000 solid;border-left:1px #000000 solid;border-right:1px #000000 solid;">
-	<div>
-		<table border=0>
-		<tr title="{msgTypeEvenement}" onMouseOut="closeContextHelp();">
-		<td class='enteteFormulaireDossierTypeEvenement' width='150'><?_("Type d'évènement")?></td>
-		<td class='choixFormulaireTypeEvenement'><input type='radio' name='typeGroupeEvenement' id='typeGroupeEvenement1' value="1" onclick="{onClickTypeEvenement1};onChangeTypeEvenement();" {checkedTypeEvenement1}>&nbsp;<?_("Culturel")?>&nbsp;&nbsp;
-		<input type='radio' name='typeGroupeEvenement' value = "2" onclick="{onClickTypeEvenement2};onChangeTypeEvenement();" {checkedTypeEvenement2}>&nbsp;<?_("Travaux")?>
-		<div id="typeEvenement">
-			<select name='typeEvenement' id='selectTypeEvenement' onchange="onChangeTypeEvenement();">
-				<!-- BEGIN typesEvenement -->
-				<option value='{afficheAjoutEvenement.isAddress.typesEvenement.id}' {afficheAjoutEvenement.isAddress.typesEvenement.selected}>{afficheAjoutEvenement.isAddress.typesEvenement.nom}</option>
-				<!-- END typesEvenement -->
-			</select>
-		</div>
-		</td><td>&nbsp;</td>
-		</tr>
-		</table></div><div id="afficheChampsSupplementairesCulturel" style="{styleChampsSupplementaireCulturel}; width:600px;">
-		<table border=0>
-		<tr title="{msgISMH}" onMouseOut="closeContextHelp();">
-		<td width='150' class='enteteFormulaireDossier'><?_("ISMH (inscrit)")?></td><td><input type="checkbox" name="ISMH" value="ISMH" {ISMHchecked}></td><td></td>
-		</tr>
-		<tr title="{msgMH}" onMouseOut="closeContextHelp();">
-		<td class='enteteFormulaireDossier'><?_("MH (classé)")?></td><td><input type="checkbox" name="MH" value="MH" {MHchecked}></td><td></td>
-		</tr>
-		</table>
-	</div>
+    <div>
+        <table border=0>
+        <tr title="{msgTypeEvenement}" onMouseOut="closeContextHelp();">
+        <td class='enteteFormulaireDossierTypeEvenement' width='150'><?_("Type d'évènement")?></td>
+        <td class='choixFormulaireTypeEvenement'><input type='radio' name='typeGroupeEvenement' id='typeGroupeEvenement1' value="1" onclick="{onClickTypeEvenement1};onChangeTypeEvenement();" {checkedTypeEvenement1}>&nbsp;<?_("Culturel")?>&nbsp;&nbsp;
+        <input type='radio' name='typeGroupeEvenement' value = "2" onclick="{onClickTypeEvenement2};onChangeTypeEvenement();" {checkedTypeEvenement2}>&nbsp;<?_("Travaux")?>
+        <div id="typeEvenement">
+            <select name='typeEvenement' id='selectTypeEvenement' onchange="onChangeTypeEvenement();">
+                <!-- BEGIN typesEvenement -->
+                <option value='{afficheAjoutEvenement.isAddress.typesEvenement.id}' {afficheAjoutEvenement.isAddress.typesEvenement.selected}>{afficheAjoutEvenement.isAddress.typesEvenement.nom}</option>
+                <!-- END typesEvenement -->
+            </select>
+        </div>
+        </td><td>&nbsp;</td>
+        </tr>
+        </table></div><div id="afficheChampsSupplementairesCulturel" style="{styleChampsSupplementaireCulturel}; width:600px;">
+        <table border=0>
+        <tr title="{msgISMH}" onMouseOut="closeContextHelp();">
+        <td width='150' class='enteteFormulaireDossier'><?_("ISMH (inscrit)")?></td><td><input type="checkbox" name="ISMH" value="ISMH" {ISMHchecked}></td><td></td>
+        </tr>
+        <tr title="{msgMH}" onMouseOut="closeContextHelp();">
+        <td class='enteteFormulaireDossier'><?_("MH (classé)")?></td><td><input type="checkbox" name="MH" value="MH" {MHchecked}></td><td></td>
+        </tr>
+        </table>
+    </div>
     
     <div id="afficheChampsSupplementairesTravaux" style="{styleChampsSupplementaireTravaux}; width:600px;">
-		<table border=0>
-		
-		
-		<!-- BEGIN isAdmin -->
-		<tr title="{msgNbEtages}" onMouseOut="closeContextHelp();">
-		<td class='enteteFormulaireDossier' width='150'><?_("Nombre d'étages")?></td><td><input type='text' value="{nbEtages}" name="nbEtages" style="width:50px;"></td>
-		</tr>
-		<!-- END isAdmin -->
-		
-		<!-- BEGIN isNotAdmin -->
-		<input type='hidden' name="nbEtages" value=''>
-		<!-- END isNotAdmin -->
-		
-		
-		
-		<tr  title="{msgCourantArchitectural}" onMouseOut="closeContextHelp();">
-		<td class='enteteFormulaireDossier'><?_("Courant architectural")?></td><td class='listeCourantsArchitecturaux'>
-			{listeCourantsArchitecturaux}
-		</td>
-		</tr>
+        <table border=0>
         
-		</table>
         
-	</div>
+        <!-- BEGIN isAdmin -->
+        <tr title="{msgNbEtages}" onMouseOut="closeContextHelp();">
+        <td class='enteteFormulaireDossier' width='150'><?_("Nombre d'étages")?></td><td><input type='text' value="{nbEtages}" name="nbEtages" style="width:50px;"></td>
+        </tr>
+        <!-- END isAdmin -->
+        
+        <!-- BEGIN isNotAdmin -->
+        <input type='hidden' name="nbEtages" value=''>
+        <!-- END isNotAdmin -->
+        
+        
+        
+        <tr  title="{msgCourantArchitectural}" onMouseOut="closeContextHelp();">
+        <td class='enteteFormulaireDossier'><?_("Courant architectural")?></td><td class='listeCourantsArchitecturaux'>
+            {listeCourantsArchitecturaux}
+        </td>
+        </tr>
+        
+        </table>
+        
+    </div>
     
 </td>
 <!-- END isAddress -->
@@ -381,19 +381,19 @@ setTimeout("majDescription()",1000);
 
 function majDescription()
 {
-	bbcode_keyup(document.forms['formAjoutDossier'].elements['description'], 'apercu');
-	setTimeout("majDescription()",500);
+    bbcode_keyup(document.forms['formAjoutDossier'].elements['description'], 'apercu');
+    setTimeout("majDescription()",500);
 }
 
 function onChangeTypeEvenement()
 {
-	//document.getElementById('msgDateDebut').innerHTML="Date "+document.getElementById('selectTypeEvenement').options[document.getElementById('selectTypeEvenement').selectedIndex].innerHTML;
+    //document.getElementById('msgDateDebut').innerHTML="Date "+document.getElementById('selectTypeEvenement').options[document.getElementById('selectTypeEvenement').selectedIndex].innerHTML;
 }
 
 
 function initMsgDebut()
 {
-	onChangeTypeEvenement();
+    onChangeTypeEvenement();
 }
 
 initMsgDebut();

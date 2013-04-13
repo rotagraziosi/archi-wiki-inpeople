@@ -428,7 +428,12 @@ class archiImage extends config
         $message ="";
         foreach ($arrayListeIdImage as $indice => $idImageModifiee)
         {
-            $message.="<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage'=>$idImageModifiee,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvement',  'archiRetourIdValue'=>$this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageModifiee))))."'>Image ".$idImageModifiee."</a><br>";
+            if ($idPerson=archiPersonne::isPerson($this->getIdEvenementGroupeAdresseFromImage(array("idImage"=>$idImageModifiee, "type"=>"personne")))) {
+                $archiRetourIdValue=$this->getIdEvenementGroupeAdresseFromImage(array("idImage"=>$idImageModifiee, "type"=>"personne"));
+            } else {
+                $archiRetourIdValue=$this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageModifiee));
+            }
+            $message.="<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage'=>$idImageModifiee,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvement',  'archiRetourIdValue'=>$archiRetourIdValue))."'>Image ".$idImageModifiee."</a><br>";
         }
         
         // recuperation d'une adresse sur laquelle ont ete liées les images ( c'est un formulaire capable de traiter des images d'adresses différentes,  mais cela n'arrive pas)
@@ -1808,14 +1813,14 @@ class archiImage extends config
             if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA)
             {
                 // dans ce cas on fabrique le zoom sur la zone de l'image concernée par l'adresse courante
-                $imageZoom = "<img style='border-color:#007799;border-width:2px;cursor:pointer;' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
+                $imageZoom = "<img src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
                 
                 $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'>$imageZoom</a></div>";
                 
             }
             else
             {
-                $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'><img style='border-color:#007799;border-width:2px;cursor:pointer;' class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt='' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."'></a></div>";
+                $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'><img class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt='' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."'></a></div>";
             }
             
             $zones[$i] = $arrayZones['htmlDivs'];

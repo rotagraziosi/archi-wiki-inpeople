@@ -747,7 +747,7 @@ class ArchiPersonne extends ArchiContenu
             ";
             $res = $config->connexionBdd->requete($req);
             $dateEvent = mysql_fetch_object($res)->dateDebut;
-            if (($dateEvent > $date && $dateEvent < $date2) || ($date2==3000 && $dateEvent=="0000-00-00")) {
+            if (($dateEvent >= $date && $dateEvent < $date2) || ($date2==3000 && $dateEvent=="0000-00-00")) {
                 $return[] = $idEvent;
             }
         }
@@ -976,10 +976,10 @@ class ArchiPersonne extends ArchiContenu
         $html="<h1 id='personSearch'>"._("Personnes")."</h1>";
         $req="SELECT idPersonne
             FROM `personne`
-            WHERE `prenom` LIKE '%$keyword'
-            OR `nom` LIKE '%$keyword%'
-            OR CONCAT_WS(' ', nom, prenom) LIKE '%$keyword%'
-            OR CONCAT_WS(' ', prenom, nom) LIKE '%$keyword%'";
+            WHERE `prenom` LIKE '%".$keyword."'
+            OR `nom` LIKE '%".$keyword."%'
+            OR CONCAT_WS(' ', nom, prenom) LIKE '%".$keyword."%'
+            OR CONCAT_WS(' ', prenom, nom) LIKE '%".$keyword."%'";
         $res = $config->connexionBdd->requete($req);
         $nbPeople=mysql_num_rows($res);
         $maxPos=round($nbPeople/10);

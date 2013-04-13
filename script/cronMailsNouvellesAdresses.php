@@ -3,6 +3,7 @@
  * Recuperation du fichier a partir de la liste et du repertoire identifié par iddossier
  * Recherche de la date dans la base de donnee archiv2, enregistrements dans les repertoires en redimensionnant avec
  * comme nom idHistoriqueImage
+ * 
  * PHP Version 5.3.3
  * 
  * @category Script
@@ -28,50 +29,45 @@ $borneMax = "SUBDATE(NOW(), INTERVAL 7 DAY)";
 
 //$borneMin = "SUBDATE(NOW(),INTERVAL 7 DAY)";
 //$borneMax = "SUBDATE(NOW(), INTERVAL 14 DAY)";
-$enLigne = true;
-if ($enLigne) {
-    //	include('/home/pia/archiv2/includes/framework/config.class.php');
-    include __DIR__.'/../includes/framework/config.class.php';
 
-    //	include_once('/home/pia/archiv2/modules/archi/includes/archiAdresse.class.php');
-    include_once __DIR__.'/../modules/archi/includes/archiAdresse.class.php';
+//  include('/home/pia/archiv2/includes/framework/config.class.php');
+require __DIR__.'/../includes/framework/config.class.php';
 
-    //	include_once('/home/pia/archiv2/modules/archi/includes/archiEvenement.class.php');
-    include_once __DIR__.'/../modules/archi/includes/archiEvenement.class.php';
-    include_once __DIR__.'/../modules/archi/includes/archiPersonne.class.php';
-} else {
-    include '/home/laurent/public_html/a/includes/framework/config.class.php';
-    include_once '/home/laurent/public_html/a/modules/archi/includes/archiAdresse.class.php';
-    include_once '/home/laurent/public_html/a/modules/archi/includes/archiEvenement.class.php';
-}
+//  include_once('/home/pia/archiv2/modules/archi/includes/archiAdresse.class.php');
+require_once __DIR__.'/../modules/archi/includes/archiAdresse.class.php';
+
+//  include_once('/home/pia/archiv2/modules/archi/includes/archiEvenement.class.php');
+require_once __DIR__.'/../modules/archi/includes/archiEvenement.class.php';
+require_once __DIR__.'/../modules/archi/includes/archiPersonne.class.php';
+
 $config = new config();
 
 // on recherche que les adresses un evenement est associe
 $reqNouvellesAdressesDeLaSemaine = "
-					SELECT ha1.idAdresse as idAdresse, count(ee.idEvenementAssocie),ha1.date as date, v.nom as nomVille, ae.idEvenement as idEvenementGroupeAdresse
-					FROM historiqueAdresse ha2, historiqueAdresse ha1
-					
-					LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-					LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-					LEFT JOIN historiqueEvenement he ON he.idEvenement = ae.idEvenement
-					
-					
-					LEFT JOIN rue r 		ON r.idRue = ha1.idRue
-					LEFT JOIN sousQuartier sq	ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' ,ha1.idSousQuartier ,r.idSousQuartier )
-					LEFT JOIN quartier q		ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' ,ha1.idQuartier ,sq.idQuartier )
-					LEFT JOIN ville v		ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' ,ha1.idVille ,q.idVille )
-					LEFT JOIN pays p		ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' ,ha1.idPays ,v.idPays )
-					
-					
-					WHERE ha2.idAdresse = ha1.idAdresse
-							
-					
-					AND he.dateCreationEvenement < $borneMin
-					AND he.dateCreationEvenement >= $borneMax
-					GROUP BY ha1.idAdresse,ee.idEvenement, ha1.idHistoriqueAdresse
-					HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) and count(ee.idEvenementAssocie)>0
-					ORDER BY nomVille,date
-			";
+                    SELECT ha1.idAdresse as idAdresse, count(ee.idEvenementAssocie),ha1.date as date, v.nom as nomVille, ae.idEvenement as idEvenementGroupeAdresse
+                    FROM historiqueAdresse ha2, historiqueAdresse ha1
+                    
+                    LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
+                    LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+                    LEFT JOIN historiqueEvenement he ON he.idEvenement = ae.idEvenement
+                    
+                    
+                    LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                    LEFT JOIN sousQuartier sq   ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' ,ha1.idSousQuartier ,r.idSousQuartier )
+                    LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' ,ha1.idQuartier ,sq.idQuartier )
+                    LEFT JOIN ville v       ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' ,ha1.idVille ,q.idVille )
+                    LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' ,ha1.idPays ,v.idPays )
+                    
+                    
+                    WHERE ha2.idAdresse = ha1.idAdresse
+                            
+                    
+                    AND he.dateCreationEvenement < $borneMin
+                    AND he.dateCreationEvenement >= $borneMax
+                    GROUP BY ha1.idAdresse,ee.idEvenement, ha1.idHistoriqueAdresse
+                    HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) and count(ee.idEvenementAssocie)>0
+                    ORDER BY nomVille,date
+            ";
 $resNouvellesAdressesDeLaSemaine = $config->connexionBdd->requete($reqNouvellesAdressesDeLaSemaine);
 $a                               = new archiAdresse();
 $e                               = new archiEvenement();
@@ -94,11 +90,11 @@ while ($fetchNouvellesAdresses = mysql_fetch_assoc($resNouvellesAdressesDeLaSema
 // recherche des adresses dont des evenements ont ete modifiés dans la semaine passée
 // recherche des evenements créés pendant la semaine, ensuite on verifiera lequels sont des mises a jour
 $reqEvenementsCrees     = "
-	SELECT distinct he1.idEvenement as idEvenement
-	from historiqueEvenement he1
-	WHERE 1=1
-	AND he1.dateCreationEvenement < $borneMin
-	AND he1.dateCreationEvenement >= $borneMax
+    SELECT distinct he1.idEvenement as idEvenement
+    from historiqueEvenement he1
+    WHERE 1=1
+    AND he1.dateCreationEvenement < $borneMin
+    AND he1.dateCreationEvenement >= $borneMax
 ";
 $resEvenementsCrees     = $config->connexionBdd->requete($reqEvenementsCrees);
 $arrayEvenementsCrees   = array();
@@ -115,10 +111,10 @@ while ($fetchEvenementsCrees = mysql_fetch_assoc($resEvenementsCrees)) {
 
 // idem pour les images :
 $reqImagesCrees    = "
-	SELECT distinct idImage 
-	FROM historiqueImage 
-	WHERE dateUpload < $borneMin
-	AND dateUpload >= $borneMax
+    SELECT distinct idImage 
+    FROM historiqueImage 
+    WHERE dateUpload < $borneMin
+    AND dateUpload >= $borneMax
 ";
 $resImagesCrees    = $config->connexionBdd->requete($reqImagesCrees);
 $arrayImagesCreees = array();
@@ -146,24 +142,24 @@ $arrayEvenementsCrees = array_unique($arrayEvenementsCrees);
 if (count($arrayEvenementsCrees)>0) {
     // recherche de l'adresse correspondante
     $reqAdresseEvenementsCrees = "
-			SELECT distinct ha1.idAdresse as idAdresse, v.nom as nomVille,ee.idEvenementAssocie,ae.idEvenement as idEvenementGroupeAdresse
-			FROM  historiqueAdresse ha2, historiqueAdresse ha1
-			RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-			RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement AND ee.idEvenementAssocie IN (".implode(",", $arrayEvenementsCrees).")
-			
-			LEFT JOIN rue r 		ON r.idRue = ha1.idRue
-			LEFT JOIN sousQuartier sq	ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' ,ha1.idSousQuartier ,r.idSousQuartier )
-			LEFT JOIN quartier q		ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' ,ha1.idQuartier ,sq.idQuartier )
-			LEFT JOIN ville v		ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' ,ha1.idVille ,q.idVille )
-			LEFT JOIN pays p		ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' ,ha1.idPays ,v.idPays )
-			
-			WHERE 
-				1=1
-				AND ha2.idAdresse = ha1.idAdresse	
-			GROUP BY ha1.idAdresse,ha1.idHistoriqueAdresse
-			HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
-			ORDER BY v.nom
-		";
+            SELECT distinct ha1.idAdresse as idAdresse, v.nom as nomVille,ee.idEvenementAssocie,ae.idEvenement as idEvenementGroupeAdresse
+            FROM  historiqueAdresse ha2, historiqueAdresse ha1
+            RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
+            RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement AND ee.idEvenementAssocie IN (".implode(",", $arrayEvenementsCrees).")
+            
+            LEFT JOIN rue r         ON r.idRue = ha1.idRue
+            LEFT JOIN sousQuartier sq   ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' ,ha1.idSousQuartier ,r.idSousQuartier )
+            LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' ,ha1.idQuartier ,sq.idQuartier )
+            LEFT JOIN ville v       ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' ,ha1.idVille ,q.idVille )
+            LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' ,ha1.idPays ,v.idPays )
+            
+            WHERE 
+                1=1
+                AND ha2.idAdresse = ha1.idAdresse   
+            GROUP BY ha1.idAdresse,ha1.idHistoriqueAdresse
+            HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+            ORDER BY v.nom
+        ";
     $resAdresseEvenementsCrees = $config->connexionBdd->requete($reqAdresseEvenementsCrees);
     $arrayListeEvGA            = array();
     while ($fetchAdresseEvenementsCrees = mysql_fetch_assoc($resAdresseEvenementsCrees)) {
@@ -181,29 +177,29 @@ if (count($arrayEvenementsCrees)>0) {
 
 /*
 SELECT distinct ha1.idAdresse as idAdresse, count(he2.idHistoriqueEvenement),ha1.date as date, v.nom as nomVille,he1.dateCreationEvenement,he2.idEvenement
-					FROM historiqueAdresse ha2, historiqueAdresse ha1
-					
-					LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-					LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-					LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-					LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
-					
-					LEFT JOIN rue r 		ON r.idRue = ha1.idRue
-					LEFT JOIN sousQuartier sq	ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' ,ha1.idSousQuartier ,r.idSousQuartier )
-					LEFT JOIN quartier q		ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' ,ha1.idQuartier ,sq.idQuartier )
-					LEFT JOIN ville v		ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' ,ha1.idVille ,q.idVille )
-					LEFT JOIN pays p		ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' ,ha1.idPays ,v.idPays )
-					
-					
-					WHERE ha2.idAdresse = ha1.idAdresse
-					
-					AND he1.dateCreationEvenement < NOW()
-					AND he1.dateCreationEvenement >= SUBDATE(NOW(), INTERVAL 7 DAY)
-					GROUP BY ha1.idAdresse,he1.idEvenement, ha1.idHistoriqueAdresse
-					HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) and count(he2.idHistoriqueEvenement)>1
-					ORDER BY nomVille,date
-					
-					
+                    FROM historiqueAdresse ha2, historiqueAdresse ha1
+                    
+                    LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
+                    LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+                    LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
+                    LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+                    
+                    LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                    LEFT JOIN sousQuartier sq   ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' ,ha1.idSousQuartier ,r.idSousQuartier )
+                    LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' ,ha1.idQuartier ,sq.idQuartier )
+                    LEFT JOIN ville v       ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' ,ha1.idVille ,q.idVille )
+                    LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' ,ha1.idPays ,v.idPays )
+                    
+                    
+                    WHERE ha2.idAdresse = ha1.idAdresse
+                    
+                    AND he1.dateCreationEvenement < NOW()
+                    AND he1.dateCreationEvenement >= SUBDATE(NOW(), INTERVAL 7 DAY)
+                    GROUP BY ha1.idAdresse,he1.idEvenement, ha1.idHistoriqueAdresse
+                    HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) and count(he2.idHistoriqueEvenement)>1
+                    ORDER BY nomVille,date
+                    
+                    
 ";*/
 $arrayEvenementsModifiees = array();
 
@@ -393,22 +389,22 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
     $messageFin .= $config->getMessageDesabonnerAlerteMail();
     
     $reqNewPeople = "
-					SELECT pers.idPersonne, pers.nom, pers.prenom
-					FROM personne pers
-					
-					LEFT JOIN _personneEvenement ae ON ae.idPersonne = pers.idPersonne
-					LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-					LEFT JOIN historiqueEvenement he ON he.idEvenement = ae.idEvenement
-					
+                    SELECT pers.idPersonne, pers.nom, pers.prenom
+                    FROM personne pers
+                    
+                    LEFT JOIN _personneEvenement ae ON ae.idPersonne = pers.idPersonne
+                    LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+                    LEFT JOIN historiqueEvenement he ON he.idEvenement = ae.idEvenement
+                    
 
-							
-					
-					WHERE he.dateCreationEvenement < $borneMin
-					AND he.dateCreationEvenement >= $borneMax
-					GROUP BY pers.idPersonne,ee.idEvenement
-					HAVING count(ee.idEvenementAssocie)>0
-					ORDER BY he.dateCreationEvenement
-			";
+                            
+                    
+                    WHERE he.dateCreationEvenement < $borneMin
+                    AND he.dateCreationEvenement >= $borneMax
+                    GROUP BY pers.idPersonne,ee.idEvenement
+                    HAVING count(ee.idEvenementAssocie)>0
+                    ORDER BY he.dateCreationEvenement
+            ";
     $resNewPeople = $config->connexionBdd->requete($reqNewPeople);
     $messagePeople="<h4>Nouvelles personnes :</h4>
     <ul>";
@@ -451,14 +447,14 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
         $reqUtilisateurs = "SELECT idUtilisateur,mail FROM utilisateur WHERE alerteMail='1' and compteActif='1'";
         $resUtilisateurs = $config->connexionBdd->requete($reqUtilisateurs);
 
-        //	       $mail->sendMail($mail->getSiteMail(),"laurent.dorer@ri67.fr",$sujet,$messageHTML,true);
-        //	       $mail->sendMail($mail->getSiteMail(),"laurent.dorer@gmail.com",$sujet,$messageHTML,true);
+        //         $mail->sendMail($mail->getSiteMail(),"laurent.dorer@ri67.fr",$sujet,$messageHTML,true);
+        //         $mail->sendMail($mail->getSiteMail(),"laurent.dorer@gmail.com",$sujet,$messageHTML,true);
         //$mail->sendMail($mail->getSiteMail(),"fabien.romary@ri67.fr",$sujet,$messageHTML,true);
         //$mail->sendMail($mail->getSiteMail(),"fabien.romary@gmail.com",$sujet,$messageHTML,true);
         //$mail->sendMail($mail->getSiteMail(),"fabien.romary@partenaireimmo.com",$sujet,$messageHTML,true);
         //$mail->sendMail($mail->getSiteMail(),"laurent_dorer@yahoo.fr",$sujet,$messageHTML,true);
         if (isset($_GET['debug']) && $_GET['debug']=='1') {
-            //			$mail->sendMail($mail->getSiteMail(),"laurent.dorer@ri67.fr",$sujet,$messageHTML,true);
+            //          $mail->sendMail($mail->getSiteMail(),"laurent.dorer@ri67.fr",$sujet,$messageHTML,true);
             //$mail->sendMail($mail->getSiteMail(),"fabien.romary@gmail.com",$sujet,$messageHTML,true);
         } else {
             while ($fetchUtilisateurs = mysql_fetch_assoc($resUtilisateurs)) {

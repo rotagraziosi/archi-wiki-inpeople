@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe ArchiContenu
+ * Classe ArchiStatic
  * 
  * PHP Version 5.3.3
  * 
