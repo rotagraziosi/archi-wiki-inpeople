@@ -431,7 +431,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
         $messageHTML .= $messageIntro.$messageStrasbourg.$messageStrasModif.$messageAutres.$messageAutresModif.$messagePeople.$messageFin;
     }
     $messageHTML .= "</body></html>";
-    $messageHTML=wordwrap($messageHTML);
+    
     if ((isset($_SERVER["SERVER_NAME"]) && !isset($_GET["modePrevisualisationAdmin"])) || isset($_GET["preview"])) {
         print_r($messageHTML);
         if (isset($_GET["testMail"])) {
