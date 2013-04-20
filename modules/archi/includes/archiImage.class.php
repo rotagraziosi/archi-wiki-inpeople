@@ -405,8 +405,8 @@ class archiImage extends config
                 // on enregistre les informations des evenements lies à la photo
                 // ****************************************************************
 
-                // on supprime les informations des evenements lies à la photo afin de pouvoir ajouter les nouveaux evenements
-                $resDeleteEvenements = $this->connexionBdd->requete("delete from _evenementImage where idImage = '".$idImage."'");
+               
+        
                 
                 // on lie les evenements selectionnés avec l'adresse
                 if (isset($this->variablesPost['listeEvenements_'.$idHistorique]))
@@ -415,8 +415,11 @@ class archiImage extends config
                     
                     foreach ($arrayListeEvenements as $indice => $valueIdEvenement)
                     {
-                        $reqInsertEvenements = $this->connexionBdd->requete("INSERT INTO _evenementImage (idImage, idEvenement)
-                                                                                VALUES ('".$idImage."',  '".$valueIdEvenement."')
+                        $resPos = $this->connexionBdd->requete("SELECT position from _evenementImage where idImage = '".$idImage."' AND idEvenement = '".$valueIdEvenement."'");
+                        $pos=mysql_fetch_row($resPos);
+                        // On supprime les informations des evenements lies à la photo afin de pouvoir ajouter les nouveaux evenements
+                        $resDeleteEvenements = $this->connexionBdd->requete("delete from _evenementImage where idImage = '".$idImage."' AND idEvenement = '".$valueIdEvenement."'");
+                        $reqInsertEvenements = $this->connexionBdd->requete("INSERT INTO _evenementImage (idImage, idEvenement, position) VALUES ('".$idImage."',  '".$valueIdEvenement."', '".$pos[0]."')
                         ");
                     }
                 }
@@ -2611,7 +2614,7 @@ class archiImage extends config
                     
                     $t->assign_vars(array("liensModifEvenements"=>$evenement->afficherLiensModificationEvenement($idEvenementCourant)));
                     
-                    $reqEvenement = "SELECT distinct idImage from _evenementImage WHERE idEvenement ='".$this->variablesGet['archiIdEvenement']."'";
+                    $reqEvenement = "SELECT distinct idImage from _evenementImage WHERE idEvenement ='".$this->variablesGet['archiIdEvenement']."' ORDER BY position";
                     $resEvenement = $this->connexionBdd->requete($reqEvenement);
                     while ($fetchEvenement = mysql_fetch_assoc($resEvenement))
                     {
