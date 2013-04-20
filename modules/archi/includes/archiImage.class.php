@@ -4611,14 +4611,14 @@ class archiImage extends config
         $html.=$evenement->afficherLiensModificationEvenement($params['idEvenement']);
         
         $html.="Deplacez les images par drag and drop.";
-        $html.= "<script  >".$imageObj->getJSFunctionsDragAndDrop()."</script>";
+        $html.= "<script>".$imageObj->getJSFunctionsDragAndDrop()."</script>";
         
         $reqImages = $this->getImagesFromEvenement(array('idEvenement'=>$params['idEvenement'],  'select'=>"hi1.idHistoriqueImage as idHistoriqueImage,  hi1.dateUpload as dateUpload"));
         $resImages = $this->connexionBdd->requete($reqImages);
         
         while ($fetch = mysql_fetch_assoc($resImages))
         {
-            $imageObj->addImageDragAndDrop(array('imageSrc'=>$this->getUrlImage("moyen").'/'.$fetch['dateUpload'].'/'.$fetch['idHistoriqueImage'].".jpg",  'idHistoriqueImage'=>$fetch['idHistoriqueImage']));
+            $imageObj->addImageDragAndDrop(array('imageSrc'=>'getPhotoSquare.php?id='.$fetch['idHistoriqueImage'],  'idHistoriqueImage'=>$fetch['idHistoriqueImage']));
         }
         
         
