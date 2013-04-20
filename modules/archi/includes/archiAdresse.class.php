@@ -1127,7 +1127,11 @@ class archiAdresse extends ArchiContenu
                             else
                             {
                                 if (!empty($fetch['nomQuartier'])) {
-                                    $nomAdresse .= isset($sousquartier)?' - ':" (";
+                                    if (!empty($fetch['nomSousQuartier'])) {
+                                        $nomAdresse .= isset($sousquartier)?' - ':' (';
+                                    } else {
+                                        $nomAdresse .= ' (';
+                                    }
                                     $nomAdresse .= ucfirst($fetch['nomQuartier']).")";
                                 }
                                 $arrayNomQuartier[$i] = ucfirst($fetch['nomQuartier']);
