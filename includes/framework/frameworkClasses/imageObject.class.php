@@ -1008,7 +1008,7 @@ class imageObject extends config
         foreach($this->tabImages as $indice => $value)
         {
             $html.="<li itemID='".$value['idHistoriqueImage']."' style='float:left; list-style-type: none;'><table border=0 cellpadding=0 cellspacing=0 style='padding-bottom:0px;' width=173 height=150><tr><td align='center' valign='top'>";
-            $html.="<img style='padding-left:5px;padding-right:5px;' width=170 src=\"".$value['imageSrc']."\" alt=\"image\"/>";
+            $html.="<img style='padding-left:5px;padding-right:5px;' src=\"".$value['imageSrc']."\" alt=\"image\"/>";
             $html.="</td></tr></table>";
             $html.="</li>";
         }
