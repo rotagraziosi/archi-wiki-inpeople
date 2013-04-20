@@ -171,6 +171,11 @@
                 
                 </nav>
                 <div class="subbox paypal">
+                <a href='index.php?archiAffichage=membership' >
+                <?_("Devenir membre")?>
+                </a>
+                </div>
+                <div class="subbox paypal">
                 <a href='{faireUnDon}' >
                 <!--<img src='https://www.paypalobjects.com/{lang}/i/btn/btn_donate_LG.gif' alt="-->
                 <?_("Faire un don")?>

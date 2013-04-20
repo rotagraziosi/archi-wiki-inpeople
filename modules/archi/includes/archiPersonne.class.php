@@ -36,11 +36,21 @@ class ArchiPersonne extends ArchiContenu
     /**
      * Constructeur d'archiPersonne
      * 
-     * return void
+     * @param int $id ID
+     * 
+     * @return void
      * */
-    function __construct()
+    function __construct($id)
     {
+        global $config;
         parent::__construct();
+        $resPerson=$config->connexionBdd->requete(
+            "SELECT * FROM `personne` WHERE idPersonne='".
+            mysql_real_escape_string($id)."'"
+        );
+        foreach (mysql_fetch_object($resPerson) as $key=>$value) {
+            $this->$key=$value;
+        }
     }
 
     /**
@@ -207,6 +217,19 @@ class ArchiPersonne extends ArchiContenu
      * */
     public function supprimer()
     {
+        global $config;
+        $config->connexionBdd->requete(
+            "DELETE FROM `_personneEvenement` WHERE idPersonne='".
+            mysql_real_escape_string($this->idPersonne)."'"
+        );
+        $config->connexionBdd->requete(
+            "DELETE FROM `_evenementPersonne` WHERE idPersonne='".
+            mysql_real_escape_string($this->idPersonne)."'"
+        );
+        return $config->connexionBdd->requete(
+            "DELETE FROM `personne` WHERE idPersonne='".
+            mysql_real_escape_string($this->idPersonne)."'"
+        );
     }
 
     /**

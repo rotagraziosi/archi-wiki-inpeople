@@ -1317,10 +1317,15 @@ li:empty {
     display:block;
 }
 
+.inline {
+    display:inline;
+}
 
-
-
-
+.membership span[title] input,
+.membership span[title] label,
+.membership span[title] {
+    cursor:help;
+}
 
 
 

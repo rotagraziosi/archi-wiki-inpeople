@@ -31,11 +31,8 @@ $formAction="ajoutNouvelPersonne";
 $t->assign_block_vars("ajoutPersonne",  array());
 $resJobs=$config->connexionBdd->requete("SELECT * FROM `metier`");
 
-$resPerson=$config->connexionBdd->requete(
-    "SELECT * FROM `personne` WHERE idPersonne='".
-    mysql_escape_string($_GET["id"])."'"
-);
-$p = mysql_fetch_object($resPerson);
+require_once __DIR__.'/../modules/archi/includes/archiPersonne.class.php';
+$p = new ArchiPersonne($_GET["id"]);
 
 $jobList="";
 while ($job = mysql_fetch_assoc($resJobs)) {

@@ -731,12 +731,17 @@ class archiImage extends config
                 $t->assign_block_vars("isConnected",  array());
                 
                 $idProfilUtilisateur = $u->getIdProfilFromUtilisateur($authentification->getIdUtilisateur());
-                
+
                 if ($d->isAuthorized('image_supprimer',  $idProfilUtilisateur))
                 {
+                    require_once __DIR__.'/archiPersonne.class.php';
+                    
+                    $e = new ArchiEvenement();
                     // on verifie que l'utilisateur est moderateur de la ville ou est admin
-                    if ($u->isModerateurFromVille($authentification->getIdUtilisateur(),  $idImage,  'idImage') || $idProfilUtilisateur == '4')
-                    {
+                    if ($u->isModerateurFromVille($authentification->getIdUtilisateur(),  $idImage,  'idImage')
+                        || $idProfilUtilisateur == '4'
+                        || ArchiPersonne::isPerson($e->getIdEvenementGroupeAdresseFromIdEvenement($_GET['archiRetourIdValue']))
+                    ) {
                         if (isset($this->variablesGet['archiRetourAffichage']))
                         {
                             $t->assign_block_vars('isAdminOrModerateurFromVille',  array('urlSupprimerImage'=>$this->creerUrl('deleteImage',  '',  array('archiIdImage'=>$idImage,  'archiRetourAffichage'=>$this->variablesGet['archiRetourAffichage'],  'archiRetourIdName'=>$this->variablesGet['archiRetourIdName'],  'archiRetourIdValue'=>$this->variablesGet['archiRetourIdValue']))));
