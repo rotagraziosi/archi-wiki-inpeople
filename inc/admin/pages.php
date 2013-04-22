@@ -22,7 +22,7 @@ $listPages=archiPage::getList(LANG);
 echo "<ul>";
 foreach ($listPages as $page) {
     echo "<li><a href='index.php?archiAffichage=editPage&idPage=".
-    $page["id"]."&langPage=".$page["lang"]."'>".$page["title"].
+    $page["id"]."&langPage=".$page["lang"]."'>".stripslashes($page["title"]).
     "</a> <small>(<a href='index.php?archiAffichage=adminPages&amp;delete=".
     $page["id"]."'>"._('Supprimer')."</a>)</small></li>";
 }

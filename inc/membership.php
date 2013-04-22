@@ -47,7 +47,7 @@ if (isset($_POST['email'])) {
             $page=new archiPage(11, Config::$default_lang);
         }
 
-        echo '<h1>'.$page->title.'</h1>';
+        echo '<h1>'.stripslashes($page->title).'</h1>';
         echo "<div>".stripslashes($page->content)."</div><br/>";
     } else {
         echo _('Erreur : Captcha incorrect !');
@@ -58,7 +58,7 @@ if (isset($_POST['email'])) {
         $page=new archiPage(10, Config::$default_lang);
     }
 
-    echo '<h1>'.$page->title.'</h1>';
+    echo '<h1>'.stripslashes($page->title).'</h1>';
     echo "<div>".stripslashes($page->content)."</div><br/>";
     echo '<script src="js/membership.js"></script>
     <form class="membership"
