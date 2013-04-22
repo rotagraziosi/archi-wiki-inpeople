@@ -99,7 +99,6 @@ if (isset($_POST['email'])) {
     <input type="number" name="otheramount" placeholder="Autre montant…" />
     <br/>
     <div id="info_amounts"></div>
-    <br/>
     <input type="submit" />
     </form>';
 }
