@@ -13,7 +13,7 @@
  * */
 require_once __DIR__.'/../includes/recaptcha-php-1.11/recaptchalib.php';
 if (isset($_POST['email'])) {
-    $resp = recaptcha_check_answer (
+    $resp = recaptcha_check_answer(
         $config->captchakey,
         $_SERVER["REMOTE_ADDR"],
         $_POST["recaptcha_challenge_field"],
