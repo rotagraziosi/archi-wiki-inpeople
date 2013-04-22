@@ -47,7 +47,8 @@ if (isset($_POST['email'])) {
     }
 
     echo "<div>".stripslashes($page->content)."</div><br/>";
-    echo '<form class="membership"
+    echo '<script src="js/membership.js"></script>
+    <form class="membership"
     action="index.php?archiAffichage=membership" method="post">
     <label for="surname">'._('Nom :').'</label><br/>
     <input required name="surname" id="surname"/>
@@ -96,7 +97,9 @@ if (isset($_POST['email'])) {
     <label for="amount80">80 €</label></span>
     <input type="radio" name="amount" value="other"/>
     <input type="number" name="otheramount" placeholder="Autre montant…" />
-    <br/><br/>
+    <br/>
+    <div id="info_amounts"></div>
+    <br/>
     <input type="submit" />
     </form>';
 }

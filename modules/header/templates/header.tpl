@@ -188,6 +188,7 @@
                 <div class="reseauSocial">
                 <script charset="utf-8" src="https://widgets.twimg.com/j/2/widget.js"></script>
                 <script>
+                if (typeof TWTR !== 'undefined') {
                 new TWTR.Widget({
                   version: 2,
                   type: 'profile',
@@ -213,6 +214,7 @@
                     behavior: 'all'
                   }
                 }).render().setUser('ArchiStrasbourg').start();
+                }
                 </script>
                 </div>
                 <!--<A HREF="http://www.archi-strasbourg.org/?archiAffichage=faireUnDon"><IMG SRC="images/20120326appeldons/bandeau_pub_vertical.jpg" width="174" alt="<?_("Pour continuer à lire du contenu gratuit et de qualité, faites un don.")?>"></A>-->
