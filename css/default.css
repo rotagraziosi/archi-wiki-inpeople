@@ -1327,3 +1327,6 @@ li:empty {
     cursor:help;
 }
 
+.info_amounts {
+    white-space:pre-line;
+}

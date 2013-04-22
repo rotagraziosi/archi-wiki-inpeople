@@ -61,7 +61,7 @@ foreach ($config->langs as $lang) {
     echo "<h3>".$lang."</h3><br/><br/>";
     echo "<label for='title'>"._("Titre :").
     "</label> <input name='title-".$lang."' id='title' value='".
-    $page->title."'/><br/><br/>";
+    htmlspecialchars($page->title, ENT_QUOTES)."'/><br/><br/>";
     echo "<label for='tinyMCE-".$lang."'>"._("Contenu :")."</label><br/>"; 
     echo "<textarea id='tinyMCE-".$lang."' name='content-".$lang."'>".
     stripslashes($page->content)."</textarea><br/>";

@@ -39,6 +39,7 @@ if (isset($_POST['email'])) {
         $page=new archiPage(11, Config::$default_lang);
     }
 
+    echo '<h1>'.$page->title.'</h1>';
     echo "<div>".stripslashes($page->content)."</div><br/>";
 } else {
     $page=new archiPage(10, LANG);
@@ -46,6 +47,7 @@ if (isset($_POST['email'])) {
         $page=new archiPage(10, Config::$default_lang);
     }
 
+    echo '<h1>'.$page->title.'</h1>';
     echo "<div>".stripslashes($page->content)."</div><br/>";
     echo '<script src="js/membership.js"></script>
     <form class="membership"
@@ -75,30 +77,43 @@ if (isset($_POST['email'])) {
     <input required type="radio" name="amount" id="amount10" value="10"/>
     <label for="amount10">10 €</label></span>
     <span title="'._('Particulier').'">
-    <input type="radio" name="amount" id="amount20" value="20"/>
+    <input checked type="radio" name="amount" id="amount20" value="20"/>
     <label for="amount20">20 €</label></span>
-    <span title="'._('Famille').'">
+    <span title="'._('Couple, famille').'">
     <input type="radio" name="amount" id="amount30" value="30"/>
     <label for="amount30">30 €</label></span>
     <span title="'.
     _(
         'Vous recevrez un reçu fiscal, '.
-        'votre don ne vous coûtera que 30,20 euros (50-20)*34%+20'
+        'votre don ne vous coûtera que 30,20&nbsp;euros.'
     ).'">
     <input type="radio" name="amount" id="amount50" value="50"/>
     <label for="amount50">50 €</label></span>
     <span title="'.
     _(
+        'Vous recevrez un reçu fiscal, '.
+        'votre don ne vous coûtera que 40,40&nbsp;euros.'.PHP_EOL.
         'Si vous le souhaitez, vous pourrez figurer '.
-        'sur notre liste de nos donateurset pour une entreprise faire '.
-        'apparaître votre logo et un lien sur le site de votre société'
+        'sur notre liste de '
+    ).
+        "<a href='http://www.archi-strasbourg.org/index.php?".
+        ."archiAffichage=donateurs'>".
+        'donateurs</a> '.
+    _(
+        'et pour une entreprise faire '.
+        'apparaître votre logo et un lien sur le site de votre société.'
     ).'">
     <input type="radio" name="amount" id="amount80" value="80"/>
     <label for="amount80">80 €</label></span>
+    <span title="'.
+    _(
+        'Vous recevrez un reçu fiscal vous permettant de déduire 66&nbsp;% '.
+        .'de votre don (somme supérieure à la cotisation de 20&nbsp;euros).'
+    ).'">
     <input type="radio" name="amount" value="other"/>
-    <input type="number" name="otheramount" placeholder="Autre montant…" />
+    <input type="number" name="otheramount" placeholder="Autre montant…" /></span>
     <br/>
-    <div id="info_amounts"></div>
+    <div id="info_amounts" class="info_amounts"></div>
     <input type="submit" />
     </form>';
 }
