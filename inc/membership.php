@@ -113,8 +113,16 @@ function displayForm ()
         'Vous recevrez un reçu fiscal vous permettant de déduire 66 % '.
         'de votre don (somme supérieure à la cotisation de 20 euros).'
     ).'">
-    <input type="radio" name="amount" value="other"/>
-    <input type="number" name="otheramount" placeholder="Autre montant…" /></span>
+    <input type="radio" name="amount" ';
+    if (isset($_POST['amount']) && $_POST['amount'] == 'other') {
+        echo 'checked';
+    }
+    echo ' value="other"/>
+    <input type="number" name="otheramount" placeholder="Autre montant…" ';
+    if (isset($_POST['amount']) && $_POST['amount'] == 'other') {
+        echo 'value="'.$_POST['otheramount'].'"';
+    }
+    echo ' /></span>
     <br/>
     <div id="info_amounts" class="info_amounts"></div>';
     echo recaptcha_get_html('6LeXTOASAAAAACl6GZmAT8QSrIj8yBrErlQozfWE');
