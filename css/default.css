@@ -1330,3 +1330,12 @@ li:empty {
 .info_amounts {
     white-space:pre-line;
 }
+
+.error {
+    margin:auto;
+    text-align:center;
+    background-color:#ffdada;
+    border:1px solid #ff4242;
+    width:75%;
+    padding: 5px 10px;
+}
