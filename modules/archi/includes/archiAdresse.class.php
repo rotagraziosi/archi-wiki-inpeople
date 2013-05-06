@@ -8950,6 +8950,7 @@ class archiAdresse extends ArchiContenu
         
         $position=0;
         $trouve=false;
+
         while(!$trouve && $fetch = mysql_fetch_assoc($res))
         {
             if($idEvenement == $fetch['idEvenement'])

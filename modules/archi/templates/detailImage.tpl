@@ -13,7 +13,13 @@
 {imageZoom}
 {txtZoom}
 <div id='divImage' style='position:relative;'>
+<!-- BEGIN previous -->
+<a href="{prevURL}">&lt;</a>
+<!-- END previous -->
 <img itemprop='image' src='{cheminDetailImage}' alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
+<!-- BEGIN next -->
+<a href="{nextURL}">&gt;</a>
+<!-- END next -->
 <br/><br/>
 <div><?_("Cette photo est disponible sous la licence suivante :")?><br/>
 <div class="licence">{licence}</div></div>

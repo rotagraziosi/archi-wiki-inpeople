@@ -960,7 +960,29 @@ class archiImage extends config
             }
             
             $intituleAdresse = $adresse->getIntituleAdresse($fetch);
+            
+            $reqImages = "
+            SELECT idImage FROM _evenementImage WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
+            ";
+        
+            $resImages = $this->connexionBdd->requete($reqImages);
+            while ($row = mysql_fetch_assoc($resImages)) {
+                if(intval($row['idImage']) == $_GET['archiIdImage']) {
+                    if (isset($prev)) {
+                        $prevImage=$prev;
+                        $t->assign_block_vars('previous',  array());
+                    }
+                    $next = true;
+                } else if($next) {
+                    $nextImage=$row;
+                    $t->assign_block_vars('next',  array());
+                    break;
+                }
+                $prev=$row;
+            }
+
             $intituleAdresseNoQuartierNoVille = $adresse->getIntituleAdresse($fetch,  array('noQuartier'=>true,  'noSousQuartier'=>true,  'noVille'=>true));
+            
             $t->assign_vars(array(
                 'datePriseDeVue'=>$datePriseDeVue, 
                 'cheminDetailImage' => 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetch['dateUpload'].'-'.$fetch['idHistoriqueImage'].'-'.$formatPhoto.'.jpg', 
@@ -968,7 +990,9 @@ class archiImage extends config
                 'description' => $description, 
                 'nom'=>$intituleAdresseNoQuartierNoVille, 
                 'IDDivImage'=>"divImage_".$idImage, 
-                'IDDivZones'=>"divZones_".$idImage
+                'IDDivZones'=>"divZones_".$idImage,
+                'nextURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $nextImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'],'archiIdAdresse'=>$_GET['archiIdAdresse'])),
+                'prevURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $prevImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'],'archiIdAdresse'=>$_GET['archiIdAdresse']))
                 
             ));//$this->urlImagesGrand.$fetch['dateUpload'].'/'.$fetch['idHistoriqueImage'].".jpg"
             
