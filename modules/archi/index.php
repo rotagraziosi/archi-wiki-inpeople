@@ -109,16 +109,17 @@ if (isset($_GET['archiAction'])) {
         $a = new archiAdresse();
         $a->enregistreCommentaire();
         
-        
-        echo "<SCRIPT>";
-        echo "alert('"._("Merci pour votre commentaire.")."\\n".
-        _(
-            "Il va ête lu par un administrateur du site ".
-            "et mis en ligne prochainement."
-        ).
-        "\\n"."A bientôt !')";
-        //echo "alert(\"salut\")";
-        echo "</SCRIPT>";
+        if (!$authentification->estConnecte()) {
+            echo "<SCRIPT>";
+            echo "alert('"._("Merci pour votre commentaire.")."\\n".
+            _(
+                "Il va ête lu par un administrateur du site ".
+                "et mis en ligne prochainement."
+            ).
+            "\\n"."A bientôt !')";
+            //echo "alert(\"salut\")";
+            echo "</SCRIPT>";
+        }
 
         
         break;
