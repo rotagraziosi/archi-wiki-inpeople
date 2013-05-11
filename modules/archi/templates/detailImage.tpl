@@ -14,11 +14,11 @@
 {txtZoom}
 <div id='divImage' style='position:relative;'>
 <!-- BEGIN previous -->
-<a href="{prevURL}">&lt;</a>
+<a href="{prevURL}"><img src="images/Advisa/balise_inver.png" alt="Précédent"/></a>
 <!-- END previous -->
 <img itemprop='image' src='{cheminDetailImage}' alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
 <!-- BEGIN next -->
-<a href="{nextURL}">&gt;</a>
+<a href="{nextURL}"><img src="images/Advisa/balise.png" alt="Suivant"/></a>
 <!-- END next -->
 <br/><br/>
 <div><?_("Cette photo est disponible sous la licence suivante :")?><br/>
