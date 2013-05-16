@@ -1,86 +1,90 @@
 <!-- BEGIN simple -->
-	<div class='evenement' itemprop='event' itemscope itemtype="http://schema.org/Event" style='position:relative;display:table;'>
-	{urlEvenementExterne}
-	<!-- BEGIN menuAction -->
-	<div class="menuAction" style="margin-left:1em;float:right;padding:5px;display:{divDisplayMenuAction};">
-	
-	<ul style='margin:0px;display:table;'>
-		<li class='actionEvent'><?_("Ajouter")?></li>
-		<li><a href="{ajouterImage}"><?_("Images")?></a> <!-- | Évènement --></li>
-		<li class='actionEvent'><?_("Modifier")?></li>
-		<li><a href="{modifierImage}"><?_("Images")?></a> | <a href="{modifierEvenement}"><?_("Évènement")?></a></li> 
-		<!-- BEGIN isAdminOrModerateurFromVille -->
-		<li class='actionEvent'><?_("Supprimer")?></li>
-		<li><a onclick="if(confirm('Voulez vous vraiment supprimer cet évènement ?')){location.href='{supprimerEvenement}'};" href="#">Évènement</a>
-		<!-- END isAdminOrModerateurFromVille -->
-		<!-- BEGIN isAdmin -->
-		<!-- BEGIN isAffichageSelectionImages -->
-		| <a onclick="{onClickSupprimerImage}" href="{urlSupprimerImage}"><?_("Images")?></a>
-		<!-- END isAffichageSelectionImages -->
-		</li>
-		<!-- BEGIN isAffichageSelectionImages -->
-		<li class='actionEvent'><?_("Importer")?></li>
-		<li><a onclick="{onClickImporterImage}" href="{urlImporterImage}"><?_("Images selectionnées")?></a></li>
-		<!-- END isAffichageSelectionImages -->
-		<!-- END isAdmin -->
-		<!-- BEGIN afficheElementMenuLierAdresse -->
-		<li class='actionEvent'><?_("Lier")?></li>
-		<li><a href="{urlLierAdresses}"><?_("Adresses")?></a></li>
-		<!-- END afficheElementMenuLierAdresse -->
-		<!-- BEGIN afficheElementMenuDeplacerEvenement -->
-		<li class='actionEvent'><?_("Déplacer")?></li>
-		<li><a href="#" onclick="{onClickDeplacerVersAdresses}"><?_("Vers Adresse")?></a> | <a href="{urlDeplacerVersNouveauGroupeAdresse}">+Créer</a></li>
-		<!-- END afficheElementMenuDeplacerEvenement -->
-	</ul>
+    <div class='evenement' itemprop='event' itemscope itemtype="http://schema.org/Event" style='position:relative;display:table;'>
+    {urlEvenementExterne}
+    <!-- BEGIN menuAction -->
+    <div class="menuAction" style="margin-left:1em;float:right;padding:5px;display:{divDisplayMenuAction};">
+    
+    <ul style='margin:0px;display:table;'>
+        <li class='actionEvent'><?_("Ajouter")?></li>
+        <li><a href="{ajouterImage}"><?_("Images")?></a> <!-- | Évènement --></li>
+        <li class='actionEvent'><?_("Modifier")?></li>
+        <li><a href="{modifierImage}"><?_("Images")?></a> | <a href="{modifierEvenement}"><?_("Évènement")?></a></li> 
+        <!-- BEGIN isAdminOrModerateurFromVille -->
+        <li class='actionEvent'><?_("Supprimer")?></li>
+        <li><a onclick="if(confirm('Voulez vous vraiment supprimer cet évènement ?')){location.href='{supprimerEvenement}'};" href="#">Évènement</a>
+        <!-- END isAdminOrModerateurFromVille -->
+        <!-- BEGIN isAdmin -->
+        <!-- BEGIN isAffichageSelectionImages -->
+        | <a onclick="{onClickSupprimerImage}" href="{urlSupprimerImage}"><?_("Images")?></a>
+        <!-- END isAffichageSelectionImages -->
+        </li>
+        <!-- BEGIN isAffichageSelectionImages -->
+        <li class='actionEvent'><?_("Importer")?></li>
+        <li><a onclick="{onClickImporterImage}" href="{urlImporterImage}"><?_("Images selectionnées")?></a></li>
+        <!-- END isAffichageSelectionImages -->
+        <!-- END isAdmin -->
+        <!-- BEGIN afficheElementMenuLierAdresse -->
+        <li class='actionEvent'><?_("Lier")?></li>
+        <li><a href="{urlLierAdresses}"><?_("Adresses")?></a></li>
+        <!-- END afficheElementMenuLierAdresse -->
+        <!-- BEGIN afficheElementMenuDeplacerEvenement -->
+        <li class='actionEvent'><?_("Déplacer")?></li>
+        <li><a href="#" onclick="{onClickDeplacerVersAdresses}"><?_("Vers Adresse")?></a> | <a href="{urlDeplacerVersNouveauGroupeAdresse}">+Créer</a></li>
+        <!-- END afficheElementMenuDeplacerEvenement -->
+    </ul>
 
-	</div>
-	<!-- END menuAction -->
-	
-	
-	
-	<div style='min-height:150px;'>
+    </div>
+    <!-- END menuAction -->
+    
+    
+    
+    <div style='min-height:150px;'>
     {titre} - {txtEnvoi} par {utilisateur} {dateEnvoi} {lienHistoriqueEvenementCourant}
-	
-	
-	
-	<div class="event">
-	<p>
+    
+    
+    
+    <div class="event">
+    <p>
     <ul>
     <li>{dates}</li>
     <li>{source}</li>
     <li>{typeStructure}</li>
     <li><?_("Type d'Évènement :")?> <a href="{urlTypeEvenement}">{typeEvenement}</a></li>
     </ul>
-	{numeroArchive}
-	<!-- BEGIN pers -->
-		{simple.pers.metier} <a href="{simple.pers.urlEvenement}">{simple.pers.prenom} {simple.pers.nom}</a><br>
-	<!-- END pers -->
-	</p>
-	<p>{description}</p>
-	<!-- BEGIN isCourantArchi -->
-		<div class="courantAchitectural">
-		<h4><?_("Courant Architectural")?></h3>
-		<ul>
-		<!-- BEGIN archi -->
-			<li><a href="{simple.isCourantArchi.archi.url}">{simple.isCourantArchi.archi.nom}</a></li>
-		<!-- END archi -->
-		</ul>
-		</div>
-	<!-- END isCourantArchi -->
-	<div class="historiqueEvenement">
-	<!-- BEGIN menuAction -->
-	<!-- Il y a {nbHistorique} historique sur cet Évènement.-->
-	<!-- END menuAction -->
-	<!-- BEGIN histo -->
-		<br /><a href="{histo.url}"><?_("Voir l'historique")?></a>
-	<!-- END histo -->
-	</div>
-	{imagesLiees}
-	{evenementsParents}
-	{listeAdressesLiees}
+    {numeroArchive}
+    <!-- BEGIN pers -->
+        {simple.pers.metier} <a href="{simple.pers.urlEvenement}">{simple.pers.prenom} {simple.pers.nom}</a>
+        <!-- BEGIN connected -->
+        <small><a href="index.php?archiAffichage=choosePersonEventImage&idPerson={simple.pers.idPerson}&idEvent={simple.pers.idEvent}">(choisir l'image principale)</a></small>
+        <!-- END connected -->
+        <br>
+    <!-- END pers -->
+    </p>
+    <p>{description}</p>
+    <!-- BEGIN isCourantArchi -->
+        <div class="courantAchitectural">
+        <h4><?_("Courant Architectural")?></h3>
+        <ul>
+        <!-- BEGIN archi -->
+            <li><a href="{simple.isCourantArchi.archi.url}">{simple.isCourantArchi.archi.nom}</a></li>
+        <!-- END archi -->
+        </ul>
+        </div>
+    <!-- END isCourantArchi -->
+    <div class="historiqueEvenement">
+    <!-- BEGIN menuAction -->
+    <!-- Il y a {nbHistorique} historique sur cet Évènement.-->
+    <!-- END menuAction -->
+    <!-- BEGIN histo -->
+        <br /><a href="{histo.url}"><?_("Voir l'historique")?></a>
+    <!-- END histo -->
+    </div>
+    {imagesLiees}
+    {evenementsParents}
+    {listeAdressesLiees}
     {evenementsLiesPersonne}
-	</div>
-	</div>
+    </div>
+    </div>
     </div>
 <!-- END simple -->
 
@@ -100,7 +104,7 @@
 
 <tr><td style='margin-bottom:0px;padding:0;font-size:13px;vertical-align:bottom;text-align:right;'>
 <!-- BEGIN isConnected --> 
-	<li><a href="{urlLierAdresseAEvenement}">{intituleActionAdresses}</a> &nbsp; </li>
+    <li><a href="{urlLierAdresseAEvenement}">{intituleActionAdresses}</a> &nbsp; </li>
 </td></tr><tr><td>
 <!-- END isConnected --> 
 
@@ -159,10 +163,10 @@
 <!-- BEGIN modePositionnementEvenements -->
 <tr>
 <td>
-	<form action='{formActionPositionnementEvenements}' name='formPositionnementEvenements' id='formPositionnementEvenements' method='POST' enctype='multipart/form-data'>
-	{sortableFormListe}
-	<input type='button' value='Valider le positionnement' onclick="{onClickValidationPositionnementEvenement}">
-	</form>
+    <form action='{formActionPositionnementEvenements}' name='formPositionnementEvenements' id='formPositionnementEvenements' method='POST' enctype='multipart/form-data'>
+    {sortableFormListe}
+    <input type='button' value='Valider le positionnement' onclick="{onClickValidationPositionnementEvenement}">
+    </form>
 </td>
 </tr>
 <!-- END modePositionnementEvenements -->
@@ -183,7 +187,7 @@
 <table style='border:2px solid #666666;' border="" class="large">
 <tr>
 <td>
-	<h2><?_("Historique des noms de la rue")?></h2>
+    <h2><?_("Historique des noms de la rue")?></h2>
 </td>
 </tr>
 <tr>
@@ -191,7 +195,7 @@
 <ul>
 <!-- END isHistoriqueNomsRue -->
 <!-- BEGIN listeHistoriqueNomsRue -->
-		<li type='square' class="inside">{noSimple.listeHistoriqueNomsRue.annee} : {noSimple.listeHistoriqueNomsRue.nomRue}<div style='padding-left:15px;'>{noSimple.listeHistoriqueNomsRue.commentaire}</div></li>
+        <li type='square' class="inside">{noSimple.listeHistoriqueNomsRue.annee} : {noSimple.listeHistoriqueNomsRue.nomRue}<div style='padding-left:15px;'>{noSimple.listeHistoriqueNomsRue.commentaire}</div></li>
 <!-- END listeHistoriqueNomsRue -->
 <!-- BEGIN isHistoriqueNomsRue -->
 </ul>
@@ -212,19 +216,19 @@
 
 <!-- BEGIN noSimple -->
 
-	<!-- BEGIN autresVuesSur -->
-	<div class="event">
-	<H5><?_("Autres vues sur")?> {listeAdressesCourantes}</H5>
-	{noSimple.autresVuesSur.value}
-	</div>
-	<!-- END autresVuesSur -->
-	
-	<!-- BEGIN autresPrisesDepuis -->
-	<div class="event">
-	<H5><?_("Vues prises depuis")?> {listeAdressesCourantes}</H5>
-	{noSimple.autresPrisesDepuis.value}
-	</div>
-	<!-- END autresPrisesDepuis -->
+    <!-- BEGIN autresVuesSur -->
+    <div class="event">
+    <H5><?_("Autres vues sur")?> {listeAdressesCourantes}</H5>
+    {noSimple.autresVuesSur.value}
+    </div>
+    <!-- END autresVuesSur -->
+    
+    <!-- BEGIN autresPrisesDepuis -->
+    <div class="event">
+    <H5><?_("Vues prises depuis")?> {listeAdressesCourantes}</H5>
+    {noSimple.autresPrisesDepuis.value}
+    </div>
+    <!-- END autresPrisesDepuis -->
 <!-- END noSimple -->
 
 

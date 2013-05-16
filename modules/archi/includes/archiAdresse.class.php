@@ -2245,10 +2245,10 @@ class archiAdresse extends ArchiContenu
                     $reqPersonneEvenement = "
                         SELECT hi1.idHistoriqueImage as idHistoriqueImage, hi1.idImage as idImage, hi1.dateUpload as dateUpload
                         FROM historiqueImage hi2,historiqueImage hi1
-                        LEFT JOIN _evenementPersonne ep ON ep.idPersonne = '".$this->variablesGet['id']."'
+                        LEFT JOIN _evenementPersonne ep ON ep.idPersonne = ".mysql_real_escape_string($this->variablesGet['id'])."
                         LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie=ep.idEvenement
                         LEFT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
-                        WHERE ee.idEvenement='".$params['idEvenementGroupeAdresse']."'
+                        WHERE ee.idEvenement=".mysql_real_escape_string($params['idEvenementGroupeAdresse'])."
                         AND hi1.idImage = ei.idImage
                         AND hi2.idImage = hi1.idImage
                         GROUP BY hi1.idImage, hi1.idHistoriqueImage

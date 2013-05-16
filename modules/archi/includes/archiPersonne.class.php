@@ -941,6 +941,8 @@ class ArchiPersonne extends ArchiContenu
                 $fetch = mysql_fetch_object($res);
                 if (isset($fetch->idAdresse)) {
                     $linkedEventIdAddress=$fetch->idAdresse;
+                                      
+
                     $req = "
                             SELECT  nom
                             FROM typeEvenement 
@@ -948,9 +950,23 @@ class ArchiPersonne extends ArchiContenu
                             $event->idTypeEvenement;
                     $res = $config->connexionBdd->requete($req);
                     $linkedEventType=mysql_fetch_object($res)->nom;
-                    $linkedEventImg=$a->getUrlImageFromEvenement($linkedEvent, "mini");
-                    if ($linkedEventImg["url"]==$config->getUrlImage("", "transparent.gif")) {
-                        $linkedEventImg=$a->getUrlImageFromAdresse($linkedEventIdAddress, "mini");
+
+                     $req = "
+                            SELECT idImage
+                            FROM _personneAdresse
+                            WHERE idPersonne = ".mysql_real_escape_string($idPerson)."
+                            AND idAdresse = ".mysql_real_escape_string($linkedEventIdAddress)."
+                            LIMIT 1";
+                    $res = $config->connexionBdd->requete($req);
+                    if ($idImage = mysql_fetch_object($res)->idImage) {
+                        $img=new ArchiImage();
+                        $img=($img->getInfosCompletesFromIdImage($idImage));
+                        $linkedEventImg['url'] = $a->getUrlImage("mini").$img['dateUpload'].'/'.$idImage.'.jpg';
+                    } else {
+                        $linkedEventImg=$a->getUrlImageFromEvenement($linkedEvent, "mini");
+                        if ($linkedEventImg["url"]==$config->getUrlImage("", "transparent.gif")) {
+                            $linkedEventImg=$a->getUrlImageFromAdresse($linkedEventIdAddress, "mini");
+                        }
                     }
                     $linkedEventUrl=$config->creerUrl("", "adresseDetail", array("archiIdAdresse"=>$linkedEventIdAddress, "archiIdEvenementGroupeAdresse"=>$linkedEvent));
                     $linkedEventsHTML.="<li class='linkedEvents'><img src='".

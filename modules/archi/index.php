@@ -511,7 +511,8 @@ $modesAffichagesAvecAuthentification = array('ajoutImageBibliotheque',
 'afficherAjouterSource', 'administration', 'comparaisonEvenement',
 'afficheLogsMails', 'adminDroits', 'adminSondages', 'adminParcours',
 'administrationAfficheAjout', 'listeTypeSourceDependancesSourcesAdmin',
-'adminPages', 'editPage', 'editPerson', 'choosePicturePerson', 'deletePerson');
+'adminPages', 'editPage', 'editPerson', 'choosePicturePerson', 'deletePerson',
+'choosePersonEventImage');
 
 if (isset($_GET['archiAffichage'])) {
     $archiAffichage=$_GET['archiAffichage'];
@@ -1009,7 +1010,10 @@ if (isset($_GET['archiAffichage'])) {
             include "inc/deletePerson.php";
             break;
         case 'membership':
-            include "inc/membership.php";
+            include 'inc/membership.php';
+            break;
+        case 'choosePersonEventImage':
+            include 'inc/choosePersonEventImage.php';
             break;
         case "ajoutNouvelPersonne":
             $auth=new archiAuthentification();

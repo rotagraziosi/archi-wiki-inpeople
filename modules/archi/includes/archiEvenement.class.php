@@ -10,6 +10,7 @@ class archiEvenement extends config
 
     function __construct($idEvenement = null)
     {
+        $this->idEvenement = $idEvenement;
         parent::__construct();
     }
     
@@ -1915,14 +1916,19 @@ class archiEvenement extends config
                     {
                         $metier = $res->metier.' : ';
                     }
-                
                     $t->assign_block_vars('simple.pers', array(
                         'urlDetail'    => $this->creerUrl('', 'personne', array('idPersonne' => $res->idPersonne)),
                         'urlEvenement' => $this->creerUrl('', 'evenementListe', array('selection' => 'personne', 'id' => $res->idPersonne)),
                         'nom' => stripslashes($res->nom),
                         'prenom' => stripslashes($res->prenom),
-                        'metier' => stripslashes($metier)
+                        'metier' => stripslashes($metier),
+                        'idPerson' => $res->idPersonne,
+                        'idEvent' => $idEvenement
                     ));
+                    if($authentification->estConnecte())
+                    {
+                        $t->assign_block_vars('simple.pers.connected',array());
+                    }
                 }
                 
                 //*
@@ -4397,6 +4403,52 @@ class archiEvenement extends config
         $fetch = mysql_fetch_assoc($res);
         
         return $fetch['description'];
+    }
+
+    function getTitle()
+    {
+        $req = "
+            SELECT he1.titre as title
+            FROM historiqueEvenement he1, historiqueEvenement he2
+            WHERE he2.idEvenement = he1.idEvenement
+            AND he1.idEvenement = ".mysql_real_escape_string($this->idEvenement)."
+            GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
+            HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+            ";
+        
+        $res = $this->connexionBdd->requete($req);
+        
+        $fetch = mysql_fetch_assoc($res);
+
+        if (empty($fetch['title'])) {
+            $req = "
+            SELECT he1.idTypeEvenement as type,
+            he1.dateDebut as date
+            FROM historiqueEvenement he1, historiqueEvenement he2
+            WHERE he2.idEvenement = he1.idEvenement
+            AND he1.idEvenement = ".mysql_real_escape_string($this->idEvenement)."
+            GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
+            HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+            ";
+            $res = $this->connexionBdd->requete($req);
+            $event = mysql_fetch_assoc($res);
+            
+            $req = "
+            SELECT nom as name
+            FROM typeEvenement
+            WHERE idTypeEvenement = ".mysql_real_escape_string($event['type'])."
+            ";
+            $res = $this->connexionBdd->requete($req);
+            $type = mysql_fetch_assoc($res);
+            
+            if (substr($event['date'], 5)=="00-00"){
+                $event['date']=substr($event['date'], 0, 4);
+            } 
+            
+            return $type['name'].' ('.$event['date'].')';
+        } else {
+            return $fetch['title'];
+        }
     }
 
     // fonction permettant de recuperer l'idEvenementGroupeAdresse a partir d'un evenement

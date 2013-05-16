@@ -10,8 +10,9 @@ class archiImage extends config
     private $idImage;
     
     
-    function __construct()
+    function __construct($idImage = null)
     {
+        $this->idImage = $idImage;
         parent::__construct();
     }
     
@@ -4678,17 +4679,24 @@ class archiImage extends config
     public function getImagesFromEvenement($params=array())
     {
         $req = "
-                SELECT ".$params['select']."
+                SELECT ".mysql_real_escape_string($params['select'])."
                 FROM _evenementImage ei
                 LEFT JOIN historiqueImage hi1 ON hi1.idImage = ei.idImage
                 LEFT JOIN historiqueImage hi2 ON hi2.idImage = hi1.idImage
-                WHERE idEvenement = '".$params['idEvenement']."'
+                WHERE idEvenement = ".mysql_real_escape_string($params['idEvenement'])."
                 GROUP BY hi1.idImage,  hi1.idHistoriqueImage
                 HAVING hi1.idHistoriqueImage = max(hi2.idHistoriqueImage)
                 ORDER BY ei.position, hi1.idHistoriqueImage
             ";
         return $req;
     }
+    
+    function getIdHistoriqueImage () {
+        $req = 'SELECT idHistoriqueImage FROM historiqueImage WHERE idImage = '.mysql_real_escape_string($this->idImage).' ORDER BY idHistoriqueImage DESC LIMIT 1';
+        $res = $this->connexionBdd->requete($req);
+        return mysql_fetch_object($res)->idHistoriqueImage;
+    }
+    
     
     /**
      * Enregistre les positions de l'image
