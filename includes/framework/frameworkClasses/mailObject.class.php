@@ -260,7 +260,7 @@ class MailObject extends config
      * @param string $email E-mail
      * @param string $name  Nom
      * 
-     * @return string THML
+     * @return string HTML
      * */
     function encodeEmail_debutpage($email, $name = null)
     {
@@ -297,8 +297,35 @@ class MailObject extends config
             if ($params['debug']==true)
                 $debugValue=true;
                 
-            $reqInsertLog = "insert into logMails (destinataire, sujet, message, date, isDebug) values (\"".$params['destinataire']."\",\"".mysql_real_escape_string($params['sujet'])."\",\"".mysql_real_escape_string($params['message'])."\", now(), '".$debugValue."')";
-            $resInsertLog = $this->connexionBdd->requete($reqInsertLog);
+            /*$reqInsertLog = "insert into logMails (destinataire, sujet, message, date, isDebug) values (\"".$params['destinataire']."\",\"".mysql_real_escape_string($params['sujet'])."\",\"".mysql_real_escape_string($params['message'])."\", now(), '".$debugValue."')";
+            $resInsertLog = $this->connexionBdd->requete($reqInsertLog);*/
+            
+            $message = strip_tags($params['message'], '<br>');
+            
+            $lastlog = popen('tac '.$this->getCheminPhysique().'/logs/mail.log', 'r');
+
+            $lastline = json_decode(fgets($lastlog));
+            pclose($lastlog);
+
+            if ($lastline[3] == $message) {
+                $fn = $this->getCheminPhysique().'/logs/mail.log';
+                $size = filesize($fn);
+                $block = 4096;
+                $trunc = max($size - $block, 0);
+
+                $f = fopen($fn, "c+");
+                if (flock($f, LOCK_EX)) {
+                    fseek($f, $trunc);
+                    $bin = rtrim(fread($f, $block), "\n");
+                    if ($r = strrpos($bin, "\n")) {
+                        ftruncate($f, $trunc + $r + 1);
+                    }
+                }
+                fclose($f);
+                error_log(json_encode(array(date('c'), array_merge($lastline[1], array($params['destinataire'])), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/mail.log');
+            } else {
+                error_log(json_encode(array(date('c'), array($params['destinataire']), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/mail.log');
+            }
         } else {
             echo "mailObject.class.php : sauvegarde dans les logs impossible, il manque un champ.<br>";
         }
