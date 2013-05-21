@@ -322,7 +322,7 @@ class MailObject extends config
                     }
                 }
                 fclose($f);
-                error_log(json_encode(array(date('c'), array_merge($lastline[1], array($params['destinataire'])), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/mail.log');
+                error_log(json_encode(array($lastline[0], array_merge($lastline[1], array($params['destinataire'])), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/mail.log');
             } else {
                 error_log(json_encode(array(date('c'), array($params['destinataire']), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/mail.log');
             }
