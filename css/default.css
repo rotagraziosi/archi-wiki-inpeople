@@ -1341,6 +1341,7 @@ li:empty {
 }
 
 .prevPic img,
-.nextPic img {
+.nextPic img,
+.current_picture {
     vertical-align:middle;
 }

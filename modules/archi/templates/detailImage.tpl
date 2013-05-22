@@ -16,7 +16,7 @@
 <!-- BEGIN previous -->
 <a href="{prevURL}" class="prevPic"><img src="images/Advisa/balise_inver.png" alt="Précédent"/></a>
 <!-- END previous -->
-<img itemprop='image' src='{cheminDetailImage}' alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
+<img itemprop='image' class="current_picture" src='{cheminDetailImage}' alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
 <!-- BEGIN next -->
 <a href="{nextURL}" class="nextPic"><img src="images/Advisa/balise.png" alt="Suivant"/></a>
 <!-- END next -->
