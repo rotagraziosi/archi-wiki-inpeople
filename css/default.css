@@ -1339,3 +1339,8 @@ li:empty {
     width:75%;
     padding: 5px 10px;
 }
+
+.prevPic img,
+.nextPic img {
+    vertical-align:middle;
+}
