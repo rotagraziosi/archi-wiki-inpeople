@@ -11324,7 +11324,7 @@ class archiAdresse extends ArchiContenu
             $html.="<script  >
                 var iconHome = new GIcon();
                 iconHome.image = \"".$this->getUrlImage()."placeMarker.png\";
-                iconHome.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                //iconHome.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                 iconHome.iconSize = new GSize(19, 32);
                 iconHome.shadowSize = new GSize(22, 20);
                 iconHome.iconAnchor = new GPoint(5, 26);
@@ -13487,7 +13487,7 @@ class archiAdresse extends ArchiContenu
                 var iconHome = new GIcon();
                     
                 iconHome.image = \"".$this->getUrlImage()."placeMarker.png\";
-                iconHome.shadow = \"http://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                //iconHome.shadow = \"http://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                 iconHome.iconSize = new GSize(19, 32);
                 iconHome.shadowSize = new GSize(22, 20);
                 iconHome.iconAnchor = new GPoint(5, 26);

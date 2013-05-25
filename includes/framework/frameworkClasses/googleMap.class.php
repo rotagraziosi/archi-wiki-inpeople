@@ -388,7 +388,7 @@ class GoogleMap extends config
                     
                 
                     icon.image = \"$urlImage\";
-                    icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                    //icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                     icon.iconSize = new GSize($imageSizeX,  $imageSizeY);
                     icon.shadowSize = new GSize(22,  20);
                     icon.iconAnchor = new GPoint(2,  24);
@@ -529,7 +529,7 @@ class GoogleMap extends config
                 
             
                 icon.image = \"$urlImage\";
-                icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                //icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                 icon.iconSize = new GSize($imageSizeX,  $imageSizeY);
                 icon.shadowSize = new GSize(22,  20);
                 icon.iconAnchor = new GPoint(2,  24);
@@ -543,7 +543,7 @@ class GoogleMap extends config
                 var iconMarker = new GIcon(icon);
                   
                 icon.image = \"https://labs.google.com/ridefinder/images/mm_20_red.png\";
-                icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                //icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                 icon.iconSize = new GSize(30,  24);
                 icon.shadowSize = new GSize(22,  20);
                 icon.iconAnchor = new GPoint(2,  24);
@@ -617,7 +617,7 @@ class GoogleMap extends config
                 var icon = new GIcon();
                 var tabAdresses = new Array();
                 icon.image = \"$urlImage\";
-                icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                //icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                 icon.iconSize = new GSize($imageSizeX,  $imageSizeY);
                 icon.shadowSize = new GSize(22,  20);
                 icon.iconAnchor = new GPoint(2,  24);
@@ -1508,7 +1508,7 @@ acl.getManyElements=function(s){
                 
                   
                 icon.image = \"https://labs.google.com/ridefinder/images/mm_20_red.png\";
-                icon.shadow = '';//\"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                //icon.shadow = '';//\"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                 icon.iconSize = new GSize(30,  24);
                 icon.shadowSize = new GSize(22,  20);
                 icon.iconAnchor = new GPoint(0, 0); //2, 24
@@ -1593,7 +1593,7 @@ acl.getManyElements=function(s){
                 
             
                 icon.image = \"$urlImage\";
-                icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                //icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                 icon.iconSize = new GSize($imageSizeX,  $imageSizeY);
                 icon.shadowSize = new GSize(22,  20);
                 icon.iconAnchor = new GPoint(0,  0); // 2, 24
@@ -1607,7 +1607,7 @@ acl.getManyElements=function(s){
                 var iconMarker = new GIcon(icon);
                   
                 icon.image = \"https://labs.google.com/ridefinder/images/mm_20_red.png\";
-                icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
+                //icon.shadow = \"https://labs.google.com/ridefinder/images/mm_20_shadow.png\";
                 icon.iconSize = new GSize(30,  24);
                 icon.shadowSize = new GSize(22,  20);
                 icon.iconAnchor = new GPoint(0, 0); //2, 24
