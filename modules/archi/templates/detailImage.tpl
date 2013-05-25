@@ -15,11 +15,11 @@
 <script src="js/navImages.js"></script>
 <div id='divImage' style='position:relative;'>
 <!-- BEGIN previous -->
-<a href="{prevURL}" rel="prefetch" class="prevPic" id="prevPic"><img src="images/Advisa/balise_inver.png" alt="Précédent"/></a>
+<a href="{prevURL}#divImage" rel="prefetch" class="prevPic" id="prevPic"><img src="images/Advisa/balise_inver.png" alt="Précédent"/></a>
 <!-- END previous -->
 <img itemprop='image' class="current_picture" src='{cheminDetailImage}' alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
 <!-- BEGIN next -->
-<a href="{nextURL}" rel="next" class="nextPic" id="nextPic"><img src="images/Advisa/balise.png" alt="Suivant"/></a>
+<a href="{nextURL}#divImage" rel="next" class="nextPic" id="nextPic"><img src="images/Advisa/balise.png" alt="Suivant"/></a>
 <!-- END next -->
 <br/><br/>
 <div><?_("Cette photo est disponible sous la licence suivante :")?><br/>
