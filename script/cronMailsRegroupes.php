@@ -71,99 +71,77 @@ if ((isset($argv[1]) && $argv[1]!='') || (isset($_GET['idPeriode']) && $_GET['id
             $arrayRegroupementTypeMail[$fetch['idUtilisateur']][$fetch['idTypeMailRegroupement']] = array();
         
         $arrayRegroupementTypeMail[$fetch['idUtilisateur']][$fetch['idTypeMailRegroupement']][] = array(
-                                                'idUtilisateur'=>$fetch['idUtilisateur'], 
-                                                'contenu'=>$fetch['contenu'], 
-                                                'dateHeure'=>$fetch['dateHeure'], 
-                                                'idTypeMailRegroupement'=>$fetch['idTypeMailRegroupement'], 
-                                                'idMail'=>$fetch['idMail']
-                                                );
+            'idUtilisateur'=>$fetch['idUtilisateur'], 
+            'contenu'=>$fetch['contenu'], 
+            'dateHeure'=>$fetch['dateHeure'], 
+            'idTypeMailRegroupement'=>$fetch['idTypeMailRegroupement'], 
+            'idMail'=>$fetch['idMail']
+        );
     }
     
     
-    foreach ($arrayRegroupementTypeMail as $idUtilisateur => $valueTypeMailRegroupement) {
+    foreach (
+        $arrayRegroupementTypeMail as $idUtilisateur => $valueTypeMailRegroupement
+    ) {
         $arrayMailsASupprimer= array();
-        $message= "<b>Modifications apportées sur le site archi-strasbourg.org</b><br><br>";
-        foreach ($valueTypeMailRegroupement as $idTypeMailRegroupement => $valueMail) {
+        $message= "<b>Modifications apportées sur le site archi-strasbourg.org".
+            "</b><br><br>";
+        foreach (
+            $valueTypeMailRegroupement as $idTypeMailRegroupement => $valueMail
+        ) {
             // recup de l'intitule de la rubrique de mail regroupee
-            $reqIntituleRegroupement = "SELECT intitule FROM typesMailsEnvoiMailsRegroupes WHERE idTypeMail = '".$idTypeMailRegroupement."'";
-            $resIntituleRegroupement = $config->connexionBdd->requete($reqIntituleRegroupement);
+            $reqIntituleRegroupement 
+                = "SELECT intitule FROM typesMailsEnvoiMailsRegroupes".
+                    " WHERE idTypeMail = '"
+                    .$idTypeMailRegroupement."'";
+            $resIntituleRegroupement
+                = $config->connexionBdd->requete($reqIntituleRegroupement);
             $fetchIntituleRegroupement = mysql_fetch_assoc($resIntituleRegroupement);
             $message.="<b>".$fetchIntituleRegroupement['intitule']."</b> : <br>";
             
             foreach ($valueMail as $indice => $value) {
-                $message.=" - <i>".$d->toFrenchAffichage($value['dateHeure'])." :</i> ".$value['contenu']."<br>";
+                $message.=" - <i>".$d->toFrenchAffichage($value['dateHeure']).
+                    " :</i> ".$value['contenu']."<br>";
                 $arrayMailsASupprimer[] = $value['idMail'];
             }
         }
         $message.="<br>".$config->getMessageDesabonnerAlerteMail();
         // recup du mail de la personne
-        $reqMail = "SELECT mail FROM utilisateur WHERE idUtilisateur='".$idUtilisateur."'";
+        $reqMail = "SELECT mail FROM utilisateur WHERE idUtilisateur='".
+            $idUtilisateur."'";
         $resMail = $config->connexionBdd->requete($reqMail);
         $fetchMail = mysql_fetch_assoc($resMail);
         $sujet = "archi-strasbourg.org : Modifications sur le site";
-        $mail->sendMail($mail->getSiteMail(), trim($fetchMail['mail']), $sujet, $message);
-        //$mail->sendMail($mail->getSiteMail(), "fabien.romary@gmail.com", "maintenance archiv2 envoi mail regroupe pour ".trim($fetchMail['mail']), $reqMail);
+        $mail->sendMail(
+            $mail->getSiteMail(), trim($fetchMail['mail']),
+            $sujet, $message, true
+        );
 
         // Stockage du mail dans les logs
-        $reqStock = "INSERT INTO logMails (destinataire, sujet, message, date) VALUES ('".trim($fetchMail['mail'])."', \"".mysql_real_escape_string($sujet)."\", \"".mysql_real_escape_string($message)."\", now())";
-        $resStock = $config->connexionBdd->requete($reqStock);
+        /*
+        $reqStock = "INSERT INTO logMails".
+        "(destinataire, sujet, message, date) VALUES ('"
+        .trim($fetchMail['mail'])."', \"".mysql_real_escape_string($sujet)."\", \""
+        .mysql_real_escape_string($message)."\", now())";
+        $resStock = $config->connexionBdd->requete($reqStock);*/
         
         // On supprime les mail regroupés 
         if (count($arrayMailsASupprimer)>0) {
-            $reqMails = "DELETE FROM mailsEnvoiMailsRegroupes WHERE idMail IN (".implode(", ", $arrayMailsASupprimer).")";
+            $reqMails = "DELETE FROM mailsEnvoiMailsRegroupes WHERE idMail IN ("
+                .implode(", ", $arrayMailsASupprimer).")";
             $resMails = $config->connexionBdd->requete($reqMails);
             
-            //$mail->sendMail($mail->getSiteMail(), "laurent.dorer@gmail.com", "maintenance archiv2", $reqMails);
         } else {
-            $mail->sendMail($mail->getSiteMail(), "fabien.romary@gmail.com", "maintenance archiv2 probleme", "mail vide envoyé ?");
+            $mail->sendMail(
+                $mail->getSiteMail(), "fabien.romary@gmail.com",
+                "maintenance archiv2 probleme", "mail vide envoyé ?"
+            );
         }
         
         
         
     }
-    
-    
-    
-    
     
 }
-/*
-$contenu = "test recuperation arguments et cron";
-$sujet = "test laurent cron params = ".$param;
-
-$mail->sendMail($mail->getSiteMail(), "laurent_dorer@yahoo.fr", $sujet, $contenu);
-$mail->sendMail($mail->getSiteMail(), "laurent.dorer@ri67.fr", $sujet, $contenu);
-*/
-/*
-$messageFin="<br>L'équipe archi-strasbourg.org<br>";
-    $messageFin.=$config->getMessageDesabonnerAlerteMail();
-
-    
-    $messageHTML = $messageIntro.$messageStrasbourg.$messageStrasModif.$messageAutres.$messageAutresModif.$messageFin;
-    
-    
-    $sujet = "Nouvelles adresses et adresses modifiées sur archi-strasbourg.org.";
-
-    
-    $reqUtilisateurs = "SELECT idUtilisateur, mail FROM utilisateur WHERE alerteMail='1' and compteActif='1'";
-    $resUtilisateurs = $config->connexionBdd->requete($reqUtilisateurs);
-
-       $mail->sendMail($mail->getSiteMail(), "laurent.dorer@ri67.fr", $sujet, $messageHTML, true);
-       $mail->sendMail($mail->getSiteMail(), "laurent.dorer@gmail.com", $sujet, $messageHTML, true);
-
-    if(isset($_GET['debug']) && $_GET['debug']=='1')
-    {
-        $mail->sendMail($mail->getSiteMail(), "laurent.dorer@ri67.fr", $sujet, $messageHTML, true);
-        $mail->sendMail($mail->getSiteMail(), "laurent.dorer@gmail.com", $sujet, $messageHTML, true);
-    }
-    else
-    {
-        while($fetchUtilisateurs = mysql_fetch_assoc($resUtilisateurs))
-        {
-            $mail->sendMail($mail->getSiteMail(), $fetchUtilisateurs['mail'], $sujet, $messageHTML, true); // $fetchUtilisateurs['mail']
-        }
-    }
-*/
-//}
 
 ?>
