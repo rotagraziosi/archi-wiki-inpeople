@@ -1346,6 +1346,12 @@ li:empty {
     vertical-align:middle;
 }
 
+.current_picture:-moz-full-screen,
+.current_picture:-webkit-full-screen,
+.current_picture:fullscreen {
+    cursor: none;
+}
+
 .current_picture {
     text-align: center;
     cursor: -moz-zoom-in;
