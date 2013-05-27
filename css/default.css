@@ -1345,3 +1345,10 @@ li:empty {
 .current_picture {
     vertical-align:middle;
 }
+
+.current_picture {
+    text-align: center;
+    cursor: -moz-zoom-in;
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
+}
