@@ -33,8 +33,10 @@ var navImages = function (e) {
             next = imgList[key + 1];
             break;
         }
-        img.src = img.src.replace(img.dataset.id, next[0]).replace(img.dataset.date, next[1]);
-        img.dataset.id = next.idHistoriqueImage;
+        if (next) {
+            img.src = img.src.replace(img.dataset.id, next[0]).replace(img.dataset.date, next[1]);
+            img.dataset.id = next.[0];
+        }
     }
 };
 
