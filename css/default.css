@@ -1346,15 +1346,18 @@ li:empty {
     vertical-align:middle;
 }
 
-.current_picture:-moz-full-screen,
-.current_picture:-webkit-full-screen,
-.current_picture:fullscreen {
-    cursor: none;
-}
-
-.current_picture {
-    text-align: center;
+.fullscreenWrapper {
     cursor: -moz-zoom-in;
     cursor: -webkit-zoom-in;
     cursor: zoom-in;
+    text-align: center;
+}
+
+.current_picture {
+    max-width:100%;
+    max-height:100%;
+}
+
+:-webkit-full-screen { 
+    cursor: auto;
 }

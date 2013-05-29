@@ -17,7 +17,9 @@
 <!-- BEGIN previous -->
 <a href="{prevURL}#divImage" rel="prefetch" class="prevPic" id="prevPic"><img src="images/Advisa/balise_inver.png" alt="Précédent"/></a>
 <!-- END previous -->
-<img itemprop='image' class="current_picture" src='{cheminDetailImage}' alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
+<span class="fullscreenWrapper" id="fullscreenWrapper">
+<img itemprop='image' class="current_picture" src='{cheminDetailImage}' data-list="{list}" data-id={imgID}  data-date="{imgDate}" alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
+</span>
 <!-- BEGIN next -->
 <a href="{nextURL}#divImage" rel="next" class="nextPic" id="nextPic"><img src="images/Advisa/balise.png" alt="Suivant"/></a>
 <!-- END next -->

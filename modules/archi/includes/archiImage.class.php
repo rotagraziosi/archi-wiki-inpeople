@@ -967,6 +967,7 @@ class archiImage extends config
             ";
         
             $resImages = $this->connexionBdd->requete($reqImages);
+            $found = false;
             while ($row = mysql_fetch_assoc($resImages)) {
                 if(intval($row['idImage']) == $_GET['archiIdImage']) {
                     if (isset($prev)) {
@@ -981,7 +982,16 @@ class archiImage extends config
                 }
                 $prev=$row;
             }
-
+            
+            $reqImages = "
+            SELECT (SELECT idHistoriqueImage from historiqueImage  WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT dateUpload from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1) FROM _evenementImage  WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
+            ";
+            $resImages = $this->connexionBdd->requete($reqImages);
+            $imgList = array();
+            while ($row = mysql_fetch_row($resImages)) {
+                $imgList[] = $row;
+            }
+            
             $intituleAdresseNoQuartierNoVille = $adresse->getIntituleAdresse($fetch,  array('noQuartier'=>true,  'noSousQuartier'=>true,  'noVille'=>true));
             
             $t->assign_vars(array(
@@ -993,9 +1003,12 @@ class archiImage extends config
                 'IDDivImage'=>"divImage_".$idImage, 
                 'IDDivZones'=>"divZones_".$idImage,
                 'nextURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $nextImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'],'archiIdAdresse'=>$_GET['archiIdAdresse'])),
-                'prevURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $prevImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'],'archiIdAdresse'=>$_GET['archiIdAdresse']))
-                
-            ));//$this->urlImagesGrand.$fetch['dateUpload'].'/'.$fetch['idHistoriqueImage'].".jpg"
+                'prevURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $prevImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'],'archiIdAdresse'=>$_GET['archiIdAdresse'])),
+                'list'=>urlencode(json_encode($imgList)),
+                'imgID'=>$fetch['idHistoriqueImage'],
+                'imgDate'=>$fetch['dateUpload']
+            ));
+            //$this->urlImagesGrand.$fetch['dateUpload'].'/'.$fetch['idHistoriqueImage'].".jpg"
             
             // si affichage du detail sans modification ,  on affiche les zones cliquables
             
