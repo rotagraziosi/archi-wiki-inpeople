@@ -186,6 +186,7 @@
                 <div class="fb-like-box reseauSocial" data-href="https://www.facebook.com/pages/Association-Archi-Strasbourg/215793091822502" data-width="190" data-stream="false" data-header="true"></div>
                 <br/>
                 <div class="reseauSocial">
+                <!--
                 <script charset="utf-8" src="https://widgets.twimg.com/j/2/widget.js"></script>
                 <script>
                 if (typeof TWTR !== 'undefined') {
@@ -216,6 +217,10 @@
                 }).render().setUser('ArchiStrasbourg').start();
                 }
                 </script>
+                -->
+                <a data-chrome="nofooter noscrollbar" width="190" height="170" data-link-color="#6D89A1" class="twitter-timeline"  href="https://twitter.com/ArchiStrasbourg"  data-widget-id="339535482302119936">Tweets de @ArchiStrasbourg</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
                 </div>
                 <!--<A HREF="http://www.archi-strasbourg.org/?archiAffichage=faireUnDon"><IMG SRC="images/20120326appeldons/bandeau_pub_vertical.jpg" width="174" alt="<?_("Pour continuer à lire du contenu gratuit et de qualité, faites un don.")?>"></A>-->
 
