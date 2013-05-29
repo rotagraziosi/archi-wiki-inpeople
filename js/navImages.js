@@ -35,7 +35,7 @@ var navImages = function (e) {
         }
         if (next) {
             img.src = img.src.replace(img.dataset.id, next[0]).replace(img.dataset.date, next[1]);
-            img.dataset.id = next.[0];
+            img.dataset.id = next[0];
         }
     }
 };
