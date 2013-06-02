@@ -6,7 +6,7 @@ internet")?> <SPAN LANG="zxx"><A HREF="http://www.archi-strasbourg.org/">www.arc
 <?_("fut d'abord une initiative privée (2003), avant de devenir un
 site collaboratif (2008). Rejoint par une dizaine de contributeurs
 qui ont contribué au succès du site, les internautes
-ont décidés de se constituer en association pour mieux
+ont décidé de se constituer en association pour mieux
 faire connaître leurs actions auprès des élus,
 institutions, chercheurs et le public.")?>
 <BR><br>
@@ -28,6 +28,12 @@ quelle que soit l'époque, le style et le type de bâtiment.")?></I>
 <I><?_("L'association
 s'intéresse au Strasbourg disparu, aux bâtiments actuels
 et au futur de la ville.")?></I>
+<BR><br>
+
+<?_("Archi-Strasbourg existe aussi ")?><A target=_blank HREF="http://m.archi-strasbourg.org"><?_("en version smartphone")?></A>,
+<A target=_blank HREF="https://itunes.apple.com/fr/app/id557893157?mt=8&affId=1578782"><?_("iPhone")?></A> <?_("et")?>
+<A target=_blank HREF="https://play.google.com/store/apps/details?id=archi.strasbourg.dev&feature=search_result#?t=W251bGwsMSwyLDEsImFyY2hpLnN0cmFzYm91cmcuZGV2Il0."><?_("Android")?></A>
+<?_("depuis 2012")?>
 <BR><br>
 
 <?_("Adresse
@@ -54,44 +60,16 @@ Rebmann Olivier<br>
 Mme Auberger Anne-Françoise
 <BR><br>
 
-<SPAN LANG="zxx"><A  HREF="http://www.archi-strasbourg.org/images/20110928assoarchistras/statut_archi-strasbourg.pdf"><?_("Télécharger
+<SPAN LANG="zxx"><A HREF="http://www.archi-strasbourg.org/images/20110928assoarchistras/statut_archi-strasbourg.pdf"><?_("Télécharger
 les statuts complets")?></A></SPAN> et <SPAN LANG="zxx"><A  HREF="http://www.archi-strasbourg.org/images/20110928assoarchistras/pvag_constitutive.pdf"><?_("l'assemblée
 constitutive")?></A></SPAN>
 <BR><br>
 
-<?_("Pour nous
-aider, et nous rejoindre en tant que membre, vous pouvez")?> <SPAN LANG="zxx"><A  HREF="http://www.archi-strasbourg.org/?archiAffichage=contact"><?_("nous
-contacter")?></A></SPAN> <?_("en nous communiquant votre nom,
-prénom, adresse et téléphone.")?>
+<?_("Pour nous aider, vous pouvez nous rejoindre en tant que membre, ")?> 
+<SPAN LANG="zxx"><A  HREF="http://www.archi-strasbourg.org/index.php?archiAffichage=membership"><?_("cliquez sur ce lien")?></A></SPAN>.
+
 <BR><br>
 
-<B><?_("Cotisation")?></B><br>
-<?_("Particuliers
-:")?>
-<?_("Membre :")?>
-20 euros<br>
-<?_("Famille :")?>
-30 euros<br>
-<?_("Membre
-donateur :")?> 40 euros<br>
-<?_("Membre
-bienfaiteur à partir de")?> 80 euros<br>
-<?_("Tarif
-réduit de")?> 10 euros <?_("pour étudiants, bénéficiaires
-du RSA et personnes non-imposables, sur justificatif.")?>
-<BR><br>
-
-<?_("Sociétés :")?>
- 40 euros (<?_("nom et logo sur notre site")?>)<br>
-<?_("Mécènes
-à partir de")?> 80 euros <?_("avec le nom, un logo et un lien sur le
-site de la société.")?>
-<BR><br>
-
-<?_("Le
-paiement se fait par chèque à l'ordre de")?> <i>Association
-Archi-Strasbourg</i> <?_("ou par virement")?> (<SPAN LANG="zxx"><A HREF="http://www.archi-strasbourg.org/images/pdf/RIB_archi-strasbourg.org.pdf"><?_("télécharger
-le RIB")?></A></SPAN>).
 <?_("Vous
 pouvez aussi nous aider")?> <SPAN LANG="zxx"><A HREF="http://www.archi-strasbourg.org/?archiAffichage=faireUnDon"><?_("en
 faisant un don")?></A></SPAN>.
