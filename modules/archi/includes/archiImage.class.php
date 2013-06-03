@@ -975,7 +975,7 @@ class archiImage extends config
                         $t->assign_block_vars('previous',  array());
                     }
                     $next = true;
-                } else if($next) {
+                } else if(isset($next)) {
                     $nextImage=$row;
                     $t->assign_block_vars('next',  array());
                     break;
@@ -984,7 +984,7 @@ class archiImage extends config
             }
             
             $reqImages = "
-            SELECT (SELECT idHistoriqueImage from historiqueImage  WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT dateUpload from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1) FROM _evenementImage  WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
+            SELECT (SELECT idHistoriqueImage from historiqueImage  WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT dateUpload from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT description from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), idImage FROM _evenementImage  WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
             ";
             $resImages = $this->connexionBdd->requete($reqImages);
             $imgList = array();
@@ -994,6 +994,8 @@ class archiImage extends config
             
             $intituleAdresseNoQuartierNoVille = $adresse->getIntituleAdresse($fetch,  array('noQuartier'=>true,  'noSousQuartier'=>true,  'noVille'=>true));
             
+            $format=isset($_GET['formatPhoto'])?$_GET['formatPhoto']:'petit';
+            
             $t->assign_vars(array(
                 'datePriseDeVue'=>$datePriseDeVue, 
                 'cheminDetailImage' => 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetch['dateUpload'].'-'.$fetch['idHistoriqueImage'].'-'.$formatPhoto.'.jpg', 
@@ -1002,11 +1004,13 @@ class archiImage extends config
                 'nom'=>$intituleAdresseNoQuartierNoVille, 
                 'IDDivImage'=>"divImage_".$idImage, 
                 'IDDivZones'=>"divZones_".$idImage,
-                'nextURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $nextImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'],'archiIdAdresse'=>$_GET['archiIdAdresse'])),
-                'prevURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $prevImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'],'archiIdAdresse'=>$_GET['archiIdAdresse'])),
-                'list'=>urlencode(json_encode($imgList)),
-                'imgID'=>$fetch['idHistoriqueImage'],
-                'imgDate'=>$fetch['dateUpload']
+                'nextURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $nextImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'], "formatPhoto"=>$format)),
+                'prevURL'=>$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $prevImage['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$_GET['archiRetourIdValue'], "formatPhoto"=>$format)),
+                'list'=>rawurlencode(json_encode($imgList)),
+                'imgID'=>rawurlencode(json_encode(array($fetch['idHistoriqueImage'], $fetch['idImage']))),
+                'imgDate'=>$fetch['dateUpload'],
+                'orgId'=>$fetch['idImage'],
+                'format'=>$format
             ));
             //$this->urlImagesGrand.$fetch['dateUpload'].'/'.$fetch['idHistoriqueImage'].".jpg"
             

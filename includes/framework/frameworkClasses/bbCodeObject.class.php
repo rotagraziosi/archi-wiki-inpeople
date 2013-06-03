@@ -14,7 +14,7 @@
  * 
  * */
 require_once "PEAR.php";
-require_once "HTML/BBCodeParser.php";
+require_once "HTML/BBCodeParser2.php";
 /**
  * Classe permettant de gerer le bbCode (mise en forme de texte de base)
  * 
@@ -47,7 +47,7 @@ class BBCodeObject extends config
             $pear = new PEAR();
             $options                 = $pear->getStaticProperty('HTML_BBCodeParser',  '_options');
             $options                 = $config['HTML_BBCodeParser'];
-            $this->parserBB         = new HTML_BBCodeParser($options);
+            $this->parserBB         = new HTML_BBCodeParser2($options);
         }
         
         

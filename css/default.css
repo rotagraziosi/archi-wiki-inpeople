@@ -1351,6 +1351,7 @@ li:empty {
     cursor: -webkit-zoom-in;
     cursor: zoom-in;
     text-align: center;
+    display:inline;
 }
 
 .current_picture {
@@ -1358,6 +1359,34 @@ li:empty {
     max-height:100%;
 }
 
-:-webkit-full-screen { 
+.fullscreenWrapper:-webkit-full-screen {
     cursor: auto;
+    margin:0;
+}
+.fullscreenWrapper:-moz-full-screen { 
+    cursor: auto;
+}
+
+.fullscreenWrapper figcaption {
+    display:inline;
+}
+
+.fullscreenDesc {
+    display:none;
+    color:white;
+    background-color:rgb(25, 25, 25);
+    background-color:rgba(25, 25, 25, 0.8);
+    bottom:20px;
+    padding:0.5em;
+    position:relative;
+    top:-3em;
+    margin:auto;
+    max-width:640px;
+    border-radius:15px;
+    border: thin solid #BBB;
+}
+
+.navImagesWrapper {
+    margin:auto;
+    text-align:center;
 }

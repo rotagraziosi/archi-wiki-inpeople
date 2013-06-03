@@ -22,4 +22,6 @@ var initLogin = function () {
         document.getElementById("browserid2").addEventListener("click", connect, true);
     }
 };
-window.addEventListener("load", initLogin, false);
+if (window.addEventListener) {
+    window.addEventListener("load", initLogin, false);
+}

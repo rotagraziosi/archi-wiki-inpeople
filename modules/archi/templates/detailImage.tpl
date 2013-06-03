@@ -14,15 +14,18 @@
 {txtZoom}
 <script src="js/navImages.js"></script>
 <div id='divImage' style='position:relative;'>
+<div class="navImagesWrapper">
 <!-- BEGIN previous -->
 <a href="{prevURL}#divImage" rel="prefetch" class="prevPic" id="prevPic"><img src="images/Advisa/balise_inver.png" alt="Précédent"/></a>
 <!-- END previous -->
-<span class="fullscreenWrapper" id="fullscreenWrapper">
-<img itemprop='image' class="current_picture" src='{cheminDetailImage}' data-list="{list}" data-id={imgID}  data-date="{imgDate}" alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
-</span>
+<figure class="fullscreenWrapper" id="fullscreenWrapper">
+<img itemprop='image' class="current_picture" src='{cheminDetailImage}' data-list="{list}" data-id={imgID} data-orgid={orgId}  data-date="{imgDate}" data-format="{format}" alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
+<figcaption><span class="fullscreenDesc" id="fullscreenDesc">{description}</span></figcaption>
+</figure>
 <!-- BEGIN next -->
 <a href="{nextURL}#divImage" rel="next" class="nextPic" id="nextPic"><img src="images/Advisa/balise.png" alt="Suivant"/></a>
 <!-- END next -->
+</div>
 <br/><br/>
 <div><?_("Cette photo est disponible sous la licence suivante :")?><br/>
 <div class="licence">{licence}</div></div>
