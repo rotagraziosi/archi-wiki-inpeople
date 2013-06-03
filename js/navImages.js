@@ -79,6 +79,7 @@ var initNavImages = function () {
             if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
                 img.elem.src = img.elem.src.replace('originaux', img.format);
                 document.getElementById('fullscreenDesc').style.display = 'none';
+                document.getElementById('fullscreenWrapper').style.lineHeight = 'normal';
                 var newURL = window.location.href.replace(img.elem.dataset.orgid, img.idImage);
                 if (newURL !== window.location.href) {
                     if (!window.location.hash) {
@@ -89,6 +90,7 @@ var initNavImages = function () {
             } else {
                 img.elem.src = img.elem.src.replace(img.format, 'originaux');
                 document.getElementById('fullscreenDesc').style.display = 'block';
+                document.getElementById('fullscreenWrapper').style.lineHeight = window.screen.height + 'px';
             }
         };
     if (img.elem.dataset) {

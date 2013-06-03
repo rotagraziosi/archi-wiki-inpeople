@@ -1377,9 +1377,12 @@ li:empty {
     background-color:rgb(25, 25, 25);
     background-color:rgba(25, 25, 25, 0.8);
     bottom:20px;
+    left:0;
+    right:0;
     padding:0.5em;
-    position:relative;
-    top:-3em;
+    position:fixed;
+    bottom:2em;
+    line-height:normal;
     margin:auto;
     max-width:640px;
     border-radius:15px;
