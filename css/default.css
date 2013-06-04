@@ -1347,6 +1347,7 @@ li:empty {
 }
 
 .fullscreenWrapper {
+    cursor:pointer;
     cursor: -moz-zoom-in;
     cursor: -webkit-zoom-in;
     cursor: zoom-in;
