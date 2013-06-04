@@ -1376,7 +1376,6 @@ li:empty {
     color:white;
     background-color:rgb(25, 25, 25);
     background-color:rgba(25, 25, 25, 0.8);
-    bottom:20px;
     left:0;
     right:0;
     padding:0.5em;
@@ -1387,6 +1386,11 @@ li:empty {
     max-width:640px;
     border-radius:15px;
     border: thin solid #BBB;
+}
+
+.fullscreenDesc:empty {
+    border:none;
+    background-color:transparent;
 }
 
 .navImagesWrapper {
