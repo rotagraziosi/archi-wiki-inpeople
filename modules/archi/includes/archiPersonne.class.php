@@ -943,11 +943,12 @@ class ArchiPersonne extends ArchiContenu
                     $linkedEventIdAddress=$fetch->idAdresse;
                                       
 
-                    $req = "
+                    //WIP sélection de l'image des personnes
+                    /*$req = "
                             SELECT  nom
                             FROM typeEvenement 
                             WHERE idTypeEvenement = ".
-                            $event->idTypeEvenement;
+                            mysql_real_escape_string($event->idTypeEvenement);
                     $res = $config->connexionBdd->requete($req);
                     $linkedEventType=mysql_fetch_object($res)->nom;
 
@@ -957,7 +958,7 @@ class ArchiPersonne extends ArchiContenu
                             WHERE idPersonne = ".mysql_real_escape_string($idPerson)."
                             AND idAdresse = ".mysql_real_escape_string($linkedEventIdAddress)."
                             LIMIT 1";
-                    $res = $config->connexionBdd->requete($req);
+                    $res = $config->connexionBdd->requete($req);*/
                     if ($idImage = mysql_fetch_object($res)->idImage) {
                         $img=new ArchiImage();
                         $img=($img->getInfosCompletesFromIdImage($idImage));

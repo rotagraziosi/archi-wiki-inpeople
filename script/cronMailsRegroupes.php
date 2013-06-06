@@ -114,7 +114,7 @@ if ((isset($argv[1]) && $argv[1]!='') || (isset($_GET['idPeriode']) && $_GET['id
         $sujet = "archi-strasbourg.org : Modifications sur le site";
         $mail->sendMail(
             $mail->getSiteMail(), trim($fetchMail['mail']),
-            $sujet, $message, true
+            $sujet, $message, true, null, 'daily.log'
         );
 
         // Stockage du mail dans les logs

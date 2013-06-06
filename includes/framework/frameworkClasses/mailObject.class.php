@@ -83,10 +83,11 @@ class MailObject extends config
      * @param string $message         Message
      * @param bool   $writeMailToLogs Ajouter le mail aux logs
      * @param string $replyTo         Adresse de réponse
+     * @param string $logfile         Fichier de log
      * 
      * @return bool
      * */
-    public function sendMail($envoyeur='',$destinataire='',$sujet='',$message='',$writeMailToLogs=false, $replyTo=null)
+    public function sendMail($envoyeur='',$destinataire='',$sujet='',$message='',$writeMailToLogs=false, $replyTo=null, $logfile='mail.log')
     {
         $headers ='From: "'.$envoyeur.'"<'.$envoyeur.'>'.PHP_EOL."Content-Type: text/html; charset=utf-8".PHP_EOL;
         if (!empty($replyTo)) {
@@ -107,13 +108,13 @@ class MailObject extends config
             $retour = true;
             
             if ($writeMailToLogs) {
-                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>stripslashes($sujet),"message"=>$message,"debug"=>true));
+                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>stripslashes($sujet),"message"=>$message,"debug"=>true, 'logfile'=>$logfile));
             }
         } else {
             $retour = pia_mail($destinataire, stripslashes($sujet), wordwrap($message), $headers, null);
             
             if ($writeMailToLogs) {
-                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>stripslashes($sujet),"message"=>$message,"debug"=>false));
+                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>stripslashes($sujet),"message"=>$message,"debug"=>false, 'logfile'=>$logfile));
             }            
         }
         
@@ -322,9 +323,9 @@ class MailObject extends config
                     }
                 }
                 fclose($f);
-                error_log(json_encode(array($lastline[0], array_merge($lastline[1], array($params['destinataire'])), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/mail.log');
+                error_log(json_encode(array($lastline[0], array_merge($lastline[1], array($params['destinataire'])), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/'.$params['logfile']);
             } else {
-                error_log(json_encode(array(date('c'), array($params['destinataire']), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/mail.log');
+                error_log(json_encode(array(date('c'), array($params['destinataire']), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/'.$params['logfile']);
             }
         } else {
             echo "mailObject.class.php : sauvegarde dans les logs impossible, il manque un champ.<br>";

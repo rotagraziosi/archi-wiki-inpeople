@@ -6397,7 +6397,8 @@ class archiAdresse extends ArchiContenu
 
                     if ($authentification->estConnecte()) {
                         $description.="<ul style='float:right;'><li><a href='".$this->creerUrl("", "editPerson", array("id"=>$_GET["id"]))."'>"._("Modifier")."</a></li>";
-                        $description.="<li><a href='".$this->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>"._("Sélectionner l'image principale")."</a></li>";
+                        //WIP sélection de l'image des personnes
+                        //$description.="<li><a href='".$this->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>"._("Sélectionner l'image principale")."</a></li>";
                         
                         if ($authentification->estAdmin()) {
                             $description.="<li><a href='".$this->creerUrl("", "deletePerson", array("id"=>$_GET["id"]))."'>"._("Supprimer")."</a></li>";
