@@ -55,7 +55,7 @@
     <!-- BEGIN pers -->
         {simple.pers.metier} <a href="{simple.pers.urlEvenement}">{simple.pers.prenom} {simple.pers.nom}</a>
         <!-- BEGIN connected -->
-        <small><a href="index.php?archiAffichage=choosePersonEventImage&idPerson={simple.pers.idPerson}&idEvent={simple.pers.idEvent}">(choisir l'image principale)</a></small>
+        <!--<small><a href="index.php?archiAffichage=choosePersonEventImage&idPerson={simple.pers.idPerson}&idEvent={simple.pers.idEvent}">(choisir l'image principale)</a></small>-->
         <!-- END connected -->
         <br>
     <!-- END pers -->
