@@ -303,13 +303,13 @@ class MailObject extends config
             
             $message = strip_tags($params['message'], '<br>');
             
-            $lastlog = popen('tac '.$this->getCheminPhysique().'/logs/mail.log', 'r');
+            $lastlog = popen('tac '.$this->getCheminPhysique().'/logs/'.$params['logfile'], 'r');
 
             $lastline = json_decode(fgets($lastlog));
             pclose($lastlog);
 
             if ($lastline[3] == $message) {
-                $fn = $this->getCheminPhysique().'/logs/mail.log';
+                $fn = $this->getCheminPhysique().'/logs/'.$params['logfile'];
                 $size = filesize($fn);
                 $block = 4096;
                 $trunc = max($size - $block, 0);
