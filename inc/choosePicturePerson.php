@@ -29,6 +29,7 @@ echo "<h2 class='h1'><a href='".$config->creerUrl(
     )
 )."'>".$infos["prenom"]." ".$infos["nom"]."</a></h2>";
 echo "<p>"._("Cliquez sur une image pour la sélectionner.")."</p>";
+//Penser à prendre les images de tous les événements de l'adresse
 $images = archiPersonne::getImages($_GET["id"]);
 echo "<form method='POST' action='".
 $config->creerUrl("", "choosePicturePerson", array("id"=>$_GET["id"]))."'>";
