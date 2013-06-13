@@ -1354,7 +1354,11 @@ li:empty {
     display:inline;
 }
 
-.current_picture {
+.fullscreenWrapper:-moz-full-screen .current_picture {
+    max-width:100%;
+    max-height:100%;
+}
+.fullscreenWrapper:-webkit-full-screen .current_picture {
     max-width:100%;
     max-height:100%;
 }
