@@ -12932,15 +12932,8 @@ class archiAdresse extends ArchiContenu
             }
             else
             {
-                list($w,$h) = getimagesize($this->getCheminPhysique()."images/imageDefautArchiv2.jpg");
-                $newWGrand = round(75*$w/100);
-                $newHGrand = round(75*$h/100);
-                    
-                $newWPetit = round(35*$w/100);
-                $newHPetit = round(35*$h/100);
                 
-                
-                $image = "<div id='divImagePetit".$numeroImage."' style='display:block;'><img src='".$this->getUrlImage()."imageDefautArchiv2.jpg' alt='' width=$newWPetit height=$newHPetit id='image".$numeroImage."Petit'></div><div id='divImageGrand".$numeroImage."' style='display:none;'><a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdAdresse'=>$params['idAdresse'],'archiIdEvenementGroupeAdresse'=>$params['idEvenementGroupeAdresse']))."'><img alt='' src='".$this->getUrlImage()."imageDefautArchiv2.jpg'  width=$newWGrand height=$newHGrand id='image".$numeroImage."Grand'></a></div>";
+                $image = "<div id='divImagePetit".$numeroImage."' style='display:block;'><img src='getPhotoSquare.php' alt='' width='70' id='image".$numeroImage."Petit'></div><div id='divImageGrand".$numeroImage."' style='display:none;'><a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdAdresse'=>$params['idAdresse'],'archiIdEvenementGroupeAdresse'=>$params['idEvenementGroupeAdresse']))."'><img alt='' src='getPhotoSquare.php' id='image".$numeroImage."Grand'></a></div>";
             }
             $adresse = "<a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdAdresse'=>$params['idAdresse'],'archiIdEvenementGroupeAdresse'=>$params['idEvenementGroupeAdresse']))."'>".$this->getIntituleAdresseFrom($params['idAdresse'],'idAdresse',array('noSousQuartier'=>true,'noQuartier'=>true,'noVille'=>true))."</a>";
             $retour = array('image'=>$image,'adresse'=>$adresse);
