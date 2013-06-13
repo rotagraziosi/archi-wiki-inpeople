@@ -1001,6 +1001,7 @@ class archiImage extends config
                 'cheminDetailImage' => 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetch['dateUpload'].'-'.$fetch['idHistoriqueImage'].'-'.$formatPhoto.'.jpg', 
                 'nomEtDateCliche'  => $nomEtDateCliche,  
                 'description' => $description, 
+                'fullscreenDesc' => strip_tags($description), 
                 'nom'=>$intituleAdresseNoQuartierNoVille, 
                 'IDDivImage'=>"divImage_".$idImage, 
                 'IDDivZones'=>"divZones_".$idImage,

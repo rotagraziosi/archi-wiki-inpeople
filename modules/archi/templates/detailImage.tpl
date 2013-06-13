@@ -20,7 +20,7 @@
 <!-- END previous -->
 <figure class="fullscreenWrapper" id="fullscreenWrapper">
 <img itemprop='image' class="current_picture" src='{cheminDetailImage}' data-list="{list}" data-id={imgID} data-orgid={orgId}  data-date="{imgDate}" data-format="{format}" alt="{nom}" title="{nom}" id='imageAfficheeID' usemap='#mapZones' border=0 />
-<figcaption><span class="fullscreenDesc" id="fullscreenDesc">{description}</span></figcaption>
+<figcaption><span class="fullscreenDesc" id="fullscreenDesc">{fullscreenDesc}</span></figcaption>
 </figure>
 <!-- BEGIN next -->
 <a href="{nextURL}#divImage" rel="next" class="nextPic" id="nextPic"><img src="images/Advisa/balise.png" alt="Suivant"/></a>
