@@ -1352,6 +1352,7 @@ li:empty {
     cursor: zoom-in;
     text-align: center;
     display:inline;
+    margin:0;
 }
 
 .fullscreenWrapper:-moz-full-screen .current_picture {
@@ -1406,4 +1407,24 @@ li:empty {
 .fb_iframe_widget span,
 .fb_iframe_widget iframe {
     width:190px !important;
+}
+
+.divImage {
+    width:500px;
+    margin:auto;
+}
+
+.prevPic,
+.nextPic {
+    position:relative;
+    position: absolute;
+    top: 50%;
+}
+
+.prevPic {
+    left: -25px;
+}
+
+.nextPic {
+    right:-25px;
 }

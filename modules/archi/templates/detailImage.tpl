@@ -13,7 +13,7 @@
 {imageZoom}
 {txtZoom}
 <script src="js/navImages.js"></script>
-<div id='divImage' style='position:relative;'>
+<div id='divImage' class='divImage' style='position:relative;'>
 <div class="navImagesWrapper">
 <!-- BEGIN previous -->
 <a href="{prevURL}#divImage" rel="prefetch" class="prevPic" id="prevPic"><img src="images/Advisa/balise_inver.png" alt="Précédent"/></a>
@@ -26,11 +26,11 @@
 <a href="{nextURL}#divImage" rel="next" class="nextPic" id="nextPic"><img src="images/Advisa/balise.png" alt="Suivant"/></a>
 <!-- END next -->
 </div>
+<div id='{IDDivZones}' style='position:absolute;top:0px;left:0px;'></div>
+</div>
 <br/><br/>
 <div><?_("Cette photo est disponible sous la licence suivante :")?><br/>
 <div class="licence">{licence}</div></div>
-<div id='{IDDivZones}' style='position:absolute;top:0px;left:0px;'></div>
-</div>
 <br>
 <span itemprop="dateCreated">
 {datePriseDeVue}</span>
