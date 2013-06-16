@@ -49,7 +49,7 @@ class ArchiPersonne extends ArchiContenu
             mysql_real_escape_string($id)."'"
         );
         foreach (mysql_fetch_object($resPerson) as $key=>$value) {
-            $this->$key=$value;
+            $this->$key=stripslashes($value);
         }
     }
 
