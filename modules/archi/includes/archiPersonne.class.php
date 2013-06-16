@@ -1078,7 +1078,7 @@ class ArchiPersonne extends ArchiContenu
                 $job=mysql_fetch_object($res)->nom;
                 $t->assign_block_vars(
                     "t.adresses", array(
-                        "nom"=>$person->prenom." ".$person->nom,
+                        "nom"=>stripslashes($person->prenom." ".$person->nom),
                         "urlDetailHref"=>$config->creerUrl(
                             "", "evenementListe", array("selection"=>"personne", "id"=>$person->idPersonne)
                         ),
