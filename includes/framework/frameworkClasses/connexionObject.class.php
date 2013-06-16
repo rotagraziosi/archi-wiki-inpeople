@@ -47,7 +47,8 @@ class ConnexionBdd extends config
      * */
     function __construct($bddName, $host, $user, $pass)
     {
-        $this->ressource = mysql_connect($host, $user, $pass) or die(mysql_error());
+        $this->ressource = mysql_connect($host, $user, $pass)
+            or die(file_get_contents(__DIR__.'/../../../maintenance.html'));
         mysql_select_db($bddName) or die(mysql_error());
         mysql_query('SET NAMES "utf8"') or die (mysql_error());    
     }
