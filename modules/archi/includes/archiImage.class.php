@@ -862,7 +862,7 @@ class archiImage extends config
             
             $e = new archiEvenement();
             if (archiPersonne::isPerson($e->getIdEvenementGroupeAdresseFromIdEvenement($_GET["archiRetourIdValue"]))) {
-               $resImage = $this->connexionBdd->requete("SELECT * FROM `historiqueImage` WHERE `idImage` =".$idImage);
+               $resImage = $this->connexionBdd->requete("SELECT * FROM `historiqueImage` WHERE `idImage` =".$idImage.' ORDER BY idHistoriqueImage DESC');
             } else {
                 $resImage = $this->connexionBdd->requete(
                     "SELECT * FROM `historiqueImage` WHERE `idImage` = $idImage
