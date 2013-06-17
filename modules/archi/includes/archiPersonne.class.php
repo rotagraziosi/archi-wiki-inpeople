@@ -685,6 +685,8 @@ class ArchiPersonne extends ArchiContenu
         $res = $this->connexionBdd->requete($req);
         
         $fetch = mysql_fetch_assoc($res);
+        $fetch['nom']=stripslashes($fetch['nom']);
+        $fetch['prenom']=stripslashes($fetch['prenom']);
         
         return $fetch;
     }
