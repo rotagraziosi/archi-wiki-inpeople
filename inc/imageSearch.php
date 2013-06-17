@@ -52,7 +52,7 @@ if (isset($_GET['query'])) {
     (NOT( historiqueEvenement.titre LIKE "%'.$keyword.'%")),
     (NOT( historiqueAdresse.nom LIKE "%'.$keyword.'%")),
     (NOT( quartier.nom LIKE "%'.$keyword.'%"))
-    LIMIT 100';
+    LIMIT 96';
     $query = mysql_query($query);
     $bbcode= new bbCodeObject();
     while ($results=mysql_fetch_assoc($query)) {
