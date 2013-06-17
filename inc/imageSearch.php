@@ -43,6 +43,7 @@ if (isset($_POST['query'])) {
     OR historiqueEvenement.titre LIKE "%'.$keyword.'%"
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
     OR quartier.nom LIKE "%'.$keyword.'%"
+    GROUP BY historiqueImage.idImage
     ORDER BY (NOT(historiqueImage.description LIKE "%'.$keyword.'%")),
     (NOT( historiqueEvenement.description LIKE "%'.$keyword.'%")),
     (NOT( historiqueEvenement.titre LIKE "%'.$keyword.'%")),
