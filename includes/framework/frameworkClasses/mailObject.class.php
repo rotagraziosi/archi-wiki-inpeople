@@ -67,9 +67,13 @@ class MailObject extends config
     public function isMail($mail="")
     {
         $retour = false;
-        
-        if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([\.a-zA-Z0-9_-])+\.([a-zA-Z0-9])+$/", $mail))
+        $cond = preg_match(
+            "/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@".
+            "([\.a-zA-Z0-9_-])+\.([a-zA-Z0-9])+$/", $mail
+        );
+        if ($cond) {
             $retour = true;
+        }
         
         return $retour;
     }
@@ -87,13 +91,15 @@ class MailObject extends config
      * 
      * @return bool
      * */
-    public function sendMail($envoyeur='',$destinataire='',$sujet='',$message='',$writeMailToLogs=false, $replyTo=null, $logfile='mail.log')
-    {
-        $headers ='From: "'.$envoyeur.'"<'.$envoyeur.'>'.PHP_EOL."Content-Type: text/html; charset=utf-8".PHP_EOL;
+    public function sendMail(
+        $envoyeur='',$destinataire='',$sujet='',$message='',
+        $writeMailToLogs=false, $replyTo=null, $logfile='mail.log'
+    ) {
+        $headers ='From: "'.$envoyeur.'"<'.$envoyeur.'>'.
+            PHP_EOL."Content-Type: text/html; charset=utf-8".PHP_EOL;
         if (!empty($replyTo)) {
             $headers.="Reply-To: $replyTo";
         }
-        //$headers = "From: ".$envoyeur."\nContent-Type: text/html; charset=ISO-8859-15\nMIME-Version: 1.0\n";
         
         //$sujet = iconv("UTF-8","ISO-8859-15//IGNORE", $sujet);
 
@@ -108,13 +114,24 @@ class MailObject extends config
             $retour = true;
             
             if ($writeMailToLogs) {
-                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>stripslashes($sujet),"message"=>$message,"debug"=>true, 'logfile'=>$logfile));
+                $this->saveMailToLogs(
+                    array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,
+                    "sujet"=>stripslashes($sujet),"message"=>$message,
+                    "debug"=>true, 'logfile'=>$logfile)
+                );
             }
         } else {
-            $retour = pia_mail($destinataire, stripslashes($sujet), wordwrap($message), $headers, null);
+            $retour = pia_mail(
+                $destinataire, stripslashes($sujet),
+                wordwrap($message), $headers, null
+            );
             
             if ($writeMailToLogs) {
-                $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,"sujet"=>stripslashes($sujet),"message"=>$message,"debug"=>false, 'logfile'=>$logfile));
+                $this->saveMailToLogs(
+                    array("envoyeur"=>$envoyeur,"destinataire"=>$destinataire,
+                    "sujet"=>stripslashes($sujet),"message"=>$message,
+                    "debug"=>false, 'logfile'=>$logfile)
+                );
             }            
         }
         
@@ -131,11 +148,14 @@ class MailObject extends config
      * @param $string $criteres                 Criteres
      * @param bool    $writeMailToLogs          ?
      * @param bool    $isEnvoiRegroupeDesactive ?
+     * @param string  $logfile                  Fichier de logs
      * 
      * @return void
      * */
-    public function sendMailToAdministrators($envoyeur='archi-strasbourg', $sujet='', $message='', $criteres='', $writeMailToLogs=false, $isEnvoiRegroupeDesactive=false)
-    {
+    public function sendMailToAdministrators(
+        $envoyeur='archi-strasbourg', $sujet='', $message='', $criteres='',
+        $writeMailToLogs=false, $isEnvoiRegroupeDesactive=false, $logfile='mail.log'
+    ) {
         $replyTo="";
         if (is_array($envoyeur)) {
             $replyTo = $envoyeur["replyTo"];
@@ -146,24 +166,34 @@ class MailObject extends config
         // recherche les administrateurs
         $authentification = new archiAuthentification();
         $idUtilisateur = '0';
-        if ($authentification->estConnecte())
+        if ($authentification->estConnecte()) {
             $idUtilisateur = $authentification->getIdUtilisateur();
+        }
         
         // n'envoi pas le mail si l'utilisateur courant est lui meme admin
         $sqlNoSendToAdmin="";
-        if ($authentification->estAdmin())
+        if ($authentification->estAdmin()) {
             $sqlNoSendToAdmin = "and idUtilisateur!='".$idUtilisateur."'";
+        }
         
-        // envoi au admins, dont le compte est actif , et la periode d'envoi est "immediate"
+        /* Envoi aux admins dont le compte est actif
+         * et la periode d'envoi est "immediate"
+         * */
         if ($isEnvoiRegroupeDesactive) {
-            $sql = "SELECT mail from utilisateur where idProfil='4' and compteActif='1' ".$criteres." ".$sqlNoSendToAdmin;    
+            $sql = "SELECT mail from utilisateur where idProfil='4'".
+                " and compteActif='1' ".$criteres." ".$sqlNoSendToAdmin;    
         } else {
-            $sql = "SELECT mail from utilisateur where idProfil='4' and compteActif='1' and (idPeriodeEnvoiMailsRegroupes='1' OR idPeriodeEnvoiMailsRegroupes='0') ".$criteres." ".$sqlNoSendToAdmin;    
+            $sql = "SELECT mail from utilisateur where idProfil='4' ".
+                "and compteActif='1' and (idPeriodeEnvoiMailsRegroupes='1' ".
+                "OR idPeriodeEnvoiMailsRegroupes='0') ".
+                $criteres." ".$sqlNoSendToAdmin;    
         }
         
         $res = $this->connexionBdd->requete($sql);
         while ($fetch = mysql_fetch_assoc($res)) {
-            $headers ='From: "'.$envoyeur.'"<'.$envoyeur.'>'."\r\nReply-To: ".$replyTo."\r\nContent-Type: text/html; charset=\"utf-8\"\r\n";
+            $headers ='From: "'.$envoyeur.'"<'.$envoyeur.'>'.
+                "\r\nReply-To: ".$replyTo.
+                "\r\nContent-Type: text/html; charset=\"utf-8\"\r\n";
             if (isset($this->isSiteLocal) && $this->isSiteLocal == true) {
                 echo "Envoi d'un mail aux administrateurs<br>";
                 echo $headers;
@@ -172,13 +202,23 @@ class MailObject extends config
                 echo "$message<br>";
                 echo "finMail<br>";
                 
-                if ($writeMailToLogs)
-                    $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$fetch['mail'],"sujet"=>$sujet,"message"=>$message,"debug"=>true));
+                if ($writeMailToLogs) {
+                    $this->saveMailToLogs(
+                        array("envoyeur"=>$envoyeur,"destinataire"=>$fetch['mail'],
+                        "sujet"=>$sujet,"message"=>$message,"debug"=>true,
+                        'logfile'=>$logfile)
+                    );
+                }
                 
             } else {
                 pia_mail($fetch['mail'], $sujet, $message, $headers, null);
-                if ($writeMailToLogs)
-                    $this->saveMailToLogs(array("envoyeur"=>$envoyeur,"destinataire"=>$fetch['mail'],"sujet"=>$sujet,"message"=>$message,"debug"=>false));
+                if ($writeMailToLogs) {
+                    $this->saveMailToLogs(
+                        array("envoyeur"=>$envoyeur,"destinataire"=>$fetch['mail'],
+                        "sujet"=>$sujet,"message"=>$message,
+                        "debug"=>false, 'logfile'=>$logfile)
+                    );
+                }
             }
         }
     }
@@ -196,8 +236,9 @@ class MailObject extends config
 
         $email = preg_replace("/\"/", "\\\"", $email);
 
-        if ($name == null)
+        if ($name == null) {
             $name = $email;
+        }
 
         $old = "document.write('<a class=lien href=\"mailto:$email\">$name</a>')";
 
@@ -207,8 +248,10 @@ class MailObject extends config
             $output = $output . '%' . bin2hex(pia_substr($old, $i, 1));
         }
 
-        $output = '<script type="text/javascript">eval(unescape(\''.$output.'\'))</script>';
-        $output .= '<noscript><div>Vous devez accepter le Javascript pour voir l\'email</div></noscript>';
+        $output = '<script type="text/javascript">eval(unescape(\''.
+            $output.'\'))</script>';
+        $output .= '<noscript><div>Vous devez accepter le Javascript'.
+            ' pour voir l\'email</div></noscript>';
         return $output;
     }
 
@@ -223,12 +266,11 @@ class MailObject extends config
      * */
     function encodeEmailwithSubject($email, $name = null, $sujet="")
     {
-        // conversion en iso pour éviter que le passage html->binaire->html ne déconne
-        //$sujet = iconv("UTF-8","ISO-8859-15//IGNORE", $sujet);
         $email = preg_replace("/\"/", "\\\"", $email);
 
-        if ($name == null)
+        if ($name == null) {
             $name = $email;
+        }
 
         $old1 = "document.write('<a class=lien href=\"mailto:$email?subject=";
         //".$sujet."
@@ -250,8 +292,10 @@ class MailObject extends config
 
 
         $output="";
-        $output = '<script type="text/javascript">eval(unescape(\''.$output1.'\')+"'.$sujet.'"+unescape(\''.$output2.'\'))</script>';
-        $output .= '<noscript><div>Vous devez accepter le Javascript pour voir l\'email</div></noscript>';
+        $output = '<script type="text/javascript">eval(unescape(\''.
+            $output1.'\')+"'.$sujet.'"+unescape(\''.$output2.'\'))</script>';
+        $output .= '<noscript><div>Vous devez accepter le Javascript'.
+            ' pour voir l\'email</div></noscript>';
         return $output;
     }
 
@@ -268,10 +312,12 @@ class MailObject extends config
 
         $email = preg_replace("/\"/", "\\\"", $email);
 
-        if ($name == null)
+        if ($name == null) {
             $name = $email;
+        }
 
-        $old = "document.write('<a CLASS=infoacceuil href=\"mailto:$email\">$name</a>')";
+        $old = "document.write('<a CLASS=infoacceuil ".
+            "href=\"mailto:$email\">$name</a>')";
 
         $output = "";
 
@@ -279,8 +325,10 @@ class MailObject extends config
             $output = $output . '%' . bin2hex(pia_substr($old, $i, 1));
         }
 
-        $output = '<script type="text/javascript">eval(unescape(\''.$output.'\'))</script>';
-        $output .= '<noscript><div>Vous devez accepter le Javascript pour voir l\'email</div></noscript>';
+        $output = '<script type="text/javascript">eval(unescape(\''.
+            $output.'\'))</script>';
+        $output .= '<noscript><div>Vous devez accepter le Javascript'.
+            ' pour voir l\'email</div></noscript>';
         return $output;
     }
     
@@ -293,20 +341,31 @@ class MailObject extends config
      * */
     public function saveMailToLogs($params = array())
     {
-        if (isset($params['destinataire']) && isset($params['sujet']) && isset($params['message']) && isset($params['debug'])) {
+        if (isset($params['destinataire'])
+            && isset($params['sujet'])
+            && isset($params['message'])
+            && isset($params['debug'])
+        ) {
             $debugValue=false;
-            if ($params['debug']==true)
+            if ($params['debug']==true) {
                 $debugValue=true;
+            }
                 
-            /*$reqInsertLog = "insert into logMails (destinataire, sujet, message, date, isDebug) values (\"".$params['destinataire']."\",\"".mysql_real_escape_string($params['sujet'])."\",\"".mysql_real_escape_string($params['message'])."\", now(), '".$debugValue."')";
-            $resInsertLog = $this->connexionBdd->requete($reqInsertLog);*/
             
             $message = strip_tags($params['message'], '<br>');
-            
-            $lastlog = popen('tac '.$this->getCheminPhysique().'/logs/'.$params['logfile'], 'r');
+            if (file_exists($this->getCheminPhysique().'logs/'.$params['logfile'])) {
+                $lastlog = popen(
+                    'tac '.escapeshellcmd(
+                        $this->getCheminPhysique().
+                        'logs/'.$params['logfile']
+                    ), 'r'
+                );
 
-            $lastline = json_decode(fgets($lastlog));
-            pclose($lastlog);
+                $lastline = json_decode(fgets($lastlog));
+                pclose($lastlog);
+            } else {
+                $lastline[3]='';
+            }
 
             if ($lastline[3] == $message) {
                 $fn = $this->getCheminPhysique().'/logs/'.$params['logfile'];
@@ -323,12 +382,28 @@ class MailObject extends config
                     }
                 }
                 fclose($f);
-                error_log(json_encode(array($lastline[0], array_merge($lastline[1], array($params['destinataire'])), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/'.$params['logfile']);
+                error_log(
+                    json_encode(
+                        array($lastline[0], array_merge(
+                            $lastline[1],
+                            array($params['destinataire'])
+                        ), $params['sujet'], $message)
+                    )
+                    .PHP_EOL, 3, $this->getCheminPhysique().
+                    '/logs/'.$params['logfile']
+                );
             } else {
-                error_log(json_encode(array(date('c'), array($params['destinataire']), $params['sujet'], $message)).PHP_EOL, 3, $this->getCheminPhysique().'/logs/'.$params['logfile']);
+                error_log(
+                    json_encode(
+                        array(date('c'), array($params['destinataire']),
+                        $params['sujet'], $message)
+                    ).PHP_EOL, 3, $this->getCheminPhysique().
+                    '/logs/'.$params['logfile']
+                );
             }
         } else {
-            echo "mailObject.class.php : sauvegarde dans les logs impossible, il manque un champ.<br>";
+            echo "mailObject.class.php : ".
+            "sauvegarde dans les logs impossible, il manque un champ.<br>";
         }
     }
 }
