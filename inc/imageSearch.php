@@ -38,11 +38,13 @@ if (isset($_POST['query'])) {
     LEFT JOIN historiqueAdresse
         ON historiqueAdresse.idAdresse = _evenementAdresseLiee.idAdresse
     LEFT JOIN quartier ON quartier.idQuartier = historiqueAdresse.idQuartier
-    WHERE historiqueImage.description LIKE "%'.$keyword.'%"
+    WHERE (NOT ISNULL(historiqueEvenement.description))
+    AND
+    (historiqueImage.description LIKE "%'.$keyword.'%"
     OR historiqueEvenement.description LIKE "%'.$keyword.'%"
     OR historiqueEvenement.titre LIKE "%'.$keyword.'%"
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
-    OR quartier.nom LIKE "%'.$keyword.'%"
+    OR quartier.nom LIKE "%'.$keyword.'%")
     GROUP BY historiqueImage.idImage
     ORDER BY (NOT(historiqueImage.description LIKE "%'.$keyword.'%")),
     (NOT( historiqueEvenement.description LIKE "%'.$keyword.'%")),
