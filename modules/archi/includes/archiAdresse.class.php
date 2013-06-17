@@ -5338,7 +5338,7 @@ class archiAdresse extends ArchiContenu
                         WHERE (v.idPays = '1' or v.idPays='2')
                         AND v.nom<>'autre'
                         AND idVille in (".$listeVilleAvecAdresses.")
-                        ORDER BY lettre
+                        ORDER BY v.nom
                         LIMIT ".$arrayPagination['limitSqlDebut'].",".$nbEnregistrementsParPage;
                         
                 $tableau = new tableau();
