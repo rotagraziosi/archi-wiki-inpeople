@@ -1,5 +1,5 @@
 <h2>Recherche d'images</h2>
-<form action="index.php?archiAffichage=imageSearch" method="POST">
+<form action="index.php" method="get">
 <input class="searchInput" type="search" name="query"
 <?php
 /**
@@ -14,18 +14,19 @@
  * @link     https://archi-strasbourg.org/
  * 
  * */
-if (isset($_POST['query'])) {
-    echo 'value="'.$_POST['query'].'"';
+if (isset($_GET['query'])) {
+    echo 'value="'.$_GET['query'].'"';
 } 
 ?>
  />
+<input type="hidden" name="archiAffichage" value="imageSearch" />
 <input class="loupe" type="image" src="images/Advisa/loupe.png">
 </form>
 <?php
 
-if (isset($_POST['query'])) {
+if (isset($_GET['query'])) {
     echo '<hr />';
-    $keyword = mysql_real_escape_string($_POST['query']);
+    $keyword = mysql_real_escape_string($_GET['query']);
     $query = 'SELECT DISTINCT
         historiqueImage.idImage, historiqueImage.idHistoriqueImage, historiqueImage.description,
         historiqueAdresse.idAdresse, historiqueEvenement.idEvenement
