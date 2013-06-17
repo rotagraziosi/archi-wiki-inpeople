@@ -1012,6 +1012,9 @@ if (isset($_GET['archiAffichage'])) {
         case 'membership':
             include 'inc/membership.php';
             break;
+        case 'imageSearch':
+            include 'inc/imageSearch.php';
+            break;
         case 'choosePersonEventImage':
             include 'inc/choosePersonEventImage.php';
             break;
