@@ -27,7 +27,7 @@ if (isset($_POST['query'])) {
     echo '<hr />';
     $keyword = mysql_real_escape_string($_POST['query']);
     $query = 'SELECT DISTINCT
-        historiqueImage.idImage, historiqueImage.description,
+        historiqueImage.idImage, historiqueImage.idHistoriqueImage, historiqueImage.description,
         historiqueAdresse.idAdresse, historiqueEvenement.idEvenement
     FROM historiqueImage
     LEFT JOIN _evenementImage ON historiqueImage.idImage = _evenementImage.idImage
@@ -57,7 +57,7 @@ if (isset($_POST['query'])) {
             'archiRetourIdName'=>'idEvenement', 'archiIdImage'=>$results['idImage'],
             'archiIdAdresse'=>$results['idAdresse'],
             'archiRetourIdValue'=>$results['idEvenement'])
-        ).'"><img src="getPhotoSquare.php?id='.$results['idImage'].'" alt="" /></a>';
+        ).'"><img src="getPhotoSquare.php?id='.$results['idHistoriqueImage'].'" alt="" /></a>';
         /*
         echo '<p>'.strip_tags($bbcode->convertToDisplay(
             array('text'=>$results['description'])
