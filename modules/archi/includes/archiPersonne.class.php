@@ -798,7 +798,7 @@ class ArchiPersonne extends ArchiContenu
         ";
 
         $res = $config->connexionBdd->requete($req);
-        
+        var_dump($req);
         if ($fetch=mysql_fetch_object($res)) {
             $req = "
                 SELECT dateUpload, idHistoriqueImage
@@ -1139,7 +1139,6 @@ class ArchiPersonne extends ArchiContenu
     static function getPersonsFromSource($idSource)
     {
         global $config;
-        print "<b>Voici la liste des personnes où nous mentionnons cette source</b>";
         $req="SELECT idEvenement
             FROM `historiqueEvenement`
             WHERE `idSource` =".$idSource;
@@ -1154,8 +1153,10 @@ class ArchiPersonne extends ArchiContenu
         }
 
         if (isset($people)) {
+            $people=array_unique($people);
+            print "<b>Voici la liste des personnes où nous mentionnons cette source</b>";
+            print('<table class="results">');
             foreach ($people as $person) {
-                print('<table class="results">');
                 print('<tr class="listAddressItem">
                 <td><a href="'.
                 $config->creerUrl(
@@ -1164,8 +1165,8 @@ class ArchiPersonne extends ArchiContenu
                     "", "evenementListe", array("selection"=>"personne", "id"=>$person['idPersonne'])
                 ).'" >'.stripslashes($person['prenom']." ".$person['nom']).'</a></span><br/><span style="font-size:11px;">'.$person['nomMetier'].'</span></td>
                 </tr>');
-                print('</table>');
             }
+            print('</table>');
         }
     }
     
