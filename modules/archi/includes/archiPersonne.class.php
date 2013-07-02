@@ -798,7 +798,6 @@ class ArchiPersonne extends ArchiContenu
         ";
 
         $res = $config->connexionBdd->requete($req);
-        var_dump($req);
         if ($fetch=mysql_fetch_object($res)) {
             $req = "
                 SELECT dateUpload, idHistoriqueImage
