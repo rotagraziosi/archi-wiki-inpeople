@@ -902,6 +902,7 @@ if (isset($_GET['archiAffichage'])) {
             $r= new archiRecherche();
             //$criteres['modeAffichage'] = 'calqueEvenement';
             echo $r->rechercheAvanceeEvenement(array('sansFormulaire'=>true));
+            print archiPersonne::getPersonsFromSource($_GET['source']);
             break;
         case 'afficheGrandFormatSource':
             $s = new archiSource();

@@ -675,7 +675,7 @@ class ArchiPersonne extends ArchiContenu
     public function getInfosPersonne($id=0)
     {
         $req = "
-            SELECT p.nom as nom, p.prenom as prenom, m.nom as nomMetier , p.dateNaissance dateNaissance, p.dateDeces as dateDeces, p.description as description
+            SELECT idPersonne, p.nom as nom, p.prenom as prenom, m.nom as nomMetier , p.dateNaissance dateNaissance, p.dateDeces as dateDeces, p.description as description
             FROM personne p
             LEFT JOIN metier m ON m.idMetier = p.idMetier
             WHERE p.idPersonne = '".$id."'
@@ -1128,5 +1128,67 @@ class ArchiPersonne extends ArchiContenu
         }
         return $return;
     }
+    
+    /**
+     * Affiche la liste des personnes liées à une source
+     * 
+     * @param int $idSource ID de la source
+     * 
+     * @return void
+     * */
+    static function getPersonsFromSource($idSource)
+    {
+        global $config;
+        print "<b>Voici la liste des personnes où nous mentionnons cette source</b>";
+        $req="SELECT idEvenement
+            FROM `historiqueEvenement`
+            WHERE `idSource` =".$idSource;
+        $res = $config->connexionBdd->requete($req);
+        $e = new archiEvenement();
+        while ($event=mysql_fetch_object($res)) {
+            $idEvenementGroupeAdresse = $e->getIdEvenementGroupeAdresseFromIdEvenement($event->idEvenement);
+            if ($idPerson=archiPersonne::isPerson($idEvenementGroupeAdresse)) {
+                $person= new archiPersonne($idPerson);
+                $people[]=$person->getInfosPersonne($idPerson);
+            }
+        }
+
+        if (isset($people)) {
+            foreach ($people as $person) {
+                print('<table class="results">');
+                print('<tr class="listAddressItem">
+                <td><a href="'.
+                $config->creerUrl(
+                    "", "evenementListe", array("selection"=>"personne", "id"=>$person['idPersonne'])
+                ).'"><img src="'.archiPersonne::getImage($person['idPersonne'], "mini", false).'" border=0 alt=""></a> <span><br/><a href="'.$config->creerUrl(
+                    "", "evenementListe", array("selection"=>"personne", "id"=>$person['idPersonne'])
+                ).'" >'.stripslashes($person['prenom']." ".$person['nom']).'</a></span><br/><span style="font-size:11px;">'.$person['nomMetier'].'</span></td>
+                </tr>');
+                print('</table>');
+            }
+        }
+    }
+    
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
