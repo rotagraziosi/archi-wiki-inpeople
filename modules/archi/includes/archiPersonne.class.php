@@ -1152,18 +1152,21 @@ class ArchiPersonne extends ArchiContenu
         }
 
         if (isset($people)) {
-            $people=array_unique($people);
+            $already=array();
             print "<b>Voici la liste des personnes où nous mentionnons cette source</b>";
             print('<table class="results">');
             foreach ($people as $person) {
-                print('<tr class="listAddressItem">
-                <td><a href="'.
-                $config->creerUrl(
-                    "", "evenementListe", array("selection"=>"personne", "id"=>$person['idPersonne'])
-                ).'"><img src="'.archiPersonne::getImage($person['idPersonne'], "mini", false).'" border=0 alt=""></a> <span><br/><a href="'.$config->creerUrl(
-                    "", "evenementListe", array("selection"=>"personne", "id"=>$person['idPersonne'])
-                ).'" >'.stripslashes($person['prenom']." ".$person['nom']).'</a></span><br/><span style="font-size:11px;">'.$person['nomMetier'].'</span></td>
-                </tr>');
+                if (!in_array($person['idPersonne'], $already)) {
+                    $already[]=$person['idPersonne'];
+                    print('<tr class="listAddressItem">
+                    <td><a href="'.
+                    $config->creerUrl(
+                        "", "evenementListe", array("selection"=>"personne", "id"=>$person['idPersonne'])
+                    ).'"><img src="'.archiPersonne::getImage($person['idPersonne'], "mini", false).'" border=0 alt=""></a> <span><br/><a href="'.$config->creerUrl(
+                        "", "evenementListe", array("selection"=>"personne", "id"=>$person['idPersonne'])
+                    ).'" >'.stripslashes($person['prenom']." ".$person['nom']).'</a></span><br/><span style="font-size:11px;">'.$person['nomMetier'].'</span></td>
+                    </tr>');
+                }
             }
             print('</table>');
         }
