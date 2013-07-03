@@ -1461,6 +1461,11 @@ li:empty {
 
 .imgResultHover img{
     border-radius: 5px;
+    min-height:130px;
+    transition: min-height 0.1s;
+}
+.imgResultGrp:hover .imgResultHover img{
+    min-height:80px;
 }
 
 .imgResultGrp:hover .imgResultHover {
