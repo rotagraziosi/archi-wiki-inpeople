@@ -28,8 +28,9 @@ if (isset($_GET['query'])) {
     echo '<hr />';
     $keyword = mysql_real_escape_string($_GET['query']);
     $query = 'SELECT DISTINCT
-        historiqueImage.idImage, historiqueImage.idHistoriqueImage, historiqueImage.description,
-        historiqueAdresse.idAdresse, historiqueEvenement.idEvenement
+        historiqueImage.idImage, historiqueImage.idHistoriqueImage,
+        historiqueImage.description, historiqueAdresse.idAdresse,
+        historiqueEvenement.idEvenement, historiqueImage.dateUpload
     FROM historiqueImage
     LEFT JOIN _evenementImage ON historiqueImage.idImage = _evenementImage.idImage
     LEFT JOIN historiqueEvenement
@@ -56,17 +57,18 @@ if (isset($_GET['query'])) {
     $query = mysql_query($query);
     $bbcode= new bbCodeObject();
     while ($results=mysql_fetch_assoc($query)) {
-        echo '<a href="'.$config->creerUrl(
+        echo '<a class="imgResultGrp" href="'.$config->creerUrl(
             '', 'imageDetail', array('archiRetourAffichage'=>'evenement',
             'archiRetourIdName'=>'idEvenement', 'archiIdImage'=>$results['idImage'],
             'archiIdAdresse'=>$results['idAdresse'],
             'archiRetourIdValue'=>$results['idEvenement'])
-        ).'"><img src="getPhotoSquare.php?id='.$results['idHistoriqueImage'].'" alt="" /></a>';
-        /*
-        echo '<p>'.strip_tags($bbcode->convertToDisplay(
-            array('text'=>$results['description'])
-        )).'</p>';
-        * */
+        ).'"><div class="imgResult"></div><div class="imgResultHover"><img src="'.
+        'photos--'.$results['dateUpload'].'-'.$results['idHistoriqueImage'].
+        '-moyen.jpg'.'" alt="" /><p>'.strip_tags(
+            $bbcode->convertToDisplay(
+                array('text'=>$results['description'])
+            )
+        ).'</p></div></a>';
     }
-
+            
 } 

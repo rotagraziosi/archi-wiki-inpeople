@@ -1428,3 +1428,48 @@ li:empty {
 .nextPic {
     right:-25px;
 }
+
+.imgResultGrp {
+    position:relative;
+    margin: 2px;
+}
+
+.imgResult {
+    width:130px;
+    height:130px;
+    display:inline-block;
+}
+
+.imgResultHover {
+  position: absolute;
+  top: -120px;
+  left:0;
+  background-color: #99ACB0;
+  border-radius: 5px;
+  text-align:center;
+    width:130px;
+    height:130px;
+    overflow:hidden;
+    padding:0;
+    transition-property: width, height, left, top, padding;
+    transition-duration: 0.1s;
+}
+
+.imgResultHover p{
+    min-width:200px;
+}
+
+.imgResultHover img{
+    border-radius: 5px;
+}
+
+.imgResultGrp:hover .imgResultHover {
+    width: 200px;
+    height: 250px;
+    padding:5px;
+    left: -45px;
+    top: -175px;
+    z-index:20;
+    opacity:1;
+    border: thin solid #BBBBBB;
+}
