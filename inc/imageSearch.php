@@ -15,7 +15,7 @@
  * 
  * */
 if (isset($_GET['query'])) {
-    echo 'value="'.$_GET['query'].'"';
+    echo 'value="'.stripcslashes($_GET['query']).'"';
 } 
 ?>
  />
