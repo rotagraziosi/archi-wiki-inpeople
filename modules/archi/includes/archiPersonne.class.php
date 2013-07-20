@@ -1020,10 +1020,10 @@ class ArchiPersonne extends ArchiContenu
         $html="<h1 id='personSearch'>"._("Personnes")."</h1>";
         $req="SELECT idPersonne
             FROM `personne`
-            WHERE `prenom` LIKE '%".$keyword."'
-            OR `nom` LIKE '%".$keyword."%'
-            OR CONCAT_WS(' ', nom, prenom) LIKE '%".$keyword."%'
-            OR CONCAT_WS(' ', prenom, nom) LIKE '%".$keyword."%'";
+            WHERE `prenom` LIKE '%".mysql_real_escape_string($keyword)."%'
+            OR `nom` LIKE '%".mysql_real_escape_string($keyword)."%'
+            OR CONCAT_WS(' ', nom, prenom) LIKE '%".mysql_real_escape_string($keyword)."%'
+            OR CONCAT_WS(' ', prenom, nom) LIKE '%".mysql_real_escape_string($keyword)."%'";
         $res = $config->connexionBdd->requete($req);
         $nbPeople=mysql_num_rows($res);
         $maxPos=round($nbPeople/10);
@@ -1042,10 +1042,10 @@ class ArchiPersonne extends ArchiContenu
         }
         $req="SELECT idPersonne, nom, prenom, idMetier
             FROM `personne`
-            WHERE `prenom` LIKE '%$keyword'
-            OR `nom` LIKE '%$keyword%'
-            OR CONCAT_WS(' ', nom, prenom) LIKE '%$keyword%'
-            OR CONCAT_WS(' ', prenom, nom) LIKE '%$keyword%'
+            WHERE `prenom` LIKE '%".mysql_real_escape_string($keyword)."%'
+            OR `nom` LIKE '%".mysql_real_escape_string($keyword)."%'
+            OR CONCAT_WS(' ', nom, prenom) LIKE '%".mysql_real_escape_string($keyword)."%'
+            OR CONCAT_WS(' ', prenom, nom) LIKE '%".mysql_real_escape_string($keyword)."%'
             LIMIT ".(($pos-1)*10).", ".($pos*10);
         $res = $config->connexionBdd->requete($req);
         while ($person=mysql_fetch_object($res)) {

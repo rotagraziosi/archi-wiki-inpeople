@@ -1480,3 +1480,15 @@ li:empty {
     opacity:1;
     border: thin solid #BBBBBB;
 }
+
+.secondaryContent .switchSearch{
+    display:none;
+}
+
+
+
+
+
+
+
+

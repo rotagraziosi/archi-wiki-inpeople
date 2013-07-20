@@ -1,6 +1,3 @@
-<h2>Recherche d'images</h2>
-<form action="index.php" method="get">
-<input class="searchInput" type="search" name="query"
 <?php
 /**
  * Affiche le formulaire d'adhésion
@@ -14,8 +11,22 @@
  * @link     https://archi-strasbourg.org/
  * 
  * */
+ ?>
+<h2>Recherche d'images</h2>
+<a 
+<?php
 if (isset($_GET['query'])) {
-    echo 'value="'.stripcslashes($_GET['query']).'"';
+    echo 'href="index.php?archiAffichage=recherche&submit=Rechercher&motcle='.
+        stripslashes($_GET['query']).'"';
+} 
+?>
+>Texte</a> &mdash; <b>Images</b>
+
+<form action="index.php" method="get">
+<input class="searchInput" type="search" name="query"
+<?php
+if (isset($_GET['query'])) {
+    echo 'value="'.stripslashes($_GET['query']).'"';
 } 
 ?>
  />
@@ -24,7 +35,7 @@ if (isset($_GET['query'])) {
 </form>
 <?php
 
-if (isset($_GET['query'])) {
+if (isset($_GET['query']) && !empty($_GET['query'])) {
     echo '<hr />';
     $keyword = mysql_real_escape_string($_GET['query']);
     $query = 'SELECT DISTINCT

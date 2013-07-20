@@ -1,6 +1,7 @@
 <!-- BEGIN titreEtLiens -->
 <h1><?_("Recherche")?></h1>
 <!-- END titreEtLiens -->
+<div class="switchSearch"><b>Texte</b> &mdash; <a href="index.php?query={motcle}&archiAffichage=imageSearch">Images</a></div>
 <form action="{formAction}" method="get">
 <input type='hidden' name='archiAffichage' value='recherche'>
 <input type='hidden' name='submit' value='Rechercher'>
