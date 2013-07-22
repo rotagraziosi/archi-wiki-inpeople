@@ -37,7 +37,7 @@ if (isset($_GET['query'])) {
 
 if (isset($_GET['query']) && !empty($_GET['query'])) {
     echo '<hr />';
-    $keyword = mysql_real_escape_string($_GET['query']);
+    $keyword = mysql_real_escape_string(trim($_GET['query']));
     $query = 'SELECT DISTINCT
         historiqueImage.idImage, historiqueImage.idHistoriqueImage,
         historiqueImage.description, historiqueAdresse.idAdresse,
@@ -54,7 +54,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     WHERE (NOT ISNULL(historiqueEvenement.description))
     AND
     (MATCH (historiqueImage.description)
-        AGAINST ("+'.str_replace(' ', ' +', $keyword).'")
+        AGAINST ("+'.str_replace(' ', ' +', $keyword).'" IN BOOLEAN MODE)
     OR historiqueEvenement.description LIKE "%'.$keyword.'%"
     OR historiqueEvenement.titre LIKE "%'.$keyword.'%"
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
@@ -62,7 +62,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     GROUP BY historiqueImage.idImage
     ORDER BY (NOT(historiqueEvenement.description LIKE "%'.$keyword.'%")),
     (NOT( MATCH (historiqueImage.description)
-        AGAINST ("+'.str_replace(' ', ' +', $keyword).'"))),
+        AGAINST ("+'.str_replace(' ', ' +', $keyword).'" IN BOOLEAN MODE))),
     (NOT( historiqueEvenement.titre LIKE "%'.$keyword.'%")),
     (NOT( historiqueAdresse.nom LIKE "%'.$keyword.'%")),
     (NOT( quartier.nom LIKE "%'.$keyword.'%"))
