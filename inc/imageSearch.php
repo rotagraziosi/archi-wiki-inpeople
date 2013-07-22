@@ -46,12 +46,15 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     LEFT JOIN _evenementImage ON historiqueImage.idImage = _evenementImage.idImage
     LEFT JOIN historiqueEvenement
         ON historiqueEvenement.idEvenement = _evenementImage.idEvenement
-    LEFT JOIN _evenementAdresseLiee
-        ON _evenementAdresseLiee.idEvenement = historiqueEvenement.idEvenement
+    LEFT JOIN  _evenementEvenement
+        ON  _evenementEvenement.idEvenementAssocie = historiqueEvenement.idEvenement
+    LEFT JOIN _adresseEvenement
+        ON _adresseEvenement.idEvenement = _evenementEvenement.idEvenement
     LEFT JOIN historiqueAdresse
-        ON historiqueAdresse.idAdresse = _evenementAdresseLiee.idAdresse
+        ON historiqueAdresse.idAdresse = _adresseEvenement.idAdresse
     LEFT JOIN quartier ON quartier.idQuartier = historiqueAdresse.idQuartier
     WHERE (NOT ISNULL(historiqueEvenement.description))
+    AND (NOT ISNULL(historiqueAdresse.idAdresse))
     AND
     (MATCH (historiqueImage.description)
         AGAINST ("+'.str_replace(' ', ' +', $keyword).'" IN BOOLEAN MODE)
