@@ -1861,6 +1861,7 @@ class archiEvenement extends config
                         SELECT dateDebut
                         FROM historiqueEvenement
                         WHERE idEvenement = '".$params["nextEvent"]."'
+                        ORDER BY idHistoriqueEvenement DESC LIMIT 1
                     ";
                     
                     $res = $this->connexionBdd->requete($req);
