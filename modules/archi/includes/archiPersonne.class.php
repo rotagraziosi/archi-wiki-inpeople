@@ -982,7 +982,7 @@ class ArchiPersonne extends ArchiContenu
                         $i++;
                     }
                     $linkedEventsHTML.="</a>";
-                    $linkedEventsHTML.="<br/><small><a href='$linkedEventUrl#$linkedEventPos'>";
+                    $linkedEventsHTML.="<br/><small><a href='".$linkedEventUrl."#".$linkedEventPos."'>";
                     if ($event->dateDebut != "0000-00-00") {
                         $linkedEventsHTML.=$config->date->toFrench($event->dateDebut);
                         if (!empty($event->titre)) {

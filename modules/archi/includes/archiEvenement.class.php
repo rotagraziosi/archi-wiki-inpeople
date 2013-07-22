@@ -4328,11 +4328,12 @@ class archiEvenement extends config
             FROM historiqueEvenement he2, historiqueEvenement he1
             LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = he1.idEvenement
             LEFT JOIN typeEvenement te ON te.idTypeEvenement = he1.idTypeEvenement
+            LEFT JOIN positionsEvenements ON positionsEvenements.idEvenement = he1.idEvenement
             WHERE he2.idEvenement = he1.idEvenement
             AND ee.idEvenement = '".$idEvenementGroupeAdresse."'
             GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
             HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-            ORDER BY he1.dateDebut
+            ORDER BY positionsEvenements.position
         ";
         
         $res = $this->connexionBdd->requete($sql);
