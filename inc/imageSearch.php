@@ -53,14 +53,16 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     LEFT JOIN quartier ON quartier.idQuartier = historiqueAdresse.idQuartier
     WHERE (NOT ISNULL(historiqueEvenement.description))
     AND
-    (historiqueImage.description LIKE "%'.$keyword.'%"
+    (MATCH (historiqueImage.description)
+        AGAINST ("+'.str_replace(' ', ' +', $keyword).'")
     OR historiqueEvenement.description LIKE "%'.$keyword.'%"
     OR historiqueEvenement.titre LIKE "%'.$keyword.'%"
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
     OR quartier.nom LIKE "%'.$keyword.'%")
     GROUP BY historiqueImage.idImage
     ORDER BY (NOT(historiqueImage.description LIKE "%'.$keyword.'%")),
-    (NOT( historiqueEvenement.description LIKE "%'.$keyword.'%")),
+    (NOT( MATCH (historiqueImage.description)
+        AGAINST ("+'.str_replace(' ', ' +', $keyword).'"))),
     (NOT( historiqueEvenement.titre LIKE "%'.$keyword.'%")),
     (NOT( historiqueAdresse.nom LIKE "%'.$keyword.'%")),
     (NOT( quartier.nom LIKE "%'.$keyword.'%"))
