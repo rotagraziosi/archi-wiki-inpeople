@@ -158,7 +158,7 @@ if (isset($_POST['email'])) {
         $mail                       = new mailObject();
         $mail->sendMail(
             $mail->getSiteMail(), $mail->getSiteMail(),
-            'Nouveau membre', $message, true
+            'Nouveau membre', $message, true, $_POST['email']
         );
         
         $page=new archiPage(11, LANG);
