@@ -59,6 +59,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     (MATCH (historiqueImage.description)
         AGAINST ("+'.str_replace(' ', ' +', $keyword).'" IN BOOLEAN MODE)
     OR historiqueEvenement.description LIKE "%'.$keyword.'%"
+    OR historiqueImage.tags LIKE "%'.$keyword.'%"
     OR historiqueEvenement.titre LIKE "%'.$keyword.'%"
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
     OR quartier.nom LIKE "%'.$keyword.'%")
@@ -67,6 +68,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     (NOT( MATCH (historiqueImage.description)
         AGAINST ("+'.str_replace(' ', ' +', $keyword).'" IN BOOLEAN MODE))),
     (NOT( historiqueEvenement.titre LIKE "%'.$keyword.'%")),
+    (NOT( historiqueImage.tags LIKE "%'.$keyword.'%")),
     (NOT( historiqueAdresse.nom LIKE "%'.$keyword.'%")),
     (NOT( quartier.nom LIKE "%'.$keyword.'%"))
     LIMIT 96';

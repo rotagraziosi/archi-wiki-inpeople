@@ -97,13 +97,13 @@ class archiImage extends config
                 switch($typeLiaisonImage)
                 {
                     case 'adresse':
-                        $listeChamps=array('nom',  'description',  'seSitue',  'prisDepuis',  'etage',  'hauteur',  'dateCliche',  'dateUpload',  'source',  'isDateClicheEnviron', "licence", "auteur");
+                        $listeChamps=array('nom',  'description',  'seSitue',  'prisDepuis',  'etage',  'hauteur',  'dateCliche',  'dateUpload',  'source',  'isDateClicheEnviron', "licence", "auteur", "tags");
                     break;
                     case 'evenement':
-                        $listeChamps=array('nom',  'description',  'dateCliche',  'dateUpload',  'source',  'isDateClicheEnviron',  'numeroArchive', "licence", "auteur");
+                        $listeChamps=array('nom',  'description',  'dateCliche',  'dateUpload',  'source',  'isDateClicheEnviron',  'numeroArchive', "licence", "auteur", "tags");
                     break;
                     default:
-                        $listeChamps=array('nom',  'description',  'dateCliche',  'dateUpload',  'source',  'isDateClicheEnviron',  'numeroArchive', "licence", "auteur");
+                        $listeChamps=array('nom',  'description',  'dateCliche',  'dateUpload',  'source',  'isDateClicheEnviron',  'numeroArchive', "licence", "auteur", "tags");
                     break;
                 }
             
@@ -228,13 +228,14 @@ class archiImage extends config
                     AND idSource = '".$tableauChamps['source']."'
                     AND licence = '".$tableauChamps["licence"]."'
                     AND auteur = '".$tableauChamps["auteur"]."'
+                    AND tags = '".$tableauChamps["tags"]."'
                     AND numeroArchive=\"".$tableauChamps['numeroArchive']."\"
                 ");
                 if (mysql_num_rows($resCompareImage)==0)
                 {
                     // l'image avec des proprietes identiques n'existe pas  donc on en deduit que les proprietes de l'image ont changés ,  on ajoute donc un nouvel historiqueImage et on modifie les données dans la table de liaison
                     $resImage = $this->connexionBdd->requete("
-                        INSERT INTO historiqueImage (idImage,  nom,  dateUpload,  dateCliche,  description,  idUtilisateur,  idSource, isDateClicheEnviron, auteur, licence,  numeroArchive) 
+                        INSERT INTO historiqueImage (idImage,  nom,  dateUpload,  dateCliche,  description,  idUtilisateur,  idSource, isDateClicheEnviron, auteur, licence, tags, numeroArchive) 
                         VALUES 
                         ('".$idImage."', 
                             '".$tableauChamps['nom']."', 
@@ -246,6 +247,7 @@ class archiImage extends config
                             '".$tableauChamps['isDateClicheEnviron']."', 
                             '".$tableauChamps["auteur"]."', 
                             '".$tableauChamps["licence"]."', 
+                            '".$tableauChamps["tags"]."', 
                             \"".$tableauChamps['numeroArchive']."\"
                         )
                     ");
@@ -661,7 +663,6 @@ class archiImage extends config
         $description = str_replace("\\n\\r",  "<br>",  $description);
         $description = str_replace("\\n",  "<br>",  $description);
         
-        
         $t->assign_vars(array(
             'cheminDetailImage' => $this->getUrlImage("originaux").$fetch['dateUpload'].'/'.$fetch['idHistoriqueImage'].".jpg", 
             'nomEtDateCliche'               => $nomEtDateCliche,  
@@ -984,7 +985,7 @@ class archiImage extends config
             }
             
             $reqImages = "
-            SELECT (SELECT idHistoriqueImage from historiqueImage  WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT dateUpload from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT description from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), idImage FROM _evenementImage  WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
+            SELECT (SELECT idHistoriqueImage from historiqueImage  WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT dateUpload from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT description from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT tags from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), idImage FROM _evenementImage  WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
             ";
             $resImages = $this->connexionBdd->requete($reqImages);
             $imgList = array();
@@ -1000,6 +1001,7 @@ class archiImage extends config
                 'datePriseDeVue'=>$datePriseDeVue, 
                 'cheminDetailImage' => 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetch['dateUpload'].'-'.$fetch['idHistoriqueImage'].'-'.$formatPhoto.'.jpg', 
                 'nomEtDateCliche'  => $nomEtDateCliche,  
+                'tags' => $fetch["tags"], 
                 'description' => $description, 
                 'fullscreenDesc' => strip_tags($description), 
                 'nom'=>$intituleAdresseNoQuartierNoVille, 
@@ -2707,7 +2709,7 @@ class archiImage extends config
             $requeteImages = "
                 SELECT 
                     hi1.idHistoriqueImage as idHistoriqueImage, hi1.idImage as idImage, hi1.nom as nom,  
-                    hi1.dateUpload as dateUpload, hi1.dateCliche as dateCliche, hi1.description as description, 
+                    hi1.dateUpload as dateUpload, hi1.dateCliche as dateCliche, hi1.description as description, hi1.tags as tags,
                     hi1.idUtilisateur as idUtilisateur, u.nom as nomUtilisateur,  u.prenom as prenomUtilisateur, 
                     hi1.idSource as idSource,  hi1.isDateClicheEnviron as isDateClicheEnviron, 
                     hi1.numeroArchive as numeroArchive, 
@@ -2958,6 +2960,7 @@ class archiImage extends config
         
         "nomAuteur"=>$nomAuteur,
         "nomUpload"=>$nomUpload,
+        "tags"=>$fetch['tags'],
         "selectLicence"=>$selectLicenceHTML,
         "enableAuthor"=>$enableAuthor
         

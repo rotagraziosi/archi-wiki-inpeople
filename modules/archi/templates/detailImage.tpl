@@ -35,6 +35,7 @@
 <span itemprop="dateCreated">
 {datePriseDeVue}</span>
 <br /><div itemprop="description">{description}</div>
+<br /><div itemprop="keywords"><?_("Tags")?>&nbsp;: {tags}</div>
 {infosPrisDepuis}<br />
 {infosVueSur}
 </p>
