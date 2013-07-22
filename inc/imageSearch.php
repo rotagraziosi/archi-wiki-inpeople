@@ -60,7 +60,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
     OR quartier.nom LIKE "%'.$keyword.'%")
     GROUP BY historiqueImage.idImage
-    ORDER BY (NOT(historiqueImage.description LIKE "%'.$keyword.'%")),
+    ORDER BY (NOT(historiqueEvenement.description LIKE "%'.$keyword.'%")),
     (NOT( MATCH (historiqueImage.description)
         AGAINST ("+'.str_replace(' ', ' +', $keyword).'"))),
     (NOT( historiqueEvenement.titre LIKE "%'.$keyword.'%")),
