@@ -17,7 +17,7 @@
 <?php
 if (isset($_GET['query'])) {
     echo 'href="index.php?archiAffichage=recherche&submit=Rechercher&motcle='.
-        stripslashes($_GET['query']).'"';
+        htmlspecialchars(stripslashes($_GET['query'])).'"';
 } 
 ?>
 >Texte</a> &mdash; <b>Images</b>
@@ -26,7 +26,7 @@ if (isset($_GET['query'])) {
 <input class="searchInput" type="search" name="query"
 <?php
 if (isset($_GET['query'])) {
-    echo 'value="'.stripslashes($_GET['query']).'"';
+    echo 'value="'.htmlspecialchars(stripslashes($_GET['query'])).'"';
 } 
 ?>
  />
