@@ -106,19 +106,38 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     $query = mysql_query($query);
     $bbcode= new bbCodeObject();
     while ($results=mysql_fetch_assoc($query)) {
-        if ($_GET['licence_'.$results['licence']] == 'on') {
+        $req = 'SELECT idHistoriqueImage, licence, historiqueImage.idImage,
+        dateUpload, historiqueImage.description, historiqueAdresse.idAdresse,
+        historiqueEvenement.idEvenement FROM historiqueImage 
+        LEFT JOIN _evenementImage
+            ON historiqueImage.idImage = _evenementImage.idImage
+        LEFT JOIN historiqueEvenement
+            ON historiqueEvenement.idEvenement = _evenementImage.idEvenement
+        LEFT JOIN  _evenementEvenement
+            ON  _evenementEvenement.idEvenementAssocie
+                = historiqueEvenement.idEvenement
+        LEFT JOIN _adresseEvenement
+            ON _adresseEvenement.idEvenement = _evenementEvenement.idEvenement
+        LEFT JOIN historiqueAdresse
+            ON historiqueAdresse.idAdresse = _adresseEvenement.idAdresse
+        WHERE historiqueImage.idImage = '.
+            mysql_real_escape_string($results['idImage']).'
+        ORDER BY idHistoriqueImage DESC LIMIT 1';
+        $res = $config->connexionBdd->requete($req);
+        $image = mysql_fetch_assoc($res);
+        if ($_GET['licence_'.$image['licence']] == 'on') {
             echo '<a class="imgResultGrp" href="'.$config->creerUrl(
                 '', 'imageDetail', array('archiRetourAffichage'=>'evenement',
                 'archiRetourIdName'=>'idEvenement',
-                'archiIdImage'=>$results['idImage'],
-                'archiIdAdresse'=>$results['idAdresse'],
-                'archiRetourIdValue'=>$results['idEvenement'])
+                'archiIdImage'=>$image['idImage'],
+                'archiIdAdresse'=>$image['idAdresse'],
+                'archiRetourIdValue'=>$image['idEvenement'])
             ).'"><div class="imgResult"></div>
             <div class="imgResultHover"><img src="'.
-            'photos--'.$results['dateUpload'].'-'.$results['idHistoriqueImage'].
+            'photos--'.$image['dateUpload'].'-'.$image['idHistoriqueImage'].
             '-moyen.jpg'.'" alt="" /><p>'.strip_tags(
                 $bbcode->convertToDisplay(
-                    array('text'=>$results['description'])
+                    array('text'=>$image['description'])
                 )
             ).'</p></div></a>';
         }
