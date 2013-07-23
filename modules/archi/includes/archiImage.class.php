@@ -985,7 +985,7 @@ class archiImage extends config
             }
             
             $reqImages = "
-            SELECT (SELECT idHistoriqueImage from historiqueImage  WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT dateUpload from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT description from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT tags from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), idImage FROM _evenementImage  WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
+            SELECT (SELECT idHistoriqueImage from historiqueImage  WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT dateUpload from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), (SELECT description from historiqueImage WHERE _evenementImage.idImage = historiqueImage.idImage ORDER BY idHistoriqueImage DESC LIMIT 1), idImage FROM _evenementImage  WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
             ";
             $resImages = $this->connexionBdd->requete($reqImages);
             $imgList = array();
