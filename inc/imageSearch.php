@@ -32,6 +32,26 @@ if (isset($_GET['query'])) {
  />
 <input type="hidden" name="archiAffichage" value="imageSearch" />
 <input class="loupe" type="image" src="images/Advisa/loupe.png">
+<br/>
+<label for="licence">Licence&nbsp;:</label>
+<?php
+$query = 'SELECT id, name FROM licences;';
+$query = mysql_query($query);
+while ($licence=mysql_fetch_assoc($query)) {
+    echo '<input ';
+    if (isset($_GET['query'])) {
+        if ($_GET['licence_'.$licence['id']] == 'on') {
+            echo 'checked';
+        }
+    } else {
+        echo 'checked';
+    }
+    echo ' type="checkbox" id="licence_'.$licence['id'].
+        '" name="licence_'.$licence['id'].'" /><label for="licence_'.
+        $licence['id'].'">'.$licence['name'].'</label>';
+}
+?>
+</select>
 </form>
 <?php
 
@@ -41,6 +61,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     $query = 'SELECT * FROM (
     SELECT DISTINCT
         historiqueImage.idImage, historiqueImage.idHistoriqueImage,
+        historiqueImage.licence,
         historiqueImage.tags, historiqueEvenement.titre, quartier.nom,
         historiqueImage.description, historiqueAdresse.idAdresse,
         historiqueEvenement.idEvenement, historiqueImage.dateUpload
@@ -85,18 +106,22 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     $query = mysql_query($query);
     $bbcode= new bbCodeObject();
     while ($results=mysql_fetch_assoc($query)) {
-        echo '<a class="imgResultGrp" href="'.$config->creerUrl(
-            '', 'imageDetail', array('archiRetourAffichage'=>'evenement',
-            'archiRetourIdName'=>'idEvenement', 'archiIdImage'=>$results['idImage'],
-            'archiIdAdresse'=>$results['idAdresse'],
-            'archiRetourIdValue'=>$results['idEvenement'])
-        ).'"><div class="imgResult"></div><div class="imgResultHover"><img src="'.
-        'photos--'.$results['dateUpload'].'-'.$results['idHistoriqueImage'].
-        '-moyen.jpg'.'" alt="" /><p>'.strip_tags(
-            $bbcode->convertToDisplay(
-                array('text'=>$results['description'])
-            )
-        ).'</p></div></a>';
+        if ($_GET['licence_'.$results['licence']] == 'on') {
+            echo '<a class="imgResultGrp" href="'.$config->creerUrl(
+                '', 'imageDetail', array('archiRetourAffichage'=>'evenement',
+                'archiRetourIdName'=>'idEvenement',
+                'archiIdImage'=>$results['idImage'],
+                'archiIdAdresse'=>$results['idAdresse'],
+                'archiRetourIdValue'=>$results['idEvenement'])
+            ).'"><div class="imgResult"></div>
+            <div class="imgResultHover"><img src="'.
+            'photos--'.$results['dateUpload'].'-'.$results['idHistoriqueImage'].
+            '-moyen.jpg'.'" alt="" /><p>'.strip_tags(
+                $bbcode->convertToDisplay(
+                    array('text'=>$results['description'])
+                )
+            ).'</p></div></a>';
+        }
     }
             
 } 
