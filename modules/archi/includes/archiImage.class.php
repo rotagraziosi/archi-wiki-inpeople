@@ -219,17 +219,17 @@ class archiImage extends config
                     SELECT 
                         idHistoriqueImage
                     FROM historiqueImage 
-                    WHERE idHistoriqueImage = '".$idHistorique."'
-                    AND dateUpload = '".$this->date->toBdd($tableauChamps['dateUpload'])."'
-                    AND dateCliche = '".$this->date->toBdd($this->date->convertYears($dateCliche))."'
-                    AND description = '".$tableauChamps['description']."'
-                    AND isDateClicheEnviron = '".$tableauChamps['isDateClicheEnviron']."'
-                    AND nom = '".$tableauChamps['nom']."'
-                    AND idSource = '".$tableauChamps['source']."'
-                    AND licence = '".$tableauChamps["licence"]."'
-                    AND auteur = '".$tableauChamps["auteur"]."'
-                    AND tags = '".$tableauChamps["tags"]."'
-                    AND numeroArchive=\"".$tableauChamps['numeroArchive']."\"
+                    WHERE idHistoriqueImage = '".mysql_real_escape_string($idHistorique)."'
+                    AND dateUpload = '".mysql_real_escape_string($this->date->toBdd($tableauChamps['dateUpload']))."'
+                    AND dateCliche = '".mysql_real_escape_string($this->date->toBdd($this->date->convertYears($dateCliche)))."'
+                    AND description = '".mysql_real_escape_string($tableauChamps['description'])."'
+                    AND isDateClicheEnviron = '".mysql_real_escape_string($tableauChamps['isDateClicheEnviron'])."'
+                    AND nom = '".mysql_real_escape_string($tableauChamps['nom'])."'
+                    AND idSource = '".mysql_real_escape_string($tableauChamps['source'])."'
+                    AND licence = '".mysql_real_escape_string($tableauChamps["licence"])."'
+                    AND auteur = '".mysql_real_escape_string($tableauChamps["auteur"])."'
+                    AND tags = '".mysql_real_escape_string($tableauChamps["tags"])."'
+                    AND numeroArchive=\"".mysql_real_escape_string($tableauChamps['numeroArchive'])."\"
                 ");
                 if (mysql_num_rows($resCompareImage)==0)
                 {
@@ -237,18 +237,18 @@ class archiImage extends config
                     $resImage = $this->connexionBdd->requete("
                         INSERT INTO historiqueImage (idImage,  nom,  dateUpload,  dateCliche,  description,  idUtilisateur,  idSource, isDateClicheEnviron, auteur, licence, tags, numeroArchive) 
                         VALUES 
-                        ('".$idImage."', 
-                            '".$tableauChamps['nom']."', 
-                            '".$this->date->toBdd($tableauChamps['dateUpload'])."', 
-                            '".$this->date->toBdd($this->date->convertYears($dateCliche))."', 
-                            '".$tableauChamps['description']."', 
-                            '".$authentifie->getIdUtilisateur()."', 
-                            '".$tableauChamps['source']."', 
-                            '".$tableauChamps['isDateClicheEnviron']."', 
-                            '".$tableauChamps["auteur"]."', 
-                            '".$tableauChamps["licence"]."', 
-                            '".$tableauChamps["tags"]."', 
-                            \"".$tableauChamps['numeroArchive']."\"
+                        ('".mysql_real_escape_string($idImage)."', 
+                            '".mysql_real_escape_string($tableauChamps['nom'])."', 
+                            '".mysql_real_escape_string($this->date->toBdd($tableauChamps['dateUpload']))."', 
+                            '".mysql_real_escape_string($this->date->toBdd($this->date->convertYears($dateCliche)))."', 
+                            '".mysql_real_escape_string($tableauChamps['description'])."', 
+                            '".mysql_real_escape_string($authentifie->getIdUtilisateur())."', 
+                            '".mysql_real_escape_string($tableauChamps['source'])."', 
+                            '".mysql_real_escape_string($tableauChamps['isDateClicheEnviron'])."', 
+                            '".mysql_real_escape_string($tableauChamps["auteur"])."', 
+                            '".mysql_real_escape_string($tableauChamps["licence"])."', 
+                            '".mysql_real_escape_string($tableauChamps["tags"])."', 
+                            \"".mysql_real_escape_string($tableauChamps['numeroArchive'])."\"
                         )
                     ");
                     

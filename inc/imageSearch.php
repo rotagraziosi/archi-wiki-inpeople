@@ -38,8 +38,10 @@ if (isset($_GET['query'])) {
 if (isset($_GET['query']) && !empty($_GET['query'])) {
     echo '<hr />';
     $keyword = mysql_real_escape_string(trim($_GET['query']));
-    $query = 'SELECT DISTINCT
+    $query = 'SELECT * FROM (
+    SELECT DISTINCT
         historiqueImage.idImage, historiqueImage.idHistoriqueImage,
+        historiqueImage.tags, historiqueEvenement.titre, quartier.nom,
         historiqueImage.description, historiqueAdresse.idAdresse,
         historiqueEvenement.idEvenement, historiqueImage.dateUpload
     FROM historiqueImage
@@ -63,15 +65,23 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     OR historiqueEvenement.titre LIKE "%'.$keyword.'%"
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
     OR quartier.nom LIKE "%'.$keyword.'%")
-    GROUP BY historiqueImage.idImage
-    ORDER BY (NOT(historiqueEvenement.description LIKE "%'.$keyword.'%")),
-    (NOT( MATCH (historiqueImage.description)
-        AGAINST ("+'.str_replace(' ', ' +', $keyword).'" IN BOOLEAN MODE))),
-    (NOT( historiqueEvenement.titre LIKE "%'.$keyword.'%")),
-    (NOT( historiqueImage.tags LIKE "%'.$keyword.'%")),
-    (NOT( historiqueAdresse.nom LIKE "%'.$keyword.'%")),
-    (NOT( quartier.nom LIKE "%'.$keyword.'%"))
-    LIMIT 96';
+    ORDER BY (
+        IF(historiqueEvenement.description LIKE "%'.$keyword.'%", 2, 0) 
+        + IF(historiqueImage.tags LIKE "%'.$keyword.'%", 10, 0) 
+        + IF(historiqueImage.description LIKE "%'.$keyword.'%", 5, 0) 
+        + IF(historiqueEvenement.titre LIKE "%'.$keyword.'%", 3, 0) 
+        + IF(historiqueAdresse.nom LIKE "%'.$keyword.'%", 1, 0) 
+        + IF(quartier.nom LIKE "%'.$keyword.'%", 1, 0) 
+        ) DESC
+    LIMIT 96) results
+    GROUP BY results.idImage
+    ORDER BY (
+        IF(results.tags LIKE "%'.$keyword.'%", 10, 0) 
+        + IF(results.description LIKE "%'.$keyword.'%", 5, 0) 
+        + IF(results.titre LIKE "%'.$keyword.'%", 3, 0) 
+        + IF(results.nom LIKE "%'.$keyword.'%", 1, 0) 
+        + IF(results.nom LIKE "%'.$keyword.'%", 1, 0) 
+        ) DESC';
     $query = mysql_query($query);
     $bbcode= new bbCodeObject();
     while ($results=mysql_fetch_assoc($query)) {
