@@ -100,7 +100,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
         + IF(historiqueAdresse.nom LIKE "%'.$keyword.'%", 1, 0) 
         + IF(quartier.nom LIKE "%'.$keyword.'%", 1, 0) 
         ) DESC
-    LIMIT 96) results
+    ) results
     GROUP BY results.idImage
     ORDER BY (
         IF(results.tags RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 20, 0) 
@@ -111,7 +111,8 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
         + IF(results.description LIKE "%'.$keyword.'%", 5, 0) 
         + IF(results.titre LIKE "%'.$keyword.'%", 3, 0) 
         + IF(results.nom LIKE "%'.$keyword.'%", 1, 0) 
-        ) DESC';
+        ) DESC
+    LIMIT 96';
     $query = mysql_query($query);
     $bbcode= new bbCodeObject();
     while ($results=mysql_fetch_assoc($query)) {
