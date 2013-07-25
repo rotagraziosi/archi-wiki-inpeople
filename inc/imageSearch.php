@@ -87,7 +87,13 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
     OR quartier.nom LIKE "%'.$keyword.'%")
     ORDER BY (
-        IF(historiqueEvenement.description LIKE "%'.$keyword.'%", 2, 0) 
+        IF(historiqueEvenement.description RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 4, 0) 
+        + IF(historiqueImage.tags RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 20, 0) 
+        + IF(historiqueImage.description RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 10, 0) 
+        + IF(historiqueEvenement.titre RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 6, 0) 
+        + IF(historiqueAdresse.nom RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 2, 0) 
+        + IF(quartier.nom RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 2, 0) 
+        + IF(historiqueEvenement.description LIKE "%'.$keyword.'%", 2, 0) 
         + IF(historiqueImage.tags LIKE "%'.$keyword.'%", 10, 0) 
         + IF(historiqueImage.description LIKE "%'.$keyword.'%", 5, 0) 
         + IF(historiqueEvenement.titre LIKE "%'.$keyword.'%", 3, 0) 
@@ -97,10 +103,13 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     LIMIT 96) results
     GROUP BY results.idImage
     ORDER BY (
-        IF(results.tags LIKE "%'.$keyword.'%", 10, 0) 
+        IF(results.tags RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 20, 0) 
+        + IF(results.description RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 10, 0) 
+        + IF(results.titre RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 6, 0) 
+        + IF(results.nom RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 2, 0) 
+        + IF(results.tags LIKE "%'.$keyword.'", 10, 0) 
         + IF(results.description LIKE "%'.$keyword.'%", 5, 0) 
         + IF(results.titre LIKE "%'.$keyword.'%", 3, 0) 
-        + IF(results.nom LIKE "%'.$keyword.'%", 1, 0) 
         + IF(results.nom LIKE "%'.$keyword.'%", 1, 0) 
         ) DESC';
     $query = mysql_query($query);
