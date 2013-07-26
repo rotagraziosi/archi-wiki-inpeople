@@ -1001,7 +1001,7 @@ class archiImage extends config
                 'datePriseDeVue'=>$datePriseDeVue, 
                 'cheminDetailImage' => 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetch['dateUpload'].'-'.$fetch['idHistoriqueImage'].'-'.$formatPhoto.'.jpg', 
                 'nomEtDateCliche'  => $nomEtDateCliche,  
-                'tags' => $fetch["tags"], 
+                'tags' => stripslashes($fetch["tags"]), 
                 'description' => $description, 
                 'fullscreenDesc' => strip_tags($description), 
                 'nom'=>$intituleAdresseNoQuartierNoVille, 
