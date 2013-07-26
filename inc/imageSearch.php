@@ -59,7 +59,8 @@ while ($licence=mysql_fetch_assoc($query)) {
 
 if (isset($_GET['query']) && !empty($_GET['query'])) {
     echo '<hr />';
-    $keyword = mysql_real_escape_string(addslashes(trim($_GET['query'])));
+    $keyword = mysql_real_escape_string(trim($_GET['query']));
+    $escapedKeyword = addslashes($keyword);
     $query = 'SELECT * FROM (
     SELECT DISTINCT
         historiqueImage.idImage, historiqueImage.idHistoriqueImage,
@@ -88,6 +89,11 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     OR historiqueEvenement.titre LIKE "%'.$keyword.'%"
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
     OR quartier.nom LIKE "%'.$keyword.'%")
+    OR historiqueEvenement.description LIKE "%'.$escapedKeyword.'%"
+    OR historiqueImage.tags LIKE "%'.$escapedKeyword.'%"
+    OR historiqueEvenement.titre LIKE "%'.$escapedKeyword.'%"
+    OR historiqueAdresse.nom LIKE "%'.$escapedKeyword.'%"
+    OR quartier.nom LIKE "%'.$escapedKeyword.'%")
     ORDER BY (
         IF(historiqueEvenement.description RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 4, 0) 
         + IF(historiqueImage.tags RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 20, 0) 
@@ -101,6 +107,18 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
         + IF(historiqueEvenement.titre LIKE "%'.$keyword.'%", 3, 0) 
         + IF(historiqueAdresse.nom LIKE "%'.$keyword.'%", 1, 0) 
         + IF(quartier.nom LIKE "%'.$keyword.'%", 1, 0) 
+        + IF(historiqueEvenement.description RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 4, 0) 
+        + IF(historiqueImage.tags RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 20, 0) 
+        + IF(historiqueImage.description RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 10, 0) 
+        + IF(historiqueEvenement.titre RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 6, 0) 
+        + IF(historiqueAdresse.nom RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 2, 0) 
+        + IF(quartier.nom RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 2, 0) 
+        + IF(historiqueEvenement.description LIKE "%'.$escapedKeyword.'%", 2, 0) 
+        + IF(historiqueImage.tags LIKE "%'.$escapedKeyword.'%", 10, 0) 
+        + IF(historiqueImage.description LIKE "%'.$escapedKeyword.'%", 5, 0) 
+        + IF(historiqueEvenement.titre LIKE "%'.$escapedKeyword.'%", 3, 0) 
+        + IF(historiqueAdresse.nom LIKE "%'.$escapedKeyword.'%", 1, 0) 
+        + IF(quartier.nom LIKE "%'.$escapedKeyword.'%", 1, 0) 
         ) DESC
     ) results
     GROUP BY results.idImage
@@ -113,6 +131,14 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
         + IF(results.description LIKE "%'.$keyword.'%", 5, 0) 
         + IF(results.titre LIKE "%'.$keyword.'%", 3, 0) 
         + IF(results.nom LIKE "%'.$keyword.'%", 1, 0) 
+        + IF(results.tags RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 20, 0) 
+        + IF(results.description RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 10, 0) 
+        + IF(results.titre RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 6, 0) 
+        + IF(results.nom RLIKE "[[:<:]]'.$escapedKeyword.'[[:>:]]", 2, 0) 
+        + IF(results.tags LIKE "%'.$escapedKeyword.'%", 10, 0) 
+        + IF(results.description LIKE "%'.$escapedKeyword.'%", 5, 0) 
+        + IF(results.titre LIKE "%'.$escapedKeyword.'%", 3, 0) 
+        + IF(results.nom LIKE "%'.$escapedKeyword.'%", 1, 0) 
         ) DESC
     LIMIT 96';
     $query = mysql_query($query);
