@@ -88,7 +88,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
     OR historiqueImage.tags LIKE "%'.$keyword.'%"
     OR historiqueEvenement.titre LIKE "%'.$keyword.'%"
     OR historiqueAdresse.nom LIKE "%'.$keyword.'%"
-    OR quartier.nom LIKE "%'.$keyword.'%")
+    OR quartier.nom LIKE "%'.$keyword.'%"
     OR historiqueEvenement.description LIKE "%'.$escapedKeyword.'%"
     OR historiqueImage.tags LIKE "%'.$escapedKeyword.'%"
     OR historiqueEvenement.titre LIKE "%'.$escapedKeyword.'%"
