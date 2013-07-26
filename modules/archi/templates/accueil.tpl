@@ -5,18 +5,14 @@
     <a href="https://itunes.apple.com/fr/app/id557893157?mt=8&affId=1578782"><img src="images/Advisa/AR_appstore.jpg" alt="<?_("Disponible sur l'App Store")?>" /></a> <a href="https://play.google.com/store/apps/details?id=archi.strasbourg.dev&feature=search_result#?t=W251bGwsMSwyLDEsImFyY2hpLnN0cmFzYm91cmcuZGV2Il0."><img src="images/Advisa/AR_googleplay.jpg" alt="<?_("Disponible sur Google Play")?>" /></a>
 </div>
 -->
-<div class="homeSearch">
-<div class="switchSearch"><b>Texte</b> &mdash; <a href="index.php?archiAffichage=imageSearch">Images</a></div>
-<form method="get" action="http://localhost/archi-strasbourg.org/?archiAffichage=recherche">
+<script src="js/homeSearch.js"></script>
+<div class="homeSearch" id="homeSearch">
+<div class="switchSearch"><b>Texte</b> &mdash; <a id="switchSearchImg" href="index.php?archiAffichage=imageSearch">Images</a></div>
+<form method="get" action="index.php?archiAffichage=recherche">
 <input type="hidden" value="recherche" name="archiAffichage">
 <input type="hidden" value="Rechercher" name="submit">
-
-
-
-
-
 <input type="text" class="searchInput" placeholder="Rechercher" style="width:300px;" name="motcle" accesskey="F"><input type="image" value="Rechercher" class="loupe" name="submit" src="images/Advisa/loupe.png">
-<br/><a href="http://localhost/archi-strasbourg.org/?archiAffichage=rechercheAvancee">Recherche avancée</a><br>
+<a href="index.php?archiAffichage=rechercheAvancee">Recherche avancée</a><br>
 <span><input type="checkbox" value="1" id="afficheResultatsSurCarte" name="afficheResultatsSurCarte">&nbsp;<label for="afficheResultatsSurCarte">Afficher les résultats sur une carte</label></span>
 </form>
 

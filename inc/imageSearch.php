@@ -18,7 +18,9 @@
 if (isset($_GET['query'])) {
     echo 'href="index.php?archiAffichage=recherche&submit=Rechercher&motcle='.
         htmlspecialchars(stripslashes($_GET['query'])).'"';
-} 
+} else {
+    echo 'href="index.php?archiAffichage=recherche"';
+}
 ?>
 >Texte</a> &mdash; <b>Images</b>
 
