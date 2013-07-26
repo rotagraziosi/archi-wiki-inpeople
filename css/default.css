@@ -1486,7 +1486,9 @@ li:empty {
 }
 
 
-
+.homeSearch {
+    text-align:center;
+}
 
 
 
