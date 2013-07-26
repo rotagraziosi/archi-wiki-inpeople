@@ -109,7 +109,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
         + IF(results.description RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 10, 0) 
         + IF(results.titre RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 6, 0) 
         + IF(results.nom RLIKE "[[:<:]]'.$keyword.'[[:>:]]", 2, 0) 
-        + IF(results.tags LIKE "%'.$keyword.'", 10, 0) 
+        + IF(results.tags LIKE "%'.$keyword.'%", 10, 0) 
         + IF(results.description LIKE "%'.$keyword.'%", 5, 0) 
         + IF(results.titre LIKE "%'.$keyword.'%", 3, 0) 
         + IF(results.nom LIKE "%'.$keyword.'%", 1, 0) 
