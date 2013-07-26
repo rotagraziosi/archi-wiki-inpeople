@@ -1487,7 +1487,8 @@ li:empty {
 
 
 .homeSearch {
-    text-align:center;
+    margin:auto;
+    width:500px;
 }
 
 
