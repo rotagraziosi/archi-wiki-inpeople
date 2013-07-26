@@ -59,7 +59,7 @@ while ($licence=mysql_fetch_assoc($query)) {
 
 if (isset($_GET['query']) && !empty($_GET['query'])) {
     echo '<hr />';
-    $keyword = mysql_real_escape_string(trim($_GET['query']));
+    $keyword = mysql_real_escape_string(addslashes(trim($_GET['query'])));
     $query = 'SELECT * FROM (
     SELECT DISTINCT
         historiqueImage.idImage, historiqueImage.idHistoriqueImage,
