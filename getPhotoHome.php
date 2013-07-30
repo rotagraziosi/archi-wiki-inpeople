@@ -16,7 +16,7 @@ $config = new Config();
 $req = "
         SELECT dateUpload
         FROM  historiqueImage 
-        WHERE idHistoriqueImage = ".$_GET["id"];
+        WHERE idHistoriqueImage = ".mysql_real_escape_string($_GET["id"]);
 $res =$config->connexionBdd->requete($req);
 $image=mysql_fetch_object($res);
 $path="images/grand/".$image->dateUpload."/".$_GET["id"].".jpg";

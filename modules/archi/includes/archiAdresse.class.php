@@ -6004,13 +6004,13 @@ class archiAdresse extends ArchiContenu
             
             $motcleEscaped = str_replace(' ', '%', $motcle);
             $motcleEscaped = str_replace("'", '', $motcleEscaped);
-            $motcleEscaped = mysql_escape_string($motcleEscaped);
+            $motcleEscaped = mysql_real_escape_string($motcleEscaped);
             $motcleEscaped = str_replace("\\", "%", $motcleEscaped);
             
             
             $motcleEntier = $motcle;
             $motcleEntierEscaped = str_replace("'", '', $motcleEntier);
-            $motcleEntierEscaped = mysql_escape_string($motcleEntierEscaped);
+            $motcleEntierEscaped = mysql_real_escape_string($motcleEntierEscaped);
             $motcleEntierEscaped = str_replace("\\", " ", $motcleEntierEscaped);
             
             

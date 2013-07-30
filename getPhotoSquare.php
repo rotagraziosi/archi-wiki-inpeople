@@ -18,7 +18,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     $req = "
             SELECT dateUpload
             FROM  historiqueImage 
-            WHERE idHistoriqueImage = '".$_GET["id"]."'";
+            WHERE idHistoriqueImage = '".mysql_real_escape_string($_GET["id"])."'";
     $res =$config->connexionBdd->requete($req);
     $image=mysql_fetch_object($res);
     if ($image) {
