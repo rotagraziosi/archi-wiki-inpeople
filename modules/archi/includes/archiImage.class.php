@@ -2345,7 +2345,24 @@ class archiImage extends config
                 $sizes['x'] = $arrayImageSizeAff[0];
                 $sizes['y'] = $arrayImageSizeAff[1];
             }
-            $imageHTML .= '<a '.$hrefImage.' onClick="'.$onClickImage.'"><img itemprop="image" id="image'.$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'" title="'.htmlspecialchars($title).'" alt="'.htmlspecialchars($alt).'"  src="getPhotoSquare.php?id='.$valuesImage['idHistoriqueImage'].'" class="eventImage"></a><br>'.$bbCode->convertToDisplay(array('text'=>$valuesImage['description']));//src=\'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].'-'.$formatAffichagePhoto.'.jpg\'
+            /*
+             * echo '<a class="imgResultGrp" href="'.$config->creerUrl(
+                '', 'imageDetail', array('archiRetourAffichage'=>'evenement',
+                'archiRetourIdName'=>'idEvenement',
+                'archiIdImage'=>$image['idImage'],
+                'archiIdAdresse'=>$image['idAdresse'],
+                'archiRetourIdValue'=>$image['idEvenement'])
+            ).'"><div class="imgResult"></div>
+            <div class="imgResultHover"><img src="'.
+            'photos--'.$image['dateUpload'].'-'.$image['idHistoriqueImage'].
+            '-moyen.jpg'.'" alt="" /><p>'.strip_tags(
+                $bbcode->convertToDisplay(
+                    array('text'=>$image['description'])
+                )
+            ).'</p></div></a>';*/
+            $imageHTML .= '<a class="imgResultGrp" '.$hrefImage.'><div class="imgResultHover"><img itemprop="image" id="image'.$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'" title="'.htmlspecialchars($title).'" alt="'.htmlspecialchars($alt).'"  src="'.
+            'photos--'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].
+            '-moyen.jpg'.'" class="eventImage"><p>'.$bbCode->convertToDisplay(array('text'=>$valuesImage['description'])).'</p></div></a><br>';//src=\'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].'-'.$formatAffichagePhoto.'.jpg\'
         
             $tab->addValue($imageHTML,  '',  $sizes);
         }
@@ -2376,7 +2393,7 @@ class archiImage extends config
             $html = "<div style='display:table;padding-top:50px;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px;",  "nbColonnes"=>4))."<div style='clear:both;'></div></div>";
         } else {
             //$html = "<div style='display:table;'>".$tab->createHtmlTableFromArray(3,  '',  '',  'align="center" valign="top" style="font-size:13px;"')."</div>";
-            $html = "<div style='display:table;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px;",  "nbColonnes"=>5))."<div style='clear:left;'></div></div>";
+            $html = "<div style='display:table;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"margin-top:120px;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px;",  "nbColonnes"=>5))."<div style='clear:left;'></div></div>";
         }
         
         return $html.$zonesHTML;
