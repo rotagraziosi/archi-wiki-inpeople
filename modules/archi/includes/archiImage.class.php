@@ -2390,10 +2390,10 @@ class archiImage extends config
         {
             // si on est connecté ,  on laisse un padding top pour que les photos ne se chevauches pas avec le menu des evenements
             //$html = "<div style='display:table;padding-top:50px;'>".$tab->createHtmlTableFromArray(3,  '',  '',  'align="center" valign="top" style="font-size:13px;"')."</div>";
-            $html = "<div style='display:table;padding-top:50px;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px; height:130px;",  "nbColonnes"=>4))."<div style='clear:both;'></div></div>";
+            $html = "<div class='gallery'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px;",  "nbColonnes"=>4))."<div style='clear:both;'></div></div>";
         } else {
             //$html = "<div style='display:table;'>".$tab->createHtmlTableFromArray(3,  '',  '',  'align="center" valign="top" style="font-size:13px;"')."</div>";
-            $html = "<div style='display:table;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"margin-top:120px;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px; height:130px;",  "nbColonnes"=>5))."<div style='clear:left;'></div></div>";
+            $html = "<div style='display:table;position:relative;'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"margin-top:120px;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px;",  "nbColonnes"=>5))."<div style='clear:left;'></div></div>";
         }
         
         return $html.$zonesHTML;
