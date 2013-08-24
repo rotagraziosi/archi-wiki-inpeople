@@ -997,11 +997,25 @@ class archiImage extends config
             
             $format=isset($_GET['formatPhoto'])?$_GET['formatPhoto']:'petit';
             
+            $d = new droitsObject();
+            $u = new archiUtilisateur();
+            
+            if ($d->isAuthorized('tags', $u->getIdProfilFromUtilisateur($authentification->getIdUtilisateur()))) {
+                $tags = 'Tags&nbsp;: ';
+                if (empty($fetch["tags"])) {
+                    $tags .= '<i>(aucun)</i>';
+                } else {
+                    $tags .= stripslashes($fetch["tags"]);
+                }
+            } else {
+                $tags='';
+            }
+            
             $t->assign_vars(array(
                 'datePriseDeVue'=>$datePriseDeVue, 
                 'cheminDetailImage' => 'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$fetch['dateUpload'].'-'.$fetch['idHistoriqueImage'].'-'.$formatPhoto.'.jpg', 
                 'nomEtDateCliche'  => $nomEtDateCliche,  
-                'tags' => stripslashes($fetch["tags"]), 
+                'tags' => $tags, 
                 'description' => $description, 
                 'fullscreenDesc' => strip_tags($description), 
                 'nom'=>$intituleAdresseNoQuartierNoVille, 
@@ -2988,6 +3002,15 @@ class archiImage extends config
                     $t->assign_block_vars('listePhotos.isDisplayNumeroArchive',  array());
                 } else {
                     $t->assign_block_vars('listePhotos.isNoDisplayNumeroArchive',  array());
+                }
+                
+               $d = new droitsObject();
+                $u = new archiUtilisateur();
+                
+                if ($d->isAuthorized('tags', $u->getIdProfilFromUtilisateur($authentification->getIdUtilisateur()))) {
+                    $t->assign_block_vars('listePhotos.canModifyTags',  array());
+                } else {
+                    $t->assign_block_vars('listePhotos.canNotModifyTags',  array());
                 }
                 
                 if ($utilisateur->isAuthorized('affiche_selection_source',  $authentification->getIdUtilisateur()))
