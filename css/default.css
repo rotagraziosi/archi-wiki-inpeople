@@ -1471,11 +1471,11 @@ li:empty {
 }
 
 .imgResultGrp:hover .imgResultHover {
-    width: 200px;
-    height: 250px;
+    width: auto;
+    height: auto;
     padding:5px;
     left: -45px;
-    top: -175px;
+    top: -150px;
     z-index:20;
     opacity:1;
     border: thin solid #BBBBBB;
