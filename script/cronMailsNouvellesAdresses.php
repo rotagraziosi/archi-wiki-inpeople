@@ -397,7 +397,6 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                     LEFT JOIN historiqueEvenement he ON he.idEvenement = ae.idEvenement
                     
 
-                            
                     
                     WHERE he.dateCreationEvenement < $borneMin
                     AND he.dateCreationEvenement >= $borneMax
@@ -406,10 +405,40 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                     ORDER BY he.dateCreationEvenement
             ";
     $resNewPeople = $config->connexionBdd->requete($reqNewPeople);
-    $messagePeople="<h4>Nouvelles personnes :</h4>
+    $messagePeople="<h4>Nouvelles personnes&nbsp;:</h4>
     <ul>";
+    $newPeople = array();
     while ($newPerson= mysql_fetch_object($resNewPeople)) {
+        $newPeople[]=$newPerson->idPersonne;
         $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$newPerson->idPersonne))."'>".$newPerson->prenom." ".$newPerson->nom."</a></li>".PHP_EOL;
+    }
+    $messagePeople.="</ul>";
+
+    $messagePeople.="<h4>Personnes modifiées&nbsp;:</h4>";
+    $reqModPeople = "
+                    SELECT * FROM (
+                        SELECT pers.idPersonne, pers.nom, pers.prenom, he.dateCreationEvenement, ee.idEvenement, ee.idEvenementAssocie, he.idHistoriqueEvenement
+                        FROM personne pers
+                        
+                        LEFT JOIN _personneEvenement ae ON ae.idPersonne = pers.idPersonne
+                        LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+                        LEFT JOIN historiqueEvenement he ON he.idEvenement = ee.idEvenementAssocie
+                        
+                        ORDER BY he.idHistoriqueEvenement
+                    ) as people
+
+                    WHERE people.dateCreationEvenement < $borneMin
+                    AND people.dateCreationEvenement >= $borneMax
+                    GROUP BY people.idPersonne, people.idEvenement
+                    HAVING count(people.idEvenementAssocie)>0
+                    ORDER BY people.dateCreationEvenement
+            ";
+    $resModPeople = $config->connexionBdd->requete($reqModPeople);
+    $messagePeople.="<ul>";
+    while ($modPerson= mysql_fetch_object($resModPeople)) {
+        if (!in_array($modPerson->idPersonne, $newPeople)) {
+            $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$modPerson->idPersonne))."'>".$modPerson->prenom." ".$modPerson->nom."</a></li>".PHP_EOL;
+        }
     }
     $messagePeople.="</ul>";
     
