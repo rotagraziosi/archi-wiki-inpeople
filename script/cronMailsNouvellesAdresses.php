@@ -406,7 +406,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
             ";
     $resNewPeople = $config->connexionBdd->requete($reqNewPeople);
     $newPeople = array();
-    if ($resNewPeople) {
+    if (mysql_num_rows($resNewPeople)>0) {
         $messagePeople="<h4>Nouvelles personnes&nbsp;:</h4>
         <ul>";
         while ($newPerson= mysql_fetch_object($resNewPeople)) {
@@ -436,7 +436,7 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                     ORDER BY people.dateCreationEvenement
             ";
     $resModPeople = $config->connexionBdd->requete($reqModPeople);
-    if ($resModPeople) {
+    if (mysql_num_rows($resModPeople)>0) {
         $messagePeople.="<h4>Personnes modifiées&nbsp;:</h4>";
         $messagePeople.="<ul>";
         while ($modPerson= mysql_fetch_object($resModPeople)) {
