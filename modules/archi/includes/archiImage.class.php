@@ -997,10 +997,8 @@ class archiImage extends config
             
             $format=isset($_GET['formatPhoto'])?$_GET['formatPhoto']:'petit';
             
-            $d = new droitsObject();
-            $u = new archiUtilisateur();
-            
-            if ($d->isAuthorized('tags', $u->getIdProfilFromUtilisateur($authentification->getIdUtilisateur()))) {
+            if ($u->canModifyTags(array('idUtilisateur'=>$authentification->getIdUtilisateur())))
+                {
                 $tags = 'Tags&nbsp;: ';
                 if (empty($fetch["tags"])) {
                     $tags .= '<i>(aucun)</i>';
@@ -3004,10 +3002,8 @@ class archiImage extends config
                     $t->assign_block_vars('listePhotos.isNoDisplayNumeroArchive',  array());
                 }
                 
-               $d = new droitsObject();
-                $u = new archiUtilisateur();
-                
-                if ($d->isAuthorized('tags', $u->getIdProfilFromUtilisateur($authentification->getIdUtilisateur()))) {
+                if ($utilisateur->canModifyTags(array('idUtilisateur'=>$authentification->getIdUtilisateur())))
+                {
                     $t->assign_block_vars('listePhotos.canModifyTags',  array());
                 } else {
                     $t->assign_block_vars('listePhotos.canNotModifyTags',  array());
