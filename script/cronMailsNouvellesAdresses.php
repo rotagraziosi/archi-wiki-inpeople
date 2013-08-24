@@ -405,16 +405,18 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                     ORDER BY he.dateCreationEvenement
             ";
     $resNewPeople = $config->connexionBdd->requete($reqNewPeople);
-    $messagePeople="<h4>Nouvelles personnes&nbsp;:</h4>
-    <ul>";
     $newPeople = array();
-    while ($newPerson= mysql_fetch_object($resNewPeople)) {
-        $newPeople[]=$newPerson->idPersonne;
-        $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$newPerson->idPersonne))."'>".$newPerson->prenom." ".$newPerson->nom."</a></li>".PHP_EOL;
+    if ($resNewPeople) {
+        $messagePeople="<h4>Nouvelles personnes&nbsp;:</h4>
+        <ul>";
+        while ($newPerson= mysql_fetch_object($resNewPeople)) {
+            $newPeople[]=$newPerson->idPersonne;
+            $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$newPerson->idPersonne))."'>".$newPerson->prenom." ".$newPerson->nom."</a></li>".PHP_EOL;
+        }
+        $messagePeople.="</ul>";
     }
-    $messagePeople.="</ul>";
 
-    $messagePeople.="<h4>Personnes modifiées&nbsp;:</h4>";
+    
     $reqModPeople = "
                     SELECT * FROM (
                         SELECT pers.idPersonne, pers.nom, pers.prenom, he.dateCreationEvenement, ee.idEvenement, ee.idEvenementAssocie, he.idHistoriqueEvenement
@@ -434,13 +436,16 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                     ORDER BY people.dateCreationEvenement
             ";
     $resModPeople = $config->connexionBdd->requete($reqModPeople);
-    $messagePeople.="<ul>";
-    while ($modPerson= mysql_fetch_object($resModPeople)) {
-        if (!in_array($modPerson->idPersonne, $newPeople)) {
-            $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$modPerson->idPersonne))."'>".$modPerson->prenom." ".$modPerson->nom."</a></li>".PHP_EOL;
+    if ($resModPeople) {
+        $messagePeople.="<h4>Personnes modifiées&nbsp;:</h4>";
+        $messagePeople.="<ul>";
+        while ($modPerson= mysql_fetch_object($resModPeople)) {
+            if (!in_array($modPerson->idPersonne, $newPeople)) {
+                $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$modPerson->idPersonne))."'>".$modPerson->prenom." ".$modPerson->nom."</a></li>".PHP_EOL;
+            }
         }
+        $messagePeople.="</ul>";
     }
-    $messagePeople.="</ul>";
     
     if (isset($fetchComplement['titre'])) {
         $sujet = $fetchComplement['titre'];
