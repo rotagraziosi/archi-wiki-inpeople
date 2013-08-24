@@ -438,14 +438,14 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
     $resModPeople = $config->connexionBdd->requete($reqModPeople);
     $i = 0;
     while ($modPerson= mysql_fetch_object($resModPeople)) {
-        if ($i==0) {
-            $messagePeople.="<h4>Personnes modifiées&nbsp;:</h4>";
-            $messagePeople.="<ul>";
-        }
         if (!in_array($modPerson->idPersonne, $newPeople)) {
+            if ($i==0) {
+                $messagePeople.="<h4>Personnes modifiées&nbsp;:</h4>";
+                $messagePeople.="<ul>";
+            }
             $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$modPerson->idPersonne))."'>".$modPerson->prenom." ".$modPerson->nom."</a></li>".PHP_EOL;
+            $i++;
         }
-        $i++;
     }
     if ($i>0) {
         $messagePeople.="</ul>";
