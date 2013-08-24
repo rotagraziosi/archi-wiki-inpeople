@@ -1456,6 +1456,7 @@ li:empty {
 }
 
 .imgResultHover p{
+    min-width:200px;
     margin-top:0;
     line-height:normal;
 }
