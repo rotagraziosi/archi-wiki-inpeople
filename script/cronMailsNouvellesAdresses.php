@@ -436,14 +436,18 @@ if (count($arrayAdresses)>0 || count($arrayAdressesModifiees)>0) {
                     ORDER BY people.dateCreationEvenement
             ";
     $resModPeople = $config->connexionBdd->requete($reqModPeople);
-    if (mysql_num_rows($resModPeople)>0) {
-        $messagePeople.="<h4>Personnes modifiées&nbsp;:</h4>";
-        $messagePeople.="<ul>";
-        while ($modPerson= mysql_fetch_object($resModPeople)) {
-            if (!in_array($modPerson->idPersonne, $newPeople)) {
-                $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$modPerson->idPersonne))."'>".$modPerson->prenom." ".$modPerson->nom."</a></li>".PHP_EOL;
-            }
+    $i = 0;
+    while ($modPerson= mysql_fetch_object($resModPeople)) {
+        if ($i==0) {
+            $messagePeople.="<h4>Personnes modifiées&nbsp;:</h4>";
+            $messagePeople.="<ul>";
         }
+        if (!in_array($modPerson->idPersonne, $newPeople)) {
+            $messagePeople.="<li><a href='".$config->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$modPerson->idPersonne))."'>".$modPerson->prenom." ".$modPerson->nom."</a></li>".PHP_EOL;
+        }
+        $i++;
+    }
+    if ($i>0) {
         $messagePeople.="</ul>";
     }
     
