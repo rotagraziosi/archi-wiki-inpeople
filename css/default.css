@@ -1451,7 +1451,7 @@ li:empty {
     height:130px;
     overflow:hidden;
     padding:0;
-    transition-property: width, height, left, top, padding;
+    transition-property: width, height;
     transition-duration: 0.1s;
 }
 
