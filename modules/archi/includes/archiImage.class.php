@@ -1748,6 +1748,9 @@ class archiImage extends config
             if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA) {
                 // dans ce cas on fabrique le zoom sur la zone de l'image concernée par l'adresse courante
                 $imageZoom = "<img src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
+                $imageZoom = '<span class="imgResultGrp"><div class="imgResultHover"><img itemprop="image" id="image'.$valuesPhoto['infosImage']['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'"  alt="'.htmlspecialchars($alt).'"  src="'.
+                'photos--'.$valuesPhoto['infosImage']['dateUpload'].'-'.$valuesPhoto['infosImage']['idHistoriqueImage'].
+                '-moyen.jpg'.'" class="eventImage" /><p>'.strip_tags($bbCode->convertToDisplay(array('text'=>$valuesPhoto['infosImage']['description']))).'</p></div></span><br>';
                 
                 $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'>$imageZoom</a></div>";
                 
@@ -2207,7 +2210,6 @@ class archiImage extends config
             $i=0;
             foreach ($params['imagesVuesSurLinkedByDate'] as $indice => $valuesImage) {
                 // ici on se sert de getAutresPhotosVuesSurAdresse uniquement pour renvoyer l'affichage de la photo avec les infos concernant celle ci
-                
                 $arrayRetourVueSur = $this->getAutresPhotosVuesSurAdresse($listeIdAdresses,  'moyen',  array('getOneIdImageFromEvenement'=>true,  'idImage'=>$valuesImage['idImage'],  'idEvenement'=>$idEvenement,  'idGroupeAdresseEvenementAffiche'=>$paramIdGroupeAdresseEvenementAffiche,  'setZoomOnImageZone'=>true));
                 $tab->addValue($arrayRetourVueSur["htmlVueSur"],  "");
                 $zonesHTML.=$arrayRetourVueSur['htmlZonesDivMapJs'];
