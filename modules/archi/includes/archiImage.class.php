@@ -1745,18 +1745,9 @@ class archiImage extends config
             }
             
             
-            if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA) {
-                // dans ce cas on fabrique le zoom sur la zone de l'image concernée par l'adresse courante
-                $imageZoom = "<img src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
-                $imageZoom = '<span class="imgResultGrp"><div class="imgResultHover"><img itemprop="image" id="image'.$valuesPhoto['infosImage']['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'"  alt="'.htmlspecialchars($alt).'"  src="'.
-                'photos--'.$valuesPhoto['infosImage']['dateUpload'].'-'.$valuesPhoto['infosImage']['idHistoriqueImage'].
-                '-moyen.jpg'.'" class="eventImage" /><p>'.strip_tags($bbCode->convertToDisplay(array('text'=>$valuesPhoto['infosImage']['description']))).'</p></div></span><br>';
-                
-                $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'>$imageZoom</a></div>";
-                
-            } else {
-                $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'><img class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt='' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."'></a></div>";
-            }
+            $tabTemp[$i]['celluleHaut'] = '<div><a href="'.$htmlOnClick.'"><span class="imgResultGrp"><div class="imgResultHover"><img itemprop="image" id="image'.$valuesPhoto['infosImage']['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'"  alt="'.htmlspecialchars($alt).'"  src="'.
+            'photos--'.$valuesPhoto['infosImage']['dateUpload'].'-'.$valuesPhoto['infosImage']['idHistoriqueImage'].
+            '-moyen.jpg'.'" class="eventImage" /><p>'.strip_tags($bbCode->convertToDisplay(array('text'=>$valuesPhoto['infosImage']['description']))).'</p></div></span><br></a></div>';
             
             $zones[$i] = $arrayZones['htmlDivs'];
             $zones[$i] .=$arrayZones['htmlMaps'];
