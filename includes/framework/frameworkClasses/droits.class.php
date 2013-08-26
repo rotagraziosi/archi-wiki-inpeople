@@ -22,7 +22,8 @@
 // pour la gestion des droits :
 /*
 une table droits (liaison entre les tables elements du site et profil
-une table elements du site (identification d'elements du site ou l'on applique les droits)
+une table elements du site
+* (identification d'elements du site ou l'on applique les droits)
 une table de profil (administrateur, modéteur, utilisateur, internaute etc)
 * 
  * @category Class
@@ -55,13 +56,19 @@ class DroitsObject extends config
      * */
     public function enregistreDroits()
     {
-        if (isset($this->variablesPost['idProfilCourant']) && $this->variablesPost['idProfilCourant']!='') {    
-            $reqDelete = "DELETE FROM droits WHERE idProfil='".$this->variablesPost['idProfilCourant']."'";
+        if (isset($this->variablesPost['idProfilCourant'])
+            && $this->variablesPost['idProfilCourant']!=''
+        ) {    
+            $reqDelete = "DELETE FROM droits WHERE idProfil='".
+                $this->variablesPost['idProfilCourant']."'";
             $resDelete = $this->connexionBdd->requete($reqDelete);
             
             if (isset($this->variablesPost['idElementSite'])) {
-                foreach ($this->variablesPost['idElementSite'] as $indice => $value) {
-                    $reqInsert="INSERT INTO droits (idProfil,idElementSite,acces) VALUES ('".$this->variablesPost['idProfilCourant']."','".$value."','1')";
+                $idElementSite=$this->variablesPost['idElementSite'];
+                foreach ($idElementSite as $indice => $value) {
+                    $reqInsert="INSERT INTO droits (idProfil,idElementSite,acces)
+                        VALUES ('".$this->variablesPost['idProfilCourant'].
+                        "','".$value."','1')";
                     $resInsert=$this->connexionBdd->requete($reqInsert);
                 }
             }
@@ -80,11 +87,17 @@ class DroitsObject extends config
         $retour="";
         
         $idProfilCourant = 1;
-        if (isset($this->variablesGet['archiIdProfil']) && $this->variablesGet['archiIdProfil']!='' && $this->variablesGet['archiIdProfil']!='0') {
+        if (isset($this->variablesGet['archiIdProfil'])
+            && $this->variablesGet['archiIdProfil']!=''
+            && $this->variablesGet['archiIdProfil']!='0'
+        ) {
             $idProfilCourant = $this->variablesGet['archiIdProfil'];
         }
         
-        $reqElements = "SELECT * FROM droitsElementsSite";//"SELECT * FROM droits WHERE idProfil=(SELECT idProfil FROM droitsProfils WHERE libelle='".$params['nomProfil']."')";
+        $reqElements = "SELECT * FROM droitsElementsSite";
+        /*"SELECT * FROM droits
+         * WHERE idProfil=(SELECT idProfil FROM droitsProfils
+         * WHERE libelle='".$params['nomProfil']."')";*/
         $resElements = $this->connexionBdd->requete($reqElements);
         $tableau = new tableau();
         
@@ -95,10 +108,12 @@ class DroitsObject extends config
             $tableau->addValue($fetchElements['libelle']);
             
             $reqProfil = "
-                    SELECT d.idDroit as idDroit, d.idProfil as idProfil,d.idElementSite as idElementSite, d.acces as acces,
-                            des.libelle as libelleElementSite,dp.libelle as libelleProfil
+                    SELECT d.idDroit as idDroit, d.idProfil as idProfil,
+                    d.idElementSite as idElementSite, d.acces as acces,
+                    des.libelle as libelleElementSite,dp.libelle as libelleProfil
                     FROM droits d
-                    LEFT JOIN droitsElementsSite des ON des.idElementSite = d.idElementSite
+                    LEFT JOIN droitsElementsSite des
+                        ON des.idElementSite = d.idElementSite
                     LEFT JOIN droitsProfils dp ON dp.idProfil = d.idProfil
                     WHERE dp.idProfil='".$idProfilCourant."'
                     AND des.idElementSite='".$fetchElements['idElementSite']."'
@@ -113,11 +128,15 @@ class DroitsObject extends config
             if (isset($fetchProfil['acces']) && $fetchProfil['acces']=='1') {
                 $checked="checked";
             }
-            $tableau->addValue("<input type='checkbox' name='idElementSite[]' value='".$fetchElements['idElementSite']."' $checked>");
+            $tableau->addValue(
+                "<input type='checkbox'name='idElementSite[]'
+                value='".$fetchElements['idElementSite']."' $checked>"
+            );
         }
         
         $retour = $tableau->createHtmlTableFromArray(2);
-        $retour.="<input type='hidden' name='idProfilCourant' value='".$idProfilCourant."'>";
+        $retour.="<input type='hidden' name='idProfilCourant'
+            value='".$idProfilCourant."'>";
         return $retour;
     }
     
@@ -131,11 +150,15 @@ class DroitsObject extends config
         $retour=array();
         
         $idProfilCourant = 1;
-        if (isset($this->variablesGet['archiIdProfil']) && $this->variablesGet['archiIdProfil']!='' && $this->variablesGet['archiIdProfil']!='0') {
+        if (isset($this->variablesGet['archiIdProfil'])
+            && $this->variablesGet['archiIdProfil']!=''
+            && $this->variablesGet['archiIdProfil']!='0'
+        ) {
             $idProfilCourant = $this->variablesGet['archiIdProfil'];
         }
         
-        $req = "SELECT libelle,idProfil FROM droitsProfils WHERE idProfil='".$idProfilCourant."'";
+        $req = "SELECT libelle,idProfil FROM droitsProfils
+            WHERE idProfil='".$idProfilCourant."'";
         $res = $this->connexionBdd->requete($req);
         $fetch = mysql_fetch_assoc($res);
         $retour=array('libelle'=>$fetch['libelle'],"idProfil"=>$fetch['idProfil']);
@@ -152,7 +175,8 @@ class DroitsObject extends config
     public function getProfilFromIdProfil($idProfil=0)
     {
         $retour = array();
-        $req = "SELECT idProfil,libelle FROM droitsProfils WHERE idProfil = '".$idProfil."'";
+        $req = "SELECT idProfil,libelle FROM droitsProfils
+            WHERE idProfil = '".$idProfil."'";
         $res = $this->connexionBdd->requete($req);
         
         $fetch = mysql_fetch_assoc($res);
@@ -181,7 +205,7 @@ class DroitsObject extends config
      * Vérifie si un utilisateur est autorisé à effectuer une action
      * 
      * @param string $tagName     Nom du droit
-     * @param int    $userProfile ID de l'utilisateur
+     * @param int    $userProfile ID du profil
      * 
      * @return bool
      * */
@@ -192,14 +216,16 @@ class DroitsObject extends config
             $reqVerif = "
                         SELECT d.acces as acces
                         FROM droits d
-                        RIGHT JOIN droitsElementsSite des ON des.idElementSite = d.idElementSite
+                        RIGHT JOIN droitsElementsSite des
+                            ON des.idElementSite = d.idElementSite
                         WHERE d.idProfil = '".$userProfile."'
                         AND des.libelle='".$tagName."'
                         ";
             $resVerif = $this->connexionBdd->requete($reqVerif);
             $fetchVerif = mysql_fetch_assoc($resVerif);
-            if ($fetchVerif['acces']=='1')
+            if ($fetchVerif['acces']=='1') {
                 $retour=true;
+            }
                         
         }
         

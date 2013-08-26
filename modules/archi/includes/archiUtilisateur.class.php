@@ -21,17 +21,17 @@ class archiUtilisateur extends config {
     public function getUtilisateurFieldsNotAdmin()
     {
         return array(
-            'nom'         =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'prenom'        =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'mail' =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'mdp1' =>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'password','fieldToCompare'=>'mdp2'),
-            'mdp2' =>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'password','fieldToCompare'=>'mdp1'),
-            'ville' =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'text'),
-            'alerteMail'       =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'alerteCommentaires' => array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'alerteAdresses' => array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'urlSiteWeb'=>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'text'),
-            'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio')
+            'nom'         =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'prenom'        =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'mail' =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'mdp1' =>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'password', 'fieldToCompare'=>'mdp2'), 
+            'mdp2' =>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'password', 'fieldToCompare'=>'mdp1'), 
+            'ville' =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'text'), 
+            'alerteMail'       =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'alerteCommentaires' => array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'alerteAdresses' => array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'urlSiteWeb'=>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'text'), 
+            'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio')
         );
     
     }
@@ -42,77 +42,77 @@ class archiUtilisateur extends config {
     public function getUtilisateurFieldsForModerators()
     {
         return array(
-            'nom'         =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'prenom'        =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'mail' =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'mdp1' =>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'password','fieldToCompare'=>'mdp2'),
-            'mdp2' =>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'password','fieldToCompare'=>'mdp1'),
-            'ville' =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'text'),
-            'alerteMail'       =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'alerteCommentaires' => array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'alerteAdresses' => array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'idPeriodeEnvoiMailsRegroupes'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'simpleList'),
-            'urlSiteWeb'=>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'text'),
-            'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio')
+            'nom'         =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'prenom'        =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'mail' =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'mdp1' =>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'password', 'fieldToCompare'=>'mdp2'), 
+            'mdp2' =>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'password', 'fieldToCompare'=>'mdp1'), 
+            'ville' =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'text'), 
+            'alerteMail'       =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'alerteCommentaires' => array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'alerteAdresses' => array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'idPeriodeEnvoiMailsRegroupes'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'simpleList'), 
+            'urlSiteWeb'=>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'text'), 
+            'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio')
         );
     
     }
     
     // **********************************************************************************************************************************************
-    // si l'utilisateur courant est un admin, on recupere les champs 'estAdmin' et 'alertMail' en plus ( ce que ne peut pas modifier un simple utilisateur connecté)
+    // si l'utilisateur courant est un admin,  on recupere les champs 'estAdmin' et 'alertMail' en plus ( ce que ne peut pas modifier un simple utilisateur connecté)
     // **********************************************************************************************************************************************
     public function getUtilisateurFieldsForAdmin()
     {
         return array(
-            'nom'         =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'prenom'        =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'mail' =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'idProfil'      =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'simpleList'),
-            'alerteMail'       =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'alerteCommentaires' => array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'alerteAdresses' => array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'mdp1' =>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'password','fieldToCompare'=>'mdp2'),
-            'mdp2' =>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'password','fieldToCompare'=>'mdp1'),
-            'ville' =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'text'),
-            'idPeriodeEnvoiMailsRegroupes'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'simpleList'),
-            'urlSiteWeb'=>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'text'),
-            'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'displayNumeroArchiveField'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'displayDateFinField'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'bannirUtilisateur'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'canCopyright'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'canModifyTags'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio')
+            'nom'         =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'prenom'        =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'mail' =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'idProfil'      =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'simpleList'), 
+            'alerteMail'       =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'alerteCommentaires' => array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'alerteAdresses' => array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'mdp1' =>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'password', 'fieldToCompare'=>'mdp2'), 
+            'mdp2' =>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'password', 'fieldToCompare'=>'mdp1'), 
+            'ville' =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'text'), 
+            'idPeriodeEnvoiMailsRegroupes'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'simpleList'), 
+            'urlSiteWeb'=>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'text'), 
+            'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'displayNumeroArchiveField'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'displayDateFinField'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'bannirUtilisateur'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'canCopyright'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'canModifyTags'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio')
         );
     
     }
     
     // **********************************************************************************************************************************************
-    // si l'utilisateur courant est un admin et qu'il modifie sont propre profil , ou celui d'un autre , le champs 'compteBanni' est en plus 
+    // si l'utilisateur courant est un admin et qu'il modifie sont propre profil ,  ou celui d'un autre ,  le champs 'compteBanni' est en plus 
     // **********************************************************************************************************************************************
     public function getUtilisateurFieldsForAdminProfil()
     {
         return array(
-            'nom'         =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'prenom'        =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'mail' =>array('default'=>'','value'=>'','required'=>true,'error'=>'','type'=>'text'),
-            'idProfil'      =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'simpleList'),
-            'alerteMail'       =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'alerteCommentaires' => array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'alerteAdresses' => array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'mdp1' =>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'password','fieldToCompare'=>'mdp2'),
-            'mdp2' =>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'password','fieldToCompare'=>'mdp1'),
-            'ville' =>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'text'),
-            'idPeriodeEnvoiMailsRegroupes'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'simpleList'),
-            'urlSiteWeb'=>array('default'=>'','value'=>'','required'=>false,'error'=>'','type'=>'text'),
-            'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'displayNumeroArchiveField'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
-            'displayDateFinField'=>array('default'=>'0','value'=>'','required'=>false,'error'=>'','type'=>'radio'),
+            'nom'         =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'prenom'        =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'mail' =>array('default'=>'', 'value'=>'', 'required'=>true, 'error'=>'', 'type'=>'text'), 
+            'idProfil'      =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'simpleList'), 
+            'alerteMail'       =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'alerteCommentaires' => array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'alerteAdresses' => array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'mdp1' =>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'password', 'fieldToCompare'=>'mdp2'), 
+            'mdp2' =>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'password', 'fieldToCompare'=>'mdp1'), 
+            'ville' =>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'text'), 
+            'idPeriodeEnvoiMailsRegroupes'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'simpleList'), 
+            'urlSiteWeb'=>array('default'=>'', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'text'), 
+            'afficheFormulaireContactPersoProfilPublic'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'displayNumeroArchiveField'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
+            'displayDateFinField'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
         );
     
     }
     
     // **********************************************************************************************************************************************
-    // modifie les infos du compte utilisateur, suivant les droits de l'utilisateur courant + mise a jour de la session en fonction de la ville favorite choisie ( si on est l'utilisateur connecté)
+    // modifie les infos du compte utilisateur,  suivant les droits de l'utilisateur courant + mise a jour de la session en fonction de la ville favorite choisie ( si on est l'utilisateur connecté)
     // **********************************************************************************************************************************************
     public function modifier() 
     {
@@ -152,9 +152,9 @@ class archiUtilisateur extends config {
                         echo "archiUtilisateur::modifier => erreur de création du répertoire pour l'image avatar<br>";
                     }
                 }
-                $avatarFile->handleUploadedFileSimpleMoveTo(array('inputFileName'=>'fichierAvatar','renameFileTo'=>'original.jpg','repertoireDestination'=>$this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/"));
+                $avatarFile->handleUploadedFileSimpleMoveTo(array('inputFileName'=>'fichierAvatar', 'renameFileTo'=>'original.jpg', 'repertoireDestination'=>$this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/"));
                 // ensuite on redimensionne l'image
-                $image->redimension($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/original.jpg",'jpg',$this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/avatar.jpg",120);
+                $image->redimension($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/original.jpg", 'jpg', $this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/avatar.jpg", 120);
             }
             else
             {
@@ -178,7 +178,7 @@ class archiUtilisateur extends config {
                 {
                     $tabForm = $this->getUtilisateurFieldsForAdmin();
                 }
-                elseif (isset($this->variablesGet['modeAffichage']) && $this->variablesGet['modeAffichage']=='profil') // utilisateur connecté, admin , dans son profil
+                elseif (isset($this->variablesGet['modeAffichage']) && $this->variablesGet['modeAffichage']=='profil') // utilisateur connecté,  admin ,  dans son profil
                 {
                     $tabForm = $this->getUtilisateurFieldsForAdminProfil();
                 }
@@ -192,27 +192,27 @@ class archiUtilisateur extends config {
                     $sqlChampDisplayDateFinField = "";
                     if (isset($this->variablesGet['modeAffichage']) && $this->variablesGet['modeAffichage']=='utilisateurDetail')
                     {
-                        $sqlChampDisplayNumeroArchiveField=",displayNumeroArchiveFieldInSaisieEvenement=\"".$tabForm['displayNumeroArchiveField']['value']."\"";
-                        $sqlChampDisplayDateFinField=",displayDateFinFieldInSaisieEvenement=\"".$tabForm['displayDateFinField']['value']."\"";
+                        $sqlChampDisplayNumeroArchiveField=", displayNumeroArchiveFieldInSaisieEvenement=\"".$tabForm['displayNumeroArchiveField']['value']."\"";
+                        $sqlChampDisplayDateFinField=", displayDateFinFieldInSaisieEvenement=\"".$tabForm['displayDateFinField']['value']."\"";
                     }
                     // test sur le mot de passe
                     if ($tabForm['mdp1']['value']!='')
                     {
-                        // un mot de passe a ete entré , donc si pas d'erreur , on peut faire l'ajout a la base
+                        // un mot de passe a ete entré ,  donc si pas d'erreur ,  on peut faire l'ajout a la base
                         $reqUpdate = 'update utilisateur 
-                                set nom="'.$tabForm['nom']['value'].'",
-                                    prenom="'.$tabForm['prenom']['value'].'",
-                                    mail="'.$tabForm['mail']['value'].'",
-                                    motDePasse="'.md5($tabForm['mdp1']['value']).'",
-                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'",
-                                    idProfil="'.$tabForm['idProfil']['value'].'",
-                                    alerteMail="'.$tabForm['alerteMail']['value'].'",
-                                    idVilleFavoris="'.$tabForm['ville']['value'].'",
-                                    canCopyright="'.$tabForm['canCopyright']['value'].'",
-                                    canModifyTags="'.$tabForm['canModifyTags']['value'].'",
-                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'",
-                                    idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'",
-                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'",
+                                set nom="'.$tabForm['nom']['value'].'", 
+                                    prenom="'.$tabForm['prenom']['value'].'", 
+                                    mail="'.$tabForm['mail']['value'].'", 
+                                    motDePasse="'.md5($tabForm['mdp1']['value']).'", 
+                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'", 
+                                    idProfil="'.$tabForm['idProfil']['value'].'", 
+                                    alerteMail="'.$tabForm['alerteMail']['value'].'", 
+                                    idVilleFavoris="'.$tabForm['ville']['value'].'", 
+                                    canCopyright="'.$tabForm['canCopyright']['value'].'", 
+                                    canModifyTags="'.$tabForm['canModifyTags']['value'].'", 
+                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'", 
+                                    idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'", 
+                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'", 
                                     displayProfilContactForm="'.$tabForm['afficheFormulaireContactPersoProfilPublic']['value'].'"
                                     '.$sqlChampDisplayNumeroArchiveField.'
                                     '.$sqlChampDisplayDateFinField.'
@@ -224,20 +224,20 @@ class archiUtilisateur extends config {
                     }
                     else
                     {
-                        //aucun mot de passe entré , on ne le met pas a jour
+                        //aucun mot de passe entré ,  on ne le met pas a jour
                         $reqUpdate = 'update utilisateur 
-                                set nom="'.$tabForm['nom']['value'].'",
-                                    prenom="'.$tabForm['prenom']['value'].'",
-                                    mail="'.$tabForm['mail']['value'].'",
-                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'",
-                                    idProfil="'.$tabForm['idProfil']['value'].'",
-                                    alerteMail="'.$tabForm['alerteMail']['value'].'",
-                                    idVilleFavoris="'.$tabForm['ville']['value'].'",
-                                    canCopyright="'.$tabForm['canCopyright']['value'].'",
-                                    canModifyTags="'.$tabForm['canModifyTags']['value'].'",
-                                    idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'",
-                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'",
-                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'",
+                                set nom="'.$tabForm['nom']['value'].'", 
+                                    prenom="'.$tabForm['prenom']['value'].'", 
+                                    mail="'.$tabForm['mail']['value'].'", 
+                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'", 
+                                    idProfil="'.$tabForm['idProfil']['value'].'", 
+                                    alerteMail="'.$tabForm['alerteMail']['value'].'", 
+                                    idVilleFavoris="'.$tabForm['ville']['value'].'", 
+                                    canCopyright="'.$tabForm['canCopyright']['value'].'", 
+                                    canModifyTags="'.$tabForm['canModifyTags']['value'].'", 
+                                    idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'", 
+                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'", 
+                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'", 
                                     displayProfilContactForm="'.$tabForm['afficheFormulaireContactPersoProfilPublic']['value'].'"
                                     '.$sqlChampDisplayNumeroArchiveField.'
                                     '.$sqlChampDisplayDateFinField.'
@@ -250,8 +250,8 @@ class archiUtilisateur extends config {
                     
                     if (isset($this->variablesGet['modeAffichage']) && $this->variablesGet['modeAffichage']=='utilisateurDetail')
                     {
-                        // Si un utilisateur est banni, on inactive son compte et on met le champs compteBanni à 1
-                        $this->majBannissementUtilisateur(array('idUtilisateur'=>$this->variablesPost['idUtilisateurModif'],'champsBanissementApresValidationFormulaire'=>$tabForm['bannirUtilisateur']['value']));
+                        // Si un utilisateur est banni,  on inactive son compte et on met le champs compteBanni à 1
+                        $this->majBannissementUtilisateur(array('idUtilisateur'=>$this->variablesPost['idUtilisateurModif'], 'champsBanissementApresValidationFormulaire'=>$tabForm['bannirUtilisateur']['value']));
                     }
                 }
             }
@@ -265,18 +265,18 @@ class archiUtilisateur extends config {
                     // test sur le mot de passe
                     if ($tabForm['mdp1']['value']!='')
                     {
-                        // un mot de passe a ete entré , donc si pas d'erreur , on peut faire l'ajout a la base
+                        // un mot de passe a ete entré ,  donc si pas d'erreur ,  on peut faire l'ajout a la base
                         $reqUpdate = 'update utilisateur 
-                                set nom="'.$tabForm['nom']['value'].'",
-                                    prenom="'.$tabForm['prenom']['value'].'",
-                                    mail="'.$tabForm['mail']['value'].'",
-                                    motDePasse="'.md5($tabForm['mdp1']['value']).'",
-                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'",
-                                    idVilleFavoris="'.$tabForm['ville']['value'].'",
-                                    idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'",
-                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'",
-                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'",
-                                    alerteMail="'.$tabForm['alerteMail']['value'].'",
+                                set nom="'.$tabForm['nom']['value'].'", 
+                                    prenom="'.$tabForm['prenom']['value'].'", 
+                                    mail="'.$tabForm['mail']['value'].'", 
+                                    motDePasse="'.md5($tabForm['mdp1']['value']).'", 
+                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'", 
+                                    idVilleFavoris="'.$tabForm['ville']['value'].'", 
+                                    idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'", 
+                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'", 
+                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'", 
+                                    alerteMail="'.$tabForm['alerteMail']['value'].'", 
                                     displayProfilContactForm="'.$tabForm['afficheFormulaireContactPersoProfilPublic']['value'].'"
                                 where idUtilisateur="'.$this->variablesPost['idUtilisateurModif'].'"
                             ';
@@ -286,17 +286,17 @@ class archiUtilisateur extends config {
                     }
                     else
                     {
-                        //aucun mot de passe entré , on ne le met pas a jour
+                        //aucun mot de passe entré ,  on ne le met pas a jour
                         $reqUpdate = 'update utilisateur 
-                                set nom="'.$tabForm['nom']['value'].'",
-                                    prenom="'.$tabForm['prenom']['value'].'",
-                                    mail="'.$tabForm['mail']['value'].'",
-                                    idVilleFavoris="'.$tabForm['ville']['value'].'",
-                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'",
-                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'",
-                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'",
-                                    idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'",
-                                    alerteMail="'.$tabForm['alerteMail']['value'].'",
+                                set nom="'.$tabForm['nom']['value'].'", 
+                                    prenom="'.$tabForm['prenom']['value'].'", 
+                                    mail="'.$tabForm['mail']['value'].'", 
+                                    idVilleFavoris="'.$tabForm['ville']['value'].'", 
+                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'", 
+                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'", 
+                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'", 
+                                    idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'", 
+                                    alerteMail="'.$tabForm['alerteMail']['value'].'", 
                                     displayProfilContactForm="'.$tabForm['afficheFormulaireContactPersoProfilPublic']['value'].'"
                                 where idUtilisateur="'.$this->variablesPost['idUtilisateurModif'].'"
                             ';
@@ -316,17 +316,17 @@ class archiUtilisateur extends config {
                     // test sur le mot de passe
                     if ($tabForm['mdp1']['value']!='')
                     {
-                        // un mot de passe a ete entré , donc si pas d'erreur , on peut faire l'ajout a la base
+                        // un mot de passe a ete entré ,  donc si pas d'erreur ,  on peut faire l'ajout a la base
                         $reqUpdate = 'update utilisateur 
-                                set nom="'.$tabForm['nom']['value'].'",
-                                    prenom="'.$tabForm['prenom']['value'].'",
-                                    mail="'.$tabForm['mail']['value'].'",
-                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'",
-                                    motDePasse="'.md5($tabForm['mdp1']['value']).'",
-                                    idVilleFavoris="'.$tabForm['ville']['value'].'",
-                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'",
-                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'",
-                                    alerteMail="'.$tabForm['alerteMail']['value'].'",
+                                set nom="'.$tabForm['nom']['value'].'", 
+                                    prenom="'.$tabForm['prenom']['value'].'", 
+                                    mail="'.$tabForm['mail']['value'].'", 
+                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'", 
+                                    motDePasse="'.md5($tabForm['mdp1']['value']).'", 
+                                    idVilleFavoris="'.$tabForm['ville']['value'].'", 
+                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'", 
+                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'", 
+                                    alerteMail="'.$tabForm['alerteMail']['value'].'", 
                                     displayProfilContactForm="'.$tabForm['afficheFormulaireContactPersoProfilPublic']['value'].'"
                                 where idUtilisateur="'.$this->variablesPost['idUtilisateurModif'].'"
                             ';
@@ -336,16 +336,16 @@ class archiUtilisateur extends config {
                     }
                     else
                     {
-                        //aucun mot de passe entré , on ne le met pas a jour
+                        //aucun mot de passe entré ,  on ne le met pas a jour
                         $reqUpdate = 'update utilisateur 
-                                set nom="'.$tabForm['nom']['value'].'",
-                                    prenom="'.$tabForm['prenom']['value'].'",
-                                    mail="'.$tabForm['mail']['value'].'",
-                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'",
-                                    idVilleFavoris="'.$tabForm['ville']['value'].'",
-                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'",
-                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'",
-                                    alerteMail="'.$tabForm['alerteMail']['value'].'",
+                                set nom="'.$tabForm['nom']['value'].'", 
+                                    prenom="'.$tabForm['prenom']['value'].'", 
+                                    mail="'.$tabForm['mail']['value'].'", 
+                                    urlSiteWeb="'.$tabForm['urlSiteWeb']['value'].'", 
+                                    idVilleFavoris="'.$tabForm['ville']['value'].'", 
+                                    alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'", 
+                                    alerteAdresses="'.$tabForm['alerteAdresses']['value'].'", 
+                                    alerteMail="'.$tabForm['alerteMail']['value'].'", 
                                     displayProfilContactForm="'.$tabForm['afficheFormulaireContactPersoProfilPublic']['value'].'"
                                 where idUtilisateur="'.$this->variablesPost['idUtilisateurModif'].'"
                             ';
@@ -365,14 +365,14 @@ class archiUtilisateur extends config {
             echo "La mise à jour a été effectuée";
             // envoi d'un mail a l'admin
             $message = "";
-            $message .= "Un utilisateur a modifié son compte , pour vérifier : <a href='".$this->creerUrl('','utilisateurDetail',array('idUtilisateur'=>$this->variablesPost['idUtilisateurModif']))."'>Cliquez ici</a>";
-            $mail->sendMailToAdministrators($mail->getSiteMail(),"Un utilisateur a modifié son compte",$message,'',true);
-            $this->ajouteMailEnvoiRegroupesAdministrateurs(array('contenu'=>$message,'idTypeMailRegroupement'=>7,'criteres'=>""));
+            $message .= "Un utilisateur a modifié son compte ,  pour vérifier : <a href='".$this->creerUrl('', 'utilisateurDetail', array('idUtilisateur'=>$this->variablesPost['idUtilisateurModif']))."'>Cliquez ici</a>";
+            $mail->sendMailToAdministrators($mail->getSiteMail(), "Un utilisateur a modifié son compte", $message, '', true);
+            $this->ajouteMailEnvoiRegroupesAdministrateurs(array('contenu'=>$message, 'idTypeMailRegroupement'=>7, 'criteres'=>""));
             
-            // on met a jour la session contenant la ville favorite , si on est soi meme l'utilisateur courant
+            // on met a jour la session contenant la ville favorite ,  si on est soi meme l'utilisateur courant
             if ($this->variablesPost['idUtilisateurModif'] == $authentification->getIdUtilisateur())
             {
-                $this->session->addToSession("idVilleFavoris",$tabForm['ville']['value']);
+                $this->session->addToSession("idVilleFavoris", $tabForm['ville']['value']);
             }
         }
         elseif ($authentification->estAdmin())
@@ -380,18 +380,18 @@ class archiUtilisateur extends config {
             echo "La mise à jour a été effectuée";
             if ($this->variablesPost['idUtilisateurModif'] == $authentification->getIdUtilisateur())
             {
-                $this->session->addToSession("idVilleFavoris",$tabForm['ville']['value']);
+                $this->session->addToSession("idVilleFavoris", $tabForm['ville']['value']);
             }
         } else {
             echo "La mise à jour n'a pas pu être effectuée.";
         }
         
         
-        //echo $this->afficher($tabForm,$this->variablesPost['idUtilisateurModif']);
+        //echo $this->afficher($tabForm, $this->variablesPost['idUtilisateurModif']);
     }
 
     
-    // cette fonction met a jour les champs concerné (compteActif, compteBanni) de l'utilisateur , banni ou debanni
+    // cette fonction met a jour les champs concerné (compteActif,  compteBanni) de l'utilisateur ,  banni ou debanni
     public function majBannissementUtilisateur($params = array())
     {
         if (isset($params['idUtilisateur']) && $params['idUtilisateur']!='' && isset($params['champsBanissementApresValidationFormulaire']) && $params['champsBanissementApresValidationFormulaire']!='')
@@ -405,17 +405,17 @@ class archiUtilisateur extends config {
                 
                 if ($fetchEtatUtilisateur['compteBanni']!=$params['champsBanissementApresValidationFormulaire'])
                 {
-                    // il y a un changement dans l'etat , on met les champs concernés a jour
+                    // il y a un changement dans l'etat ,  on met les champs concernés a jour
                     if ($params['champsBanissementApresValidationFormulaire']=='1')
                     {
                         // l'utilisateur est maintenant banni :
-                        $reqBannissement = "UPDATE utilisateur SET compteBanni='1', compteActif='0' WHERE idUtilisateur='".$params['idUtilisateur']."' ";
+                        $reqBannissement = "UPDATE utilisateur SET compteBanni='1',  compteActif='0' WHERE idUtilisateur='".$params['idUtilisateur']."' ";
                         $resBannissement = $this->connexionBdd->requete($reqBannissement);
                         
                     }
                     else
                     {
-                        // l'utilisateur etait banni , mais on l'a reactivé
+                        // l'utilisateur etait banni ,  mais on l'a reactivé
                         // on verifie d'abord que le champs mail est renseigné et qu'il y a un mot de passe
                         $reqVerif = "SELECT 0 FROM utilisateur WHERE mail<>'' AND motDePasse<>'' AND idUtilisateur='".$params['idUtilisateur']."'";
                         $resVerif = $this->connexionBdd->requete($reqVerif);
@@ -423,7 +423,7 @@ class archiUtilisateur extends config {
                         
                         if (mysql_num_rows($resVerif)==1)
                         {
-                            $reqDeBan = "UPDATE utilisateur SET compteBanni='0', compteActif='1' WHERE idUtilisateur='".$params['idUtilisateur']."'";
+                            $reqDeBan = "UPDATE utilisateur SET compteBanni='0',  compteActif='1' WHERE idUtilisateur='".$params['idUtilisateur']."'";
                             $resDeBan = $this->connexionBdd->requete($reqDeBan);
                         }
                         
@@ -438,10 +438,10 @@ class archiUtilisateur extends config {
     // **********************************************************************************************************************************************
     // affiche le formulaire de modification du compte d'un utilisateur
     // **********************************************************************************************************************************************
-    public function afficher($tabTravail=array(),$idUtilisateur = '',$modeAffichage='utilisateurDetail')
+    public function afficher($tabTravail=array(), $idUtilisateur = '', $modeAffichage='utilisateurDetail')
     {
         $html = '';
-        $tabParametresPredefinis = array('pays', 'ville');
+        $tabParametresPredefinis = array('pays',  'ville');
         
         $authentification = new archiAuthentification();
         $u = new archiUtilisateur();
@@ -457,7 +457,7 @@ class archiUtilisateur extends config {
             $html .= 'Erreur id invalide';
             if (!$authentification->estConnecte())
             {
-                echo "<script  >location.href='".$this->creerUrl('','authentification',array())."';</script>";
+                echo "<script  >location.href='".$this->creerUrl('', 'authentification', array())."';</script>";
             }
         }
         else 
@@ -472,7 +472,7 @@ class archiUtilisateur extends config {
                     $s = new objetSession();
                     $infos = $u->getArrayInfosFromUtilisateur($s->getFromSession('utilisateurConnecte'.$this->idSite));
                     $t->assign_vars(array("phraseBienvenu"=>_("Bienvenue sur votre profil")." ".ucwords($infos['prenom'])." ".ucwords($infos['nom'])));
-                    $t->assign_vars(array("srcImgTrombone"=>$this->getUrlImage(null, "trombone.jpg")));
+                    $t->assign_vars(array("srcImgTrombone"=>$this->getUrlImage(null,  "trombone.jpg")));
                 }
                 
                 $sqlIdUtilisateur = $idUtilisateur;
@@ -489,25 +489,25 @@ class archiUtilisateur extends config {
                     
                     if (!empty($rep['nomVille']))
                     {
-                        $t->assign_block_vars('villeFavoris', array());
+                        $t->assign_block_vars('villeFavoris',  array());
                     }
                     $t->assign_vars(array(
 
-                        'villeFavorite'        => $rep['nomVille'],
-                        'urlVilleFavorite'     => $this->creerUrl('', 'adresseListe', array('selection'=>'ville', 'id'=>$rep['idVille'], 'debut'=>0)),
-                        'paysVilleFavorite'    => $rep['nomPays'],
-                        'urlPaysVilleFavorite' => $this->creerUrl('', 'adresseListe', array('selection'=>'pays', 'id'=>$rep['idPays'], 'debut'=>0))
+                        'villeFavorite'        => $rep['nomVille'], 
+                        'urlVilleFavorite'     => $this->creerUrl('',  'adresseListe',  array('selection'=>'ville',  'id'=>$rep['idVille'],  'debut'=>0)), 
+                        'paysVilleFavorite'    => $rep['nomPays'], 
+                        'urlPaysVilleFavorite' => $this->creerUrl('',  'adresseListe',  array('selection'=>'pays',  'id'=>$rep['idPays'],  'debut'=>0))
                         ));
                     
 
                     
                     // évènements créés par l'utilisateur
                     //$e = new archiEvenement();
-                    //$evenements = $e->afficherListe(array('selection'=>'utilisateurAjout', 'id' => $idUtilisateur)); // liste des evenements de l'utilisateur
+                    //$evenements = $e->afficherListe(array('selection'=>'utilisateurAjout',  'id' => $idUtilisateur)); // liste des evenements de l'utilisateur
                     
                     // images créés par l'utilisateur
                     //$i = new archiImage();
-                    //$images = $i->afficherListe(array('selection'=>'utilisateur', 'id' => $idUtilisateur)); // liste des images de l'utilisateur
+                    //$images = $i->afficherListe(array('selection'=>'utilisateur',  'id' => $idUtilisateur)); // liste des images de l'utilisateur
                     
                     $t->assign_vars(array('idUtilisateurModif'=>$idUtilisateur));
                     
@@ -572,7 +572,7 @@ class archiUtilisateur extends config {
                     $selectProfil.="</select>";
                     
                     // periodicite d'envoi des mails
-                    $reqPeriodicite = "SELECT idPeriode,intitule FROM periodesEnvoiMailsRegroupes";
+                    $reqPeriodicite = "SELECT idPeriode, intitule FROM periodesEnvoiMailsRegroupes";
                     $resPeriodicite = $this->connexionBdd->requete($reqPeriodicite);
                     $selectPeriodiciteMail = "<select name='idPeriodeEnvoiMailsRegroupes'>";
                     while($fetchPeriodicite = mysql_fetch_assoc($resPeriodicite))
@@ -588,33 +588,33 @@ class archiUtilisateur extends config {
                     
                     
                     
-                    $t->assign_block_vars('detailUtilisateur',array(
-                                                'nom'=>$nom,
-                                                'prenom'=>$prenom,
-                                                'email'=>$mail,
-                                                'onClickChoixVilleFavorite'=>"document.getElementById('calqueVille').style.top=getScrollHeight()+150+'px';document.getElementById('paramChampAppelantVille').value='ville';document.getElementById('calqueVille').style.display='block';",
-                                                'ville'=>$rep['idVille'],
-                                                'villetxt'=>$rep['nomVille'],
-                                                'urlSiteWeb'=>$urlSiteWeb,
+                    $t->assign_block_vars('detailUtilisateur', array(
+                                                'nom'=>$nom, 
+                                                'prenom'=>$prenom, 
+                                                'email'=>$mail, 
+                                                'onClickChoixVilleFavorite'=>"document.getElementById('calqueVille').style.top=getScrollHeight()+150+'px';document.getElementById('paramChampAppelantVille').value='ville';document.getElementById('calqueVille').style.display='block';", 
+                                                'ville'=>$rep['idVille'], 
+                                                'villetxt'=>$rep['nomVille'], 
+                                                'urlSiteWeb'=>$urlSiteWeb, 
                                                 'imageAvatar'=>"<img src='".$this->getImageAvatar(array('idUtilisateur'=>$idUtilisateur))."' border=0>"
                                                 ));
                     
                     $authentifie = new archiAuthentification();
                     if ($authentifie->estConnecte() && $authentifie->estAdmin())
                     {
-                        $t->assign_block_vars('detailUtilisateur.utilisateurCourantIsAdmin',array());
+                        $t->assign_block_vars('detailUtilisateur.utilisateurCourantIsAdmin', array());
                         $t->assign_vars(array('selectProfil'=>$selectProfil));
 
                         
-                        //$t->assign_vars(array("urlLogsMails"=>"<a href='".$this->creerUrl('','afficheLogsMails',array('idUtilisateur'=>$idUtilisateur))."'>Acceder au log des mail de cet utilisateur</a>"));
+                        //$t->assign_vars(array("urlLogsMails"=>"<a href='".$this->creerUrl('', 'afficheLogsMails', array('idUtilisateur'=>$idUtilisateur))."'>Acceder au log des mail de cet utilisateur</a>"));
                     }
                     
                     if ($modeAffichage=="utilisateurDetail")
                     {
-                        if ($authentifie->estConnecte()  && $authentifie->estAdmin()) // admin ou moderateur ont le droit de changer leur periodicites (pour les moderateur , voir plus bas
+                        if ($authentifie->estConnecte()  && $authentifie->estAdmin()) // admin ou moderateur ont le droit de changer leur periodicites (pour les moderateur ,  voir plus bas
                         {
                             $t->assign_vars(array('selectPeriodiciteMail'=>$selectPeriodiciteMail));
-                            $t->assign_block_vars('detailUtilisateur.banissementUtilisateurParAdmin',array());
+                            $t->assign_block_vars('detailUtilisateur.banissementUtilisateurParAdmin', array());
                             
                             if ($rep['compteBanni']=='1')
                             {
@@ -671,7 +671,7 @@ class archiUtilisateur extends config {
                     {
                         if ($authentifie->estConnecte() && ($idProfil=='3' || $idProfil=='4')) // admin ou moderateur ont le droit de changer leur periodicites
                         {
-                            $t->assign_block_vars('detailUtilisateur.utilisateurCourantIsAdminOrModerateur',array());
+                            $t->assign_block_vars('detailUtilisateur.utilisateurCourantIsAdminOrModerateur', array());
                             $t->assign_vars(array('selectPeriodiciteMail'=>$selectPeriodiciteMail));
                         }
                     }
@@ -703,11 +703,11 @@ class archiUtilisateur extends config {
                     
                     if ($modeAffichage=="utilisateurDetail")
                     {
-                        $t->assign_vars(array('formAction'=>$this->creerUrl('modifierUtilisateur','utilisateurDetail',array('modeAffichage'=>'utilisateurDetail','idUtilisateur'=>$idUtilisateur))));
+                        $t->assign_vars(array('formAction'=>$this->creerUrl('modifierUtilisateur', 'utilisateurDetail', array('modeAffichage'=>'utilisateurDetail', 'idUtilisateur'=>$idUtilisateur))));
                     }
                     else
                     {
-                        $t->assign_vars(array('formAction'=>$this->creerUrl('modifierUtilisateur','afficheAccueil',array('modeAffichage'=>'profil'))));
+                        $t->assign_vars(array('formAction'=>$this->creerUrl('modifierUtilisateur', 'afficheAccueil', array('modeAffichage'=>'profil'))));
                     }
                     
                     // gestion de la popup du choix de la ville
@@ -778,12 +778,12 @@ class archiUtilisateur extends config {
             $afficheOngletLogsMails=false;
         }
         
-        if ($modeAffichage=='utilisateurDetail' && $u->isAuthorized('admin_ville_par_moderateur',$authentification->getIdUtilisateur()))
+        if ($modeAffichage=='utilisateurDetail' && $u->isAuthorized('admin_ville_par_moderateur', $authentification->getIdUtilisateur()))
         {
-            $onglets->addContent("utilisateur",$ongletUtilisateur,$afficheOngletUtilisateur);
+            $onglets->addContent("utilisateur", $ongletUtilisateur, $afficheOngletUtilisateur);
         }
         
-        if ($modeAffichage=='utilisateurDetail' && $isCompteModerateur && $u->isAuthorized('admin_ville_par_moderateur',$authentification->getIdUtilisateur()))
+        if ($modeAffichage=='utilisateurDetail' && $isCompteModerateur && $u->isAuthorized('admin_ville_par_moderateur', $authentification->getIdUtilisateur()))
         {
         
             $ongletListeVille="";
@@ -812,7 +812,7 @@ class archiUtilisateur extends config {
                 $checked="";
                 $baliseOuvrante="";
                 $baliseFermante="";
-                if (in_array($fetchVilles['idVille'],$arrayListeVillesModerees))
+                if (in_array($fetchVilles['idVille'], $arrayListeVillesModerees))
                 {
                     $checked="checked";
                     $baliseOuvrante="<b>";
@@ -822,20 +822,20 @@ class archiUtilisateur extends config {
             }
             
             $ongletListeVille.="<h3>Cet utilisateur modère :</h3>";
-            $ongletListeVille.="<form action='".$this->creerUrl('enregistreListeVillesModerateur','utilisateurDetail',array('idUtilisateur'=>$idUtilisateur,'archiOnglet'=>'listeVilles'))."' name='formulaireModerationVille' enctype='multipart/form-data' method='POST'>";
+            $ongletListeVille.="<form action='".$this->creerUrl('enregistreListeVillesModerateur', 'utilisateurDetail', array('idUtilisateur'=>$idUtilisateur, 'archiOnglet'=>'listeVilles'))."' name='formulaireModerationVille' enctype='multipart/form-data' method='POST'>";
             $ongletListeVille.=$tableau->createHtmlTableFromArray(4);
             $ongletListeVille.="<input type='hidden' value='".$idUtilisateur."' name='idUtilisateurModerateur'>";
             $ongletListeVille.="<input type='submit' value='Enregistrer'>";
             $ongletListeVille.="</form>";
             
 
-            $onglets->addContent("modération de ville",$ongletListeVille,$afficheOngletListeVille);
+            $onglets->addContent("modération de ville", $ongletListeVille, $afficheOngletListeVille);
             
         }
         
 
 
-        if ($modeAffichage=='utilisateurDetail' && $u->isAuthorized('admin_ville_par_moderateur',$authentification->getIdUtilisateur()))
+        if ($modeAffichage=='utilisateurDetail' && $u->isAuthorized('admin_ville_par_moderateur', $authentification->getIdUtilisateur()))
         {
             // utilisateur administrateur
             $administration = new archiAdministration();
@@ -843,10 +843,10 @@ class archiUtilisateur extends config {
             $ongletLogsMail=$administration->getLoggedMails();
             
             
-            $onglets->addContent("log mails",$ongletLogsMail,$afficheOngletLogsMails);
+            $onglets->addContent("log mails", $ongletLogsMail, $afficheOngletLogsMails);
         }
         
-        if ($modeAffichage=='utilisateurDetail' && $u->isAuthorized('admin_ville_par_moderateur',$authentification->getIdUtilisateur()))
+        if ($modeAffichage=='utilisateurDetail' && $u->isAuthorized('admin_ville_par_moderateur', $authentification->getIdUtilisateur()))
         {
             $html=$onglets->getHTML();
         }
@@ -859,10 +859,10 @@ class archiUtilisateur extends config {
     
     public function getInfosModifsPerso($sqlIdUtilisateur=0)
     {
-        /*$sql = 'SELECT u.idUtilisateur as idUtilisateur, u.nom as nom, u.prenom as prenom, u.idProfil as idProfil,u.alerteCommentaires,u.alerteAdresses, u.mail as mail, u.alerteMail as alerteMail,
-                    COUNT(DISTINCT hI.idHistoriqueImage)- COUNT(DISTINCT hI.idImage ) AS nbModifImage, COUNT(DISTINCT hI.idImage ) AS nbAjoutImage, 
-                    COUNT(DISTINCT hE.idHistoriqueEvenement)- COUNT(DISTINCT hE.idEvenement ) AS nbModifEvenement, COUNT(DISTINCT hE.idEvenement ) AS nbAjoutEvenement,
-                    v.idVille, v.nom AS nomVille, p.idPays, p.nom AS nomPays 
+        /*$sql = 'SELECT u.idUtilisateur as idUtilisateur,  u.nom as nom,  u.prenom as prenom,  u.idProfil as idProfil, u.alerteCommentaires, u.alerteAdresses,  u.mail as mail,  u.alerteMail as alerteMail, 
+                    COUNT(DISTINCT hI.idHistoriqueImage)- COUNT(DISTINCT hI.idImage ) AS nbModifImage,  COUNT(DISTINCT hI.idImage ) AS nbAjoutImage,  
+                    COUNT(DISTINCT hE.idHistoriqueEvenement)- COUNT(DISTINCT hE.idEvenement ) AS nbModifEvenement,  COUNT(DISTINCT hE.idEvenement ) AS nbAjoutEvenement, 
+                    v.idVille,  v.nom AS nomVille,  p.idPays,  p.nom AS nomPays 
                 FROM utilisateur u
                 LEFT JOIN historiqueImage hI ON hI.idUtilisateur = u.idUtilisateur
                 LEFT JOIN historiqueEvenement hE ON hE.idUtilisateur = u.idUtilisateur
@@ -874,7 +874,7 @@ class archiUtilisateur extends config {
         */                
                             
                             
-        $sqlInfosPerso= "SELECT u.idUtilisateur as idUtilisateur, u.nom as nom, u.prenom as prenom, u.idProfil as idProfil,u.alerteCommentaires,u.alerteAdresses, u.mail as mail, u.alerteMail as alerteMail,u.idVilleFavoris as idVilleFavoris,u.idPeriodeEnvoiMailsRegroupes as idPeriodeEnvoiMailsRegroupes,u.urlSiteWeb as urlSiteWeb,u.displayProfilContactForm as displayProfilContactForm,u.compteBanni as compteBanni FROM utilisateur u WHERE u.idUtilisateur = '".$sqlIdUtilisateur."'";
+        $sqlInfosPerso= "SELECT u.idUtilisateur as idUtilisateur,  u.nom as nom,  u.prenom as prenom,  u.idProfil as idProfil, u.alerteCommentaires, u.alerteAdresses,  u.mail as mail,  u.alerteMail as alerteMail, u.idVilleFavoris as idVilleFavoris, u.idPeriodeEnvoiMailsRegroupes as idPeriodeEnvoiMailsRegroupes, u.urlSiteWeb as urlSiteWeb, u.displayProfilContactForm as displayProfilContactForm, u.compteBanni as compteBanni FROM utilisateur u WHERE u.idUtilisateur = '".$sqlIdUtilisateur."'";
         $resInfosPerso = $this->connexionBdd->requete($sqlInfosPerso);
         $fetchInfosPerso = mysql_fetch_assoc($resInfosPerso);
         
@@ -896,7 +896,7 @@ class archiUtilisateur extends config {
         
         
         
-        $sqlVilleFavoris = "SELECT v.idVille, v.nom as nomVille, p.idPays, p.nom as nomPays FROM ville v LEFT JOIN pays p ON p.idPays = v.idPays WHERE v.idVille='".$fetchInfosPerso['idVilleFavoris']."'";
+        $sqlVilleFavoris = "SELECT v.idVille,  v.nom as nomVille,  p.idPays,  p.nom as nomPays FROM ville v LEFT JOIN pays p ON p.idPays = v.idPays WHERE v.idVille='".$fetchInfosPerso['idVilleFavoris']."'";
         $resVilleFavoris = $this->connexionBdd->requete($sqlVilleFavoris);
         $fetchVilleFavoris = mysql_fetch_assoc($resVilleFavoris);
         if (!isset($fetchVilleFavoris['nomVille']))
@@ -907,7 +907,7 @@ class archiUtilisateur extends config {
             $fetchVilleFavoris['idPays']='';
         }
 
-        return array_merge($fetchInfosPerso,$fetchNbModifsImage,$fetchNbAjoutImage,$fetchNbModifEvenement,$fetchNbAjoutEvenement,$fetchVilleFavoris);
+        return array_merge($fetchInfosPerso, $fetchNbModifsImage, $fetchNbAjoutImage, $fetchNbModifEvenement, $fetchNbAjoutEvenement, $fetchVilleFavoris);
     }
     
     // **********************************************************************************************************************************************
@@ -922,13 +922,13 @@ class archiUtilisateur extends config {
         $f = new formGenerator();
         
         $configFields = array(
-            "motCleRechercheUtilisateur"=>array('type'=>'text','htmlCode'=>'','error'=>'','libelle'=>'Recherche :','default'=>'','value'=>'','required'=>false),
-            "pageCourante" =>array('type'=>'hidden','htmlCode'=>'','error'=>'','default'=>'','value'=>'','required'=>false),
-            "classementDernieresConnexions" =>array('type'=>'hidden','htmlCode'=>'','error'=>'','default'=>'0','value'=>'0','required'=>false,'libelle'=>'dernieres connexions'),
-            "classementNbConnexions" =>array('type'=>'hidden','htmlCode'=>'','error'=>'','default'=>'0','value'=>'0','required'=>false,'libelle'=>'nbConnexions'),
-            "classementNbParticipations" =>array('type'=>'hidden','htmlCode'=>'','error'=>'','default'=>'0','value'=>'0','required'=>false,'libelle'=>'nbParticipations'),
-            "classementDateCreation"=>array('type'=>'hidden','htmlCode'=>'','error'=>'','default'=>'0','value'=>'0','required'=>false,'libelle'=>'dateCreation'),
-            "classementNomPrenom"=>array('type'=>'hidden','htmlCode'=>'','error'=>'','default'=>'0','value'=>'0','required'=>false,'libelle'=>'nomprenom')
+            "motCleRechercheUtilisateur"=>array('type'=>'text', 'htmlCode'=>'', 'error'=>'', 'libelle'=>'Recherche :', 'default'=>'', 'value'=>'', 'required'=>false), 
+            "pageCourante" =>array('type'=>'hidden', 'htmlCode'=>'', 'error'=>'', 'default'=>'', 'value'=>'', 'required'=>false), 
+            "classementDernieresConnexions" =>array('type'=>'hidden', 'htmlCode'=>'', 'error'=>'', 'default'=>'0', 'value'=>'0', 'required'=>false, 'libelle'=>'dernieres connexions'), 
+            "classementNbConnexions" =>array('type'=>'hidden', 'htmlCode'=>'', 'error'=>'', 'default'=>'0', 'value'=>'0', 'required'=>false, 'libelle'=>'nbConnexions'), 
+            "classementNbParticipations" =>array('type'=>'hidden', 'htmlCode'=>'', 'error'=>'', 'default'=>'0', 'value'=>'0', 'required'=>false, 'libelle'=>'nbParticipations'), 
+            "classementDateCreation"=>array('type'=>'hidden', 'htmlCode'=>'', 'error'=>'', 'default'=>'0', 'value'=>'0', 'required'=>false, 'libelle'=>'dateCreation'), 
+            "classementNomPrenom"=>array('type'=>'hidden', 'htmlCode'=>'', 'error'=>'', 'default'=>'0', 'value'=>'0', 'required'=>false, 'libelle'=>'nomprenom')
         );
         
         
@@ -940,13 +940,13 @@ class archiUtilisateur extends config {
             $arraySqlSelect[] = "nom LIKE \"%".mysql_escape_string($this->variablesPost['motCleRechercheUtilisateur'])."%\"";
             $arraySqlSelect[] = "prenom LIKE \"%".mysql_escape_string($this->variablesPost['motCleRechercheUtilisateur'])."%\"";
             $arraySqlSelect[] = "mail LIKE \"%".mysql_escape_string($this->variablesPost['motCleRechercheUtilisateur'])."%\"";
-            $arraySqlSelect[] = "concat(nom,prenom,mail) LIKE \"%".mysql_escape_string($this->variablesPost['motCleRechercheUtilisateur'])."%\"";
-            $sqlSelect = " AND (".implode(" OR ",$arraySqlSelect).")";
+            $arraySqlSelect[] = "concat(nom, prenom, mail) LIKE \"%".mysql_escape_string($this->variablesPost['motCleRechercheUtilisateur'])."%\"";
+            $sqlSelect = " AND (".implode(" OR ", $arraySqlSelect).")";
         }
         
         
         // tri par defaut
-        $sqlTri = " ORDER BY nom,prenom ";
+        $sqlTri = " ORDER BY nom, prenom ";
 
         
         // requetes par defaut
@@ -962,7 +962,7 @@ class archiUtilisateur extends config {
     
     
         $req = "
-        SELECT u.idUtilisateur,u.nom as nom, u.prenom as prenom, u.dateCreation as dateCreation, cu1.date as derniereConnexion
+        SELECT u.idUtilisateur, u.nom as nom,  u.prenom as prenom,  u.dateCreation as dateCreation,  cu1.date as derniereConnexion
         FROM utilisateur u
         LEFT JOIN connexionsUtilisateurs cu1 ON cu1.idUtilisateur = u.idUtilisateur
         WHERE ((cu1.date = (SELECT max(cu2.date) FROM connexionsUtilisateurs cu2 WHERE cu2.idUtilisateur = u.idUtilisateur)
@@ -984,20 +984,20 @@ class archiUtilisateur extends config {
             LEFT JOIN connexionsUtilisateurs cu2 ON cu2.idUtilisateur = cu1.idUtilisateur
             WHERE 1=1
             $sqlSelect
-            GROUP BY cu1.idUtilisateur,cu1.date
+            GROUP BY cu1.idUtilisateur, cu1.date
             HAVING cu1.date = max(cu2.date) OR cu1.date IS NULL
             $sqlTri
         ";
         
         $req = "
         
-            SELECT u.idUtilisateur, u.nom as nom, u.prenom as prenom, u.dateCreation as dateCreation, cu1.date as derniereConnexion
+            SELECT u.idUtilisateur,  u.nom as nom,  u.prenom as prenom,  u.dateCreation as dateCreation,  cu1.date as derniereConnexion
             FROM utilisateur u
             LEFT JOIN connexionsUtilisateurs cu1 ON cu1.idUtilisateur = u.idUtilisateur
             LEFT JOIN connexionsUtilisateurs cu2 ON cu2.idUtilisateur = cu1.idUtilisateur
             WHERE 1=1
             $sqlSelect
-            GROUP BY cu1.idUtilisateur,cu1.date
+            GROUP BY cu1.idUtilisateur, cu1.date
             HAVING cu1.date = max(cu2.date) OR cu1.date IS NULL
             $sqlTri
         
@@ -1027,7 +1027,7 @@ class archiUtilisateur extends config {
                 ";
                 */
                 $req = "
-                SELECT u.idUtilisateur,u.nom as nom, u.prenom as prenom, u.dateCreation as dateCreation, cu1.date as derniereConnexion
+                SELECT u.idUtilisateur, u.nom as nom,  u.prenom as prenom,  u.dateCreation as dateCreation,  cu1.date as derniereConnexion
                 FROM utilisateur u
                 LEFT JOIN connexionsUtilisateurs cu1 ON cu1.idUtilisateur = u.idUtilisateur
                 WHERE ((cu1.date = (SELECT max(cu2.date) FROM connexionsUtilisateurs cu2 WHERE cu2.idUtilisateur = u.idUtilisateur)
@@ -1062,7 +1062,7 @@ class archiUtilisateur extends config {
                 ";
             
                 $req = "
-                SELECT u.idUtilisateur,u.nom as nom, u.prenom as prenom, u.dateCreation as dateCreation, count(cu1.idUtilisateur) as nbConnexions
+                SELECT u.idUtilisateur, u.nom as nom,  u.prenom as prenom,  u.dateCreation as dateCreation,  count(cu1.idUtilisateur) as nbConnexions
                 FROM utilisateur u
                 LEFT JOIN connexionsUtilisateurs cu1 ON cu1.idUtilisateur = u.idUtilisateur
                 WHERE 1=1
@@ -1098,7 +1098,7 @@ class archiUtilisateur extends config {
                 ";
             
                 $req = "
-                SELECT u.idUtilisateur,u.nom as nom, u.prenom as prenom, u.dateCreation as dateCreation, count(cu1.idUtilisateur) as nbConnexions
+                SELECT u.idUtilisateur, u.nom as nom,  u.prenom as prenom,  u.dateCreation as dateCreation,  count(cu1.idUtilisateur) as nbConnexions
                 FROM utilisateur u
                 LEFT JOIN historiqueEvenement cu1 ON cu1.idUtilisateur = u.idUtilisateur
                 WHERE 1=1
@@ -1132,7 +1132,7 @@ class archiUtilisateur extends config {
                 ";
             
                 $req = "
-                SELECT u.idUtilisateur,u.nom as nom, u.prenom as prenom, u.dateCreation as dateCreation, cu1.date as derniereConnexion
+                SELECT u.idUtilisateur, u.nom as nom,  u.prenom as prenom,  u.dateCreation as dateCreation,  cu1.date as derniereConnexion
                 FROM utilisateur u
                 LEFT JOIN connexionsUtilisateurs cu1 ON cu1.idUtilisateur = u.idUtilisateur
                 WHERE (cu1.date = (SELECT max(cu2.date) FROM connexionsUtilisateurs cu2 WHERE cu2.idUtilisateur = u.idUtilisateur)
@@ -1142,14 +1142,14 @@ class archiUtilisateur extends config {
             
                 if ($configFields['classementDateCreation']['value']=='1')
                 {
-                    $req.= " ORDER BY dateCreation DESC,u.idUtilisateur DESC ";
-                    $reqCount.="";//" ORDER BY dateCreation DESC,u.idUtilisateur DESC ";
+                    $req.= " ORDER BY dateCreation DESC, u.idUtilisateur DESC ";
+                    $reqCount.="";//" ORDER BY dateCreation DESC, u.idUtilisateur DESC ";
                 }
                 
                 if ($configFields['classementDateCreation']['value']=='0')
                 {
-                    $req.= " ORDER BY dateCreation ASC,u.idUtilisateur ASC ";
-                    $reqCount.="";//" ORDER BY dateCreation ASC,u.idUtilisateur ASC  ";
+                    $req.= " ORDER BY dateCreation ASC, u.idUtilisateur ASC ";
+                    $reqCount.="";//" ORDER BY dateCreation ASC, u.idUtilisateur ASC  ";
                 }
             }
             
@@ -1165,7 +1165,7 @@ class archiUtilisateur extends config {
                 ";
             
                 $req = "
-                SELECT u.idUtilisateur,u.nom as nom, u.prenom as prenom, u.dateCreation as dateCreation, cu1.date as derniereConnexion
+                SELECT u.idUtilisateur, u.nom as nom,  u.prenom as prenom,  u.dateCreation as dateCreation,  cu1.date as derniereConnexion
                 FROM utilisateur u
                 LEFT JOIN connexionsUtilisateurs cu1 ON cu1.idUtilisateur = u.idUtilisateur
                 WHERE (cu1.date = (SELECT max(cu2.date) FROM connexionsUtilisateurs cu2 WHERE cu2.idUtilisateur = u.idUtilisateur)
@@ -1175,25 +1175,25 @@ class archiUtilisateur extends config {
             
                 if ($configFields['classementNomPrenom']['value']=='1')
                 {
-                    $req.= " ORDER BY u.nom ASC,u.prenom ASC ";
-                    $reqCount.="";//" ORDER BY u.nom ASC,prenom ASC ";
+                    $req.= " ORDER BY u.nom ASC, u.prenom ASC ";
+                    $reqCount.="";//" ORDER BY u.nom ASC, prenom ASC ";
                 }
                 
                 if ($configFields['classementNomPrenom']['value']=='0')
                 {
-                    $req.= " ORDER BY u.nom DESC,u.prenom DESC ";
-                    $reqCount.="";//" ORDER BY u.nom DESC,u.prenom DESC ";
+                    $req.= " ORDER BY u.nom DESC, u.prenom DESC ";
+                    $reqCount.="";//" ORDER BY u.nom DESC, u.prenom DESC ";
                 }
             }
             
         }
 
         $configForm = array(
-        'titrePage'=>'',
-        'fields'=>$configFields,
-        'submitButtonValue'=>_("Envoyer"),
-        'formAction'=>$this->creerUrl('','utilisateurListe',array_merge(array('recherche'=>1))),
-        'templateFileName'=>'rechercheUtilisateurs.tpl',
+        'titrePage'=>'', 
+        'fields'=>$configFields, 
+        'submitButtonValue'=>_("Envoyer"), 
+        'formAction'=>$this->creerUrl('', 'utilisateurListe', array_merge(array('recherche'=>1))), 
+        'templateFileName'=>'rechercheUtilisateurs.tpl', 
         'formName'=>'formRechercheUtilisateur'
         );
         
@@ -1208,11 +1208,11 @@ class archiUtilisateur extends config {
         $nbEnregistrementsParPage = 15;
         
         $arrayPagination=$pagination->pagination(array(
-                                        'nbEnregistrementsParPage'=>$nbEnregistrementsParPage,
-                                        'nbEnregistrementsTotaux'=>$nbEnregistrementTotaux,
-                                        'typeLiens'=>'formulaire',
-                                        'champPageCourante'=>'pageCourante',
-                                        'nomParamPageCourante'=>'pageCourante',
+                                        'nbEnregistrementsParPage'=>$nbEnregistrementsParPage, 
+                                        'nbEnregistrementsTotaux'=>$nbEnregistrementTotaux, 
+                                        'typeLiens'=>'formulaire', 
+                                        'champPageCourante'=>'pageCourante', 
+                                        'nomParamPageCourante'=>'pageCourante', 
                                         'idFormulaire'=>'formRechercheUtilisateur'
                                         ));
 
@@ -1233,7 +1233,7 @@ class archiUtilisateur extends config {
             while ( $rep = mysql_fetch_object( $result )) {
                 $hasResult=true;
                 $nbModifications = 0;
-                $arrayInfosConnectionsUtilisateurs = $this->getInfosConnexions($rep->idUtilisateur,true); // on est en mode administration
+                $arrayInfosConnectionsUtilisateurs = $this->getInfosConnexions($rep->idUtilisateur, true); // on est en mode administration
                 
                 $derniereConnexion = '';
                 if ($arrayInfosConnectionsUtilisateurs['derniereConnexion']=="c'est votre première connexion.")
@@ -1246,19 +1246,19 @@ class archiUtilisateur extends config {
                 }
                 
                 
-                $t->assign_block_vars('l', array(
-                    'url'         => $this->creerUrl('','utilisateurDetail',array('idUtilisateur' => $rep->idUtilisateur)),
-                    'nom'         => $rep->nom,
-                    'prenom'      => $rep->prenom,
-                    'nbConnexions' => $arrayInfosConnectionsUtilisateurs['nbConnexions'],
-                    'derniereConnexion'=>$derniereConnexion,
-                    'nbParticipationsEvenements'=>$arrayInfosConnectionsUtilisateurs["nbParticipationsEvenements"],
+                $t->assign_block_vars('l',  array(
+                    'url'         => $this->creerUrl('', 'utilisateurDetail', array('idUtilisateur' => $rep->idUtilisateur)), 
+                    'nom'         => $rep->nom, 
+                    'prenom'      => $rep->prenom, 
+                    'nbConnexions' => $arrayInfosConnectionsUtilisateurs['nbConnexions'], 
+                    'derniereConnexion'=>$derniereConnexion, 
+                    'nbParticipationsEvenements'=>$arrayInfosConnectionsUtilisateurs["nbParticipationsEvenements"], 
                     'dateCreation'=>$this->date->toFrench($rep->dateCreation)
                     ));
                 
                 
                 $t->assign_vars(array("pagination"=>$arrayPagination["html"]));
-                $t->assign_vars(array("infosStatistiques"=>"Nombre de compte actifs : <b>".$this->getNbUtilisateursInscrits()."</b>, nombre d'abonnés à l'alerte mail : <b>".$this->getNbUtilisateursAbonnesAlerteMail()."</b>.<br><br>"));
+                $t->assign_vars(array("infosStatistiques"=>"Nombre de compte actifs : <b>".$this->getNbUtilisateursInscrits()."</b>,  nombre d'abonnés à l'alerte mail : <b>".$this->getNbUtilisateursAbonnesAlerteMail()."</b>.<br><br>"));
                             
                 $t->assign_vars(array("urlTriNomPrenom"=>" href='#' onclick=\"document.getElementById('classementNomPrenom').value='1';document.getElementById('classementNbConnexions').value='0';document.getElementById('classementDernieresConnexions').value='0';document.getElementById('classementDateCreation').value='0';document.getElementById('classementNbParticipations').value='0';document.getElementById('formRechercheUtilisateur').submit();\" "));
                 $t->assign_vars(array("urlTriNbConnexions"=>" href='#' onclick=\"document.getElementById('classementNomPrenom').value='0';document.getElementById('classementNbConnexions').value='1';document.getElementById('classementDernieresConnexions').value='0';document.getElementById('classementDateCreation').value='0';document.getElementById('classementNbParticipations').value='0';document.getElementById('formRechercheUtilisateur').submit();\" "));
@@ -1297,7 +1297,7 @@ class archiUtilisateur extends config {
             $fetch = mysql_fetch_assoc($res);
             $mail=$fetch['mail'];
         } else {
-            echo "Il y a un problème avec votre compte , veuillez contacter l'administrateur.";
+            echo "Il y a un problème avec votre compte ,  veuillez contacter l'administrateur.";
         }
         
         return $mail;
@@ -1310,7 +1310,7 @@ class archiUtilisateur extends config {
     {
         $html="";
         $mail = new mailObject();    
-        // est ce que l'utilisateur courant a les droits pour confirmer une inscription , est il admin ?
+        // est ce que l'utilisateur courant a les droits pour confirmer une inscription ,  est il admin ?
         // si oui on recupere ces identifiants afin de stocker dans la base l'id de la personne qui a confirmé l'inscription
         //$authentification = new archiAuthentification();
         //if ($authentification->estConnecte() && $authentification->estAdmin())
@@ -1320,7 +1320,7 @@ class archiUtilisateur extends config {
             if (isset($this->variablesGet['archiIdUtilisateur']) && isset($this->variablesGet['archiMd5']))
             {
                 // on verifie que le compte n'a pas deja ete activé
-                $requeteActif = "select compteActif,idActivateur,compteBanni from utilisateur where idUtilisateur = '".$this->variablesGet['archiIdUtilisateur']."' and       motDePasse = '".$this->variablesGet['archiMd5']."'";
+                $requeteActif = "select compteActif, idActivateur, compteBanni from utilisateur where idUtilisateur = '".$this->variablesGet['archiIdUtilisateur']."' and       motDePasse = '".$this->variablesGet['archiMd5']."'";
                 $resActif = $this->connexionBdd->requete($requeteActif);
                 if (mysql_num_rows($resActif)==0)
                 {
@@ -1343,20 +1343,20 @@ class archiUtilisateur extends config {
                     }
                     else
                     {
-                        // on le met a jour , activation
-                        $requeteMaj = "update utilisateur set compteActif='1', alerteMail='1', alerteCommentaires='1', alerteAdresses='1' where idUtilisateur='".$this->variablesGet['archiIdUtilisateur']."' and motDePasse = '".$this->variablesGet['archiMd5']."'";//idActivateur='".$idAdministrateur."'
+                        // on le met a jour ,  activation
+                        $requeteMaj = "update utilisateur set compteActif='1',  alerteMail='1',  alerteCommentaires='1',  alerteAdresses='1' where idUtilisateur='".$this->variablesGet['archiIdUtilisateur']."' and motDePasse = '".$this->variablesGet['archiMd5']."'";//idActivateur='".$idAdministrateur."'
                         
                         if ($resMaj = $this->connexionBdd->requete($requeteMaj))
                         {
                             echo "Compte mis a jour";
                             // envoi du mail a l'utilisateur
                             $mailUtilisateur = $this->getMailUtilisateur($this->variablesGet['archiIdUtilisateur']);
-                            $message = "Bonjour, <br><br>";
+                            $message = "Bonjour,  <br><br>";
                             $message .="Votre compte sur <a href='http://www.archi-strasbourg.org'>http://www.archi-strasbourg.org</a> a été activé.<br>";
                             $message .="Votre login correspond à votre adresse mail : ".$mailUtilisateur."<br>";
                             $message .="A bientôt sur archi-strasbourg.org!<br>";
                             
-                            $mail->sendMail($mail->getSiteMail(),$mailUtilisateur,'archi-strasbourg.org : Votre compte est activé',$message,true);
+                            $mail->sendMail($mail->getSiteMail(), $mailUtilisateur, 'archi-strasbourg.org : Votre compte est activé', $message, true);
                             echo "Le compte ".$mailUtilisateur." est maintenant actif.<br>";
                         }
                         else
@@ -1369,7 +1369,7 @@ class archiUtilisateur extends config {
         //}
         //else
         //{
-        //    echo "Vous n'etes pas connecté, ou vous n'avez pas les droits requis pour effectuer cette operation. Veuillez contacter l'administrateur.<br>";
+        //    echo "Vous n'etes pas connecté,  ou vous n'avez pas les droits requis pour effectuer cette operation. Veuillez contacter l'administrateur.<br>";
         //}
         
         return $html;
@@ -1384,18 +1384,18 @@ class archiUtilisateur extends config {
         return $retour;
     }
     
-    public function setParametrePredefini( $nom, $valeur)
+    public function setParametrePredefini( $nom,  $valeur)
     {
         // défini le cookie pour 6 mois
-        setcookie($nom, $valeur, $_SERVER['REQUEST_TIME']+60*60*24*182);
+        setcookie($nom,  $valeur,  $_SERVER['REQUEST_TIME']+60*60*24*182);
     }
     
     // ******************************************************************************************************************************
     // renvoi un tableau 
     // ******************************************************************************************************************************
-    public function getArrayInfosFromUtilisateur($idUtilisateur=0,$params = array())
+    public function getArrayInfosFromUtilisateur($idUtilisateur=0, $params = array())
     {
-        $sqlListeChamps = "nom,prenom,mail,idVilleFavoris,compteActif,idProfil,alerteCommentaires,alerteAdresses,idActivateur,dateCreation,urlSiteWeb,displayProfilContactForm";
+        $sqlListeChamps = "nom, prenom, mail, idVilleFavoris, compteActif, idProfil, alerteCommentaires, alerteAdresses, idActivateur, dateCreation, urlSiteWeb, displayProfilContactForm";
         if (isset($params['listeChamps']) && $params['listeChamps']!='')
         {
             $sqlListeChamps = $params['listeChamps'];
@@ -1421,15 +1421,15 @@ class archiUtilisateur extends config {
     // ******************************************************************************************************************************
     // renvoi les informations de connexions de l'utilisateur
     // ******************************************************************************************************************************
-    public function getInfosConnexions($idUtilisateur=0,$modeAdministrationSite = false)
+    public function getInfosConnexions($idUtilisateur=0, $modeAdministrationSite = false)
     {
         $reqNbConnexions = "SELECT count(idConnexion) as nbConnexions FROM connexionsUtilisateurs WHERE idUtilisateur = '".$idUtilisateur."'";
         $resNbConnexions = $this->connexionBdd->requete($reqNbConnexions);
         $fetchNbConnexions = mysql_fetch_assoc($resNbConnexions);
         $nbConnexions = $fetchNbConnexions['nbConnexions'];
         
-        // pour l'utilisateur courant, 
-        // on ne cherche pas la date de la connexion courante, mais la date de la derniere connexion
+        // pour l'utilisateur courant,  
+        // on ne cherche pas la date de la connexion courante,  mais la date de la derniere connexion
         $reqLastConnexion = "
                     
                     SELECT max(date) as derniereConnexion 
@@ -1459,14 +1459,14 @@ class archiUtilisateur extends config {
         $resNbParticipationsImages = $this->connexionBdd->requete($reqNbParticipationsImages);
         
         
-        return array('nbConnexions'=>$nbConnexions,'derniereConnexion'=>$dateLastConnexion,'isPremiereConnexion'=>$premiereConnexion,'nbParticipationsEvenements'=>mysql_num_rows($resNbParticipationsEvenements)+mysql_num_rows($resNbParticipationsImages));
+        return array('nbConnexions'=>$nbConnexions, 'derniereConnexion'=>$dateLastConnexion, 'isPremiereConnexion'=>$premiereConnexion, 'nbParticipationsEvenements'=>mysql_num_rows($resNbParticipationsEvenements)+mysql_num_rows($resNbParticipationsImages));
     }
     
 
     // ******************************************************************************************************************************
     // renvoi le createur d'une adresse a partir de different parametre possibles en entree de la fonction
     // ******************************************************************************************************************************
-    public function getCreatorsFromAdresseFrom($id=0,$type='')
+    public function getCreatorsFromAdresseFrom($id=0, $type='')
     {
         $utilisateurs = array(); // on retourne un tableau car il peut y avoir plusieur auteur d'adresses pour un meme groupe d'adresses par exemple
         
@@ -1476,14 +1476,14 @@ class archiUtilisateur extends config {
             //$idHistoriqueEvenementNouveau
                 $req = "
                                     SELECT ha1.idUtilisateur as idUtilisateur
-                                    FROM historiqueAdresse ha2, historiqueAdresse ha1
+                                    FROM historiqueAdresse ha2,  historiqueAdresse ha1
                                     LEFT JOIN historiqueEvenement he ON he.idHistoriqueEvenement = '".$id."'
                                     LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = he.idEvenement
                                     LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
                                     LEFT JOIN utilisateur u ON u.idUtilisateur = ha1.idUtilisateur
                                     WHERE ha2.idAdresse = ha1.idAdresse
                                     AND ha1.idAdresse = ae.idAdresse
-                                    GROUP BY ha1.idAdresse, ha1.idHistoriqueAdresse
+                                    GROUP BY ha1.idAdresse,  ha1.idHistoriqueAdresse
                                     HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                 ";
                 $res = $this->connexionBdd->requete($req);
@@ -1515,13 +1515,13 @@ class archiUtilisateur extends config {
                 $req = "
                 
                                     SELECT ha1.idUtilisateur as idUtilisateur
-                                    FROM historiqueAdresse ha2, historiqueAdresse ha1
+                                    FROM historiqueAdresse ha2,  historiqueAdresse ha1
                                     LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = '".$id."'
                                     LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
                                     LEFT JOIN utilisateur u ON u.idUtilisateur = ha1.idUtilisateur
                                     WHERE ha2.idAdresse = ha1.idAdresse
                                     AND ha1.idAdresse = ae.idAdresse
-                                    GROUP BY ha1.idAdresse, ha1.idHistoriqueAdresse
+                                    GROUP BY ha1.idAdresse,  ha1.idHistoriqueAdresse
                                     HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                 
                 ";
@@ -1537,14 +1537,14 @@ class archiUtilisateur extends config {
                 $req = "
                 
                                     SELECT ha1.idUtilisateur as idUtilisateur
-                                    FROM historiqueAdresse ha2, historiqueAdresse ha1
+                                    FROM historiqueAdresse ha2,  historiqueAdresse ha1
                                     LEFT JOIN historiqueImage hi ON hi.idHistoriqueImage = '".$id."'
                                     LEFT JOIN _evenementImage ei ON ei.idImage = hi.idImage
                                     LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = ei.idEvenement
                                     LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ei.idEvenement
                                     WHERE ha2.idAdresse = ha1.idAdresse
                                     AND ha1.idAdresse = ae.idAdresse
-                                    GROUP BY ha1.idAdresse, ha1.idHistoriqueAdresse
+                                    GROUP BY ha1.idAdresse,  ha1.idHistoriqueAdresse
                                     HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                 
                 ";
@@ -1558,8 +1558,8 @@ class archiUtilisateur extends config {
             
             case 'idImage':
                 $req = "
-                                    SELECT ha1.idUtilisateur as idUtilisateur,ha1.idAdresse as idAdresse
-                                    FROM historiqueAdresse ha2, historiqueAdresse ha1
+                                    SELECT ha1.idUtilisateur as idUtilisateur, ha1.idAdresse as idAdresse
+                                    FROM historiqueAdresse ha2,  historiqueAdresse ha1
                                     LEFT JOIN historiqueImage hi1 ON hi1.idImage = '".$id."'
                                     LEFT JOIN historiqueImage hi2 ON hi2.idImage = hi1.idImage
                                     LEFT JOIN _evenementImage ei ON ei.idImage = hi1.idImage
@@ -1567,13 +1567,13 @@ class archiUtilisateur extends config {
                                     LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
                                     WHERE ha2.idAdresse = ha1.idAdresse
                                     AND ha1.idAdresse = ae.idAdresse
-                                    GROUP BY ha1.idAdresse,hi1.idImage, ha1.idHistoriqueAdresse,hi1.idHistoriqueImage
+                                    GROUP BY ha1.idAdresse, hi1.idImage,  ha1.idHistoriqueAdresse, hi1.idHistoriqueImage
                                     HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND hi1.idHistoriqueImage = max(hi2.idHistoriqueImage)
                 ";
                 $res = $this->connexionBdd->requete($req);
                 while($fetch = mysql_fetch_assoc($res))
                 {
-                    $utilisateurs[] = array('idUtilisateur'=>$fetch['idUtilisateur'],'idAdresse'=>$fetch['idAdresse']);
+                    $utilisateurs[] = array('idUtilisateur'=>$fetch['idUtilisateur'], 'idAdresse'=>$fetch['idAdresse']);
                 }
             break;
         }
@@ -1601,11 +1601,11 @@ class archiUtilisateur extends config {
             $configFields = $this->getFieldsFromMotDePasseOublie();
             
         $configForm = array(
-        'titrePage'=>_("Vous avez perdu votre mot de passe"),
-        'fields'=>$configFields,
-        'submitButtonValue'=>_("Envoyer"),
-        'formAction'=>$this->creerUrl('handleMotDePasseOublie'),
-        'codeHtmlBeforeSubmitButton'=>_("Une fois ce formulaire validé, un mail contenant un lien vous permettant de choisir un nouveau mot de passe vous sera envoyé.")
+        'titrePage'=>_("Vous avez perdu votre mot de passe"), 
+        'fields'=>$configFields, 
+        'submitButtonValue'=>_("Envoyer"), 
+        'formAction'=>$this->creerUrl('handleMotDePasseOublie'), 
+        'codeHtmlBeforeSubmitButton'=>_("Une fois ce formulaire validé,  un mail contenant un lien vous permettant de choisir un nouveau mot de passe vous sera envoyé.")
         );
     
         $form  = new formGenerator();
@@ -1617,7 +1617,7 @@ class archiUtilisateur extends config {
     private function getFieldsFromMotDePasseOublie()
     {
         return array(
-                        'adresseMail'=>array('type'=>'text','default'=>'','htmlCode'=>'','libelle'=>_("Entrez votre adresse mail :"),'required'=>true,'error'=>'','value'=>'','htmlCode'=>"style='width:300px;'")
+                        'adresseMail'=>array('type'=>'text', 'default'=>'', 'htmlCode'=>'', 'libelle'=>_("Entrez votre adresse mail :"), 'required'=>true, 'error'=>'', 'value'=>'', 'htmlCode'=>"style='width:300px;'")
                     );
     }
     
@@ -1644,34 +1644,34 @@ class archiUtilisateur extends config {
                 $urlMd5 = md5("idUtilisateur=".$fetch['idUtilisateur']."_".$configFields['adresseMail']['value']);
                 // ok
                 // envoi du mail
-                $message = _("Vous avez fais une demande de nouveau mot de passe, veuillez cliquer")." <a href='".$this->creerUrl('','nouveauMotDePasse',array('check'=>$urlMd5,'mail'=>$configFields['adresseMail']['value']))."'><font color=blue>"._("ici")."</font></a> "._("pour pouvoir redéfinir votre mot de passe sur le site")." www.archi-strasbourg.org<br>";
+                $message = _("Vous avez fais une demande de nouveau mot de passe,  veuillez cliquer")." <a href='".$this->creerUrl('', 'nouveauMotDePasse', array('check'=>$urlMd5, 'mail'=>$configFields['adresseMail']['value']))."'><font color=blue>"._("ici")."</font></a> "._("pour pouvoir redéfinir votre mot de passe sur le site")." www.archi-strasbourg.org<br>";
                 $message.=_("ou copier coller le lien suivant dans votre navigateur :")." <br>";
-                $message.= "<a href='".$this->creerUrl('','nouveauMotDePasse',array('check'=>$urlMd5,'mail'=>$configFields['adresseMail']['value']))."'><font color=blue>".$this->creerUrl('','nouveauMotDePasse',array('check'=>$urlMd5,'mail'=>$configFields['adresseMail']['value']))."</font></a>";
+                $message.= "<a href='".$this->creerUrl('', 'nouveauMotDePasse', array('check'=>$urlMd5, 'mail'=>$configFields['adresseMail']['value']))."'><font color=blue>".$this->creerUrl('', 'nouveauMotDePasse', array('check'=>$urlMd5, 'mail'=>$configFields['adresseMail']['value']))."</font></a>";
                 $message.= "<br><br><br>"._("L'équipe archi-strasbourg.org")."<br>";
                 
                 $sujet = _("Demande de changement de mot de passe")." - www.archi-strasbourg.org";
                 
                 $mail = new mailObject();
-                $mail->sendMail($mail->getSiteMail(),$configFields['adresseMail']['value'],$sujet,$message,true);
+                $mail->sendMail($mail->getSiteMail(), $configFields['adresseMail']['value'], $sujet, $message, true);
                 
                 
                 // envoi de l'info aux administrateurs
                 $messageAdmins = _("Un utilisateur a fait une demande de changement de mot de passe.")."<br>".$configFields['adresseMail']['value'];
                 $sujetAdmins = _("Demande de changement de mot de passe sur")." archi-strasbourg.org";
                 
-                $mail->sendMailToAdministrators($mail->getSiteMail(),$sujetAdmins,$messageAdmins,'',true);
-                $this->ajouteMailEnvoiRegroupesAdministrateurs(array('contenu'=>$messageAdmins,'idTypeMailRegroupement'=>8,'criteres'=>""));
+                $mail->sendMailToAdministrators($mail->getSiteMail(), $sujetAdmins, $messageAdmins, '', true);
+                $this->ajouteMailEnvoiRegroupesAdministrateurs(array('contenu'=>$messageAdmins, 'idTypeMailRegroupement'=>8, 'criteres'=>""));
                 
                 $html.= _("Un mail vous a été envoyé contenant un lien pour redéfinir votre mot de passe.")."<br>";
             }
             elseif (mysql_num_rows($resVerif)>1)
             {
-                // probleme , plusieurs compte avec la meme adresse
-                $erreur->ajouter(_("Attention, plusieurs comptes ont ce mail comme identifiant. Merci de contacter l'administrateur du site."));
+                // probleme ,  plusieurs compte avec la meme adresse
+                $erreur->ajouter(_("Attention,  plusieurs comptes ont ce mail comme identifiant. Merci de contacter l'administrateur du site."));
             }
             elseif (mysql_num_rows($resVerif)==0)
             {
-                $erreur->ajouter(_("Le mail n'a pas été trouvé dans la base de données, merci de vérifier le mail"));
+                $erreur->ajouter(_("Le mail n'a pas été trouvé dans la base de données,  merci de vérifier le mail"));
             }
             
             if ($erreur->getNbErreurs()>0) // erreurs en rapport avec la verification de l'adresse mail ( et non pas les erreurs du formulaire)
@@ -1689,10 +1689,10 @@ class archiUtilisateur extends config {
     private function getFieldsFromChangementMotDePasseOublie()
     {
         return array(
-                        'mdp1'=>array('type'=>'password','default'=>'','htmlCode'=>'','libelle'=>'Nouveau mot de passe :','required'=>true,'error'=>'','value'=>'','htmlCode'=>""),
-                        'mdp2'=>array('type'=>'password','default'=>'','htmlCode'=>'','libelle'=>'Confirmez votre nouveau mot de passe :','required'=>true,'error'=>'','value'=>'','htmlCode'=>""),
-                        'mail'=>array('type'=>'hidden','default'=>'','htmlCode'=>'','libelle'=>'','required'=>true,'error'=>'','value'=>'','htmlCode'=>""),
-                        'md5'=>array('type'=>'hidden','default'=>'','htmlCode'=>'','libelle'=>'','required'=>true,'error'=>'','value'=>'','htmlCode'=>"")
+                        'mdp1'=>array('type'=>'password', 'default'=>'', 'htmlCode'=>'', 'libelle'=>'Nouveau mot de passe :', 'required'=>true, 'error'=>'', 'value'=>'', 'htmlCode'=>""), 
+                        'mdp2'=>array('type'=>'password', 'default'=>'', 'htmlCode'=>'', 'libelle'=>'Confirmez votre nouveau mot de passe :', 'required'=>true, 'error'=>'', 'value'=>'', 'htmlCode'=>""), 
+                        'mail'=>array('type'=>'hidden', 'default'=>'', 'htmlCode'=>'', 'libelle'=>'', 'required'=>true, 'error'=>'', 'value'=>'', 'htmlCode'=>""), 
+                        'md5'=>array('type'=>'hidden', 'default'=>'', 'htmlCode'=>'', 'libelle'=>'', 'required'=>true, 'error'=>'', 'value'=>'', 'htmlCode'=>"")
                     );
     }
     
@@ -1701,7 +1701,7 @@ class archiUtilisateur extends config {
     {
         $html="";
         
-        if (isset($this->variablesGet['check']) && isset($this->variablesGet['mail']) && $this->verifMD5ChangementMotDePasse($this->variablesGet['check'],$this->variablesGet['mail']))
+        if (isset($this->variablesGet['check']) && isset($this->variablesGet['mail']) && $this->verifMD5ChangementMotDePasse($this->variablesGet['check'], $this->variablesGet['mail']))
         {
             
             $configFields = $this->getFieldsFromChangementMotDePasseOublie();
@@ -1710,9 +1710,9 @@ class archiUtilisateur extends config {
             $configFields['md5']['default']=$this->variablesGet['check'];
             
             $configForm = array(
-            'titrePage'=>_("Choisissez un nouveau mot de passe"),
-            'fields'=>$configFields,
-            'submitButtonValue'=>_("Envoyer"),
+            'titrePage'=>_("Choisissez un nouveau mot de passe"), 
+            'fields'=>$configFields, 
+            'submitButtonValue'=>_("Envoyer"), 
             'formAction'=>$this->creerUrl('handleMotDePasseOublieNouveauMotDePasse')
             );
         
@@ -1740,7 +1740,7 @@ class archiUtilisateur extends config {
         
         $erreur = new objetErreur();
         
-        if (isset($this->variablesPost['mail']) && $this->variablesPost['mail']!='' && isset($this->variablesPost['md5']) && $this->verifMD5ChangementMotDePasse($this->variablesPost['md5'], $this->variablesPost['mail']))
+        if (isset($this->variablesPost['mail']) && $this->variablesPost['mail']!='' && isset($this->variablesPost['md5']) && $this->verifMD5ChangementMotDePasse($this->variablesPost['md5'],  $this->variablesPost['mail']))
         {
             if ($configFields['mdp1']['value']==$configFields['mdp2']['value'])
             {
@@ -1777,7 +1777,7 @@ class archiUtilisateur extends config {
     
     
     
-    private function verifMD5ChangementMotDePasse($md5="",$mail="")
+    private function verifMD5ChangementMotDePasse($md5="", $mail="")
     {
         $ok = false;
         $mail = trim($mail);
@@ -1801,12 +1801,12 @@ class archiUtilisateur extends config {
     }
     
     // est ce que l'utilisateur a acces a l'element bloqué par l'element identifié par le tag
-    public function isAuthorized($tagName='',$idUtilisateur=0)
+    public function isAuthorized($tagName='', $idUtilisateur=0)
     {
         $retour=false;
         $d = new droitsObject();
         $idProfil = $this->getIdProfilFromUtilisateur($idUtilisateur);
-        if ($d->isAuthorized($tagName,$idProfil))
+        if ($d->isAuthorized($tagName, $idProfil))
         {
             $retour=true;
         }
@@ -1830,7 +1830,7 @@ class archiUtilisateur extends config {
             {
                 foreach($this->variablesPost['idVillesModerateur'] as $indice => $value)
                 {
-                    $reqVillesModeration="INSERT INTO utilisateurModerateurVille (idUtilisateur,idVille) VALUES ('".$this->variablesPost['idUtilisateurModerateur']."','".$value."')";
+                    $reqVillesModeration="INSERT INTO utilisateurModerateurVille (idUtilisateur, idVille) VALUES ('".$this->variablesPost['idUtilisateurModerateur']."', '".$value."')";
                     $resVillesModeration = $this->connexionBdd->requete($reqVillesModeration);
                 }
             }
@@ -1858,7 +1858,7 @@ class archiUtilisateur extends config {
     }
     
     // renvoi la liste des moderateurs concernant une ville
-    public function getArrayIdModerateursActifsFromVille($idVille=0,$params=array())
+    public function getArrayIdModerateursActifsFromVille($idVille=0, $params=array())
     {
         $retour = array();
         
@@ -1888,8 +1888,8 @@ class archiUtilisateur extends config {
         return $retour;
     }
     
-    // est ce que l'utilisateur est moderateur de la ville dont l'adresse est renseigné dans id , cet id peut etre un idImage, idAdresse, idEvenement , idEvenementGroupeAdresse , ce qui doit etre précisé dans typeId
-    public function isModerateurFromVille($idUtilisateur=0,$id=0,$typeId='')
+    // est ce que l'utilisateur est moderateur de la ville dont l'adresse est renseigné dans id ,  cet id peut etre un idImage,  idAdresse,  idEvenement ,  idEvenementGroupeAdresse ,  ce qui doit etre précisé dans typeId
+    public function isModerateurFromVille($idUtilisateur=0, $id=0, $typeId='')
     {
         $isModerateur=false;
 
@@ -1898,9 +1898,9 @@ class archiUtilisateur extends config {
         {
             $arrayVillesModerees = $this->getArrayVillesModereesPar($idUtilisateur);
             $adresse = new archiAdresse();
-            $idVilleAdresseCourante = $adresse->getIdVilleFrom($id,$typeId);
+            $idVilleAdresseCourante = $adresse->getIdVilleFrom($id, $typeId);
             
-            if (in_array($idVilleAdresseCourante,$arrayVillesModerees))
+            if (in_array($idVilleAdresseCourante, $arrayVillesModerees))
             {
                 $isModerateur=true;
             }
@@ -1930,11 +1930,11 @@ class archiUtilisateur extends config {
     {
         if (isset($params['contenu']) && isset($params['idDestinataire']) && isset($params['idTypeMailRegroupement']) && $params['contenu']!='' && $params['idDestinataire']!='' && $params['idTypeMailRegroupement']!='')
         {
-            $req = "INSERT INTO mailsEnvoiMailsRegroupes (contenu,dateHeure,idUtilisateur,idTypeMailRegroupement) VALUES (\"".$params['contenu']."\",now(),'".$params['idDestinataire']."','".$params['idTypeMailRegroupement']."')";
+            $req = "INSERT INTO mailsEnvoiMailsRegroupes (contenu, dateHeure, idUtilisateur, idTypeMailRegroupement) VALUES (\"".$params['contenu']."\", now(), '".$params['idDestinataire']."', '".$params['idTypeMailRegroupement']."')";
             $res = $this->connexionBdd->requete($req);
             
         } else {
-            echo "ATTENTION : parametre manquant dans la fonction archiUtilisateur::ajouteMailEnvoiRegroupe, veuillez contacter l'administrateur<br>";
+            echo "ATTENTION : parametre manquant dans la fonction archiUtilisateur::ajouteMailEnvoiRegroupe,  veuillez contacter l'administrateur<br>";
         }
     
     }
@@ -1966,19 +1966,19 @@ class archiUtilisateur extends config {
             $resAdmins = $this->connexionBdd->requete($reqAdmins);
             while($fetchAdmins = mysql_fetch_assoc($resAdmins))
             {        
-                $req = "INSERT INTO mailsEnvoiMailsRegroupes (contenu,dateHeure,idUtilisateur,idTypeMailRegroupement) VALUES (\"".$params['contenu']."\",now(),'".$fetchAdmins['idUtilisateur']."','".$params['idTypeMailRegroupement']."')";
+                $req = "INSERT INTO mailsEnvoiMailsRegroupes (contenu, dateHeure, idUtilisateur, idTypeMailRegroupement) VALUES (\"".$params['contenu']."\", now(), '".$fetchAdmins['idUtilisateur']."', '".$params['idTypeMailRegroupement']."')";
                 $res = $this->connexionBdd->requete($req);
             }
             
         } else {
-            echo "ATTENTION : parametre manquant dans la fonction archiUtilisateur::ajouteMailEnvoiRegroupe, veuillez contacter l'administrateur<br>";
+            echo "ATTENTION : parametre manquant dans la fonction archiUtilisateur::ajouteMailEnvoiRegroupe,  veuillez contacter l'administrateur<br>";
         }
     
     }
     
     // si l'utilisateur a un avatar cette fonction renvoie l'image
     // sinon elle renvoi une image par defaut
-    // si pas d'idUtilisateur en parametre , on renvoi l'image de l'avatar pour l'utilisateur connecté
+    // si pas d'idUtilisateur en parametre ,  on renvoi l'image de l'avatar pour l'utilisateur connecté
     public function getImageAvatar($params = array())
     {
         $retour = "";
@@ -2046,7 +2046,7 @@ class archiUtilisateur extends config {
                 $a = new archiAdresse();
                 foreach($villesModereesArray as $indice => $idVille)
                 {
-                    $fetchVille = $a->getInfosVille($idVille,array('fieldList'=>"v.nom as nom"));
+                    $fetchVille = $a->getInfosVille($idVille, array('fieldList'=>"v.nom as nom"));
                     $libelleVillesModerees[] = $fetchVille['nom'];
                 }
                 
@@ -2054,10 +2054,10 @@ class archiUtilisateur extends config {
                 {
                     foreach($libelleVillesModerees as $indice => $nomVille)
                     {
-                        $villesModerees .= "<a href='".$this->urlRacine."$nomVille/'>$nomVille</a>, ";
+                        $villesModerees .= "<a href='".$this->urlRacine."$nomVille/'>$nomVille</a>,  ";
                     }
                     
-                    $villesModerees = "- Villes modérées : ".pia_substr($villesModerees,0,-2);
+                    $villesModerees = "- Villes modérées : ".pia_substr($villesModerees, 0, -2);
                 }
                 
             }
@@ -2079,7 +2079,7 @@ class archiUtilisateur extends config {
             </div>
             <div style='float:left;width:600px;'>
                 <b>".ucfirst($infosArray['nom'])." ".ucfirst($infosArray['prenom'])."</b><br>
-                - Nombre de participations : $nbParticipations (ajouts et modifications d'images, d'événements et commentaires en tant qu'utilisateur inscrit)<br>
+                - Nombre de participations : $nbParticipations (ajouts et modifications d'images,  d'événements et commentaires en tant qu'utilisateur inscrit)<br>
                 $dateCreationCompte
                 - Cette personne à le statut : <b>$profil</b> sur archi-strasbourg.org<br>
                 $villesModerees
@@ -2108,7 +2108,7 @@ class archiUtilisateur extends config {
                 
                 
                 
-                $configBoutonsBBCode = array('formName'=>'messagePrive','fieldName'=>'message','noUrlInterneButton'=>true);
+                $configBoutonsBBCode = array('formName'=>'messagePrive', 'fieldName'=>'message', 'noUrlInterneButton'=>true);
                 
                 $help = $this->getHelpMessages('helpEvenement');
                 foreach($help as $index=>$value)
@@ -2116,24 +2116,24 @@ class archiUtilisateur extends config {
                     $configBoutonsBBCode[$index]=$value;
                 }
                 $configBoutonsBBCode["msgQuote"]="Selectionnez une partie de votre texte pour le mettre entre quotes";
-                $configBoutonsBBCode["msgUrlExterne"]="Tapez une url commencant par http:// , et selectionnez la pour en faire un lien";
+                $configBoutonsBBCode["msgUrlExterne"]="Tapez une url commencant par http:// ,  et selectionnez la pour en faire un lien";
                 $arrayBBCode = $bb->getBoutonsMiseEnFormeTextArea($configBoutonsBBCode);
                 
                 if ($authentification->estConnecte())
                 {
                     $configFieldsContact = array(
-                        'idUtilisateurDestinataire'=>array('type'=>'hidden','value'=>'','forceValueTo'=>$idUtilisateur,'htmlCode'=>'','default'=>'','error'=>'','required'=>true),
-                        'mailEnvoyeur'=>array('type'=>'email','value'=>'','forceValueTo'=>$mailUtilisateurConnecte,'htmlCode'=>'','default'=>'','libelle'=>'Votre mail','error'=>'','required'=>true),
-                        'message'=>array('type'=>'bigText','value'=>'','htmlCode'=>"style='width:400px;height:100px;'",'default'=>'','libelle'=>'Votre message','error'=>'','required'=>true,'htmlCodeBeforeField'=>$arrayBBCode['boutonsHTML'])
+                        'idUtilisateurDestinataire'=>array('type'=>'hidden', 'value'=>'', 'forceValueTo'=>$idUtilisateur, 'htmlCode'=>'', 'default'=>'', 'error'=>'', 'required'=>true), 
+                        'mailEnvoyeur'=>array('type'=>'email', 'value'=>'', 'forceValueTo'=>$mailUtilisateurConnecte, 'htmlCode'=>'', 'default'=>'', 'libelle'=>'Votre mail', 'error'=>'', 'required'=>true), 
+                        'message'=>array('type'=>'bigText', 'value'=>'', 'htmlCode'=>"style='width:400px;height:100px;'", 'default'=>'', 'libelle'=>'Votre message', 'error'=>'', 'required'=>true, 'htmlCodeBeforeField'=>$arrayBBCode['boutonsHTML'])
                     );
                 }
                 else
                 {
                     $configFieldsContact = array(
-                        'idUtilisateurDestinataire'=>array('type'=>'hidden','value'=>'','forceValueTo'=>$idUtilisateur,'htmlCode'=>'','default'=>'','error'=>'','required'=>true),
-                        'mailEnvoyeur'=>array('type'=>'email','value'=>'','forceValueTo'=>$mailUtilisateurConnecte,'htmlCode'=>'','default'=>'','libelle'=>'Votre mail','error'=>'','required'=>true),
-                        'message'=>array('type'=>'bigText','value'=>'','htmlCode'=>"style='width:400px;height:100px;'",'default'=>'','libelle'=>'Votre message','error'=>'','required'=>true,'htmlCodeBeforeField'=>$arrayBBCode['boutonsHTML']),
-                        'captcha'=>array('type'=>'captcha','value'=>'','htmlCode'=>"",'default'=>'','libelle'=>'Vérification','error'=>'','required'=>true)
+                        'idUtilisateurDestinataire'=>array('type'=>'hidden', 'value'=>'', 'forceValueTo'=>$idUtilisateur, 'htmlCode'=>'', 'default'=>'', 'error'=>'', 'required'=>true), 
+                        'mailEnvoyeur'=>array('type'=>'email', 'value'=>'', 'forceValueTo'=>$mailUtilisateurConnecte, 'htmlCode'=>'', 'default'=>'', 'libelle'=>'Votre mail', 'error'=>'', 'required'=>true), 
+                        'message'=>array('type'=>'bigText', 'value'=>'', 'htmlCode'=>"style='width:400px;height:100px;'", 'default'=>'', 'libelle'=>'Votre message', 'error'=>'', 'required'=>true, 'htmlCodeBeforeField'=>$arrayBBCode['boutonsHTML']), 
+                        'captcha'=>array('type'=>'captcha', 'value'=>'', 'htmlCode'=>"", 'default'=>'', 'libelle'=>'Vérification', 'error'=>'', 'required'=>true)
                     );
                 }
 
@@ -2147,8 +2147,8 @@ class archiUtilisateur extends config {
                         // recuperation de l'intitule de l'adresse
                         $adresse = new archiAdresse();
                         $idAdresseMessage = $adresse->getIdAdresseFromIdEvenementGroupeAdresse($this->variablesGet['archiIdEvenementGroupeAdresseOrigine']);
-                        $intituleAdresse = $adresse->getIntituleAdresseFrom($this->variablesGet['archiIdEvenementGroupeAdresseOrigine'],'idEvenementGroupeAdresse',array('ifTitreAfficheTitreSeulement'=>true,'noQuartier'=>true,'noSousQuartier'=>true,'noVille'=>true));
-                        $complementMsgVisiteAdresse = " à visité l'adresse <a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdAdresse'=>$idAdresseMessage,'archiIdEvenementGroupeAdresse'=>$this->variablesGet['archiIdEvenementGroupeAdresseOrigine']))."'>".$intituleAdresse."</a> et";
+                        $intituleAdresse = $adresse->getIntituleAdresseFrom($this->variablesGet['archiIdEvenementGroupeAdresseOrigine'], 'idEvenementGroupeAdresse', array('ifTitreAfficheTitreSeulement'=>true, 'noQuartier'=>true, 'noSousQuartier'=>true, 'noVille'=>true));
+                        $complementMsgVisiteAdresse = " à visité l'adresse <a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$idAdresseMessage, 'archiIdEvenementGroupeAdresse'=>$this->variablesGet['archiIdEvenementGroupeAdresseOrigine']))."'>".$intituleAdresse."</a> et";
                     }
                     
                     
@@ -2156,17 +2156,17 @@ class archiUtilisateur extends config {
                     {
                         // envoi du mail
                         
-                        $contenu = "Bonjour,<br><br>";
+                        $contenu = "Bonjour, <br><br>";
                         $contenu.="Un utilisateur d'archi-strasbourg (<a href=\"mailto:".$this->variablesPost['mailEnvoyeur']."\">".$this->variablesPost['mailEnvoyeur']."</a>)$complementMsgVisiteAdresse vous envoie un message privé :<br><br>";
                         $contenu.=stripslashes($bb->convertToDisplay(array('text'=>$this->variablesPost['message'])));
                         $contenu.="";
                         $contenu.="";
-                        if ($mail->sendMail($this->siteMail,$infosArray['mail'], "Un utilisateur d'archi-strasbourg vous envoie un message", $contenu, $writeMailToLogs=false, $this->variablesPost['mailEnvoyeur']))
+                        if ($mail->sendMail($this->siteMail, $infosArray['mail'],  "Un utilisateur d'archi-strasbourg vous envoie un message",  $contenu,  $writeMailToLogs=false,  $this->variablesPost['mailEnvoyeur']))
                         {
                             echo "<span style='color:red;'>Mail envoyé.</span>";
                         }
                     }
-                    //$configFieldsContact['sended']=array('type'=>'hidden','value'=>'','forceValueTo'=>1,'htmlCode'=>'','default'=>'','error'=>'','required'=>false);
+                    //$configFieldsContact['sended']=array('type'=>'hidden', 'value'=>'', 'forceValueTo'=>1, 'htmlCode'=>'', 'default'=>'', 'error'=>'', 'required'=>false);
                 }
                 
                 
@@ -2177,9 +2177,9 @@ class archiUtilisateur extends config {
                 }
             
                 $configForm = array(
-                    'formAction'=>$this->creerUrl('','detailProfilPublique',array_merge($arrayUrlViensDeAdresse,array('archiIdUtilisateur'=>$idUtilisateur))),
-                    'fields'=>$configFieldsContact,
-                    'formName'=>'messagePrive',
+                    'formAction'=>$this->creerUrl('', 'detailProfilPublique', array_merge($arrayUrlViensDeAdresse, array('archiIdUtilisateur'=>$idUtilisateur))), 
+                    'fields'=>$configFieldsContact, 
+                    'formName'=>'messagePrive', 
                     'codeHtmlInFormAfterFields'=>"Prévisualisation :".$arrayBBCode['divAndJsAfterForm']
                 );
                 $html.="<br><br><h2>Lui envoyer un message personnel :</h2>";
@@ -2270,7 +2270,7 @@ class archiUtilisateur extends config {
     }
     
     /**
-     * Le champ date fin s'affiche pour les moderateurs , les admins et pour les utilisateurs dont la case est cochée dans leur profil (dans l'admin)
+     * Le champ date fin s'affiche pour les moderateurs ,  les admins et pour les utilisateurs dont la case est cochée dans leur profil (dans l'admin)
      * 
      * @param array $params Paramètres
      * 
@@ -2321,16 +2321,15 @@ class archiUtilisateur extends config {
         return $retour;
     }
     
-    public function canModifyTags ($params = array()) {
+    public function canModifyTags ($params = array())
+    {
         $d = new droitsObject();
-        $u = new archiUtilisateur();
-        $authentification = new archiAuthentification();
         
         $req = "SELECT canModifyTags FROM utilisateur WHERE idUtilisateur = '".$params['idUtilisateur']."'";
         $res = $this->connexionBdd->requete($req);
         $fetch = mysql_fetch_assoc($res);
                 
-        if ($d->isAuthorized('tags', $u->getIdProfilFromUtilisateur($authentification->getIdUtilisateur()))) {
+        if ($this->isAuthorized('tags',  $params['idUtilisateur'])) {
             return true;
         } else if ($fetch['canModifyTags']=='1') {
             return true;
