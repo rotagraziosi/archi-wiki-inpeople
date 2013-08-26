@@ -26,15 +26,13 @@ class archiImage extends config
     {
         $authentifie = new archiAuthentification();
 
-        if (isset($this->variablesPost['listeIdAdresses']) && $this->variablesPost['listeIdAdresses']!='')
-        {
+        if (isset($this->variablesPost['listeIdAdresses']) && $this->variablesPost['listeIdAdresses']!='') {
             $arrayListeId = explode(',  ',  $this->variablesPost['listeIdAdresses']);
             
             // on supprime d'abord les enregistrements précédents
             $resDelete = $this->connexionBdd->requete("delete from _adresseImage where idImage = '".$idImage."'");
             
-            foreach ($arrayListeId as $indice => $idAdresse)
-            {
+            foreach ($arrayListeId as $indice => $idAdresse) {
                 $prisDepuis ='0';
                 if (isset($this->variablesPost['prisDepuis_'.$idAdresse]))
                     $prisDepuis = $this->variablesPost['prisDepuis_'.$idAdresse];
@@ -76,14 +74,12 @@ class archiImage extends config
         $arrayListeIdImage=array();
         $dateDuJour = date("Y-m-d");
         //$authentifie->estConnecte() &&
-        if (isset($this->variablesPost['listeId']) && $this->variablesPost['listeId']!='')
-        {
+        if (isset($this->variablesPost['listeId']) && $this->variablesPost['listeId']!='') {
             $adresses = new archiAdresse();
             
             $arrayListeIdHistoriqueImage = explode(',  ',  $this->variablesPost['listeId']);
             
-            foreach ($arrayListeIdHistoriqueImage as $indice => $idHistorique)
-            {
+            foreach ($arrayListeIdHistoriqueImage as $indice => $idHistorique) {
                 if (isset($this->variablesPost['idCourant_'.$idHistorique])) {
                     $idCourant = $this->variablesPost['idCourant_'.$idHistorique];
                 }
@@ -117,8 +113,7 @@ class archiImage extends config
                 {
                     $authentifie = new archiAuthentification();
                     //$authentifie->estConnecte() &&
-                    if ( extension_loaded('gd'))
-                    {
+                    if ( extension_loaded('gd')) {
                         // nommage de l'image en fonction de l'id
                         // recuperation du type de fichier
                         // et conversion en jpg s'il le faut
@@ -163,8 +158,7 @@ class archiImage extends config
                         $this->redimension($_FILES['fichierRemplace'.$idHistorique]['tmp_name'],  pia_substr(strtolower($_FILES['fichierRemplace'.$idHistorique]['name']),  -3),  $this->getCheminPhysiqueImage("grand").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  $this->getFormatImageGrand());
 
                         
-                        if (file_exists($_FILES['fichierRemplace'.$idHistorique]['tmp_name']))
-                        {
+                        if (file_exists($_FILES['fichierRemplace'.$idHistorique]['tmp_name'])) {
                             echo "le fichier est uploadé<br>";
                         }
                         else
@@ -173,9 +167,7 @@ class archiImage extends config
                         unlink($_FILES['fichierRemplace'.$idHistorique]['tmp_name']);
                         
                         
-                    }
-                    else
-                    {
+                    } else {
                         echo "Il s'est produit une erreur lors de l'upload,  la session est terminée ou la bibliothèque gd n'est pas installé sur le serveur.<br>";
                     }
                 }
@@ -186,15 +178,12 @@ class archiImage extends config
                 $tableauChamps=array(); // contient les infos d'une image
                 foreach ($listeChamps as $indice => $name)
                 {
-                    if ($name=='isDateClicheEnviron')
-                    {
+                    if ($name=='isDateClicheEnviron') {
                         if (isset($this->variablesPost[$name."_".$idHistorique]) && $this->variablesPost[$name."_".$idHistorique]=='1')
                             $tableauChamps[$name] = 1;
                         else
                             $tableauChamps[$name] = 0;
-                    }
-                    else
-                    {
+                    } else {
                         $tableauChamps[$name] = isset($this->variablesPost[$name."_".$idHistorique])?$this->variablesPost[$name."_".$idHistorique]:"";
                     }
                 }
@@ -324,16 +313,14 @@ class archiImage extends config
                 // enregistrement des liaisons 
                 if (isset($this->variablesPost['prisDepuis'.$idHistorique]) && count($this->variablesPost['prisDepuis'.$idHistorique])>0)
                 {
-                    foreach ($this->variablesPost['prisDepuis'.$idHistorique] as $indice => $value)
-                    {
+                    foreach ($this->variablesPost['prisDepuis'.$idHistorique] as $indice => $value) {
                         $arrayAdresseGroupeAdresseImage = explode("_",  $value);
                         $idAdresse = $arrayAdresseGroupeAdresseImage[0];
                         $idEvenementGroupeAdresse = $arrayAdresseGroupeAdresseImage[1];
                         // verification que l'enregistrement n'existe pas deja
                         $reqVerifPrisDepuis = "SELECT idImage FROM _adresseImage WHERE idImage = '".$idImage."' AND idAdresse = '".$idAdresse."' AND idEvenementGroupeAdresse='".$idEvenementGroupeAdresse."' AND prisDepuis ='1';";
                         $resVerifPrisDepuis = $this->connexionBdd->requete($reqVerifPrisDepuis);
-                        if (mysql_num_rows($resVerifPrisDepuis)==0)
-                        {
+                        if (mysql_num_rows($resVerifPrisDepuis)==0) {
                             $champs="";
                             $values="";
                             if (isset($tabRecupZonesPrisDepuis[$value]) && count($tabRecupZonesPrisDepuis[$value])>0)
@@ -375,8 +362,7 @@ class archiImage extends config
 
                 if (isset($this->variablesPost['vueSur'.$idHistorique]) && count($this->variablesPost['vueSur'.$idHistorique])>0)
                 {
-                    foreach ($this->variablesPost['vueSur'.$idHistorique] as $indice => $value)
-                    {
+                    foreach ($this->variablesPost['vueSur'.$idHistorique] as $indice => $value) {
                         $arrayAdresseGroupeAdresseImage = explode("_",  $value);
                         $idAdresse = $arrayAdresseGroupeAdresseImage[0];
                         $idEvenementGroupeAdresse = $arrayAdresseGroupeAdresseImage[1];
@@ -384,8 +370,7 @@ class archiImage extends config
                         $reqVerifVueSur = "SELECT idImage FROM _adresseImage WHERE idImage = '".$idImage."' AND idAdresse = '".$idAdresse."' AND idEvenementGroupeAdresse='".$idEvenementGroupeAdresse."' AND vueSur ='1';";
                         
                         $resVerifVueSur = $this->connexionBdd->requete($reqVerifVueSur);
-                        if (mysql_num_rows($resVerifVueSur)==0)
-                        {
+                        if (mysql_num_rows($resVerifVueSur)==0) {
                             $champs="";
                             $values="";
                             if (isset($tabRecupZonesVuesSur[$value]) && count($tabRecupZonesVuesSur[$value])>0)
@@ -416,8 +401,7 @@ class archiImage extends config
                 {
                     $arrayListeEvenements = array_unique($this->variablesPost['listeEvenements_'.$idHistorique]);
                     
-                    foreach ($arrayListeEvenements as $indice => $valueIdEvenement)
-                    {
+                    foreach ($arrayListeEvenements as $indice => $valueIdEvenement) {
                         $resPos = $this->connexionBdd->requete("SELECT position from _evenementImage where idImage = '".$idImage."' AND idEvenement = '".$valueIdEvenement."'");
                         $pos=mysql_fetch_row($resPos);
                         // On supprime les informations des evenements lies à la photo afin de pouvoir ajouter les nouveaux evenements
@@ -432,8 +416,7 @@ class archiImage extends config
         
         // envoi d'un mail aux administrateurs
         $message ="";
-        foreach ($arrayListeIdImage as $indice => $idImageModifiee)
-        {
+        foreach ($arrayListeIdImage as $indice => $idImageModifiee) {
             if ($idPerson=archiPersonne::isPerson($this->getIdEvenementGroupeAdresseFromImage(array("idImage"=>$idImageModifiee, "type"=>"personne")))) {
                 $archiRetourIdValue=$this->getIdEvenementGroupeAdresseFromImage(array("idImage"=>$idImageModifiee, "type"=>"personne"));
             } else {
@@ -444,8 +427,7 @@ class archiImage extends config
         
         // recuperation d'une adresse sur laquelle ont ete liées les images ( c'est un formulaire capable de traiter des images d'adresses différentes,  mais cela n'arrive pas)
         $intituleAdresse="";
-        if ($idImageModifiee!='0' && $idImageModifiee!='')
-        {
+        if ($idImageModifiee!='0' && $idImageModifiee!='') {
             $a = new archiAdresse();
             $intituleAdresse = $a->getIntituleAdresseFrom($idImageModifiee,  'idImage');
         }
@@ -473,19 +455,14 @@ class archiImage extends config
         $arrayVilles = array_unique($arrayVilles);
         
         $arrayListeModerateurs = $u->getArrayIdModerateursActifsFromVille($arrayVilles[0],  array("sqlWhere"=>" AND alerteAdresses='1' "));
-        if (count($arrayListeModerateurs)>0)
-        {
-            foreach ($arrayListeModerateurs as $indice => $idModerateur)
-            {
+        if (count($arrayListeModerateurs)>0) {
+            foreach ($arrayListeModerateurs as $indice => $idModerateur) {
                 if ($idModerateur!=$this->session->getFromSession('utilisateurConnecte'.$this->idSite))
                 {
-                    if ($u->isMailEnvoiImmediat($idModerateur))
-                    {
+                    if ($u->isMailEnvoiImmediat($idModerateur)) {
                         $mailModerateur = $u->getMailUtilisateur($idModerateur);
                         $mail->sendMail($mail->getSiteMail(),  $mailModerateur,  "Modification d'images - ".$intituleAdresse,  $message, true);
-                    }
-                    else
-                    {
+                    } else {
                         $u->ajouteMailEnvoiRegroupes(array('contenu'=>$message,  'idDestinataire'=>$idModerateur,  'idTypeMailRegroupement'=>12));
                     }
                 }
@@ -505,15 +482,12 @@ class archiImage extends config
         $mail = new mailObject();
         $utilisateur = new archiUtilisateur();
         
-        foreach ($arrayListeIdImage as $indice => $idImage)
-        {
+        foreach ($arrayListeIdImage as $indice => $idImage) {
             $arrayUtilisateurs[] = $utilisateur->getCreatorsFromAdresseFrom($idImage,  'idImage');
         }
         
-        foreach ($arrayUtilisateurs as $indice => $tabUtilImage)
-        {
-            if ($tabUtilImage[0]['idUtilisateur'] != $authentifie->getIdUtilisateur())
-            {
+        foreach ($arrayUtilisateurs as $indice => $tabUtilImage) {
+            if ($tabUtilImage[0]['idUtilisateur'] != $authentifie->getIdUtilisateur()) {
                 $infosUtilisateur = $utilisateur->getArrayInfosFromUtilisateur($tabUtilImage[0]['idUtilisateur']);
                 if ($infosUtilisateur['alerteAdresses']=='1' && $infosUtilisateur['idProfil']!='4' && $infosUtilisateur['compteActif']=='1')
                 {
@@ -522,12 +496,9 @@ class archiImage extends config
                     $message.= "Pour vous rendre sur l'évènement : <a href='".$this->creerUrl('',  '',  array('archiAffichage'=>'adresseDetail',  'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresseRetour,  'archiIdAdresse'=>$tabUtilImage[0]['idAdresse']))."'>".$adresse->getIntituleAdresseFrom($tabUtilImage[0]['idAdresse'],  "idAdresse")."</a><br>";
                     $message.= $this->getMessageDesabonnerAlerteMail();
                     
-                    if ($utilisateur->isMailEnvoiImmediat($tabUtilImage[0]['idUtilisateur']))
-                    {
+                    if ($utilisateur->isMailEnvoiImmediat($tabUtilImage[0]['idUtilisateur'])) {
                         $mail->sendMail($mail->getSiteMail(),  $infosUtilisateur['mail'],  'Modification d\'une image sur une adresse sur laquelle vous avez participé - '.$intituleAdresse,  $message, true);
-                    }
-                    else
-                    {
+                    } else {
                         $utilisateur->ajouteMailEnvoiRegroupes(array('contenu'=>$message,  'idDestinataire'=>$tabUtilImage[0]['idUtilisateur'],  'idTypeMailRegroupement'=>12));
                     }
                     
@@ -536,32 +507,24 @@ class archiImage extends config
         }
         // ************************************************************************************************************************************************
         
-        if (isset($this->variablesPost['formulaireRetour']) && $this->variablesPost['formulaireRetour']!='')
-        {
-            switch($this->variablesPost['formulaireRetour'])
-            {
+        if (isset($this->variablesPost['formulaireRetour']) && $this->variablesPost['formulaireRetour']!='') {
+            switch($this->variablesPost['formulaireRetour']) {
                 case 'evenement':
                     $evenement = new archiEvenement();
                     echo $evenement->afficher($idCourant);
                 break;
             }
         } else {
-            if (isset($this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']!='')
-            {
+            if (isset($this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']!='') {
                 $idEvenementGroupeAdresseRetour = $this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse'];
-            }
-            else
-            {
+            } else {
                 $idEvenementGroupeAdresseRetour = $this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageModifiee));
             }
             
-            if ($idEvenementGroupeAdresseRetour!=0)
-            {
+            if ($idEvenementGroupeAdresseRetour!=0) {
                 $a = new archiAdresse();
                 echo $a->afficherDetail(0,  $idEvenementGroupeAdresseRetour);
-            }
-            else
-            {
+            } else {
                 echo $this->afficher($idImageModifiee);
             }
         }
@@ -571,8 +534,7 @@ class archiImage extends config
     public function getIdEvenementGroupeAdresseFromImage($params = array())
     {
         $retour = 0;
-        if (isset($params['idImage']) && $params['idImage']!='')
-        {
+        if (isset($params['idImage']) && $params['idImage']!='') {
             if (isset($params['type']) && $params['type']=="personne") {
                 $req = "
                     SELECT ae.idEvenement as idEvenementGroupeAdresse
@@ -593,8 +555,7 @@ class archiImage extends config
                 ";
             }
             $res = $this->connexionBdd->requete($req);
-            if (mysql_num_rows($res)>0)
-            {
+            if (mysql_num_rows($res)>0) {
                 $fetch = mysql_fetch_assoc($res);
                 $retour = $fetch['idEvenementGroupeAdresse'];
             }
@@ -619,8 +580,7 @@ class archiImage extends config
                     ";
 
         $res = $this->connexionBdd->requete($req);
-        if (mysql_num_rows($res)>0)
-        {
+        if (mysql_num_rows($res)>0) {
             $fetch = mysql_fetch_assoc($res);
             $retour = $fetch['idAdresse'];
         }
@@ -670,8 +630,7 @@ class archiImage extends config
         ));
         
         //$authentifie = new archiAuthentification();
-        /*if (1==1)//$authentifie->estConnecte()
-        {
+        /*if (1==1)//$authentifie->estConnecte() {
             
         //'formulaireModification'=>$this->afficherFormulaireModification($fetch['idHistoriqueImage'],  'adresse')
             $t->assign_block_vars('connecte',  array(
@@ -694,8 +653,7 @@ class archiImage extends config
         $t->assign_vars(array('urlModifierImage'=>$this->creerUrl('',  'modifierImage',  array('archiIdImageModification'=>$idImage))));
         */
         // gestion du lien de retour à la page précédente
-        if (isset($this->variablesGet['archiRetourAffichage']) && isset($this->variablesGet['archiRetourIdName']) && isset($this->variablesGet['archiRetourIdValue']))
-        {
+        if (isset($this->variablesGet['archiRetourAffichage']) && isset($this->variablesGet['archiRetourIdName']) && isset($this->variablesGet['archiRetourIdValue'])) {
             $t->assign_block_vars('isRetour',  array('urlRetour'=>$this->creerUrl('',  $this->variablesGet['archiRetourAffichage'],  array($this->variablesGet['archiRetourIdName']=>$this->variablesGet['archiRetourIdValue']))));
         }
         
@@ -726,13 +684,11 @@ class archiImage extends config
         
         $html="";
         
-        if (((isset($this->variablesGet['formatPhoto']) && $this->variablesGet['formatPhoto']=='moyenRedim') || (isset($this->variablesGet['formatPhoto']) && $this->variablesGet['formatPhoto']=='original')) && !$authentification->estConnecte())
-        {
+        if (((isset($this->variablesGet['formatPhoto']) && $this->variablesGet['formatPhoto']=='moyenRedim') || (isset($this->variablesGet['formatPhoto']) && $this->variablesGet['formatPhoto']=='original')) && !$authentification->estConnecte()) {
             // il faut etre connecté et donc inscrit pour pouvoir voir les images dans un format different
             $html.=$authentification->afficheFormulaireAuthentification('noCompact',  array("msg"=>"<b>Pour voir les photos au format moyen ou l'original vous devez être connecté. Si vous n'avez pas encore de compte utilisateur pour vous connecter,  cliquez <a href='".$this->creerUrl('',  'inscription')."'>ici</a></b>"));
         } else {
-            if ($authentification->estConnecte())
-            {
+            if ($authentification->estConnecte()) {
                 $t->assign_block_vars("isConnected",  array());
                 
                 $idProfilUtilisateur = $u->getIdProfilFromUtilisateur($authentification->getIdUtilisateur());
@@ -747,8 +703,7 @@ class archiImage extends config
                         || $idProfilUtilisateur == '4'
                         || ArchiPersonne::isPerson($e->getIdEvenementGroupeAdresseFromIdEvenement($_GET['archiRetourIdValue']))
                     ) {
-                        if (isset($this->variablesGet['archiRetourAffichage']))
-                        {
+                        if (isset($this->variablesGet['archiRetourAffichage'])) {
                             $t->assign_block_vars('isAdminOrModerateurFromVille',  array('urlSupprimerImage'=>$this->creerUrl('deleteImage',  '',  array('archiIdImage'=>$idImage,  'archiRetourAffichage'=>$this->variablesGet['archiRetourAffichage'],  'archiRetourIdName'=>$this->variablesGet['archiRetourIdName'],  'archiRetourIdValue'=>$this->variablesGet['archiRetourIdValue']))));
                         } else {
                             $t->assign_block_vars('isAdminOrModerateurFromVille',  array('urlSupprimerImage'=>$this->creerUrl('deleteImage',  '',  array('archiIdImage'=>$idImage))));
@@ -762,13 +717,10 @@ class archiImage extends config
                 if ($authentification->estAdmin())
                 {
                 
-                    if (isset($this->variablesGet['archiRetourAffichage']) && isset($this->variablesGet['archiRetourIdName']) && isset($this->variablesGet['archiRetourIdValue']))
-                    {
+                    if (isset($this->variablesGet['archiRetourAffichage']) && isset($this->variablesGet['archiRetourIdName']) && isset($this->variablesGet['archiRetourIdValue'])) {
                         $t->assign_block_vars('isAdmin',  array('urlAfficheHistorique'=>$this->creerUrl('',  'afficheHistoriqueImage',  array('archiIdImage'=>$idImage,  'archiRetourAffichage'=>$this->variablesGet['archiRetourAffichage'],  'archiRetourIdName'=>$this->variablesGet['archiRetourIdName'],  'archiRetourIdValue'=>$this->variablesGet['archiRetourIdValue']))
                                             ));
-                    }
-                    else
-                    {
+                    } else {
                         $t->assign_block_vars('isAdmin',  array('urlAfficheHistorique'=>$this->creerUrl('',  'afficheHistoriqueImage',  array('archiIdImage'=>$idImage))
                                         ));
                     }
@@ -776,8 +728,7 @@ class archiImage extends config
             }
             
             // gestion des liens vers le detail de la photo et autres formats
-            if (isset($this->variablesGet["formatPhoto"]))
-            {
+            if (isset($this->variablesGet["formatPhoto"])) {
                 switch($this->variablesGet["formatPhoto"])
                 {
                     case 'petit':
@@ -802,9 +753,7 @@ class archiImage extends config
                         $formatPhotoUrl = "original";
                     break;
                 }
-            }
-            else
-            {
+            } else {
                 $classLienPetit="formatAffichePhotoSelected";
                 $classLienMoyen="formatAffichePhoto";
                 $classLienOriginal="formatAffichePhoto";
@@ -812,28 +761,21 @@ class archiImage extends config
                 $formatPhotoUrl = "petit";
             }
             
-            if (isset($this->variablesGet['archiRetourAffichage']))
-            {
+            if (isset($this->variablesGet['archiRetourAffichage'])) {
                 $t->assign_vars(array("choixFormatPhoto"=>"<span style='color:#007799;'>Photo au format : <a href='".$this->creerUrl('',  'imageDetail',  array("archiIdImage"=>$idImage,  "archiRetourAffichage"=>$this->variablesGet['archiRetourAffichage'],  "archiRetourIdName"=>$this->variablesGet['archiRetourIdName'],  "archiRetourIdValue"=>$this->variablesGet['archiRetourIdValue'],  "formatPhoto"=>'petit'))."' class='$classLienPetit'>Petit</a> | <a href='".$this->creerUrl('',  'imageDetail',  array("archiIdImage"=>$idImage,  "archiRetourAffichage"=>$this->variablesGet['archiRetourAffichage'],  "archiRetourIdName"=>$this->variablesGet['archiRetourIdName'],  "archiRetourIdValue"=>$this->variablesGet['archiRetourIdValue'],  "formatPhoto"=>'moyenRedim'))."' class='$classLienMoyen'>Moyen</a> | <a href='".$this->creerUrl('',  'imageDetail',  array("archiIdImage"=>$idImage,  "archiRetourAffichage"=>$this->variablesGet['archiRetourAffichage'],  "archiRetourIdName"=>$this->variablesGet['archiRetourIdName'],  "archiRetourIdValue"=>$this->variablesGet['archiRetourIdValue'],  "formatPhoto"=>'original'))."' class='$classLienOriginal'>Original</a></span><br />"));
-            }
-            else
-            {
+            } else {
                 $idAdresseRetour = $this->getIdAdresseFromIdImage($idImage);
                 $t->assign_vars(array("choixFormatPhoto"=>"<span style='color:#007799;'>Photo au format : <a href='".$this->creerUrl('',  'imageDetail',  array("archiIdImage"=>$idImage,  "archiRetourAffichage"=>'adresseDetail',  "archiRetourIdName"=>'archiIdAdresse',  "archiRetourIdValue"=>$idAdresseRetour,  "formatPhoto"=>'petit'))."' class='$classLienPetit'>Petit</a> | <a href='".$this->creerUrl('',  'imageDetail',  array("archiIdImage"=>$idImage,  "archiRetourAffichage"=>'adresseDetail',  "archiRetourIdName"=>'archiIdAdresse',  "archiRetourIdValue"=>$idAdresseRetour,  "formatPhoto"=>'moyenRedim'))."' class='$classLienMoyen'>Moyen</a> | <a href='".$this->creerUrl('',  'imageDetail',  array("archiIdImage"=>$idImage,  "archiRetourAffichage"=>'adresseDetail',  "archiRetourIdName"=>'archiIdAdresse',  "archiRetourIdValue"=>$idAdresseRetour,  "formatPhoto"=>'original'))."' class='$classLienOriginal'>Original</a></span><br />"));
             }
             
             // ***********************************************************************************************************************
             // on prend l'adresse de reference de la page si elle existe sinon celle de l'evenement courant et sinon on prend l'adresse de reference de l'image
-            if (isset($this->variablesGet['archiIdAdresse']))
-            {
+            if (isset($this->variablesGet['archiIdAdresse'])) {
                 $idAdresseReference = $this->variablesGet['archiIdAdresse'];
             }
-            elseif (isset($this->variablesGet['archiRetourIdName']) && $this->variablesGet['archiRetourIdName']=='idEvenement' && isset($this->variablesGet['archiRetourIdValue']))
-            {
+            elseif (isset($this->variablesGet['archiRetourIdName']) && $this->variablesGet['archiRetourIdName']=='idEvenement' && isset($this->variablesGet['archiRetourIdValue'])) {
                 $idAdresseReference =$adresse->getIdAdresseFromIdEvenementGroupeAdresse($this->variablesGet['archiRetourIdValue']);
-            }
-            else
-            {
+            } else {
                 $idAdresseReference = $this->getIdAdresseFromIdImage($idImage);
             }
 
@@ -842,8 +784,7 @@ class archiImage extends config
             
             $arrayInfosImage = $this->getInfosCompletesFromIdImage($idImage,  array('idAdresseReference'=>$idAdresseReference,  'displayFirstTitreAdresse'=>true,  'classCSSTitreAdresse'=>"textePrisDepuisVueSur",  'withZonesOnMouseOver'=>true));
             
-            if (count($arrayInfosImage['vueSurLiens'])>0)
-            {
+            if (count($arrayInfosImage['vueSurLiens'])>0) {
             
                 if (count($arrayInfosImage['vueSurLiens'])>1)
                 {
@@ -856,8 +797,7 @@ class archiImage extends config
             }
             
             
-            if (count($arrayInfosImage['prisDepuisLiens'])>0)
-            {
+            if (count($arrayInfosImage['prisDepuisLiens'])>0) {
                 $t->assign_vars(array("infosPrisDepuis"=>"<br><span class='textePrisDepuisVueSurEntete'>Pris depuis</span>&nbsp; ".implode(" / ",  $arrayInfosImage['prisDepuisLiens'])."<br>"));
             }
             
@@ -924,8 +864,7 @@ class archiImage extends config
             else
                 $nomEtDateCLiche=stripslashes($fetch['nom']).$this->date->toFrench($fetch['dateCliche']); // on affiche les deux car on sait qu'il y en a un qui est vide,  donc pas de probleme
             $datePriseDeVue = "";
-            if ($this->date->toFrench($fetch['dateCliche'])!='')
-            {
+            if ($this->date->toFrench($fetch['dateCliche'])!='') {
                 $environ = "";
                 if ($fetch['isDateClicheEnviron']=='1')
                 {
@@ -943,8 +882,7 @@ class archiImage extends config
             }
             
             
-            if (isset($fetch['idSource']) && $fetch['idSource']!='' && $fetch['idSource']!='0')
-            {
+            if (isset($fetch['idSource']) && $fetch['idSource']!='' && $fetch['idSource']!='0') {
                 $reqSource = "
                     SELECT s.idSource as idSource,  s.nom as nomSource,  ts.nom as nomTypeSource
                     FROM source s
@@ -955,8 +893,7 @@ class archiImage extends config
                 $description.="<br>Source : <a href='".$this->creerUrl('',  'listeAdressesFromSource',  array('source'=>$fetch['idSource'],  'submit'=>'Rechercher'))."'>".stripslashes($fetchSource['nomSource'])." (".stripslashes($fetchSource['nomTypeSource']).")</a>";
             }
             
-            if (isset($fetch['numeroArchive']) && $fetch['numeroArchive']!='')
-            {
+            if (isset($fetch['numeroArchive']) && $fetch['numeroArchive']!='') {
             // modif fabien du 15/04/2011 suite mail directrice Archives de Strasbourg Mme Perry Laurence
                 $description.="<br>Cote Archives de Strasbourg : ".$fetch['numeroArchive'];
             }
@@ -1034,13 +971,11 @@ class archiImage extends config
             
             // pour la selection de zone modifiable
             // on ne l'affiche que si l'image figure dans la table _adresseImage et comporte des adresses sur lesquelles le champ vueSur est a 1
-            if (count($arrayInfosImage['vueSurLiens'])>0 && $authentification->estConnecte() && $u->isAuthorized('selection_zones_photo',  $authentification->getIdUtilisateur()))
-            {
+            if (count($arrayInfosImage['vueSurLiens'])>0 && $authentification->estConnecte() && $u->isAuthorized('selection_zones_photo',  $authentification->getIdUtilisateur())) {
                 if ($u->getIdProfil($authentification->getIdUtilisateur())==4 || $u->isModerateurFromVille($authentification->getIdUtilisateur(),  $idImage,  'idImage'))
                 {
                     $styleMenuZoneSelection="";
-                    if (isset($this->variablesGet['archiSelectionZone']) && $this->variablesGet['archiSelectionZone']=='1')
-                    {
+                    if (isset($this->variablesGet['archiSelectionZone']) && $this->variablesGet['archiSelectionZone']=='1') {
                         // menu en rouge si on est sur la selection de zone
                         $styleMenuZoneSelection="color:#FF0000;";
                     }
@@ -1061,8 +996,7 @@ class archiImage extends config
             
             
             // gestion du lien de retour à la page précédente
-            if (isset($this->variablesGet['archiRetourAffichage']) && isset($this->variablesGet['archiRetourIdName']) && isset($this->variablesGet['archiRetourIdValue']))
-            {
+            if (isset($this->variablesGet['archiRetourAffichage']) && isset($this->variablesGet['archiRetourIdName']) && isset($this->variablesGet['archiRetourIdValue'])) {
                         //$t->assign_block_vars('isRetour',  array('urlRetour'=>$this->creerUrl('',  $this->variablesGet['archiRetourAffichage'],  array($this->variablesGet['archiRetourIdName']=>$this->variablesGet['archiRetourIdValue']))));
                 // affichage de l'encars des adresses
                 $idEvenementGroupeAdresse = $evenement->getIdEvenementGroupeAdresseFromIdEvenement($this->variablesGet['archiRetourIdValue']);
@@ -1076,23 +1010,19 @@ class archiImage extends config
                 
                 $t->assign_vars(array('urlModifierImage'=>$this->creerUrl('',  'modifierImage',  array('archiIdImageModification'=>$idImage,  'archiIdEvenementGroupeAdresseAffichageAdresse'=>$idEvenementGroupeAdresse))));
             }
-            elseif (isset($idAdresseRetour) && $idAdresseRetour!='' && $idAdresseRetour!='0')
-            {
+            elseif (isset($idAdresseRetour) && $idAdresseRetour!='' && $idAdresseRetour!='0') {
                 $resIdGroupeAdresse = $adresse->getIdEvenementGroupeAdresseFromAdresse($idAdresseRetour);
                 $fetchIdGroupeAdresse = mysql_fetch_assoc($resIdGroupeAdresse);
                 
                 $html.=$adresse->afficherRecapitulatifAdresses($fetchIdGroupeAdresse['idEvenement']);
                 $t->assign_vars(array('urlModifierImage'=>$this->creerUrl('',  'modifierImage',  array('archiIdImageModification'=>$idImage,  'archiIdEvenementGroupeAdresseAffichageAdresse'=>$fetchIdGroupeAdresse['idEvenement']))));
-            }
-            else
-            {
+            } else {
                 $t->assign_vars(array('urlModifierImage'=>$this->creerUrl('',  'modifierImage',  array('archiIdImageModification'=>$idImage))));
             }
             
             
             // ***********************************************************************************************************************
-            if (isset($this->variablesGet['archiRetourIdName']) && $this->variablesGet['archiRetourIdName']=='idEvenement' && isset($this->variablesGet['archiRetourIdValue']))
-            {
+            if (isset($this->variablesGet['archiRetourIdName']) && $this->variablesGet['archiRetourIdName']=='idEvenement' && isset($this->variablesGet['archiRetourIdValue'])) {
                 $reqVerifZone = "
                     SELECT 0
                     FROM _adresseImage ai
@@ -1140,8 +1070,7 @@ class archiImage extends config
             $html.=$image->getJsSetOpacityFunction();
             $html.=$image->getJsCodeDrawFunctions();
             
-            if (isset($this->variablesGet['archiSelectionZone']) && $this->variablesGet['archiSelectionZone']=='1')
-            {
+            if (isset($this->variablesGet['archiSelectionZone']) && $this->variablesGet['archiSelectionZone']=='1') {
                 // recuperation des longueur et largeur de l'image affiché pour avoir le rapport de base entre ces deux dimensions,  comme cela on pourra reporter les zones sur les images d'autres longueurs et largeurs grace au taux calculé
                 $calque = new calqueObject(array('idPopup'=>'popupSelectAdresseVueSurZone'));
                 
@@ -1169,8 +1098,7 @@ class archiImage extends config
             
 
             
-            if ($formatPhoto == 'moyenRedim')
-            {
+            if ($formatPhoto == 'moyenRedim') {
                 // vu que le format de la photo moyenRedim est generé a la volée,  il faut calculer les hauteurs et largeurs en fonction d'une autre photo. Ici on prendra le format grand c'est suffisamment precis pas besoin de prendre le format original
                 // les photos redimensionnées ont une largeur X de 700px ,  voir le htaccess
                 $sizes = getimagesize($this->getCheminPhysiqueImage("grand").$fetch['dateUpload']."/".$fetch['idHistoriqueImage'].".jpg");
@@ -1187,9 +1115,7 @@ class archiImage extends config
                 }
                 $arrayZones = $this->getDivsAndMapsZonesImagesVueSur(array("idImage"=>$idImage,  'largeurImageCourante'=>$sizeX,  'longueurImageCourante'=>$sizeY));
                 
-            }
-            else
-            {
+            } else {
                 $sizes = getimagesize($this->getCheminPhysique()."images/".$formatPhoto."/".$fetch['dateUpload']."/".$fetch['idHistoriqueImage'].".jpg");
                 $arrayZones = $this->getDivsAndMapsZonesImagesVueSur(array("idImage"=>$idImage,  'largeurImageCourante'=>$sizes[0],  'longueurImageCourante'=>$sizes[1]));
             }
@@ -1229,20 +1155,17 @@ class archiImage extends config
         
         
         $jsIDImage="imageAfficheeID"; // id image sur le detail de la photo (identifiant element javascript,  pas id de bdd)
-        if (isset($params['idHTMLImage']) && $params['idHTMLImage']!='')
-        {
+        if (isset($params['idHTMLImage']) && $params['idHTMLImage']!='') {
             $jsIDImage=$params['idHTMLImage'];
         }
         
         $jsIDMapZone = "mapZones";
-        if (isset($params['idHTMLMap']) && $params['idHTMLMap']!='')
-        {
+        if (isset($params['idHTMLMap']) && $params['idHTMLMap']!='') {
             $jsIDMapZone = $params['idHTMLMap'];
         }
         
         $divIdGroupeAdresseCourant="";
-        if (isset($params['idGroupeAdresseCourant']) && $params['idGroupeAdresseCourant']!='')
-        {
+        if (isset($params['idGroupeAdresseCourant']) && $params['idGroupeAdresseCourant']!='') {
             $idGroupeAdresseCourant = $params['idGroupeAdresseCourant'];
             $divIdGroupeAdresseCourant = "_".$params['idGroupeAdresseCourant'];
         }
@@ -1253,12 +1176,10 @@ class archiImage extends config
         $req = "SELECT idAdresse, idEvenementGroupeAdresse, coordonneesZoneImage, largeurBaseZoneImage, longueurBaseZoneImage FROM _adresseImage WHERE idImage=$idImage AND vueSur=1 AND coordonneesZoneImage<>''";
         $res = $this->connexionBdd->requete($req);
         
-        if (mysql_num_rows($res)>0)
-        {
+        if (mysql_num_rows($res)>0) {
             $a = new archiAdresse();
             
-            while ($fetch = mysql_fetch_assoc($res))
-            {
+            while ($fetch = mysql_fetch_assoc($res)) {
                 if ($fetch['idEvenementGroupeAdresse']!='0' && $fetch['idEvenementGroupeAdresse']!='')
                 {
                     $intituleAdresse = $a->getIntituleAdresseFrom($fetch['idEvenementGroupeAdresse'],  'idEvenementGroupeAdresse',  array('ifTitreAfficheTitreSeulement'=>true));
@@ -1274,8 +1195,7 @@ class archiImage extends config
                 {
                     // on modifie les coordonnees en fonction du rapport entre les coordonnees de l'image originale et celles de l'image affichée,  on admet que l'image n'est pas deformée à l'affichage
                     $arrayCoordsEchelle=array();
-                    foreach ($arrayCoords as $indice => $value)
-                    {
+                    foreach ($arrayCoords as $indice => $value) {
                         $arrayCoordsEchelle[] = round($largeurImageCourante*$value / $fetch['largeurBaseZoneImage']);
                         
                     }
@@ -1290,8 +1210,7 @@ class archiImage extends config
                     
                     // code pour dessiner dans le div un rectangle plein
                     // il faut que la fonction set_opacity soit definie => voir objet image du framework
-                    if ($fetch['idEvenementGroupeAdresse']!='' && $fetch['idEvenementGroupeAdresse']!='0')
-                    {
+                    if ($fetch['idEvenementGroupeAdresse']!='' && $fetch['idEvenementGroupeAdresse']!='0') {
                         $url = $this->creerUrl('',  '',  array('archiAffichage'=>'adresseDetail',  'archiIdAdresse'=>$fetch['idAdresse'],  'archiIdEvenementGroupeAdresse'=>$fetch['idEvenementGroupeAdresse']));
                     } else {
                         $url = $this->creerUrl('',  'adresseDetail',  array('archiIdAdresse'=>$fetch['idAdresse']));
@@ -1372,11 +1291,9 @@ class archiImage extends config
             isset($this->variablesGet['archiIdImage']) &&
             $this->variablesPost['largeurBaseImageZoneSelection']!='' && 
             $this->variablesPost['longueurBaseImageZoneSelection']!=''
-        )
-        {
+        ) {
             $arrayCoords=array();
-            foreach ($this->variablesPost['inputArrayPointX'] as $indice => $value)
-            {
+            foreach ($this->variablesPost['inputArrayPointX'] as $indice => $value) {
                 $arrayCoords[] = $this->variablesPost['inputArrayPointX'][$indice];
                 $arrayCoords[] = $this->variablesPost['inputArrayPointY'][$indice];
             }
@@ -1416,8 +1333,7 @@ class archiImage extends config
         $adresse = new archiAdresse();
         
         $modeAffichage='';
-        if (isset($params['modeAffichage']) && $params['modeAffichage']!='')
-        {
+        if (isset($params['modeAffichage']) && $params['modeAffichage']!='') {
             $modeAffichage = $params['modeAffichage'];
         }
         
@@ -1432,24 +1348,18 @@ class archiImage extends config
         $tableauVueSur = new tableau();
         $arrayTemp=array();
         $i=0;
-        while ($fetchVueSur=mysql_fetch_assoc($resVueSur))
-        {
-            if ($fetchVueSur['idEvenementGroupeAdresse']!='0')
-            {
+        while ($fetchVueSur=mysql_fetch_assoc($resVueSur)) {
+            if ($fetchVueSur['idEvenementGroupeAdresse']!='0') {
                 $nomAdresse = $adresse->getIntituleAdresseFrom($fetchVueSur['idEvenementGroupeAdresse'],  'idEvenementGroupeAdresse',  array('ifTitreAfficheTitreSeulement'=>true));
-            }
-            else
-            {
+            } else {
                 $nomAdresse = $adresse->getIntituleAdresseFrom($fetchVueSur['idAdresse'],  'idAdresse',  array('ifTitreAfficheTitreSeulement'=>true));
             }
             $infosImage = $adresse->getUrlImageFrom($fetchVueSur['idAdresse'],  $format,  'AND ei.position=1');
-            if ($infosImage['idHistoriqueImage']=='0')
-            {
+            if ($infosImage['idHistoriqueImage']=='0') {
                 $infosImage = $adresse->getUrlImageFrom($fetchVueSur['idAdresse'],  $format);
             }
             
-            switch($modeAffichage)
-            {
+            switch($modeAffichage) {
                 case 'affichePopupSelectionZoneVueSur':
                     $tableauVueSur->addValue("<a onclick=\"parent.document.getElementById('idAdresseRetourZone').value='".$fetchVueSur['idAdresse']."_".$fetchVueSur['idEvenementGroupeAdresse']."';parent.document.getElementById('formRetourArrayPoints').submit();\">".$nomAdresse."</a>");
                 break;
@@ -1461,8 +1371,7 @@ class archiImage extends config
             $i++;
         }
         
-        switch($modeAffichage)
-        {
+        switch($modeAffichage) {
             case 'affichePopupSelectionZoneVueSur':
                 $html=$tableauVueSur->createHtmlTableFromArray(1,  "",  "",  "",  "");
             break;
@@ -1499,12 +1408,10 @@ class archiImage extends config
         $tableauPrisDepuis = new tableau();
         $arrayTemp=array();
         $i=0;
-        while ($fetchPrisDepuis=mysql_fetch_assoc($resPrisDepuis))
-        {
+        while ($fetchPrisDepuis=mysql_fetch_assoc($resPrisDepuis)) {
             $nomAdresse = $adresse->getIntituleAdresseFrom($fetchPrisDepuis['idAdresse'],  'idAdresse');
             $infosImage = $adresse->getUrlImageFrom($fetchPrisDepuis['idAdresse'],  $format,  'AND ei.position=1');
-            if ($infosImage['idHistoriqueImage']=='0')
-            {
+            if ($infosImage['idHistoriqueImage']=='0') {
                 $infosImage = $adresse->getUrlImageFrom($fetchPrisDepuis['idAdresse'],  $format);
             }
             
@@ -1516,8 +1423,7 @@ class archiImage extends config
         $tableauPrisDepuis->addValuesFromArrayLinked($arrayTemp, 4,  "",  "style='font-size:12px;width:200px;'");
     
     
-        if ($i>0)
-        {
+        if ($i>0) {
             $html=$tableauPrisDepuis->createHtmlTableFromArray(4,  "",  "",  "",  "");
         }
 
@@ -1548,8 +1454,7 @@ class archiImage extends config
         
         $resEvenementsLies = $this->connexionBdd->requete($reqEvenementsLies);
         
-        while ($fetchEvenementsLies=mysql_fetch_assoc($resEvenementsLies))
-        {
+        while ($fetchEvenementsLies=mysql_fetch_assoc($resEvenementsLies)) {
             $t->assign_block_vars('evenementsLies',  array('titre'=>$fetchEvenementsLies['titre']));
         }
                 
@@ -1572,8 +1477,7 @@ class archiImage extends config
         
         $authentification = new archiAuthentification();
         
-        if ($authentification->estConnecte())
-        {
+        if ($authentification->estConnecte()) {
             $t->assign_block_vars('isConnected',  array());
         }
         
@@ -1608,8 +1512,7 @@ class archiImage extends config
         $adresses = new archiAdresse();
         $recherche = new archiRecherche();
         $arrayListeIdAdresses=array();
-        while ($fetch = mysql_fetch_assoc($resAdressesLiees))
-        {
+        while ($fetch = mysql_fetch_assoc($resAdressesLiees)) {
             $nomAdressePrisDepuis         = $adresses->getNomAdresse($adresses->getArrayAdresseFromIdAdresse($fetch['prisDepuis']));
             $nomAdresseSeSitue             = $adresses->getNomAdresse($adresses->getArrayAdresseFromIdAdresse($fetch['seSitue']));
             
@@ -1655,42 +1558,36 @@ class archiImage extends config
         
         
         $idAdresseCourante = 0;
-        if (isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!='')
-        {
+        if (isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!='') {
             $idAdresseCourante = $this->variablesGet['archiIdAdresse'];
         }
         
         
         $sqlOneImage="";
-        if (isset($params['getOneIdImageFromEvenement']) && $params['getOneIdImageFromEvenement']==true)
-        {
+        if (isset($params['getOneIdImageFromEvenement']) && $params['getOneIdImageFromEvenement']==true) {
             $sqlOneImage = "AND ai.idImage='".$params['idImage']."' AND ee.idEvenementAssocie=".$params['idEvenement']." ";
         }
         
         $sqlListeAdresses="";
-        if (isset($listeAdresses) && !isset($params['getOneIdImageFromEvenement']))
-        {
+        if (isset($listeAdresses) && !isset($params['getOneIdImageFromEvenement'])) {
             $sqlListeAdresses = "AND ai.idAdresse IN (".implode(",  ",  $listeAdresses).") ";
         }
         
         $sqlNoDisplayIdImages="";
-        if (isset($params['noDiplayIdImage']) && count($params['noDiplayIdImage'])>0)
-        {
+        if (isset($params['noDiplayIdImage']) && count($params['noDiplayIdImage'])>0) {
             $sqlNoDisplayIdImages = "AND ai.idImage NOT IN (".implode(",  ",  $params['noDiplayIdImage']).")";
         
         }
         
         
         $sqlGroupeAdresse = "";
-        if (isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='0')
-        {
+        if (isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='0') {
             $sqlGroupeAdresse = "AND ai.idEvenementGroupeAdresse = '".$params['idEvenementGroupeAdresse']."'";
         }
         
         $idEvenementGroupeAdresseEvenementAffiche="";
         $divIdEvenementGroupeAdresseEvenementAffiche="";
-        if (isset($params['idGroupeAdresseEvenementAffiche']))
-        {
+        if (isset($params['idGroupeAdresseEvenementAffiche'])) {
             $idEvenementGroupeAdresseEvenementAffiche=$params['idGroupeAdresseEvenementAffiche'];
             $divIdEvenementGroupeAdresseEvenementAffiche = "_".$params['idGroupeAdresseEvenementAffiche'];
         }
@@ -1718,8 +1615,7 @@ class archiImage extends config
         $resPhotos = $this->connexionBdd->requete($reqPhotos);
         $tabPhotos=array();
         
-        while ($fetchPhotos = mysql_fetch_assoc($resPhotos))
-        {
+        while ($fetchPhotos = mysql_fetch_assoc($resPhotos)) {
             $tabPhotos[$fetchPhotos['idImage']]['infosImage'] = array(
                             'idHistoriqueImage'=>$fetchPhotos['idHistoriqueImage'], 
                             'idImage'=>$fetchPhotos['idImage'], 
@@ -1735,8 +1631,7 @@ class archiImage extends config
         $tabTemp=array();
         $tableau = new tableau();
         $zones=array();
-        foreach ($tabPhotos as $idImage => $valuesPhoto)
-        {
+        foreach ($tabPhotos as $idImage => $valuesPhoto) {
         
             // la photo comporte t elle des zones pointant sur l'adresse courante :
             $reqVerifZone = "
@@ -1751,8 +1646,7 @@ class archiImage extends config
             ";
             $resVerifZone = $this->connexionBdd->requete($reqVerifZone);
             $isZonesOnImageForGA = false;
-            if (mysql_num_rows($resVerifZone)>0)
-            {
+            if (mysql_num_rows($resVerifZone)>0) {
                 $isZonesOnImageForGA = true;
             }
         
@@ -1767,46 +1661,33 @@ class archiImage extends config
             $liensAdresses=array();
             $intituleAdresse = "";
             
-            if (isset($valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']) && $valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']!='' && $valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']!='0')
-            {
+            if (isset($valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']) && $valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']!='' && $valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']!='0') {
                 $intituleAdressePhoto = $adresse->getIntituleAdresseFrom($valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant'],  'idEvenementGroupeAdresse');
-            }
-            else
-            {
+            } else {
                 $intituleAdressePhoto = $adresse->getIntituleAdresseFrom($valuesPhoto['infosImage']['idAdresse'],  'idAdresse');
             }
             
             
-            if (mysql_num_rows($resPriseDepuis)>0)
-            {
+            if (mysql_num_rows($resPriseDepuis)>0) {
                 while ($fetchPriseDepuis = mysql_fetch_assoc($resPriseDepuis))
                 {
-                    if ($fetchPriseDepuis['idEvenementGroupeAdresse']=='0' || $fetchPriseDepuis['idEvenementGroupeAdresse']=='')
-                    {
+                    if ($fetchPriseDepuis['idEvenementGroupeAdresse']=='0' || $fetchPriseDepuis['idEvenementGroupeAdresse']=='') {
                         $intituleAdresse = $adresse->getIntituleAdresseFrom($fetchPriseDepuis['idAdresse'],  'idAdresse',  array('ifTitreAfficheTitreSeulement'=>true,  'idAdresseReference'=>$listeAdresses[0]));
-                    }
-                    else
-                    {
+                    } else {
                         $intituleAdresse = $adresse->getIntituleAdresseFrom($fetchPriseDepuis['idEvenementGroupeAdresse'],  'idEvenementGroupeAdresse',  array('ifTitreAfficheTitreSeulement'=>true,  'idAdresseReference'=>$listeAdresses[0]));
                     }
                     
-                    if (trim($intituleAdresse)== '')
-                    {
+                    if (trim($intituleAdresse)== '') {
                         $liensAdresses[] = "?";
-                    }
-                    else
-                    {
-                        if ($fetchPriseDepuis['idEvenementGroupeAdresse']=='0' || $fetchPriseDepuis['idEvenementGroupeAdresse']=='')
-                        {
+                    } else {
+                        if ($fetchPriseDepuis['idEvenementGroupeAdresse']=='0' || $fetchPriseDepuis['idEvenementGroupeAdresse']=='') {
                             $liensAdresses[] = "<a href='".$this->creerUrl('',  'adresseDetail',  array('archiIdAdresse'=>$fetchPriseDepuis['idAdresse']))."'>".$intituleAdresse."</a>";
                         } else {
                             $liensAdresses[] = "<a href='".$this->creerUrl('',  '',  array('archiAffichage'=>'adresseDetail',  'archiIdEvenementGroupeAdresse'=>$fetchPriseDepuis['idEvenementGroupeAdresse'],  'archiIdAdresse'=>$fetchPriseDepuis['idAdresse']))."'>".$intituleAdresse."</a>";
                         }
                     }
                 }
-            }
-            else
-            {
+            } else {
                 $liensAdresses[] = "?";
             }
             
@@ -1816,17 +1697,14 @@ class archiImage extends config
             $descriptionImage="<br>".$bbCode->convertToDisplay(array('text'=>$valuesPhoto['infosImage']['description']));
             
         
-            if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA)
-            {
+            if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA) {
                 if ($idAdresseCourante !=0)
                 {
                     $tabTemp[$i]['celluleBas'] = "<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant'],  'archiIdAdresse'=>$idAdresseCourante))."'><img src='".$this->getUrlImage()."Advisa/loupe.png"."' alt='' /></a>&nbsp;Pris depuis ".implode(" / ",  $liensAdresses).$descriptionImage;
                 } else {
                     $tabTemp[$i]['celluleBas'] = "<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']))."'><img src='".$this->getUrlImage()."Advisa/loupe.png"."' alt='' /></a>&nbsp;Pris depuis ".implode(" / ",  $liensAdresses).$descriptionImage;
                 }
-            }
-            else
-            {
+            } else {
                 $tabTemp[$i]['celluleBas'] = "Pris depuis ".implode(" / ",  $liensAdresses).$descriptionImage;
             }
             
@@ -1834,38 +1712,30 @@ class archiImage extends config
             $arrayZones = $this->getDivsAndMapsZonesImagesVueSur(array("idImage"=>$valuesPhoto['infosImage']['idImage'],  'largeurImageCourante'=>$sizes[0],  'longueurImageCourante'=>$sizes[1],  'idHTMLImage'=>'imageEvenement_'.$valuesPhoto['infosImage']['idImage'],  'idHTMLMap'=>'mapZone_'.$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche,  "idGroupeAdresseCourant"=>$idEvenementGroupeAdresseEvenementAffiche));
             
             
-            if ($idAdresseCourante !=0)
-            {
+            if ($idAdresseCourante !=0) {
                 $url = $this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant'],  'archiIdAdresse'=>$idAdresseCourante));
-            }
-            else
-            {
+            } else {
                 $url = $this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$valuesPhoto['infosImage']['idEvenementGroupeAdresseCourant']));
             }
             
             // construction du test pour IE ... si les zones de cliques ne sont pas visible ,  on permet le clique pour voir le detail de l'image ,  sinon c'est que l'on a cliqué sur une zone,  ou en tout cas l'une de celles ci est visible
             $arrayTestDivsJs=array();
-            foreach ($arrayZones['arrayNomsIDDivsZones'] as $indice => $value)
-            {
+            foreach ($arrayZones['arrayNomsIDDivsZones'] as $indice => $value) {
                 $arrayTestDivsJs[]="document.getElementById('".$value."').style.display=='none'";
             }
 
             $htmlOnClick="";
-            if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA)
-            {
+            if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA) {
                 $htmlOnClick=$url;
             }
-            elseif (count($arrayTestDivsJs)>0)
-            {
+            elseif (count($arrayTestDivsJs)>0) {
                 if (isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1')
                 {
                     $htmlOnClick=$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']));
                 } else {
                     $htmlOnClick=$url;
                 }
-            }
-            else
-            {
+            } else {
                 if (isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1')
                 {
                     $htmlOnClick=$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']));
@@ -1875,16 +1745,13 @@ class archiImage extends config
             }
             
             
-            if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA)
-            {
+            if (isset($params['setZoomOnImageZone']) && $params['setZoomOnImageZone']==true && $isZonesOnImageForGA) {
                 // dans ce cas on fabrique le zoom sur la zone de l'image concernée par l'adresse courante
                 $imageZoom = "<img src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt=''>";
                 
                 $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'>$imageZoom</a></div>";
                 
-            }
-            else
-            {
+            } else {
                 $tabTemp[$i]['celluleHaut'] = "<div><a href='".$htmlOnClick."'><img class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' alt='' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage'].$divIdEvenementGroupeAdresseEvenementAffiche."'></a></div>";
             }
             
@@ -1898,21 +1765,17 @@ class archiImage extends config
         }
         
         $htmlZones = "";
-        foreach ($zones as $indice => $valueZone)
-        {
+        foreach ($zones as $indice => $valueZone) {
             $htmlZones.=$valueZone;
         }
         
-        if (isset($params['getOneIdImageFromEvenement']) && $params['getOneIdImageFromEvenement']==true)
-        {
+        if (isset($params['getOneIdImageFromEvenement']) && $params['getOneIdImageFromEvenement']==true) {
             // dans le cas ou on est aller chercher une seule idImage ( pour l'affichage des images dispatchée par date d'image et d'evenement par exemple ,  on renvoie un table d'1 seule colonne pour la mise en page
             /*$tableau->addValuesFromArrayLinked($tabTemp, 1,  "align=center",  "style='font-size:12px;width:200px;'");
-            if ($i>0)
-            {
+            if ($i>0) {
                 $html=$tableau->createHtmlTableFromArray(1,  "",  "",  "",  "");
             }*/
-            if ($i>0)
-            {
+            if ($i>0) {
                 $html="<table><tr><td style='padding:0;'>";
                 $html.=$tabTemp[0]['celluleHaut'];
                 $html.="</td></tr><tr><td>";
@@ -1921,8 +1784,7 @@ class archiImage extends config
             }
         } else {
             $tableau->addValuesFromArrayLinked($tabTemp, 3,  "align=center",  "style='font-size:12px;width:200px;'");
-            if ($i>0)
-            {
+            if ($i>0) {
                 $html=$tableau->createHtmlTableFromArray(3,  "",  "",  "",  "");
             }
         }
@@ -1940,14 +1802,12 @@ class archiImage extends config
         
         
         $sqlGroupeAdresse = "";
-        if (isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='0')
-        {
+        if (isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='0') {
             $sqlGroupeAdresse = "AND ai.idEvenementGroupeAdresse = '".$params['idEvenementGroupeAdresse']."'";
         }
         
         $idAdresseCourante = 0;
-        if (isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!='')
-        {
+        if (isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!='') {
             $idAdresseCourante = $this->variablesGet['archiIdAdresse'];
         }
         
@@ -1973,15 +1833,11 @@ class archiImage extends config
         $resPhotos = $this->connexionBdd->requete($reqPhotos);
         $tabPhotos=array();
         
-        while ($fetchPhotos = mysql_fetch_assoc($resPhotos))
-        {
+        while ($fetchPhotos = mysql_fetch_assoc($resPhotos)) {
             // on verifie que cette photo n'est pas deja affichée dans la liste des evenements courant,  en tant qu'image vueSur ,  sinon cela va faire doublon
-            if (isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='' && $this->isImagePriseDepuisAndVueSurOnSameGroupeAdresse(array('idImage'=>$fetchPhotos['idImage'],  'idEvenementGroupeAdresse'=>$params['idEvenementGroupeAdresse'])))
-            {
+            if (isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='' && $this->isImagePriseDepuisAndVueSurOnSameGroupeAdresse(array('idImage'=>$fetchPhotos['idImage'],  'idEvenementGroupeAdresse'=>$params['idEvenementGroupeAdresse']))) {
                  // on ajoute pas la photo au tableau
-            }
-            else
-            {
+            } else {
                 $tabPhotos[$fetchPhotos['idImage']]['infosImage'] = array(
                                 'idHistoriqueImage'=>$fetchPhotos['idHistoriqueImage'], 
                                 'idImage'=>$fetchPhotos['idImage'], 
@@ -1997,8 +1853,7 @@ class archiImage extends config
         $i=0;
         $tabTemp=array();
         $tableau = new tableau();
-        foreach ($tabPhotos as $idImage => $valuesPhoto)
-        {
+        foreach ($tabPhotos as $idImage => $valuesPhoto) {
             // recherche de l'adresse depuis laquelle a ete prise la photo
             $reqPriseDepuis = "SELECT ai.idAdresse,  ai.idEvenementGroupeAdresse
                                 FROM _adresseImage ai
@@ -2009,37 +1864,27 @@ class archiImage extends config
             $liensAdresses=array();
             $intituleAdresse = "";
             $intituleAdressePhoto = $adresse->getIntituleAdresseFrom($valuesPhoto['infosImage']['idAdresse'],  'idAdresse');
-            if (mysql_num_rows($resPriseDepuis)>0)
-            {
+            if (mysql_num_rows($resPriseDepuis)>0) {
                 while ($fetchPriseDepuis = mysql_fetch_assoc($resPriseDepuis))
                 {
-                    if ($fetchPriseDepuis['idEvenementGroupeAdresse']!='0' && $fetchPriseDepuis['idEvenementGroupeAdresse']!='')
-                    {
+                    if ($fetchPriseDepuis['idEvenementGroupeAdresse']!='0' && $fetchPriseDepuis['idEvenementGroupeAdresse']!='') {
                         $intituleAdresse = $adresse->getIntituleAdresseFrom($fetchPriseDepuis['idEvenementGroupeAdresse'],  'idEvenementGroupeAdresse',  array('ifTitreAfficheTitreSeulement'=>true,  'idAdresseReference'=>$listeAdresses[0]));
-                    }
-                    else
-                    {
+                    } else {
                         $intituleAdresse = $adresse->getIntituleAdresseFrom($fetchPriseDepuis['idAdresse'],  'idAdresse',  array('ifTitreAfficheTitreSeulement'=>true,  'idAdresseReference'=>$listeAdresses[0]));
                         
                     }
                     
-                    if (trim($intituleAdresse)== '')
-                    {
+                    if (trim($intituleAdresse)== '') {
                         $liensAdresses[] = "?";
-                    }
-                    else
-                    {
-                        if ($fetchPriseDepuis['idEvenementGroupeAdresse']!='0' && $fetchPriseDepuis['idEvenementGroupeAdresse']!='')
-                        {
+                    } else {
+                        if ($fetchPriseDepuis['idEvenementGroupeAdresse']!='0' && $fetchPriseDepuis['idEvenementGroupeAdresse']!='') {
                             $liensAdresses[] = "<a href='".$this->creerUrl('',  '',  array('archiAffichage'=>'adresseDetail',  'archiIdEvenementGroupeAdresse'=>$fetchPriseDepuis['idEvenementGroupeAdresse'],  'archiIdAdresse'=>$fetchPriseDepuis['idAdresse']))."'>".$intituleAdresse."</a>";
                         } else {
                             $liensAdresses[] = "<a href='".$this->creerUrl('',  'adresseDetail',  array('archiIdAdresse'=>$fetchPriseDepuis['idAdresse']))."'>".$intituleAdresse."</a>";
                         }
                     }
                 }
-            }
-            else
-            {
+            } else {
                 $liensAdresses[] = "?";
             }
             
@@ -2055,8 +1900,7 @@ class archiImage extends config
             $sizes = getimagesize($this->getCheminPhysique()."images/".$format."/".$valuesPhoto['infosImage']['dateUpload']."/".$valuesPhoto['infosImage']['idHistoriqueImage'].".jpg");
             $arrayZones = $this->getDivsAndMapsZonesImagesVueSur(array("idImage"=>$valuesPhoto['infosImage']['idImage'],  'largeurImageCourante'=>$sizes[0],  'longueurImageCourante'=>$sizes[1],  'idHTMLImage'=>'imageEvenement_'.$valuesPhoto['infosImage']['idImage'],  'idHTMLMap'=>'mapZone_'.$valuesPhoto['infosImage']['idImage']));
             
-            if (isset($this->variablesGet['archiIdEvenementGroupeAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresse']!='')
-            {
+            if (isset($this->variablesGet['archiIdEvenementGroupeAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresse']!='') {
                 // on revient sur le groupe d'adresse courant
                 if ($idAdresseCourante!=0)
                 {
@@ -2064,9 +1908,7 @@ class archiImage extends config
                 } else {
                     $url = $this->creerUrl('',  'imageDetail',  array('archiIdImage' => $valuesPhoto['infosImage']['idImage'],  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$this->variablesGet['archiIdEvenementGroupeAdresse']));
                 }
-            }
-            else
-            {
+            } else {
                 // on revient sur le groupe d'adresse de l'image
                 if ($idAdresseCourante!=0)
                 {
@@ -2079,17 +1921,13 @@ class archiImage extends config
             
             // construction du test pour IE ... si les zones de cliques ne sont pas visible ,  on permet le clique pour voir le detail de l'image ,  sinon c'est que l'on a cliqué sur une zone,  ou en tout cas l'une de celles ci est visible
             $arrayTestDivsJs=array();
-            foreach ($arrayZones['arrayNomsIDDivsZones'] as $indice => $value)
-            {
+            foreach ($arrayZones['arrayNomsIDDivsZones'] as $indice => $value) {
                 $arrayTestDivsJs[]="document.getElementById('".$value."').style.display=='none'";
             }
             $htmlOnClick="";
-            if (count($arrayTestDivsJs)>0)
-            {
+            if (count($arrayTestDivsJs)>0) {
                 $htmlOnClick="onclick=\"if (".implode(" && ",  $arrayTestDivsJs)."){location.href='".$url."';}\"";
-            }
-            else
-            {
+            } else {
                 if (isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1')
                 {
                     $htmlOnClick="onclick=\"location.href='".$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']))."';\"";                
@@ -2109,8 +1947,7 @@ class archiImage extends config
         
         $tableau->addValuesFromArrayLinked($tabTemp, 3,  "align=center",  "style='font-size:12px;width:200px;'");
         
-        if ($i>0)
-        {
+        if ($i>0) {
             $html.=$tableau->createHtmlTableFromArray(3,  "",  "",  "",  "");
         }
         
@@ -2121,27 +1958,23 @@ class archiImage extends config
     public function isImagePriseDepuisAndVueSurOnSameGroupeAdresse($params = array())
     {
         $retour = false;
-        if (isset($params['idImage']) && $params['idImage']!='' && isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='' && $params['idEvenementGroupeAdresse']!='0')
-        {
+        if (isset($params['idImage']) && $params['idImage']!='' && isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='' && $params['idEvenementGroupeAdresse']!='0') {
             $isPrisDepuis = false;
             $isVueSur = false;
             
             $reqPrisDepuis = "SELECT 0 FROM _adresseImage WHERE idImage = '".$params['idImage']."' AND idEvenementGroupeAdresse='".$params['idEvenementGroupeAdresse']."' AND prisDepuis='1'";
             $resPrisDepuis = $this->connexionBdd->requete($reqPrisDepuis);
-            if (mysql_num_rows($resPrisDepuis)>0)
-            {
+            if (mysql_num_rows($resPrisDepuis)>0) {
                 $isPrisDepuis = true;
             }
             
             $reqVueSur = "SELECT 0 FROM _adresseImage WHERE idImage = '".$params['idImage']."' AND idEvenementGroupeAdresse='".$params['idEvenementGroupeAdresse']."' AND vueSur='1'";
             $resVueSur = $this->connexionBdd->requete($reqVueSur);
-            if (mysql_num_rows($resVueSur)>0)
-            {
+            if (mysql_num_rows($resVueSur)>0) {
                 $isVueSur = true;
             }
             
-            if ($isPrisDepuis && $isVueSur)
-            {
+            if ($isPrisDepuis && $isVueSur) {
                 $retour = true;
             }
         }
@@ -2168,15 +2001,13 @@ class archiImage extends config
         // dans le cas de plusieur groupe d'adresse sur la meme page avec la meme photo affichee sur chacun,  on recupere le groupe d'adresse pour pouvoir identifier separement l'affichage des divs de la zone
         $paramIdGroupeAdresseEvenementAffiche="";
         $divParamIdGroupeAdresseAffiche = "";
-        if (isset($params['idGroupeAdresseEvenementAffiche']) && $params['idGroupeAdresseEvenementAffiche']!='' && $params['idGroupeAdresseEvenementAffiche']!='0')
-        {
+        if (isset($params['idGroupeAdresseEvenementAffiche']) && $params['idGroupeAdresseEvenementAffiche']!='' && $params['idGroupeAdresseEvenementAffiche']!='0') {
             $paramIdGroupeAdresseEvenementAffiche=$params['idGroupeAdresseEvenementAffiche'];
             $divParamIdGroupeAdresseAffiche="_".$params['idGroupeAdresseEvenementAffiche'];
         }
         
         $idAdresseCourante = 0;
-        if (isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!='')
-        {
+        if (isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!='') {
             $idAdresseCourante = $this->variablesGet['archiIdAdresse'];
         }
         
@@ -2200,14 +2031,12 @@ class archiImage extends config
             ";
         $resAdresses = $this->connexionBdd->requete($reqAdresses);
         
-        while ($fetchAdresses = mysql_fetch_assoc($resAdresses))
-        {
+        while ($fetchAdresses = mysql_fetch_assoc($resAdresses)) {
             $listeIdAdresses[] = $fetchAdresses['idAdresse'];
         }
         
         
-        if (isset($params['withoutImagesVuesSurPrisesDepuis']) && $params['withoutImagesVuesSurPrisesDepuis']==true)
-        {
+        if (isset($params['withoutImagesVuesSurPrisesDepuis']) && $params['withoutImagesVuesSurPrisesDepuis']==true) {
 
             if(!empty($listeIdAdresses)) {
                 // on recupere la liste des images qui sont deja affichee dans les encarts vueSur et prisDepuis
@@ -2232,8 +2061,7 @@ class archiImage extends config
         
         
         $sqlVueSurPrisDepuisWhereParam="";
-        if (count($listeImagesDejaAffichees)>0)
-        {
+        if (count($listeImagesDejaAffichees)>0) {
             $sqlVueSurPrisDepuisWhereParam="AND ei.idImage NOT IN (".implode(",  ",  $listeImagesDejaAffichees).")";
         }
         
@@ -2252,8 +2080,7 @@ class archiImage extends config
         
         $resImages = $this->connexionBdd->requete($reqImages);
         $listeImages=array();
-        while ($fetchImages = mysql_fetch_assoc($resImages))
-        {
+        while ($fetchImages = mysql_fetch_assoc($resImages)) {
             $listeImages[$fetchImages['idImage']] = array(
                                                             'idImage'=>$fetchImages['idImage'], 
                                                             'idHistoriqueImage'=>$fetchImages['idHistoriqueImage'], 
@@ -2266,8 +2093,7 @@ class archiImage extends config
         
         // recuperation d'une adresse pour chacune des images pour l'affichage de l'adresse dans l'url de la photo
         $tab = new tableau();
-        foreach ($listeImages as $idImage => $valuesImage)
-        {
+        foreach ($listeImages as $idImage => $valuesImage) {
         
             $reqAdresse = "    SELECT ha1.numero as numero, 
                                     r.nom as nomRue, 
@@ -2318,20 +2144,16 @@ class archiImage extends config
             
             
             $imageHTML="";
-            if ($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionImage']) && $this->variablesGet['afficheSelectionImage']=='1')
-            {
+            if ($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionImage']) && $this->variablesGet['afficheSelectionImage']=='1') {
                 $hrefImage="";
                 $onClickImage="if (document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked){document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked=false;document.getElementById('image".$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche."').style.borderColor='#007799';}else{document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked=true;document.getElementById('image".$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche."').style.borderColor='#FF8800';}";
                 $imageHTML .="<input type='checkbox' name='checkboxSelectionImages[]' id='checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."' value='".$idEvenement."_".$valuesImage['idHistoriqueImage']."' style='display:none;'>";
             }
-            elseif ($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1')
-            {
+            elseif ($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1') {
                 $hrefImage = "href='".$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$idImage))."'";
                 $onClickImage = "";
                 $imageHTML .="";
-            }
-            else
-            {
+            } else {
                 if ($idAdresseCourante !=0)
                 {
                     $hrefImage = "href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage' => $idImage,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$idEvenement,  'archiIdAdresse'=>$idAdresseCourante))."'";
@@ -2346,8 +2168,7 @@ class archiImage extends config
             $largeurImage="";
             $sizes=array();
             // pour gerer les format panoramiques ,  on va afficher l'image au format "grand" ,  l'image au format petit est trop flou
-            if (file_exists($this->getCheminPhysiqueImage("mini").$valuesImage['dateUpload']."/".$valuesImage['idHistoriqueImage'].".jpg"))
-            {
+            if (file_exists($this->getCheminPhysiqueImage("mini").$valuesImage['dateUpload']."/".$valuesImage['idHistoriqueImage'].".jpg")) {
                 $arrayImageSize = getimagesize($this->getCheminPhysiqueImage("mini").$valuesImage['dateUpload']."/".$valuesImage['idHistoriqueImage'].".jpg");
                 if ($arrayImageSize[0]/$arrayImageSize[1]>2.5)
                 {
@@ -2372,9 +2193,9 @@ class archiImage extends config
                     array('text'=>$image['description'])
                 )
             ).'</p></div></a>';*/
-            $imageHTML .= '<a class="imgResultGrp" '.$hrefImage.'><div class="imgResultHover"><img itemprop="image" id="image'.$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'" title="'.htmlspecialchars($title).'" alt="'.htmlspecialchars($alt).'"  src="'.
+            $imageHTML .= '<a class="imgResultGrp" '.$hrefImage.'><div class="imgResultHover"><img itemprop="image" id="image'.$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'"  alt="'.htmlspecialchars($alt).'"  src="'.
             'photos--'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].
-            '-moyen.jpg'.'" class="eventImage"><p>'.$bbCode->convertToDisplay(array('text'=>$valuesImage['description'])).'</p></div></a><br>';//src=\'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].'-'.$formatAffichagePhoto.'.jpg\'
+            '-moyen.jpg'.'" class="eventImage" /><p>'.strip_tags($bbCode->convertToDisplay(array('text'=>$valuesImage['description']))).'</p></div></a><div class="imgDesc">'.$bbCode->convertToDisplay(array('text'=>$valuesImage['description'])).'</div><br>';//src=\'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].'-'.$formatAffichagePhoto.'.jpg\'
         
             $tab->addValue($imageHTML,  '',  $sizes);
         }
@@ -2382,11 +2203,9 @@ class archiImage extends config
         // recuperation des images VuesSur classée suivant la date ,  si la date correspond,  on l'affiche dans l'evenement
         // pour l'instant on va les afficher a la suite des autres images...
         // par contre on ne les affiche pas quand on est en mode de selection d'image (pour la deplacer d'un evenement à l'autre
-        if (isset($params['imagesVuesSurLinkedByDate']) && count($params['imagesVuesSurLinkedByDate'])>0   && (!isset($this->variablesGet['afficheSelectionImage']) || $this->variablesGet['afficheSelectionImage']!='1') )
-        {
+        if (isset($params['imagesVuesSurLinkedByDate']) && count($params['imagesVuesSurLinkedByDate'])>0   && (!isset($this->variablesGet['afficheSelectionImage']) || $this->variablesGet['afficheSelectionImage']!='1') ) {
             $i=0;
-            foreach ($params['imagesVuesSurLinkedByDate'] as $indice => $valuesImage)
-            {
+            foreach ($params['imagesVuesSurLinkedByDate'] as $indice => $valuesImage) {
                 // ici on se sert de getAutresPhotosVuesSurAdresse uniquement pour renvoyer l'affichage de la photo avec les infos concernant celle ci
                 
                 $arrayRetourVueSur = $this->getAutresPhotosVuesSurAdresse($listeIdAdresses,  'moyen',  array('getOneIdImageFromEvenement'=>true,  'idImage'=>$valuesImage['idImage'],  'idEvenement'=>$idEvenement,  'idGroupeAdresseEvenementAffiche'=>$paramIdGroupeAdresseEvenementAffiche,  'setZoomOnImageZone'=>true));
@@ -2398,8 +2217,7 @@ class archiImage extends config
         
         
         
-        if ($authentification->estConnecte())
-        {
+        if ($authentification->estConnecte()) {
             // si on est connecté ,  on laisse un padding top pour que les photos ne se chevauches pas avec le menu des evenements
             //$html = "<div style='display:table;padding-top:50px;'>".$tab->createHtmlTableFromArray(3,  '',  '',  'align="center" valign="top" style="font-size:13px;"')."</div>";
             $html = "<div class='gallery'>".$tab->createHtmlDivsFromArray(array("styleDivs"=>"text-align:center;display:table;padding-left:5px;padding-bottom:5px;position:relative; width:130px; height:130px;",  "nbColonnes"=>4))."<div style='clear:both;'></div></div>";
@@ -2434,8 +2252,7 @@ class archiImage extends config
             $t->assign_block_vars('imAsso',  array());
         }
 
-        while ( $res = mysql_fetch_object($rep)) 
-        {
+        while ( $res = mysql_fetch_object($rep)) {
             $t->assign_block_vars('imAsso.associe',  array(
                 'lien' => $this->creerUrl('',  'imageDetail',  array(
                                             'archiIdImage' => $res->idImage, 
@@ -2482,8 +2299,7 @@ class archiImage extends config
         $authentifie = new archiAuthentification();
         $nomRepertoireTemporaire=$authentifie->getIdUtilisateur().'-'.time();
 
-        if (!is_dir($this->getCheminPhysique()."/images/uploadMultiple/".$nomRepertoireTemporaire))
-        {
+        if (!is_dir($this->getCheminPhysique()."/images/uploadMultiple/".$nomRepertoireTemporaire)) {
             mkdir($this->getCheminPhysique()."/images/uploadMultiple/".$nomRepertoireTemporaire);        
             chmod($this->getCheminPhysique()."/images/uploadMultiple/".$nomRepertoireTemporaire,  0777);
         }
@@ -2587,18 +2403,15 @@ class archiImage extends config
         
         echo "<script>
         
-            function retirerPrisDepuis(idAdresseValue, identifiantUniqueRetour)
-            {
+            function retirerPrisDepuis(idAdresseValue, identifiantUniqueRetour) {
                 document.getElementById('listePrisDepuisDiv'+identifiantUniqueRetour).innerHTML='';
                 
                 if (idAdresseValue!=0)
                 {
                     selectField = document.getElementById('prisDepuis'+identifiantUniqueRetour);
                     divField = document.getElementById('listePrisDepuisDiv'+identifiantUniqueRetour);
-                    for(i=0 ; i<selectField.options.length; i++ )
-                    {
-                        if (selectField.options[i]!=null)
-                        {
+                    for(i=0 ; i<selectField.options.length; i++ ) {
+                        if (selectField.options[i]!=null) {
                             if (selectField.options[i].value==idAdresseValue)
                             {
                                 indiceARetirer = i;
@@ -2616,18 +2429,15 @@ class archiImage extends config
             }
             
             
-            function retirerVueSur(idAdresseValue, identifiantUniqueRetour)
-            {
+            function retirerVueSur(idAdresseValue, identifiantUniqueRetour) {
                 document.getElementById('listeVueSurDiv'+identifiantUniqueRetour).innerHTML='';
                 
                 if (idAdresseValue!=0)
                 {
                     selectField = document.getElementById('vueSur'+identifiantUniqueRetour);
                     divField = document.getElementById('listeVueSurDiv'+identifiantUniqueRetour);
-                    for(i=0 ; i<selectField.options.length; i++ )
-                    {
-                        if (selectField.options[i]!=null)
-                        {
+                    for(i=0 ; i<selectField.options.length; i++ ) {
+                        if (selectField.options[i]!=null) {
                             if (selectField.options[i].value==idAdresseValue)
                             {
                                 indiceARetirer = i;
@@ -2654,16 +2464,13 @@ class archiImage extends config
         **/
         $sqlSource = 'SELECT idSource,  nom,  idTypeSource FROM source';
         $tabSource = array();
-        if ($result = $this->connexionBdd->requete($sqlSource))
-        {
-            while ($rep = mysql_fetch_object($result))
-            {
+        if ($result = $this->connexionBdd->requete($sqlSource)) {
+            while ($rep = mysql_fetch_object($result)) {
                 $tabSource[$rep->idSource] = $rep->nom;
             }
         }
     
-        switch($type)
-        {
+        switch($type) {
             case 'adresse':
             break;
             case 'evenement':
@@ -2690,8 +2497,7 @@ class archiImage extends config
                     
                     $reqEvenement = "SELECT distinct idImage from _evenementImage WHERE idEvenement ='".$this->variablesGet['archiIdEvenement']."' ORDER BY position";
                     $resEvenement = $this->connexionBdd->requete($reqEvenement);
-                    while ($fetchEvenement = mysql_fetch_assoc($resEvenement))
-                    {
+                    while ($fetchEvenement = mysql_fetch_assoc($resEvenement)) {
                         $arrayListeIdImages[] = $fetchEvenement['idImage'];
                     }
                 }
@@ -2703,13 +2509,10 @@ class archiImage extends config
                 {
                     $evenement = new archiEvenement();
                     $adresse = new archiAdresse();
-                    if (isset($this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']!='')
-                    {
+                    if (isset($this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']!='') {
                         $idEvenementGroupeAdresse = $this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse'];
                         $arrayModifUrlParams = array('archiIdEvenementGroupeAdresseAffichageAdresse'=>$this->variablesGet['archiIdEvenementGroupeAdresseAffichageAdresse']);
-                    }
-                    else
-                    {
+                    } else {
                         $idEvenementImageUnique = $this->getArrayIdEvenementFromIdImage($arrayListeIdImages[0]);
                         $idEvenementGroupeAdresse = $evenement->getParent($idEvenementImageUnique);
                     }
@@ -2728,8 +2531,7 @@ class archiImage extends config
         // cas ou le ne precise pas de idCourant ni de type de liaison ( la photo n'est ni liee a un evenement ni une adresse)
         // on modifie une liste d'images
         // *****************************************************************************************************************************************************************
-        if (count($arrayListeIdImages)>0)
-        {
+        if (count($arrayListeIdImages)>0) {
             $t->assign_block_vars('isImages',  array());
         
         
@@ -2777,8 +2579,7 @@ class archiImage extends config
             // ********************************************************************************************************************************************
             // boucle sur les images
             // ********************************************************************************************************************************************
-            while ($fetch=mysql_fetch_array($resImage))
-            {
+            while ($fetch=mysql_fetch_array($resImage)) {
                 if ($i==0)
                 {
                     $nomUtilisateur = $fetch["nomUtilisateur"];
@@ -2814,12 +2615,9 @@ class archiImage extends config
                 $divPrisDepuisHTML = "";
                 while ($fetchPrisDepuis = mysql_fetch_assoc($resPrisDepuis))
                 {
-                    if ($fetchPrisDepuis['idEvenementGroupeAdresse']!='0')
-                    {
+                    if ($fetchPrisDepuis['idEvenementGroupeAdresse']!='0') {
                         $nomAdresse = $adresseObject->getIntituleAdresseFrom($fetchPrisDepuis['idEvenementGroupeAdresse'],  'idEvenementGroupeAdresse',  array('ifTitreAfficheTitreSeulement'=>true));
-                    }
-                    else
-                    {
+                    } else {
                         $nomAdresse = $adresseObject->getIntituleAdresseFrom($fetchPrisDepuis['idAdresse'],  'idAdresse');
                     }
                     $selectPrisDepuisHTML .= "<option value='".$fetchPrisDepuis['idAdresse']."_".$fetchPrisDepuis['idEvenementGroupeAdresse']."' SELECTED>".$nomAdresse."</option>";
@@ -2835,12 +2633,9 @@ class archiImage extends config
                 $divVueSurHTML = "";
                 while ($fetchVueSur = mysql_fetch_assoc($resVueSur))
                 {
-                    if ($fetchVueSur['idEvenementGroupeAdresse']!='0')
-                    {
+                    if ($fetchVueSur['idEvenementGroupeAdresse']!='0') {
                         $nomAdresse = $adresseObject->getIntituleAdresseFrom($fetchVueSur['idEvenementGroupeAdresse'],  'idEvenementGroupeAdresse',  array('ifTitreAfficheTitreSeulement'=>true));
-                    }
-                    else
-                    {
+                    } else {
                         $nomAdresse = $adresseObject->getIntituleAdresseFrom($fetchVueSur['idAdresse'],  'idAdresse');
                     }
                     $selectVueSurHTML .= "<option value='".$fetchVueSur['idAdresse']."_".$fetchVueSur['idEvenementGroupeAdresse']."' SELECTED>".$nomAdresse."</option>";
@@ -3031,8 +2826,7 @@ class archiImage extends config
                 // ***************************************************
                 if (!empty($tabSource))
                 {
-                    foreach ($tabSource AS $id => $nom)
-                    {
+                    foreach ($tabSource AS $id => $nom) {
                         if (isset($tabTravail['source']['value']) && $tabTravail['source']['value'] == $id)
                             $selected='selected="selected"';
                         else
@@ -3086,8 +2880,7 @@ class archiImage extends config
         // recuperation des aides contextuelles
         $helpMessages = $this->getHelpMessages('helpImage');
         $helpMessages = array_merge($helpMessages,  $this->getHelpMessages('helpAdresse'));
-        foreach ($helpMessages as $fieldName => $message)
-        {
+        foreach ($helpMessages as $fieldName => $message) {
             $t->assign_vars(array($fieldName => $message));
         }
         
@@ -3123,19 +2916,16 @@ class archiImage extends config
         // recuperation du nombre d'adresses
         // *************************************************************************
         $nbAdressesAffichees = 1;
-        if (isset($this->variablesPost['nbAdressesAffichees'.$identifiantUniqueImage]) && $this->variablesPost['nbAdressesAffichees'.$identifiantUniqueImage]!='0')
-        {
+        if (isset($this->variablesPost['nbAdressesAffichees'.$identifiantUniqueImage]) && $this->variablesPost['nbAdressesAffichees'.$identifiantUniqueImage]!='0') {
             $nbAdressesAffichees = $this->variablesPost['nbAdressesAffichees'.$identifiantUniqueImage];
         }        
         
         // gestion de l'affichage des champs d'adresses
-        if (isset($this->variablesPost['ajouterAdresse'.$identifiantUniqueImage]))
-        {
+        if (isset($this->variablesPost['ajouterAdresse'.$identifiantUniqueImage])) {
             $nbAdressesAffichees = $nbAdressesAffichees + 1;
             //$t->assign_vars(array('nbAdressesAffichees'=>$nbAdressesAffichees));
         }
-        elseif (isset($this->variablesPost['enleverAdresse'.$identifiantUniqueImage]))
-        {
+        elseif (isset($this->variablesPost['enleverAdresse'.$identifiantUniqueImage])) {
             $nbAdressesAffichees = $nbAdressesAffichees - 1;
             //$t->assign_vars(array('nbAdressesAffichees'.$identifiantUniqueImage=>$nbAdressesAffichees));
         } else {
@@ -3148,8 +2938,7 @@ class archiImage extends config
         // SI ON EDITE DES IMAGES VENANT D'ETRE UPLOADEES
         // on recupere les donnees en POST
         // *************************************************************************
-        if ($modeRecuperationDonnees == 'ajout')
-        {
+        if ($modeRecuperationDonnees == 'ajout') {
         
                 $ville = 0;
                 if (isset($this->variablesPost['ville'.$identifiantUniqueImage]) && $this->variablesPost['ville'.$identifiantUniqueImage]!='0' && $this->variablesPost['ville'.$identifiantUniqueImage]!='')
@@ -3184,12 +2973,10 @@ class archiImage extends config
                     
                     // recherche des quartiers de la ville
                     $resQuartiers = $this->connexionBdd->requete("select idQuartier,  nom from quartier where idVille = '".$ville."'");
-                    while ($fetchQuartiers = mysql_fetch_assoc($resQuartiers))
-                    {
+                    while ($fetchQuartiers = mysql_fetch_assoc($resQuartiers)) {
                         $selected = "";
 
-                        if (isset($this->variablesPost['quartiers'.$identifiantUniqueImage]) && $this->variablesPost['quartiers'.$identifiantUniqueImage]!='0' && $fetchQuartiers['idQuartier']==$this->variablesPost['quartiers'.$identifiantUniqueImage])
-                        {    
+                        if (isset($this->variablesPost['quartiers'.$identifiantUniqueImage]) && $this->variablesPost['quartiers'.$identifiantUniqueImage]!='0' && $fetchQuartiers['idQuartier']==$this->variablesPost['quartiers'.$identifiantUniqueImage]) {    
                             $selected=" selected";
                         }
 
@@ -3213,12 +3000,10 @@ class archiImage extends config
                 {
                     $resSousQuartiers = $this->connexionBdd->requete("select idSousQuartier,  nom from sousQuartier where idQuartier = '".$this->variablesPost['quartiers'.$identifiantUniqueImage]."'");
                 
-                    while ($fetchSousQuartiers = mysql_fetch_assoc($resSousQuartiers))
-                    {
+                    while ($fetchSousQuartiers = mysql_fetch_assoc($resSousQuartiers)) {
                         $selected = "";
 
-                        if (isset($this->variablesPost['sousQuartiers'.$identifiantUniqueImage]) && $this->variablesPost['sousQuartiers'.$identifiantUniqueImage]!='0' && $fetchSousQuartiers['idSousQuartier']==$this->variablesPost['sousQuartiers'.$identifiantUniqueImage])
-                        {    
+                        if (isset($this->variablesPost['sousQuartiers'.$identifiantUniqueImage]) && $this->variablesPost['sousQuartiers'.$identifiantUniqueImage]!='0' && $fetchSousQuartiers['idSousQuartier']==$this->variablesPost['sousQuartiers'.$identifiantUniqueImage]) {    
                             $selected=" selected";
                         }
 
@@ -3235,8 +3020,7 @@ class archiImage extends config
         
         
         
-        if ($modeRecuperationDonnees == 'modif')
-        {
+        if ($modeRecuperationDonnees == 'modif') {
                 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 // RECUPERATION DES DONNEES DES ADRESSES A PARTIR DE LA BASE DE DONNEES
                 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3286,8 +3070,7 @@ class archiImage extends config
                     // pour l'instant on considere que cela concerne une rue avec son numero
                     $retourQuartiers = array();
                     $retourSousQuartiers = array();
-                    if ($fetchInfosAdresse['idRue']!='0')
-                    {
+                    if ($fetchInfosAdresse['idRue']!='0') {
                         // recherche de la ville,  du quartier et sous quartier
                         
                         $infosNomsAdresse     = $adresse->getAdresseComplete($fetchInfosAdresse['idRue'],  'rue');
@@ -3303,8 +3086,7 @@ class archiImage extends config
                         // assignation du quartier
                         $resQuartiers=$this->connexionBdd->requete("SELECT idQuartier, nom FROM quartier WHERE idVille = '".$infosIds['ville']."'");
                         
-                        while ($fetchQuartiers = mysql_fetch_assoc($resQuartiers))
-                        {
+                        while ($fetchQuartiers = mysql_fetch_assoc($resQuartiers)) {
                             $selected="";
                             if ($infosIds['quartier']==$fetchQuartiers['idQuartier'])
                                 $selected = " selected";
@@ -3325,8 +3107,7 @@ class archiImage extends config
                         
                         // assignation du sousQuartier
                         $resSousQuartiers=$this->connexionBdd->requete("SELECT idSousQuartier, nom FROM sousQuartier WHERE idQuartier = '".$infosIds['quartier']."'");
-                        while ($fetchSousQuartiers = mysql_fetch_assoc($resSousQuartiers))
-                        {
+                        while ($fetchSousQuartiers = mysql_fetch_assoc($resSousQuartiers)) {
                             $selected="";
                             if ($infosIds['sousQuartier']==$fetchSousQuartiers['idSousQuartier'])
                                 $selected=" selected";
@@ -3340,16 +3121,13 @@ class archiImage extends config
                             $retourSousQuartiers[] = array('nom'=>$fetchSousQuartiers['nom'],  'id'=>$fetchSousQuartiers['idSousQuartier'],  'selected'=>$selected);
                         }
                     }
-                    elseif ($fetchInfosAdresse['idSousQuartier']!='0')
-                    {
+                    elseif ($fetchInfosAdresse['idSousQuartier']!='0') {
                         echo "archiAdresse::afficheAjoutAdressesMultiple : ajout d'une localisation sur un sous quartier entier désactivée. Contactez l'administrateur.";
                     }
-                    elseif ($fetchInfosAdresse['idQuartier']!='0')
-                    {
+                    elseif ($fetchInfosAdresse['idQuartier']!='0') {
                         echo "archiAdresse::afficheAjoutAdressesMultiple : ajout d'une localisation sur un quartier entier désactivée. Contactez l'administrateur.";
                     }
-                    elseif ($fetchInfosAdresse['idVille']!='0')
-                    {
+                    elseif ($fetchInfosAdresse['idVille']!='0') {
                         echo "archiAdresse::afficheAjoutAdressesMultiple : ajout d'une localisation sur une ville entière désactivée. Contactez l'administrateur.";
                     }
                 }
@@ -3359,18 +3137,14 @@ class archiImage extends config
         
         $retourAdresses=array();
         // parcours des adresses
-        for($i=0 ; $i<$nbAdressesAffichees ; $i++)
-        {
-            if ($modeRecuperationDonnees == 'ajout' && isset($this->variablesPost['rue'.$i.'_'.$identifiantUniqueImage]))
-            {
+        for($i=0 ; $i<$nbAdressesAffichees ; $i++) {
+            if ($modeRecuperationDonnees == 'ajout' && isset($this->variablesPost['rue'.$i.'_'.$identifiantUniqueImage])) {
             
                 $arrayAdresse[$i]['txt']         = $this->variablesPost['rue'.$i.'_'.$identifiantUniqueImage."txt"];
                 $arrayAdresse[$i]['id']          = $this->variablesPost['rue'.$i.'_'.$identifiantUniqueImage];
                 $arrayAdresse[$i]['numero']      = $this->variablesPost['numero'.$i.'_'.$identifiantUniqueImage];
                 $arrayAdresse[$i]['indicatif']  = $this->variablesPost['indicatif'.$i.'_'.$identifiantUniqueImage];
-            }
-            else
-            {
+            } else {
                 if ($modeRecuperationDonnees == 'modif' && $i<$nbAdressesEnregistrees)
                 {
                     mysql_data_seek($resAdresses,  $i);
@@ -3408,8 +3182,7 @@ class archiImage extends config
             $reqIndicatif = "select idIndicatif,  nom from indicatif";
             $resIndicatif = $this->connexionBdd->requete($reqIndicatif);
             
-            while ($fetchIndicatif = mysql_fetch_assoc($resIndicatif))
-            {
+            while ($fetchIndicatif = mysql_fetch_assoc($resIndicatif)) {
                 $selected="";
                 if (    (isset($this->variablesPost['indicatif'.$i]) && $this->variablesPost['indicatif'.$i]!='' && $this->variablesPost['indicatif'.$i]==$fetchIndicatif['idIndicatif'])     ||    ($arrayAdresse[$i]['indicatif']==$fetchIndicatif['idIndicatif']))
                 {
@@ -3468,8 +3241,7 @@ class archiImage extends config
         $listeIdNouvellesImages=array(); // ce tableau contient la liste des idImages des nouvelles photos ajoutée,  ce tableau est simplement transmis au formulaire de modification qui s'affiche a la fin de l'ajout
         $rapportTransfert=array(); // ce tableau contient le resultat du retour de la fonction de redimensionnement ,  ok ou pas
         // creation des repertoires datés
-        if (!is_dir($this->getCheminPhysiqueImage("mini").$dateDuJour))
-        {
+        if (!is_dir($this->getCheminPhysiqueImage("mini").$dateDuJour)) {
             mkdir($this->getCheminPhysiqueImage("originaux").$dateDuJour);
             chmod($this->getCheminPhysiqueImage("originaux").$dateDuJour,  0777);
             mkdir($this->getCheminPhysiqueImage("mini").$dateDuJour);
@@ -3520,26 +3292,22 @@ class archiImage extends config
                     $erreurRedimension=false;
                     // conversion en jpeg quelque soit le format géré
                     // 1- l'image est sauvegardee tel quel  (0 pour le redimensionnement)
-                    if (!$this->redimension($_FILES['fichier']['tmp_name'],  pia_substr(strtolower($_FILES['fichier']['name']),  -3),  $this->getCheminPhysiqueImage("originaux").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  0))
-                    {
+                    if (!$this->redimension($_FILES['fichier']['tmp_name'],  pia_substr(strtolower($_FILES['fichier']['name']),  -3),  $this->getCheminPhysiqueImage("originaux").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  0)) {
                         $erreurRedimension=true;
                     }
                     // 2- redimensionnement au format mini
                     
-                    if (!$this->redimension($_FILES['fichier']['tmp_name'],  pia_substr(strtolower($_FILES['fichier']['name']),  -3),  $this->getCheminPhysiqueImage("mini").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  $this->getFormatImageMini()))
-                    {
+                    if (!$this->redimension($_FILES['fichier']['tmp_name'],  pia_substr(strtolower($_FILES['fichier']['name']),  -3),  $this->getCheminPhysiqueImage("mini").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  $this->getFormatImageMini())) {
                         $erreurRedimension=true;
                     }
                     
                     // 3- redimensionnement au format moyen
-                    if (!$this->redimension($_FILES['fichier']['tmp_name'],  pia_substr(strtolower($_FILES['fichier']['name']),  -3),  $this->getCheminPhysiqueImage("moyen").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  $this->getFormatImageMoyen()))
-                    {
+                    if (!$this->redimension($_FILES['fichier']['tmp_name'],  pia_substr(strtolower($_FILES['fichier']['name']),  -3),  $this->getCheminPhysiqueImage("moyen").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  $this->getFormatImageMoyen())) {
                         $erreurRedimension=true;
                     }
                     
                     // 4- redimensionnement au format grand
-                    if (!$this->redimension($_FILES['fichier']['tmp_name'],  pia_substr(strtolower($_FILES['fichier']['name']),  -3),  $this->getCheminPhysiqueImage("grand").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  $this->getFormatImageGrand()))
-                    {
+                    if (!$this->redimension($_FILES['fichier']['tmp_name'],  pia_substr(strtolower($_FILES['fichier']['name']),  -3),  $this->getCheminPhysiqueImage("grand").$dateDuJour."/".$nouvelIdHistoriqueImage.".jpg",  $this->getFormatImageGrand())) {
                         $erreurRedimension=true;
                     }
 
@@ -3548,8 +3316,7 @@ class archiImage extends config
                     $rapportTransfert[$nouveauIdImage]=array("erreurRedimension"=>$erreurRedimension);
                     
                     // ajout a la table _adresseImage
-                    switch($this->variablesPost['liaisonImage'])
-                    {
+                    switch($this->variablesPost['liaisonImage']) {
                         case 'adresse':
                             $resLiaison = $this->connexionBdd->requete('insert into _adresseImage (idImage, idAdresse, seSitue, prisDepuis, etage, hauteur) values ("'.$nouveauIdImage.'",  "'.$this->variablesPost['idCourant'].'",  0,  0,  0,  0)');
                         break;
@@ -3564,9 +3331,7 @@ class archiImage extends config
                 } else {
                     echo "Il s'est produit une erreur lors de l'upload,  la session est terminée ou la bibliothèque gd n'est pas installé sur le serveur.<br>";
                 }
-            }
-            else
-            {
+            } else {
                 echo "erreur lors de l'upload : archiImage::ajouter() : peut etre que l'image est de taille trop importante.<br>";
             }
             // *******************************************************************************************************************************************************************************
@@ -3592,10 +3357,8 @@ class archiImage extends config
                 if (($directory = opendir($this->getCheminPhysique()."/images/uploadMultiple/".$repertoireUpload))) // && $authentifie->estConnecte()
                 {
                     // parcours du repertoire
-                    while ($fichier = readdir($directory))
-                    {
-                        if ($fichier!="." && $fichier !=".." && !is_dir($fichier))
-                        {
+                    while ($fichier = readdir($directory)) {
+                        if ($fichier!="." && $fichier !=".." && !is_dir($fichier)) {
                             
                             // on analyse le nom de fichier pour voir s'il y a une date a extraire et a inclure dans la base de données
                             $dateCliche="0000-00-00";
@@ -3726,65 +3489,57 @@ class archiImage extends config
         $message="De nouvelles images ont été uploadées : <br>";
         
         $intituleAdresse="";
-        switch($this->variablesPost['liaisonImage'])
-        {
-            case 'evenement':
-                    $a = new archiAdresse();
-                    $reqAdresse = $a->getIdAdressesFromIdEvenement(array('idEvenement'=>$this->variablesPost['idCourant']));
-                    $resAdresse = $this->connexionBdd->requete($reqAdresse);
-                    $fetchAdresse = mysql_fetch_assoc($resAdresse); // on prend la premiere adresse qui vient
-                    $intituleAdresse=$a->getIntituleAdresseFrom($fetchAdresse['idAdresse'],  'idAdresse');
-                    
-                    foreach ($listeIdNouvellesImages as $idImageNouvelle)
-                    {
-                        $msgErreur="";
-                        if ($rapportTransfert[$idImageNouvelle]['erreurRedimension']==true)
-                        {
-                            $msgErreur=" ATTENTION : il y a eu un problème avec cette image (format incorrect) ";
-                        }
-                        $message.="<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage'=>$idImageNouvelle,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageNouvelle))))."'>Image ".$idImageNouvelle."</a>$msgErreur<br>";
-                        
-                    }                    
-                    $evenement = new archiEvenement();
-                    $idEvenementGroupeAdresse = $evenement->getIdEvenementGroupeAdresseFromIdEvenement($this->variablesPost['idCourant']);
-                    
-                    $message.="<a href='".$this->creerUrl('',  '',  array('archiAffichage'=>'adresseDetail',  'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse,  'archiIdAdresse'=>$fetchAdresse['idAdresse']))."'>".$intituleAdresse."</a><br>";
-            break;
-            case 'adresse':
-                    $a = new archiAdresse();
-                    $intituleAdresse=$a->getIntituleAdresseFrom($this->variablesPost['idCourant'],  'idAdresse');
-                    
-                    foreach ($listeIdNouvellesImages as $idImageNouvelle)
-                    {
-                        $msgErreur="";
-                        if ($rapportTransfert[$idImageNouvelle]['erreurRedimension']==true)
-                        {
-                            $msgErreur=" ATTENTION : il y a eu un problème avec cette image (format incorrect) ";
-                        }
-                        $message.="<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage'=>$idImageNouvelle,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageNouvelle))))."'>Image ".$idImageNouvelle."</a>$msgErreur<br>";
-                    }
-                    
-                    $arrayUrl = array();
-                    if (isset($idImageNouvelle))
-                    {
-                        $idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageNouvelle));
-                        $arrayUrl=array('archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse);
-                    }
-                    
-                    $message.="<a href='".$this->creerUrl('',  '',  array_merge($arrayUrl,  array('archiAffichage'=>'adresseDetail',  'archiIdAdresse'=>$this->variablesPost['idCourant'])))."'>".$intituleAdresse."</a><br>";
-            break;
-            default:
-                $message.="De nouvelle images ont été ajoutées à la bibliothèque :<br>";
-                foreach ($listeIdNouvellesImages as $idImageNouvelle)
-                {
-                    $msgErreur="";
-                    if ($rapportTransfert[$idImageNouvelle]['erreurRedimension']==true)
-                    {
-                        $msgErreur=" ATTENTION : il y a eu un problème avec cette image (format incorrect) ";
-                    }
-                    $message.="<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage'=>$idImageNouvelle,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageNouvelle))))."'>Image ".$idImageNouvelle."</a>$msgErreur<br>";
-                    
+        switch($this->variablesPost['liaisonImage']) {
+        case 'evenement':
+            $a = new archiAdresse();
+            $reqAdresse = $a->getIdAdressesFromIdEvenement(array('idEvenement'=>$this->variablesPost['idCourant']));
+            $resAdresse = $this->connexionBdd->requete($reqAdresse);
+            $fetchAdresse = mysql_fetch_assoc($resAdresse); // on prend la premiere adresse qui vient
+            $intituleAdresse=$a->getIntituleAdresseFrom($fetchAdresse['idAdresse'],  'idAdresse');
+            
+            foreach ($listeIdNouvellesImages as $idImageNouvelle) {
+                $msgErreur="";
+                if ($rapportTransfert[$idImageNouvelle]['erreurRedimension']==true) {
+                    $msgErreur=" ATTENTION : il y a eu un problème avec cette image (format incorrect) ";
                 }
+                $message.="<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage'=>$idImageNouvelle,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageNouvelle))))."'>Image ".$idImageNouvelle."</a>$msgErreur<br>";
+                
+            }                    
+            $evenement = new archiEvenement();
+            $idEvenementGroupeAdresse = $evenement->getIdEvenementGroupeAdresseFromIdEvenement($this->variablesPost['idCourant']);
+            
+            $message.="<a href='".$this->creerUrl('',  '',  array('archiAffichage'=>'adresseDetail',  'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse,  'archiIdAdresse'=>$fetchAdresse['idAdresse']))."'>".$intituleAdresse."</a><br>";
+            break;
+        case 'adresse':
+            $a = new archiAdresse();
+            $intituleAdresse=$a->getIntituleAdresseFrom($this->variablesPost['idCourant'],  'idAdresse');
+            
+            foreach ($listeIdNouvellesImages as $idImageNouvelle) {
+                $msgErreur="";
+                if ($rapportTransfert[$idImageNouvelle]['erreurRedimension']==true) {
+                    $msgErreur=" ATTENTION : il y a eu un problème avec cette image (format incorrect) ";
+                }
+                $message.="<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage'=>$idImageNouvelle,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageNouvelle))))."'>Image ".$idImageNouvelle."</a>$msgErreur<br>";
+            }
+            
+            $arrayUrl = array();
+            if (isset($idImageNouvelle)) {
+                $idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageNouvelle));
+                $arrayUrl=array('archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse);
+            }
+            
+            $message.="<a href='".$this->creerUrl('',  '',  array_merge($arrayUrl,  array('archiAffichage'=>'adresseDetail',  'archiIdAdresse'=>$this->variablesPost['idCourant'])))."'>".$intituleAdresse."</a><br>";
+            break;
+        default:
+            $message.="De nouvelle images ont été ajoutées à la bibliothèque :<br>";
+            foreach ($listeIdNouvellesImages as $idImageNouvelle) {
+                $msgErreur="";
+                if ($rapportTransfert[$idImageNouvelle]['erreurRedimension']==true) {
+                    $msgErreur=" ATTENTION : il y a eu un problème avec cette image (format incorrect) ";
+                }
+                $message.="<a href='".$this->creerUrl('',  'imageDetail',  array('archiIdImage'=>$idImageNouvelle,  'archiRetourAffichage'=>'evenement',  'archiRetourIdName'=>'idEvenement',  'archiRetourIdValue'=>$this->getIdEvenementGroupeAdresseFromImage(array('idImage'=>$idImageNouvelle))))."'>Image ".$idImageNouvelle."</a>$msgErreur<br>";
+                
+            }
             break;
         }
         $mail = new mailObject();    
@@ -3806,13 +3561,10 @@ class archiImage extends config
         $adresse = new archiAdresse();
         $intituleAdresse = $adresse->getIntituleAdresseFrom($this->variablesPost['idCourant'],  'idEvenement');
         $evenement = new archiEvenement();
-        foreach ($arrayUtilisateurs as $indice => $idUtilisateurAdresse)
-        {
-            if ($idUtilisateurAdresse != $auth->getIdUtilisateur())
-            {
+        foreach ($arrayUtilisateurs as $indice => $idUtilisateurAdresse) {
+            if ($idUtilisateurAdresse != $auth->getIdUtilisateur()) {
                 $infosUtilisateur = $utilisateur->getArrayInfosFromUtilisateur($idUtilisateurAdresse);
-                if ($infosUtilisateur['alerteAdresses']=='1' && $infosUtilisateur['compteActif']=='1' && $infosUtilisateur['idProfil']!='4')
-                {
+                if ($infosUtilisateur['alerteAdresses']=='1' && $infosUtilisateur['compteActif']=='1' && $infosUtilisateur['idProfil']!='4') {
                     $messageIntro = "Un utilisateur a ajouté une ou plusieurs images sur une adresse dont vous êtes l'auteur.<br>";
                     
                     $idEvenementGroupeAdresse = $evenement->getIdEvenementGroupeAdresseFromIdEvenement($this->variablesPost['idCourant']);
@@ -3823,12 +3575,9 @@ class archiImage extends config
                     
                     $message= "Pour vous rendre sur l'évènement : <a href='".$this->creerUrl('',  '',  array('archiAffichage'=>'adresseDetail',  'archiIdAdresse'=>$fetchAdresses['idAdresse'],  'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse))."'>".$intituleAdresse."</a><br>";
                     $messageFin= $this->getMessageDesabonnerAlerteMail();
-                    if ($utilisateur->isMailEnvoiImmediat($idUtilisateurAdresse))
-                    {
+                    if ($utilisateur->isMailEnvoiImmediat($idUtilisateurAdresse)) {
                         $mail->sendMail($mail->getSiteMail(),  $infosUtilisateur['mail'],  'Ajout de photos sur une adresse dont vous êtes l\'auteur.',  $messageIntro.$message.$messageFin, true);
-                    }
-                    else
-                    {
+                    } else {
                         $utilisateur->ajouteMailEnvoiRegroupes(array('contenu'=>$message,  'idDestinataire'=>$idUtilisateurAdresse,  'idTypeMailRegroupement'=>13));
                     }
                 }
@@ -3846,19 +3595,13 @@ class archiImage extends config
         $arrayVilles = array_unique($arrayVilles);
         
         $arrayListeModerateurs = $u->getArrayIdModerateursActifsFromVille($arrayVilles[0],  array("sqlWhere"=>" AND alerteAdresses='1' "));
-        if (count($arrayListeModerateurs)>0)
-        {
-            foreach ($arrayListeModerateurs as $indice => $idModerateur)
-            {
-                if ($idModerateur!=$this->session->getFromSession('utilisateurConnecte'.$this->idSite))
-                {
-                    if ($u->isMailEnvoiImmediat($idModerateur))
-                    {
+        if (count($arrayListeModerateurs)>0) {
+            foreach ($arrayListeModerateurs as $indice => $idModerateur) {
+                if ($idModerateur!=$this->session->getFromSession('utilisateurConnecte'.$this->idSite)) {
+                    if ($u->isMailEnvoiImmediat($idModerateur)) {
                         $mailModerateur = $u->getMailUtilisateur($idModerateur);
                         $mail->sendMail($mail->getSiteMail(),  $mailModerateur,  'Nouvelles images ajoutées -'.$intituleAdresse,  $message, true);
-                    }
-                    else
-                    {
+                    } else {
                         $u->ajouteMailEnvoiRegroupes(array('contenu'=>$message,  'idDestinataire'=>$idModerateur,  'idTypeMailRegroupement'=>13));
                     }
                 }
@@ -3874,7 +3617,16 @@ class archiImage extends config
         echo $this->afficherFormulaireModification(0,  '',  $listeIdNouvellesImages);
     }
     
-    // redimensionne une image ,  si newWidth =0 ,  pas de redimensionnement
+    /**
+     * Redimensionne une image ,  si newWidth =0 ,  pas de redimensionnement
+     * 
+     * @param string $imageFile Nom du fichier
+     * @param string $imageType Type du fichier
+     * @param string $chemin    Chemin
+     * @param int    $newLength Nouvelle longueur
+     * 
+     * @return bool
+     * */
     public function redimension($imageFile='',  $imageType='jpg',  $chemin='',  $newLength=0)
     {
         set_time_limit(0);
@@ -3882,43 +3634,40 @@ class archiImage extends config
         $imageOK=true;
         $f = new fileObject();
         
-        switch($imageType)
-        {
-            case 'gif':
-                $im=imagecreatefromgif ($imageFile);
+        switch($imageType) {
+        case 'gif':
+            $im=imagecreatefromgif($imageFile);
             break;
-            
-            case 'jpg':
-                // attention pour les jpg ,  si on ne les redimensionne pas ,  on va se contenter de la copier (pour essayer d'eviter les problemes d'images tronquees)
-                if ($newLength!=0)
-                    $im=imagecreatefromjpeg($imageFile); 
+        
+        case 'jpg':
+            // attention pour les jpg ,  si on ne les redimensionne pas ,  on va se contenter de la copier (pour essayer d'eviter les problemes d'images tronquees)
+            if ($newLength!=0)
+                $im=imagecreatefromjpeg($imageFile); 
             break;
-            case 'peg': // pour les format 'jpeg' ,  cette detection devrait suffir
-                    $im=imagecreatefromjpeg($imageFile);
+        case 'peg': // pour les format 'jpeg' ,  cette detection devrait suffir
+                $im=imagecreatefromjpeg($imageFile);
             break;
-            
-            case 'png':
-                $im=imagecreatefrompng($imageFile);
+        
+        case 'png':
+            $im=imagecreatefrompng($imageFile);
             break;
-            
-            default:
-                echo 'format d\'image non supporté';
-                $imageOK=false;
+        
+        default:
+            echo 'format d\'image non supporté';
+            $imageOK=false;
             break;
         }
         
         list($originalWidth,  $originalHeight,  $type,  $attr) = getimagesize($imageFile);
         
-        if ($newLength==0) // on ne redimensionne pas
-        {
+        if ($newLength==0) {
+            // on ne redimensionne pas
             $newWidth = $originalWidth;
             $newHeight = $originalHeight;
             
-            if ($imageType=='jpg')
-            {
+            if ($imageType=='jpg') {
                 // dans le cas d'une image jpg ,  on se contente de la copier
-                if (!copy($imageFile,  $chemin))
-                {
+                if (!copy($imageFile,  $chemin)) {
                     $imageOK=false;
                 } else {
                     // verification du CRC
@@ -3926,13 +3675,11 @@ class archiImage extends config
                     //echo "crc32 image file : ".$f->crc32_file($imageFile)."<br><br>";
                     //echo "crc32 chemin : ".$f->crc32_file($chemin)."<br><br>";
 
-                    while (!($f->crc32_file($imageFile)==$f->crc32_file($chemin)))
-                    {
+                    while (!($f->crc32_file($imageFile)==$f->crc32_file($chemin))) {
                         copy($imageFile,  $chemin);
                         $i++;
                         
-                        if ($i>=5)
-                        {
+                        if ($i>=5) {
                             echo "il y a une erreur a la copie de l'image originale. Effacez l'image et retentez l'opération,  si le problème persiste merci de contacter l'administrateur.<br>";
                             $m = new mailObject();
                             $m->sendMail("images@archi-strasbourg.org",  "laurent_dorer@yahoo.fr",  "probleme image corrompue",  "il y a eu plus de 5 tentatives pour des crc errones => $imageFile => $chemin");
@@ -3941,33 +3688,26 @@ class archiImage extends config
                     }
                 }
                 
-            }
-            else
-            {
-                $imDestination = imagecreatetruecolor( $newWidth,  $newHeight);
-                imagecopyresampled( $imDestination,  $im,  0,  0,  0,  0,  $newWidth,  $newHeight,  $originalWidth,  $originalHeight);
-                imagejpeg( $imDestination,  $chemin,  100);
+            } else {
+                $imDestination = imagecreatetruecolor($newWidth,  $newHeight);
+                imagecopyresampled($imDestination,  $im,  0,  0,  0,  0,  $newWidth,  $newHeight,  $originalWidth,  $originalHeight);
+                imagejpeg($imDestination,  $chemin,  100);
                 
                 imagedestroy($im);
                 imagedestroy($imDestination);
             }
-        }
-        elseif ($originalWidth>$originalHeight)
-        {
-            /*if ($originalWidth/$originalHeight>2.5)
-            {
+        } elseif ($originalWidth>$originalHeight) {
+            /*if ($originalWidth/$originalHeight>2.5) {
                 // on admet qu'a ce ratio entre la longueur et la hauteur ,  on a affaire a une image panoramique,  on va donc calculer les dimensions de la nouvelle image en fonction de sa hauteur
                 $newHeight = $newLength;
                 $newWidth     = round($originalWidth * $newHeight / $originalHeight);
-            }
-            else
-            {*/
+            } else {*/
                 $newWidth=$newLength;
                 $newHeight     = round($originalHeight * $newWidth / $originalWidth);
             //}
-            $imDestination = imagecreatetruecolor( $newWidth,  $newHeight);
-            imagecopyresampled( $imDestination,  $im,  0,  0,  0,  0,  $newWidth,  $newHeight,  $originalWidth,  $originalHeight);
-            imagejpeg( $imDestination,  $chemin,  100);
+            $imDestination = imagecreatetruecolor($newWidth,  $newHeight);
+            imagecopyresampled($imDestination,  $im,  0,  0,  0,  0,  $newWidth,  $newHeight,  $originalWidth,  $originalHeight);
+            imagejpeg($imDestination,  $chemin,  100);
             
             imagedestroy($im);
             imagedestroy($imDestination);
@@ -3975,9 +3715,9 @@ class archiImage extends config
             $newHeight = $newLength;
             $newWidth     = round($originalWidth * $newHeight / $originalHeight);
             
-            $imDestination = imagecreatetruecolor( $newWidth,  $newHeight);
-            imagecopyresampled( $imDestination,  $im,  0,  0,  0,  0,  $newWidth,  $newHeight,  $originalWidth,  $originalHeight);
-            imagejpeg( $imDestination,  $chemin,  100);
+            $imDestination = imagecreatetruecolor($newWidth,  $newHeight);
+            imagecopyresampled($imDestination,  $im,  0,  0,  0,  0,  $newWidth,  $newHeight,  $originalWidth,  $originalHeight);
+            imagejpeg($imDestination,  $chemin,  100);
             
             imagedestroy($im);
             imagedestroy($imDestination);
@@ -3988,7 +3728,11 @@ class archiImage extends config
         return $imageOK;
     }
     
-    // fonction permettant d'afficher le formulaire de recherche sur les images
+    /**
+     * Fonction permettant d'afficher le formulaire de recherche sur les images
+     * 
+     * @return string HTML
+     * */
     public function afficherFormulaireRecherche()
     {
         $html = '';
@@ -3999,8 +3743,7 @@ class archiImage extends config
         
         $listeChampsFormulaire = array("motCle",  "dateUploadDu",  "dateUploadAu",  "datePriseDeVueDu",  "datePriseDeVueAu",  "pageCourante");
         
-        foreach ($listeChampsFormulaire as $indice =>$value)
-        {
+        foreach ($listeChampsFormulaire as $indice =>$value) {
             if (isset($this->variablesPost[$value]))
                 $t->assign_vars(array($value=>$this->variablesPost[$value]));
         }
@@ -4016,7 +3759,13 @@ class archiImage extends config
     
     }
     
-    // fonction qui affiche la liste des photos suivant les criteres fournis dans le tableau 'criteres'
+    /**
+     * Fonction qui affiche la liste des photos suivant les criteres fournis dans le tableau 'criteres'
+     * 
+     * @param array $criteres Critères
+     * 
+     * @return string HTML
+     * */
     public function afficherListe($criteres=array())
     {
         $html = '';
@@ -4031,59 +3780,54 @@ class archiImage extends config
         // lien pour l'ajout d'une ou plusieur images dans la bibliotheque ,  sans préciser si celle(s) ci appartient (iennent) à une adresse ou un evenement
         $t->assign_vars(array('lienAjoutImage'=>$this->creerUrl('',  'ajoutImageBibliotheque')));
         
-        foreach ($tabParametresAutorises AS $param) 
-        {
+        foreach ($tabParametresAutorises AS $param) {
             if (isset($this->variablesPost[$param]) AND !isset($criteres[$param]))
                 $criteres[$param] = $this->variablesPost[$param];
         }
         
-        foreach ($tabParametresAutorises AS $param) 
-        {
+        foreach ($tabParametresAutorises AS $param) {
             if (isset($this->variablesGet[$param]) AND !isset($criteres[$param]))
                 $criteres[$param] = $this->variablesGet[$param];
         }
         
-        if (!isset($criteres['pageCourante']))
-        {
+        if (!isset($criteres['pageCourante'])) {
             $criteres['pageCourante']=1;
         }        
         
-        if ( !isset( $criteres['selection']) OR !isset($criteres['id']) OR $formulaire->estChiffre($criteres['id']) != 1)
-        {
+        if ( !isset( $criteres['selection']) OR !isset($criteres['id']) OR $formulaire->estChiffre($criteres['id']) != 1) {
             $sqlWhere = '1=1';
         } else {
             switch( $criteres['selection']) {
-                case 'utilisateur':        $sqlWhere = 'hI.idUtilisateur='.$criteres['id'];
-                    break;
-                default:        $sqlWhere = '1=1';
+            case 'utilisateur':        $sqlWhere = 'hI.idUtilisateur='.$criteres['id'];
+                break;
+            default:        $sqlWhere = '1=1';
             }
         }
         
         
-        if ( !isset( $criteres['ordre'] ))
-        {
+        if ( !isset( $criteres['ordre'] )) {
             $sqlOrdre = 'hI.nom';
         } else {
             switch( $criteres['ordre']) {
-                case 'nom':        $sqlOrdre = 'hI.nom';
-                    break;
-                case 'description':    $sqlOrdre = 'hI.description';
-                    break;
-                case 'source':        $sqlOrdre = 'nomSource';
-                    break;
-                case 'dateAjout':    $sqlOrdre = 'hI.dateUpload';
-                    break;
-                default:        $sqlOrdre = 'hI.nom';
+            case 'nom':        $sqlOrdre = 'hI.nom';
+                break;
+            case 'description':    $sqlOrdre = 'hI.description';
+                break;
+            case 'source':        $sqlOrdre = 'nomSource';
+                break;
+            case 'dateAjout':    $sqlOrdre = 'hI.dateUpload';
+                break;
+            default:        $sqlOrdre = 'hI.nom';
             }
         }
         
         if (isset( $criteres['tri'])) {
-            if ($criteres['tri'] == 'desc')
+            if ($criteres['tri'] == 'desc') {
                 $sqlTri = 'DESC';
-            else
+            } else {
                 $sqlTri = 'ASC';
-        }
-        else {
+            }
+        } else {
             $sqlTri = 'ASC';
         }
         
@@ -4092,48 +3836,39 @@ class archiImage extends config
         //  **********************************
         $sqlRecherche="";
         // criteres sur les dates d'upload
-        if (isset($criteres['dateUploadDu']) && $criteres['dateUploadDu']!='' && (!isset($criteres['dateUploadAu']) || $criteres['dateUploadAu']==''))
-        {
+        if (isset($criteres['dateUploadDu']) && $criteres['dateUploadDu']!='' && (!isset($criteres['dateUploadAu']) || $criteres['dateUploadAu']=='')) {
             $sqlRecherche .= " and hI.dateUpload='".$this->date->toBdd($criteres['dateUploadDu'])."' ";
         }
         
-        if (isset($criteres['dateUploadDu']) && $criteres['dateUploadDu']!='' && (!isset($criteres['dateUploadAu']) || $criteres['dateUploadAu']==''))
-        {
+        if (isset($criteres['dateUploadDu']) && $criteres['dateUploadDu']!='' && (!isset($criteres['dateUploadAu']) || $criteres['dateUploadAu']=='')) {
             $sqlRecherche .= " and hI.dateUpload='".$this->date->toBdd($criteres['dateUploadDu'])."' ";
         }
         
-        if (isset($criteres['dateUploadDu']) && $criteres['dateUploadDu']!='' && isset($criteres['dateUploadAu']) && $criteres['dateUploadAu']!='')
-        {
+        if (isset($criteres['dateUploadDu']) && $criteres['dateUploadDu']!='' && isset($criteres['dateUploadAu']) && $criteres['dateUploadAu']!='') {
             $sqlRecherche .= " and hI.dateUpload>='".$this->date->toBdd($criteres['dateUploadDu'])."' and hI.dateUpload<='".$criteres['dateUploadAu']."' ";
         }
         
         // criteres sur les dates de prises de vues
-        if (isset($criteres['datePriseDeVueDu']) && $criteres['datePriseDeVueDu']!='' && (!isset($criteres['datePriseDeVuAu']) || $criteres['datePriseDeVuAu']==''))
-        {
+        if (isset($criteres['datePriseDeVueDu']) && $criteres['datePriseDeVueDu']!='' && (!isset($criteres['datePriseDeVuAu']) || $criteres['datePriseDeVuAu']=='')) {
             $sqlRecherche .= " and hI.dateCliche='".$this->date->toBdd($criteres['datePriseDeVueDu'])."' ";
         }
         
-        if (isset($criteres['datePriseDeVueDu']) && $criteres['datePriseDeVueDu']!='' && (!isset($criteres['datePriseDeVueAu']) || $criteres['datePriseDeVueAu']==''))
-        {
+        if (isset($criteres['datePriseDeVueDu']) && $criteres['datePriseDeVueDu']!='' && (!isset($criteres['datePriseDeVueAu']) || $criteres['datePriseDeVueAu']=='')) {
             $sqlRecherche .= " and hI.dateCliche='".$this->date->toBdd($criteres['datePriseDeVueDu'])."' ";
         }
         
-        if (isset($criteres['datePriseDeVueDu']) && $criteres['datePriseDeVueDu']!='' && isset($criteres['datePriseDeVueAu']) && $criteres['datePriseDeVueAu']!='')
-        {
+        if (isset($criteres['datePriseDeVueDu']) && $criteres['datePriseDeVueDu']!='' && isset($criteres['datePriseDeVueAu']) && $criteres['datePriseDeVueAu']!='') {
             $sqlRecherche .= " and hI.dateCliche>='".$criteres['datePriseDeVueDu']."' and hI.dateCliche<='".$criteres['datePriseDeVueAu']."' ";
         }
         
         // criteres sur le nom/description
-        if (isset($criteres['motCle']) && $criteres['motCle']!='')
-        {
+        if (isset($criteres['motCle']) && $criteres['motCle']!='') {
             $sqlRecherche .=" and ( ";
             $arrayListeMots = explode(" ",  $criteres['motCle']);
-            foreach ($arrayListeMots as $indice => $value)
-            {
+            foreach ($arrayListeMots as $indice => $value) {
                 $sqlRecherche .= " hI.nom LIKE \"%".$value."%\" or hI.description LIKE \"%".$value."%\" or ";
             }
-            if (count($arrayListeMots)>0)
-            {
+            if (count($arrayListeMots)>0) {
                 $sqlRecherche = substr($sqlRecherche,  0,  pia_strlen($sqlRecherche)-3);
             }
             $sqlRecherche .= ") ";
@@ -4156,14 +3891,16 @@ class archiImage extends config
         
         // nombre d'images affichées sur une page
         $nbEnregistrementsParPage = 5;
-        $arrayPagination=$this->pagination(array(
-                                        'nomParamPageCourante'=>'pageCourante', 
-                                        'nbEnregistrementsParPage'=>$nbEnregistrementsParPage, 
-                                        'nbEnregistrementsTotaux'=>$nbEnregistrementTotaux, 
-                                        'typeLiens'=>'formulaire', 
-                                        'champPageCourante'=>'pageCourante', 
-                                        'idFormulaire'=>'rechercheImages'
-                                        ));
+        $arrayPagination=$this->pagination(
+            array(
+            'nomParamPageCourante'=>'pageCourante', 
+            'nbEnregistrementsParPage'=>$nbEnregistrementsParPage, 
+            'nbEnregistrementsTotaux'=>$nbEnregistrementTotaux, 
+            'typeLiens'=>'formulaire', 
+            'champPageCourante'=>'pageCourante', 
+            'idFormulaire'=>'rechercheImages'
+            )
+        );
         
         echo $arrayPagination['html'];
         
@@ -4181,8 +3918,7 @@ class archiImage extends config
 
         $t->assign_vars(array('nbReponses'=>$nbEnregistrementTotaux));
         
-        if ($nbEnregistrementTotaux>0)
-        {
+        if ($nbEnregistrementTotaux>0) {
             $tabLiens= array(
                 array(
                     'titre' => 'Image', 
@@ -4224,15 +3960,16 @@ class archiImage extends config
             }
             
             
-            while ($res =mysql_fetch_object($rep))
-            {
-                $t->assign_block_vars('image',  array(
-                    'url'        => $this->creerUrl('',  'imageDetail',  array('archiIdImage' => $res->idImage)), 
-                    'urlImage'     => $this->getUrlImage("mini").$res->urlImage, 
-                    'nom'        => htmlspecialchars(stripslashes($res->nom)), 
-                    'description'    => htmlspecialchars(stripslashes($res->description)), 
-                    'source'    => $res->nomSource
-                    ));
+            while ($res =mysql_fetch_object($rep)) {
+                $t->assign_block_vars(
+                    'image',  array(
+                        'url'        => $this->creerUrl('',  'imageDetail',  array('archiIdImage' => $res->idImage)), 
+                        'urlImage'     => $this->getUrlImage("mini").$res->urlImage, 
+                        'nom'        => htmlspecialchars(stripslashes($res->nom)), 
+                        'description'    => htmlspecialchars(stripslashes($res->description)), 
+                        'source'    => $res->nomSource
+                    )
+                );
             }
         }
         
@@ -4244,7 +3981,11 @@ class archiImage extends config
         return $html;
     }
     
-    // retourne un nouvel idImage pour l'ajout d'une nouvelle image
+    /**
+     * Retourne un nouvel idImage pour l'ajout d'une nouvelle image
+     * 
+     * @return int
+     * */
     public function getNewIdImage()
     {
         $resMaxId    =    $this->connexionBdd->requete('select max(idImage) as maxIdImage from historiqueImage');
@@ -4258,7 +3999,13 @@ class archiImage extends config
         return $nouveauIdImage;
     }
     
-    // recuperation de la liste des adresses lies enregistrees dans la base pour la table _adresseImage
+    /**
+     * Recuperation de la liste des adresses lies enregistrees dans la base pour la table _adresseImage
+     * 
+     * @param int $idImage ID de l'image
+     * 
+     * @return Resource
+     * */
     public function getFetchAdressesLiees($idImage=0)
     {
         $reqAdressesLiees = "
@@ -4297,11 +4044,17 @@ class archiImage extends config
         return $resAdressesLiees;
     }
     
-    // recuperation des evenements lies a l'image
+    /**
+     * Recuperation des evenements lies a l'image
+     * 
+     * @param int $idImage ID de l'image
+     * 
+     * @return Resource
+     * */
     public function getFetchEvenementsLies($idImage=0)
     {
-        $reqEvenementsLies=
-        "    SELECT he.idEvenement as idEvenement,  he.titre as titre
+        $reqEvenementsLies
+            ="SELECT he.idEvenement as idEvenement,  he.titre as titre
             FROM historiqueEvenement heb,  historiqueEvenement he
             RIGHT JOIN _evenementImage ei ON ei.idEvenement = he.idEvenement
             WHERE heb.idEvenement = he.idEvenement
@@ -4314,7 +4067,13 @@ class archiImage extends config
         return $resEvenementsLies;
     }
 
-    // supprime les images d'un evenement si celle ci ne sont pas liées a une adresse,  ou un autre evenement
+    /**
+     * Supprime les images d'un evenement si celle ci ne sont pas liées a une adresse,  ou un autre evenement
+     * 
+     * @param int $idEvenement ID de l'événement
+     * 
+     * @return void
+     * */
     public function deleteImagesFromIdEvenement($idEvenement=0)
     {
         // recuperation de la liste des images et suppression des images :
@@ -4330,22 +4089,19 @@ class archiImage extends config
         // liste des images concernées : 
         $tabIdImages = array();
         
-        while ($fetchImages = mysql_fetch_assoc($resImages))
-        {
+        while ($fetchImages = mysql_fetch_assoc($resImages)) {
             $tabIdImages[]=$fetchImages['idImage'];
         }
         
         $tabIdImages = array_unique($tabIdImages);
         
         // verification et suppression
-        foreach ($tabIdImages as $idImage)
-        {
+        foreach ($tabIdImages as $idImage) {
             // on verifie que l'image courante n'est pas liée a une adresse
             $reqVerifAdresse = "SELECT idAdresse FROM _adresseImage WHERE idImage='".$idImage."'";
             $resVerifAdresse = $this->connexionBdd->requete($reqVerifAdresse);
             
-            if (mysql_num_rows($resVerifAdresse)==0)
-            {
+            if (mysql_num_rows($resVerifAdresse)==0) {
                 // l'image n'est pas liee a une adresse ,  on peut donc la supprimer,  ainsi que tout son historique
                 
                 
@@ -4363,39 +4119,27 @@ class archiImage extends config
                 while ($fetchInfosImage = mysql_fetch_assoc($resInfosImage))
                 {
                     
-                    if (unlink($this->getCheminPhysiqueImage("originaux").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg"))
-                    {
+                    if (unlink($this->getCheminPhysiqueImage("originaux").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg")) {
                         echo "suppression image ".$fetchInfosImage['idHistoriqueImage']." originale... OK<br>";
-                    }
-                    else
-                    {
+                    } else {
                         echo "probleme suppression image ".$fetchInfosImage['idHistoriqueImage']." originale.<br>";
                     }
                     
-                    if (unlink($this->getCheminPhysiqueImage("mini").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg"))
-                    {
+                    if (unlink($this->getCheminPhysiqueImage("mini").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg")) {
                         echo "suppression image ".$fetchInfosImage['idHistoriqueImage']." mini... OK<br>";
-                    }
-                    else
-                    {
+                    } else {
                         echo "probleme suppression image ".$fetchInfosImage['idHistoriqueImage']." mini.<br>";
                     }
                     
-                    if (unlink($this->getCheminPhysiqueImage("moyen").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg"))
-                    {
+                    if (unlink($this->getCheminPhysiqueImage("moyen").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg")) {
                         echo "suppression image ".$fetchInfosImage['idHistoriqueImage']." moyen... OK<br>";
-                    }
-                    else
-                    {
+                    } else {
                         echo "probleme suppression image ".$fetchInfosImage['idHistoriqueImage']." moyen.<br>";
                     }
                     
-                    if (unlink($this->getCheminPhysiqueImage("grand").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg"))
-                    {
+                    if (unlink($this->getCheminPhysiqueImage("grand").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg")) {
                         echo "suppression image ".$fetchInfosImage['idHistoriqueImage']." grand... OK<br>";
-                    }
-                    else
-                    {
+                    } else {
                         echo "probleme suppression image ".$fetchInfosImage['idHistoriqueImage']." grand.<br>";
                     }
                     
@@ -4420,9 +4164,14 @@ class archiImage extends config
         }
     }
     
-    // ************************************************************************************************************************
-    // fonction supprimant physiquement et dans la bdd une image donnée
-    // ************************************************************************************************************************
+    /**
+     * Fonction supprimant physiquement et dans la bdd une image donnée
+     * 
+     * @param int   $idImage ID de l'image
+     * @param array $params  Paramètres
+     * 
+     * @return void
+     * */
     public function deleteImage($idImage=0,  $params = array())
     {
         $a = new archiAdresse();
@@ -4442,8 +4191,7 @@ class archiImage extends config
         $d = new droitsObject();
         
         
-        if (($d->isAuthorized('image_supprimer',  $idProfilUtilisateur)) && ($u->isModerateurFromVille($authentification->getIdUtilisateur(),  $idImage,  'idImage') || $idProfilUtilisateur == '4' ))
-        {
+        if (($d->isAuthorized('image_supprimer',  $idProfilUtilisateur)) && ($u->isModerateurFromVille($authentification->getIdUtilisateur(),  $idImage,  'idImage') || $idProfilUtilisateur == '4' )) {
             $reqInfosImage = "
                             SELECT idHistoriqueImage ,  idImage ,  dateUpload 
                             FROM historiqueImage
@@ -4452,32 +4200,27 @@ class archiImage extends config
             
             $resInfosImage=$this->connexionBdd->requete($reqInfosImage);
             
-            while ($fetchInfosImage = mysql_fetch_assoc($resInfosImage))
-            {
+            while ($fetchInfosImage = mysql_fetch_assoc($resInfosImage)) {
                 
-                if (unlink($this->getCheminPhysiqueImage("originaux").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg"))
-                {
+                if (unlink($this->getCheminPhysiqueImage("originaux").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg")) {
                     //echo "suppression image ".$fetchInfosImage['idHistoriqueImage']." originale... OK<br>";
                 } else {
                     $erreurObj->ajouter("probleme suppression image ".$fetchInfosImage['idHistoriqueImage']." originale.<br>");
                 }
                 
-                if (unlink($this->getCheminPhysiqueImage("mini").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg"))
-                {
+                if (unlink($this->getCheminPhysiqueImage("mini").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg")) {
                     //echo "suppression image ".$fetchInfosImage['idHistoriqueImage']." mini... OK<br>";
                 } else {
                     $erreurObj->ajouter("probleme suppression image ".$fetchInfosImage['idHistoriqueImage']." mini.<br>");
                 }
                 
-                if (unlink($this->getCheminPhysiqueImage("moyen").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg"))
-                {
+                if (unlink($this->getCheminPhysiqueImage("moyen").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg")) {
                     //echo "suppression image ".$fetchInfosImage['idHistoriqueImage']." moyen... OK<br>";
                 } else {
                     $erreurObj->ajouter("probleme suppression image ".$fetchInfosImage['idHistoriqueImage']." moyen.<br>");
                 }
                 
-                if (unlink($this->getCheminPhysiqueImage("grand").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg"))
-                {
+                if (unlink($this->getCheminPhysiqueImage("grand").$fetchInfosImage['dateUpload']."/".$fetchInfosImage['idHistoriqueImage'].".jpg")) {
                     //echo "suppression image ".$fetchInfosImage['idHistoriqueImage']." grand... OK<br>";
                 } else {
                     $erreurObj->ajouter("probleme suppression image ".$fetchInfosImage['idHistoriqueImage']." grand.<br>");
@@ -4505,21 +4248,25 @@ class archiImage extends config
             header("Location: ".$this->creerUrl("", "evenementListe", array("selection"=>"personne", "id"=>$idPerson), false, false));
         }
         
-        if ($erreurObj->getNbErreurs()>0)
-        {
+        if ($erreurObj->getNbErreurs()>0) {
             echo $erreurObj->afficher();
         } else {
             echo "image supprimée.<br>";
         }
         
-        if (isset($params['retourSurGroupeAdresse']) && $params['retourSurGroupeAdresse']==true)
-        {
+        if (isset($params['retourSurGroupeAdresse']) && $params['retourSurGroupeAdresse']==true) {
             echo $a->afficherDetail(0,  $idEvenementGroupeAdresse);
         }
         
     }
     
-    // fonction permettant a l'administrateur de visualiser l'historique de l'image
+    /**
+     * Fonction permettant a l'administrateur de visualiser l'historique de l'image
+     * 
+     * @param int $idImage ID de l'image
+     * 
+     * @return string HTML
+     * */
     public function afficheHistoriqueImage($idImage=0)
     {
         $u = new archiUtilisateur();
@@ -4538,38 +4285,34 @@ class archiImage extends config
         $idProfilUtilisateur = $u->getIdProfilFromUtilisateur($authentification->getIdUtilisateur());
         
         $isRegenerationPossible = false;
-        if ($droitsObject->isAuthorized('image_regenerer',  $idProfilUtilisateur))
-        {
+        if ($droitsObject->isAuthorized('image_regenerer',  $idProfilUtilisateur)) {
             $isRegenerationPossible = true;
         }
         
         
-        while ($fetch = mysql_fetch_assoc($res))
-        {
+        while ($fetch = mysql_fetch_assoc($res)) {
             //$html.="<img src='".$this->getUrlImage("moyen").$fetch['dateUpload']."/".$fetch['idHistoriqueImage'].".jpg"."'><br>";
             $t->addValue("<img src='".$this->getUrlImage("moyen").$fetch['dateUpload']."/".$fetch['idHistoriqueImage'].".jpg"."'>",  "valign=top");
             $arrayInfosUtilisateur = $u->getArrayInfosFromUtilisateur($fetch['idUtilisateur'],  array('listeChamps'=>'nom, prenom'));
             $libelleUtilisateur = $arrayInfosUtilisateur['nom']." ".$arrayInfosUtilisateur['prenom'];
             
             $dateCliche = " - ";
-            if ($fetch['dateCliche']!='0000-00-00')
-            {
+            if ($fetch['dateCliche']!='0000-00-00') {
                 $environ = "";
-                if ($fetch['isDateClicheEnviron']=='1')
-                {
+                if ($fetch['isDateClicheEnviron']=='1') {
                     $environ = "Environ ";
                 }
                 $dateCliche    = $environ.$d->toFrenchAffichage($fetch['dateCliche']);
             }
             
             $libelleSource= $s->getSourceLibelle($fetch['idSource']);
-            if ($libelleSource != '')
+            if ($libelleSource != '') {
                 $libelleSource = "<tr><td><b>source : </b>".$libelleSource."</td></tr>";
+            }
                 
             
             $description = "";
-            if ($fetch['description']!='')
-            {
+            if ($fetch['description']!='') {
                 $description = "<tr><td><b>description :</b><br>".$bb->convertToDisplay(array('text'=>$fetch['description']))."</td></tr>";
             }
             
@@ -4578,21 +4321,16 @@ class archiImage extends config
             
             $t->addValue($detailHistoriqueImage);
             
-            if ($isRegenerationPossible)
-            {
+            if ($isRegenerationPossible) {
                 $reqRegenerationAvailable = "SELECT idHistoriqueImage ,  idImage ,  cheminImageUploadee FROM imagesUploadeesPourRegeneration WHERE idHistoriqueImage = '".$fetch['idHistoriqueImage']."' AND idImage='".$idImage."'";
                 $resRegenerationAvailable = $this->connexionBdd->requete($reqRegenerationAvailable);
                 
-                if (mysql_num_rows($resRegenerationAvailable)>0)
-                {
+                if (mysql_num_rows($resRegenerationAvailable)>0) {
                     $fetchRegenerationAvailable = mysql_fetch_assoc($resRegenerationAvailable);
                     
-                    if (file_exists($this->getCheminPhysique()."/images/uploadMultiple/".$fetchRegenerationAvailable['cheminImageUploadee']))
-                    {
+                    if (file_exists($this->getCheminPhysique()."/images/uploadMultiple/".$fetchRegenerationAvailable['cheminImageUploadee'])) {
                         $t->addValue("<input type='button' name='regenere' value='régéréner les photos à partir de la source' onclick=\"location.href='".$this->creerUrl('regenereImageFromUploadDir',  'imageDetail',  array('archiIdHistoriqueImage'=>$fetch['idHistoriqueImage'],  'archiIdImage'=>$idImage))."';\">");
-                    }
-                    else
-                    {
+                    } else {
                         $t->addValue("Enregistrement trouvé,  mais fichier source de régénération inexistant.");
                     }
                 } else {
@@ -4600,9 +4338,8 @@ class archiImage extends config
                 }
             }
         }
-        
-        if (isset($this->variablesGet['archiRetourIdValue']) && $this->variablesGet['archiRetourIdValue']!='') // en principe cette variable represente un idEvenement,  a changer pour l'id evenementGroupeAdresse
-        {
+        // En principe cette variable represente un idEvenement,  a changer pour l'id evenementGroupeAdresse
+        if (isset($this->variablesGet['archiRetourIdValue']) && $this->variablesGet['archiRetourIdValue']!='') {
             $adresse = new archiAdresse();
             $evenement = new archiEvenement();
             $idEvenementGroupeAdresse = $evenement->getIdEvenementGroupeAdresseFromIdEvenement($this->variablesGet['archiRetourIdValue']);
@@ -4611,8 +4348,7 @@ class archiImage extends config
         
         $html.="<h2>Historique de l'image $idImage</h2>";
         
-        if ($isRegenerationPossible)
-        {
+        if ($isRegenerationPossible) {
             $html.=$t->createHtmlTableFromArray(3,  '',  '',  '');
         } else {
             $html.=$t->createHtmlTableFromArray(2,  '',  '',  '');
@@ -4621,12 +4357,18 @@ class archiImage extends config
     }
     
     
-    // recuperation des images d'une adresse en passant par les images liée aux evenements (et non aux adresses)
+    /**
+     * Recuperation des images d'une adresse en passant par les images liée aux evenements (et non aux adresses)
+     * 
+     * @param int   $idAdresse ID de l'adresse
+     * @param array $params    Paramètres
+     * 
+     * @return Resource
+     * */
     public function getImagesEvenementsFromAdresse($idAdresse=0,  $params=array())
     {
         $sqlGA = "";
-        if (isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='' && $params['idEvenementGroupeAdresse']!='0')
-        {
+        if (isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='' && $params['idEvenementGroupeAdresse']!='0') {
             $sqlGA = "AND ae.idEvenement = '".$params['idEvenementGroupeAdresse']."'";
         }
     
@@ -4648,8 +4390,7 @@ class archiImage extends config
             ORDER BY ei.position, hi1.idHistoriqueImage
         ";
         $res = $this->connexionBdd->requete($req1);
-        if (mysql_num_rows($res)==0)
-        {
+        if (mysql_num_rows($res)==0) {
             $req = "
             
                 SELECT hi1.idHistoriqueImage as idHistoriqueImage,  hi1.idImage as idImage,  hi1.dateUpload as dateUpload
@@ -4675,7 +4416,13 @@ class archiImage extends config
         return $res;        
     }
     
-    // affichage de la liste des image dans le formulaire de modif de position
+    /**
+     * Affichage de la liste des image dans le formulaire de modif de position
+     * 
+     * @param array $params Paramètres
+     * 
+     * @return string HTML
+     * */
     public function afficheFormulaireModifPosition($params=array())
     {
         $html="";
@@ -4701,8 +4448,7 @@ class archiImage extends config
         $reqImages = $this->getImagesFromEvenement(array('idEvenement'=>$params['idEvenement'],  'select'=>"hi1.idHistoriqueImage as idHistoriqueImage,  hi1.dateUpload as dateUpload"));
         $resImages = $this->connexionBdd->requete($reqImages);
         
-        while ($fetch = mysql_fetch_assoc($resImages))
-        {
+        while ($fetch = mysql_fetch_assoc($resImages)) {
             $imageObj->addImageDragAndDrop(array('imageSrc'=>'getPhotoSquare.php?id='.$fetch['idHistoriqueImage'],  'idHistoriqueImage'=>$fetch['idHistoriqueImage']));
         }
         
@@ -4710,8 +4456,7 @@ class archiImage extends config
         $reqAdresses = $adresse->getIdAdressesFromIdEvenement(array('idEvenement'=>$params['idEvenement']));
         $resAdresses = $this->connexionBdd->requete($reqAdresses);
         $idAdresse = 0;
-        if (mysql_num_rows($resAdresses)>0)
-        {
+        if (mysql_num_rows($resAdresses)>0) {
             $fetchAdresses = mysql_fetch_assoc($resAdresses);
             $idAdresse = $fetchAdresses['idAdresse'];
         }
@@ -4748,7 +4493,13 @@ class archiImage extends config
         return $req;
     }
     
-    function getIdHistoriqueImage () {
+    /**
+     * Obtenir l'IdHistorique de l'image actuelle
+     * 
+     * @return int
+     * */
+    function getIdHistoriqueImage ()
+    {
         $req = 'SELECT idHistoriqueImage FROM historiqueImage WHERE idImage = '.mysql_real_escape_string($this->idImage).' ORDER BY idHistoriqueImage DESC LIMIT 1';
         $res = $this->connexionBdd->requete($req);
         return mysql_fetch_object($res)->idHistoriqueImage;
@@ -5420,6 +5171,8 @@ class archiImage extends config
     /**
      * Obtenir la licence d'une photo
      * 
+     * @param int $idImage ID de l'image
+     * 
      * @return array
      */
     function getLicence($idImage=null)
@@ -5430,7 +5183,13 @@ class archiImage extends config
         return mysql_fetch_assoc($this->connexionBdd->requete("SELECT * FROM licences WHERE id = '".$licence."'"));
     }
     
-    function getID () {
+    /**
+     * Obtenir l'ID de l'image actuelle
+     * 
+     * @return int ID
+     * */
+    function getID ()
+    {
         if (isset($this->variablesGet["archiIdImageModification"])) {
             return $this->variablesGet["archiIdImageModification"];
         } else if (isset($this->variablesGet["archiIdImage"])) {
@@ -5443,7 +5202,9 @@ class archiImage extends config
     /**
      * Obtenir l'auteur d'une photo
      * 
-     * @return mixed Tableau si c'est un utilisateur,  chaine sinon
+     * @param int $idImage ID de l'image
+     * 
+     * @return mixed Tableau si c'est un utilisateur, chaine sinon
      * */
     function getAuteur($idImage=null)
     {

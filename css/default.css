@@ -1352,7 +1352,6 @@ li:empty {
     cursor: zoom-in;
     text-align: center;
     display:inline;
-    margin:0;
 }
 
 .fullscreenWrapper:-moz-full-screen .current_picture {
@@ -1406,7 +1405,7 @@ li:empty {
 /*On force la taille du widget parece qu'il ne respecte pas les instructions*/
 .fb_iframe_widget span,
 .fb_iframe_widget iframe {
-    width:190px !important;
+    width:190px;
 }
 
 .divImage {
@@ -1430,22 +1429,19 @@ li:empty {
 }
 
 .imgResultGrp {
-    position:relative;
+    display: inline-block;
+    height: 130px;
     margin: 2px;
+    position: relative;
+    width: 130px;
 }
 .event .imgResultGrp {
     position:static;
 }
 
-.imgResult {
-    width:130px;
-    height:130px;
-    display:inline-block;
-}
 
 .imgResultHover {
     position: absolute;
-    top: -120px;
     left:0;
     background-color: #99ACB0;
     border-radius: 5px;
@@ -1454,8 +1450,6 @@ li:empty {
     height:130px;
     overflow:hidden;
     padding:0;
-    transition-property: width, height;
-    transition-duration: 0.1s;
 }
 
 .imgResultHover p{
@@ -1478,7 +1472,7 @@ li:empty {
     height: auto;
     padding:5px;
     left: -45px;
-    top: -150px;
+    top: -20px;
     z-index:20;
     opacity:1;
     border: thin solid #BBBBBB;
@@ -1498,7 +1492,6 @@ li:empty {
 
 .gallery {
     display:table;
-    padding-top:120px;
     position:relative;
 }
 
