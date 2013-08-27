@@ -2140,7 +2140,7 @@ class archiImage extends config
             $imageHTML="";
             if ($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionImage']) && $this->variablesGet['afficheSelectionImage']=='1') {
                 $hrefImage="";
-                $onClickImage="if (document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked){document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked=false;document.getElementById('image".$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche."').style.borderColor='#007799';}else{document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked=true;document.getElementById('image".$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche."').style.borderColor='#FF8800';}";
+                $onClickImage="if (document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked){document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked=false;document.getElementById('image".$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche."').parentNode.style.border='none';}else{document.getElementById('checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."').checked=true;document.getElementById('image".$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche."').parentNode.style.border ='thin solid #FF8800';}";
                 $imageHTML .="<input type='checkbox' name='checkboxSelectionImages[]' id='checkboxSelectionImages_".$valuesImage['idHistoriqueImage']."' value='".$idEvenement."_".$valuesImage['idHistoriqueImage']."' style='display:none;'>";
             }
             elseif ($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1') {
@@ -2187,7 +2187,7 @@ class archiImage extends config
                     array('text'=>$image['description'])
                 )
             ).'</p></div></a>';*/
-            $imageHTML .= '<a class="imgResultGrp" '.$hrefImage.'><div class="imgResultHover"><img itemprop="image" id="image'.$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'"  alt="'.htmlspecialchars($alt).'"  src="'.
+            $imageHTML .= '<a class="imgResultGrp" '.$hrefImage.'><div class="imgResultHover"><img itemprop="image" onclick="'.$onClickImage.'" id="image'.$valuesImage['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'"  alt="'.htmlspecialchars($alt).'"  src="'.
             'photos--'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].
             '-moyen.jpg'.'" class="eventImage" /><p>'.strip_tags($bbCode->convertToDisplay(array('text'=>$valuesImage['description']))).'</p></div></a><div class="imgDesc">'.$bbCode->convertToDisplay(array('text'=>$valuesImage['description'])).'</div><br>';//src=\'photos-'.$string->convertStringToUrlRewrite($intituleAdresse).'-'.$valuesImage['dateUpload'].'-'.$valuesImage['idHistoriqueImage'].'-'.$formatAffichagePhoto.'.jpg\'
         
