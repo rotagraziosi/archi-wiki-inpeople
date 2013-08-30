@@ -1421,7 +1421,7 @@ class ArchiAccueil extends config
         
         
         
-        $arrayActus = $this->getDernieresActualites(array("sqlWhere"=>" AND desactive<>'1' ", "sqlLimit"=>"LIMIT ".$arrayPagination['limitSqlDebut'].", ".$nbEnregistrementsParPage));
+        $arrayActus = $this->getDernieresActualites(array("sqlWhere"=>" AND desactive<>'1' ", "sqlLimit"=>"LIMIT ".mysql_real_escape_string($arrayPagination['limitSqlDebut']).", ".$nbEnregistrementsParPage));
         
         $tab = new tableau();
         
@@ -1432,7 +1432,7 @@ class ArchiAccueil extends config
                 $url = $this->creerUrl('', 'afficherActualite', array('archiIdActualite'=>$value['idActualite']));
             }
             
-            $tab->addValue("<a href='".$url."'>".$d->toFrenchAffichage($value['date'])." ".$value['titre']."</a>");
+            $tab->addValue("<a href='".$url."'>".$d->toFrenchAffichage($value['date'])." ".stripslashes($value['titre'])."</a>");
             
             if ($value['photoIllustration']!='') {
                 list($w, $h) = getimagesize(
