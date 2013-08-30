@@ -1930,7 +1930,9 @@ class archiImage extends config
                 }
             }
             
-            $tabTemp[$i]['celluleHaut'] = "<div style='position:relative;cursor:pointer;' $htmlOnClick><img style='border-color:#007799;border-width:2px;' class='eventImage' src='getPhotoSquare.php?id=".$valuesPhoto['infosImage']['idHistoriqueImage']."' usemap='#mapZone_".$valuesPhoto['infosImage']['idImage']."' alt=''><div id='divZones_".$valuesPhoto['infosImage']['idImage']."' style='position:absolute;top:0px;left:0px;'></div></div>";
+            $tabTemp[$i]['celluleHaut'] = '<div><a href="'.$htmlOnClick.'"><span class="imgResultGrp"><div class="imgResultHover"><img itemprop="image" id="image'.$valuesPhoto['infosImage']['idHistoriqueImage'].$divParamIdGroupeAdresseAffiche.'"  alt="'.htmlspecialchars($alt).'"  src="'.
+            'photos--'.$valuesPhoto['infosImage']['dateUpload'].'-'.$valuesPhoto['infosImage']['idHistoriqueImage'].
+            '-moyen.jpg'.'" class="eventImage" /><p>'.strip_tags($bbCode->convertToDisplay(array('text'=>$valuesPhoto['infosImage']['description']))).'</p></div></span><br></a></div>';
             $tabTemp[$i]['celluleHaut'] .=$arrayZones['htmlDivs'];
             $tabTemp[$i]['celluleHaut'] .=$arrayZones['htmlMaps'];
             $tabTemp[$i]['celluleHaut'] .=$arrayZones['htmlJs'];
@@ -1939,7 +1941,7 @@ class archiImage extends config
         }
         
         
-        $tableau->addValuesFromArrayLinked($tabTemp, 3,  "align=center",  "style='font-size:12px;width:200px;'");
+        $tableau->addValuesFromArrayLinked($tabTemp, 3,  "align='center'",  "style='font-size:12px;width:200px;'");
         
         if ($i>0) {
             $html.=$tableau->createHtmlTableFromArray(3,  "",  "",  "",  "");
