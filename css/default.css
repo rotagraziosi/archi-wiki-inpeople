@@ -1435,9 +1435,6 @@ li:empty {
     position: relative;
     width: 130px;
 }
-.event .imgResultGrp {
-    position:static;
-}
 
 
 .imgResultHover {
@@ -1494,4 +1491,3 @@ li:empty {
     display:table;
     position:relative;
 }
-

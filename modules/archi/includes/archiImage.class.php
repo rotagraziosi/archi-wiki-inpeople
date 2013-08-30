@@ -1777,7 +1777,7 @@ class archiImage extends config
                 $html.="</td></tr></table>";
             }
         } else {
-            $tableau->addValuesFromArrayLinked($tabTemp, 3,  "align=center",  "style='font-size:12px;width:200px;'");
+            $tableau->addValuesFromArrayLinked($tabTemp, 3,  "align='center'",  "style='font-size:12px;width:200px;'");
             if ($i>0) {
                 $html=$tableau->createHtmlTableFromArray(3,  "",  "",  "",  "");
             }
