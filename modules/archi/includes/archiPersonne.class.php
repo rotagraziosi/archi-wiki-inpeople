@@ -1018,6 +1018,7 @@ class ArchiPersonne extends ArchiContenu
     {
         global $config;
         $html="<h1 id='personSearch'>"._("Personnes")."</h1>";
+        $keyword = str_replace(' ', '%%', $keyword);
         $req="SELECT idPersonne
             FROM `personne`
             WHERE `prenom` LIKE '%".mysql_real_escape_string($keyword)."%'
