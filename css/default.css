@@ -1110,6 +1110,7 @@ a.white:hover {
     padding:1em;
     margin-bottom:3em;
     border-radius:5px;
+    min-width:730px;
 }
 
 
