@@ -52,6 +52,10 @@
             <input type='radio' name='canModifyTags' value='1' {canModifyTags1} id="canModifyTags1" /> <label for="canModifyTags1"><?_("Oui")?></label>
             <input type='radio' name='canModifyTags' value='0' {canModifyTags0} id="canModifyTags0" /> <label for="canModifyTags0"><?_("Non")?></label>
         </td></tr>
+            <tr><td><?_("Permettre à l'utilisateur d'ajouter une adresse sans préciser la rue")?></td><td>
+            <input type='radio' name='canAddWithoutStreet' value='1' {canAddWithoutStreet1} id="canAddWithoutStreet1" /> <label for="canAddWithoutStreet1"><?_("Oui")?></label>
+            <input type='radio' name='canAddWithoutStreet' value='0' {canAddWithoutStreet0} id="canAddWithoutStreet0" /> <label for="canAddWithoutStreet0"><?_("Non")?></label>
+        </td></tr>
         <!-- END utilisateurCourantIsAdmin -->
         <!-- BEGIN banissementUtilisateurParAdmin -->
         <tr><td><?_("Bannir l'utilisateur (le compte devient inactif)")?></td><td>

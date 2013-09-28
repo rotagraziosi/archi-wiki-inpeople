@@ -81,7 +81,8 @@ class archiUtilisateur extends config {
             'displayDateFinField'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
             'bannirUtilisateur'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
             'canCopyright'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'), 
-            'canModifyTags'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio')
+            'canModifyTags'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio'),
+            'canAddWithoutStreet'=>array('default'=>'0', 'value'=>'', 'required'=>false, 'error'=>'', 'type'=>'radio')
         );
     
     }
@@ -210,6 +211,7 @@ class archiUtilisateur extends config {
                                     idVilleFavoris="'.$tabForm['ville']['value'].'", 
                                     canCopyright="'.$tabForm['canCopyright']['value'].'", 
                                     canModifyTags="'.$tabForm['canModifyTags']['value'].'", 
+                                    canAddWithoutStreet="'.$tabForm['canAddWithoutStreet']['value'].'", 
                                     alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'", 
                                     idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'", 
                                     alerteAdresses="'.$tabForm['alerteAdresses']['value'].'", 
@@ -235,6 +237,7 @@ class archiUtilisateur extends config {
                                     idVilleFavoris="'.$tabForm['ville']['value'].'", 
                                     canCopyright="'.$tabForm['canCopyright']['value'].'", 
                                     canModifyTags="'.$tabForm['canModifyTags']['value'].'", 
+                                    canAddWithoutStreet="'.$tabForm['canAddWithoutStreet']['value'].'", 
                                     idPeriodeEnvoiMailsRegroupes="'.$tabForm['idPeriodeEnvoiMailsRegroupes']['value'].'", 
                                     alerteCommentaires="'.$tabForm['alerteCommentaires']['value'].'", 
                                     alerteAdresses="'.$tabForm['alerteAdresses']['value'].'", 
@@ -663,6 +666,14 @@ class archiUtilisateur extends config {
                         else
                         {
                             $t->assign_vars(array('canModifyTags0'=>'checked'));
+                        }
+                        if ($this->canAddWithoutStreet(array('idUtilisateur'=>$idUtilisateur)))
+                        {
+                            $t->assign_vars(array('canAddWithoutStreet1'=>'checked'));
+                        }
+                        else
+                        {
+                            $t->assign_vars(array('canAddWithoutStreet0'=>'checked'));
                         }
                         
                     }
@@ -2336,6 +2347,17 @@ class archiUtilisateur extends config {
         } else {
             return false;
         }
+    }
+    
+    public function canAddWithoutStreet ($params = array())
+    {
+        $d = new droitsObject();
+        
+        $req = "SELECT canAddWithoutStreet FROM utilisateur WHERE idUtilisateur = '".$params['idUtilisateur']."'";
+        $res = $this->connexionBdd->requete($req);
+        $fetch = mysql_fetch_assoc($res);
+                
+        return $fetch['canAddWithoutStreet'];
     }
     
     /**

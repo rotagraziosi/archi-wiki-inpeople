@@ -113,7 +113,8 @@ abstract class ArchiContenu extends config
         // ******
         // si la personne n'est pas admin elle verra une version simplifiée du formulaire
         $authentification = new archiAuthentification();
-        if ($authentification->estConnecte() && $authentification->estAdmin()) {
+        $u = new ArchiUtilisateur();
+        if ($authentification->estConnecte() && ($authentification->estAdmin() || $u->canAddWithoutStreet(array('idUtilisateur'=>$authentification->getIdUtilisateur())))) {
             $t->assign_block_vars('afficheAjoutEvenement.isAdmin', array());
             $t->assign_vars(array("displayQuartiers"=>'table-row'));
             $t->assign_vars(array("displaySousQuartiers"=>'table-row'));            
@@ -527,7 +528,7 @@ abstract class ArchiContenu extends config
                 'onClickBoutonAjouterAdresse'            => "document.getElementById('formAjoutDossier').action='".$this->creerUrl('', 'ajoutNouveauDossier')."'",                                     
                 'onClickBoutonEnleverAdresse'            => "document.getElementById('formAjoutDossier').action='".$this->creerUrl('', 'ajoutNouveauDossier')."'", 
                 
-                'onClickBoutonValider'					=> $onClickBoutonValider,
+                'onClickBoutonValider'                  => $onClickBoutonValider,
                 'typeBoutonValidation'=>$typeBoutonValidation,
                 'onClickBoutonChoixVille'        =>"document.getElementById('paramChampAppelantVille').value='ville';document.getElementById('calqueVille').style.top=(getScrollHeight()+150)+'px';document.getElementById('calqueVille').style.display='block';", 
                 'onChangeListeQuartier'            =>"appelAjax('".$this->creerUrl('', 'afficheSelectSousQuartier', array('noHeaderNoFooter'=>1))."&archiIdQuartier='+document.getElementById('quartiers').value, 'listeSousQuartier')", 

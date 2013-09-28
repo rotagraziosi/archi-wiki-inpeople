@@ -373,7 +373,7 @@ class ArchiAuthentification extends config
     {
         $retour = 0;
         if ($this->session->isInSession('utilisateurConnecte'.$this->idSite)) {
-            $retour = $this->session->getFromSession('utilisateurConnecte'.$this->idSite);
+            $retour = intval($this->session->getFromSession('utilisateurConnecte'.$this->idSite));
         }
         return $retour;
     }
@@ -391,7 +391,7 @@ class ArchiAuthentification extends config
             $idUtilisateurConnecte = $this->session->getFromSession('utilisateurConnecte'.$this->idSite);
         }
         $u = new archiUtilisateur();
-        return $u->getIdProfilFromUtilisateur($idUtilisateurConnecte);
+        return intval($u->getIdProfilFromUtilisateur($idUtilisateurConnecte));
     }
 
     /** Affichage du formulaire d'authentification
