@@ -6003,9 +6003,7 @@ class archiAdresse extends ArchiContenu
             }
             
             $motcleEscaped = str_replace(' ', '%', $motcle);
-            $motcleEscaped = str_replace("'", '', $motcleEscaped);
             $motcleEscaped = mysql_real_escape_string($motcleEscaped);
-            $motcleEscaped = str_replace("\\", "%", $motcleEscaped);
             
             
             $motcleEntier = $motcle;
