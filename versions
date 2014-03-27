@@ -1,0 +1,33 @@
+laurent_dorer@yahoo.fr
+
+
+05/06/2008 : v2.0 - Mise en ligne version beta 2.0
+06/06/2008 : v2.0.1 	- correction styles ie6 
+			- mise en ligne de l'affichage de l'encart 'derniers commentaires' sur la page d'accueil
+			- mise en place url rewriting pour les url du type ?archiAffichage=adresseDetail&archiIdAdrese=...
+09/06/2008 : v2.0.2     - mise en ligne des adresses relatives et modification de l'url rewriting pour prise en compte des parametres qui ne sont pas rewrités (flag QSA)
+			- modification formulaire commentaires
+			- modification de l'adresse mail du site
+			- correction bug : affichage en premier des photos qui concerne l'evenement sur la page d'accueil
+			- correction  : on ne repete plus la phrase sous le formulaire de modification d'une adresse quand on en ajoute une
+
+
+11/08/2008 : v2.0.3 	- modification applet d'upload, celle ci peut maintenant rediriger l'utilisateur a la fin de l'upload
+
+28/08/2008 : v2.0.4	- affichage des titres sous les listes d'adresses
+
+29/08/2008 : v2.1	- modification du moteur de recherche qui permet d'afficher les resultats dans un certain ordre defini
+
+24/09/2008 : v2.1.1	- nouveau bouton sur la page d'accueil pour ajout d'adresse
+			- debuggage affichage des adresses dans les encarts de la page d'accueil
+
+08/10/2008 : v2.2.1	- Mise en ligne du profil et monArchi et modifs sur les envois de mails
+
+
+
+09/12/2008 : v2.2.2	- mise en ligne de la gestion des champs vueSur et prisDepuis pour les photos
+
+
+
+
+
