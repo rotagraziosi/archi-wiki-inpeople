@@ -1920,13 +1920,13 @@ class archiImage extends config
             }
             $htmlOnClick="";
             if (count($arrayTestDivsJs)>0) {
-                $htmlOnClick="onclick=\"if (".implode(" && ",  $arrayTestDivsJs)."){location.href='".$url."';}\"";
+                $htmlOnClick=$url;
             } else {
                 if (isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1')
                 {
-                    $htmlOnClick="onclick=\"location.href='".$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']))."';\"";                
+                    $htmlOnClick=$this->creerUrl('enregistreSelectionImagePrincipale',  'evenement',  array('idEvenement'=>$this->variablesGet['idEvenement'],  'idImage'=>$valuesPhoto['infosImage']['idImage']));                
                 } else {
-                    $htmlOnClick="onclick=\"location.href='".$url."';\"";
+                    $htmlOnClick=$url;
                 }
             }
             
