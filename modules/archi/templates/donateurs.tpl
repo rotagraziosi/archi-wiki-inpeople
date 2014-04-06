@@ -4,31 +4,6 @@ Vous trouverez ci-dessous la liste de nos mécènes et donateurs (par ordre de d
 
 <table>
 
-<!------------------------------------------------------------------------------>
-<!----		Balloïde Photo         	                    ->
-<!------------------------------------------------------------------------------>
-<tr>
-<td>
-<img border=0 src='images/donateurs/logo_balloide.jpg'>
-</td>
-<!--<td class='textePetit'>-->
-<td>
-<font size=2>
-<b>Balloïde Photo</b>
-<br>
-Premier réseau européen de photgraphies aériens par drone et ballon captif
-<br>
-Jean-Marc Bannwarth<br>
-21, rue Fairmont<br>
-67270 Durningen<br>
-Tél: 0033 642 227 604
-<br><br>
-<a href='http://bannwarth.balloide-photo.com' target=_blank>Consulter le site de la société</a>
-
-</td>
-</tr>
-
-
 <tr>
 <td>
 <img border=0 src='images/donateurs/logo_dianex.jpg'>
