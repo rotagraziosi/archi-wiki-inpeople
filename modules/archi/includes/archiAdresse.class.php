@@ -9510,8 +9510,9 @@ class archiAdresse extends ArchiContenu
             $nom=$auth->estConnecte()?$userInfos["nom"]:$this->variablesPost['nom'];
             $prenom=$auth->estConnecte()?$userInfos["prenom"]:$this->variablesPost['prenom'];
             $email=$auth->estConnecte()?$user->getMailUtilisateur($idUtilisateur):$this->variablesPost['email'];
+            $uniqid = uniqid(null, true);
             
-            $req = "insert into commentaires (nom,prenom,email,commentaire,idEvenementGroupeAdresse,date,idUtilisateur,CommentaireValide) values (\"".addslashes(strip_tags($nom))."\",\"".addslashes(strip_tags($prenom))."\",\"".addslashes(strip_tags($email))."\",\"".addslashes(strip_tags($this->variablesPost['commentaire']))."\",'".$this->variablesPost['idEvenementGroupeAdresse']."',now(),'".$idUtilisateur. "'," . $CommentaireValide . ")";
+            $req = "INSERT INTO commentaires (nom, prenom, email, commentaire, idEvenementGroupeAdresse, date, idUtilisateur, CommentaireValide, uniqid) VALUES ('".mysql_real_escape_string(strip_tags($nom))."', '".mysql_real_escape_string(strip_tags($prenom))."', '".mysql_real_escape_string(strip_tags($email))."', '".mysql_real_escape_string(strip_tags($this->variablesPost['commentaire']))."', '".mysql_real_escape_string($this->variablesPost['idEvenementGroupeAdresse'])."', now(), '".mysql_real_escape_string($idUtilisateur). "'," . mysql_real_escape_string($CommentaireValide).", '".mysql_real_escape_string($uniqid)."')";
             
             $res = $this->connexionBdd->requete($req);
             
@@ -9551,17 +9552,15 @@ class archiAdresse extends ArchiContenu
             
             
             // envoi d'un mail aux administrateur pour la moderation
-            $message="Un utilisateur a ajouté un commentaire sur archiV2 : <br>";
-            $message .= "nom ou pseudo : ".strip_tags($this->variablesPost['nom'])."<br>";
-            $message .= "prenom : ".strip_tags($this->variablesPost['prenom'])."<br>";
-            $message .= "email : ".strip_tags($this->variablesPost['email'])."<br>";
-            $message .= "commentaire : ".stripslashes(strip_tags($this->variablesPost['commentaire']))."<br>";
-            $message .="<a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdEvenementGroupeAdresse'=>$this->variablesPost['idEvenementGroupeAdresse'],'archiIdAdresse'=>$idAdresse))."'>".$intituleAdresse."</a><br>";
+            $message="Merci d'avoir laissé un commentaire sur Archi-Strasbourg.<br>";
+            $message .= "Afin qu'il soit publié, merci de le valider en cliquant sur ";
+            $message .="<a href='".$this->getUrlRacine()."script/validateEmail.php?uniqid=".urlencode($uniqid)."'>ce lien</a>.<br>";
+            $message .="<br/>Cordialement,</br>";
             $mail = new mailObject();
             
             $envoyeur['envoyeur'] = $mail->getSiteMail();
             $envoyeur['replyTo'] = strip_tags($this->variablesPost['email']);
-            $mail->sendMailToAdministrators($envoyeur,'Un utilisateur a ajouté un commentaire',$message," AND alerteCommentaires='1' ",true,true);
+            $mail->sendMail($envoyeur['envoyeur'], $this->variablesPost['email'], 'Votre commentaire sur Archi-Strasbourg', $message, true);
             $u = new archiUtilisateur();
             //$u->ajouteMailEnvoiRegroupesAdministrateurs(array('contenu'=>$message,'idTypeMailRegroupement'=>5,'criteres'=>" and alerteCommentaires='1' "));
             

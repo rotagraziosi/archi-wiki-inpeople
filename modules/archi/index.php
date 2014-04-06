@@ -113,8 +113,8 @@ if (isset($_GET['archiAction'])) {
             echo "<SCRIPT>";
             echo "alert('"._("Merci pour votre commentaire.")."\\n".
             _(
-                "Il va ête lu par un administrateur du site ".
-                "et mis en ligne prochainement."
+                "Vous allez recevoir un mail contenant un lien ".
+                "permettant de valider le commentaire."
             ).
             "\\n"."A bientôt !')";
             //echo "alert(\"salut\")";
