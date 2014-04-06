@@ -158,7 +158,7 @@ class archiEvenement extends config
             $idTypeEvenement=isset($idTypeEvenement)?$idTypeEvenement:0;
             
             $sqlHistoriqueEvenement = "INSERT INTO historiqueEvenement (idEvenement, titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement,ISMH , MH , nbEtages,isDateDebutEnviron,numeroArchive)
-            VALUES (".$idSousEvenement.", \"".$libelle."\", \"".$description."\", '".$dateDebut."', '".$dateFin."', ".$idSource.", ".$idUtilisateur.", '".mysql_escape_string($idTypeStructure)."', '".mysql_escape_string($idTypeEvenement)."', now(), '".$ISMH."', '".$MH."', '".$nbEtages."', '".$isDateDebutEnviron."',\"".$numeroArchive."\")";
+            VALUES (".mysql_real_escape_string($idSousEvenement).", \"".mysql_real_escape_string($libelle)."\", \"".mysql_real_escape_string($description)."\", '".mysql_real_escape_string($dateDebut)."', '".mysql_real_escape_string($dateFin)."', ".mysql_real_escape_string($idSource).", ".mysql_real_escape_string($idUtilisateur).", '".mysql_real_escape_string($idTypeStructure)."', '".mysql_real_escape_string($idTypeEvenement)."', now(), '".mysql_real_escape_string($ISMH)."', '".mysql_real_escape_string($MH)."', '".mysql_real_escape_string($nbEtages)."', '".mysql_real_escape_string($isDateDebutEnviron)."',\"".mysql_real_escape_string($numeroArchive)."\")";
             $this->connexionBdd->requete($sqlHistoriqueEvenement );
 
 
