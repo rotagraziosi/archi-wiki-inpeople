@@ -9560,18 +9560,19 @@ class archiAdresse extends ArchiContenu
             
             $envoyeur['envoyeur'] = $mail->getSiteMail();
             $envoyeur['replyTo'] = strip_tags($this->variablesPost['email']);
+            $u = new archiUtilisateur();
             if (!$CommentaireValide) {
                 $mail->sendMail($envoyeur['envoyeur'], $this->variablesPost['email'], 'Votre commentaire sur Archi-Strasbourg', $message, true);
-            }
-            $u = new archiUtilisateur();
-            $message="Un utilisateur a ajouté un commentaire sur archiV2 : <br>";
-            $message .= "nom ou pseudo : ".strip_tags($this->variablesPost['nom'])."<br>";
-            $message .= "prenom : ".strip_tags($this->variablesPost['prenom'])."<br>";
-            $message .= "email : ".strip_tags($this->variablesPost['email'])."<br>";
-            $message .= "commentaire : ".stripslashes(strip_tags($this->variablesPost['commentaire']))."<br>";
-            $message .="<a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdEvenementGroupeAdresse'=>$this->variablesPost['idEvenementGroupeAdresse'],'archiIdAdresse'=>$idAdresse))."'>".$intituleAdresse."</a><br>";
+            } else {
+                $message="Un utilisateur a ajouté un commentaire sur archiV2 : <br>";
+                $message .= "nom ou pseudo : ".strip_tags($this->variablesPost['nom'])."<br>";
+                $message .= "prenom : ".strip_tags($this->variablesPost['prenom'])."<br>";
+                $message .= "email : ".strip_tags($this->variablesPost['email'])."<br>";
+                $message .= "commentaire : ".stripslashes(strip_tags($this->variablesPost['commentaire']))."<br>";
+                $message .="<a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdEvenementGroupeAdresse'=>$this->variablesPost['idEvenementGroupeAdresse'],'archiIdAdresse'=>$idAdresse))."'>".$intituleAdresse."</a><br>";
 
-            $mail->sendMailToAdministrators($envoyeur,'Un utilisateur a ajouté un commentaire', $message, " AND alerteCommentaires='1' ", true, true);
+                $mail->sendMailToAdministrators($envoyeur,'Un utilisateur a ajouté un commentaire', $message, " AND alerteCommentaires='1' ", true, true);
+            }
             //$u->ajouteMailEnvoiRegroupesAdministrateurs(array('contenu'=>$message,'idTypeMailRegroupement'=>5,'criteres'=>" and alerteCommentaires='1' "));
             
             
