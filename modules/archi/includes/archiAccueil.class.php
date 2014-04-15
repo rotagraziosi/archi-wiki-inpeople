@@ -1346,7 +1346,7 @@ class ArchiAccueil extends config
             while ($fetchCountParProposition = mysql_fetch_assoc($resCountParProposition)) {
                 $tableau->addValue($fetchCountParProposition['libelleProposition']."&nbsp;", "style='margin:0;padding:0;font-size:11px;'");
                 $tableau->addValue(round($fetchCountParProposition['nbVotes']*100/$nbVotes)."%", "style='margin:0;padding:0;font-size:11px;'");
-                $tableau->addValue("<table style='margin:0;padding:0;' border=''><tr><td style='background-color:red;font-size:3px;width:".round($fetchCountParProposition['nbVotes']*100/$nbVotes)."px'>&nbsp;</td></tr></table>", "style='margin:0;padding:0;font-size:11px;'");
+                $tableau->addValue("<table style='margin:0;padding:0; position:relative;' border=''><tr><td style='background-color:red; position:absolute; font-size:3px;width:".round($fetchCountParProposition['nbVotes']*100/$nbVotes)."%'>&nbsp;</td></tr></table>", "style='margin:0;padding:0;font-size:11px;'");
                 $tableau->addValue("&nbsp;", "style='margin:0;padding:0;font-size:11px;'");
             }
             
