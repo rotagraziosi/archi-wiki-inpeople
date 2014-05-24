@@ -55,7 +55,7 @@
     <div class="header2">
     <div class="inline-block homeTitle">
     <a href="./">
-    <div class="title"><h1 class="h1"><img src="images/Advisa/logo-archi-strasbourg.png" alt="{titreSite}" /></h1><!--<h2 class="h2">Version 2.3</h2>--><?_("Architecture et histoire des lieux de Strasbourg")?></div>
+    <div class="title"><h1 class="h1"><img src="images/Advisa/logo-archi-strasbourg.png" alt="{titreSite}" /></h1><!--<h2 class="h2">Version 2.3</h2>--><?_("Architecture et histoire des bâtiments et lieux")?></div>
     </a>
     </div>
     <div class="infos"><a href="statistiques-adresses-photos-architectes-strasbourg.html">{infos}</a></div>
