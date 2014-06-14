@@ -61,6 +61,9 @@ class ArchiAdministration extends config
             $menu = array_merge($menu, array(_("Actualités")=>$this->creerUrl('', 'adminActualites')));
         }
         $menu[_("Pages")] = $this->creerUrl('', 'adminPages', array());
+        if ($u->isAuthorized('admin_actualites', $idUtilisateur)) {
+            $menu = array_merge($menu, array(_("Compteur de dons")=>$this->creerUrl('', 'adminCompteur')));
+        }
         if ($u->isAuthorized('admin_sources', $idUtilisateur)) {
             $menu = array_merge($menu, array(_("Sources")=>$this->creerUrl('', 'administration', array('tableName'=>'source'))));
         }
@@ -1315,6 +1318,35 @@ class ArchiAdministration extends config
                 exec("rm -rf ".$this->getCheminPhysique()."images/actualites/".$this->variablesGet['idActuSuppr']."/* ");
             }
         }
+    }
+
+    public function adminCompteur() {
+        global $config;
+        if (!empty($_POST)) {
+            if (isset($_POST['compteur_actif'])) {
+                $actif = true;
+            } else {
+                $actif = false;
+            }
+            $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_actif', '".mysql_real_escape_string($actif)."');");
+            $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_actuel', '".mysql_real_escape_string($_POST['compteur_actuel'])."');");
+            $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_max', '".mysql_real_escape_string($_POST['compteur_max'])."');");
+        }
+        $reqCompteur = $config->connexionBdd->requete("SELECT nom, valeur FROM options WHERE nom LIKE 'compteur_%';");
+        while ($row = mysql_fetch_object($reqCompteur)) {
+           $compteur[$row->nom] = $row->valeur;
+        }
+        echo '<form action="index.php?archiAffichage=adminCompteur" method="post">
+            <h2>Compteur de dons</h2>
+            <input name="compteur_actif" id="compteur_actif" type="checkbox"';
+        if ($compteur['compteur_actif']) {
+            echo ' checked ';
+        }
+        echo ' /><label for="compteur_actif">Actif</label><br/><br/>
+            <label for="compteur_max">Maximum</label>&nbsp;:<br/><input name="compteur_max" id="compteur_max" type="number" value="', $compteur['compteur_max'], '" />&nbsp;€<br/><br/>
+            <label for="compteur_actuel">Actuel</label>&nbsp;:<br/><input name="compteur_actuel" id="compteur_actuel" type="number" value="', $compteur['compteur_actuel'], '" />&nbsp;€<br/>
+            <br/><input type="submit" />
+        </form>';
     }
 }
 ?>

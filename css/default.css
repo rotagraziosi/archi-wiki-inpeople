@@ -810,8 +810,17 @@ img {
 }
 
 .barredons {
-    float: right;
+    float:right;
     margin-top: 3em;
+    clear:both;
+}
+
+.barredons a {
+    color:black;
+}
+
+.barredons a:hover {
+    color: white;
 }
 
 .barredons .percent {
