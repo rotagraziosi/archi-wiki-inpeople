@@ -300,9 +300,20 @@ $reqPhotos = "SELECT DISTINCT idImage as nbImages FROM historiqueImage;";
 $resPhotos = $config->connexionBdd->requete($reqPhotos);
 $infos .= "<b>"._("Photos :")."</b> ".mysql_num_rows($resPhotos);
 
+$reqCompteur = $config->connexionBdd->requete("SELECT nom, valeur FROM options WHERE nom LIKE 'compteur_%';");
+while ($row = mysql_fetch_object($reqCompteur)) {
+   $compteur[$row->nom] = $row->valeur;
+}
 $t->assign_vars(
     array("mailContact"=>$config->mail, "authorLink"=>$config->authorLink,
     "infos"=>$infos)
+);
+$t->assign_vars(
+    array(
+        'compteur_pourcentage'=>round(($compteur['compteur_actuel'] / $compteur['compteur_max']) * 100),
+        'compteur_actif'=>$compteur['compteur_actif'],
+        'compteur_restant'=>$compteur['compteur_max'] - $compteur['compteur_actuel']
+    )
 );
 
 
