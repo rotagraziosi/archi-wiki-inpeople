@@ -9,6 +9,30 @@ Vous trouverez ci-dessous la liste de nos mécènes et donateurs (par ordre de d
 <!------------------------------------------------------------------------------>
 <tr>
 <td>
+<img border=0 src='images/donateurs/chamar-elle.jpg'>
+</td>
+<!--<td class='textePetit'>-->
+<td>
+<font size=2>
+<b>Chamar'Elle</b>
+<br>
+Peinture & décoration
+<br>
+<br>
+1 rue de Boulogne<br>
+BP 7031<br>
+67026 Strasbourg Cedex 1<br>
+Tél: 06 19 32 57 92
+<br><br>
+<a href='http://www.chamar-elle.fr' target=_blank>Consulter le site de la société</a>
+
+</td>
+</tr>
+
+
+
+<tr>
+<td>
 <img border=0 src='images/donateurs/logo_balloide.jpg'>
 </td>
 <!--<td class='textePetit'>-->
