@@ -59,25 +59,26 @@
     </a>
     </div>
     <div class="infos"><a href="statistiques-adresses-photos-architectes-strasbourg.html">{infos}</a></div>
-    </div>
-    <!--
-    <script>
-    $(function() {
-        $( "#progressbar" ).progressbar({
-            value: 66
-        });
-    });
-    </script>
-    
     <div class='barredons'>
-    <a href="actualites-archi-strasbourg-30.html">
+    <a href="index.php?archiAffichage=faireUnDon">
     Dons :
     <div id='progressbar' class='progressbar'></div>
-    <span class="percent">68 %</span><br/>
-    <span class="euros">11850 € restants</span>
+    <span class="percent">{compteur_pourcentage} %</span><br/>
+    <span class="euros">{compteur_restant}&nbsp;€ restants</span>
     </a>
     </div>
-    -->
+    </div>
+    <script>
+    $(function() {
+        if ({compteur_actif}) {
+            $( "#progressbar" ).progressbar({
+                value: {compteur_pourcentage}
+            });
+        } else {
+            $('.barredons').remove();
+        }
+    });
+    </script>
     
     <nav id="menu" class="menu">
             <div class="wrapper">

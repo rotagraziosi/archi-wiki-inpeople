@@ -1208,6 +1208,8 @@ class formGenerator extends config
     // **************************************************************************************************************************************
     public function afficherFromArray($parametres=array())
     {
+        require_once __DIR__.'/../../recaptcha-php-1.11/recaptchalib.php';
+
         $html="";
         $t=new Template($this->cheminTemplates);
         
@@ -1316,6 +1318,13 @@ class formGenerator extends config
         
         if (isset($parametres['complementHTML'])) {
             $t->assign_vars(array('complementHTML'=>$parametres['complementHTML']));
+        }
+
+        if (isset($parametres['captcha'])) {
+            $t->assign_vars(array('captcha'=>recaptcha_get_html('6LeXTOASAAAAACl6GZmAT8QSrIj8yBrErlQozfWE')));
+            if (isset($parametres['captcha-error'])) {
+                $t->assign_vars(array('captcha-error'=>_('Captcha incorrect !')));
+            }
         }
                 
         if (isset($parametres['fields'])) {
@@ -1583,6 +1592,7 @@ class formGenerator extends config
                 else
                 {
                     $configForm['fields'] = $parametres;
+                    $configForm['captcha-error'] = $errors['captcha-error'];
                     echo $this->afficherFromArray($configForm);
                 }
                 break;
@@ -1592,6 +1602,8 @@ class formGenerator extends config
     // fonction qui met a jour le tableau des champs du formulaire avec les donnees envoyées en post et qui renvoi aussi un tableau contenant la liste des champs obligatoires qui sont mal renseignés
     function getArrayFromPost(&$tableauTravail=array(),  $param = null)
     {
+        global $config;
+        require_once __DIR__.'/../../recaptcha-php-1.11/recaptchalib.php';
         if (empty($param))
             $param = $_POST;
         $errors=array();
@@ -1861,6 +1873,15 @@ class formGenerator extends config
                     }
                 }
             }
+        }
+        $resp = recaptcha_check_answer(
+            $config->captchakey,
+            $_SERVER["REMOTE_ADDR"],
+            $param["recaptcha_challenge_field"],
+            $param["recaptcha_response_field"]
+        );
+        if (!$resp->is_valid) {
+            $errors['captcha-error']=$resp->error;
         }
         
         return $errors;

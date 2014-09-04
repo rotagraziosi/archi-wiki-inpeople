@@ -41,7 +41,8 @@ $fieldsContactForm = array(
 $configFormContact = array(
     'logMails'=>true, 'titrePage'=>_("Contactez-nous"),
     'fields'=>$fieldsContactForm, 'submitButtonValue'=>_("Envoyer"),
-    'formAction'=>$authentification->creerUrl('handleFormulaireContact', '')
+    'formAction'=>$authentification->creerUrl('handleFormulaireContact', ''),
+    'captcha'=>true
 );
 
 
@@ -1437,6 +1438,10 @@ if (isset($_GET['archiAffichage'])) {
             $admin = new archiAdministration();
             echo $admin->listeActualites();
             echo $admin->formulaireActualites();
+            break;
+        case 'adminCompteur':
+            $admin = new archiAdministration();
+            echo $admin->adminCompteur();
             break;
         case "previsualisationActualite":
             $admin = new archiAdministration();
