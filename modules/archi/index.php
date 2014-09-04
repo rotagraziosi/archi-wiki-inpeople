@@ -41,7 +41,8 @@ $fieldsContactForm = array(
 $configFormContact = array(
     'logMails'=>true, 'titrePage'=>_("Contactez-nous"),
     'fields'=>$fieldsContactForm, 'submitButtonValue'=>_("Envoyer"),
-    'formAction'=>$authentification->creerUrl('handleFormulaireContact', '')
+    'formAction'=>$authentification->creerUrl('handleFormulaireContact', ''),
+    'captcha'=>true
 );
 
 
