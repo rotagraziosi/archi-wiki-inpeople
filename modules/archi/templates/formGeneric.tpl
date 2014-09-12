@@ -28,7 +28,7 @@ function changeCurrentPoint{idFormObject}()
 <!-- BEGIN fields -->
 <tr><td>{fields.name}</td><td>{fields.field}</td><td>{fields.error}</td></tr>
 <!-- END fields -->
-<tr><td>{captcha}</td><td>{captcha-error}</td></tr>
+<tr><td>Merci de recopier le texte ci-contre (lutte contre les mails indésirables)&nbsp;:</td><td>{captcha}</td><td>{captcha-error}</td></tr>
 <tr><td colspan=3>{codeHtmlBeforeSubmitButton}<input type='submit' value='{formButtonName}' name='valider' id='{submitButtonId}' onclick="document.getElementById('msgFormulaireGenerator{idFormObject}').innerHTML='Chargement en cours ';setTimeout('changeCurrentPoint{idFormObject}()', 100);{onClickSubmitButton}" {codeHtmlSubmitButton}>{codeHtmlAfterSubmitButton}<span id='msgFormulaireGenerator{idFormObject}'></span><span id='points{idFormObject}'></span></td></tr>
 </table>
 <!-- BEGIN hiddenFields -->
