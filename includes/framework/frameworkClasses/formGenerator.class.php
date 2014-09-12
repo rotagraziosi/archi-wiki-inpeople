@@ -1321,6 +1321,7 @@ class formGenerator extends config
         }
 
         if (isset($parametres['captcha'])) {
+            $t->assign_block_vars('captcha', array());
             $t->assign_vars(array('captcha'=>recaptcha_get_html('6LeXTOASAAAAACl6GZmAT8QSrIj8yBrErlQozfWE')));
             if (isset($parametres['captcha-error'])) {
                 $t->assign_vars(array('captcha-error'=>_('Captcha incorrect !')));
@@ -1874,7 +1875,8 @@ class formGenerator extends config
                 }
             }
         }
-        $resp = recaptcha_check_answer(
+	if (isset($param["recaptcha_challenge_field"])) {
+	$resp = recaptcha_check_answer(
             $config->captchakey,
             $_SERVER["REMOTE_ADDR"],
             $param["recaptcha_challenge_field"],
@@ -1883,7 +1885,7 @@ class formGenerator extends config
         if (!$resp->is_valid) {
             $errors['captcha-error']=$resp->error;
         }
-        
+        }
         return $errors;
     }
     
