@@ -1,0 +1,9 @@
+.svn
+*(save *)*
+*BACK*
+logs/
+includes/framework/config.php
+images/*
+cache/
+mobile
+doc/
