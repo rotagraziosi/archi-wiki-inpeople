@@ -315,7 +315,10 @@ $t->assign_vars(
     array(
         'compteur_pourcentage'=>round(($compteur['compteur_actuel'] / $compteur['compteur_max']) * 100),
         'compteur_actif'=>$compteur['compteur_actif'],
-        'compteur_restant'=>$compteur['compteur_max'] - $compteur['compteur_actuel']
+        'compteur_restant'=>$compteur['compteur_max'] - $compteur['compteur_actuel'],
+        'compteur_lien'=>$compteur['compteur_lien'],
+        'compteur_projet'=>$compteur['compteur_projet'],
+        'compteur_label'=>$compteur['compteur_label']
     )
 );
 

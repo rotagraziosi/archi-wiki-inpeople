@@ -1331,6 +1331,9 @@ class ArchiAdministration extends config
             $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_actif', '".mysql_real_escape_string($actif)."');");
             $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_actuel', '".mysql_real_escape_string($_POST['compteur_actuel'])."');");
             $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_max', '".mysql_real_escape_string($_POST['compteur_max'])."');");
+            $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_lien', '".mysql_real_escape_string($_POST['compteur_lien'])."');");
+            $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_projet', '".mysql_real_escape_string($_POST['compteur_projet'])."');");
+            $config->connexionBdd->requete("REPLACE INTO options (nom, valeur) VALUES ('compteur_label', '".mysql_real_escape_string($_POST['compteur_label'])."');");
         }
         $reqCompteur = $config->connexionBdd->requete("SELECT nom, valeur FROM options WHERE nom LIKE 'compteur_%';");
         while ($row = mysql_fetch_object($reqCompteur)) {
@@ -1344,7 +1347,10 @@ class ArchiAdministration extends config
         }
         echo ' /><label for="compteur_actif">Actif</label><br/><br/>
             <label for="compteur_max">Maximum</label>&nbsp;:<br/><input name="compteur_max" id="compteur_max" type="number" value="', $compteur['compteur_max'], '" />&nbsp;€<br/><br/>
-            <label for="compteur_actuel">Actuel</label>&nbsp;:<br/><input name="compteur_actuel" id="compteur_actuel" type="number" value="', $compteur['compteur_actuel'], '" />&nbsp;€<br/>
+            <label for="compteur_actuel">Actuel</label>&nbsp;:<br/><input name="compteur_actuel" id="compteur_actuel" type="number" value="', $compteur['compteur_actuel'], '" />&nbsp;€<br/><br/>
+            <label for="compteur_lien">Lien</label>&nbsp;:<br/><input name="compteur_lien" id="compteur_lien" type="url" value="', $compteur['compteur_lien'], '" /><br/><br/>
+            <label for="compteur_projet">Projet</label>&nbsp;:<br/><input name="compteur_projet" id="compteur_projet" type="text" value="', $compteur['compteur_projet'], '" /><br/><br/>
+            <label for="compteur_label">Label</label>&nbsp;:<br/><input name="compteur_label" id="compteur_label" type="text" value="', $compteur['compteur_label'], '" /><br/>
             <br/><input type="submit" />
         </form>';
     }
