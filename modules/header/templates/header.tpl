@@ -60,11 +60,14 @@
     </div>
     <div class="infos"><a href="statistiques-adresses-photos-architectes-strasbourg.html">{infos}</a></div>
     <div class='barredons'>
-    <a href="index.php?archiAffichage=faireUnDon">
-    Dons :
+    <a href="{compteur_lien}">
+    <div class="compteur_block"><strong>{compteur_projet}</strong></div>
+    <div class="compteur_block">{compteur_label} :
     <div id='progressbar' class='progressbar'></div>
-    <span class="percent">{compteur_pourcentage} %</span><br/>
+    <span class="percent">{compteur_pourcentage} %</span></div>
+    <div class="compteur_block">
     <span class="euros">{compteur_restant}&nbsp;€ restants</span>
+    </div>
     </a>
     </div>
     </div>
