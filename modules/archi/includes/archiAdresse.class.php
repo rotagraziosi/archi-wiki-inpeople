@@ -9572,42 +9572,24 @@ class archiAdresse extends ArchiContenu
                 $message .="<a href='".$this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdEvenementGroupeAdresse'=>$this->variablesPost['idEvenementGroupeAdresse'],'archiIdAdresse'=>$idAdresse))."'>".$intituleAdresse."</a><br>";
 
                 $mail->sendMailToAdministrators($envoyeur,'Un utilisateur a ajouté un commentaire', $message, " AND alerteCommentaires='1' ", true, true);
-            }
-            //$u->ajouteMailEnvoiRegroupesAdministrateurs(array('contenu'=>$message,'idTypeMailRegroupement'=>5,'criteres'=>" and alerteCommentaires='1' "));
-            
-            
-            
-            // *************************************************************************************************************************************************************
-            // envoi mail aussi au moderateur si ajout sur adresse de ville que celui ci modere
-            
-            
-            $arrayVilles=array();
-            $arrayVilles[] = $this->getIdVilleFrom($idAdresse,'idAdresse');
-            $arrayVilles = array_unique($arrayVilles);
-            
-            $arrayListeModerateurs = $u->getArrayIdModerateursActifsFromVille($arrayVilles[0],array("sqlWhere"=>" AND alerteCommentaires='1' "));
-            if(count($arrayListeModerateurs)>0)
-            {
-                foreach($arrayListeModerateurs as $indice => $idModerateur)
+                // envoi mail aussi au moderateur si ajout sur adresse de ville que celui ci modere
+                $arrayVilles=array();
+                $arrayVilles[] = $this->getIdVilleFrom($idAdresse,'idAdresse');
+                $arrayVilles = array_unique($arrayVilles);
+                $arrayListeModerateurs = $u->getArrayIdModerateursActifsFromVille($arrayVilles[0],array("sqlWhere"=>" AND alerteCommentaires='1' "));
+                if(count($arrayListeModerateurs)>0)
                 {
-                    if($auth->getIdUtilisateur()!=$idModerateur)
+                    foreach($arrayListeModerateurs as $indice => $idModerateur)
                     {
-                        //if($u->isMailEnvoiImmediat($idModerateur))
-                        //{
-                            // pas de mail regroupé finalement
+                        if($auth->getIdUtilisateur()!=$idModerateur)
+                        {
                             $mailModerateur = $u->getMailUtilisateur($idModerateur);
                             
                             $mail->sendMail($mail->getSiteMail(),$mailModerateur,'Un utilisateur a ajouté un commentaire',$message,true);
-                        //}
-                        //else
-                        //{
-                        //  $u->ajouteMailEnvoiRegroupes(array('contenu'=>$message,'idDestinataire'=>$idModerateur,'idTypeMailRegroupement'=>5));
-                        //}
+                        }
                     }
                 }
             }
-            // *************************************************************************************************************************************************************
-            
             
                         
             // remise a zero des variables en post sinon on va reafficher les infos
