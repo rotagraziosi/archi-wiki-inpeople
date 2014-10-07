@@ -224,7 +224,7 @@ class GoogleMap extends config
         }
         
         $html.="</script>";
-        //$html.="<div id='".$this->googleMapNameId."' style='width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px; background-color:lime;'>Veuilliez patienter pendant le chargement de la carte...</div>";
+        //$html.="<div id='".$this->googleMapNameId."' style='width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px;'>Veuilliez patienter pendant le chargement de la carte...</div>";
         
         if ($this->debugMode)
             $displayDebug='block';
@@ -314,7 +314,7 @@ class GoogleMap extends config
         }*/
         
         $html.="</script>";
-        //$html.="<div id='".$this->googleMapNameId."' style='width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px; background-color:lime;'>Veuilliez patienter pendant le chargement de la carte...</div>";
+        //$html.="<div id='".$this->googleMapNameId."' style='width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px;'>Veuilliez patienter pendant le chargement de la carte...</div>";
         
         if ($this->debugMode)
             $displayDebug='block';
@@ -452,7 +452,7 @@ class GoogleMap extends config
         }
         
         $html.="</script>";
-        $html.="<div id='".$this->googleMapNameId."' style='width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px; background-color:lime;'>Veuilliez patienter pendant le chargement de la carte...</div>";
+        $html.="<div id='".$this->googleMapNameId."' style='width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px;'>Veuilliez patienter pendant le chargement de la carte...</div>";
         
         if ($this->debugMode)
             $displayDebug='block';
@@ -1569,7 +1569,7 @@ acl.getManyElements=function(s){
             // la carte est deja affichee
             // on se contente de rajouter des points
         } else {
-            $html.="<div id='".$this->googleMapNameId."' style='padding:0px;margin:0px;width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px; background-color:lime;".$this->divStyle."'>Veuillez patienter pendant le chargement de la carte...</div>";
+            $html.="<div id='".$this->googleMapNameId."' style='padding:0px;margin:0px;width: ".$this->googleMapWidth."px; height: ".$this->googleMapHeight."px;".$this->divStyle."'>Veuillez patienter pendant le chargement de la carte...</div>";
             // dans le cas d'un parcours de type 'walking' ,  a pied ,  il faut preciser le div avec l'affichage des informations du chemin,  sinon le parcours ne s'affichera pas
             if (isset($params['idDivDisplayEtapesText']) && $params['idDivDisplayEtapesText']!='') {
                 $html.="<div id='".$params['idDivDisplayEtapesText']."' style=''></div>";
