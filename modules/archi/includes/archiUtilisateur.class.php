@@ -127,14 +127,14 @@ class archiUtilisateur extends config {
         // suppression de l'avatar si la checkbox est cochée
         if (isset($this->variablesPost['supprFichierAvatar']) && $this->variablesPost['supprFichierAvatar']=='1')
         {
-            if (file_exists($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/avatar.jpg"))
+            if (file_exists($this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/avatar.jpg"))
             {
-                unlink($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/avatar.jpg");
+                unlink($this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/avatar.jpg");
             }
             
-            if (file_exists($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/original.jpg"))
+            if (file_exists($this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/original.jpg"))
             {
-                unlink($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/original.jpg");
+                unlink($this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/original.jpg");
             }
         }
         
