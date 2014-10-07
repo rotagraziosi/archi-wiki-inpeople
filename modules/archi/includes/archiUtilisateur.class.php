@@ -146,16 +146,16 @@ class archiUtilisateur extends config {
         {
             if (pia_strtolower($avatarFile->getExtensionFromFile($_FILES['fichierAvatar']['name']))=='jpg')
             {
-                if (!file_exists($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/"))
+                if (!file_exists($this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/"))
                 {
-                    if (!$avatarFile->creerRepertoire($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/"))
+                    if (!$avatarFile->creerRepertoire($this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/"))
                     {
                         echo "archiUtilisateur::modifier => erreur de création du répertoire pour l'image avatar<br>";
                     }
                 }
-                $avatarFile->handleUploadedFileSimpleMoveTo(array('inputFileName'=>'fichierAvatar', 'renameFileTo'=>'original.jpg', 'repertoireDestination'=>$this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/"));
+                $avatarFile->handleUploadedFileSimpleMoveTo(array('inputFileName'=>'fichierAvatar', 'renameFileTo'=>'original.jpg', 'repertoireDestination'=>$this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/"));
                 // ensuite on redimensionne l'image
-                $image->redimension($this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/original.jpg", 'jpg', $this->cheminPhysique."images/avatar/".$this->variablesPost['idUtilisateurModif']."/avatar.jpg", 120);
+                $image->redimension($this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/original.jpg", 'jpg', $this->getCheminPhysique()."images/avatar/".$this->variablesPost['idUtilisateurModif']."/avatar.jpg", 120);
             }
             else
             {
