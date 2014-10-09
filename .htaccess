@@ -12,7 +12,7 @@ RewriteEngine on
 #--------------------------------------------------
 
 
-RewriteBase /archi-strasbourg.org/
+#RewriteBase /archi-strasbourg.org/
 
 ########################################
 # Exemples 							   #

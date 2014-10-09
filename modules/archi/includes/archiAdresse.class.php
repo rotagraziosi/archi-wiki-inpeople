@@ -8210,6 +8210,15 @@ class archiAdresse extends ArchiContenu
     //  ************************************************************************************************************************
     public function getDerniersEvenementsParCategorie($nbAdressesParEncart=5,$params=array())
     {
+    	
+    	$locations = $this->getLocationTables();
+    	$T_RUE = $locations['rue'];
+    	$T_S_QUARTIER = $locations['sousQuartier'];
+    	$T_QUARTIER = $locations['quartier'];
+    	$T_VILLE = $locations['ville'];
+    	$T_PAYS = $locations['pays'];
+    	
+    	
         // ville de Strasbourg par defaut
         $sqlWhere = "AND v.idVille=1";
         if(isset($params['idVille']) && $params['idVille']!='')
@@ -8218,7 +8227,9 @@ class archiAdresse extends ArchiContenu
         }
         
         
-        $reqEvenements = "
+        
+        
+        $reqEvenementsOriginal = "
         
             SELECT  he1.idEvenement as idEvenement, he1.dateCreationEvenement as dateCreationEvenement,he1.dateDebut as dateDebut,extract(YEAR FROM he1.dateDebut) as annneeDebut, he1.idTypeEvenement as idTypeEvenement,
                     ha1.idAdresse as idAdresse, ha1.date as dateAdresse, ha1.numero as numero, ha1.idRue as idRue, ha1.idQuartier as idQuartier, 
@@ -8255,16 +8266,36 @@ class archiAdresse extends ArchiContenu
             GROUP BY he1.idEvenement,ha1.idAdresse, he1.idHistoriqueEvenement, ha1.idHistoriqueAdresse
             HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) 
             ORDER BY he1.dateCreationEvenement DESC
-        ";//,dateCreationEvenement DESC,dateAdresse DESC
+        ";
         
         
-        /*
-                    LEFT JOIN rue r ON r.idRue = ha1.idRue
-            LEFT JOIN sousQuartier sq ON sq.idSousQuartier = ha1.idSousQuartier
-            LEFT JOIN quartier q ON q.idQuartier = ha1.idQuartier
-            LEFT JOIN ville v ON v.idVille = ha1.idVille
+        $reqEvenementsCustom = "
         
-        */
+            SELECT  he1.idEvenement as idEvenement, he1.dateCreationEvenement as dateCreationEvenement,he1.dateDebut as dateDebut,extract(YEAR FROM he1.dateDebut) as annneeDebut, he1.idTypeEvenement as idTypeEvenement,
+                    ha1.idAdresse as idAdresse, ha1.date as dateAdresse, ha1.numero as numero, ha1.idRue as idRue, ha1.idQuartier as idQuartier,
+                    ha1.idSousQuartier as idSousQuartier, ha1.idPays as idPays, ha1.idVille as idVille, ha1.idIndicatif as idIndicatif,
+        
+                    ae.idEvenement as idEvenementGroupeAdresses
+        
+        
+            FROM historiqueEvenement he2, historiqueEvenement he1
+            RIGHT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = he1.idEvenement
+            RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
+            RIGHT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
+            RIGHT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
+        
+            LEFT JOIN typeEvenement te ON te.idTypeEvenement = he1.idTypeEvenement
+        
+        
+            WHERE he2.idEvenement = he1.idEvenement
+        
+            GROUP BY he1.idEvenement,ha1.idAdresse, he1.idHistoriqueEvenement, ha1.idHistoriqueAdresse
+            HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+            ORDER BY he1.dateCreationEvenement DESC
+        ";
+        
+        
+        $reqEvenements=$reqEvenementsCustom;
                 
         $resEvenements = $this->connexionBdd->requete($reqEvenements);
                 
@@ -8288,7 +8319,7 @@ class archiAdresse extends ArchiContenu
             //{
                 //$this->getUrlImage("moyen")."/".$fetchEvenements['dateUpload']."/".$fetchEvenements['idHistoriqueImage'].".jpg"
                 $positionEvenement = $this->getPositionFromEvenement($fetchEvenements['idEvenement']);
-                $infosAdresseCourante = array(
+                $infosAdresseCouranteOriginal = array(
                     "idAdresse"=>$fetchEvenements['idAdresse'],
                     "idIndicatif"=>$fetchEvenements['idIndicatif'],
                     "numero"=>$fetchEvenements['numero'],
@@ -8302,6 +8333,45 @@ class archiAdresse extends ArchiContenu
                     "idEvenement"=>$fetchEvenements['idEvenement'],
                     "idEvenementGroupeAdresse"=>$fetchEvenements['idEvenementGroupeAdresses']
                 );
+                
+                /*
+			LEFT JOIN rue r         ON r.idRue = ha1.idRue
+            LEFT JOIN sousQuartier sq   ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' ,ha1.idSousQuartier ,r.idSousQuartier )
+            LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' ,ha1.idQuartier ,sq.idQuartier )
+            LEFT JOIN ville v       ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' ,ha1.idVille ,q.idVille )
+            LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' ,ha1.idPays ,v.idPays )
+                 */
+  				$idRue = $fetchEvenements['idRue'];
+  				if($fetchEvenements['idRue']=='0' && $fetchEvenements['idSousQuartier']!='0'){
+  					$idSousQuartier = $fetchEvenements['idSousQuartier'];
+  				}   
+  				else{
+  					$idSousQuartier = $T_RUE[$idRue]['idSousQuartier'];
+  				}           
+                //TODO : Continue  if/else matching SQL if/else 
+  				
+  				
+  				
+  				
+                $infosAdresseCouranteCustom = array(
+                		"idAdresse"=>$fetchEvenements['idAdresse'],
+                		"idIndicatif"=>$fetchEvenements['idIndicatif'],
+                		"numero"=>$fetchEvenements['numero'],
+                		"nomRue"=>$fetchEvenements['nomRue'],
+                		"nomQuartier"=>$fetchEvenements['nomQuartier'],
+                		"nomSousQuartier"=>$fetchEvenements['nomSousQuartier'],
+                		"nomVille"=>$fetchEvenements['nomVille'],
+                		"prefixeRue"=>$fetchEvenements['prefixeRue'],
+                		"dateCreationEvenement"=>$fetchEvenements['dateCreationEvenement'],
+                		"positionEvenement"=>$positionEvenement,
+                		"idEvenement"=>$fetchEvenements['idEvenement'],
+                		"idEvenementGroupeAdresse"=>$fetchEvenements['idEvenementGroupeAdresses']
+                );
+                
+                $infosAdresseCourante=$infosAdresseCouranteCustom;
+                
+                
+                
                 //"titreEvenement"=>$fetchEvenements['titreEvenement'],
                 //"description"=>$fetchEvenements['descriptionEvenement'],
                 //"idHistoriqueImage"=>$fetchEvenements['idHistoriqueImage'],
@@ -13907,7 +13977,56 @@ class archiAdresse extends ArchiContenu
         }
         return $retour;
     }
-    
+
+    /**
+     * 
+     * @return multitype: return array of all the small tables required for big SQL requests
+     */
+    public function getLocationTables(){
+        	$req = "SELECT idRue, idSousQuartier, nom,prefixe 
+    			FROM rue
+    			";
+    	$res = $this->connexionBdd->requete($req);
+    	while($line = mysql_fetch_assoc($res)){
+			$rue[$line['idRue']] = array('nom' => $line['nom'], 'idSousQuartier'=>$line['idSousQuartier'], 'prefixe' => $line['prefixe']);    		
+    	}
+    	
+    	
+    	$req = "SELECT  idSousQuartier,idQuartier, nom
+    			FROM sousQuartier
+    			";
+    	$res = $this->connexionBdd->requete($req);
+    	while($line = mysql_fetch_assoc($res)){
+    		$sousQuartier[$line['idSousQuartier']] = array('nom' => $line['nom'], 'idQuartier'=>$line['idQuartier']);
+    	}
+
+    	
+    	$req = "SELECT idQuartier, idVille, nom,codepostal
+    			FROM quartier
+    			";
+    	$res = $this->connexionBdd->requete($req);
+    	while($line = mysql_fetch_assoc($res)){
+    		$quartier[$line['idQuartier']] = array('nom' => $line['nom'], 'idQuartier'=>$line['idQuartier'], 'idVille' => $line['idVille']);
+    	}
+    	
+    	$req = "SELECT idVille,idPays, nom, codepostal, latitude,longitude
+    			FROM ville
+    			";
+    	$res = $this->connexionBdd->requete($req);
+    	while($line = mysql_fetch_assoc($res)){
+    		$ville[$line['idVille']] = array('nom' => $line['nom'], 'idVille'=>$line['idVille'], 'idPays' => $line['idPays'],  'codepostal' => $line['codepostal'] , 'latitude' => $line['latitude'],'longitude' => $line['longitude']);
+    	}
+    	
+    	$req = "SELECT idPays, nom
+    			FROM pays
+    			";
+    	$res = $this->connexionBdd->requete($req);
+    	while($line = mysql_fetch_assoc($res)){
+    		$pays[$line['idPays']] = array('nom' => $line['nom']);
+    	}
+    	
+    	return array('rue' => $rue, 'sousQuartier' => $sousQuartier,'quartier' => $quartier,'ville' => $ville,'pays' => $pays);
+    }
 }
 
 ?>
