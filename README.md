@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ArchiWiki
 ==========
 
@@ -10,3 +11,9 @@ Le site est orienté base de données permettant de réaliser des recherches mul
 Le code source peut être librement utilisé pour d'autres villes françaises ou étrangères.
 
 Merci de nous faire part de vos projets ! 
+=======
+archi-wiki-inpeople
+===================
+
+Depot of the archi-wiki project developped by InPeople
+>>>>>>> e0de4b7a7a1287fa3ff0cbacc47e994a471bf2bb
