@@ -425,10 +425,18 @@ class archiAdresse extends ArchiContenu
         if (isset($_GET["archiIdAdresse"])) {
             $address=$this->getArrayAdresseFromIdAdresse($_GET["archiIdAdresse"]);
         }
+
         
+        
+        
+        /**
+         * The following commented code seems useless (and overloading data from DB for nothing)
+         * Commented yet waiting if there are side effects 
+         * TODO: Delete the commented code after a poweruse of this func
+         */
+     	/*   
+        var_dump($idAdresse);
         $trouve = false;
-            
-            
             // on regarde d'abord s'il existe un titre pour le groupe d'adresse
             // vu qu'un evenement groupe d'adresse est unique , on ne va pas grouper dans la requete
             $reqVerif = "
@@ -437,10 +445,11 @@ class archiAdresse extends ArchiContenu
             LEFT JOIN _adresseEvenement ae ON ae.idAdresse = '$idAdresse'
             WHERE he.idEvenement = ae.idEvenement
             ";
-        $resVerif = $this->connexionBdd->requete($reqVerif);
+        	$resVerif = $this->connexionBdd->requete($reqVerif);
             if(mysql_num_rows($resVerif)>0)
             {
                 $fetchVerif = mysql_fetch_assoc($resVerif);
+                var_dump($fetchVerif);
                 if($fetchVerif['idEvenementRecuperationTitre']=='0')
                 {
                     $trouve=false;
@@ -465,6 +474,7 @@ class archiAdresse extends ArchiContenu
                     
                     $fetchTitre = mysql_fetch_assoc($resTitre);
                     $titre = "<span>".stripslashes($fetchTitre['titre'])."</span>";
+                    var_dump($titre);
                     if(trim($fetchTitre['titre'])!='')
                     {
                         $trouve=true;
@@ -481,7 +491,7 @@ class archiAdresse extends ArchiContenu
             
             if(!$trouve)
             {
-                // avec ce parametre , on va aller chercher le premier titre rencontré sur la liste des evenements du groupe d'adresse de l'adresse
+              */  // avec ce parametre , on va aller chercher le premier titre rencontré sur la liste des evenements du groupe d'adresse de l'adresse
                 
                 $reqTitre = "
                         SELECT he1.titre as titre
@@ -509,7 +519,9 @@ class archiAdresse extends ArchiContenu
                         $titre='';
                     }
                 }
-            }
+             
+                
+        //    }
         $html="<div class='fb-like right' data-send='false' data-layout='button_count' data-show-faces='true' data-action='recommend'></div>
         <a href='https://twitter.com/share' class='twitter-share-button right' data-via='ArchiStrasbourg' data-lang='fr' data-related='ArchiStrasbourg'>Tweeter</a> 
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>"; 
