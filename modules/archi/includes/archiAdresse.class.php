@@ -426,9 +426,6 @@ class archiAdresse extends ArchiContenu
             $address=$this->getArrayAdresseFromIdAdresse($_GET["archiIdAdresse"]);
         }
 
-        
-        
-        
         /**
          * The following commented code seems useless (and overloading data from DB for nothing)
          * Commented yet waiting if there are side effects 
@@ -5940,7 +5937,8 @@ class archiAdresse extends ArchiContenu
                 WHERE p.idPays = '".$criteres['recherche_pays']."'
                 "
             );
-        
+
+           
             $tabIdRue=array();
             $tabIdSousQuartier=array();
             $tabIdQuartier=array();
@@ -6349,7 +6347,6 @@ class archiAdresse extends ArchiContenu
         
         $result = $this->connexionBdd->requete($sqlCount);
         
-        
         $nbReponses = mysql_num_rows($result);
         $nbResult=$nbReponses;
         
@@ -6677,18 +6674,11 @@ class archiAdresse extends ArchiContenu
         ";////ORDER BY  ".pia_substr($sqlOrderByPoidsMotCle, 0, -1)."
         }
         
-    
-        
-        
-        
         //echo $sql."<br><br>";
         // ***************************************************************************************************************************************
         // affichage des resultats de la recherche
         // ***************************************************************************************************************************************
         $requeteAdresse = $this->connexionBdd->requete($sql);
-
-        
-        
         
         // dans le cas de la popup on ne veut pas afficher le detail d'une adresse
         // ceci arrive quand le resultat de la recherche ne renvoit qu'un resultat ,  par defaut on va sur l'evenement,  sauf pour les cas suivant:
@@ -7223,6 +7213,28 @@ class archiAdresse extends ArchiContenu
         $html=ob_get_contents();
         ob_end_clean();
 
+      
+        /*
+        echo "<pre>";
+        print_r($nbAdresses);
+        echo "</pre>";
+        
+        echo "<pre>";
+        print_r($arrayRetour);
+        echo "</pre>";
+        
+        echo "<pre>";
+        print_r($arrayIdAdressesRetour);
+        echo "</pre>";
+
+        echo "<pre>";
+        print_r($arrayIdEvenementsGARetour);
+        echo "</pre>";
+        
+        echo "<pre>";
+        print_r($arrayRetourLiensVoirBatiments);
+        echo "</pre>";
+        */
         
         return array('html'=>$html, 'nbAdresses'=>$nbAdresses, 'arrayLiens'=>$arrayRetour, 'arrayIdAdresses'=>$arrayIdAdressesRetour, 'arrayIdEvenementsGroupeAdresse'=>$arrayIdEvenementsGARetour, 'arrayRetourLiensVoirBatiments'=>$arrayRetourLiensVoirBatiments);
     }
@@ -9504,7 +9516,7 @@ class archiAdresse extends ArchiContenu
         
         return $html;
     }
-    
+   
     /**
      * Fonction qui permet d'afficher les derniers commentaires postés par les internautes
      * */

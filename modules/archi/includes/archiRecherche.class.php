@@ -205,6 +205,7 @@ class archiRecherche extends config {
                 
                 if (isset($this->variablesGet['afficheResultatsSurCarte'])
                     && $this->variablesGet['afficheResultatsSurCarte']==1) {
+                	 
                     $checkedCheckBox = true;
                     $criteres = array('recherche_motcle'=>$tabForm['motcle']['value']);
                     $adresses = new archiAdresse();
