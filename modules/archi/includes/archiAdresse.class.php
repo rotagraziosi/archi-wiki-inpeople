@@ -9449,24 +9449,7 @@ class archiAdresse extends ArchiContenu
         $t = new Template('modules/archi/templates/');
         $t->set_filenames((array('listeCommentaires'=>'listeCommentaires.tpl')));
         
-        /*$req = "SELECT 
-        			c.idCommentaire as idCommentaire,
-        			u.nom as nom,
-        			u.prenom as prenom,
-        			u.mail as email,
-        			DATE_FORMAT(c.date,'"._("%d/%m/%Y à %kh%i")."') as dateF,
-        			c.commentaire as commentaire,
-        			c.idUtilisateur as idUtilisateur, 
-        			u.urlSiteWeb as urlSiteWeb
-        					
-                FROM commentaires c
-                LEFT JOIN utilisateur u ON u.idUtilisateur = c.idUtilisateur
-                WHERE c.idEvenementGroupeAdresse = '".$idEvenementGroupeAdresse."'
-                AND CommentaireValide=1
-                ORDER BY date DESC
-        ";
-        */
-        
+
                 $req = "SELECT c.idCommentaire as idCommentaire,c.nom as nom,c.prenom as prenom,c.email as email,DATE_FORMAT(c.date,'"._("%d/%m/%Y à %kh%i")."') as dateF,c.commentaire as commentaire,c.idUtilisateur as idUtilisateur, u.urlSiteWeb as urlSiteWeb
                 FROM commentaires c
                 LEFT JOIN utilisateur u ON u.idUtilisateur = c.idUtilisateur
@@ -9576,10 +9559,11 @@ class archiAdresse extends ArchiContenu
 
         
         $req = "
-                SELECT distinct idCommentaire, email,nom,prenom,commentaire,idEvenementGroupeAdresse,DATE_FORMAT(date,'%d/%m/%Y') as dateF, date
+                SELECT distinct c.idCommentaire, u.mail,u.nom,u.prenom,c.commentaire,c.idEvenementGroupeAdresse,DATE_FORMAT(c.date,'%d/%m/%Y') as dateF, date
                 FROM commentaires c
+				LEFT JOIN utilisateur u ON u.idUtilisateur = c.idUtilisateur
                 LEFT JOIN _adresseEvenement ae ON ae.idEvenement = c.idEvenementGroupeAdresse
-                WHERE CommentaireValide=1
+                WHERE c.CommentaireValide=1
                 ORDER BY date DESC
                 $sqlLimit
             ";

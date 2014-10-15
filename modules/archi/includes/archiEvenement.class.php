@@ -6500,6 +6500,36 @@ class archiEvenement extends config
 	
 	        		return $fetch['idAdresse'];
 	}
+	
+	
+	// ************************************************************************************************************************
+	// supprime un commentaire a partir de son idCommentaire
+	// ************************************************************************************************************************
+	public function deleteCommentaireEvenement($criteres=array())
+	{
+		if(isset($this->variablesGet['archiIdCommentaire']) && $this->variablesGet['archiIdCommentaire']!='')
+		{
+			$req = "DELETE FROM commentairesEvenement WHERE idCommentaire = '".$this->variablesGet['archiIdCommentaire']."'";
+			$res = $this->connexionBdd->requete($req);
+		}
+	
+		// redirection javascript ... pas terrible ca , a changer
+		if(isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!='')
+		{
+			echo "<script langage='javascript'>location.href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$this->variablesGet['archiIdAdresse']), false, false)."';</script>";
+		}
+	}
+	
+	// ************************************************************************************************************************
+	// supprime tous les commentaires d'un idEvenementGroupeAdresse
+	// ************************************************************************************************************************
+	public function deleteCommentairesFromIdHistoriqueEvenement($idHistoriqueEvenement=0)
+	{
+	$req = "DELETE FROM commentairesEvenement WHERE idHistoriqueEvenement='".$idHistoriqueEvenement."'";
+	$res = $this->connexionBdd->requete($req);
+	}
+	
+	
 }
 
 
