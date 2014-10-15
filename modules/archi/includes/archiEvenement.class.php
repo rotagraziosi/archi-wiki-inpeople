@@ -4987,8 +4987,8 @@ class archiEvenement extends config
 			$email=$auth->estConnecte()?$user->getMailUtilisateur($idUtilisateur):$this->variablesPost['email'];
 			$uniqid = uniqid(null, true);
 
+			
 			$req = "INSERT INTO commentairesEvenement (commentaire, idHistoriqueEvenement, date, idUtilisateur, CommentaireValide) VALUES ('".mysql_real_escape_string(strip_tags($this->variablesPost['commentaire']))."', '".mysql_real_escape_string($this->variablesPost['idEvenementGroupeAdresse'])."', now(), '".mysql_real_escape_string($idUtilisateur). "'," . mysql_real_escape_string($CommentaireValide).")";
-
 			$res = $this->connexionBdd->requete($req);
 			// retour a l'affichage de l'adresse
 			$idAdresse = $this->variablesPost['idEvenementGroupeAdresse'];
@@ -5047,7 +5047,7 @@ class archiEvenement extends config
 				$mail->sendMailToAdministrators($envoyeur,'Un utilisateur a ajouté un commentaire', $message, " AND alerteCommentaires='1' ", true, true);
 				// envoi mail aussi au moderateur si ajout sur adresse de ville que celui ci modere
 				$arrayVilles=array();
-				$arrayVilles[] = $this->getIdVilleFrom($idAdresse,'idAdresse');
+				$arrayVilles[] = $this->getIdVilleFrom($idAdresse,'idEvenement');
 				$arrayVilles = array_unique($arrayVilles);
 				$arrayListeModerateurs = $u->getArrayIdModerateursActifsFromVille($arrayVilles[0],array("sqlWhere"=>" AND alerteCommentaires='1' "));
 				if(count($arrayListeModerateurs)>0)
@@ -5071,8 +5071,7 @@ class archiEvenement extends config
 			$_POST['prenom']="";
 
 			$this->variablesGet['archiIdEvenementGroupeAdresse'] = $this->variablesPost['idEvenementGroupeAdresse'];
-			
-			$adresse = new archiAdresse();
+			echo $this->afficheHistoriqueEvenement(array('idEvenement' =>$idAdresse));
 		}
 		else
 		{
@@ -6362,9 +6361,7 @@ class archiEvenement extends config
 
 				$evenement = new archiEvenement();
 				$idEvenementGroupeAdresse = $evenement->getIdEvenementGroupeAdresseFromIdEvenement($id);
-
 				$idAdresse = $this->getIdAdresseFromIdEvenementGroupeAdresse($idEvenementGroupeAdresse);
-
 				// recherche de la ville correspondante a l'idAdresse
 				$reqAdresse = "
 						SELECT ha1.idRue as idRue,ha1.idQuartier as idQuartier,ha1.idSousQuartier as idSousQuartier,ha1.idVille as idVille
@@ -6465,7 +6462,6 @@ class archiEvenement extends config
 				}
 				break;
 		}
-
 		return $idVille;
 	}
 	// ************************************************************************************************************************
@@ -6486,6 +6482,23 @@ class archiEvenement extends config
         $res = $this->connexionBdd->requete($req);
 	        		$fetch = mysql_fetch_assoc($res);
 	        		return $fetch['idEvenement'];
+	}
+	// ************************************************************************************************************************
+	// recupere le premier idAdresse d'un evenement groupeAdresse
+	// ************************************************************************************************************************
+	public function getIdAdresseFromIdEvenementGroupeAdresse($idEvenementGroupeAdresse=0)
+	{
+	// recherche de l'idAdresse
+		$req = "
+		SELECT idAdresse
+		FROM _adresseEvenement
+                WHERE idEvenement = '".$idEvenementGroupeAdresse."'
+        ";
+	
+        $res = $this->connexionBdd->requete($req);
+	        		$fetch = mysql_fetch_assoc($res);
+	
+	        		return $fetch['idAdresse'];
 	}
 }
 

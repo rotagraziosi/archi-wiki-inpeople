@@ -9449,13 +9449,33 @@ class archiAdresse extends ArchiContenu
         $t = new Template('modules/archi/templates/');
         $t->set_filenames((array('listeCommentaires'=>'listeCommentaires.tpl')));
         
-        $req = "SELECT c.idCommentaire as idCommentaire,c.nom as nom,c.prenom as prenom,c.email as email,DATE_FORMAT(c.date,'"._("%d/%m/%Y à %kh%i")."') as dateF,c.commentaire as commentaire,c.idUtilisateur as idUtilisateur, u.urlSiteWeb as urlSiteWeb
+        /*$req = "SELECT 
+        			c.idCommentaire as idCommentaire,
+        			u.nom as nom,
+        			u.prenom as prenom,
+        			u.mail as email,
+        			DATE_FORMAT(c.date,'"._("%d/%m/%Y à %kh%i")."') as dateF,
+        			c.commentaire as commentaire,
+        			c.idUtilisateur as idUtilisateur, 
+        			u.urlSiteWeb as urlSiteWeb
+        					
                 FROM commentaires c
                 LEFT JOIN utilisateur u ON u.idUtilisateur = c.idUtilisateur
                 WHERE c.idEvenementGroupeAdresse = '".$idEvenementGroupeAdresse."'
                 AND CommentaireValide=1
                 ORDER BY date DESC
         ";
+        */
+        
+                $req = "SELECT c.idCommentaire as idCommentaire,c.nom as nom,c.prenom as prenom,c.email as email,DATE_FORMAT(c.date,'"._("%d/%m/%Y à %kh%i")."') as dateF,c.commentaire as commentaire,c.idUtilisateur as idUtilisateur, u.urlSiteWeb as urlSiteWeb
+                FROM commentaires c
+                LEFT JOIN utilisateur u ON u.idUtilisateur = c.idUtilisateur
+                WHERE c.idEvenementGroupeAdresse = '".$idEvenementGroupeAdresse."'
+                AND CommentaireValide=1
+                ORDER BY date DESC
+        ";
+        
+        
         
         
         $res = $this->connexionBdd->requete($req);
