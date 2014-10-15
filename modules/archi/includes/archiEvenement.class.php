@@ -2571,19 +2571,14 @@ class archiEvenement extends config
 				$html.=$adresse->afficherRecapitulatifAdresses($idEvenementGroupeAdresse);
 			}
 			$html.=$this->afficherRecapitulatifAncres($idEvenementGroupeAdresse, $params['idEvenement']);
-
 			$html.="<h2>"._("Historique de mise à jour")."</h2><br>";
-
-			//$a = new archiAdresse();
 
 			while($fetch = mysql_fetch_assoc($res))
 			{
 				$arrayAfficher = $this->afficher(null,'consultationHistoriqueEvenement',$fetch['idHistoriqueEvenement']);
 				$html.="<div class='divConsultationHistoriqueEvenement'>".$arrayAfficher['html']."</div>";
 				$html.=$this->getListCommentairesEvenements($fetch['idHistoriqueEvenement']);
-				//$html.=$this->getFormulaireCommentairesHistorique($params['idEvenement'],$this->getCommentairesFields());
 				$html.=$this->getFormulaireCommentairesHistorique($fetch['idHistoriqueEvenement'],$this->getCommentairesFields());
-				//$html.=$a->getFormulaireCommentaires($fetch['idHistoriqueEvenement'],$a->getCommentairesFields());
 			}
 		}
 

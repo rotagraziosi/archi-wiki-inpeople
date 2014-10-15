@@ -61,7 +61,6 @@ $listeActionsAuthentificationNonRequise=array(
 
 if (isset($_GET['archiAction'])) {
     $archiAction=$_GET['archiAction'];
-    
     // Authentification non requise pour ces actions : 
     switch($archiAction) {
     case 'ajouterActu':
@@ -118,12 +117,24 @@ if (isset($_GET['archiAction'])) {
                 "permettant de valider le commentaire."
             ).
             "\\n"."A bientôt !')";
-            //echo "alert(\"salut\")";
             echo "</SCRIPT>";
         }
-
-        
         break;
+	case 'enregistreCommentaireEvenement':
+       	$a = new archiEvenement();
+       	$a->enregistreCommentaireEvenement();
+        
+        	if (!$authentification->estConnecte()) {
+        		echo "<SCRIPT>";
+        		echo "alert('"._("Merci pour votre commentaire.")."\\n".
+        				_(
+        						"Vous allez recevoir un mail contenant un lien ".
+        						"permettant de valider le commentaire."
+        				).
+        				"\\n"."A bientôt !')";
+        		echo "</SCRIPT>";
+        	}
+        	break;
     case 'validAuthentification':
         $connexionUtilisateur= new archiAuthentification();
         $login=isset($_POST['archiLogin'])?$_POST['archiLogin']:"";
