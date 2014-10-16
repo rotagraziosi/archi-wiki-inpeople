@@ -5800,15 +5800,6 @@ class archiAdresse extends ArchiContenu
     * */
     public function afficherListe($criteres = array() ,  $modeAffichage='', $params = array())
     {
-    	
-    	echo "<pre>";
-    	print_r($criteres);
-    	echo "</pre>";
-    	echo "<pre>";
-    	print_r($params);
-    	echo "</pre>";
-        $html="";
-        
         $sqlId='';
         
         $nbAdresses=0;
@@ -7298,27 +7289,6 @@ class archiAdresse extends ArchiContenu
         ob_end_clean();
 
       
-        /*
-        echo "<pre>";
-        print_r($nbAdresses);
-        echo "</pre>";
-        
-        echo "<pre>";
-        print_r($arrayRetour);
-        echo "</pre>";
-
-        echo "<pre>";
-        print_r($arrayIdAdressesRetour);
-        echo "</pre>";
-
-        echo "<pre>";
-        print_r($arrayIdEvenementsGARetour);
-        echo "</pre>";
-        
-        echo "<pre>";
-        print_r($arrayRetourLiensVoirBatiments);
-        echo "</pre>";
-        */
         
         return array('html'=>$html, 'nbAdresses'=>$nbAdresses, 'arrayLiens'=>$arrayRetour, 'arrayIdAdresses'=>$arrayIdAdressesRetour, 'arrayIdEvenementsGroupeAdresse'=>$arrayIdEvenementsGARetour, 'arrayRetourLiensVoirBatiments'=>$arrayRetourLiensVoirBatiments);
     }
