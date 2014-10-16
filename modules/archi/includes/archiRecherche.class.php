@@ -445,10 +445,6 @@ class archiRecherche extends config {
                 
                 
                 $retourAdresses = $adresse->afficherListe(array('groupesAdressesSupplementairesExternes'=>$arrayListeEvenementsParents), $modeAffichage);
-                
-                
-                
-                
                 $html.= $retourAdresses['html'];
                 
             }

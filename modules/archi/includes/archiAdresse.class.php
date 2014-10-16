@@ -4308,21 +4308,22 @@ class archiAdresse extends ArchiContenu
                 // on enregistre la nouvelle adresse et on renvoi son id
                 $newIdAdresse = $this->getNewIdAdresse();
                 
+				// Auto filling of the subsidiaries ID (ex: filling city and country id from  neighborhood id)                
                 if($adresse['idRue']>0)
                 {
                     $idRue = $adresse['idRue'];
-                    $idSousQuartier = 0;
-                    $idQuartier = 0;
-                    $idVille = 0;
-                    $idPays = 0;
+                    $idSousQuartier = $this->getIdSousQuartier($idRue);
+                    $idQuartier = $this->getIdQuartier($idSousQuartier);
+                    $idVille = $this->getIdVille($idQuartier);
+                    $idPays = $this->getIdPays($idVille);
                 }
                 elseif($adresse['idSousQuartier']>0)
                 {
                     $idRue = 0;
                     $idSousQuartier = $adresse['idSousQuartier'];
-                    $idQuartier = 0;
-                    $idVille = 0;
-                    $idPays = 0;
+                    $idQuartier = $this->getIdQuartier($idSousQuartier);
+					$idVille = $this->getIdVille($idQuartier);
+                    $idPays = $this->getIdPays($idVille);
                     $numero="";
                     $indicatif="";
                 }
@@ -4331,8 +4332,8 @@ class archiAdresse extends ArchiContenu
                     $idRue = 0;
                     $idSousQuartier = 0;
                     $idQuartier = $adresse['idQuartier'];
-                    $idVille = 0;
-                    $idPays = 0;
+                    $idVille = $this->getIdVille($idQuartier);
+                    $idPays = $this->getIdPays($idVille);
                     $numero="";
                     $indicatif="";
                 }
@@ -4342,7 +4343,7 @@ class archiAdresse extends ArchiContenu
                     $idSousQuartier = 0;
                     $idQuartier = 0;
                     $idVille = $adresse['idVille'];
-                    $idPays = 0;
+                    $idPays = $this->getIdPays($idVille);
                     $numero="";
                     $indicatif="";
                 }
@@ -5812,16 +5813,15 @@ class archiAdresse extends ArchiContenu
         
         $arrayIdEvenementsGARetour = array(); // tableau avec la liste des evenements de groupes d'adresses
         
-        
         $tabParametresAutorises = array('ordre',  'tri',  'limit', 'archiIdEvenement',  'debut',  'selection',  'id', 'recherche_rue', 'recherche_quartier', 'recherche_ville', 'recherche_longitude', 'recherche_latitude', 'recherche_rayon', 'recherche_groupesAdressesFromAdresse', 'recherche_sousQuartier', 'displayAdresseIfNoCoordonneesGroupeAdresse');
         
         $sqlMotCle="";
         $sqlSelectMotCle="";
         $sqlOrderByPoidsMotCle="";
-        $sqlOrderBy=" ha1.date ";
+        $sqlOrderBy=" ha1.date";
         
-        
-        
+      /*  
+        //TODO: remove preloading if not used (obviously)
         //Pre loading small tables to speed up some requests 
         $locations = $this->getLocationTables();
         $T_RUE = $locations['rue'];
@@ -5829,7 +5829,7 @@ class archiAdresse extends ArchiContenu
         $T_QUARTIER = $locations['quartier'];
         $T_VILLE = $locations['ville'];
         $T_PAYS = $locations['pays'];
-        
+        */
         
         foreach ($tabParametresAutorises as $param) {
             if (isset($this->variablesGet[$param]) and !isset($criteres[$param]))
@@ -5844,9 +5844,13 @@ class archiAdresse extends ArchiContenu
         
         
         
-        /*
-         * IF de Recherche dans les rues 
-         */
+        
+        
+        
+        
+        
+        
+         //IF de Recherche dans les rues 
         if (!empty($criteres['recherche_rue']) && $criteres['recherche_rue']!='0') {
         
             // une rue a ete precisée par l'utilisateur
@@ -5858,13 +5862,9 @@ class archiAdresse extends ArchiContenu
 
             $sqlOrderBy = "ha1.numero ASC,  ha1.date";
         } 
-        /*
-         * ELSE de Recherche dans les rues
-        */
+        //ELSE de Recherche dans les rues
         else{
-        	/*
-        	 * IF de Recherche dans les sous quartiers
-        	*/
+        	// IF de Recherche dans les sous quartiers
         	if (!empty($criteres['recherche_sousQuartier']) && $criteres['recherche_sousQuartier']!='0') {
         		// un sous quartier a ete précisé par l'utilisateur,  on recupere donc les rue de ce sous quartier
         		$rep = $this->connexionBdd->requete("SELECT idRue FROM rue WHERE idSousQuartier=".$criteres['recherche_sousQuartier']);
@@ -5876,15 +5876,11 @@ class archiAdresse extends ArchiContenu
         		else
         			$tabSqlWhere[] = ' AND ha1.idSousQuartier='.$criteres['recherche_sousQuartier'];
         	}
-        	/*
-        	 * ELSE de Recherche dans les sous quartiers
-        	*/
+        	//ELSE de Recherche dans les sous quartiers
         	else{
         		
         		
-        		/*
-        		 * IF de Recherche dans les quartiers
-        		 */
+        		// IF de Recherche dans les quartiers
         		if (!empty($criteres['recherche_quartier']) && $criteres['recherche_quartier']!='0') {
         			$rep = $this->connexionBdd->requete(
         					"SELECT r.idRue,  sQ.idSousQuartier
@@ -5911,27 +5907,23 @@ class archiAdresse extends ArchiContenu
         		}
         		
         		
-        		/*
-        		 * ELSE de Recherche dans les quartiers
-        		*/
+        		// ELSE de Recherche dans les quartiers
         		else{
         			
-        			/*
-        			 * IF de Recherch dans les villes
-        			*/
+        			// IF de Recherch dans les villes
         			if (!empty($criteres['recherche_ville']) && $criteres['recherche_ville']!='0') {
         				$s = new objetSession();
         				$s->addToSession('archiIdVilleGeneral', $criteres['recherche_ville']);
         				// une ville a ete précisée,  on cherche les quartiers,  sous quartier et rues correspondant
         				$rep = $this->connexionBdd->requete(
         						"
-                SELECT q.idQuartier as idQuartier,  sq.idSousQuartier as idSousQuartier,  r.idRue as idRue
-                FROM ville v
-                LEFT JOIN quartier q ON q.idVille = v.idVille
-                LEFT JOIN sousQuartier sq ON sq.idQuartier = q.idQuartier
-                LEFT JOIN rue r ON r.idSousQuartier = sq.idSousQuartier
-                WHERE v.idVille = '".$criteres['recherche_ville']."'
-                "
+			                SELECT q.idQuartier as idQuartier,  sq.idSousQuartier as idSousQuartier,  r.idRue as idRue
+			                FROM ville v
+			                LEFT JOIN quartier q ON q.idVille = v.idVille
+			                LEFT JOIN sousQuartier sq ON sq.idQuartier = q.idQuartier
+			                LEFT JOIN rue r ON r.idSousQuartier = sq.idSousQuartier
+			                WHERE v.idVille = '".$criteres['recherche_ville']."'
+                			"
         				);
         			
         				$tabIdRue=array();
@@ -5968,27 +5960,25 @@ class archiAdresse extends ArchiContenu
         					$tabSqlWhere[]=$sqlSelect;
         				}
         			}
-        			/*
-        			 * ELSE de Recherch dans les villes
-        			 */
+        			
+        			// ELSE de Recherch dans les villes
         			else{
         				
         				
-        				/*
-        				 * IF de  Recherche dans les pays
-        				 */
+        				
+        				//IF de  Recherche dans les pays
         				if (!empty($criteres['recherche_pays']) && $criteres['recherche_pays']!='0') {
         					// une ville a ete précisée,  on cherche les quartiers,  sous quartier et rues correspondant
         					$rep = $this->connexionBdd->requete(
         							"
-                SELECT v.idVille as idVille,  q.idQuartier as idQuartier,  sq.idSousQuartier as idSousQuartier,  r.idRue as idRue
-                FROM pays p
-                LEFT JOIN ville v on v.idPays = p.idPays
-                LEFT JOIN quartier q ON q.idVille = v.idVille
-                LEFT JOIN sousQuartier sq ON sq.idQuartier = q.idQuartier
-                LEFT JOIN rue r ON r.idSousQuartier = sq.idSousQuartier
-                WHERE p.idPays = '".$criteres['recherche_pays']."'
-                "
+				                SELECT v.idVille as idVille,  q.idQuartier as idQuartier,  sq.idSousQuartier as idSousQuartier,  r.idRue as idRue
+				                FROM pays p
+				                LEFT JOIN ville v on v.idPays = p.idPays
+				                LEFT JOIN quartier q ON q.idVille = v.idVille
+				                LEFT JOIN sousQuartier sq ON sq.idQuartier = q.idQuartier
+				                LEFT JOIN rue r ON r.idSousQuartier = sq.idSousQuartier
+				                WHERE p.idPays = '".$criteres['recherche_pays']."'
+				                "
         					);
         				
         					 
@@ -6035,6 +6025,9 @@ class archiAdresse extends ArchiContenu
         		}
         	}
         }
+        
+        
+        
         
         
         $sqlAdressesSupplementaires="";
@@ -6237,7 +6230,7 @@ class archiAdresse extends ArchiContenu
         }
         
         
-        
+            		
         if (isset($criteres['selection']) AND is_numeric($criteres['id']) AND $criteres['id'] > 0) {
             switch ($criteres['selection']) {
             case 'rue':        $tabSqlWhere[] = ' AND (ha1.idRue='.$criteres['id'].' OR r.idRue='.$criteres['id'].')';
@@ -6738,17 +6731,7 @@ class archiAdresse extends ArchiContenu
         ";////ORDER BY  ".pia_substr($sqlOrderByPoidsMotCle, 0, -1)."
         }
         
-        
-        echo "<pre>";
-        print_r($sql);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($sqlWhere);
-        echo "</pre>";
-        
-        
-        
-        
+  
 		//echo $sql."<br><br>";
         // ***************************************************************************************************************************************
         // affichage des resultats de la recherche
@@ -14188,6 +14171,106 @@ class archiAdresse extends ArchiContenu
     	
     	return array('rue' => $rue, 'sousQuartier' => $sousQuartier,'quartier' => $quartier,'ville' => $ville,'pays' => $pays);
     }
+    
+
+    
+    /**
+	 * Get the id of a sub neighborhood from the id of a street 
+	 * 
+	 * @param string $idRue : id of the street
+	 * @return NULL|string  : id of the neighborhood
+	 */    
+    public function getIdSousQuartier($idRue = null){
+   		$idSousQuartier = null;
+    	if(!isset($idRue) && $idRue != ''){
+    		echo "Error while getting sub neighborhood id, no street informations were specified for this request.";
+    	}
+    	else{
+    		$req = "SELECT idSousQuartier
+    			FROM rue
+    			WHERE idRue = ".$idRue
+    		;
+    		$res = $this->connexionBdd->requete($req);
+    		$fetchSousQuartier = mysql_fetch_assoc($res);
+			$idSousQuartier = $fetchSousQuartier['idSousQuartier'];
+    	}
+    	return $idSousQuartier;
+    }
+    
+    /**
+     * Get the id of a neighborhood from the id of a street
+     * 
+     * @param int $idSousQuartier : id of the sub neighborhood
+     * @return int  $idQuartier :  id of the neighborhood (or null if error occurs)
+     */
+    public function getIdQuartier($idSousQuartier){
+    	$idQuartier = null;
+    	if(!isset($idSousQuartier) && $idSousQuartier != ''){
+    		echo "Error while getting neighborhood id, no sub neighborhood informations were specified for this request.";
+    	}
+    	else{
+    		$req = "
+    				SELECT idQuartier 
+    				FROM sousQuartier 
+    				WHERE idSousQuartier = ".$idSousQuartier."
+    				";
+			$res = $this->connexionBdd->requete($req);
+			$fetchQuartier = mysql_fetch_assoc($res);
+			$idQuartier = $fetchQuartier['idQuartier'];
+    	}
+    	return $idQuartier;
+    }
+    
+    /**
+     * Get the id of the city from neighborhood id 
+     * 
+     * @param  $idQuartier : neighborhood id 
+     * @return $idVille : id of the city
+     */
+    public function getIdVille($idQuartier){
+    	$idVille;
+    	if(!isset($idQuartier) && $idQuartier != ''){
+    		echo "Error while getting city id, no sub neighborhood informations were specified for this request.";
+    	}
+    	else{
+    		$req = "
+    				SELECT idVille
+    				FROM quartier
+    				WHERE idQuartier = ".$idQuartier."
+    				";
+    		$res = $this->connexionBdd->requete($req);
+    		$fetch = mysql_fetch_assoc($res);
+    		$idVille = $fetch['idVille'];
+    	}
+    	return $idVille;
+    }
+    
+    
+    
+    /**
+     * Get id of the country from city id
+     * 
+     * @param  $idVille : id of the city
+     * @return $idPays : id of the country
+     */
+    public function getIdPays($idVille){
+    	$idPays;
+    	if(!isset($idVille) && $idVille != ''){
+    		echo "Error while getting country id, no sub neighborhood informations were specified for this request.";
+    	}
+    	else{
+    		$req = "
+    				SELECT idPays
+    				FROM ville
+    				WHERE idVille = ".$idVille."
+    				";
+    		$res = $this->connexionBdd->requete($req);
+    		$fetch = mysql_fetch_assoc($res);
+    		$idPays = $fetch['idPays'];
+    	}
+    	return $idPays;
+    }
+    
 }
 
 ?>

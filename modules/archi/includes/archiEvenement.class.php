@@ -1322,8 +1322,6 @@ class archiEvenement extends config
 
 
 
-
-
 		// fabrication de la requete en fonction des parametres
 		$sqlEvenementsAdressesLiees="";
 		if (empty($idEvenement))
@@ -6525,8 +6523,8 @@ class archiEvenement extends config
 	// ************************************************************************************************************************
 	public function deleteCommentairesFromIdHistoriqueEvenement($idHistoriqueEvenement=0)
 	{
-	$req = "DELETE FROM commentairesEvenement WHERE idHistoriqueEvenement='".$idHistoriqueEvenement."'";
-	$res = $this->connexionBdd->requete($req);
+		$req = "DELETE FROM commentairesEvenement WHERE idHistoriqueEvenement='".$idHistoriqueEvenement."'";
+		$res = $this->connexionBdd->requete($req);
 	}
 	
 	
