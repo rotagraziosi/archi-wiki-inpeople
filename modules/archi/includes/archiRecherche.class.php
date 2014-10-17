@@ -1915,8 +1915,7 @@ class archiRecherche extends config {
                 LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
                 
                 
-                WHERE ha1.idPays=0
-                and ha1.idRue<>0
+                WHERE ha1.nom != ''
                 GROUP BY ha1.idAdresse,ae.idAdresse,ha1.idHistoriqueAdresse
                 HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) and count(ae.idEvenement)>0
         
@@ -1959,8 +1958,7 @@ class archiRecherche extends config {
                 LEFT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
                 LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
                 
-                WHERE ha1.idPays=0
-                AND ha1.idVille=0
+                WHERE ha1.nom!=''
                 
                 GROUP BY ha1.idAdresse,ae.idAdresse,ha1.idHistoriqueAdresse
                 HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) and count(ae.idEvenement)>0

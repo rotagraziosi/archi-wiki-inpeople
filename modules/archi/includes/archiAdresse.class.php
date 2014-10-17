@@ -5182,7 +5182,7 @@ class archiAdresse extends ArchiContenu
         
         ));
         
-        
+     
         switch($modeAffichageListe)
         {
             case 'parQuartiers':
@@ -5203,9 +5203,6 @@ class archiAdresse extends ArchiContenu
                         
                     }
                 }
-                
-                
-
                 
                 
                 // pagination
