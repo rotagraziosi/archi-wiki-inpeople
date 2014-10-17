@@ -5820,16 +5820,6 @@ class archiAdresse extends ArchiContenu
         $sqlOrderByPoidsMotCle="";
         $sqlOrderBy=" ha1.date";
         
-      /*  
-        //TODO: remove preloading if not used (obviously)
-        //Pre loading small tables to speed up some requests 
-        $locations = $this->getLocationTables();
-        $T_RUE = $locations['rue'];
-        $T_S_QUARTIER = $locations['sousQuartier'];
-        $T_QUARTIER = $locations['quartier'];
-        $T_VILLE = $locations['ville'];
-        $T_PAYS = $locations['pays'];
-        */
         
         foreach ($tabParametresAutorises as $param) {
             if (isset($this->variablesGet[$param]) and !isset($criteres[$param]))
@@ -5842,192 +5832,23 @@ class archiAdresse extends ArchiContenu
             }
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
-         //IF de Recherche dans les rues 
+        $locationCriterias = '';
         if (!empty($criteres['recherche_rue']) && $criteres['recherche_rue']!='0') {
-        
-            // une rue a ete precisée par l'utilisateur
-            $tabSqlWhere[] = ' AND ha1.idRue='.$criteres['recherche_rue'];
-        
-            if (isset($this->variablesGet['noAdresseSansNumero'])) {
-                $tabSqlWhere[]=' ha1.numero<>0 AND ha1.numero IS NOT NULL ';
-            }
-
-            $sqlOrderBy = "ha1.numero ASC,  ha1.date";
-        } 
-        //ELSE de Recherche dans les rues
-        else{
-        	// IF de Recherche dans les sous quartiers
-        	if (!empty($criteres['recherche_sousQuartier']) && $criteres['recherche_sousQuartier']!='0') {
-        		// un sous quartier a ete précisé par l'utilisateur,  on recupere donc les rue de ce sous quartier
-        		$rep = $this->connexionBdd->requete("SELECT idRue FROM rue WHERE idSousQuartier=".$criteres['recherche_sousQuartier']);
-        		while ($res = mysql_fetch_object($rep)) {
-        			$tabIdRue[] = $res->idRue;
-        		}
-        		if (count($tabIdRue) > 0)
-        			$tabSqlWhere[] = ' AND (ha1.idRue IN(\''.implode("', '",  array_unique($tabIdRue)).'\') OR ha1.idSousQuartier='.$criteres['recherche_sousQuartier'].')';
-        		else
-        			$tabSqlWhere[] = ' AND ha1.idSousQuartier='.$criteres['recherche_sousQuartier'];
-        	}
-        	//ELSE de Recherche dans les sous quartiers
-        	else{
-        		
-        		
-        		// IF de Recherche dans les quartiers
-        		if (!empty($criteres['recherche_quartier']) && $criteres['recherche_quartier']!='0') {
-        			$rep = $this->connexionBdd->requete(
-        					"SELECT r.idRue,  sQ.idSousQuartier
-                FROM sousQuartier sQ
-                LEFT JOIN rue r USING(idSousQuartier)
-                WHERE sQ.idQuartier=".$criteres['recherche_quartier']
-        			);
-        			while ($res = mysql_fetch_object($rep)) {
-        				if (!empty($res->idRue))
-        					$tabIdRue[]          = $res->idRue;
-        		
-        				if (!empty($res->idSousQuartier))
-        					$tabIdSousQuartier[] = $res->idSousQuartier;
-        			}
-        		
-        			$sqlSelect = ' AND (';
-        			if (count($tabIdRue) > 0)
-        				$sqlSelect .= ' ha1.idRue IN(\''.implode("', '",  array_unique($tabIdRue)).'\') OR ';
-        			if (count($tabIdSousQuartier) > 0)
-        				$sqlSelect .= ' ha1.idSousQuartier IN(\''.implode("', '",  array_unique($tabIdSousQuartier)).'\') OR ';
-        		
-        			$sqlSelect .= ' ha1.idQuartier='.$criteres['recherche_quartier'] .')';
-        			$tabSqlWhere[] = $sqlSelect;
-        		}
-        		
-        		
-        		// ELSE de Recherche dans les quartiers
-        		else{
-        			
-        			// IF de Recherch dans les villes
-        			if (!empty($criteres['recherche_ville']) && $criteres['recherche_ville']!='0') {
-        				$s = new objetSession();
-        				$s->addToSession('archiIdVilleGeneral', $criteres['recherche_ville']);
-        				// une ville a ete précisée,  on cherche les quartiers,  sous quartier et rues correspondant
-        				$rep = $this->connexionBdd->requete(
-        						"
-			                SELECT q.idQuartier as idQuartier,  sq.idSousQuartier as idSousQuartier,  r.idRue as idRue
-			                FROM ville v
-			                LEFT JOIN quartier q ON q.idVille = v.idVille
-			                LEFT JOIN sousQuartier sq ON sq.idQuartier = q.idQuartier
-			                LEFT JOIN rue r ON r.idSousQuartier = sq.idSousQuartier
-			                WHERE v.idVille = '".$criteres['recherche_ville']."'
-                			"
-        				);
-        			
-        				$tabIdRue=array();
-        				$tabIdSousQuartier=array();
-        				$tabIdQuartier=array();
-        			
-        				while ($fetch = mysql_fetch_assoc($rep)) {
-        					if ($fetch['idRue']!=null && $fetch['idRue']!='0')
-        						$tabIdRue[] = $fetch['idRue'];
-        					if ($fetch['idSousQuartier']!=null && $fetch['idSousQuartier']!='0')
-        						$tabIdSousQuartier[] = $fetch['idSousQuartier'];
-        					if ($fetch['idQuartier']!=null && $fetch['idQuartier']!='0')
-        						$tabIdQuartier[] = $fetch['idQuartier'];
-        				}
-        			
-        				if (mysql_num_rows($rep)>0) {
-        			
-        					$sqlSelect=' AND (';
-        			
-        			
-        					if (count($tabIdQuartier)>0) {
-        						$sqlSelect .=' ha1.idQuartier IN (\''.implode("', '", array_unique($tabIdQuartier)).'\') OR ';
-        					}
-        			
-        					if (count($tabIdSousQuartier)>0) {
-        						$sqlSelect .=' ha1.idSousQuartier IN (\''.implode("', '", array_unique($tabIdSousQuartier)).'\') OR ';
-        					}
-        			
-        					if (count($tabIdRue)>0) {
-        						$sqlSelect .=' ha1.idRue IN (\''.implode("', '", array_unique($tabIdRue)).'\') OR ';
-        					}
-        			
-        					$sqlSelect .=' ha1.idVille='.$criteres['recherche_ville'].')';
-        					$tabSqlWhere[]=$sqlSelect;
-        				}
-        			}
-        			
-        			// ELSE de Recherch dans les villes
-        			else{
-        				
-        				
-        				
-        				//IF de  Recherche dans les pays
-        				if (!empty($criteres['recherche_pays']) && $criteres['recherche_pays']!='0') {
-        					// une ville a ete précisée,  on cherche les quartiers,  sous quartier et rues correspondant
-        					$rep = $this->connexionBdd->requete(
-        							"
-				                SELECT v.idVille as idVille,  q.idQuartier as idQuartier,  sq.idSousQuartier as idSousQuartier,  r.idRue as idRue
-				                FROM pays p
-				                LEFT JOIN ville v on v.idPays = p.idPays
-				                LEFT JOIN quartier q ON q.idVille = v.idVille
-				                LEFT JOIN sousQuartier sq ON sq.idQuartier = q.idQuartier
-				                LEFT JOIN rue r ON r.idSousQuartier = sq.idSousQuartier
-				                WHERE p.idPays = '".$criteres['recherche_pays']."'
-				                "
-        					);
-        				
-        					 
-        					$tabIdRue=array();
-        					$tabIdSousQuartier=array();
-        					$tabIdQuartier=array();
-        					$tabIdVille=array();
-        				
-        					while ($fetch = mysql_fetch_assoc($rep)) {
-        						if ($fetch['idRue']!=null && $fetch['idRue']!='0')
-        							$tabIdRue[] = $fetch['idRue'];
-        						if ($fetch['idSousQuartier']!=null && $fetch['idSousQuartier']!='0')
-        							$tabIdSousQuartier[] = $fetch['idSousQuartier'];
-        						if ($fetch['idQuartier']!=null && $fetch['idQuartier']!='0')
-        							$tabIdQuartier[] = $fetch['idQuartier'];
-        						if ($fetch['idVille']!=null && $fetch['idVille']!='0')
-        							$tabIdVille[] = $fetch['idVille'];
-        					}
-        				
-        					if (mysql_num_rows($rep)>0) {
-        						$sqlSelect=' AND (';
-        				
-        						if (count($tabIdVille)>0) {
-        							$sqlSelect .=' ha1.idVille IN (\''.implode("', '", array_unique($tabIdVille)).'\') OR ';
-        						}
-        				
-        						if (count($tabIdQuartier)>0) {
-        							$sqlSelect .=' ha1.idQuartier IN (\''.implode("', '", array_unique($tabIdQuartier)).'\') OR ';
-        						}
-        				
-        						if (count($tabIdSousQuartier)>0) {
-        							$sqlSelect .=' ha1.idSousQuartier IN (\''.implode("', '", array_unique($tabIdSousQuartier)).'\') OR ';
-        						}
-        				
-        						if (count($tabIdRue)>0) {
-        							$sqlSelect .=' ha1.idRue IN (\''.implode("', '", array_unique($tabIdRue)).'\') OR ';
-        						}
-        				
-        						$sqlSelect .='  ha1.idPays='.$criteres['recherche_pays'].')';
-        						$tabSqlWhere[]=$sqlSelect;
-        					}
-        				}
-        			}
-        		}
-        	}
+        	$locationCriterias.=' AND ha1.idRue = ' . $criteres['recherche_rue'];    
         }
-        
-        
-        
+		if (!empty($criteres['recherche_sousQuartier']) && $criteres['recherche_sousQuartier']!='0') {
+			$locationCriterias .=' AND ha1.idSousQuartier = ' . $criteres['recherche_sousQuartier'];
+        }
+        if (!empty($criteres['recherche_quartier']) && $criteres['recherche_quartier']!='0') {
+        	$locationCriterias.=' AND ha1.idQuartier = ' . $criteres['recherche_quartier'];
+        }
+        if (!empty($criteres['recherche_ville']) && $criteres['recherche_ville']!='0') {
+        	$locationCriterias .=' AND ha1.idVille = ' . $criteres['recherche_ville'];
+        }
+        if (!empty($criteres['recherche_pays']) && $criteres['recherche_pays']!='0') {
+        	$locationCriterias .=' AND ha1.idPays = ' . $criteres['recherche_pays'];
+        }
+        $tabSqlWhere[] = $locationCriterias;
         
         
         $sqlAdressesSupplementaires="";
@@ -6731,7 +6552,7 @@ class archiAdresse extends ArchiContenu
         ";////ORDER BY  ".pia_substr($sqlOrderByPoidsMotCle, 0, -1)."
         }
         
-  
+        
 		//echo $sql."<br><br>";
         // ***************************************************************************************************************************************
         // affichage des resultats de la recherche
