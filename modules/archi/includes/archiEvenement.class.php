@@ -1283,6 +1283,7 @@ class archiEvenement extends config
 	// le parametre idHistoriqueEvenement n'est plus utilisé
 	public function afficher($idEvenement = null,$modeAffichage='', $idHistoriqueEvenement = null, $paramChampCache=array(),$params=array())
 	{
+		
 		$html = '';
 
 		$erreurObject = new objetErreur();
@@ -1481,7 +1482,6 @@ class archiEvenement extends config
 		);
 
 
-
 		if (isset($sqlWhere) && mysql_num_rows($rep) > 0)
 		{
 
@@ -1525,7 +1525,6 @@ class archiEvenement extends config
 						if($modeAffichage!='consultationHistoriqueEvenement')
 							$t->assign_vars(array("divDisplayMenuAction"=>"table"));
 					}
-
 
 					if($authentification->estConnecte())
 					{
@@ -1590,7 +1589,6 @@ class archiEvenement extends config
 						$t->assign_block_vars('simple.menuAction.isAdmin.isAffichageSelectionImages',array());
 					}
 				}
-
 
 				// ******************************************************************************************************
 				// Affichage des dates
@@ -1687,7 +1685,6 @@ class archiEvenement extends config
 					}
 				}
 				// ******************************************************************************************************
-
 				// on renseigne la variable nomTypeStructure pour la renvoyer au retour de la fonction
 				$retourIdTypeStructure = $res->idTypeStructure;
 				// idem pour le titre qui sera affiché en resume pour le tableau de liens
@@ -1712,7 +1709,6 @@ class archiEvenement extends config
 						$typeStructure="Structure : <a href='".$this->creerUrl('', 'evenementListe', array('selection' => 'typeStructure', 'id' => $res->idTypeStructure))."'>".$res->nomTypeStructure."</a><br>";
 					}
 				}
-
 				$source = "";
 				if($res->idSource!=0)
 				{
@@ -1736,8 +1732,6 @@ class archiEvenement extends config
 				$description = $bbCode->convertToDisplay(array('text'=>$res->description));
 				$description = empty($description)?"":"<div itemprop='description' class='desc'>".$description."</div>";
 				// --
-
-
 
 
 				// numeroArchive
@@ -1792,7 +1786,6 @@ class archiEvenement extends config
 				$resTypeEvenement = $this->connexionBdd->requete("SELECT idTypeEvenement,nom FROM typeEvenement where groupe = '".$this->getGroupeFromTypeEvenement($res->idTypeEvenement)."'");
 
 				$fetchTypeEvenement = mysql_fetch_assoc($resTypeEvenement);
-
 				if (archiPersonne::isPerson($idEvenementGroupeAdresse)) {
 					$typeEvenement=_("Biographie");
 					$urlTypeEvenement="";
@@ -1836,7 +1829,6 @@ class archiEvenement extends config
 						'numeroArchive'=>$numeroArchive
 				));
 
-
 				$idEvenement = $res->idEvenement;
 
 
@@ -1876,7 +1868,6 @@ class archiEvenement extends config
 				/*
 				 **  COURANTS ARCHI
 				*/
-
 				$rep = $this->connexionBdd->requete('
 						SELECT  cA.idCourantArchitectural, cA.nom
 						FROM _evenementCourantArchitectural _eA
@@ -1939,7 +1930,6 @@ class archiEvenement extends config
 					$t->assign_block_vars('histo', array('url' => $this->creerUrl('', 'historiqueEvenement', array('idEvenement' => $idEvenement))));
 				}
 			}
-
 			// *************************************************************************************************************************************
 			// affichage des adresses et evenements lies dans la partie supérieur du detail
 			// que l'évènement soit un groupe d'adresse ou non, on affiche les enfants
@@ -1947,19 +1937,17 @@ class archiEvenement extends config
 			if($modeAffichage!='simple' && $modeAffichage!='consultationHistoriqueEvenement')
 			{
 				$tabIdEvenementsLies=$this->getEvenementsLies($idEvenement); // recherche des sous evenements (idEvenementAssocie) du groupe d'adresse
-
+				
 				if(count($tabIdEvenementsLies)>0)
 				{
 					$listeGroupeAdressesAffichees[] =  $idEvenement;
 					$t->assign_block_vars('noSimple',array());  // vu que la fonction afficher est recursive , on affiche cette partie uniquement en affichant 'non simple'
 					//=> affichage simple = affichage de l'evenement => affichage non simple = affichage de la page ...
-
 					if ($modeAffichage=="personne") {
 
 					} else {
 						$retourAdresse=$adresse->afficherListe(array('archiIdEvenement'=>$idEvenement,'useTemplateFile'=>'listeAdressesDetailEvenement.tpl'),"listeDesAdressesDuGroupeAdressesSurDetailAdresse"); // modeAffichage => listeDesAdressesDuGroupeAdressesSurDetailAdresse
 					}
-
 					$idAdresseCourante = 0;
 					if(isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!='')
 					{
@@ -1987,7 +1975,6 @@ class archiEvenement extends config
 						));
 						// ********************************************************************************************************************************
 
-
 						$t->assign_block_vars('noSimple.isCarteGoogle',array(
 								'src'=>$this->creerUrl('','afficheGoogleMapIframe',array('noHeaderNoFooter'=>1,'longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement)),
 								'lienVoirCarteGrand'=>"<a href='#' onclick=\"".$calqueGoogleMap->getJsOpenPopupNoDraggableWithBackgroundOpacity()."document.getElementById('iFrameDivPopupGM').src='".$this->creerUrl('','afficheGoogleMapIframe',array('longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'noHeaderNoFooter'=>true,'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement,'modeAffichage'=>'popupDetailAdresse'))."';\" class='bigger' style='font-size:11px;'>"._("Voir la carte en + grand")."</a>",
@@ -2000,7 +1987,6 @@ class archiEvenement extends config
 						$arrayEncartAdresses = $adresse->getArrayEncartAdressesImmeublesAvantApres(array('idEvenementGroupeAdresse'=>$idEvenement));
 						$t->assign_block_vars('noSimple.adresses', array(
 								'adressesLiees' => $arrayEncartAdresses['html']));
-
 						$t->assign_vars(
 								array(
 										'urlAutresBiensRue'=>$retourAdresse['arrayRetourLiensVoirBatiments']['urlAutresBiensRue'],
@@ -2014,7 +2000,6 @@ class archiEvenement extends config
 							$t->assign_block_vars('noSimple.adresses.isConnected', array());
 						}
 
-
 						if($retourAdresse['nbAdresses']==0)
 						{
 							$t->assign_vars(array('intituleActionAdresses'=>_("Ajouter une adresse")));
@@ -2023,8 +2008,6 @@ class archiEvenement extends config
 						{
 							$t->assign_vars(array('intituleActionAdresses'=>_("Modifier")));
 						}
-
-
 
 						if($authentification->estConnecte() && $authentification->estAdmin())
 						{
@@ -2040,7 +2023,6 @@ class archiEvenement extends config
 								$t->assign_block_vars('noSimple.isConnected.afficheLienSelectionTitre',array());
 							}
 						}
-
 						if($authentification->estConnecte() && $u->isAuthorized('affiche_menu_evenement_choix_image_principale',$authentification->getIdUtilisateur()))
 						{
 							if($u->getIdProfil($authentification->getIdUtilisateur())==4 || $u->isModerateurFromVille($authentification->getIdUtilisateur(),$idEvenementGroupeAdresse,'idEvenementGroupeAdresse'))
@@ -2072,7 +2054,6 @@ class archiEvenement extends config
 
 						$params['calquePopupDeplacerEvenement'] = $c;
 					}
-
 					$images = new archiImage();
 					// **********************************************************************************************************************************************************
 					// recherche des images en rapport avec l'adresse courante
@@ -2139,7 +2120,6 @@ class archiEvenement extends config
 					// **********************************************************************************************************************************************************
 					$champsCacheTransmis=array();
 					//
-
 					$idEvenementWhereIsTitre = $this->getIdEvenementTitre(array("idEvenementGroupeAdresse"=>$idEvenementGroupeAdresse));
 					$idAdresse = $adresse->getIdAdresseFromIdEvenementGroupeAdresse($idEvenementGroupeAdresse);
 
@@ -2203,8 +2183,6 @@ class archiEvenement extends config
 							$titreAncre.=" ".$retourEvenement['dateFin'];
 						}
 
-
-
 						if(isset($this->variablesGet['affichePositionnementEvenements']) && $this->variablesGet['affichePositionnementEvenements']=='1')
 						{
 							// si on est en mode de positionnement des evenements manuellement
@@ -2253,7 +2231,6 @@ class archiEvenement extends config
 						$i++;
 					}
 
-
 					// affichage de la liste triable a la place de l'historique des evenements, quand on est en mode positionnement d'evenements
 					if(isset($this->variablesGet['affichePositionnementEvenements']) && $this->variablesGet['affichePositionnementEvenements']=='1')
 					{
@@ -2285,8 +2262,6 @@ class archiEvenement extends config
 						));
 
 					}
-
-
 
 					// affichage de la liste des historiques de nom de rue pour l'adresse si celle ci ne concerne qu'une rue , sans numero de rue.
 					$infosAdresseCourante = $adresse->getArrayAdresseFromIdAdresse($idAdresse);
@@ -2327,7 +2302,6 @@ class archiEvenement extends config
 		}
 
 
-
 		ob_start();
 		$t->pparse('ev');
 		$html .= ob_get_contents();
@@ -2346,8 +2320,6 @@ class archiEvenement extends config
 				$html.="</form>";
 			}
 		}
-
-
 		return array('html'=>$html,'idTypeStructure'=>$retourIdTypeStructure,'titreAncre'=>$retourTitreAncre,'nomTypeEvenement'=>$retourNomTypeEvenement,'date'=>$retourDate,'isMH'=>$isMH,'isISMH'=>$isISMH,'listeGroupeAdressesAffichees'=>$listeGroupeAdressesAffichees,'dateFin'=>$retourDateFin);
 	}
 

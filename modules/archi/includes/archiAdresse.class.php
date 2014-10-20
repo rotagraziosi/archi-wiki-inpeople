@@ -17,6 +17,12 @@ class archiAdresse extends ArchiContenu
     private $nomQuartier    = '';
     private $nomSousQuartier= '';
     private $nomPays    = '';
+    
+    private $T_PAYS = array();
+    private $T_VILLE = array();
+    private $T_QUARTIER = array();
+    private $T_S_QUARTIER = array();
+    private $T_RUE = array();
 
     private $microstart;
 
@@ -24,6 +30,12 @@ class archiAdresse extends ArchiContenu
     {
         parent::__construct();
         //$this->microstart=microtime(true);
+        $locations = $this->getLocationTables();
+        $T_RUE = $locations['rue'];
+        $T_S_QUARTIER = $locations['sousQuartier'];
+        $T_QUARTIER = $locations['quartier'];
+        $T_VILLE = $locations['ville'];
+        $T_PAYS = $locations['pays'];
     }
     
     function __destruct()
@@ -425,13 +437,13 @@ class archiAdresse extends ArchiContenu
         if (isset($_GET["archiIdAdresse"])) {
             $address=$this->getArrayAdresseFromIdAdresse($_GET["archiIdAdresse"]);
         }
-
+		
         /**
          * The following commented code seems useless (and overloading data from DB for nothing)
          * Commented yet waiting if there are side effects 
          * TODO: Delete the commented code after a poweruse of this func
          */
-     	/*   
+        /*
         var_dump($idAdresse);
         $trouve = false;
             // on regarde d'abord s'il existe un titre pour le groupe d'adresse
@@ -488,7 +500,8 @@ class archiAdresse extends ArchiContenu
             
             if(!$trouve)
             {
-              */  // avec ce parametre , on va aller chercher le premier titre rencontré sur la liste des evenements du groupe d'adresse de l'adresse
+              */
+                // avec ce parametre , on va aller chercher le premier titre rencontré sur la liste des evenements du groupe d'adresse de l'adresse
                 
                 $reqTitre = "
                         SELECT he1.titre as titre
@@ -552,6 +565,7 @@ class archiAdresse extends ArchiContenu
             $html.=$address["prefixeRue"]." ".$address["nomRue"];
             if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail') {
                 $html.="</span>
+                		
                 <meta itemprop='addressLocality' content='".$address["nomVille"]."'/>
                 <meta itemprop='addressCountry' content='".$address["nomPays"]."'/>
                 </span>";
@@ -559,7 +573,6 @@ class archiAdresse extends ArchiContenu
             
         } 
         $html.="</h2>";
-        
         $evenement = new archiEvenement();
         // si le groupe d'adresse est precisé dans l'url , on ne va afficher que celui ci
         if(isset($this->variablesGet['archiIdEvenementGroupeAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresse']!='') 
@@ -5845,7 +5858,8 @@ class archiAdresse extends ArchiContenu
         if (!empty($criteres['recherche_pays']) && $criteres['recherche_pays']!='0') {
         	$locationCriterias .=' AND ha1.idPays = ' . $criteres['recherche_pays'];
         }
-        $tabSqlWhere[] = $locationCriterias;
+        $sqlWhere= $locationCriterias;
+        //$tabSqlWhere[] = $locationCriterias;
         
         
         $sqlAdressesSupplementaires="";
@@ -6180,10 +6194,20 @@ class archiAdresse extends ArchiContenu
                 ha1.numero as numero, 
                 ha1.idHistoriqueAdresse, 
                 ha1.idIndicatif as idIndicatif";
+            
+            $sqlJoin .=" 
+                LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
+                LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' , ha1.idQuartier , sq.idQuartier )
+                LEFT JOIN ville v        ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' , ha1.idVille , q.idVille )
+                LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
+            ";
+            
+            
+            
+            
         }
         
-
-
         
         /*
          * Getting number of result 
@@ -6200,13 +6224,7 @@ class archiAdresse extends ArchiContenu
                 RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
                 RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
                 
-                
-                LEFT JOIN rue r         ON r.idRue = ha1.idRue
-                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
-                LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' , ha1.idQuartier , sq.idQuartier )
-                LEFT JOIN ville v        ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' , ha1.idVille , q.idVille )
-                LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
-                
+                               
                 LEFT JOIN _evenementPersonne ep ON ep.idEvenement = he1.idEvenement
                 LEFT JOIN personne pers ON pers.idPersonne = ep.idPersonne
                 LEFT JOIN indicatif ind ON ind.idIndicatif = ha1.idIndicatif
@@ -6246,7 +6264,6 @@ class archiAdresse extends ArchiContenu
             $nbReponses = $nbAdresses;
             
         }
-        
         
         
     
@@ -6505,17 +6522,11 @@ class archiAdresse extends ArchiContenu
             }
         
         
-
-
-
-        
         $sql = "
         SELECT distinct ee.idEvenement as idEvenementGA $critereSelectionIdAdressesModeAffichageListeAdressesRequete
         
         
         FROM historiqueAdresse ha2, historiqueAdresse ha1
-        
-        
         
         LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
         LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
@@ -6525,12 +6536,6 @@ class archiAdresse extends ArchiContenu
         LEFT JOIN _evenementPersonne ep ON ep.idEvenement = he1.idEvenement
         LEFT JOIN personne pers ON pers.idPersonne = ep.idPersonne
         LEFT JOIN indicatif ind ON ind.idIndicatif = ha1.idIndicatif
-        
-        LEFT JOIN rue r         ON r.idRue = ha1.idRue
-        LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
-        LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' , ha1.idQuartier , sq.idQuartier )
-        LEFT JOIN ville v        ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' , ha1.idVille , q.idVille )
-        LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
         ".$sqlJoin."
         
         
@@ -6548,6 +6553,7 @@ class archiAdresse extends ArchiContenu
             $sql.= " LIMIT ".$sqlLimit."
         ";////ORDER BY  ".pia_substr($sqlOrderByPoidsMotCle, 0, -1)."
         }
+
         
         
 		//echo $sql."<br><br>";
@@ -8089,14 +8095,12 @@ class archiAdresse extends ArchiContenu
     //  ************************************************************************************************************************
     public function getDerniersEvenementsParCategorie($nbAdressesParEncart=5,$params=array())
     {
-    	
     	$locations = $this->getLocationTables();
     	$T_RUE = $locations['rue'];
     	$T_S_QUARTIER = $locations['sousQuartier'];
     	$T_QUARTIER = $locations['quartier'];
     	$T_VILLE = $locations['ville'];
     	$T_PAYS = $locations['pays'];
-    	
     	
         // ville de Strasbourg par defaut
         $sqlWhere = "AND v.idVille=1";
