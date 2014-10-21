@@ -1970,5 +1970,15 @@ if (!function_exists('pia_mail')) {
         }
     }
     
+    
+    /**
+     * Print debug variable content 
+     * @param $variable : variable to print
+     */
+    function debug($variable){
+    	echo "<pre>";
+    	print_r($variable);
+    	echo "</pre>";
+    }
 }
 ?>

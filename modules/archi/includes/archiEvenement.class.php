@@ -1864,7 +1864,7 @@ class archiEvenement extends config
 
 					$t->assign_vars(array("evenementsLiesPersonne" => $linkedEventsHTML));
 				}
-
+				
 				/*
 				 **  COURANTS ARCHI
 				*/
@@ -2222,12 +2222,35 @@ class archiEvenement extends config
 									'url'=> "#".$indice
 							));
 						}
-
+						$listeCommentaires = $this->getListCommentairesEvenements( $value['idEvenementAssocie']);
+						$formulaireCommentaire = $this->getFormulaireCommentairesHistorique($value['idEvenementAssocie'],$this->getCommentairesFields());
+						
+						
 						$t->assign_block_vars( 'evenementLie', array(
 								'evenement' => $retourEvenement['html'],
-								'numeroAncre'=>$indice
+								'numeroAncre'=>$indice,
+								'listeCommentaires' => $listeCommentaires,
+								'formulaireCommentaire'=>$formulaireCommentaire,
+								'idbrol' => $value['idEvenementAssocie']
 						));
-
+												/*
+						$t->assign_block_vars('commentaireEvenement',
+								array(
+										'listeCommentaireEvenement' => $listeCommentaires,
+										'formulaireCommentaireEvenement' => $formulaireCommentaire
+								));
+						*/
+						
+						/*
+						echo $value['idEvenementAssocie']."<br/>";
+						$t->assign_vars(
+								array(
+										'listeCommentaireEvenement' => $listeCommentaires,
+										'formulaireCommentaireEvenement' => $formulaireCommentaire
+								));
+						*/
+						
+						
 						$i++;
 					}
 
@@ -5041,7 +5064,7 @@ class archiEvenement extends config
 			$_POST['prenom']="";
 
 			$this->variablesGet['archiIdEvenementGroupeAdresse'] = $this->variablesPost['idEvenementGroupeAdresse'];
-			echo $this->afficheHistoriqueEvenement(array('idEvenement' =>$idAdresse));
+			echo $this->afficheHistoriqueEvenement(array('idEvenement' =>$this->variablesGet['archiIdEvenementGroupeAdresse']));
 		}
 		else
 		{
@@ -5060,7 +5083,16 @@ class archiEvenement extends config
 		$t->set_filenames((array('listeCommentaires'=>'listeCommentaires.tpl')));
 
 			
-			
+		/*			
+		$req = "SELECT c.idCommentairesEvenement as idCommentaire,u.nom as nom,u.prenom as prenom,u.mail as email,DATE_FORMAT(c.date,'"._("%d/%m/%Y à %kh%i")."') as dateF,c.commentaire as commentaire,c.idUtilisateur as idUtilisateur, u.urlSiteWeb as urlSiteWeb
+				FROM commentairesEvenement c
+				LEFT JOIN utilisateur u ON u.idUtilisateur = c.idUtilisateur
+				WHERE c.idHistoriqueEvenement = '".$idCommentaireAdresse."'
+						AND CommentaireValide=1
+						ORDER BY date DESC
+						";
+		*/
+		
 		$req = "SELECT c.idCommentairesEvenement as idCommentaire,u.nom as nom,u.prenom as prenom,u.mail as email,DATE_FORMAT(c.date,'"._("%d/%m/%Y à %kh%i")."') as dateF,c.commentaire as commentaire,c.idUtilisateur as idUtilisateur, u.urlSiteWeb as urlSiteWeb
 				FROM commentairesEvenement c
 				LEFT JOIN utilisateur u ON u.idUtilisateur = c.idUtilisateur
