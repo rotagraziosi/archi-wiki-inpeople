@@ -5835,6 +5835,9 @@ class archiAdresse extends ArchiContenu
             if (isset($this->variablesGet[$param]) and !isset($criteres[$param]))
                 $criteres[$param] = $this->variablesGet[$param];
         }
+        
+        debug($criteres);
+        
         if (isset($criteres['recherche_groupesAdressesFromAdresse']) && $criteres['recherche_groupesAdressesFromAdresse']!='') {
             $tabSqlWhere[] = ' AND ha1.idAdresse='.$criteres['recherche_groupesAdressesFromAdresse'];
             if (isset($criteres['displayAdresseIfNoCoordonneesGroupeAdresse']) && $criteres['displayAdresseIfNoCoordonneesGroupeAdresse']==1) {
@@ -5844,18 +5847,59 @@ class archiAdresse extends ArchiContenu
         
         $locationCriterias = '';
         if (!empty($criteres['recherche_rue']) && $criteres['recherche_rue']!='0') {
-        	$locationCriterias.=' AND ha1.idRue = ' . $criteres['recherche_rue'];    
+        	$locationCriterias.=' AND ha1.idRue = ' . $criteres['recherche_rue'];
+
+        	$sqlJoin .="
+                LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier 
+                LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
+                LEFT JOIN ville v        ON v.idVille =  ha1.idVille
+                LEFT JOIN pays p        ON p.idPays = ha1.idPays 
+            ";
+        	
         }
 		if (!empty($criteres['recherche_sousQuartier']) && $criteres['recherche_sousQuartier']!='0') {
 			$locationCriterias .=' AND ha1.idSousQuartier = ' . $criteres['recherche_sousQuartier'];
+			$sqlJoin .="
+                LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
+                LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
+                LEFT JOIN ville v        ON v.idVille =  ha1.idVille
+                LEFT JOIN pays p        ON p.idPays = ha1.idPays
+            ";
         }
         if (!empty($criteres['recherche_quartier']) && $criteres['recherche_quartier']!='0') {
         	$locationCriterias.=' AND ha1.idQuartier = ' . $criteres['recherche_quartier'];
+        	
+
+           	$sqlJoin .="
+                LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier 
+                LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
+                LEFT JOIN ville v        ON v.idVille =  ha1.idVille
+                LEFT JOIN pays p        ON p.idPays = ha1.idPays 
+            ";
         }
         if (!empty($criteres['recherche_ville']) && $criteres['recherche_ville']!='0') {
         	$locationCriterias .=' AND ha1.idVille = ' . $criteres['recherche_ville'];
+
+			$sqlJoin .="
+                LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier 
+                LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
+                LEFT JOIN ville v        ON v.idVille =  ha1.idVille
+                LEFT JOIN pays p        ON p.idPays = ha1.idPays 
+            ";
         }
         if (!empty($criteres['recherche_pays']) && $criteres['recherche_pays']!='0') {
+        	$sqlJoin .="
+                LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier 
+                LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
+                LEFT JOIN ville v        ON v.idVille =  ha1.idVille
+                LEFT JOIN pays p        ON p.idPays = ha1.idPays 
+            ";
+        	
         	$locationCriterias .=' AND ha1.idPays = ' . $criteres['recherche_pays'];
         }
         $sqlWhere= $locationCriterias;
@@ -5955,7 +5999,6 @@ class archiAdresse extends ArchiContenu
             
             //$sqlOrderByPoidsMotCle="poidsTotal DESC";
             //
-
             $sqlJoin .="
                 LEFT JOIN rue r         ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
@@ -6210,15 +6253,11 @@ class archiAdresse extends ArchiContenu
                 LEFT JOIN ville v        ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' , ha1.idVille , q.idVille )
                 LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
             ";
-            
-            
-            
-            
         }
         
         
         /*
-         * Getting number of result 
+         * Getting number of results 
          */
         $sqlCount = "
                 SELECT distinct ee.idEvenement as idEvenementGroupeAdresse    $critereSelectionIdAdressesModeAffichageListeAdressesCount
@@ -6531,7 +6570,25 @@ class archiAdresse extends ArchiContenu
         
         
         $sql = "
-        SELECT distinct ee.idEvenement as idEvenementGA $critereSelectionIdAdressesModeAffichageListeAdressesRequete
+        SELECT distinct ee.idEvenement as idEvenementGA $critereSelectionIdAdressesModeAffichageListeAdressesRequete,
+
+                ae.idEvenement as idEvenementGA,
+                r.nom as nomRue,
+                sq.nom as nomSousQuartier,
+                q.nom as nomQuartier,
+                v.nom as nomVille,
+                p.nom as nomPays,
+                ha1.numero as numeroAdresse, 
+                ha1.idRue,
+                r.prefixe as prefixeRue,
+                IF (ha1.idSousQuartier != 0, ha1.idSousQuartier, r.idSousQuartier) AS idSousQuartier,
+                IF (ha1.idQuartier != 0, ha1.idQuartier, sq.idQuartier) AS idQuartier,
+                IF (ha1.idVille != 0, ha1.idVille, q.idVille) AS idVille,
+                IF (ha1.idPays != 0, ha1.idPays, v.idPays) AS idPays,
+                
+                ha1.numero as numero,
+                ha1.idHistoriqueAdresse,
+                ha1.idIndicatif as idIndicatif
         
         
         FROM historiqueAdresse ha2, historiqueAdresse ha1
@@ -6605,10 +6662,18 @@ class archiAdresse extends ArchiContenu
                 while ($fetch=mysql_fetch_assoc($requeteAdresse)) {
                     // on recupere un idAdresse,  idQuartier ,  idRue etc appartenant au groupe d'adresse pour l'urlRewriting
                     
+                    
+                	/*
+                	 * Desactivated for now because getting all the fields used previously in the request
+                	 */
+  					
+  					/*              	
                     if ($modeAffichage != 'listeDesAdressesDuGroupeAdressesSurDetailAdresse') {
                         $fetch = $this->getFetchOneAdresseElementsFromGroupeAdresse($fetch['idEvenementGA']);
                     }
-                    
+					*/
+
+                	
                     // *******************************************************************************************************************
                     // recuperation de l'adresse
 
@@ -6643,6 +6708,9 @@ class archiAdresse extends ArchiContenu
                             HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
                             ORDER BY he1.dateDebut, he1.idHistoriqueEvenement
                         ";//RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = '".$fetch['idAdresse']."'
+
+                        //debug($sql);
+                        //debug($reqTitresEvenements);
                         
                         $resTitresEvenements = $this->connexionBdd->requete($reqTitresEvenements);
                         

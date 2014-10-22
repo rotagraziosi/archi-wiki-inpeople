@@ -310,7 +310,6 @@
 {evenementLie.evenement}
 {evenementLie.listCommentaires}
 {evenementLie.formulaireCommentaire}
-{evenementLie.idbrol}
 </div>
 <!-- END evenementLie -->
 

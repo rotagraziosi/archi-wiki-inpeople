@@ -2230,26 +2230,8 @@ class archiEvenement extends config
 								'evenement' => $retourEvenement['html'],
 								'numeroAncre'=>$indice,
 								'listeCommentaires' => $listeCommentaires,
-								'formulaireCommentaire'=>$formulaireCommentaire,
-								'idbrol' => $value['idEvenementAssocie']
+								'formulaireCommentaire'=>$formulaireCommentaire
 						));
-												/*
-						$t->assign_block_vars('commentaireEvenement',
-								array(
-										'listeCommentaireEvenement' => $listeCommentaires,
-										'formulaireCommentaireEvenement' => $formulaireCommentaire
-								));
-						*/
-						
-						/*
-						echo $value['idEvenementAssocie']."<br/>";
-						$t->assign_vars(
-								array(
-										'listeCommentaireEvenement' => $listeCommentaires,
-										'formulaireCommentaireEvenement' => $formulaireCommentaire
-								));
-						*/
-						
 						
 						$i++;
 					}
