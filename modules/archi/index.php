@@ -862,13 +862,17 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'recherche':
             $a = new archiRecherche();
-            echo $a->rechercher();
+            //echo $a->rechercher();
+            echo $a->search();
+            
+            /*
             if (isset($_GET["motcle"]) 
                 && $_GET["modeAffichage"]!="popupRechercheAdresseVueSur"
             ) {
                 $pos=isset($_GET["pos"])?$_GET["pos"]:1;
                 echo archiPersonne::search($_GET["motcle"], $pos);
             }
+            */
             break;
         case 'source':
             $s = new archiSource();
@@ -1466,6 +1470,10 @@ if (isset($_GET['archiAffichage'])) {
             $r = new archiRecherche();
             echo $r->afficheResultatsRechercheAvancee();
             break;
+        case "advancedSearch":
+        	$r = new archiRecherche();
+        	 echo $r->advancedSearch();
+        	break;
         case "page":
             include "inc/page.php";
             break;

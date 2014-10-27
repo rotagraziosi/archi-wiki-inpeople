@@ -30,7 +30,6 @@ class archiAdresse extends ArchiContenu
     {
         parent::__construct();
         //$this->microstart=microtime(true);
-        $locations = $this->getLocationTables();
         $T_RUE = $locations['rue'];
         $T_S_QUARTIER = $locations['sousQuartier'];
         $T_QUARTIER = $locations['quartier'];
@@ -5836,7 +5835,7 @@ class archiAdresse extends ArchiContenu
                 $criteres[$param] = $this->variablesGet[$param];
         }
         
-        debug($criteres);
+        //debug($criteres);
         
         if (isset($criteres['recherche_groupesAdressesFromAdresse']) && $criteres['recherche_groupesAdressesFromAdresse']!='') {
             $tabSqlWhere[] = ' AND ha1.idAdresse='.$criteres['recherche_groupesAdressesFromAdresse'];
@@ -5849,7 +5848,7 @@ class archiAdresse extends ArchiContenu
         if (!empty($criteres['recherche_rue']) && $criteres['recherche_rue']!='0') {
         	$locationCriterias.=' AND ha1.idRue = ' . $criteres['recherche_rue'];
 
-        	$sqlJoin .="
+        	$sqlJoin ="
                 LEFT JOIN rue r         ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier 
                 LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
@@ -5860,7 +5859,7 @@ class archiAdresse extends ArchiContenu
         }
 		if (!empty($criteres['recherche_sousQuartier']) && $criteres['recherche_sousQuartier']!='0') {
 			$locationCriterias .=' AND ha1.idSousQuartier = ' . $criteres['recherche_sousQuartier'];
-			$sqlJoin .="
+			$sqlJoin ="
                 LEFT JOIN rue r         ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
                 LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
@@ -5872,7 +5871,7 @@ class archiAdresse extends ArchiContenu
         	$locationCriterias.=' AND ha1.idQuartier = ' . $criteres['recherche_quartier'];
         	
 
-           	$sqlJoin .="
+           	$sqlJoin ="
                 LEFT JOIN rue r         ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier 
                 LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
@@ -5883,7 +5882,7 @@ class archiAdresse extends ArchiContenu
         if (!empty($criteres['recherche_ville']) && $criteres['recherche_ville']!='0') {
         	$locationCriterias .=' AND ha1.idVille = ' . $criteres['recherche_ville'];
 
-			$sqlJoin .="
+			$sqlJoin ="
                 LEFT JOIN rue r         ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier 
                 LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
@@ -5892,7 +5891,7 @@ class archiAdresse extends ArchiContenu
             ";
         }
         if (!empty($criteres['recherche_pays']) && $criteres['recherche_pays']!='0') {
-        	$sqlJoin .="
+        	$sqlJoin ="
                 LEFT JOIN rue r         ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier 
                 LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
@@ -5901,6 +5900,15 @@ class archiAdresse extends ArchiContenu
             ";
         	
         	$locationCriterias .=' AND ha1.idPays = ' . $criteres['recherche_pays'];
+        }
+        if (empty($criteres['recherche_motcle']) ) {
+        	$sqlJoin ="
+                LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
+                LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
+                LEFT JOIN ville v        ON v.idVille =  ha1.idVille
+                LEFT JOIN pays p        ON p.idPays = ha1.idPays
+            ";
         }
         $sqlWhere= $locationCriterias;
         //$tabSqlWhere[] = $locationCriterias;
@@ -5999,15 +6007,14 @@ class archiAdresse extends ArchiContenu
             
             //$sqlOrderByPoidsMotCle="poidsTotal DESC";
             //
-            $sqlJoin .="
+          /* $sqlJoin .="
                 LEFT JOIN rue r         ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
                 LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' , ha1.idQuartier , sq.idQuartier )
                 LEFT JOIN ville v        ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' , ha1.idVille , q.idVille )
                 LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
-            ";
+            ";*/
         }
-        
 
         
         
@@ -6245,7 +6252,7 @@ class archiAdresse extends ArchiContenu
                 ha1.numero as numero, 
                 ha1.idHistoriqueAdresse, 
                 ha1.idIndicatif as idIndicatif";
-            
+            /*
             $sqlJoin .=" 
                 LEFT JOIN rue r         ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
@@ -6253,6 +6260,7 @@ class archiAdresse extends ArchiContenu
                 LEFT JOIN ville v        ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' , ha1.idVille , q.idVille )
                 LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
             ";
+            */
         }
         
         
@@ -6271,6 +6279,12 @@ class archiAdresse extends ArchiContenu
                 RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
                 RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
                 
+                LEFT JOIN rue r         ON r.idRue = ha1.idRue
+                LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
+                LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' , ha1.idQuartier , sq.idQuartier )
+                LEFT JOIN ville v        ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' , ha1.idVille , q.idVille )
+                LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
+        
                                
                 LEFT JOIN _evenementPersonne ep ON ep.idEvenement = he1.idEvenement
                 LEFT JOIN personne pers ON pers.idPersonne = ep.idPersonne
@@ -6592,6 +6606,11 @@ class archiAdresse extends ArchiContenu
         
         
         FROM historiqueAdresse ha2, historiqueAdresse ha1
+        LEFT JOIN rue r         ON r.idRue = ha1.idRue
+		LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
+		LEFT JOIN quartier q        ON q.idQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier!='0' , ha1.idQuartier , sq.idQuartier )
+		LEFT JOIN ville v        ON v.idVille = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille!='0' , ha1.idVille , q.idVille )
+		LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
         
         LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
         LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
@@ -6619,6 +6638,8 @@ class archiAdresse extends ArchiContenu
         ";////ORDER BY  ".pia_substr($sqlOrderByPoidsMotCle, 0, -1)."
         }
 
+        
+        //debug($sql);
         
         
 		//echo $sql."<br><br>";
@@ -7025,9 +7046,6 @@ class archiAdresse extends ArchiContenu
                             if ($idEvenementTitreAdresses!=0 && $titreAdresse!='')
                                 $styleAdresse = "font-size:13px;";
                         }
-                        
-                    
-
                     }
                     
                     

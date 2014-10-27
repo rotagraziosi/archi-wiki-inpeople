@@ -2,7 +2,7 @@
 -- This need the update-histo-adresse.sql script to be run before
 -- Author: Antoine Rota Graziosi
 
-CREATE TABLE recherchetmp AS 
+CREATE TABLE recherchetest AS 
   (
         SELECT distinct ee.idEvenement as idEvenementGA ,
                 r.nom as nomRue,
@@ -23,10 +23,13 @@ CREATE TABLE recherchetmp AS
                 CONVERT( ha1.numero USING utf8 ) as numeroAdresse,
                 ha1.idHistoriqueAdresse,
                 ha1.idIndicatif as idIndicatif,
-		CONCAT_WS( '', he1.titre, CONVERT( ha1.numero USING utf8 ) , r.prefixe, r.nom, sq.nom, q.nom, v.nom, p.nom ) as concat1,
-		CONCAT_WS('', pers.nom, pers.prenom) as concat2,
-		CONCAT_WS('',pers.prenom , pers.nom) as concat3
-
+		ind.nom as nomIndicatif,
+		he1.idSource as idSource,
+		he1.idTypeStructure as idTypeStructure,
+		he1.dateDebut as dateDebut,
+		he1.dateFin as dateFin,
+		he1.MH as MH,
+		he1.ISMH as ISMH
 
         
         FROM historiqueAdresse ha2, historiqueAdresse ha1
@@ -63,10 +66,50 @@ ALTER TABLE recherche ADD FULLTEXT INDEX `search` (nomRue, nomQuartier, nomSousQ
 ALTER TABLE recherchetmp ADD FULLTEXT INDEX `search` (nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, numeroAdresse, prefixeRue, description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3);
 
 
+
+                
+                    nomQuartier LIKE "%vélo%"
+                    OR nomSousQuartier LIKE "%vélo%"
+                    OR nomVille LIKE "%vélo%"
+                    OR nomPays LIKE "%vélo%"
+                    OR nomRue LIKE "%vélo%"
+                    OR titre LIKE "%vélo%"
+                    OR description LIKE "%vélo%" 
+
+
+ALTER TABLE recherchetmp ADD FULLTEXT INDEX `search2` (nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, description, titre );
+
+
+
+
 -- Executing the fulltext search 
+
+SELECT idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 ,
+(
+	10 * (MATCH (nomRue) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	10 * (MATCH (nomSousQuartier) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	10 * (MATCH (nomQuartier) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	10 * (MATCH (nomVille) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	10 * (MATCH (nomPays) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	1 * (MATCH (description) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	1 * (MATCH (titre) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	1000 * (MATCH (concat1) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	100 * (MATCH (concat2) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
+	100 * (MATCH (concat3) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) 
+
+) as relevance
+
+FROM recherchetmp
+WHERE MATCH(nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, prefixeRue,numeroAdresse,  description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3) AGAINST ('5 rue des balayeurs')
+ORDER BY relevance DESC
+;
+
+
+
+
 
 SELECT idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3
 FROM recherchetmp
-WHERE MATCH(nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, prefixeRue,numeroAdresse,  description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3) AGAINST ('etoile');
+WHERE MATCH(nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, description, titre ) AGAINST ('etoile');
 
 

@@ -38,8 +38,8 @@ class ConnexionBdd extends config
     /**
      * Constructeur de connexionBdd
      * 
-     * @param string $bddName Base de données
-     * @param string $host    Hôte
+     * @param string $bddName Base de donnï¿½es
+     * @param string $host    Hï¿½te
      * @param string $user    Utilisateur
      * @param string $pass    Mot de passe
      * 
@@ -54,12 +54,12 @@ class ConnexionBdd extends config
     }
     
     /**
-     * Se connecter à une base de donnée
+     * Se connecter ï¿½ une base de donnï¿½e
      * 
-     * @param string $host     Hôte
+     * @param string $host     Hï¿½te
      * @param string $user     Utilisateur
      * @param string $password Mot de passe
-     * @param string $bdd      Base de données
+     * @param string $bdd      Base de donnï¿½es
      * 
      * @return void
      * */
@@ -72,9 +72,9 @@ class ConnexionBdd extends config
     }
     
     /**
-     * Exécute une requète SQL
+     * Exï¿½cute une requï¿½te SQL
      * 
-     * @param string $requete    Requète
+     * @param string $requete    Requï¿½te
      * @param bool   $silencieux Afficher une erreur ?
      * 
      * @return object
@@ -93,15 +93,15 @@ class ConnexionBdd extends config
     * Chaque fois qu'on appelle un getLock,
     * il faut d'abord que l'utilisateur precedent ai fait un freeLock
     * (cas du blocage lors de l'enregistrement dans la base)
-    * Si utilisateur a ete précisé,
+    * Si utilisateur a ete prï¿½cisï¿½,
     * c'est donc que l'on tente de mettre a jour un element
     * (evenement par exemple, ceci ne correspond
     * pas au blocage lors de l'enregistrement dans une table)
-    * Cette fonction sert donc aussi à
+    * Cette fonction sert donc aussi ï¿½
     * bloquer l'edition d'un element grace a isLocked
     * 
     * @param array $tableName Nom de la table
-    * @param array $config    Paramètres
+    * @param array $config    Paramï¿½tres
     * 
     * @return void
     * */
@@ -115,7 +115,7 @@ class ConnexionBdd extends config
         if (isset($config['idUtilisateur'])) {
             $idUtilisateur = $config['idUtilisateur']; 
             /**
-             * Un utilisateur a ete précisé,
+             * Un utilisateur a ete prï¿½cisï¿½,
              * c'est donc que l'on tente de mettre a jour un element
              * (evenement par exemple, ceci ne correspond
              * pas au blocage lors de l'enregistrement dans une table)
@@ -139,7 +139,7 @@ class ConnexionBdd extends config
                 $resVerif = $this->requete($reqVerif);
                 if (mysql_num_rows($resVerif)>0) {
                     /**
-                     * Un verrou non expiré existe,
+                     * Un verrou non expirï¿½ existe,
                      * on ne va donc pas tenter d'en creer un autre
                      * du meme non pour le meme utilisateur,
                      * cela ferait bloquer le site pendant $minutes.
@@ -163,7 +163,7 @@ class ConnexionBdd extends config
                      * Le lock est valable pendant 1 minute
                      * (largement suffisement pour une operation dans la base
                      * (ajout, suppression ... )
-                     * sauf si $config['minutes'] est précisé
+                     * sauf si $config['minutes'] est prï¿½cisï¿½
                      * */
                     $qid = $this->requete(
                         "insert into verrouTable (verrouName,timeOut,idUtilisateur)".
@@ -181,7 +181,7 @@ class ConnexionBdd extends config
      * ???
      * 
      * @param array $tableName Nom de la table
-     * @param array $config    Paramètres
+     * @param array $config    Paramï¿½tres
      * 
      * @return void
      * */
@@ -204,7 +204,7 @@ class ConnexionBdd extends config
     
     /**
      * Fonction qui permet de voir si une table
-     * ou un element est bloqué, par un utilisateur ou non
+     * ou un element est bloquï¿½, par un utilisateur ou non
      * 
      * @param string $tableName     Nom de la table
      * @param int    $idUtilisateur Utilisateur
@@ -249,7 +249,7 @@ class ConnexionBdd extends config
     }
     
     /**
-     * Obtenir toutes les tables de la base de données
+     * Obtenir toutes les tables de la base de donnï¿½es
      * 
      * @return array
      * */
@@ -268,7 +268,7 @@ class ConnexionBdd extends config
     }
     
     /**
-     * Obtenir le nom de la base de données
+     * Obtenir le nom de la base de donnï¿½es
      * 
      * @return string
      * */
@@ -304,7 +304,7 @@ class ConnexionBdd extends config
     }
     
     /**
-     * Obtenir un tableau associatif depuis une requête contenue dans un fichier SQL
+     * Obtenir un tableau associatif depuis une requï¿½te contenue dans un fichier SQL
      * 
      * @param string $file SQL file
      * 
@@ -323,12 +323,12 @@ class ConnexionBdd extends config
     }
     
     /**
-     * Permet de sécuriser les variables utilisées dans les requêtes.
-     * Attention : la fonction mysql_real_escape_string est obsolète !
+     * Permet de sï¿½curiser les variables utilisï¿½es dans les requï¿½tes.
+     * Attention : la fonction mysql_real_escape_string est obsolï¿½te !
      * 
-     * @param mixed $var La variable à sécuriser
+     * @param mixed $var La variable ï¿½ sï¿½curiser
      * 
-     * @return string Variable sécurisée
+     * @return string Variable sï¿½curisï¿½e
      * */
     function quote ($var)
     {
