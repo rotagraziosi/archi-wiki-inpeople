@@ -5835,8 +5835,6 @@ class archiAdresse extends ArchiContenu
 				$criteres[$param] = $this->variablesGet[$param];
 		}
 
-		//debug($criteres);
-
 		if (isset($criteres['recherche_groupesAdressesFromAdresse']) && $criteres['recherche_groupesAdressesFromAdresse']!='') {
 			$tabSqlWhere[] = ' AND ha1.idAdresse='.$criteres['recherche_groupesAdressesFromAdresse'];
 			if (isset($criteres['displayAdresseIfNoCoordonneesGroupeAdresse']) && $criteres['displayAdresseIfNoCoordonneesGroupeAdresse']==1) {
@@ -5845,73 +5843,6 @@ class archiAdresse extends ArchiContenu
 		}
 
 		$locationCriterias = '';
-		/*
-		if (!empty($criteres['recherche_rue']) && $criteres['recherche_rue']!='0') {
-			$locationCriterias.=' AND ha1.idRue = ' . $criteres['recherche_rue'];
-
-			$sqlJoin ="
-					LEFT JOIN rue r         ON r.idRue = ha1.idRue
-					LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
-					LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
-					LEFT JOIN ville v        ON v.idVille =  ha1.idVille
-					LEFT JOIN pays p        ON p.idPays = ha1.idPays
-					";
-			 
-		}
-		if (!empty($criteres['recherche_sousQuartier']) && $criteres['recherche_sousQuartier']!='0') {
-			$locationCriterias .=' AND ha1.idSousQuartier = ' . $criteres['recherche_sousQuartier'];
-			$sqlJoin ="
-					LEFT JOIN rue r         ON r.idRue = ha1.idRue
-					LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
-					LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
-					LEFT JOIN ville v        ON v.idVille =  ha1.idVille
-					LEFT JOIN pays p        ON p.idPays = ha1.idPays
-					";
-		}
-		if (!empty($criteres['recherche_quartier']) && $criteres['recherche_quartier']!='0') {
-			$locationCriterias.=' AND ha1.idQuartier = ' . $criteres['recherche_quartier'];
-			 
-
-			$sqlJoin ="
-					LEFT JOIN rue r         ON r.idRue = ha1.idRue
-					LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
-					LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
-					LEFT JOIN ville v        ON v.idVille =  ha1.idVille
-					LEFT JOIN pays p        ON p.idPays = ha1.idPays
-					";
-		}
-		if (!empty($criteres['recherche_ville']) && $criteres['recherche_ville']!='0') {
-			$locationCriterias .=' AND ha1.idVille = ' . $criteres['recherche_ville'];
-
-			$sqlJoin ="
-					LEFT JOIN rue r         ON r.idRue = ha1.idRue
-					LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
-					LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
-					LEFT JOIN ville v        ON v.idVille =  ha1.idVille
-					LEFT JOIN pays p        ON p.idPays = ha1.idPays
-					";
-		}
-		if (!empty($criteres['recherche_pays']) && $criteres['recherche_pays']!='0') {
-			$sqlJoin ="
-					LEFT JOIN rue r         ON r.idRue = ha1.idRue
-					LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
-					LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
-					LEFT JOIN ville v        ON v.idVille =  ha1.idVille
-					LEFT JOIN pays p        ON p.idPays = ha1.idPays
-					";
-			 
-			$locationCriterias .=' AND ha1.idPays = ' . $criteres['recherche_pays'];
-		}
-		if (empty($criteres['recherche_motcle']) ) {
-			$sqlJoin ="
-					LEFT JOIN rue r         ON r.idRue = ha1.idRue
-					LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = ha1.idSousQuartier
-					LEFT JOIN quartier q        ON q.idQuartier =  ha1.idQuartier
-					LEFT JOIN ville v        ON v.idVille =  ha1.idVille
-					LEFT JOIN pays p        ON p.idPays = ha1.idPays
-					";
-		}
-		*/
 		$sqlWhere= $locationCriterias;
 		//$tabSqlWhere[] = $locationCriterias;
 
@@ -5977,7 +5908,6 @@ class archiAdresse extends ArchiContenu
 													OR r.nom LIKE \"%".$motcleEscaped."%\"
 															OR he1.titre LIKE \"%".$motcleEscaped."%\"
 																	OR he1.description LIKE \"%".$motcleEscaped."%\"
-
 																			OR CONCAT_WS('', he1.titre, CONVERT(ha1.numero USING utf8), ind.nom, r.prefixe, r.nom, sq.nom,  q.nom,  v.nom,  p.nom) LIKE '%".$motcleEscaped."%'
 																					OR CONCAT_WS('', pers.nom, pers.prenom) LIKE \"%".$motcleEscaped."%\"
 																							OR CONCAT_WS('', pers.prenom, pers.nom) LIKE \"%".$motcleEscaped."%\"
@@ -5987,24 +5917,24 @@ class archiAdresse extends ArchiContenu
 
 
 			$sqlOrderBy="(
-					IF(r.nom LIKE \"%".$motcle."%\", 10000, 0)
-							+ IF(sq.nom LIKE \"%".$motcle."%\", 10000, 0)
-									+ IF(q.nom  LIKE \"%".$motcle."%\", 10000, 0)
-											+ IF(v.nom  LIKE \"%".$motcle."%\", 10000, 0)
-													+ IF(he1.titre LIKE \"%".$motcle."%\", 100, 0)
-															+ IF(he1.description LIKE \"%".$motcle."%\", 10, 0)
-																	+ IF(he1.titre ".$motcleEntierEscaped.", 2000000000000000000, 0)
-																			+ IF(he1.description ".$motcleEntierEscaped.", 200000000000000000, 0)
-																					+ IF(ha1.idQuartier !=0 and ha1.idRue=0 and ha1.numero=0 and q.nom  LIKE \"%".$motcle."%\", 1000000000, 0)
-																							+ IF(ha1.numero=0 and CONCAT_WS('', r.prefixe, ' ', r.nom) ".$motcleAdresseEntiere.", 1000000000000000000000000000, 0)
-																									+ IF(ha1.numero=0 and ha1.idRue=0 and ha1.idQuartier=0 and ha1.idSousQuartier=0 and v.nom LIKE \"%".$motcle."%\", 10000000000000000, 0)
-																											+ IF(CONCAT_WS('', CONVERT(ha1.numero USING utf8), ind.nom, r.prefixe, r.nom, sq.nom,  q.nom,  v.nom,  p.nom) LIKE '%".$motcleEscaped."%', 1000000000000000000000000000, 0)
-																													+ IF(CONCAT_WS('', CONVERT(ha1.numero USING utf8), ' ', r.prefixe, ' ', r.nom) ".$motcleAdresseEntiere.", 1000000000000000000000000000, 0)
-																															+ IF(CONCAT_WS('', he1.titre, CONVERT(ha1.numero USING utf8), ' ', r.prefixe, ' ', r.nom) LIKE \"%".$motcleEscaped."%\", 2000000000000000000000000000, 0)
-																																	+ IF(CONCAT_WS('', pers.nom, pers.prenom) LIKE \"%".$motcleEscaped."%\", 20000000000000000, 0)
-																																			+ IF(CONCAT_WS('', pers.prenom, pers.nom) LIKE \"%".$motcleEscaped."%\", 20000000000000000, 0)
-																																					)
-																																					";
+			IF(r.nom LIKE \"%".$motcle."%\", 10000, 0)
+			+ IF(sq.nom LIKE \"%".$motcle."%\", 10000, 0)
+			+ IF(q.nom  LIKE \"%".$motcle."%\", 10000, 0)
+			+ IF(v.nom  LIKE \"%".$motcle."%\", 10000, 0)
+			+ IF(he1.titre LIKE \"%".$motcle."%\", 100, 0)
+			+ IF(he1.description LIKE \"%".$motcle."%\", 10, 0)
+			+ IF(he1.titre ".$motcleEntierEscaped.", 2000000000000000000, 0)
+			+ IF(he1.description ".$motcleEntierEscaped.", 200000000000000000, 0)
+			+ IF(ha1.idQuartier !=0 and ha1.idRue=0 and ha1.numero=0 and q.nom  LIKE \"%".$motcle."%\", 1000000000, 0)
+			+ IF(ha1.numero=0 and CONCAT_WS('', r.prefixe, ' ', r.nom) ".$motcleAdresseEntiere.", 1000000000000000000000000000, 0)
+			+ IF(ha1.numero=0 and ha1.idRue=0 and ha1.idQuartier=0 and ha1.idSousQuartier=0 and v.nom LIKE \"%".$motcle."%\", 10000000000000000, 0)
+			+ IF(CONCAT_WS('', CONVERT(ha1.numero USING utf8), ind.nom, r.prefixe, r.nom, sq.nom,  q.nom,  v.nom,  p.nom) LIKE '%".$motcleEscaped."%', 1000000000000000000000000000, 0)
+			+ IF(CONCAT_WS('', CONVERT(ha1.numero USING utf8), ' ', r.prefixe, ' ', r.nom) ".$motcleAdresseEntiere.", 1000000000000000000000000000, 0)
+			+ IF(CONCAT_WS('', he1.titre, CONVERT(ha1.numero USING utf8), ' ', r.prefixe, ' ', r.nom) LIKE \"%".$motcleEscaped."%\", 2000000000000000000000000000, 0)
+			+ IF(CONCAT_WS('', pers.nom, pers.prenom) LIKE \"%".$motcleEscaped."%\", 20000000000000000, 0)
+			+ IF(CONCAT_WS('', pers.prenom, pers.nom) LIKE \"%".$motcleEscaped."%\", 20000000000000000, 0)
+			)
+					";
 
 
 			//$sqlOrderByPoidsMotCle="poidsTotal DESC";
@@ -21066,28 +20996,60 @@ class archiAdresse extends ArchiContenu
 		else{
 			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList);
 			$t->assign_vars(array('nbReponses' => count($addressesInfromations)));
-						
+
+			//Loop on each address infos
 			foreach ($addressesInfromations as $info){
-				$testUrl = $this->creerUrl('', '', array_merge($this->variablesGet,  array('debut' => $valDebutPrecedent)));
-				$testUrl2 = $this->creerUrl('','',array('archiAffichage'=>'adresseDetail',"archiIdAdresse"=>$info['idHistoriqueAdresse'],"archiIdEvenementGroupeAdresse"=>$info['idEvenementGroupeAdresse']));
-					
+				$illustration = $this->getUrlImageFromAdresse($info['idHistoriqueAdresse'], 'mini', array('idEvenementGroupeAdresse'=>$info['idEvenementGroupeAdresse']));
+				$addressUrl = $this->creerUrl(
+						'',
+						'',
+						array(
+								'archiAffichage'=>'adresseDetail',
+								"archiIdAdresse"=>$info['idHistoriqueAdresse'],
+								"archiIdEvenementGroupeAdresse"=>$info['idEvenementGroupeAdresse']
+						)
+					);
+				//'getPhotoSquare.php?id='.$illustration['idHistoriqueImage']
 				$nom = $info['nom'];
 				
 				if(empty($nom)){
 					$nom =  $this->getIntituleAdresseFrom($info['idHistoriqueAdresse'],$type='idAdresse');
 				}
 				
+				
+				/*
+				 * 
+				 * Previous assignation
+				 * 		$t->assign_block_vars(
+								't.adresses',
+								array(
+										'nom'        => $nomAdresse,
+										'titresEvenements'        => $titresEvenements,
+										'urlDetailHref'        => $urlDetailHref,
+										'urlDetailOnClick'     => $urlDetailOnClick,
+										'urlImageIllustration'    => 'getPhotoSquare.php?id='.$illustration['idHistoriqueImage'],
+										'alt'=>''
+										//'alt'=>str_replace("'", " ", $nomAdresseNoStyle)
+								)
+						);
+				 */
+				
+				
+				$titreEvenements = 	implode(" - ", $info['titresEvenements']);
+				
+				
 				$t->assign_block_vars(
 						'adresses',
 						array(
-								'urlDetailHref'           => "MGBEP",
+								'nom'        => $nom,
+								'urlImageIllustration'    => 'getPhotoSquare.php?id='.$illustration['idHistoriqueImage'],
 								'alt' => $nom,
-								'urlDetailHref' => $testUrl2
+								'urlDetailHref' => $addressUrl,
+								'titresEvenements'        => $titreEvenements
+								
 						)
 				);
 			}			
-			
-			
 		}
 		
 		ob_start();
@@ -21107,6 +21069,7 @@ class archiAdresse extends ArchiContenu
 		if(!empty($idList)){
 			
 			//Building WHERE clause
+			//$whereClause = 'WHERE idHistoriqueAdresse IN (';
 			$whereClause = 'WHERE idHistoriqueAdresse IN (';
 			$i=0;
 			$nbElt=count($idList);
@@ -21119,15 +21082,54 @@ class archiAdresse extends ArchiContenu
 				}
 			}
 			
-			$req = "
-    				SELECT ha.nom , eal.idEvenementGroupeAdresse, ha.idHistoriqueAdresse
-    				FROM historiqueAdresse ha, _evenementAdresseLiee eal
+			$req="
+					SELECT ha.nom , ha.idHistoriqueAdresse , ha.idAdresse , ae.idEvenement
+    				FROM historiqueAdresse ha
+					LEFT JOIN _adresseEvenement ae on ae.idAdresse = ha.idHistoriqueAdresse
     				".$whereClause."
     				GROUP BY ha.idHistoriqueAdresse
-    				";
+					";
+    				
 			$res = $this->connexionBdd->requete($req);
+			
+			//Processing all the adresses get from the request : getting address title and link to the events linked
 			while($fetch = mysql_fetch_assoc($res)){
+				$reqTitresEvenements ="
+					SELECT  distinct he1.titre
+    				FROM historiqueEvenement he1
+					LEFT JOIN _evenementEvenement ee on ee.idEvenementAssocie = he1.idEvenement
+					LEFT JOIN _adresseEvenement ae on ae.idEvenement = ee.idEvenement
+					LEFT JOIN historiqueAdresse ha on ha.idAdresse = ae.idAdresse
+					WHERE ha.idAdresse =  ".$fetch['idAdresse']."
+								";
+				
+				$resTitresEvenements = $this->connexionBdd->requete($reqTitresEvenements);
+				$titresEvenements = array();
+				$positionAncre=0;
+
+				//Generating all the link to the events linked to current address 
+				while ($row = mysql_fetch_assoc($resTitresEvenements)) {
+				 	
+					//Link creation with the ancre to each event
+					$titresEvenements[] =
+				 	"<a href='".
+				 	$this->creerUrl(
+				 			'', 
+				 			'', 
+				 			array(
+				 					'archiIdAdresse'=>$fetch['idAdresse'], 
+				 					'archiAffichage'=>'adresseDetail', 
+				 					'archiIdEvenementGroupeAdresse'=>$fetch['idEvenementGA'], 
+				 					'debut'=>'')
+				 			)
+				 	."#".$positionAncre."'>"
+				 	.stripslashes($row['titre']).
+				 	"</a>";
+				 
+				}
+				$fetch['titresEvenements'] = $titresEvenements;
 				$addressesInformations[]=$fetch;
+				$positionAncre++;
 			}
 			
 		}
