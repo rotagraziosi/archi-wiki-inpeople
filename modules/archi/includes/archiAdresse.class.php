@@ -21009,35 +21009,15 @@ class archiAdresse extends ArchiContenu
 								"archiIdEvenementGroupeAdresse"=>$info['idEvenementGroupeAdresse']
 						)
 					);
-				//'getPhotoSquare.php?id='.$illustration['idHistoriqueImage']
+
+				//Processing name of the address
 				$nom = $info['nom'];
-				
 				if(empty($nom)){
 					$nom =  $this->getIntituleAdresseFrom($info['idHistoriqueAdresse'],$type='idAdresse');
 				}
 				
 				
-				/*
-				 * 
-				 * Previous assignation
-				 * 		$t->assign_block_vars(
-								't.adresses',
-								array(
-										'nom'        => $nomAdresse,
-										'titresEvenements'        => $titresEvenements,
-										'urlDetailHref'        => $urlDetailHref,
-										'urlDetailOnClick'     => $urlDetailOnClick,
-										'urlImageIllustration'    => 'getPhotoSquare.php?id='.$illustration['idHistoriqueImage'],
-										'alt'=>''
-										//'alt'=>str_replace("'", " ", $nomAdresseNoStyle)
-								)
-						);
-				 */
-				
-				
-				$titreEvenements = 	implode(" - ", $info['titresEvenements']);
-				
-				
+				$titreEvenements = 	implode(" - ", $info['titresEvenements']); // Getting all the events links on one line
 				$t->assign_block_vars(
 						'adresses',
 						array(
@@ -21052,6 +21032,7 @@ class archiAdresse extends ArchiContenu
 			}			
 		}
 		
+		//Filling template, getting content, returning it
 		ob_start();
 		$t->pparse('addressesList');
 		$html .= ob_get_contents();
@@ -21069,7 +21050,6 @@ class archiAdresse extends ArchiContenu
 		if(!empty($idList)){
 			
 			//Building WHERE clause
-			//$whereClause = 'WHERE idHistoriqueAdresse IN (';
 			$whereClause = 'WHERE idHistoriqueAdresse IN (';
 			$i=0;
 			$nbElt=count($idList);
@@ -21127,14 +21107,17 @@ class archiAdresse extends ArchiContenu
 				 	"</a>";
 				 
 				}
+				
+				//Putting all this in a nice array
 				$fetch['titresEvenements'] = $titresEvenements;
 				$addressesInformations[]=$fetch;
 				$positionAncre++;
 			}
-			
 		}
+		debug($addressesInformations);
 		return $addressesInformations;
 	}
+
 }
 
 ?>

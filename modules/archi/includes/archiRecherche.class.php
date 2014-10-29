@@ -2009,6 +2009,8 @@ class archiRecherche extends config {
 
 		return $this->advancedSearch();
 	}
+	
+	
 	/*
 	 * Make an advanced search with criterias such as city or street specified
 	*/
@@ -2082,13 +2084,14 @@ class archiRecherche extends config {
 	 * *************************************************************************
 	 */
 	private function buildWhereClause($criterias ){
+		debug($criterias);
 		$sqlWhere = '';
 		$sqlWhereTab = array();
 		$motcle="";
 		if(isset($criterias['motcle'])){
 			$motcle = $criterias['motcle'];
 		}
-		$arrayCriterias = array(
+				$arrayCriterias = array(
 				array('motcle',$motcle),
 				array('pays' ,'idPays'),
 				array('ville','idVille'),
@@ -2103,13 +2106,16 @@ class archiRecherche extends config {
 				array('ISMH','ISMH')
 
 		);
+				
 		foreach ($arrayCriterias as $id){
 			if(isset($criterias[$id[0]])){
-				if($criterias[$id[0]]!=0){
-					$sqlWhereTab[] = $id[1].' = '.$criterias[$id[0]];
+				if($id[0]!='motcle'){
+					if($criterias[$id[0]]!=0){
+						$sqlWhereTab[] = $id[1].' = '.$criterias[$id[0]].'';
+					}
 				}
 				else{
-					if($id[0]=='motcle'){
+					if(!empty($criterias[$id[0]])){
 						$sqlWhereTab[] = "MATCH(nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, prefixeRue,numeroAdresse,  description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3) AGAINST ('".$criterias[$id[0]]."') ";
 					}
 				}
@@ -2122,17 +2128,20 @@ class archiRecherche extends config {
 		$numItems = count($sqlWhereTab);
 		$i = 0;
 
-		$sqlWhere = "WHERE ";
-		foreach ($sqlWhereTab as $clause){
-			//Finding the last occurence
-			if(++$i === $numItems) {
-				$sqlWhere  .= $clause . " ";
-			}
-			//Regulare cases
-			else{
-				$sqlWhere  .= $clause . " AND ";
+		if($numItems>0){
+			$sqlWhere = "WHERE ";
+			foreach ($sqlWhereTab as $clause){
+				//Finding the last occurence
+				if(++$i === $numItems) {
+					$sqlWhere  .= $clause . " ";
+				}
+				//Regulare cases
+				else{
+					$sqlWhere  .= $clause . " AND ";
+				}
 			}
 		}
+		
 		return $sqlWhere;
 	}
 
@@ -2142,26 +2151,37 @@ class archiRecherche extends config {
 	 * @param string $sqlWhere : Prebuild where clause
 	 * @return multitype:unknown
 	 */
-	private function getIdHistoAdresses($sqlWhere = ''){
-		$request = "SELECT idHistoriqueAdresse, idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 ,
+	private function getIdHistoAdresses($sqlWhere = '',$motcle =''){
+		if(isset($motcle) && $motcle!=''){
+			$request = "SELECT idHistoriqueAdresse, idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 ,
 				(
-				10 * (MATCH (nomRue) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				10 * (MATCH (nomSousQuartier) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				10 * (MATCH (nomQuartier) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				10 * (MATCH (nomVille) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				10 * (MATCH (nomPays) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				1 * (MATCH (description) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				1 * (MATCH (titre) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				1000 * (MATCH (concat1) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				100 * (MATCH (concat2) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE)) +
-				100 * (MATCH (concat3) AGAINST ('5 rue des balayeurs' IN BOOLEAN MODE))
-
+				10 * (MATCH (nomRue) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				10 * (MATCH (nomSousQuartier) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				10 * (MATCH (nomQuartier) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				10 * (MATCH (nomVille) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				10 * (MATCH (nomPays) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				1 * (MATCH (description) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				1 * (MATCH (titre) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				1000 * (MATCH (concat1) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				100 * (MATCH (concat2) AGAINST ('".$motcle."' IN BOOLEAN MODE)) +
+				100 * (MATCH (concat3) AGAINST ('".$motcle."' IN BOOLEAN MODE))
+			
 				) as relevance
-
+			
 				FROM recherchetmp "
-				.$sqlWhere.
-				"ORDER BY relevance DESC
+					.$sqlWhere.
+					"ORDER BY relevance DESC
 				;";
+		}
+		else{
+			$request = "SELECT idHistoriqueAdresse, idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 ,
+			1 as relevance
+			
+				FROM recherchetmp "
+					.$sqlWhere.
+					"ORDER BY relevance DESC
+				;";
+		}
 		
 		$idHistoriqueAdresse  = array();
 		$res = $this->connexionBdd->requete($request);
