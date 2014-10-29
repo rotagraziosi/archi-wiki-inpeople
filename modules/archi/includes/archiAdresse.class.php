@@ -20999,7 +20999,13 @@ class archiAdresse extends ArchiContenu
 
 			//Loop on each address infos
 			foreach ($addressesInfromations as $info){
-				$illustration = $this->getUrlImageFromAdresse($info['idHistoriqueAdresse'], 'mini', array('idEvenementGroupeAdresse'=>$info['idEvenementGroupeAdresse']));
+				$illustration = $this->getUrlImageFromAdresse(
+						$info['idHistoriqueAdresse'], 
+						'mini', 
+						array(
+								'idEvenementGroupeAdresse'=>$info['idEvenementGroupeAdresse']
+								
+				));
 				$addressUrl = $this->creerUrl(
 						'',
 						'',
@@ -21012,10 +21018,9 @@ class archiAdresse extends ArchiContenu
 
 				//Processing name of the address
 				$nom = $info['nom'];
-				if(empty($nom)){
-					$nom =  $this->getIntituleAdresseFrom($info['idHistoriqueAdresse'],$type='idAdresse');
+				if(empty($nom) || $nom == "" || $nom == ' '){
+					$nom =  $this->getIntituleAdresseFrom($info['idEvenementGroupeAdresse'],$type='idEvenementGroupeAdresse');
 				}
-				
 				
 				$titreEvenements = 	implode(" - ", $info['titresEvenements']); // Getting all the events links on one line
 				$t->assign_block_vars(
@@ -21063,7 +21068,7 @@ class archiAdresse extends ArchiContenu
 			}
 			
 			$req="
-					SELECT ha.nom , ha.idHistoriqueAdresse , ha.idAdresse , ae.idEvenement
+					SELECT ha.nom , ha.idHistoriqueAdresse , ha.idAdresse , ae.idEvenement as idEvenementGroupeAdresse
     				FROM historiqueAdresse ha
 					LEFT JOIN _adresseEvenement ae on ae.idAdresse = ha.idHistoriqueAdresse
     				".$whereClause."
@@ -21114,7 +21119,6 @@ class archiAdresse extends ArchiContenu
 				$positionAncre++;
 			}
 		}
-		debug($addressesInformations);
 		return $addressesInformations;
 	}
 

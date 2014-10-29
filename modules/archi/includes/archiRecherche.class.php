@@ -2084,7 +2084,6 @@ class archiRecherche extends config {
 	 * *************************************************************************
 	 */
 	private function buildWhereClause($criterias ){
-		debug($criterias);
 		$sqlWhere = '';
 		$sqlWhereTab = array();
 		$motcle="";
@@ -2174,12 +2173,10 @@ class archiRecherche extends config {
 				;";
 		}
 		else{
-			$request = "SELECT idHistoriqueAdresse, idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 ,
-			1 as relevance
-			
+			$request = "SELECT idHistoriqueAdresse, idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 , 1 as relevance
 				FROM recherchetmp "
-					.$sqlWhere.
-					"ORDER BY relevance DESC
+				.$sqlWhere.
+				"ORDER BY relevance DESC
 				;";
 		}
 		
