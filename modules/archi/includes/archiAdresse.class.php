@@ -20995,7 +20995,18 @@ class archiAdresse extends ArchiContenu
 		}
 		else{
 			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList);
-			$t->assign_vars(array('nbReponses' => count($addressesInfromations)));
+			
+			
+			if(count($addressesInfromations) > 1){
+				$nbReponses = count($addressesInfromations) ." réponses";
+			}
+			else{
+				$nbReponses = count($addressesInfromations) ." résponse";
+			}
+			$t->assign_vars(array(
+					'nbReponses' => $nbReponses,
+					'titre' => 'Adresses'					
+			));
 
 			//Loop on each address infos
 			foreach ($addressesInfromations as $info){
