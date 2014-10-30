@@ -4,13 +4,14 @@
 <a href="{urlPrecedent}" onclick="{urlPrecedentOnClick}">&lt;</a>
 <!-- BEGIN nav -->
 	<!-- BEGIN courant -->
-	<strong>
+		<strong>
 	<!-- END courant -->
 	<a href="{nav.urlNb}" onclick="{nav.urlNbOnClick}">{nav.nb}</a>
 	<!-- BEGIN courant -->
-	</strong>
+		</strong>
 	<!-- END courant -->
 <!-- END nav -->
+
 <a href="{urlSuivant}" onclick="{urlSuivantOnClick}">&gt;</a>
 
 <table class="results">

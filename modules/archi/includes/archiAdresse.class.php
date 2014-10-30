@@ -14151,12 +14151,13 @@ class archiAdresse extends ArchiContenu
 			if(isset($this->variablesGet['debut']) && $this->variablesGet['debut']!=''){
 				$optionsPagination['currentPage'] = ($this->variablesGet['debut'] / $optionsPagination['nbResultPerPage']) +1;
 			}
-
+			
+			
 			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList);
 			if($nbResult > 1){
 				$optionsPagination['nbResult']  = $nbResult;
 				$nbReponses = $nbResult ;
-				$optionsPagination['nbPages']  = (int)(($nbReponses/$optionsPagination['nbResultPerPage'])) +1;
+				$optionsPagination['nbPages']  = ceil((($nbReponses/$optionsPagination['nbResultPerPage'])) );
 				$url = array();
 				
 				
@@ -14175,22 +14176,36 @@ class archiAdresse extends ArchiContenu
 			));
 
 			
+			
 			// Template filling 
-			$i=1;
-			foreach ($url as $u){
+			$indexToDisplay = $this->getPaginationIndex($optionsPagination);
+			foreach ($indexToDisplay as $indexPage){
+				
+				// Dirty hack for displaying strong tag on current page
+				if($indexPage-1 == $optionsPagination['currentPage']){
+					$t->assign_block_vars(
+							'nav.courant',
+							array()
+					);
+				}
+
 				$t->assign_block_vars(
 						'nav',
 						array(
 								'urlNbOnClick' => '',
-								'urlNb'        => $u ,
-								'nb'           => $i++
-								)
+								'urlNb'        => $url[$indexPage-1] ,
+								'nb'           => $indexPage
+						)
 				);
 			}
-			
-			
-			
-			
+					
+			//Generating next/previous pagination link
+			$siblingIndex = $this->getNextPreviousPages($optionsPagination['currentPage'] , $optionsPagination['nbPages']);
+			$t->assign_vars(
+					array(
+						'urlPrecendant' => $url[$siblingIndex['previousPage']-1],
+						'urlSuivant'=>$url[$siblingIndex['nextPage']-1]
+			));
 			
 			
 			//Addresses display
@@ -14354,8 +14369,6 @@ class archiAdresse extends ArchiContenu
 		if(isset($options['offset'])){
 			$offset= $options['offset'];
 		}
-		debug($options);		
-		
 		
 		//Link creation
 		for($i=0;$i<$nbPages;$i++){
@@ -14367,8 +14380,108 @@ class archiAdresse extends ArchiContenu
 					$paramCreerUrl
 			);
 		}
-		debug($url);
 		return $url;
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param unknown $optionsPagination : array with the info of pagination (nb results, nb results per page, current page etc)
+	 * @return $indexRange = range of the index to display
+	 */	
+	private function getPaginationIndex($optionsPagination = array()){
+		$nbResult = 0;
+		$nbPages = 0;
+		$currentPage = 0;
+		$nextPage = 0;
+		$previousPage = 0;
+		$nbResultPerPage = 10;
+		$offset = 4;
+		$indexToDisplay = array();
+		
+		//Setting vars
+		if(isset($optionsPagination['nbResult'])){
+			$nbResult =$optionsPagination['nbResult'];
+		}		
+		if(isset($optionsPagination['nbPages'])){
+			$nbPages = $optionsPagination['nbPages'];
+		}
+		if(isset($optionsPagination['currentPage'])){
+			$currentPage = $optionsPagination['currentPage'];
+		}
+		if(isset($optionsPagination['nextPage'])){
+			$nextPage = $optionsPagination['nextPage'];
+		}
+		if(isset($optionsPagination['previousPage'])){
+			$previousPage = $optionsPagination['previousPage'];
+		}
+		if(isset($optionsPagination['nbResultPerPage'])){
+			$nbResultPerPage = $optionsPagination['nbResultPerPage'];
+		}
+		if(isset($optionsPagination['offset'])){
+			$offset = $optionsPagination['offset'];
+		}
+		
+		//Processing firstpage index
+		if($nbPages<=(2*$offset+1)){
+			$indexToDisplay['firstPage'] = 1;
+			$indexToDisplay['lastPage'] = $nbPages;
+		}
+		else{
+			if(($currentPage - $offset)<= 0){
+				$indexToDisplay['firstPage'] = 1;
+			}
+			else{
+				$indexToDisplay['firstPage'] = $currentPage - $offset;
+			}
+			
+			//Processing lastpage index
+			if(($currentPage+$offset)>=$nbPages){
+				$indexToDisplay['lastPage'] = $nbPages;
+			}
+			else{
+				$indexToDisplay['lastPage']=$currentPage+$offset;
+			}
+			
+			// Adjusting first page index or last page index if nb of previous pages are not balanced compared to next ones
+			// Adding the extra missing page to a side or another to really have 9 pages (aka 2*offset+1)
+			if((2*$offset+1) > ($indexToDisplay['lastPage'] - $indexToDisplay['firstPage'] +1)){
+				
+				//Calculating the offset to add to first or last page
+				$offsetAdd=(2*$offset+1) - ($indexToDisplay['lastPage'] - $indexToDisplay['firstPage'] +1);
+				
+				if($indexToDisplay['firstPage'] == 1){
+					$indexToDisplay['lastPage']+=$offsetAdd;
+				}
+				else{
+					$indexToDisplay['firstPage']-=$offsetAdd;
+				}
+			}
+		}
+		
+		
+		
+		
+		$indexRange = array();
+		for($i = $indexToDisplay['firstPage'] ; $i <= $indexToDisplay['lastPage'] ; $i++){
+			$indexRange[] = $i;
+		}
+		$indexToDisplay['range'] = $indexRange;
+		return $indexRange;
+	}
+	
+	private function getNextPreviousPages($currentPage=0,$nbPages){
+		$nextPage=$currentPage+1;
+		$previousPage=$currentPage-1;
+		if($currentPage==1){
+			$previousPage=1;
+		}
+		if($currentPage == $nbPages){
+			$nextPage = $nbPages;
+		}
+		return array('previousPage'=>$previousPage , 'nextPage'=>$nextPage) ;
 	}
 
 }
