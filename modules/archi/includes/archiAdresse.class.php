@@ -14125,9 +14125,9 @@ class archiAdresse extends ArchiContenu
      * @param unknown $idList : a list of idHistoriqueAdresse to display 
      * @return $html : the list of addresses to display
      */
-	public function displayList($idList = array()){
+	public function displayList($idList = array(),$nbResult = 0){
 		$html = "";
-		
+
 		//Template loading 
 		$t=new Template('modules/archi/templates/');
 		$t->set_filenames(array('addressesList'=>'addressesList.tpl'));
@@ -14136,37 +14136,36 @@ class archiAdresse extends ArchiContenu
 	   		$html = "Aucunes adresses à afficher.";
 		}
 		else{
+			
+			$optionsPagination=array(
+					'nbResult' => 0,
+					'nbPages' => 0,
+					'currentPage'=> 0,
+					'nextPage' => 0,
+					'previousPage' => 0,
+					'nbResultPerPage' => 10,
+					'offset'=>4
+			);
+				
 			//Pagination display
-			$nbResult = 0;
-			$nbPages = 0;
-			$currentPage = 0;
-			$nextPage = 0;
-			$previousPage = 0;
-			$nbResultPerPage = 10;
-			$offset=4;
 			if(isset($this->variablesGet['debut']) && $this->variablesGet['debut']!=''){
 				$currentPage=$this->variablesGet['debut'];
+				$optionsPagination['currentPage'] = $this->variablesGet['debut'];
 			}
 
 			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList);
 			if(count($addressesInfromations) > 1){
-				$nbReponses = count($addressesInfromations) ;
-				$nbPages = (int)(($nbReponses/$nbResultPerPage)) +1;
-				debug($nbReponses);
-				debug($nbPages);
+				$optionsPagination['nbResult']  = $nbResult;
+				$nbReponses = $nbResult ;
+				$optionsPagination['nbPages']  = (int)(($nbReponses/$optionsPagination['nbResultPerPage'])) +1;
 				$url = array();
-				for($i=1;$i<$nbPages+1;$i++){
-					$paramCreerUrl = $this->variablesGet;
-					$paramCreerUrl['debut'] = $i*$nbResultPerPage;
-					$url[]=$this->creerUrl(
-							'',
-							'',
-							$paramCreerUrl
-					);
-				}
+				
+				
+				//Call link generation
+				$url = $this->generatePaginationLinks($optionsPagination);
+				
+
 				$nbReponses.=" réponses";
-				debug($this->variablesGet);
-				debug($url);
 			}
 			else{
 				$nbReponses = count($addressesInfromations) ." résponse";
@@ -14176,11 +14175,6 @@ class archiAdresse extends ArchiContenu
 					'titre' => 'Adresses'					
 			));
 
-			
-			
-			
-			
-			
 			
 			
 			//Addresses display
@@ -14308,6 +14302,57 @@ class archiAdresse extends ArchiContenu
 			}
 		}
 		return $addressesInformations;
+	}
+	
+	
+	private function generatePaginationLinks($options = array()){
+		//Pagination display
+		$nbResult = 0;
+		$nbPages = 0;
+		$currentPage = 0;
+		$nextPage = 0;
+		$previousPage = 0;
+		$nbResultPerPage = 10;
+		$offset=4;
+		$url = array();
+		
+		// Checking if all the parameters are set 
+		if(isset($options['nbResult'])){
+			$nbResult = $options['nbResult'];
+		}
+		if(isset($options['nbPages'])){
+			$nbPages= $options['nbPages'];
+		}
+		if(isset($options['currentPage'])){
+			$currentPage= $options['nbResult'];
+		}
+		if(isset($options['nextPage'])){
+			$nextPage= $options['nextPage'];
+		}
+		if(isset($options['previousPage'])){
+			$previousPage= $options['previousPage'];
+		}
+		if(isset($options['nbResultPerPage'])){
+			$nbResultPerPage= $options['nbResultPerPage'];
+		}
+		if(isset($options['offset'])){
+			$offset= $options['offset'];
+		}
+		debug($options);		
+		
+		
+		//Link creation
+		for($i=1;$i<$nbPages+1;$i++){
+			$paramCreerUrl = $this->variablesGet;
+			$paramCreerUrl['debut'] = $i*$nbResultPerPage;
+			$url[]=$this->creerUrl(
+					'',
+					'',
+					$paramCreerUrl
+			);
+		}
+		debug($url);
+		return $url;
 	}
 
 }
