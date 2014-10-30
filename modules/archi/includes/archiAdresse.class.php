@@ -14149,12 +14149,11 @@ class archiAdresse extends ArchiContenu
 				
 			//Pagination display
 			if(isset($this->variablesGet['debut']) && $this->variablesGet['debut']!=''){
-				$currentPage=$this->variablesGet['debut'];
-				$optionsPagination['currentPage'] = $this->variablesGet['debut'];
+				$optionsPagination['currentPage'] = ($this->variablesGet['debut'] / $optionsPagination['nbResultPerPage']) +1;
 			}
 
 			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList);
-			if(count($addressesInfromations) > 1){
+			if($nbResult > 1){
 				$optionsPagination['nbResult']  = $nbResult;
 				$nbReponses = $nbResult ;
 				$optionsPagination['nbPages']  = (int)(($nbReponses/$optionsPagination['nbResultPerPage'])) +1;
@@ -14175,6 +14174,23 @@ class archiAdresse extends ArchiContenu
 					'titre' => 'Adresses'					
 			));
 
+			
+			// Template filling 
+			$i=1;
+			foreach ($url as $u){
+				$t->assign_block_vars(
+						'nav',
+						array(
+								'urlNbOnClick' => '',
+								'urlNb'        => $u ,
+								'nb'           => $i++
+								)
+				);
+			}
+			
+			
+			
+			
 			
 			
 			//Addresses display
@@ -14342,7 +14358,7 @@ class archiAdresse extends ArchiContenu
 		
 		
 		//Link creation
-		for($i=1;$i<$nbPages+1;$i++){
+		for($i=0;$i<$nbPages;$i++){
 			$paramCreerUrl = $this->variablesGet;
 			$paramCreerUrl['debut'] = $i*$nbResultPerPage;
 			$url[]=$this->creerUrl(
