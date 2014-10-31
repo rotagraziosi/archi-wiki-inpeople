@@ -1999,7 +1999,6 @@ class archiRecherche extends config {
 
 		if(!empty($this->variablesGet['motcle'])){
 			$html.="pas empty";
-
 		}
 		//If no keyword specified, show an error
 		//TODO : Create a common error method showing an error message with a red panel
@@ -2029,9 +2028,13 @@ class archiRecherche extends config {
 		if(isset($this->variablesGet['motcle'])){
 			$motcle = $this->variablesGet['motcle'];
 		}
+		if(isset($this->variablesGet['order'])){
+			$order = $this->variablesGet['order'];
+		}
 		$params = array(
 				'motcle' => $motcle,
-				'debut' => $debut
+				'debut' => $debut,
+				'order' => $order
 		);		
 		
 		
@@ -2169,9 +2172,14 @@ class archiRecherche extends config {
 	 */
 	private function getIdHistoAdresses($sqlWhere = '',$params =array()){
 		$limit = "";
+		$order ="DESC ";
 		if(isset($params['debut'])){
 			$limit = "LIMIT ". $params['debut']." , 10";
 		}
+		if(isset($params['order'])){
+			$order = $params['order'];
+		}
+		
 		if(isset($params['motcle']) && $params['motcle']!=''){
 			$request = "SELECT idHistoriqueAdresse, idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 ,
 				(
@@ -2191,7 +2199,7 @@ class archiRecherche extends config {
 				FROM recherchetmp "
 				.$sqlWhere.
 				"GROUP BY idHistoriqueAdresse 
-				ORDER BY relevance DESC ".
+				ORDER BY relevance  ".$order." " . 
 				$limit.
 				";";
 		}
@@ -2201,7 +2209,7 @@ class archiRecherche extends config {
 				.$sqlWhere.
 				"
 				GROUP BY idHistoriqueAdresse 
-				ORDER BY relevance DESC "
+				ORDER BY relevance  " . $order." "
 				.$limit.						
 				";";
 		}

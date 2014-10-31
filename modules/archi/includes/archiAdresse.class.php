@@ -5829,7 +5829,6 @@ class archiAdresse extends ArchiContenu
 		$sqlOrderByPoidsMotCle="";
 		$sqlOrderBy=" ha1.date";
 
-
 		foreach ($tabParametresAutorises as $param) {
 			if (isset($this->variablesGet[$param]) and !isset($criteres[$param]))
 				$criteres[$param] = $this->variablesGet[$param];
@@ -5844,8 +5843,9 @@ class archiAdresse extends ArchiContenu
 
 		$locationCriterias = '';
 		$sqlWhere= $locationCriterias;
-		//$tabSqlWhere[] = $locationCriterias;
+		$tabSqlWhere[] = $locationCriterias;
 
+		debug($sqlWhere);
 
 		$sqlAdressesSupplementaires="";
 		$tabidAdresses=array();
@@ -5902,16 +5902,16 @@ class archiAdresse extends ArchiContenu
 					AND
 					(
 					q.nom LIKE \"%".$motcleEscaped."%\"
-							OR sq.nom LIKE \"%".$motcleEscaped."%\"
-									OR v.nom LIKE \"%".$motcleEscaped."%\"
-											OR p.nom LIKE \"%".$motcleEscaped."%\"
-													OR r.nom LIKE \"%".$motcleEscaped."%\"
-															OR he1.titre LIKE \"%".$motcleEscaped."%\"
-																	OR he1.description LIKE \"%".$motcleEscaped."%\"
-																			OR CONCAT_WS('', he1.titre, CONVERT(ha1.numero USING utf8), ind.nom, r.prefixe, r.nom, sq.nom,  q.nom,  v.nom,  p.nom) LIKE '%".$motcleEscaped."%'
-																					OR CONCAT_WS('', pers.nom, pers.prenom) LIKE \"%".$motcleEscaped."%\"
-																							OR CONCAT_WS('', pers.prenom, pers.nom) LIKE \"%".$motcleEscaped."%\"
-																									)";
+					OR sq.nom LIKE \"%".$motcleEscaped."%\"
+					OR v.nom LIKE \"%".$motcleEscaped."%\"
+					OR p.nom LIKE \"%".$motcleEscaped."%\"
+					OR r.nom LIKE \"%".$motcleEscaped."%\"
+					OR he1.titre LIKE \"%".$motcleEscaped."%\"
+					OR he1.description LIKE \"%".$motcleEscaped."%\"
+					OR CONCAT_WS('', he1.titre, CONVERT(ha1.numero USING utf8), ind.nom, r.prefixe, r.nom, sq.nom,  q.nom,  v.nom,  p.nom) LIKE '%".$motcleEscaped."%'
+					OR CONCAT_WS('', pers.nom, pers.prenom) LIKE \"%".$motcleEscaped."%\"
+					OR CONCAT_WS('', pers.prenom, pers.nom) LIKE \"%".$motcleEscaped."%\"
+					)";
 
 			$sqlSelectMotCle="";//, IF(ha1.idQuartier !=0 and ha1.idRue=0 and ha1.numero=0 and q.nom  LIKE \"%".$motcle."%\", 1000000000, 0) as poidsSpeQuartier
 
@@ -6002,6 +6002,8 @@ class archiAdresse extends ArchiContenu
 			}
 		}
 
+		
+		//debug($sqlWhere);
 
 
 		// ************************************************************************************************************************************************
@@ -6230,6 +6232,7 @@ class archiAdresse extends ArchiContenu
 		HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
 		";
 
+		debug($sqlWhere);
 
 		$result = $this->connexionBdd->requete($sqlCount);
 
@@ -6571,7 +6574,7 @@ class archiAdresse extends ArchiContenu
 			}
 
 
-			//debug($sql);
+			debug($sql);
 
 
 			//echo $sql."<br><br>";
@@ -14133,7 +14136,7 @@ class archiAdresse extends ArchiContenu
 		$t->set_filenames(array('addressesList'=>'addressesList.tpl'));
 
 		if(empty($idList)){
-	   		$html = "Aucunes adresses à afficher.";
+	   		$html = "Aucune adresse à afficher.";
 		}
 		else{
 			
@@ -14177,7 +14180,32 @@ class archiAdresse extends ArchiContenu
 
 			
 			
-			// Template filling 
+			// Template filling
+			$paramsUrlDesc = $this->variablesGet;
+			$paramsUrlAsc = $this->variablesGet;
+			$paramsUrlDesc['order'] = "desc";
+			$paramsUrlAsc['order'] = "asc";
+			
+			$urlAsc =$this->creerUrl(
+					'',
+					'',
+					$paramsUrlAsc
+					);
+			$urlDesc =$this->creerUrl(
+					'',
+					'',
+					$paramsUrlDesc
+					);
+				
+		
+			$t->assign_block_vars(
+					'liens',
+					array(
+							'urlDesc' => $urlAsc,
+							'urlAsc'        => $urlDesc
+					)
+			);
+			
 			$indexToDisplay = $this->getPaginationIndex($optionsPagination);
 			foreach ($indexToDisplay as $indexPage){
 				
@@ -14209,7 +14237,6 @@ class archiAdresse extends ArchiContenu
 			
 			
 			//Addresses display
-			
 			//Loop on each address infos
 			foreach ($addressesInfromations as $info){
 				$illustration = $this->getUrlImageFromAdresse(
