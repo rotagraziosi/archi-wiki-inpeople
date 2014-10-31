@@ -6342,7 +6342,8 @@ class archiAdresse extends ArchiContenu
 
 					$t->assign_vars(
 							array(
-									'titre'=>$titre, 'description'=>$description,
+									'titre'=>$titre, 
+									'description'=>$description,
 									"divBegin"=>"<div itemscope itemtype='http://schema.org/Person'>",
 									"divEnd"=>"</div>"
 							)
@@ -14178,26 +14179,15 @@ class archiAdresse extends ArchiContenu
 					'titre' => 'Adresses'					
 			));
 
-			
-			
 			// Template filling
 			$paramsUrlDesc = $this->variablesGet;
 			$paramsUrlAsc = $this->variablesGet;
 			$paramsUrlDesc['order'] = "desc";
 			$paramsUrlAsc['order'] = "asc";
 			
-			$urlAsc =$this->creerUrl(
-					'',
-					'',
-					$paramsUrlAsc
-					);
-			$urlDesc =$this->creerUrl(
-					'',
-					'',
-					$paramsUrlDesc
-					);
+			$urlAsc =$this->creerUrl('','',$paramsUrlAsc);
+			$urlDesc =$this->creerUrl('','',$paramsUrlDesc);
 				
-		
 			$t->assign_block_vars(
 					'liens',
 					array(
@@ -14257,16 +14247,21 @@ class archiAdresse extends ArchiContenu
 					);
 
 				//Processing name of the address
+				
+				
+				
+				
 				$nom = $info['nom'];
-				if(empty($nom) || $nom == "" || $nom == ' '){
-					$nom =  $this->getIntituleAdresseFrom($info['idEvenementGroupeAdresse'],$type='idEvenementGroupeAdresse');
-				}
+				//if(empty($nom) || $nom == "" || $nom == ' '){
+					$fulladdress =  $this->getIntituleAdresseFrom($info['idEvenementGroupeAdresse'],$type='idEvenementGroupeAdresse');
+				//}
 				
 				$titreEvenements = 	implode(" - ", $info['titresEvenements']); // Getting all the events links on one line
 				$t->assign_block_vars(
 						'adresses',
 						array(
 								'nom'        => $nom,
+								'adresseComplete' => $fulladdress,
 								'urlImageIllustration'    => 'getPhotoSquare.php?id='.$illustration['idHistoriqueImage'],
 								'alt' => $nom,
 								'urlDetailHref' => $addressUrl,

@@ -34,7 +34,7 @@
         	<span>
         	<br/>
 	        	<a href="{adresses.urlDetailHref}" onclick="{adresses.urlDetailOnClick}">
-	        		{adresses.nom}
+	        		<b>{adresses.nom} </b> {adresses.adresseComplete}
 	        	</a>
         	</span>
         	<br/>
