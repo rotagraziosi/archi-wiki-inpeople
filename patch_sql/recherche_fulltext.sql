@@ -23,13 +23,17 @@ CREATE TABLE recherchetest AS
                 CONVERT( ha1.numero USING utf8 ) as numeroAdresse,
                 ha1.idHistoriqueAdresse,
                 ha1.idIndicatif as idIndicatif,
-		ind.nom as nomIndicatif,
-		he1.idSource as idSource,
 		he1.idTypeStructure as idTypeStructure,
+		he1.idTypeEvement as idTypeEvenement,
+		he1.idSource as idSource,
 		he1.dateDebut as dateDebut,
 		he1.dateFin as dateFin,
+		he1.ISMH as ISMH,
 		he1.MH as MH,
-		he1.ISMH as ISMH
+		CONCAT_WS( '', he1.titre, CONVERT( ha1.numero USING utf8 ) , r.prefixe, r.nom, sq.nom, q.nom, v.nom, p.nom ) as concat1,
+		CONCAT_WS('', pers.nom, pers.prenom) as concat2,
+		CONCAT_WS('',pers.prenom , pers.nom) as concat3
+
 
         
         FROM historiqueAdresse ha2, historiqueAdresse ha1
@@ -55,15 +59,26 @@ CREATE TABLE recherchetest AS
         HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
 );
 
-
 -- Change db engine
+ALTER TABLE recherchetest ENGINE=MYISAM;
+
 
 ALTER TABLE recherchetmp ENGINE=MYISAM;
 
 
 -- Adding the index for the fulltext search
+ALTER TABLE recherchetest ADD FULLTEXT INDEX `search` (nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, numeroAdresse, prefixeRue, description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3);
+
+
+
 ALTER TABLE recherche ADD FULLTEXT INDEX `search` (nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, prefixeRue, description, titre , nomPersonne, prenomPersonne);
+
+
+
 ALTER TABLE recherchetmp ADD FULLTEXT INDEX `search` (nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, numeroAdresse, prefixeRue, description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3);
+
+
+
 
 
 

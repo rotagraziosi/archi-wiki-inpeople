@@ -2130,7 +2130,15 @@ class archiRecherche extends config {
 			if(isset($criterias[$id[0]])){
 				if($id[0]!='motcle'){
 					if($criterias[$id[0]]!=0){
-						$sqlWhereTab[] = $id[1].' = '.$criterias[$id[0]].'';
+						if($id[0]=='anneeDebut'){
+							$sqlWhereTab[] = $id[1].' <= '.$criterias[$id[0]].'';
+						}
+						elseif($id[0]=='anneeFin'){
+							$sqlWhereTab[] = $id[1].' >= '.$criterias[$id[0]].'';
+						}
+						else{
+							$sqlWhereTab[] = $id[1].' = '.$criterias[$id[0]].'';
+						}
 					}
 				}
 				else{
@@ -2196,7 +2204,7 @@ class archiRecherche extends config {
 			
 				) as relevance
 			
-				FROM recherchetmp "
+				FROM recherchetest "
 				.$sqlWhere.
 				"GROUP BY idHistoriqueAdresse 
 				ORDER BY relevance  ".$order." " . 
@@ -2205,7 +2213,7 @@ class archiRecherche extends config {
 		}
 		else{
 			$request = "SELECT idHistoriqueAdresse, idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 , 1 as relevance
-				FROM recherchetmp "
+				FROM recherchetest "
 				.$sqlWhere.
 				"
 				GROUP BY idHistoriqueAdresse 
