@@ -14172,7 +14172,7 @@ class archiAdresse extends ArchiContenu
 				$nbReponses.=" réponses";
 			}
 			else{
-				$nbReponses = count($addressesInfromations) ." résponse";
+				$nbReponses = $nbResult ." résponse";
 			}
 			$t->assign_vars(array(
 					'nbReponses' => $nbReponses,
@@ -14326,10 +14326,12 @@ class archiAdresse extends ArchiContenu
 				$resTitresEvenements = $this->connexionBdd->requete($reqTitresEvenements);
 				$titresEvenements = array();
 				$positionAncre=0;
-
+				$defaultEventTitle= "Evenement sans titre";
+				
 				//Generating all the link to the events linked to current address 
 				while ($row = mysql_fetch_assoc($resTitresEvenements)) {
 				 	
+					$titre = ($row['titre']=="") ? $defaultEventTitle : $row['titre']; //Assigning default title to event which doesn't have one 
 					//Link creation with the ancre to each event
 					$titresEvenements[] =
 				 	"<a href='".
@@ -14343,7 +14345,7 @@ class archiAdresse extends ArchiContenu
 				 					'debut'=>'')
 				 			)
 				 	."#".$positionAncre."'>"
-				 	.stripslashes($row['titre']).
+				 	.stripslashes($titre).
 				 	"</a>";
 				 
 				}
