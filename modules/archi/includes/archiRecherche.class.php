@@ -2122,20 +2122,42 @@ class archiRecherche extends config {
 				array('anneeDebut','dateDebut'),
 				array('anneeFin', 'dateFin'),
 				array('MH','MH'), //Monuement historique
-				array('ISMH','ISMH')
-
+				array('ISMH','ISMH'),
+				array('courant','idCourantArchitectural')
 		);
-				
+
 		foreach ($arrayCriterias as $id){
 			if(isset($criterias[$id[0]])){
 				if($id[0]!='motcle'){
 					if($criterias[$id[0]]!=0){
+						
+						//Processing years clauses
 						if($id[0]=='anneeDebut'){
 							$sqlWhereTab[] = $id[1].' <= '.$criterias[$id[0]].'';
 						}
 						elseif($id[0]=='anneeFin'){
 							$sqlWhereTab[] = $id[1].' >= '.$criterias[$id[0]].'';
 						}
+						
+						//Processing architectural style
+						elseif($id[0]=='courant'){
+							$clause =  $id[1]." IN (";
+							
+							$i=0;
+							$nbOfCourantArchi  = count($criterias[$id[0]]);
+							//Loop on each archi style selected
+							foreach ($criterias[$id[0]] as $idCourant){
+								if(++$i == $nbOfCourantArchi){
+									$clause.=$idCourant." ) ";
+								}
+								else{
+									$clause.=$idCourant." , ";
+								}
+							}
+							$sqlWhereTab[]=$clause;
+						}
+						
+						//Regular cases
 						else{
 							$sqlWhereTab[] = $id[1].' = '.$criterias[$id[0]].'';
 						}

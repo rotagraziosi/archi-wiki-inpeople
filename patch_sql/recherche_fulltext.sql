@@ -24,12 +24,13 @@ CREATE TABLE recherchetest AS
                 ha1.idHistoriqueAdresse,
                 ha1.idIndicatif as idIndicatif,
 		he1.idTypeStructure as idTypeStructure,
-		he1.idTypeEvement as idTypeEvenement,
+		he1.idTypeEvenement as idTypeEvenement,
 		he1.idSource as idSource,
 		he1.dateDebut as dateDebut,
 		he1.dateFin as dateFin,
 		he1.ISMH as ISMH,
 		he1.MH as MH,
+		eca.idCourantArchitectural as idCourantArchitectural,
 		CONCAT_WS( '', he1.titre, CONVERT( ha1.numero USING utf8 ) , r.prefixe, r.nom, sq.nom, q.nom, v.nom, p.nom ) as concat1,
 		CONCAT_WS('', pers.nom, pers.prenom) as concat2,
 		CONCAT_WS('',pers.prenom , pers.nom) as concat3
@@ -51,6 +52,7 @@ CREATE TABLE recherchetest AS
         LEFT JOIN _evenementPersonne ep ON ep.idEvenement = he1.idEvenement
         LEFT JOIN personne pers ON pers.idPersonne = ep.idPersonne
         LEFT JOIN indicatif ind ON ind.idIndicatif = ha1.idIndicatif
+	LEFT JOIN _evenementCourantArchitectural eca on eca.idEvenement = ee.idEvenementAssocie
         
         WHERE ha2.idAdresse = ha1.idAdresse 
 
@@ -63,13 +65,16 @@ CREATE TABLE recherchetest AS
 ALTER TABLE recherchetest ENGINE=MYISAM;
 
 
-ALTER TABLE recherchetmp ENGINE=MYISAM;
 
 
 -- Adding the index for the fulltext search
 ALTER TABLE recherchetest ADD FULLTEXT INDEX `search` (nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, numeroAdresse, prefixeRue, description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3);
 
 
+
+
+
+ALTER TABLE recherchetmp ENGINE=MYISAM;
 
 ALTER TABLE recherche ADD FULLTEXT INDEX `search` (nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, prefixeRue, description, titre , nomPersonne, prenomPersonne);
 
