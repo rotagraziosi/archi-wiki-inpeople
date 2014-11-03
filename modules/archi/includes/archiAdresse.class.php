@@ -6076,11 +6076,13 @@ class archiAdresse extends ArchiContenu
 		if (!isset($sqlJoin))
 			$sqlJoin ="";
 
+		
 		$selectEvenement="";
 		if (isset($criteres['archiIdEvenement'])) {
-			$tabSqlWhere[] = " AND ae.idEvenement = '".$criteres['archiIdEvenement']."'";
+			$tabSqlWhere[] = "  ae.idEvenement = '".$criteres['archiIdEvenement']."'";
 		}
 
+		
 		if (!isset($sqlWhere)) // debug laurent : je ne sais pas pourquoi cela n'a pas ete initialisé plus haut ,  a verifier
 			$sqlWhere = '';
 
@@ -6232,7 +6234,6 @@ class archiAdresse extends ArchiContenu
 		HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
 		";
 
-		debug($sqlWhere);
 
 		$result = $this->connexionBdd->requete($sqlCount);
 
@@ -6575,7 +6576,6 @@ class archiAdresse extends ArchiContenu
 			}
 
 
-			debug($sql);
 
 
 			//echo $sql."<br><br>";
