@@ -1998,7 +1998,9 @@ class archiRecherche extends config {
 
 		if(empty($criteres)){
 			$criteres = $this->variablesGet;
-			debug($criteres);
+		}
+		if(!isset($criteres['debut'])){
+			$criteres['debut'] = 0 ;
 		}
 
 		if(empty($criteres['motcle'])){
@@ -2019,7 +2021,6 @@ class archiRecherche extends config {
 	 * Make an advanced search with criterias such as city or street specified
 	*/
 	public function advancedSearch($criteres=array()){
-		debug($criteres);
 		$html = '';
 		$tabForm = array();
 		$resAvAdresse="";
@@ -2028,7 +2029,7 @@ class archiRecherche extends config {
 		$sqlWhereTab = array();
 		$debut = 0;
 		$motcle = '';
-		
+
 		if(empty($criteres)){
 			$criteres = $this->variablesGet;
 		}
@@ -2264,6 +2265,25 @@ class archiRecherche extends config {
 	 * display details with the criterias 
 	 * 
 	 * @param unknown $criterias: addresses criterias
+	 * Sample of criterias
+	 * 
+	 * Array
+	(
+	    [archiAffichage] => advancedSearch
+	    [motcle] => 
+	    [pays] => 1
+	    [ville] => 1
+	    [quartier] => 17
+	    [sousQuartier] => 116
+	    [rue] => 178
+	    [source] => 0
+	    [typeStructure] => 0
+	    [typeEvenement] => 0
+	    [anneeDebut] => 
+	    [anneeFin] => 
+	    [submitRechercheAvancee] => Recherche
+	)
+	 * 
 	 * @return HTML generated depending on the criterias
 	 */	
 	public function searchByCriterias($criterias = array()){

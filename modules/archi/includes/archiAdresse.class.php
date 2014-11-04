@@ -5435,8 +5435,6 @@ class archiAdresse extends ArchiContenu
 					$totalAdresses = $nbRues + $nbQuartiers + $nbVilles;
 
 
-
-
 					$nbResultats = " (".$totalAdresses.")";
 
 
@@ -5844,8 +5842,6 @@ class archiAdresse extends ArchiContenu
 		$locationCriterias = '';
 		$sqlWhere= $locationCriterias;
 		$tabSqlWhere[] = $locationCriterias;
-
-		debug($sqlWhere);
 
 		$sqlAdressesSupplementaires="";
 		$tabidAdresses=array();
@@ -14157,7 +14153,7 @@ class archiAdresse extends ArchiContenu
 			}
 			
 			
-			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList);
+			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList,$optionsPagination);
 			if($nbResult > 1){
 				$optionsPagination['nbResult']  = $nbResult;
 				$nbReponses = $nbResult ;
@@ -14195,6 +14191,7 @@ class archiAdresse extends ArchiContenu
 							'urlAsc'        => $urlDesc
 					)
 			);
+			
 			
 			$indexToDisplay = $this->getPaginationIndex($optionsPagination);
 			foreach ($indexToDisplay as $indexPage){
@@ -14272,6 +14269,10 @@ class archiAdresse extends ArchiContenu
 			}			
 		}
 		
+		
+		
+		
+		
 		//Filling template, getting content, returning it
 		ob_start();
 		$t->pparse('addressesList');
@@ -14285,7 +14286,7 @@ class archiAdresse extends ArchiContenu
 	 * Get all the addresses informations from their ID
 	 * @param unknown $idList
 	 */
-	private function getAddressesInfoFromIdHA($idList =array()){
+	private function getAddressesInfoFromIdHA($idList =array() , $optionsPagination = array()){
 		$addressesInformations = array();
 		if(!empty($idList)){
 			
@@ -14302,13 +14303,34 @@ class archiAdresse extends ArchiContenu
 				}
 			}
 			
+/*
+ * 			$optionsPagination=array(
+					'nbResult' => 0,
+					'nbPages' => 0,
+					'currentPage'=> 0,
+					'nextPage' => 0,
+					'previousPage' => 0,
+					'nbResultPerPage' => 10,
+					'offset'=>4
+			);
+ */			
+			
+			$limit = " ";
+			if(!empty($optionsPagination)){
+				$indexResult = $optionsPagination['currentPage']*$optionsPagination['nbResultPerPage'];
+				$limit =" LIMIT " .$indexResult . " , " . $optionsPagination['nbResultPerPage']. " ";
+			}
+			
+			
 			$req="
 					SELECT ha.nom , ha.idHistoriqueAdresse , ha.idAdresse , ae.idEvenement as idEvenementGroupeAdresse
     				FROM historiqueAdresse ha
 					LEFT JOIN _adresseEvenement ae on ae.idAdresse = ha.idHistoriqueAdresse
     				".$whereClause."
     				GROUP BY ha.idHistoriqueAdresse
-					";
+    						
+					".$limit."
+							";
     				
 			$res = $this->connexionBdd->requete($req);
 			
@@ -14321,7 +14343,8 @@ class archiAdresse extends ArchiContenu
 					LEFT JOIN _adresseEvenement ae on ae.idEvenement = ee.idEvenement
 					LEFT JOIN historiqueAdresse ha on ha.idAdresse = ae.idAdresse
 					WHERE ha.idAdresse =  ".$fetch['idAdresse']."
-								";
+						
+						";
 				
 				$resTitresEvenements = $this->connexionBdd->requete($reqTitresEvenements);
 				$titresEvenements = array();

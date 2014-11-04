@@ -259,20 +259,19 @@ class archiEvenement extends config
 						SELECT he1.idEvenement
 						FROM historiqueEvenement he2, historiqueEvenement he1
 						RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = '".$this->variablesPost['evenementGroupeAdresse']."'
-								WHERE he2.idEvenement = he1.idEvenement
-								AND he1.titre='".$titre."'
-										AND he1.idEvenement = ee.idEvenementAssocie
-										AND he1.description = \"".$description."\"
-												AND he1.dateDebut = \"".$dateDebut."\"
-														AND he1.isDateDebutEnviron = '".$isDateDebutEnviron."'
-																AND he1.dateFin = \"".$dateFin."\"
-																		AND he1.idSource = '".$idSource."'
-																				AND he1.idTypeStructure='".$idTypeStructure."'
-																						AND he1.idTypeEvenement='".$idTypeEvenement."'
-																								GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-																								HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-																								";
-
+						WHERE he2.idEvenement = he1.idEvenement
+						AND he1.titre='".$titre."'
+						AND he1.idEvenement = ee.idEvenementAssocie
+						AND he1.description = \"".$description."\"
+						AND he1.dateDebut = \"".$dateDebut."\"
+						AND he1.isDateDebutEnviron = '".$isDateDebutEnviron."'
+						AND he1.dateFin = \"".$dateFin."\"
+						AND he1.idSource = '".$idSource."'
+						AND he1.idTypeStructure='".$idTypeStructure."'
+						AND he1.idTypeEvenement='".$idTypeEvenement."'
+						GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
+						HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+						";
 
 
 				$res = $this->connexionBdd->requete($sqlVerificationDoublon);
@@ -288,6 +287,7 @@ class archiEvenement extends config
 				}
 				else
 				{
+					debug($this->variablesPost);
 					//***************
 					//**  ENREGISTREMENT
 					//**
@@ -350,7 +350,23 @@ class archiEvenement extends config
 						$this->connexionBdd->requete($sqlEvenementPersonne);
 					}
 
+					
+					//TODO : Gestion du tableau de source 
+					/*
+					if(!empty($tabForm['source']['value'])){
+						$sqlEvenementSource = "INSERT INTO _evenementSource (idSource, idEvenement) VALUES ";
+						foreach ( array_unique($tabForm['source']['value']) AS $idSource)
+						{
+							$sqlEvenementSource .= '('.$idSource.', '.$idSousEvenement.'),';
+						}
+						$sqlEvenementSource = pia_substr( $sqlEvenementSource, 0, -1);
+						
+						$this->connexionBdd->requete($sqlEvenementSource);
+					}
+					*/
 
+					
+					
 					// ajout de l'evenement enfant à l'evenement groupe d'adresse
 
 					if (!isset($this->variablesPost['evenementGroupeAdresse']) || $this->variablesPost['evenementGroupeAdresse']=='')//(empty($tabForm['evenements']['value']))
@@ -398,12 +414,8 @@ class archiEvenement extends config
 			{
 				$idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromIdEvenement($idSousEvenement);
 
-
-
 				// d'abord on classe les evenements (les positions précédentes sont conservees)
 				$this->majPositionsEvenements(array('idEvenementGroupeAdresse'=>$idEvenementGroupeAdresse,'idNouvelEvenement'=>$idSousEvenement));
-
-
 
 				$mail = new mailObject();
 				$adresse = new archiAdresse();
