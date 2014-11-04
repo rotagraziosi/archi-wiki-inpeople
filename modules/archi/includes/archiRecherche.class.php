@@ -2173,7 +2173,7 @@ class archiRecherche extends config {
 				}
 				else{
 					if(!empty($criterias[$id[0]])){
-						$sqlWhereTab[] = "MATCH(nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, prefixeRue,numeroAdresse,  description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3) AGAINST ('".$criterias[$id[0]]."') ";
+						$sqlWhereTab[] = "MATCH(nomRue, nomQuartier, nomSousQuartier, nomVille, nomPays, prefixeRue,numeroAdresse,  description, titre , nomPersonne, prenomPersonne, concat1,concat2,concat3) AGAINST ('*".$criterias[$id[0]]."*' IN BOOLEAN MODE) ";
 					}
 				}
 			}
@@ -2253,6 +2253,7 @@ class archiRecherche extends config {
 		}
 		$idHistoriqueAdresse  = array();
 		$res = $this->connexionBdd->requete($request);
+		debug($request);
 		while($fetch = mysql_fetch_assoc($res)){
 			$idHistoriqueAdresse[] = $fetch['idHistoriqueAdresse'];
 		}
