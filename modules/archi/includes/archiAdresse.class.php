@@ -14149,22 +14149,34 @@ class archiAdresse extends ArchiContenu
 				
 			//Pagination display
 			if(isset($this->variablesGet['debut']) && $this->variablesGet['debut']!=''){
-				$optionsPagination['currentPage'] = ($this->variablesGet['debut'] / $optionsPagination['nbResultPerPage']) +1;
+				$optionsPagination['currentPage'] = ($this->variablesGet['debut'] / $optionsPagination['nbResultPerPage']) ;
 			}
-			
 			
 			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList,$optionsPagination);
 			if($nbResult > 1){
 				$optionsPagination['nbResult']  = $nbResult;
 				$nbReponses = $nbResult ;
 				$optionsPagination['nbPages']  = ceil((($nbReponses/$optionsPagination['nbResultPerPage'])) );
+				if($optionsPagination['currentPage'] <$optionsPagination['nbPages']){
+					$optionsPagination['nextPage']= $optionsPagination['currentPage']+1;
+				}
+				else{
+					$optionsPagination['nextPage']=$optionsPagination['nbPages'];
+				}
+				
+				if($optionsPagination['currentPage']>1){
+					$optionsPagination['previousPage']=$optionsPagination['currentPage']-1;
+				}
+				else{
+					$optionsPagination['previousPage']=1;
+				}
+				
 				$url = array();
 				
-				
+				debug($optionsPagination);
 				//Call link generation
 				$url = $this->generatePaginationLinks($optionsPagination);
 				
-
 				$nbReponses.=" réponses";
 			}
 			else{
@@ -14195,9 +14207,8 @@ class archiAdresse extends ArchiContenu
 			
 			$indexToDisplay = $this->getPaginationIndex($optionsPagination);
 			foreach ($indexToDisplay as $indexPage){
-				
 				// Dirty hack for displaying strong tag on current page
-				if($indexPage-1 == $optionsPagination['currentPage']){
+				if($indexPage-1 == $optionsPagination['currentPage']){ //-2 Because of currentPage start at 0 and index of indexPage start at 1
 					$t->assign_block_vars(
 							'nav.courant',
 							array()
@@ -14216,6 +14227,16 @@ class archiAdresse extends ArchiContenu
 					
 			//Generating next/previous pagination link
 			$siblingIndex = $this->getNextPreviousPages($optionsPagination['currentPage'] , $optionsPagination['nbPages']);
+			debug($optionsPagination);
+			debug($siblingIndex);
+			debug($url);
+			debug(
+				array(
+					'urlCurrent' => $url[$optionsPagination['currentPage']],
+					'urlPrecendant' => $url[$siblingIndex['previousPage']-1],
+					'urlSuivant'=>$url[$siblingIndex['nextPage']-1]
+				)
+			);
 			$t->assign_vars(
 					array(
 						'urlPrecendant' => $url[$siblingIndex['previousPage']-1],
@@ -14317,7 +14338,7 @@ class archiAdresse extends ArchiContenu
 			
 			$limit = " ";
 			if(!empty($optionsPagination)){
-				$indexResult = $optionsPagination['currentPage']*$optionsPagination['nbResultPerPage'];
+				$indexResult = ($optionsPagination['currentPage'] )*$optionsPagination['nbResultPerPage'];
 				$limit =" LIMIT " .$indexResult . " , " . $optionsPagination['nbResultPerPage']. " ";
 			}
 			
@@ -14331,7 +14352,7 @@ class archiAdresse extends ArchiContenu
     						
 					".$limit."
 							";
-    				
+    				debug($req);
 			$res = $this->connexionBdd->requete($req);
 			
 			//Processing all the adresses get from the request : getting address title and link to the events linked
@@ -14405,10 +14426,10 @@ class archiAdresse extends ArchiContenu
 			$currentPage= $options['nbResult'];
 		}
 		if(isset($options['nextPage'])){
-			$nextPage= $options['nextPage'];
+			$nextPage = $options['nextPage'];
 		}
 		if(isset($options['previousPage'])){
-			$previousPage= $options['previousPage'];
+			$previousPage = $options['previousPage'];
 		}
 		if(isset($options['nbResultPerPage'])){
 			$nbResultPerPage= $options['nbResultPerPage'];
@@ -14522,11 +14543,17 @@ class archiAdresse extends ArchiContenu
 	private function getNextPreviousPages($currentPage=0,$nbPages){
 		$nextPage=$currentPage+1;
 		$previousPage=$currentPage-1;
-		if($currentPage==1){
-			$previousPage=1;
+		if($previousPage<=-1){
+			$previousPage=0;
 		}
-		if($currentPage == $nbPages){
+		else{
+			//$previousPage--;			
+		}
+		if($nextPage > $nbPages){
 			$nextPage = $nbPages;
+		}
+		else{
+			$nextPage++;
 		}
 		return array('previousPage'=>$previousPage , 'nextPage'=>$nextPage) ;
 	}
