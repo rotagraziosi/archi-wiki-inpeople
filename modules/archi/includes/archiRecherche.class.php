@@ -2296,7 +2296,9 @@ class archiRecherche extends config {
 			$html .=$a->displayList($idHistoriqueEvenementArray,$nbResult);
 		}
 		else{
-			$html = "Erreur, aucun critères n'a été renseigné.";	
+			$this->errors->ajouter("Erreur, aucun critères n'a été renseigné.");
+			$this->errors->afficher();
+			//$html = "Erreur, aucun critères n'a été renseigné.";	
 		}
 		return $html;
 	}

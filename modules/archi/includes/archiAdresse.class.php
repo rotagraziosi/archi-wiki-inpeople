@@ -10445,7 +10445,7 @@ class archiAdresse extends ArchiContenu
     // enregistrer les modification d'une adresse (rue quartier sous quartier ... ) dans la partie administration du site
     public function enregistreModificationAdresse()
     {
-        $errors = array();
+         $errors = array();
         if(isset($this->variablesGet['tableName']) && $this->variablesGet['tableName']!='')
         {
             switch($this->variablesGet['tableName'])
@@ -10782,7 +10782,7 @@ class archiAdresse extends ArchiContenu
                     if(count($arrayListeModerateurs)>0)
                     {
                         foreach($arrayListeModerateurs as $indice => $idModerateur)
-                        {
+           	              {
                             if($idModerateur!=$a->getIdUtilisateur() && $u->isAuthorized('admin_rues',$idModerateur) && $u->isAuthorized('admin_sousQuartiers',$idModerateur) && $u->isAuthorized('admin_quartiers',$idModerateur))
                             {
                                 $mailModerateur = $u->getMailUtilisateur($idModerateur);
@@ -14173,7 +14173,6 @@ class archiAdresse extends ArchiContenu
 				
 				$url = array();
 				
-				debug($optionsPagination);
 				//Call link generation
 				$url = $this->generatePaginationLinks($optionsPagination);
 				
