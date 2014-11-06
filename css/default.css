@@ -1508,3 +1508,12 @@ li:empty {
     position:relative;
     padding:0.1em;
 }
+
+
+.error_block{
+		background: url('images/failure.png') no-repeat scroll 10px center #FFDADA;
+}
+
+.error_message{
+	margin-left: 20px;
+}

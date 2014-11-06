@@ -14122,7 +14122,7 @@ class archiAdresse extends ArchiContenu
     /**
      * This function display the informations related to the addresses whom idHistoriqueAdresse is given in param
      * 
-     * @param unknown $idList : a list of idHistoriqueAdresse to display 
+     * @param array of idHistorique $idList : a list of idHistoriqueAdresse to display 
      * @return $html : the list of addresses to display
      */
 	public function displayList($idList = array(),$nbResult = 0){
@@ -14133,7 +14133,8 @@ class archiAdresse extends ArchiContenu
 		$t->set_filenames(array('addressesList'=>'addressesList.tpl'));
 
 		if(empty($idList)){
-	   		$html = "Aucune adresse à afficher.";
+			$this->erreurs->ajouter("Aucune adresse à afficher.");
+			$html = $this->erreurs->afficher();
 		}
 		else{
 			
@@ -14151,7 +14152,6 @@ class archiAdresse extends ArchiContenu
 			if(isset($this->variablesGet['debut']) && $this->variablesGet['debut']!=''){
 				$optionsPagination['currentPage'] = ($this->variablesGet['debut'] / $optionsPagination['nbResultPerPage']) ;
 			}
-			
 			$addressesInfromations = $this->getAddressesInfoFromIdHA($idList,$optionsPagination);
 			if($nbResult > 1){
 				$optionsPagination['nbResult']  = $nbResult;
@@ -14186,6 +14186,7 @@ class archiAdresse extends ArchiContenu
 					'titre' => 'Adresses'					
 			));
 
+			
 			// Template filling
 			$paramsUrlDesc = $this->variablesGet;
 			$paramsUrlAsc = $this->variablesGet;
@@ -14202,46 +14203,35 @@ class archiAdresse extends ArchiContenu
 							'urlAsc'        => $urlDesc
 					)
 			);
-			
-			
+			//Generating next/previous pagination link
+			$siblingIndex = $this->getNextPreviousPages($optionsPagination['currentPage'] , $optionsPagination['nbPages']);
+				
 			$indexToDisplay = $this->getPaginationIndex($optionsPagination);
 			foreach ($indexToDisplay as $indexPage){
+				$t->assign_block_vars(
+						'nav',
+						array(
+								'urlNbOnClick' => '',
+								'urlNb'        => $url[$indexPage] ,
+								'nb'           => $indexPage+1
+						)
+				);
+				
 				// Dirty hack for displaying strong tag on current page
-				if($indexPage-1 == $optionsPagination['currentPage']){ //-2 Because of currentPage start at 0 and index of indexPage start at 1
+				if($indexPage == $optionsPagination['currentPage']){ //-2 Because of currentPage start at 0 and index of indexPage start at 1
+					
 					$t->assign_block_vars(
 							'nav.courant',
 							array()
 					);
 				}
-
-				$t->assign_block_vars(
-						'nav',
-						array(
-								'urlNbOnClick' => '',
-								'urlNb'        => $url[$indexPage-1] ,
-								'nb'           => $indexPage
-						)
-				);
 			}
 					
-			//Generating next/previous pagination link
-			$siblingIndex = $this->getNextPreviousPages($optionsPagination['currentPage'] , $optionsPagination['nbPages']);
-			debug($optionsPagination);
-			debug($siblingIndex);
-			debug($url);
-			debug(
-				array(
-					'urlCurrent' => $url[$optionsPagination['currentPage']],
-					'urlPrecendant' => $url[$siblingIndex['previousPage']-1],
-					'urlSuivant'=>$url[$siblingIndex['nextPage']-1]
-				)
-			);
 			$t->assign_vars(
 					array(
-						'urlPrecendant' => $url[$siblingIndex['previousPage']-1],
-						'urlSuivant'=>$url[$siblingIndex['nextPage']-1]
+						'urlPrecendant' =>$url[$siblingIndex['previousPage']],
+						'urlSuivant'=>$url[$siblingIndex['nextPage']]
 			));
-			
 			
 			//Addresses display
 			//Loop on each address infos
@@ -14263,11 +14253,8 @@ class archiAdresse extends ArchiContenu
 						)
 					);
 
+				
 				//Processing name of the address
-				
-				
-				
-				
 				$nom = $info['nom'];
 				//if(empty($nom) || $nom == "" || $nom == ' '){
 					$fulladdress =  $this->getIntituleAdresseFrom($info['idEvenementGroupeAdresse'],$type='idEvenementGroupeAdresse');
@@ -14290,14 +14277,12 @@ class archiAdresse extends ArchiContenu
 		}
 		
 		
-		
-		
-		
 		//Filling template, getting content, returning it
 		ob_start();
 		$t->pparse('addressesList');
 		$html .= ob_get_contents();
 		ob_end_clean();
+		
 		return $html;
 	} 
 	
@@ -14351,7 +14336,6 @@ class archiAdresse extends ArchiContenu
     						
 					".$limit."
 							";
-    				debug($req);
 			$res = $this->connexionBdd->requete($req);
 			
 			//Processing all the adresses get from the request : getting address title and link to the events linked
@@ -14493,43 +14477,40 @@ class archiAdresse extends ArchiContenu
 		
 		//Processing firstpage index
 		if($nbPages<=(2*$offset+1)){
-			$indexToDisplay['firstPage'] = 1;
-			$indexToDisplay['lastPage'] = $nbPages;
+			$indexToDisplay['firstPage'] = 0;
+			$indexToDisplay['lastPage'] = $nbPages-1;
 		}
 		else{
 			if(($currentPage - $offset)<= 0){
-				$indexToDisplay['firstPage'] = 1;
+				$indexToDisplay['firstPage'] = 0;
 			}
 			else{
-				$indexToDisplay['firstPage'] = $currentPage - $offset;
+				$indexToDisplay['firstPage'] = $currentPage - $offset - 1;
 			}
 			
 			//Processing lastpage index
 			if(($currentPage+$offset)>=$nbPages){
-				$indexToDisplay['lastPage'] = $nbPages;
+				$indexToDisplay['lastPage'] = $nbPages-1;
 			}
 			else{
-				$indexToDisplay['lastPage']=$currentPage+$offset;
+				$indexToDisplay['lastPage']=$currentPage+$offset-1;
 			}
 			
 			// Adjusting first page index or last page index if nb of previous pages are not balanced compared to next ones
 			// Adding the extra missing page to a side or another to really have 9 pages (aka 2*offset+1)
-			if((2*$offset+1) > ($indexToDisplay['lastPage'] - $indexToDisplay['firstPage'] +1)){
+			if((2*$offset+1) > ($indexToDisplay['lastPage'] - $indexToDisplay['firstPage'] )){
 				
 				//Calculating the offset to add to first or last page
-				$offsetAdd=(2*$offset+1) - ($indexToDisplay['lastPage'] - $indexToDisplay['firstPage'] +1);
+				$offsetAdd=(2*$offset+1) - ($indexToDisplay['lastPage'] - $indexToDisplay['firstPage'] );
 				
-				if($indexToDisplay['firstPage'] == 1){
-					$indexToDisplay['lastPage']+=$offsetAdd;
+				if($indexToDisplay['firstPage'] == 0){
+					$indexToDisplay['lastPage']+=$offsetAdd-1;
 				}
 				else{
-					$indexToDisplay['firstPage']-=$offsetAdd;
+					$indexToDisplay['firstPage']-=$offsetAdd-1;
 				}
 			}
 		}
-		
-		
-		
 		
 		$indexRange = array();
 		for($i = $indexToDisplay['firstPage'] ; $i <= $indexToDisplay['lastPage'] ; $i++){
@@ -14550,9 +14531,6 @@ class archiAdresse extends ArchiContenu
 		}
 		if($nextPage > $nbPages){
 			$nextPage = $nbPages;
-		}
-		else{
-			$nextPage++;
 		}
 		return array('previousPage'=>$previousPage , 'nextPage'=>$nextPage) ;
 	}
