@@ -2,10 +2,26 @@
 -- Create triggers to auto-add value to recherche table when new data are inserted in other tables
 -- Author : Antoine Rota Graziosi
 
+
+-- Insert historiqueEvenement trigger
 delimiter $$
 create trigger recherche_historiqueEvenement_insert_trig after insert on historiqueEvenement
 for each row
 begin
+	declare done int default false;
+	declare each_personne int; 
+	declare num_rows int default 0; 
+	declare cursorPersonne cursor for select idPersonne from _evenementPersonne where idEvenement = new.idEvenement;
+	declare continue handler for sqlstate '02000' set done = 1; 
+	
+	open cursorPersonne; 
+	select found_rows() into num_rows; 
+	
+	-- Start loop for all the personne selected
+	repeat
+		fetch cursorPersonne into each_personne;
+		
+		
 	insert into recherche 
 		(idEvenementGA, 
 		nomRue, 
@@ -79,7 +95,7 @@ SELECT distinct he1.idEvenement as idEvenementGA ,
         LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
         LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
         LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
-        LEFT JOIN _evenementPersonne ep ON ep.idEvenement = he1.idEvenement
+        LEFT JOIN _evenementPersonne ep ON ep.idPersonne = each_personne
         LEFT JOIN personne pers ON pers.idPersonne = ep.idPersonne
         LEFT JOIN indicatif ind ON ind.idIndicatif = ha1.idIndicatif
 		LEFT JOIN _evenementCourantArchitectural eca on eca.idEvenement = ee.idEvenementAssocie
@@ -89,8 +105,9 @@ SELECT distinct he1.idEvenement as idEvenementGA ,
 		AND he1.idEvenement = NEW.idEvenement
 		GROUP BY ha1.idAdresse, he1.idEvenement, ha1.idHistoriqueAdresse,  he1.idHistoriqueEvenement
         HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement);
+        
+        until done end repeat;
 END$$
-
 delimiter ;
 
 
@@ -130,3 +147,4 @@ begin
 	where idEvenementGA = old.idEvenement; 
 END$$
 delimiter ;
+
