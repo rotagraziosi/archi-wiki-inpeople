@@ -6,7 +6,7 @@
 // historique des versions
 // version 1.1 --- 11/06/2008 - separation de la classe d'erreurs de l'objet config
 
-class objetErreur extends config
+class objetErreur extends messagesObject
 {
 	private $existe  	  = false;
 	private $tabFormExiste    = false;
@@ -15,8 +15,9 @@ class objetErreur extends config
 	private $erreursDansFormulaire = array();
 	
 	
-	function __construct()
-	{
+	function __construct(){
+		parent::__construct();
+		$this->templateFile = 'listeErreurs.tpl';
 	}
 
 	function getNbErreurs()
@@ -51,8 +52,8 @@ class objetErreur extends config
 		
 		if ($this->existe())
 		{
-			$t = new Template($this->cheminTemplates);
-			$t->set_filenames(array('afficherErreurs'=>'listeErreurs.tpl'));
+			$t = new Template('modules/archi/templates/');
+			$t->set_filenames(array('afficherErreurs'=>'listeErreurs.tpl' ));
 			foreach($this->array_erreurs AS $message)
 			{
 				$t->assign_block_vars('erreur', array('message'=>$message));
@@ -76,7 +77,7 @@ class objetErreur extends config
 	}
 
 	// dans le cas ou on ajoute toute une configuration de formulaire , on peut ainsi la recuperer et recuperer les champs "error" de ce formulaire, 
-	// on sait donc qu'il y a une erreur dans le formulaire , car on a utilisé la fonction d'ajout d'erreur , 
+	// on sait donc qu'il y a une erreur dans le formulaire , car on a utilisï¿½ la fonction d'ajout d'erreur , 
 	// et l'erreur se recupere donc directement dans ce tableau , ou meme on peut afficher directement les erreurs dans le template en parcourant le tableau de config de ce formulaire
 	function tabFormExiste()
 	{

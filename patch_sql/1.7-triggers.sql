@@ -148,3 +148,140 @@ begin
 END$$
 delimiter ;
 
+
+
+
+
+-- Update personne trigger
+delimiter $$
+create trigger recherche_personne_update_trig after UPDATE on personne
+for each row
+begin
+	
+	UPDATE recherche 
+	SET
+	nomPersonne=new.nom,
+	prenomPersonne = new.prenom
+	WHERE nomPersonne = old.nom
+	or  prenomPersonne = old.prenom; 
+
+END$$
+
+delimiter ;
+
+
+
+
+
+
+
+-- Update personne trigger
+delimiter $$
+create trigger recherche_adresse_update_trig after UPDATE on historiqueAdresse
+for each row
+begin
+	
+	UPDATE recherche 
+	SET
+	numeroAdresse=new.numero
+	WHERE numeroAdresse = old.numero
+	; 
+END$$
+delimiter ;
+
+
+
+
+-- Update pays trigger
+delimiter $$
+create trigger recherche_pays_update_trig after UPDATE on pays
+for each row
+begin
+	
+	UPDATE recherche 
+	SET
+	nomPays=new.nom
+	WHERE nomPays = old.nom
+	; 
+END$$
+delimiter ;
+
+
+-- Update ville trigger
+delimiter $$
+create trigger recherche_ville_update_trig after UPDATE on ville
+for each row
+begin
+	
+	UPDATE recherche 
+	SET
+	nomVille = new.nom
+	WHERE nomVille = old.nom
+	; 
+END$$
+delimiter ;
+
+
+-- Update quartier trigger
+delimiter $$
+create trigger recherche_quartier_update_trig after UPDATE on quartier
+for each row
+begin
+	UPDATE recherche 
+	SET
+	nomQuartier=new.nom
+	WHERE nomQuartier = old.nom
+	; 
+END$$
+delimiter ;
+
+
+-- Update sous quartier trigger
+delimiter $$
+create trigger recherche_sousquartier_update_trig after UPDATE on sousQuartier
+for each row
+begin
+	
+	UPDATE recherche 
+	SET
+	nomSousQuartier=new.nom
+	WHERE nomSousQuartier = old.nom
+	; 
+END$$
+delimiter ;
+
+
+
+-- Update rue trigger
+delimiter $$
+create trigger recherche_rue_update_trig after UPDATE on rue
+for each row
+begin
+	
+	UPDATE recherche 
+	SET
+	nomRue=new.nom,
+	prefixeRue = new.prefixe
+	WHERE nomRue = old.nom
+	; 
+END$$
+delimiter ;
+
+
+
+
+-- Update indicatif trigger
+delimiter $$
+create trigger recherche_indicatif_update_trig after UPDATE on indicatif
+for each row
+begin
+	
+	UPDATE recherche 
+	SET
+	nomRue=new.nom,
+	prefixeRue = new.prefixe
+	WHERE nomRue = old.nom
+	; 
+END$$
+delimiter ;
+

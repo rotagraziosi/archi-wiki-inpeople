@@ -614,13 +614,13 @@ class archiAdresse extends ArchiContenu
 							SELECT ee.idEvenement as idEvenementGroupeAdresse, he1.idEvenement as idEvenement
 							FROM historiqueEvenement he2, historiqueEvenement he1
 							RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = '".$idAdresse."'
-									RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-									WHERE he2.idEvenement = he1.idEvenement
-									AND he1.idEvenement = ee.idEvenementAssocie
-									AND CONCAT_WS('',lower(he1.titre),lower(he1.description)) like \"%".strtolower($this->variablesGet['recherche_motcle'])."%\"
-											GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
-											HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-											";
+							RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+							WHERE he2.idEvenement = he1.idEvenement
+							AND he1.idEvenement = ee.idEvenementAssocie
+							AND CONCAT_WS('',lower(he1.titre),lower(he1.description)) like \"%".strtolower($this->variablesGet['recherche_motcle'])."%\"
+							GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
+							HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+							";
 
 					$res = $this->connexionBdd->requete($req);
 

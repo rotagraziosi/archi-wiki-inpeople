@@ -122,6 +122,7 @@ class Config
     //protected $formulaire;
     
     public $erreurs;
+    public $messages;
     
     //public $mail;
     
@@ -156,6 +157,8 @@ class Config
         }
         */
         $this->erreurs             = new objetErreur();
+        $this->messages = new messagesObject();
+       // $coucou = new coucouObject();
         
     }
     

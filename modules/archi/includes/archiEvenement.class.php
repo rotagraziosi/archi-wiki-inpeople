@@ -1333,8 +1333,6 @@ class archiEvenement extends config
 
 
 
-
-
 		// fabrication de la requete en fonction des parametres
 		$sqlEvenementsAdressesLiees="";
 		if (empty($idEvenement))
