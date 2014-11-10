@@ -40,8 +40,7 @@ class objetErreur extends messagesObject
 		}
 	}
 
-	function getErreursFromFormulaire()
-	{
+	function getErreursFromFormulaire(){
 		return $this->erreursDansFormulaire;
 	}
 	

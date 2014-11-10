@@ -18,7 +18,7 @@ CREATE TABLE _evenementSource AS
 -- TODO  : Need to had constraints on historiqueEvenement and source table to _evenementSource table
 
 
-
+ALTER TABLE `source` CHANGE `idTypeSource` `idTypeSource` INT( 10 ) UNSIGNED NOT NULL ;
 -- Add missing constraints
 ALTER TABLE source ADD CONSTRAINT source_ibfk_1 FOREIGN KEY(idTypeSource) REFERENCES typeSource(idTypeSource);
 
