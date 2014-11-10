@@ -2003,7 +2003,7 @@ class archiRecherche extends config {
 			$criteres['debut'] = 0 ;
 		}
 
-		if(empty($criteres['motcle'])){
+		if(count($criteres) <= 1&& empty($criteres['motcle'])){
 			return "Erreur ! Aucun mot-clé n'a été spécifié. Veuillez entrer un mot-clé pour effectuer une recherche.";
 			//$html.="Aucun";
 		}
@@ -2046,8 +2046,29 @@ class archiRecherche extends config {
 				'motcle' => $motcle,
 				'debut' => $debut,
 				'order' => $order
-		);		
+		);	
+
 		
+		
+		
+		/*
+		 * 			$sqlSelectCoordonnees=" AND ha1.latitude<>0 AND ha1.longitude<>0 AND ha1.latitude<>'' AND ha1.longitude<>'' AND ((acos(sin(".$criteres['recherche_latitude']."*PI()/180) * sin(ha1.latitude*PI()/180) + cos(".$criteres['recherche_latitude']."*PI()/180) * cos(ha1.latitude*PI()/180) * cos((".$criteres['recherche_longitude']." - ha1.longitude)*PI()/180))/ pi() * 180.0)* 60 * 1.1515 * 1.609344)*1000<".$criteres['recherche_rayon']." ";
+
+		 */
+		//Processing latitude and longitude properties
+		if(isset($criteres['latitude'] , $criteres['longitude'] ) && !empty($criteres['latitude']) && !empty($criteres['longitude'])){
+			$latitude = $criteres['latitude'];
+			$longitude = $criteres['longitude'];
+			$rayon = '100';
+			unset($criteres['latitude']);
+			unset($criteres['longitude']);
+			unset($criteres['rayon']);
+			$criteres['coordonnees']= array(
+					'latitude' => $latitude,
+					'longitude' => $longitude,
+					'rayon' => $rayon
+			);
+		}
 		
 		/*
 		 * Detecting parameters selected in the form and build the query with those criterias
@@ -2131,43 +2152,54 @@ class archiRecherche extends config {
 				array('anneeFin', 'dateFin'),
 				array('MH','MH'), //Monuement historique
 				array('ISMH','ISMH'),
-				array('courant','idCourantArchitectural')
+				array('courant','idCourantArchitectural'),
+				array('coordonnees' ,array(
+						'latitude' => 'latitude',
+						'longitude' => 'longitude',
+						'rayon' => 'rayon'						
+				))
 		);
 
 		foreach ($arrayCriterias as $id){
 			if(isset($criterias[$id[0]])){
 				if($id[0]!='motcle'){
 					if($criterias[$id[0]]!=0){
-						
-						//Processing years clauses
-						if($id[0]=='anneeDebut'){
-							$sqlWhereTab[] = $id[1].' <= '.$criterias[$id[0]].'';
-						}
-						elseif($id[0]=='anneeFin'){
-							$sqlWhereTab[] = $id[1].' >= '.$criterias[$id[0]].'';
-						}
-						
-						//Processing architectural style
-						elseif($id[0]=='courant'){
-							$clause =  $id[1]." IN (";
-							
-							$i=0;
-							$nbOfCourantArchi  = count($criterias[$id[0]]);
-							//Loop on each archi style selected
-							foreach ($criterias[$id[0]] as $idCourant){
-								if(++$i == $nbOfCourantArchi){
-									$clause.=$idCourant." ) ";
+						switch($id[0]){
+							case 'anneeDebut' :
+								$sqlWhereTab[] = $id[1].' <= '.$criterias[$id[0]].'';
+								break;
+							case 'anneeFin':
+								$sqlWhereTab[] = $id[1].' >= '.$criterias[$id[0]].'';
+								break;
+							case 'courant' :
+								$clause =  $id[1]." IN (";
+									
+								$i=0;
+								$nbOfCourantArchi  = count($criterias[$id[0]]);
+								//Loop on each archi style selected
+								foreach ($criterias[$id[0]] as $idCourant){
+									if(++$i == $nbOfCourantArchi){
+										$clause.=$idCourant." ) ";
+									}
+									else{
+										$clause.=$idCourant." , ";
+									}
 								}
-								else{
-									$clause.=$idCourant." , ";
-								}
-							}
-							$sqlWhereTab[]=$clause;
-						}
-						
-						//Regular cases
-						else{
-							$sqlWhereTab[] = $id[1].' = '.$criterias[$id[0]].'';
+								$sqlWhereTab[]=$clause;
+								break;
+							case 'coordonnees' :
+								$latitude = $criterias[$id[0]]['latitude'];
+								$longitude =$criterias[$id[0]]['longitude'];
+								$rayon =$criterias[$id[0]]['rayon'];
+					  			$sqlWhereTab[]=" latitude<>0 
+					  					AND longitude<>0 
+					  					AND latitude<>'' 
+					  					AND longitude<>'' 
+					  					AND ((acos(sin(".$latitude."*PI()/180) * sin(latitude*PI()/180) + cos(".$latitude."*PI()/180) * cos(latitude*PI()/180) * cos((".$longitude." - longitude)*PI()/180))/ pi() * 180.0)* 60 * 1.1515 * 1.609344)*1000<".$rayon." ";
+								break;
+							default:
+								$sqlWhereTab[] = $id[1].' = '.$criterias[$id[0]].'';
+								
 						}
 					}
 				}
@@ -2198,7 +2230,6 @@ class archiRecherche extends config {
 				}
 			}
 		}
-		
 		return $sqlWhere;
 	}
 
@@ -2234,7 +2265,7 @@ class archiRecherche extends config {
 			
 				) as relevance
 			
-				FROM recherchetest "
+				FROM recherche "
 				.$sqlWhere.
 				"GROUP BY idHistoriqueAdresse 
 				ORDER BY relevance  ".$order." " . 
@@ -2243,7 +2274,7 @@ class archiRecherche extends config {
 		}
 		else{
 			$request = "SELECT idHistoriqueAdresse, idEvenementGA, nomRue,nomSousQuartier,nomQuartier,nomVille,nomPays,prefixeRue,description,titre,nomPersonne, prenomPersonne, numeroAdresse,concat1,concat2,concat3 , 1 as relevance
-				FROM recherchetest "
+				FROM recherche "
 				.$sqlWhere.
 				"
 				GROUP BY idHistoriqueAdresse 
