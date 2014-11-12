@@ -1585,6 +1585,8 @@ class archiEvenement extends config
 
 						if($authentification->getIdProfil() == 4 || $isModerateurFromVilleCourante) // est on administrateur ou moderateur de la ville ?
 						{
+							debug("blabla");
+							debug($res);
 							$t->assign_block_vars('simple.menuAction.isAdminOrModerateurFromVille',array());
 						}
 					}
@@ -3344,8 +3346,8 @@ class archiEvenement extends config
 				LEFT JOIN typeStructure tS ON hE.idTypeStructure = tS.idTypeStructure
 				LEFT JOIN typeEvenement tE ON hE.idTypeEvenement = tE.idTypeEvenement
 				'.$sqlJoin.'
-						WHERE '. $sqlWhere .' AND hE.idEvenement = hE2.idEvenement
-								GROUP BY hE.idEvenement,hE.idHistoriqueEvenement HAVING hE.idHistoriqueEvenement=MAX(hE2.idHistoriqueEvenement) ORDER BY '.$sqlOrdre.' '.$sqlTri;//.' LIMIT '.$sqlLimit.' ' // modif laurent , pas de limite dans cette requetes sinon on n'affichera pas tous les resultats
+				WHERE '. $sqlWhere .' AND hE.idEvenement = hE2.idEvenement
+				GROUP BY hE.idEvenement,hE.idHistoriqueEvenement HAVING hE.idHistoriqueEvenement=MAX(hE2.idHistoriqueEvenement) ORDER BY '.$sqlOrdre.' '.$sqlTri;//.' LIMIT '.$sqlLimit.' ' // modif laurent , pas de limite dans cette requetes sinon on n'affichera pas tous les resultats
 		//hE.titre, hE.idSource, hE.idTypeStructure, hE.idTypeEvenement, hE.description AS description, s.nom as nomSource, hE.dateCreationEvenement, // modif laurent pour accelerer la recherche
 		//tS.nom as nomTypeStructure, tE.nom as nomTypeEvenement
 

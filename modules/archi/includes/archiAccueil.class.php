@@ -480,7 +480,13 @@ class ArchiAccueil extends config
                 
             $tabInfosAccueil = $adresses->getDerniersEvenementsParCategorie(5, $params); // on affichera un maximum de 5 evenements par encart
             
+            debug(array_keys($tabInfosAccueil['dernieresAdresses']['0']));
+            
+            $infosAccueil = $this->getInfoAccueil();
+            
+          //  debug($tabInfosAccueil);
             $encarts =  $this->getEncarts($tabInfosAccueil);
+            //debug($encarts);
             $t->assign_block_vars('afficheEncarts', array());
             $t->assign_vars(
                 array(
@@ -964,6 +970,250 @@ class ArchiAccueil extends config
     }
     
     
+
+    
+    /**
+     * New function displaying the encarts for the index page
+     * 3 encarts are displayed : News, lasts addresses, last addresses followed by the user
+     * 
+     * 
+     * @param unknown $params
+     * @return multitype:string : array of html relative to each "encarts"
+     */
+   	public function getNewEncarts($params = array()){
+   		$derniersAdresses = $this->getDernieresAdresses($params);
+		$actualites = $this->getActualites($params);   		
+   		$derniersLike = $this->getDernieresAdresses($params);
+   		
+   		return array(
+   				'dernieresAdresses' => $derniersAdresses,
+   				'actualites' => $actualites
+   		);
+   	}
+    
+    
+    
+	/**
+	 * Get the HTML for the last addresses added encarts
+	 * 
+	 * 
+	 * @param unknown $params
+	 * @return string html of the last added addresses
+	 */    
+   	public function getDernieresAdresses($params = array()){
+   		$tDernieresAdresses = new Template($this->getCheminPhysique().$this->cheminTemplates);
+   		$tDernieresAdresses->set_filenames(array('encartDernieresAdresses'=>'encartAccueil.tpl'));
+   		
+   		$tDernieresAdresses->assign_vars(array('titre'=>_("Nouvelles adresses"), "type"=>"dernieresAdresses"));
+   		
+   		if (count($params['dernieresAdresses'])>0) {
+   			$tDernieresAdresses->assign_vars(array('lienVersTout'=>"<a href='".$this->creerUrl('', 'recherche', array_merge(array('motcle'=>'', 'submit'=>'Rechercher'), $arrayIdVilleGeneral, $archiIdPaysGeneral))."'>"._("Toutes les adresses")."</a>"));
+   		} else {
+   			// il n'y a pas de "dernieres adresses" affichées ,  on envoi donc l'affichage par defaut
+   			$tDernieresAdresses->assign_vars(array('lienVersTout'=>"<a href='".$this->creerUrl('', 'ajoutNouveauDossier', array_merge($arrayIdVilleGeneral, $archiIdPaysGeneral))."'>"._("Ajouter une adresse")."</a>"));
+   				
+   			$tDernieresAdresses->assign_block_vars("premiereAdresseAvecPhoto", array());
+   			$tDernieresAdresses->assign_vars(
+   					array(
+   							'photoAdresse1'=>"",
+   							'descriptionAdresse1'=>"<div>"._("Il n'y a pas encore de nouvelles adresses pour cette localité")."</div>"
+   					)
+   			);
+   		}
+   		
+   		foreach ($params['dernieresAdresses'] as $indice => $value) {
+   			$intituleAdresse = $adresse->getIntituleAdresseAccueil($value, array('ifTitreAfficheTitreSeulement'=>true));
+   			$intituleAdresseAlt = strip_tags(str_replace("\"", "'", $intituleAdresse));
+   			if (isset($params['indiceEvenementsPremierePositions']['dernieresAdresses']) && $indice == $params['indiceEvenementsPremierePositions']['dernieresAdresses']) {
+   		
+   				$urlImage = $this->getUrlRacine().'getPhotoSquare.php?id='.$params['imagesEvenementsPremieresPositions']['dernieresAdresses']['idHistoriqueImage'];
+   		
+   				$tDernieresAdresses->assign_block_vars("premiereAdresseAvecPhoto", array());
+   				if ($params['imagesEvenementsPremieresPositions']['dernieresAdresses']['idHistoriqueImage']!='') {
+   					$tDernieresAdresses->assign_vars(
+   							array(
+   									'photoAdresse1'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."'><img style='border:1px #000000 solid;margin-right:2px;float:left;' src='".$urlImage."' alt='".$intituleAdresseAlt."' title='".$intituleAdresseAlt."'></a>",
+   									'descriptionAdresse1'=>"<div><a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationAdresse'])).' '.$intituleAdresse."</a><br>".($string->sansBalises(stripslashes($string->coupureTexte($value['description'], 20))))."</div>"
+   							)
+   					);
+   				}
+   				else {
+   					$tDernieresAdresses->assign_vars(
+   							array(
+   									'photoAdresse1'=>"",
+   									'descriptionAdresse1'=>"<div><a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."' style='font-size:12px;'>".date('d/m/Y', strtotime($value['dateCreationAdresse'])).' '.$intituleAdresse."</a><br>".($string->sansBalises(stripslashes($string->coupureTexte($value['description'],  20))))."</div>"
+   							)
+   					);
+   						
+   				}
+   			}
+   			else {
+   				$tDernieresAdresses->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a href='".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', "archiIdAdresse"=>$value['idAdresse'], "archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']))."' style='font-size:12px;'><span class='date'>".date('d/m/Y', strtotime($value['dateCreationAdresse'])).'</span> '.$intituleAdresse."</a>"));
+   			}
+   		}
+   		ob_start();
+   		$tDernieresAdresses->pparse('encartDernieresAdresses');
+   		$htmlDerniersAdresses = ob_get_contents();
+   		ob_end_clean();
+   		return $htmlDerniersAdresses;
+   	}
+   	
+   	
+   	
+   	
+   	/**
+   	 * Get the last news
+   	 * @param unknown $params
+   	 * @return string html of the last news encarts
+   	 */
+   	public function getActualites($params = array()){
+   		$tActualites = new Template($this->getCheminPhysique().$this->cheminTemplates);
+   		$tActualites->set_filenames(array('encartActualites'=>'encartAccueil.tpl'));
+   		 
+   		$tActualites->assign_vars(array('titre'=>_('Actualités'), "type"=>"actualites"));
+   		$i=0;
+   		 
+   		if (count($params['actualites'])>0) {
+   			$tActualites->assign_vars(array('lienVersTout'=>"<a href='".$this->creerUrl('', 'toutesLesActualites', array())."'>"._("Toutes les actualités")."</a>"));
+   		}
+   		 
+   		 
+   		// s'il y a un parcours plus récent que la derniere actu ,  on affiche le parcours comme une actualité ( ...je sais mais bon ,  va comprendre....)
+   		$reqDateDerniereActualite = "SELECT max(date) as maxDate FROM actualites WHERE desactive<>'1'";
+   		$resDateDerniereActualite = $this->connexionBdd->requete($reqDateDerniereActualite);
+   		 
+   		$indiceGlobalNbActu = 0;
+   		$isParcoursToDisplay = false; // est ce que l'on va afficher un parcours plutot qu'une actu en place principale sur l'encars des actus
+   		if (mysql_num_rows($resDateDerniereActualite)>0) {
+   			 
+   			 
+   			$fetchDateDerniereActualite = mysql_fetch_assoc($resDateDerniereActualite);
+   			$dateActu = $fetchDateDerniereActualite['maxDate'];
+   			// voyons maintenant s'il y a un parcours ajouté actif plus recent
+   			$reqParcoursActif = "SELECT idParcours,  dateAjoutParcours, libelleParcours, commentaireParcours FROM parcoursArt WHERE dateAjoutParcours>'".$dateActu."' AND isActif='1' ORDER BY dateAjoutParcours DESC,  idParcours DESC LIMIT 1";
+   			$resParcoursActif = $this->connexionBdd->requete($reqParcoursActif);
+   			 
+   			if (mysql_num_rows($resParcoursActif)>0) {
+   				$isParcoursToDisplay = true;
+   				$fetchParcoursActif = mysql_fetch_assoc($resParcoursActif);
+   				 
+   				// recuperation d'une photo appartenant a une adresse du parcours (en principe dans le meilleur des cas la premiere photo de la premiere etape)
+   				$reqEtapes = "SELECT idEtape, commentaireEtape FROM etapesParcoursArt WHERE idParcours = '".$fetchParcoursActif['idParcours']."'";
+   				$resEtapes = $this->connexionBdd->requete($reqEtapes);
+   				if (mysql_num_rows($resEtapes)>0) {
+   					$trouvePhoto = false;
+   					 
+   					while (!$trouvePhoto && $fetchEtape = mysql_fetch_assoc($resEtapes)) {
+   						$arrayPhoto = $adresse->getPhotoFromEtape(array('idEtape'=>$fetchEtape['idEtape'], 'format'=>'moyen'));
+   						$trouvePhoto = $arrayPhoto['trouve'];
+   					}
+   					 
+   					mysql_data_seek($resEtapes, 0);
+   					 
+   					$commentaire = "";
+   					if ($fetchParcoursActif['commentaireParcours']!='') {
+   						$bbCode = new bbCodeObject();
+   						$trouveCommentaire = true;
+   						$commentaire = $bbCode->convertToDisplay(array('text'=>$fetchParcoursActif['commentaireParcours']));
+   					} else {
+   						$trouveCommentaire = false;
+   					}
+   					 
+   					while (!$trouveCommentaire && $fetchEtape = mysql_fetch_assoc($resEtapes)) {
+   						if ($fetchEtape['commentaireEtape']!='') {
+   							$trouveCommentaire = true;
+   							$commentaire = $fetchEtape['commentaireEtape'];
+   						}
+   					}
+   					 
+   					 
+   					if ($trouvePhoto) {
+   						$s = new stringObject();
+   						 
+   						// si une photo pour le dernier parcours a ete trouvee ,  alors on affiche le parcours en actu principale
+   						$i=1; // pour que la boucle des actus commence a 1 et ne remplace pas l'actu principale
+   						$indiceGlobalNbActu = 1; // pour que l'on affiche pas la derniere actu ramenee par la fonction sinon il y en aurait une de plus que dans les autres encars
+   						 
+   						 
+   						$urlImage = $arrayPhoto['url'];
+   						 
+   						$url = $this->creerUrl('', 'detailParcours', array('archiIdParcours'=>$fetchParcoursActif['idParcours']));
+   						 
+   						 
+   						$dimensionImage = "";
+   						 
+   						$tActualites->assign_block_vars("premiereAdresseAvecPhoto", array());
+   						$tActualites->assign_vars(
+   								array(
+   										"photoAdresse1"=>"<a href='".$url."'><img alt='' style='border:1px #000000 solid;margin-right:2px;float:left;'  src='".$urlImage."' $dimensionImage ></a>",
+   										"descriptionAdresse1"=>"<a href='".$url."'>".$d->toFrenchAffichage($fetchParcoursActif['dateAjoutParcours'])." ".stripslashes($fetchParcoursActif['libelleParcours'])."</a><br>".$s->coupureTexte($s->sansBalisesHtml(stripslashes($commentaire)), 10)."<br>".mysql_num_rows($resEtapes)." étapes... <a href='".$url."' style='font-size:11px;'>lire la suite</a>"
+   								)
+   						);
+   						 
+   					}
+   				}
+   			}
+   		}
+   		 
+   		 
+   		 
+   		foreach ($params['actualites'] as $indice => $value) {
+   			if ($indiceGlobalNbActu<5) {
+   				if ($i==0) {
+   					// premiere actualite
+   					@list($w, $h) = getimagesize($this->getCheminPhysique()."images/actualites/".$value['idActualite']."/".$value['photoIllustration']);
+   					 
+   					if ($w>$h) {
+   						$dimensionImage = "width=130";    // modif par fabien pour que l'image soit au même format que les autres rubriques (01/02/2013)
+   					} else {
+   						$dimensionImage = "height=130";
+   					}
+   					 
+   					$urlImage = $this->getUrlRacine()."images/actualites/".$value['idActualite']."/".$value['photoIllustration'];
+   					 
+   					if ($value['urlFichier']!='')
+   						$url = $value['urlFichier'];
+   					else
+   						$url = $this->creerUrl('', 'afficherActualite', array('archiIdActualite'=>$value['idActualite']));
+   					 
+   					$tActualites->assign_block_vars("premiereAdresseAvecPhoto", array());
+   					$tActualites->assign_vars(
+   							array(
+   									"photoAdresse1"=>"<a href='".$url."'><img alt='' style='border:1px #000000 solid;margin-right:2px;float:left;' src='".$urlImage."' $dimensionImage></a>",
+   									"descriptionAdresse1"=>"<a href='".$url."'>".$d->toFrenchAffichage($value['date'])." ".stripslashes($value['titre'])."</a><br>".stripslashes($string->coupureTexte($string->sansBalisesHtml($value['texte']), 20))." <a href='".$url."' style='font-size:11px;'>lire la suite</a>"
+   							)
+   					);
+   					 
+   				} else {
+   					if ($value['urlFichier']!='')
+   						$url = $value['urlFichier'];
+   					else
+   						$url = $this->creerUrl('', 'afficherActualite', array('archiIdActualite'=>$value['idActualite']));
+   					 
+   					// by fabien le 23/03/2012 : ajout de stripslashes pour virer les \ sur la page d'acceuil
+   					 
+   					$tActualites->assign_block_vars('listeAdressesSuivantes', array('lien'=>"<a style='font-size:12px;' href='".$url."'><span class='date'>".$d->toFrenchAffichage($value['date'])."</span> ".stripslashes($value['titre'])."</a>"));
+   				}
+   				 
+   				$i++;
+   			}
+   			$indiceGlobalNbActu++;
+   		}
+   		 
+   		ob_start();
+   		$tActualites->pparse('encartActualites');
+   		$htmlActualites = ob_get_contents();
+   		ob_end_clean();
+   		return $htmlActualites;
+   	}
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
     /**
      * Recupere la listes des architectes
      * les plus productifs classée
@@ -1511,6 +1761,14 @@ class ArchiAccueil extends config
         }
         
         return $retour;
+    }
+    
+    
+    
+    
+    
+    public function getInfoAccueil(){
+    	
     }
     
 }

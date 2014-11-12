@@ -4,9 +4,7 @@
 	style='position: relative; display: table;'>
 	{urlEvenementExterne}
 	<!-- BEGIN menuAction -->
-	<div class="menuAction"
-		style="margin-left: 1em; float: right; padding: 5px; display: {divDisplayMenuAction">
-
+	<div class="menuAction"	style="margin-left: 1em; float: right; padding: 5px; display: {divDisplayMenuAction}">
 		<ul style='margin: 0px; display: table;'>
 			<li class='actionEvent'><?_("Ajouter")?></li>
 			<li><a href="{ajouterImage}"><?_("Images")?> </a> <!-- | Évènement -->
@@ -18,16 +16,22 @@
 			<li class='actionEvent'><?_("Supprimer")?></li>
 			<li><a
 				onclick="if(confirm('Voulez vous vraiment supprimer cet évènement ?')){location.href='{supprimerEvenement}'};"
-				href="#">Évènement</a> <!-- END isAdminOrModerateurFromVille --> <!-- BEGIN isAdmin -->
-				<!-- BEGIN isAffichageSelectionImages --> | <a
-				onclick="{onClickSupprimerImage}" href="{urlSupprimerImage}"><?_("Images")?>
-			</a> <!-- END isAffichageSelectionImages -->
-			</li>
-			<!-- BEGIN isAffichageSelectionImages -->
-			<li class='actionEvent'><?_("Importer")?></li>
-			<li><a onclick="{onClickImporterImage}" href="{urlImporterImage}"><?_("Images selectionnées")?>
-			</a></li>
-			<!-- END isAffichageSelectionImages -->
+				href="#">Évènement</a> 
+				</li>
+			<!-- END isAdminOrModerateurFromVille --> 
+			<!-- BEGIN isAdmin -->
+				<!-- BEGIN isAffichageSelectionImages --> 
+					| <a
+						onclick="{onClickSupprimerImage}" href="{urlSupprimerImage}"><?_("Images")?>
+					</a> 
+				<!-- END isAffichageSelectionImages -->
+			
+				<!-- BEGIN isAffichageSelectionImages -->
+					<li class='actionEvent'><?_("Importer")?></li>
+					<li>
+						<a onclick="{onClickImporterImage}" href="{urlImporterImage}"><?_("Images selectionnées")?>	</a>
+					</li>
+				<!-- END isAffichageSelectionImages -->
 			<!-- END isAdmin -->
 			<!-- BEGIN afficheElementMenuLierAdresse -->
 			<li class='actionEvent'><?_("Lier")?></li>
@@ -40,38 +44,7 @@
 			<!-- END afficheElementMenuDeplacerEvenement -->
 		</ul>
 
-		<ul style='margin: 0px; display: table;'>
-			<li class='actionEvent'><?_("Ajouter")?></li>
-			<li><a href="{ajouterImage}"><?_("Images")?> </a> <!-- | Évènement -->
-			</li>
-			<li class='actionEvent'><?_("Modifier")?></li>
-			<li><a href="{modifierImage}"><?_("Images")?> </a> | <a
-				href="{modifierEvenement}"><?_("Évènement")?> </a></li>
-			<!-- BEGIN isAdminOrModerateurFromVille -->
-			<li class='actionEvent'><?_("Supprimer")?></li>
-			<li><a
-				onclick="if(confirm('Voulez vous vraiment supprimer cet évènement ?')){location.href='{supprimerEvenement}'};"
-				href="#">Évènement</a> <!-- END isAdminOrModerateurFromVille --> <!-- BEGIN isAdmin -->
-				<!-- BEGIN isAffichageSelectionImages --> | <a
-				onclick="{onClickSupprimerImage}" href="{urlSupprimerImage}"><?_("Images")?>
-			</a> <!-- END isAffichageSelectionImages -->
-			</li>
-			<!-- BEGIN isAffichageSelectionImages -->
-			<li class='actionEvent'><?_("Importer")?></li>
-			<li><a onclick="{onClickImporterImage}" href="{urlImporterImage}"><?_("Images selectionnées")?>
-			</a></li>
-			<!-- END isAffichageSelectionImages -->
-			<!-- END isAdmin -->
-			<!-- BEGIN afficheElementMenuLierAdresse -->
-			<li class='actionEvent'><?_("Lier")?></li>
-			<li><a href="{urlLierAdresses}"><?_("Adresses")?> </a></li>
-			<!-- END afficheElementMenuLierAdresse -->
-			<!-- BEGIN afficheElementMenuDeplacerEvenement -->
-			<li class='actionEvent'><?_("Déplacer")?></li>
-			<li><a href="#" onclick="{onClickDeplacerVersAdresses}"><?_("Vers Adresse")?>
-			</a> | <a href="{urlDeplacerVersNouveauGroupeAdresse}">+Créer</a></li>
-			<!-- END afficheElementMenuDeplacerEvenement -->
-		</ul>
+		
 
 	</div>
 	<!-- END menuAction -->
