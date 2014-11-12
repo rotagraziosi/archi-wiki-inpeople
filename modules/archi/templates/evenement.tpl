@@ -128,22 +128,21 @@
 
 		<td
 			style='padding-left: 5px; padding-right: 0px; margin: 0; padding-top: 0; padding-bottom: 0;'>
-			<!-- END isCarteGoogle --> <!-- BEGIN adresses -->
+<!-- END isCarteGoogle --> 
+	<!-- BEGIN adresses -->
 			<table border="" class='tableauResumeAdresse'
 				style='width: {largeurTableauResumeAdresse'>
 
 				<tr>
 					<td
 						style='margin-bottom: 0px; padding: 0; font-size: 13px; vertical-align: bottom; text-align: right;'>
-						<!-- BEGIN isConnected -->
-						<li><a href="{urlLierAdresseAEvenement}">{intituleActionAdresses}</a>
-							&nbsp;</li>
+		<!-- BEGIN isConnected -->
+						<li><a href="{urlLierAdresseAEvenement}">{intituleActionAdresses}</a>&nbsp;</li>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<!-- END isConnected -->
-
+		<!-- END isConnected -->
 						<table border="" style='margin: 0px; padding: 0;'>
 							<tr>
 								<td style='margin: 0px; padding: 0;'>{noSimple.adresses.adressesLiees}</td>
@@ -159,10 +158,12 @@
 									</ul>
 								</td>
 							</tr>
-						</table> <!-- END adresses -->
+						</table> 
+	<!-- END adresses -->
 					</td>
 				</tr>
-			</table> <!-- BEGIN isCarteGoogle -->
+			</table> 
+<!-- BEGIN isCarteGoogle -->
 		</td>
 	</tr>
 </table>

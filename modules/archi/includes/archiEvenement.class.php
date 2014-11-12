@@ -1585,8 +1585,6 @@ class archiEvenement extends config
 
 						if($authentification->getIdProfil() == 4 || $isModerateurFromVilleCourante) // est on administrateur ou moderateur de la ville ?
 						{
-							debug("blabla");
-							debug($res);
 							$t->assign_block_vars('simple.menuAction.isAdminOrModerateurFromVille',array());
 						}
 					}
