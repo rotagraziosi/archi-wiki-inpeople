@@ -1284,7 +1284,6 @@ class archiRecherche extends config {
 		$t=new Template('modules/archi/templates/');
 		$t->set_filenames((array('rechercheFormulaire'=>'rechercheAvanceeAdresseFormulaire.tpl')));
 
-
 		$adresse = new archiAdresse();
 
 		switch($modeAffichage)
@@ -2037,7 +2036,8 @@ class archiRecherche extends config {
 			$debut = $criteres['debut'];
 		}
 		if(isset($criteres['motcle'])){
-			$motcle = $criteres['motcle'];
+			$motcle = addslashes($criteres['motcle']);
+			$criteres['motcle'] = $motcle;
 		}
 		if(isset($criteres['order'])){
 			$order = $criteres['order'];
