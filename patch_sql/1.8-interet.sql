@@ -2,7 +2,6 @@
 -- Add interests links between tables (auto generated sql from MCD)
 -- Author : Antoine Rota Graziosi
 
-
 -- -----------------------------------------------------
 -- Table `archi_v2`.`_interetAdresse`
 -- -----------------------------------------------------
@@ -28,17 +27,18 @@ ENGINE = InnoDB;
 -- Table `archi_v2`.`_interetRue`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetRue` (
-  `utilisateur_idUtilisateur` INT(10) UNSIGNED NOT NULL,
-  `rue_idRue` INT(10) UNSIGNED NOT NULL,
-  INDEX `fk__interetRue_utilisateur1_idx` (`utilisateur_idUtilisateur` ASC),
-  INDEX `fk__interetRue_rue1_idx` (`rue_idRue` ASC),
+  `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  `idRue` INT(10) UNSIGNED NOT NULL,
+  INDEX `fk__interetRue_utilisateur1_idx` (`idUtilisateur` ASC),
+  INDEX `fk__interetRue_rue1_idx` (`idRue` ASC),
+  PRIMARY KEY (`idUtilisateur`, `idRue`),
   CONSTRAINT `fk__interetRue_utilisateur1`
-    FOREIGN KEY (`utilisateur_idUtilisateur`)
+    FOREIGN KEY (`idUtilisateur`)
     REFERENCES `archi_v2`.`utilisateur` (`idUtilisateur`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk__interetRue_rue1`
-    FOREIGN KEY (`rue_idRue`)
+    FOREIGN KEY (`idRue`)
     REFERENCES `archi_v2`.`rue` (`idRue`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -49,17 +49,18 @@ ENGINE = InnoDB;
 -- Table `archi_v2`.`_interetSousQuartier`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetSousQuartier` (
-  `sousQuartier_idSousQuartier` INT(10) UNSIGNED NOT NULL,
-  `utilisateur_idUtilisateur` INT(10) UNSIGNED NOT NULL,
-  INDEX `fk_interetSousQuartier_sousQuartier1_idx` (`sousQuartier_idSousQuartier` ASC),
-  INDEX `fk_interetSousQuartier_utilisateur1_idx` (`utilisateur_idUtilisateur` ASC),
+  `idSousQuartier` INT(10) UNSIGNED NOT NULL,
+  `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  INDEX `fk_interetSousQuartier_sousQuartier1_idx` (`idSousQuartier` ASC),
+  INDEX `fk_interetSousQuartier_utilisateur1_idx` (`idUtilisateur` ASC),
+  PRIMARY KEY (`idSousQuartier`, `idUtilisateur`),
   CONSTRAINT `fk_interetSousQuartier_sousQuartier1`
-    FOREIGN KEY (`sousQuartier_idSousQuartier`)
+    FOREIGN KEY (`idSousQuartier`)
     REFERENCES `archi_v2`.`sousQuartier` (`idSousQuartier`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_interetSousQuartier_utilisateur1`
-    FOREIGN KEY (`utilisateur_idUtilisateur`)
+    FOREIGN KEY (`idUtilisateur`)
     REFERENCES `archi_v2`.`utilisateur` (`idUtilisateur`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -74,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetQuartier` (
   `idUtilisateur` INT(10) UNSIGNED NOT NULL,
   INDEX `fk__interetQuartier_quartier1_idx` (`idQuartier` ASC),
   INDEX `fk__interetQuartier_utilisateur1_idx` (`idUtilisateur` ASC),
+  PRIMARY KEY (`idQuartier`, `idUtilisateur`),
   CONSTRAINT `fk__interetQuartier_quartier1`
     FOREIGN KEY (`idQuartier`)
     REFERENCES `archi_v2`.`quartier` (`idQuartier`)
@@ -91,17 +93,18 @@ ENGINE = InnoDB;
 -- Table `archi_v2`.`_interetPays`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetPays` (
-  `utilisateur_idUtilisateur` INT(10) UNSIGNED NOT NULL,
-  `pays_idPays` INT(10) UNSIGNED NOT NULL,
-  INDEX `fk__interetPays_utilisateur1_idx` (`utilisateur_idUtilisateur` ASC),
-  INDEX `fk__interetPays_pays1_idx` (`pays_idPays` ASC),
+  `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  `idPays` INT(10) UNSIGNED NOT NULL,
+  INDEX `fk__interetPays_utilisateur1_idx` (`idUtilisateur` ASC),
+  INDEX `fk__interetPays_pays1_idx` (`idPays` ASC),
+  PRIMARY KEY (`idUtilisateur`, `idPays`),
   CONSTRAINT `fk__interetPays_utilisateur1`
-    FOREIGN KEY (`utilisateur_idUtilisateur`)
+    FOREIGN KEY (`idUtilisateur`)
     REFERENCES `archi_v2`.`utilisateur` (`idUtilisateur`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk__interetPays_pays1`
-    FOREIGN KEY (`pays_idPays`)
+    FOREIGN KEY (`idPays`)
     REFERENCES `archi_v2`.`pays` (`idPays`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -109,21 +112,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `archi_v2`.`_interetVille`
+-- Table `archi_v2`.`_interetPersonne`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetVille` (
-  `utilisateur_idUtilisateur` INT(10) UNSIGNED NOT NULL,
-  `ville_idVille` INT(10) UNSIGNED NOT NULL,
-  INDEX `fk__interetVille_utilisateur1_idx` (`utilisateur_idUtilisateur` ASC),
-  INDEX `fk__interetVille_ville1_idx` (`ville_idVille` ASC),
-  CONSTRAINT `fk__interetVille_utilisateur1`
-    FOREIGN KEY (`utilisateur_idUtilisateur`)
-    REFERENCES `archi_v2`.`utilisateur` (`idUtilisateur`)
+CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetPersonne` (
+  `idPersonne` INT(10) UNSIGNED NOT NULL,
+  `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  INDEX `fk_table1_personne1_idx` (`idPersonne` ASC),
+  INDEX `fk_table1_utilisateur1_idx` (`idUtilisateur` ASC),
+  PRIMARY KEY (`idPersonne`, `idUtilisateur`),
+  CONSTRAINT `fk_table1_personne1`
+    FOREIGN KEY (`idPersonne`)
+    REFERENCES `archi_v2`.`personne` (`idPersonne`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk__interetVille_ville1`
-    FOREIGN KEY (`ville_idVille`)
-    REFERENCES `archi_v2`.`ville` (`idVille`)
+  CONSTRAINT `fk_table1_utilisateur1`
+    FOREIGN KEY (`idUtilisateur`)
+    REFERENCES `archi_v2`.`utilisateur` (`idUtilisateur`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
