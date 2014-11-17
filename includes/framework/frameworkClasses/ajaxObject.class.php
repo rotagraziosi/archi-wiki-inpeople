@@ -37,26 +37,28 @@ class ajaxObject extends config
 
 			function appelAjax(url,containerID,isReturnToParent)
 			{
+				console.log(url);
 				//alert(url);
 			    returnToParent=isReturnToParent;
 				byIDContainer = containerID;
 			    http = createRequestObject();
 			    http.open('GET', url, true);
-			    http.onreadystatechange = handleAJAXReturn;
+			    http.onreadystatechange = function(){ handleAJAXReturn(byIDContainer);};
 			    http.send(null);
 			}
 			
 			
 			function appelAjaxReturnJs(url,containerID,isReturnToParent)
 			{
+				console.log(url);
 				//alert(url);
 				returnExecJavascript = true;
 			    returnToParent=isReturnToParent;
 				byIDContainer = containerID;
 			    http = createRequestObject();
 			    http.open('GET', url, true);
-			    http.onreadystatechange = handleAJAXReturn;
-			    http.send(null);
+				http.onreadystatechange = function(){ handleAJAXReturn(byIDContainer);};
+				http.send(null);
 			}
 
 			function handleAJAXReturn()

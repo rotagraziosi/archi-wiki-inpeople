@@ -444,6 +444,8 @@ class ArchiAccueil extends config
             }
             
             $monArchi.=$tableauCommentaires->createHtmlTableFromArray(2, "font-size:12px;");
+            $monArchi.="<a href=".$this->creerUrl('', 'mesInterets', array()).">Afficher mes interets </a>";
+            
             
             $t->assign_vars(array('htmlMonArchi'=>$monArchi));
             $t->assign_vars(array('calqueHelp'=>$calque->getHtmlDivContextualHelp()));
@@ -462,7 +464,6 @@ class ArchiAccueil extends config
                 $params['idVille'] = $s->getFromSession('archiIdVilleGeneral');
                 $s->addToSession('archiIdVilleGeneral', $params['idVille']);
             }
-            
             if (isset($this->variablesGet['archiNomVilleGeneral']) 
                 && $this->variablesGet['archiNomVilleGeneral']!=''
             ) {
@@ -480,13 +481,8 @@ class ArchiAccueil extends config
                 
             $tabInfosAccueil = $adresses->getDerniersEvenementsParCategorie(5, $params); // on affichera un maximum de 5 evenements par encart
             
-            debug(array_keys($tabInfosAccueil['dernieresAdresses']['0']));
-            
-            $infosAccueil = $this->getInfoAccueil();
-            
-          //  debug($tabInfosAccueil);
+
             $encarts =  $this->getEncarts($tabInfosAccueil);
-            //debug($encarts);
             $t->assign_block_vars('afficheEncarts', array());
             $t->assign_vars(
                 array(
@@ -984,6 +980,8 @@ class ArchiAccueil extends config
    		$derniersAdresses = $this->getDernieresAdresses($params);
 		$actualites = $this->getActualites($params);   		
    		$derniersLike = $this->getDernieresAdresses($params);
+   		// 
+   		
    		
    		return array(
    				'dernieresAdresses' => $derniersAdresses,
@@ -1761,14 +1759,6 @@ class ArchiAccueil extends config
         }
         
         return $retour;
-    }
-    
-    
-    
-    
-    
-    public function getInfoAccueil(){
-    	
     }
     
 }

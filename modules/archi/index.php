@@ -494,8 +494,8 @@ if (isset($_GET['archiAction'])) {
             $i = new archiImage();
             $i->regenereImageFromUploadDirectory();
             break;
-        
-        
+
+  
         default:
             break;
         }
@@ -1470,20 +1470,28 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case "advancedSearch":
         	$r = new archiRecherche();
-        	 echo $r->advancedSearch();
+        	echo $r->advancedSearch();
         	break;
         case "page":
-            include "inc/page.php";
-            break;
+        	include "inc/page.php";
+        	break;
         case "adminPages":
-            include "inc/admin/pages.php";
-            break;
+        	include "inc/admin/pages.php";
+        	break;
         case "editPage":
-            include "inc/admin/editPage.php";
-            break;
+        	include "inc/admin/editPage.php";
+        	break;
         case "batchLicence":
-            include "inc/user/batchLicence.php";
-            break;
+        	include "inc/user/batchLicence.php";
+        	break;
+        case 'mesInterets':
+        	$i = new archiInterest();
+        	echo $i->displayMyInterest();
+        	break;
+        case 'saveInterest':
+        	$i = new archiInterest();
+        	$i->saveInterest();
+        	break;
         }
     }
 }

@@ -131,3 +131,22 @@ CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetPersonne` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetVille` (
+  `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  `idVille` INT(10) UNSIGNED NOT NULL,
+  INDEX `fk__interetVille_utilisateur1_idx` (`idUtilisateur` ASC),
+  INDEX `fk__interetVille_ville1_idx` (`idVille` ASC),
+  PRIMARY KEY (`idUtilisateur`, `idVille`),
+  CONSTRAINT `fk__interetVille_utilisateur1`
+    FOREIGN KEY (`idUtilisateur`)
+    REFERENCES `ARCHI_V2`.`utilisateur` (`idUtilisateur`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk__interetVille_ville1`
+    FOREIGN KEY (`idVille`)
+    REFERENCES `ARCHI_V2`.`ville` (`idVille`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

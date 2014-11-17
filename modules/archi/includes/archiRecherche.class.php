@@ -2049,8 +2049,6 @@ class archiRecherche extends config {
 		);	
 
 		
-		
-		
 		/*
 		 * 			$sqlSelectCoordonnees=" AND ha1.latitude<>0 AND ha1.longitude<>0 AND ha1.latitude<>'' AND ha1.longitude<>'' AND ((acos(sin(".$criteres['recherche_latitude']."*PI()/180) * sin(ha1.latitude*PI()/180) + cos(".$criteres['recherche_latitude']."*PI()/180) * cos(ha1.latitude*PI()/180) * cos((".$criteres['recherche_longitude']." - ha1.longitude)*PI()/180))/ pi() * 180.0)* 60 * 1.1515 * 1.609344)*1000<".$criteres['recherche_rayon']." ";
 

@@ -8120,7 +8120,6 @@ class archiAdresse extends ArchiContenu
     //  ************************************************************************************************************************
     public function getDerniersEvenementsParCategorie($nbAdressesParEncart=5,$params=array())
     {
-    	debug($params);
     	$locations = $this->getLocationTables();
     	$T_RUE = $locations['rue'];
     	$T_S_QUARTIER = $locations['sousQuartier'];
@@ -8544,7 +8543,7 @@ class archiAdresse extends ArchiContenu
         $reqAdresses=$reqAdressesCustom;
         
         
-        debug($reqAdresses);
+        //debug($reqAdresses);
         $resAdresses = $this->connexionBdd->requete($reqAdresses);
         $image = new archiImage();
         $isImageAdresses=false;
