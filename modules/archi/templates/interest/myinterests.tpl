@@ -8,6 +8,9 @@
 		<!-- BEGIN interests -->
 			<li>
 			{interestList.interests.name}
+			<a href="{interestList.interests.deleteUrl}" onclick="return confirm('Etes vous sur de vouloir supprimer cet intérêt ?');"> 
+			<img alt="" src="images/delete-simple.png"></img>
+			</a>
 			</li>
 		<!-- END interests -->
 		</ul>

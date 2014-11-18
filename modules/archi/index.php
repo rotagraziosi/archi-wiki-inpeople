@@ -1490,7 +1490,11 @@ if (isset($_GET['archiAffichage'])) {
         	break;
         case 'saveInterest':
         	$i = new archiInterest();
-        	$i->saveInterest();
+        	echo $i->saveInterest();
+        	break;
+        case 'deleteInterest':
+        	$i = new archiInterest();
+        	echo $i->deleteInterest();
         	break;
         }
     }

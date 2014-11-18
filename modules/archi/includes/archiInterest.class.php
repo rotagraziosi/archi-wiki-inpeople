@@ -29,13 +29,11 @@ class archiInterest extends config{
 		$ajax = new ajaxObject();
 		$html.=$ajax->getAjaxFunctions();
 
-		$t = new Template($this->getCheminPhysique().$this->cheminTemplates);
+		$t = new Template($this->getCheminPhysique().$this->cheminTemplates."interest/");
 		$t->set_filenames(array('myinterests'=>'myinterests.tpl'));
 
 
-		//debug($interestsArray);
 		$a = new archiAdresse();
-		//$formAddInterest = $utils->afficheFormulaireAdresse(array(),'ajouterInteret',array());
 
 		//Generate address form
 		$formAddressAddInterest=$a->afficheChoixAdresse();
@@ -69,23 +67,45 @@ class archiInterest extends config{
 
 		$userInterest = $this->getAllInterest($paramsRequest);
 
-		//debug($userInterest);
-		
+		/*
+		 * Array of EVERY interest  by categories : street country address etc..
+		 */
 		foreach ($userInterest as $interestByCat){
-				
-			//debug($interestByCat);
 			if(!isset($interestByCat[0]['vide'])){
 				$t->assign_block_vars('interestList',array('title'=>'Liste des '.$interestByCat[0]['titre'].' dans les centre d\'intéret','CSSclass'=>'interestList'));
 				
+				/*
+				 * Interest of each category
+				 */
 				foreach ($interestByCat as $interest){
-					//debug($interest);
+					/*
+					 * Process fields for delete link
+					 */
+					$table = $interest['table'];
+					$fieldId = $interest['field'];
+					$userId = $interest['idUtilisateur'];
+					$interestId = $interest[$fieldId];
+					
+					$paramsDelete = array(
+						$table,
+						$fieldId,
+						$userId,
+						$interestId
+					);
+					
+					$deleteUrl = $this->creerUrl('', 'deleteInterest', array('params' => $paramsDelete));
 					switch ($interest['associateTable']){
 						case 'personne':
-							$t->assign_block_vars('interestList.interests',array('name'=>$interest['nom']." ".$interest['prenom']));
+							$t->assign_block_vars('interestList.interests',array(
+							'name'=>$interest['nom']." ".$interest['prenom'],
+							'deleteUrl' => $deleteUrl
+							));
 							break;
 						default:
-							$t->assign_block_vars('interestList.interests',array('name'=>$interest['nom']));
-
+							$t->assign_block_vars('interestList.interests',array(
+							'name'=>$interest['nom'],
+							'deleteUrl' => $deleteUrl
+							));
 					}
 				}
 			}
@@ -113,6 +133,9 @@ class archiInterest extends config{
 	 * This method save the interest with
 	 */
 	public function saveInterest(){
+		$t = new Template($this->getCheminPhysique().$this->cheminTemplates."interest/");
+		$t->set_filenames(array('confirm'=>'confirm.tpl'));
+		
 		$interets = $this->variablesPost;
 
 
@@ -133,26 +156,84 @@ class archiInterest extends config{
 			$requestParameters[]=array('table'=>'_interetPays','fieldName1'=>'idUtilisateur','fieldName2'=>'idPays','idInteret'=>$interets['pays'],'userId'=>$this->userId);
 		}
 
+		$nbEltInserted=0;
 		foreach ($requestParameters as $rp){
 			//Insert if not exists
 			$requete= "
 					INSERT INTO ".$rp['table']." (".$rp['fieldName1'].",".$rp['fieldName2'].")
 					SELECT '".$this->userId."', '".$rp['idInteret']."'
-					FROM `".$rp['table']."`
+					FROM DUAL
 					WHERE NOT EXISTS (SELECT * FROM `".$rp['table']."`
 					WHERE ".$rp['fieldName1']."='".$this->userId."' AND ".$rp['fieldName2']."='".$rp['idInteret']."')
 					LIMIT 1
 					";
+			
 			$res = $this->connexionBdd->requete($requete,false);
 		}
+		
+		$this->erreurs->ajouter("Intérêt(s) sauvegardé(s) avec succès !");
 
-		//TODO : Handle the errors with the insert
-
-		$this->erreurs->ajouter("Added with success");
-		echo $this->erreurs->afficher();
-
+		$t->assign_vars(array(
+				'message' =>  $this->erreurs->afficher(),
+				'urlBack'=> $this->creerUrl('', 'mesInterets', array())
+		)); 
+		ob_start();
+		$t->pparse('confirm');
+		$html .= ob_get_contents();
+		ob_end_clean();
+		return $html;
 	}
 
+	
+	
+	public function deleteInterest(){
+		$t = new Template($this->getCheminPhysique().$this->cheminTemplates."interest/");
+		$t->set_filenames(array('confirminterests'=>'confirm.tpl'));
+		
+		/*
+		 * Process the params field to get the proper information for the SQL request 
+		 */
+		$table = $this->variablesGet['params'][0];
+		$fieldId = $this->variablesGet['params'][1];
+		$userId = $this->variablesGet['params'][2];
+		$interestId = $this->variablesGet['params'][3];
+		
+		$requete= "
+				SELECT count(*) as nb
+				FROM ".$table."
+				WHERE idUtilisateur = ".$userId."
+				AND ".$fieldId." = ".$interestId
+					;
+		$res = $this->connexionBdd->requete($requete,false);
+		$fetch = mysql_fetch_assoc($res);
+
+		if($fetch['nb']==1){
+			$requeteDelete = "
+					DELETE FROM ".$table." WHERE ".$fieldId." = ".$interestId. " AND idUtilisateur = " . $userId
+					;
+			$resDelete = $this->connexionBdd->requete($requeteDelete);
+			if ($resDelete) {
+				$this->erreurs->ajouter("Interest supprimé !");
+			} else {
+				$this->erreurs->ajouter("Problème dans la suppression de l'interest !");
+			}
+		}
+		else {
+			$this->erreurs->ajouter("Aucun intérêt spécifié !");
+		}
+		$t->assign_vars(array(
+				'message' =>  $this->erreurs->afficher(),
+				'urlBack'=> $this->creerUrl('', 'mesInterets', array())
+		));
+
+		ob_start();
+		$t->pparse('confirminterests');
+		$html .= ob_get_contents();
+		ob_end_clean();
+		return $html;
+	}
+	
+	
 
 	/*
 	 * Private functions
