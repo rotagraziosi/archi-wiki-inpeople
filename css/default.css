@@ -1458,4 +1458,43 @@ li:empty {
 
 .error_message {
 	margin-left: 20px;
+	}
+
+.addInterest{
+	margin-top: 20px;
+}
+
+
+
+
+.message-bloc {
+	margin: auto;
+	text-align: center;
+	border: 1px solid #ff4242;
+	width: 75%;
+	padding: 5px 10px;
+	margin-bottom: 20px;
+	
+}
+
+.message-text{
+	margin-left: 30px;
+}
+
+.error-message{
+	background: url('images/failure.png') no-repeat scroll 10px center #FFDADA;
+	background-color: #ffdada;
+	border: 1px solid red; 
+}
+
+.warning-message{
+	background: url('images/notice.png') no-repeat scroll 10px center #FFDADA;
+	background-color: #ffffc3;
+	border: 1px solid yellow; 
+}
+
+.confirmation-message{
+	background: url('images/success.png') no-repeat scroll 10px center #FFDADA;
+	background-color: #c3f2c3;
+	border: 1px solid green; 
 }

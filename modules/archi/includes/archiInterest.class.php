@@ -171,10 +171,13 @@ class archiInterest extends config{
 			$res = $this->connexionBdd->requete($requete,false);
 		}
 		
-		$this->erreurs->ajouter("Intérêt(s) sauvegardé(s) avec succès !");
+		$this->messages->addConfirmation('Intérêt(s) sauvegardé(s) avec succès !');
+		$test = $this->messages->display();
+		//$this->erreurs->ajouter("Intérêt(s) sauvegardé(s) avec succès !");
 
 		$t->assign_vars(array(
-				'message' =>  $this->erreurs->afficher(),
+				'message' =>  $test,
+				//'message' =>  $this->erreurs->afficher(),
 				'urlBack'=> $this->creerUrl('', 'mesInterets', array())
 		)); 
 		ob_start();
@@ -213,16 +216,17 @@ class archiInterest extends config{
 					;
 			$resDelete = $this->connexionBdd->requete($requeteDelete);
 			if ($resDelete) {
-				$this->erreurs->ajouter("Interest supprimé !");
+				$this->messages->addConfirmation("Intérêt(s) supprimé(s) !");
 			} else {
-				$this->erreurs->ajouter("Problème dans la suppression de l'interest !");
+				$this->messages->addError("Problème dans la suppression de l'interest !");
 			}
 		}
 		else {
-			$this->erreurs->ajouter("Aucun intérêt spécifié !");
+			$this->messages->addError("Aucun intérêt spécifié !");
 		}
+		
 		$t->assign_vars(array(
-				'message' =>  $this->erreurs->afficher(),
+				'message' => $this->messages->display(),
 				'urlBack'=> $this->creerUrl('', 'mesInterets', array())
 		));
 

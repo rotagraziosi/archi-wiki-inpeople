@@ -437,71 +437,6 @@ class archiAdresse extends ArchiContenu
 			$address=$this->getArrayAdresseFromIdAdresse($_GET["archiIdAdresse"]);
 		}
 
-		/**
-		 * The following commented code seems useless (and overloading data from DB for nothing)
-		 * Commented yet waiting if there are side effects
-		 * TODO: Delete the commented code after a poweruse of this func
-		 */
-		/*
-		 var_dump($idAdresse);
-		$trouve = false;
-		// on regarde d'abord s'il existe un titre pour le groupe d'adresse
-		// vu qu'un evenement groupe d'adresse est unique , on ne va pas grouper dans la requete
-		$reqVerif = "
-		SELECT idEvenementRecuperationTitre
-		FROM historiqueEvenement he
-		LEFT JOIN _adresseEvenement ae ON ae.idAdresse = '$idAdresse'
-		WHERE he.idEvenement = ae.idEvenement
-		";
-		$resVerif = $this->connexionBdd->requete($reqVerif);
-		if(mysql_num_rows($resVerif)>0)
-		{
-		$fetchVerif = mysql_fetch_assoc($resVerif);
-		var_dump($fetchVerif);
-		if($fetchVerif['idEvenementRecuperationTitre']=='0')
-		{
-		$trouve=false;
-		}
-		elseif($fetchVerif['idEvenementRecuperationTitre']=='-1')
-		{
-		$params['ifTitreAfficheTitreSeulement']=true;
-		$titre='';
-		$trouve=true;
-		}
-		elseif($fetchVerif['idEvenementRecuperationTitre']!='0')
-		{
-		$reqTitre = "
-		SELECT he1.titre as titre
-		FROM historiqueEvenement he2, historiqueEvenement he1
-		WHERE he2.idEvenement = he1.idEvenement
-		AND he1.idEvenement = '".$fetchVerif['idEvenementRecuperationTitre']."'
-		GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
-		HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-		";
-		$resTitre = $this->connexionBdd->requete($reqTitre);
-
-		$fetchTitre = mysql_fetch_assoc($resTitre);
-		$titre = "<span>".stripslashes($fetchTitre['titre'])."</span>";
-		var_dump($titre);
-		if(trim($fetchTitre['titre'])!='')
-		{
-		$trouve=true;
-
-		}
-		else
-		{
-		$trouve=true; // meme si pas de titre , ceci va permettre d'afficher l'adresse
-		$titre='';
-		}
-
-		}
-		}
-
-		if(!$trouve)
-		{
-		*/
-		// avec ce parametre , on va aller chercher le premier titre rencontré sur la liste des evenements du groupe d'adresse de l'adresse
-
 		$reqTitre = "
 				SELECT he1.titre as titre
 				FROM _adresseEvenement ae
@@ -510,13 +445,13 @@ class archiAdresse extends ArchiContenu
 				LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
 				WHERE he1.titre!=''
 				AND ae.idAdresse = '".$idAdresse."'
-						AND he1.idTypeEvenement <>'6'
-						GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-						HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-						ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
-						LIMIT 1
+				AND he1.idTypeEvenement <>'6'
+				GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
+				HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+				ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+				LIMIT 1
 
-						";
+				";
 		$resTitre = $this->connexionBdd->requete($reqTitre);
 		if(mysql_num_rows($resTitre)==1)
 		{
@@ -564,10 +499,9 @@ class archiAdresse extends ArchiContenu
 			$html.=$address["prefixeRue"]." ".$address["nomRue"];
 			if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail') {
 				$html.="</span>
-
 						<meta itemprop='addressLocality' content='".$address["nomVille"]."'/>
-								<meta itemprop='addressCountry' content='".$address["nomPays"]."'/>
-										</span>";
+						<meta itemprop='addressCountry' content='".$address["nomPays"]."'/>
+						</span>";
 			}
 
 		}

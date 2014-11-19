@@ -123,7 +123,6 @@ class Config
     
     public $erreurs;
     public $messages;
-    
     //public $mail;
     
     /**
@@ -157,7 +156,7 @@ class Config
         }
         */
         $this->erreurs             = new objetErreur();
-        $this->messages = new messagesObject();
+        $this->messages = new messageCollection();
        // $coucou = new coucouObject();
         
     }

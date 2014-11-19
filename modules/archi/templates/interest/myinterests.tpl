@@ -15,9 +15,9 @@
 		<!-- END interests -->
 		</ul>
 	</div>
-	<a href="{interestList.addInterest}">Ajouter un intérêt</a>
 	<!-- END interestList -->
 	<div class="addInterest">
+	<h1>Ajouter un intérêt</h1>
 		<form action="{formActionUrl}" name="{nameForm}" method="post">
 			<div id="choixAdresse">
 				{formAddInterest}
