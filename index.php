@@ -36,6 +36,10 @@ if (isset($_SERVER['HTTP_REFERER'])
         }
     }
 }
+require_once "includes/framework/autoload.php";
+require 'includes/framework/config.class.php';
+require 'includes/framework/localization.php';//Traduction
+require_once 'includes/securimage/securimage.php'; // gestion du captcha
 
 /* 'noHeaderNoFooter' permet de ne pas retourner
  * et inclure les fichiers qui sont inutiles lors d'un appel ajax
@@ -53,13 +57,10 @@ $microstart=microtime(true);
  * */
 $jsHeader=""; 
 $jsFooter="";
-$config = new config();
 $ajaxObj = new ajaxObject();
+$config = new config();
 
-require_once "includes/framework/autoload.php";
-require 'includes/framework/config.class.php';
-require 'includes/framework/localization.php';//Traduction
-require_once 'includes/securimage/securimage.php'; // gestion du captcha
+
 ob_start();
 if (isset($_GET['module'])) {
     include 'modules/'.$_GET['module'].'/index.php';
