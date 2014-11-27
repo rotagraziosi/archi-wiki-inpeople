@@ -1442,14 +1442,11 @@ class archiImage extends config
         
         $reqEvenementsLies="
             SELECT he.titre
-            FROM historiqueEvenement heb, historiqueEvenement he
+            FROM evenements he
             RIGHT JOIN _evenementImage ei ON ei.idEvenement=he.idEvenement
             WHERE he.idTypeEvenement != '3'
-            AND heb.idTypeEvenement != '3'
-            AND heb.idEvenement = he.idEvenement
             AND ei.idImage = '".$idImage."'
-            GROUP BY he.idEvenement, he.idHistoriqueEvenement
-            HAVING he.idHistoriqueEvenement = max(heb.idHistoriqueEvenement)
+            GROUP BY he.idEvenement
         ";
         
         $resEvenementsLies = $this->connexionBdd->requete($reqEvenementsLies);
@@ -4050,12 +4047,10 @@ class archiImage extends config
     {
         $reqEvenementsLies
             ="SELECT he.idEvenement as idEvenement,  he.titre as titre
-            FROM historiqueEvenement heb,  historiqueEvenement he
+            FROM evenements he
             RIGHT JOIN _evenementImage ei ON ei.idEvenement = he.idEvenement
-            WHERE heb.idEvenement = he.idEvenement
-            AND ei.idImage = '".$idImage."'
-            GROUP BY he.idEvenement,  he.idHistoriqueEvenement
-            HAVING he.idHistoriqueEvenement = max(heb.idHistoriqueEvenement)                        
+            WHERE ei.idImage = '".$idImage."'
+            GROUP BY he.idEvenement
         ";
         
         $resEvenementsLies = $this->connexionBdd->requete($reqEvenementsLies);
@@ -4741,13 +4736,11 @@ class archiImage extends config
             
             $req = "
                 SELECT he1.idImagePrincipale as idImagePrincipale
-                FROM historiqueEvenement he2,  historiqueEvenement he1
+                FROM evenements he1
                 WHERE he1.idEvenement = $idEvenementGroupeAdresse
                 AND he1.idTypeEvenement='11'
                 AND he1.idImagePrincipale !='0'
-                AND he2.idEvenement = he1.idEvenement
-                GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-                HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+                GROUP BY he1.idEvenement
             ";
             
             $res = $this->connexionBdd->requete($req);
@@ -4837,6 +4830,8 @@ class archiImage extends config
      * */
     public function getDernieresVues($params = array())
     {
+    	
+    	debug($params);
         $sqlLimit = "";
         if (isset($params['sqlLimit']) && $params['sqlLimit']!='') {
             $sqlLimit = $params['sqlLimit'];

@@ -105,7 +105,7 @@ class archiEvenement extends config
 			$sql = "INSERT INTO historiqueEvenement (idEvenement, titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement)
 					VALUES (".$idEvenementGroupeAdresse.", '', '', '', '', ".$tabForm['source']['value'].", ".$idUtilisateur.", 0, ".$this->getIdTypeEvenementGroupeAdresse().",now())";
 
-			$this->connexionBdd->requete($sql);
+			//$this->connexionBdd->requete($sql);
 
 			// *****************************************************
 			// on recupere l'id de l'evenement enfant ( construction)
@@ -157,11 +157,15 @@ class archiEvenement extends config
 			$idTypeStructure=isset($idTypeStructure)?$idTypeStructure:0;
 			$idTypeEvenement=isset($idTypeEvenement)?$idTypeEvenement:0;
 
-			$sqlHistoriqueEvenement = "INSERT INTO historiqueEvenement (idEvenement, titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement,ISMH , MH , nbEtages,isDateDebutEnviron,numeroArchive)
-					VALUES (".mysql_real_escape_string($idSousEvenement).", \"".mysql_real_escape_string($libelle)."\", \"".mysql_real_escape_string($description)."\", '".mysql_real_escape_string($dateDebut)."', '".mysql_real_escape_string($dateFin)."', ".mysql_real_escape_string($idSource).", ".mysql_real_escape_string($idUtilisateur).", '".mysql_real_escape_string($idTypeStructure)."', '".mysql_real_escape_string($idTypeEvenement)."', now(), '".mysql_real_escape_string($ISMH)."', '".mysql_real_escape_string($MH)."', '".mysql_real_escape_string($nbEtages)."', '".mysql_real_escape_string($isDateDebutEnviron)."',\"".mysql_real_escape_string($numeroArchive)."\")";
+			$sqlHistoriqueEvenement = "INSERT INTO evenements ( titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement,ISMH , MH , nbEtages,isDateDebutEnviron,numeroArchive)
+					VALUES ( \"".mysql_real_escape_string($libelle)."\", \"".mysql_real_escape_string($description)."\", '".mysql_real_escape_string($dateDebut)."', '".mysql_real_escape_string($dateFin)."', ".mysql_real_escape_string($idSource).", ".mysql_real_escape_string($idUtilisateur).", '".mysql_real_escape_string($idTypeStructure)."', '".mysql_real_escape_string($idTypeEvenement)."', now(), '".mysql_real_escape_string($ISMH)."', '".mysql_real_escape_string($MH)."', '".mysql_real_escape_string($nbEtages)."', '".mysql_real_escape_string($isDateDebutEnviron)."',\"".mysql_real_escape_string($numeroArchive)."\")";
 			$this->connexionBdd->requete($sqlHistoriqueEvenement );
 
+			$idEvenement = mysql_insert_id();
 
+			
+			
+			
 			// on relie l'evenement pere (groupe d'adresse ) à l'evenement fils
 			$sqlAssociationNettoie = "delete from _evenementEvenement where idEvenement = '".$idEvenementGroupeAdresse."'";
 			$resAssociationNettoie = $this->connexionBdd->requete($sqlAssociationNettoie);
@@ -257,11 +261,9 @@ class archiEvenement extends config
 
 				$sqlVerificationDoublon = "
 						SELECT he1.idEvenement
-						FROM historiqueEvenement he2, historiqueEvenement he1
-						RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = '".$this->variablesPost['evenementGroupeAdresse']."'
-						WHERE he2.idEvenement = he1.idEvenement
+						FROM evenements he1
+						WHERE he1.idEvenement = '".$this->variablesPost['evenementGroupeAdresse']."'
 						AND he1.titre='".$titre."'
-						AND he1.idEvenement = ee.idEvenementAssocie
 						AND he1.description = \"".$description."\"
 						AND he1.dateDebut = \"".$dateDebut."\"
 						AND he1.isDateDebutEnviron = '".$isDateDebutEnviron."'
@@ -269,8 +271,7 @@ class archiEvenement extends config
 						AND he1.idSource = '".$idSource."'
 						AND he1.idTypeStructure='".$idTypeStructure."'
 						AND he1.idTypeEvenement='".$idTypeEvenement."'
-						GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-						HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+						GROUP BY he1.idEvenement
 						";
 
 
@@ -303,7 +304,7 @@ class archiEvenement extends config
 						$sql = "INSERT INTO historiqueEvenement (idEvenement, titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement)
 								VALUES (".$idEvenement.", '', '', '', '', ".$idSource.", ".$idUtilisateur.", 0, '".$this->getIdTypeEvenementGroupeAdresse()."', now())";
 
-						$this->connexionBdd->requete($sql);
+						//$this->connexionBdd->requete($sql);
 						$tabForm['evenements']['value'][] = $idEvenement;
 						$idSousEvenement =$idEvenement+ 1; // id du sous evenements lié à l'evenement groupe d'adresses
 
@@ -587,11 +588,10 @@ class archiEvenement extends config
 		}
 
 		$sqlEvenement = "SELECT hE.titre, hE.description, DATE_FORMAT(hE.dateDebut, '%d/%m/%Y') AS dateDebut, DATE_FORMAT(hE.dateFin, '%d/%m/%Y') AS dateFin, hE.idTypeStructure, hE.idTypeEvenement, hE.idSource, hE.nbEtages, hE.ISMH, hE.MH, hE.isDateDebutEnviron,hE.numeroArchive as numeroArchive
-				FROM historiqueEvenement hE2, historiqueEvenement hE
-				WHERE  hE.idEvenement=".$id." AND hE2.idEvenement=hE.idEvenement
-						GROUP BY hE.idEvenement,hE.idHIstoriqueEvenement
-						HAVING hE.idHistoriqueEvenement=max(hE2.idHistoriqueEvenement)
-						ORDER BY hE.idHistoriqueEvenement DESC";
+				FROM evenements hE
+				WHERE  hE.idEvenement=".$id." 
+						GROUP BY hE.idEvenement
+						ORDER BY hE.idHistorique DESC";
 
 
 		if ( $rep = $this->connexionBdd->requete($sqlEvenement))
@@ -663,12 +663,10 @@ class archiEvenement extends config
 		// recuperation de l'idHistoriqueEvenement Courant pour le renvoyer en tant que idHistoriquePrecedent a la fin de la modification ( visualisation de l'administrateur de l'ancien evenement)
 		// *************************************************************************************************************************************
 		$reqIdHistoriqueEvenementAvantModif = "
-				SELECT he1.idHistoriqueEvenement as idHistoriqueEvenementAvantModif
-				FROM historiqueEvenement he2,historiqueEvenement he1
-				WHERE he2.idEvenement = he1.idEvenement
-				AND he1.idEvenement = '".$id."'
-						GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
-						HAVING he1.idHistoriqueEvenement=max(he2.idHistoriqueEvenement)
+				SELECT he1.idHistorique as idHistoriqueEvenementAvantModif
+				FROM evenement he1
+				WHERE he1.idEvenement = '".$id."'
+						GROUP BY he1.idEvenement
 						";
 
 		$resIdHistoriqueEvenementAvantModif = $this->connexionBdd->requete($reqIdHistoriqueEvenementAvantModif);
@@ -783,8 +781,8 @@ class archiEvenement extends config
 
 
 					$idEvenement = $id;//$tabForm['idEvenement']['value'];
-					$sqlHistoriqueEvenement = "INSERT INTO historiqueEvenement (idEvenement, titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement, dateCreationEvenement,nbEtages, ISMH , MH, isDateDebutEnviron,numeroArchive)
-							VALUES (".$idEvenement.", \"".$titre."\", \"".$description."\", '".$dateDebut."', '".$dateFin."', ".$idSource.", ".$idUtilisateur.", '".$idTypeStructure."', '".$idTypeEvenement."', NOW(),'".$nbEtages."','".$ISMH."','".$MH."','".$isDateDebutEnviron."',\"".$numeroArchive."\")";
+					$sqlHistoriqueEvenement = "INSERT INTO evenements ( titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement, dateCreationEvenement,nbEtages, ISMH , MH, isDateDebutEnviron,numeroArchive)
+							VALUES (\"".$titre."\", \"".$description."\", '".$dateDebut."', '".$dateFin."', ".$idSource.", ".$idUtilisateur.", '".$idTypeStructure."', '".$idTypeEvenement."', NOW(),'".$nbEtages."','".$ISMH."','".$MH."','".$isDateDebutEnviron."',\"".$numeroArchive."\")";
 
 					$this->connexionBdd->requete($sqlHistoriqueEvenement);
 
@@ -1087,6 +1085,31 @@ class archiEvenement extends config
 		if($idHistoriqueEvenement !='')
 		{
 
+			$requeteCheck = "SELECT he.idEvenement as idEvenement
+					FROM evenements he1
+					WHERE he1.idEvenement = ".$idHistoriqueEvenement."
+							";
+			$res = $this->connexionBdd->requete($requeteCheck);
+			if(count(mysql_fetch_row($res)) > 0){
+				$fetch = mysql_fetch_assoc($res);
+				$idEvenement = $fetch['idEvenement'];
+				
+				$requeteDelete = "DELETE FROM evenements WHERE idHistorique = '".$idEvenement."'";
+				$resSupprHistorique = $this->connexionBdd->requete($reqSuppHistorique);
+				
+				$requeteIdAdresse = "SELECT ae.idAdresse as idAdresse
+					FROM _adresseEvenement ae
+					WHERE ae.idEvenement = " . $idEvenement;
+				$resIdAdresse = $this->connexionBdd->requete($requeteIdAdresse);
+				$fetch = mysql_fetch_assoc($resIdAdresse);
+				$idAdresse = $fetch['idAdresse'];
+				
+				
+				$this->majPositionsEvenements(array('idEvenementGroupeAdresse'=>$idEvenement,'refreshAfterDelete'=>true));
+				
+			}
+
+			/*
 			$adresse = new archiAdresse();
 			$reqRecupIdEvenementGroupeAdresse = "
 					SELECT DISTINCT ee.idEvenement as idEvenementGroupeAdresse
@@ -1108,7 +1131,7 @@ class archiEvenement extends config
 
 
 			$idAdresse = $adresse->getIdAdresseFromIdEvenementGroupeAdresse($idEvenementGroupeAdresse);
-
+*/
 		}
 		else
 		{
@@ -1120,8 +1143,16 @@ class archiEvenement extends config
 
 			// suppression d'un evenement
 			// verification que l'evenement est le seul ou pas lié au groupe d'adresse
-			$idEvenementGroupeAdresse = $this->getParent($idEvenement);
+		
+			debug("petit hack vite fait sur les idEvenement/idHistoriqueEvenement");
+			//$idEvenementGroupeAdresse = $this->getParent($idEvenement);  //Previous line
+			$idEvenementGroupeAdresse = $idEvenement; //no more id groupe evenement 
 
+			
+			
+			
+			/*
+			
 			// on verifie que l'evenement n'a qu'un seul parent
 			$reqVerifParent = "
 					SELECT idEvenement
@@ -1213,8 +1244,7 @@ class archiEvenement extends config
 			{
 				echo "Erreur : l'evenement n'appartient a aucun groupe d'adresse : contactez l'administrateur<br>";
 			}
-
-
+			
 
 			// pour l'affichage de retour : on recupere l'adresse
 			$idAdresse = $adresse->getIdAdresseFromIdEvenementGroupeAdresse($idEvenementGroupeAdresse); // attention si l'evenement groupe adresse a ete supprimé precedemment
@@ -1247,6 +1277,9 @@ class archiEvenement extends config
 		}
 		if ($idPerson=archiPersonne::isPerson($idEvenementGroupeAdresse)) {
 			header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'evenementListe', 'selection'=>"personne", 'id'=>$idPerson), false, false));
+		}
+		
+		*/
 		}
 		$retourArray = $this->afficher($idEvenementGroupeAdresse);
 		$html =  $retourArray['html'];
@@ -1341,7 +1374,7 @@ class archiEvenement extends config
 			{
 				// on affiche les idHistoriqueEvenement de l'evenement choisi
 				$isAffichageSingleEvenement=true;
-				$sqlWhere = 'hE.idHistoriqueEvenement='.$idHistoriqueEvenement;
+				$sqlWhere = 'hE.idEvenement='.$idHistoriqueEvenement;
 			}
 
 			if(isset($this->variablesGet['modeAffichage']) && $this->variablesGet['modeAffichage']=='comparaisonEvenement')
@@ -1407,7 +1440,10 @@ class archiEvenement extends config
 
 		// lien vers le formulaire d'ajout d'une adresse pour un evenement parent
 		// recherche de l'evenement parent
-		$idEvenementGroupeAdresse=$this->getParent($idEvenement);
+		//$idEvenementGroupeAdresse=$this->getParent($idEvenement);
+		debug('HACK : changement d idGroupeAdresse en idEvenempent');
+		$idEvenementGroupeAdresse=$idEvenement;
+		debug($idEvenement);
 		if($idEvenementGroupeAdresse==0)
 		{
 			$idEvenementGroupeAdresse = $idEvenement; // pas de parent trouvé , donc l'evenement est lui meme un parent
@@ -1859,9 +1895,9 @@ class archiEvenement extends config
 				if (($idPerson=archiPersonne::isPerson($idEvenementGroupeAdresse)) && isset($params["nextEvent"])) {
 					$req = "
 							SELECT dateDebut
-							FROM historiqueEvenement
+							FROM evenements
 							WHERE idEvenement = '".$params["nextEvent"]."'
-									ORDER BY idHistoriqueEvenement DESC LIMIT 1
+									ORDER BY idEvenement DESC LIMIT 1
 									";
 
 					$res = $this->connexionBdd->requete($req);
@@ -2060,7 +2096,9 @@ class archiEvenement extends config
 					{
 						$c = new calqueObject(array('idPopup'=>"divPopupDeplacerEvenementVersGA".$idEvenementGroupeAdresse));
 						$t->assign_vars(array('divDeplacerEvenementVersGA'=>$c->getDiv(array(
-								'lienSrcIFrame'=>$this->creerUrl('','recherche',array('noHeaderNoFooter'=>1,'modeAffichage'=>'popupDeplacerEvenementVersGroupeAdresse')),'titrePopup'=>_("Recherche d'adresses"),'width'=>700))));
+								'lienSrcIFrame'=>$this->creerUrl('','recherche',array(
+										'noHeaderNoFooter'=>1,
+										'modeAffichage'=>'popupDeplacerEvenementVersGroupeAdresse')),'titrePopup'=>_("Recherche d'adresses"),'width'=>700))));
 
 						$params['calquePopupDeplacerEvenement'] = $c;
 					}
@@ -2423,6 +2461,7 @@ class archiEvenement extends config
 		$retour=array();
 		// recuperation des adresses du groupe d'adresse
 		$reqAdresse = "SELECT idAdresse FROM _adresseEvenement WHERE idEvenement = '$idGA'";
+		debug($reqAdresse);
 		$resAdresse = $this->connexionBdd->requete($reqAdresse);
 		$arrayAdresses = array();
 		while($fetchAdresse = mysql_fetch_assoc($resAdresse))
@@ -2457,14 +2496,11 @@ class archiEvenement extends config
 			$arrayEvenementsDates=array();
 			$reqEvenements = "
 			SELECT he1.idEvenement as idEvenement,he1.dateDebut as dateDebutEvenement,he1.dateFin as dateFinEvenement
-			FROM historiqueEvenement he2, historiqueEvenement he1
-			LEFT JOIN _evenementEvenement ee ON he1.idEvenement = ee.idEvenementAssocie
-			WHERE he2.idEvenement = he1.idEvenement
-			AND ee.idEvenement = $idGA
+			FROM evenements he1
+			WHERE he1.idEvenement = $idGA
 			AND he1.dateDebut<>'0000-00-00'
-			GROUP BY he1.idEvenement , he1.idHistoriqueEvenement
-			HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-			ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+			GROUP BY he1.idEvenement 
+			ORDER BY he1.dateDebut
 			";
 
 			$resEvenements = $this->connexionBdd->requete($reqEvenements);
@@ -2526,6 +2562,7 @@ class archiEvenement extends config
 		$retour=0;
 		if(isset($params['idEvenement']))
 		{
+			debug("A modifier vis  a vis de l'historique  (en principe la requete est ok");
 			$req = "SELECT count(idHistoriqueEvenement) as nb FROM historiqueEvenement WHERE idEvenement=".$params['idEvenement'];
 			$res = $this->connexionBdd->requete($req);
 			$fetch = mysql_fetch_assoc($res);
@@ -2656,15 +2693,12 @@ class archiEvenement extends config
 				// s'il n'y en a pas on renvoi 0
 				$reqIdEvenementTitre="
 						SELECT distinct he1.idEvenement as idEvenementTitre
-						FROM historiqueEvenement he2, historiqueEvenement he1
-						LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ".$params['idEvenementGroupeAdresse']."
+						FROM evenements he1
 								WHERE he1.titre!=''
 								AND he1.idTypeEvenement<>6
-								AND he2.idEvenement = he1.idEvenement
-								AND he1.idEvenement = ee.idEvenementAssocie
-								GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-								HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-								ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+								AND he1.idEvenement = ".$params['idEvenementGroupeAdresse']."
+								GROUP BY he1.idEvenement
+								ORDER BY he1.dateDebut
 								LIMIT 1
 								";
 
@@ -2873,16 +2907,22 @@ class archiEvenement extends config
 	// *********************************************************************
 	public function getTitreFromFirstChildEvenement($idEvenementGroupeAdresse=0)
 	{
-
+		debug("Big modification on the request, doesn't seem to be buggy");
 		$query="
 				select he.titre as titre
-				from historiqueEvenement he2, historiqueEvenement he
-				where he2.idEvenement = he.idEvenement
-				and he.idEvenement =(select min(idEvenementAssocie) from _evenementEvenement where idEvenement = '".$idEvenementGroupeAdresse."')
-						group by he.idEvenement, he.idHistoriqueEvenement
-						having he.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-						";
-
+				from evenements he
+				where he.idEvenement =(
+				
+				SELECT min(idEvenement)
+				FROM _adresseEvenement ae1
+				where ae1.idAdresse =(
+					SELECT idAdresse 
+					FROM _adresseEvenement 
+					WHERE idEvenement = '".$idEvenementGroupeAdresse."'
+					)
+				)
+				group by he.idEvenement
+				";
 		$res = $this->connexionBdd->requete($query);
 		$fetch=mysql_fetch_assoc($res);
 
@@ -2896,16 +2936,23 @@ class archiEvenement extends config
 	// *********************************************************************
 	public function getDescriptionAndTitreFromFirstChildEvenement($idEvenementGroupeAdresse=0)
 	{
-
+		debug("Big modification on the request, doesn't seem to be buggy");
 		$query="
-				select he.titre as titre,he.description as description
-				from historiqueEvenement he2, historiqueEvenement he
-				where he2.idEvenement = he.idEvenement
-				and he.idEvenement =(select min(idEvenementAssocie) from _evenementEvenement where idEvenement = '".$idEvenementGroupeAdresse."')
-						group by he.idEvenement, he.idHistoriqueEvenement
-						having he.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+				select he.titre as titre, he.description as description
+				from evenements he
+				where he.idEvenement =(
+				
+				SELECT min(idEvenement)
+				FROM _adresseEvenement ae1
+				where ae1.idAdresse =(
+					SELECT idAdresse 
+					FROM _adresseEvenement 
+					WHERE idEvenement = '".$idEvenementGroupeAdresse."'
+					)
+				)
+				group by he.idEvenement
 						";
-
+		debug($query);
 		$res = $this->connexionBdd->requete($query);
 		$fetch=mysql_fetch_assoc($res);
 
@@ -2917,6 +2964,39 @@ class archiEvenement extends config
 	// renvoi les evenements lies enfants d'un groupe d'adresses
 	public function getEvenementsLies($idEvenement=0,$afficheEvenementsAdressesLiees=true,$params = array())
 	{
+		$idEvtLie = array();
+		
+		$requeteIdAdresse ="SELECT idAdresse FROM _adresseEvenement WHERE idEvenement = ".$idEvenement;
+		$result = $this->connexionBdd->requete($requeteIdAdresse);
+		$fetch = mysql_fetch_assoc($result);
+		$idAdresse = $fetch['idAdresse'];
+		
+		$requete = "
+				SELECT idEvenement 
+				FROM _adresseEvenement
+				WHERE idAdresse =   
+				".$idAdresse;
+		
+		$result = $this->connexionBdd->requete($requete);
+		
+		while ($fetch = mysql_fetch_assoc($result)){
+			//Test si l'evenement en question est lié a une autre adresse 
+			$idEvenement = $fetch['idEvenement'];
+			$requeteEvtLie ="SELECT 0 FROM _adresseEvenement WHERE idEvenement = ".$idEvenement;
+			$res =$this->connexionBdd->requete($requeteEvtLie);
+			
+			$isLieFromOtherAdresse = false;
+			if(mysql_num_fields($res)>1){
+				$isLieFromOtherAdresse=true;
+			} 
+			$idEvtLie[]=array("idEvenementAssocie"=>$idEvenement,"isLieFromOtherAdresse"=>$isLieFromOtherAdresse);
+		}
+		
+		return idEvtLie;
+
+		
+		
+		/*
 		$sqlEvenementsAdresses="";
 		$arrayEvenementsAdressesLiees=array();
 		if($afficheEvenementsAdressesLiees)
@@ -2981,6 +3061,7 @@ class archiEvenement extends config
 		}
 
 		return $tabEvenement;
+		*/
 	}
 
 
@@ -3031,13 +3112,14 @@ class archiEvenement extends config
 		$t->set_filenames((array('evl'=>'evenementsLies.tpl')));
 
 		$sql = 'SELECT  hE.idEvenement, hE.idHistoriqueEvenement, hE.titre, hE.idTypeStructure, hE.idTypeEvenement,
-				tE.nom AS nomTypeEvenement, tS.nom AS nomTypeStructure FROM _evenementEvenement _eE
-				LEFT JOIN historiqueEvenement hE  ON hE.idEvenement = IF(_eE.idEvenement='.$idEvenement.', _eE.idEvenementAssocie, _eE.idEvenement)
-						LEFT JOIN historiqueEvenement hE2 ON hE2.idEvenement = IF(_eE.idEvenement='.$idEvenement.', _eE.idEvenementAssocie, _eE.idEvenement)
-								LEFT JOIN typeStructure tS    ON tS.idTypeStructure = hE.idTypeStructure
-								LEFT JOIN typeEvenement tE    ON tE.idTypeEvenement = hE.idTypeEvenement
-								WHERE _eE.idEvenement='.$idEvenement.' OR _eE.idEvenementAssocie='.$idEvenement.'
-										GROUP BY hE.idEvenement,hE.idHistoriqueEvenement HAVING hE.idHistoriqueEvenement=MAX(hE2.idHistoriqueEvenement) ORDER BY hE.idHistoriqueEvenement ASC';
+				tE.nom AS nomTypeEvenement, tS.nom AS nomTypeStructure 
+				FROM evenements _hE
+				LEFT JOIN typeStructure tS    ON tS.idTypeStructure = hE.idTypeStructure
+				LEFT JOIN typeEvenement tE    ON tE.idTypeEvenement = hE.idTypeEvenement
+				WHERE _hE.idEvenement='.$idEvenement.' 
+				GROUP BY hE.idEvenement 
+				ORDER BY hE.idEvenement ASC';
+		
 		$rep = $this->connexionBdd->requete($sql);
 
 		if (mysql_num_rows($rep) > 0) {
@@ -3090,6 +3172,7 @@ class archiEvenement extends config
 						";
 
 
+		debug("Not modified, this method dosen't seem to be called (...)");
 		$rep = $this->connexionBdd->requete($sql);
 
 		if (mysql_num_rows($rep) > 0) {
@@ -3989,6 +4072,18 @@ class archiEvenement extends config
 
 		return $idEvenement;
 	}
+	
+	private function getNewIdEv(){
+		$res = $this->connexionBdd->requete('SELECT (MAX(idEvenement)+1) AS idEvenement FROM historiqueEvenement');
+		$rep = mysql_fetch_object($res);
+		$idEvenement = $rep->idEvenement;
+		
+		// debut si aucun enregistrement $idEvenement = NULL, donc on le redéfini
+		if (!isset($idEvenement))
+			$idEvenement = 1;
+		
+		return $idEvenement;
+	}
 
 	// ************************************************************************************************************************************************
 	// renvoie l'evenement parent de l'evenement passé en parametre
@@ -4505,7 +4600,7 @@ class archiEvenement extends config
 		if(count($arrayIdGroupeAdressesPrecedent)==1 && $arrayIdGroupeAdressesPrecedent[0]!='' && $arrayIdGroupeAdressesPrecedent[0]!='0')
 		{
 			$idNouveauGroupeAdresse = $this->getNewIdEvenement();
-
+			
 			// creation de l'evenement parent groupe d'adresse
 			$sqlGA = "INSERT INTO historiqueEvenement (idEvenement, titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement)
 					VALUES (".$idNouveauGroupeAdresse.", '', '', '', '', 0, ".$idUtilisateur.", 0, ".$this->getIdTypeEvenementGroupeAdresse().",now())";
@@ -5737,16 +5832,13 @@ class archiEvenement extends config
 				$reqTitre = "
 						SELECT he1.titre as titre
 						FROM _adresseEvenement ae
-						LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-						LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-						LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+						LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ae.idEvenement
 						WHERE he1.titre!=''
 						AND ae.idAdresse = '".$idAdresse."'
 						$sqlGroupeAdresse
 						AND he1.idTypeEvenement <>'6'
-						GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-						HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-						ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+						GROUP BY he1.idEvenement
+						ORDER BY he1.dateDebut
 						LIMIT 1
 
 						";
@@ -6079,15 +6171,12 @@ class archiEvenement extends config
 		$reqTitre = "
 				SELECT he1.titre as titre
 				FROM _adresseEvenement ae
-				LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-				LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-				LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+				LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ae.idEvenement
 				WHERE he1.titre!=''
 				AND ae.idAdresse = '".$idAdresse."'
 						AND he1.idTypeEvenement <>'6'
-						GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-						HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-						ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+						GROUP BY he1.idEvenement
+						ORDER BY he1.dateDebut
 						LIMIT 1
 
 						";
@@ -6186,15 +6275,13 @@ class archiEvenement extends config
 
 					$req = "
 							SELECT ee.idEvenement as idEvenementGroupeAdresse, he1.idEvenement as idEvenement
-							FROM historiqueEvenement he2, historiqueEvenement he1
-							RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = '".$idAdresse."'
-									RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-									WHERE he2.idEvenement = he1.idEvenement
-									AND he1.idEvenement = ee.idEvenementAssocie
-									AND CONCAT_WS('',lower(he1.titre),lower(he1.description)) like \"%".strtolower($this->variablesGet['recherche_motcle'])."%\"
-											GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
-											HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-											";
+							FROM evenements he1
+							RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = he1.idEvenement 
+							RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+							WHERE he1.idEvenement = '".$idAdresse."'
+							AND CONCAT_WS('',lower(he1.titre),lower(he1.description)) like \"%".strtolower($this->variablesGet['recherche_motcle'])."%\"
+							GROUP BY he1.idEvenement
+							";
 
 					$res = $this->connexionBdd->requete($req);
 
@@ -6465,6 +6552,8 @@ class archiEvenement extends config
 	{
 	// recherche de l'idAdresse
 		
+		debug("Funky hack, les hypothetiques erreurs peuvent venir de la.");
+		return $idHistoriqueEvenement;
 		$req = "
 				
 				SELECT idEvenement

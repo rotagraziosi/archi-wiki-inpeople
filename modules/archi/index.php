@@ -799,6 +799,10 @@ if (isset($_GET['archiAffichage'])) {
             $a = new archiAdresse();
             echo $a->afficherDetail($_GET['archiIdAdresse']);
             break;
+        case 'displayAddress':
+        	$a = new archiAdresse();
+        	echo $a->display();
+        	break;
         case 'adresseListe':
             $a = new archiAdresse();
             $retourAdresse = $a->afficherListe();
@@ -1512,5 +1516,7 @@ if ((count($_POST)==0 && count($_GET)==0)
     //echo $accueil->gestionSondage(array('modeAffichage'=>'resultatAccueil'));
     echo $accueil->afficheAccueil();
 }
+
+
 
 ?>

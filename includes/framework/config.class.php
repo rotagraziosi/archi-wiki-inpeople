@@ -158,7 +158,6 @@ class Config
         $this->erreurs             = new objetErreur();
         $this->messages = new messageCollection();
        // $coucou = new coucouObject();
-        
     }
     
     /**

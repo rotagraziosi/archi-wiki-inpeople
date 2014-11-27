@@ -17,35 +17,19 @@
 </form>
 
 </div>
-<!--<TABLE>
-<TR><TD></TD></TR>
-</TABLE>-->
-<P></P>
 
-<!--
-<div style='text-align:center;'>{infos}</div>
--->
 
-<P></P>
 
-<!--
-<div style="padding-top:7px;height:20px;width:200px;display:table;
-<!-- BEGIN estConnecte -->
-float:left;
-<!-- END estConnecte -->
-background-color:#666666;color:#FFFFFF;text-align:center;font-size:12px;font-weight:bold;padding-bottom:3px;float:left;">
-{onglet1}
+<!-- BEGIN test -->
+<div class="body-content">
+{news}
+{lastAdd}
+</div>
+<!-- END test -->
+
+
 </div>
 
-<!-- BEGIN estConnecte -->
-<div style="padding-top:7px;height:20px;width:200px;display:table;float:left;background-color:#007799;color:#FFFFFF;text-align:center;font-size:12px;font-weight:bold;padding-bottom:3px;">
-{onglet2}
-</div>
-<div style="padding-top:7px;height:20px;width:200px;display:table;float:left;background-color:#FF8800;color:#FFFFFF;text-align:center;font-size:12px;font-weight:bold;padding-bottom:3px;">
-{onglet3}
-</div>
-<!-- END estConnecte -->
--->
 
 <!-- BEGIN afficheEncarts -->
 <div style='display:table;' class="clear">
@@ -60,6 +44,7 @@ background-color:#666666;color:#FFFFFF;text-align:center;font-size:12px;font-wei
 </tr></table>
 </div>
 <!-- END afficheEncarts -->
+
 
 
 <!-- BEGIN afficheProfil -->

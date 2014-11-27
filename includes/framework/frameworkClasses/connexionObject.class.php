@@ -80,6 +80,7 @@ class ConnexionBdd extends config
      * */
     function requete($requete="",$silencieux=false)
     {
+    	//debug($requete);
         if ($silencieux==false) {
             $res = mysql_query($requete) or die($requete.' -- '.mysql_error());
         } else {

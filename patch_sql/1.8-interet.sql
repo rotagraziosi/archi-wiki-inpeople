@@ -2,12 +2,10 @@
 -- Add interests links between tables (auto generated sql from MCD)
 -- Author : Antoine Rota Graziosi
 
--- -----------------------------------------------------
--- Table `archi_v2`.`_interetAdresse`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetAdresse` (
   `idUtilisateur` INT(10) UNSIGNED NOT NULL,
   `idHistoriqueAdresse` INT(10) UNSIGNED NOT NULL,
+  `created` DATETIME NULL,
   INDEX `fk__interetAdresse_utilisateur1_idx` (`idUtilisateur` ASC),
   INDEX `fk__interetAdresse_historiqueAdresse1_idx` (`idHistoriqueAdresse` ASC),
   CONSTRAINT `fk__interetAdresse_utilisateur1`
@@ -29,6 +27,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetRue` (
   `idUtilisateur` INT(10) UNSIGNED NOT NULL,
   `idRue` INT(10) UNSIGNED NOT NULL,
+  `created` DATETIME NULL,
   INDEX `fk__interetRue_utilisateur1_idx` (`idUtilisateur` ASC),
   INDEX `fk__interetRue_rue1_idx` (`idRue` ASC),
   PRIMARY KEY (`idUtilisateur`, `idRue`),
@@ -51,6 +50,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetSousQuartier` (
   `idSousQuartier` INT(10) UNSIGNED NOT NULL,
   `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  `created` DATETIME NULL,
   INDEX `fk_interetSousQuartier_sousQuartier1_idx` (`idSousQuartier` ASC),
   INDEX `fk_interetSousQuartier_utilisateur1_idx` (`idUtilisateur` ASC),
   PRIMARY KEY (`idSousQuartier`, `idUtilisateur`),
@@ -73,6 +73,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetQuartier` (
   `idQuartier` INT(10) UNSIGNED NOT NULL,
   `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  `created` DATETIME NULL,
   INDEX `fk__interetQuartier_quartier1_idx` (`idQuartier` ASC),
   INDEX `fk__interetQuartier_utilisateur1_idx` (`idUtilisateur` ASC),
   PRIMARY KEY (`idQuartier`, `idUtilisateur`),
@@ -95,6 +96,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetPays` (
   `idUtilisateur` INT(10) UNSIGNED NOT NULL,
   `idPays` INT(10) UNSIGNED NOT NULL,
+  `created` DATETIME NULL,
   INDEX `fk__interetPays_utilisateur1_idx` (`idUtilisateur` ASC),
   INDEX `fk__interetPays_pays1_idx` (`idPays` ASC),
   PRIMARY KEY (`idUtilisateur`, `idPays`),
@@ -112,11 +114,35 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `archi_v2`.`_interetVille`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetVille` (
+  `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  `idVille` INT(10) UNSIGNED NOT NULL,
+  `created` DATETIME NULL,
+  INDEX `fk__interetVille_utilisateur1_idx` (`idUtilisateur` ASC),
+  INDEX `fk__interetVille_ville1_idx` (`idVille` ASC),
+  PRIMARY KEY (`idUtilisateur`, `idVille`),
+  CONSTRAINT `fk__interetVille_utilisateur1`
+    FOREIGN KEY (`idUtilisateur`)
+    REFERENCES `archi_v2`.`utilisateur` (`idUtilisateur`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk__interetVille_ville1`
+    FOREIGN KEY (`idVille`)
+    REFERENCES `archi_v2`.`ville` (`idVille`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `archi_v2`.`_interetPersonne`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetPersonne` (
   `idPersonne` INT(10) UNSIGNED NOT NULL,
   `idUtilisateur` INT(10) UNSIGNED NOT NULL,
+  `created` DATETIME NULL,
   INDEX `fk_table1_personne1_idx` (`idPersonne` ASC),
   INDEX `fk_table1_utilisateur1_idx` (`idUtilisateur` ASC),
   PRIMARY KEY (`idPersonne`, `idUtilisateur`),
@@ -128,25 +154,6 @@ CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetPersonne` (
   CONSTRAINT `fk_table1_utilisateur1`
     FOREIGN KEY (`idUtilisateur`)
     REFERENCES `archi_v2`.`utilisateur` (`idUtilisateur`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-CREATE TABLE IF NOT EXISTS `archi_v2`.`_interetVille` (
-  `idUtilisateur` INT(10) UNSIGNED NOT NULL,
-  `idVille` INT(10) UNSIGNED NOT NULL,
-  INDEX `fk__interetVille_utilisateur1_idx` (`idUtilisateur` ASC),
-  INDEX `fk__interetVille_ville1_idx` (`idVille` ASC),
-  PRIMARY KEY (`idUtilisateur`, `idVille`),
-  CONSTRAINT `fk__interetVille_utilisateur1`
-    FOREIGN KEY (`idUtilisateur`)
-    REFERENCES `ARCHI_V2`.`utilisateur` (`idUtilisateur`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk__interetVille_ville1`
-    FOREIGN KEY (`idVille`)
-    REFERENCES `ARCHI_V2`.`ville` (`idVille`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

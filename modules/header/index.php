@@ -329,6 +329,7 @@ $t->pparse('header');
 $html=ob_get_contents();
 ob_end_clean();
 
-echo $html;
+$header = $html;
+//echo $html;
 
 ?>

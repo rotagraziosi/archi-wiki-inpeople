@@ -200,7 +200,7 @@ class archiAdresse extends ArchiContenu
 				$t->set_filenames(array('suppr'=>'suppression.tpl'));
 				$t->assign_vars(array('nom'=>'Historique évènement'));
 
-				$sql = "DELETE FROM historiqueEvenement WHERE idHistoriqueEvenement=".$idHistoriqueEvenement;
+				$sql = "DELETE FROM evenements WHERE idEvenement=".$idHistoriqueEvenement;
 				$this->connexionBdd->requete($sql);
 				$t->assign_block_vars('suppr', array('description'=>'historique evenement', 'nombre'=>mysql_affected_rows()));
 
@@ -215,7 +215,7 @@ class archiAdresse extends ArchiContenu
 		// suppression de toutes les informations sur l'évènement
 		if ( $formulaire->estChiffre($idAdresse) == 1)
 		{
-			$tabSql[] = array( "DELETE FROM historiqueEvenement WHERE idEvenement=".$idEvenement, 'évènement');
+			$tabSql[] = array( "DELETE FROM evenements WHERE idEvenement=".$idEvenement, 'évènement');
 			$tabSql[] = array( "DELETE FROM _evenementImage     WHERE idEvenement=".$idEvenement, 'liens images');
 			$tabSql[] = array( "DELETE FROM _adresseEvenement   WHERE idEvenement=".$idEvenement, 'liens adresse');
 			$tabSql[] = array( "DELETE FROM _evenementPersonne  WHERE idEvenement=".$idEvenement, 'liens personnes');
@@ -440,15 +440,12 @@ class archiAdresse extends ArchiContenu
 		$reqTitre = "
 				SELECT he1.titre as titre
 				FROM _adresseEvenement ae
-				LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-				LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-				LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+				LEFT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
 				WHERE he1.titre!=''
 				AND ae.idAdresse = '".$idAdresse."'
 				AND he1.idTypeEvenement <>'6'
-				GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-				HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-				ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+				GROUP BY he1.idEvenement
+				ORDER BY he1.dateDebut
 				LIMIT 1
 
 				";
@@ -545,15 +542,12 @@ class archiAdresse extends ArchiContenu
 					// on refait une recherche sur les evenements concernés par l'adresse correspondant a plusieurs evenements groupe adresse
 
 					$req = "
-							SELECT ee.idEvenement as idEvenementGroupeAdresse, he1.idEvenement as idEvenement
-							FROM historiqueEvenement he2, historiqueEvenement he1
-							RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = '".$idAdresse."'
-							RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-							WHERE he2.idEvenement = he1.idEvenement
-							AND he1.idEvenement = ee.idEvenementAssocie
+							SELECT he1.idEvenement as idEvenementGroupeAdresse, he1.idEvenement as idEvenement
+							FROM evenements he1
+							RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = he1.idEvenement
+							WHERE  ae.idAdresse = '".$idAdresse."'
 							AND CONCAT_WS('',lower(he1.titre),lower(he1.description)) like \"%".strtolower($this->variablesGet['recherche_motcle'])."%\"
-							GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
-							HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+							GROUP BY he1.idEvenement
 							";
 
 					$res = $this->connexionBdd->requete($req);
@@ -875,9 +869,9 @@ class archiAdresse extends ArchiContenu
 			// vu qu'un evenement groupe d'adresse est unique , on ne va pas grouper dans la requete
 			$reqVerif = "
 			SELECT idEvenementRecuperationTitre
-			FROM historiqueEvenement he
-			LEFT JOIN _adresseEvenement ae ON ae.idAdresse = '$idAdresse'
-			WHERE he.idEvenement = ae.idEvenement
+			FROM evenements he
+			LEFT JOIN _adresseEvenement ae ON ae.idEvenement = he.idEvenement
+			WHERE ae.idAdresse = '$idAdresse'
 			$sqlGroupeAdresse
 			";
 
@@ -899,11 +893,9 @@ class archiAdresse extends ArchiContenu
 				{
 					$reqTitre = "
 							SELECT he1.titre as titre
-							FROM historiqueEvenement he2, historiqueEvenement he1
-							WHERE he2.idEvenement = he1.idEvenement
-							AND he1.idEvenement = '".$fetchVerif['idEvenementRecuperationTitre']."'
-									GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
-									HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+							FROM evenements he1
+							WHERE he1.idEvenement = '".$fetchVerif['idEvenementRecuperationTitre']."'
+									GROUP BY he1.idEvenement
 									";
 					$resTitre = $this->connexionBdd->requete($reqTitre);
 
@@ -934,16 +926,13 @@ class archiAdresse extends ArchiContenu
 				$reqTitre = "
 						SELECT he1.titre as titre
 						FROM _adresseEvenement ae
-						LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-						LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-						LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+						LEFT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
 						WHERE he1.titre!=''
 						AND ae.idAdresse = '".$idAdresse."'
 						$sqlGroupeAdresse
 						AND he1.idTypeEvenement <>'6'
-						GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-						HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-						ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+						GROUP BY he1.idEvenement
+						ORDER BY he1.dateDebut
 						LIMIT 1
 
 						";
@@ -1393,7 +1382,7 @@ class archiAdresse extends ArchiContenu
 			// vu qu'un evenement groupe d'adresse est unique , on ne va pas grouper dans la requete
 			$reqVerif = "
 			SELECT idEvenementRecuperationTitre
-			FROM historiqueEvenement he
+			FROM evenements he
 			LEFT JOIN _adresseEvenement ae ON ae.idAdresse = $idAdresse
 			WHERE he.idEvenement = ae.idEvenement
 			$sqlGA
@@ -1420,11 +1409,9 @@ class archiAdresse extends ArchiContenu
 
 					$reqTitre = "
 							SELECT he1.titre as titre
-							FROM historiqueEvenement he2, historiqueEvenement he1
-							WHERE he2.idEvenement = he1.idEvenement
-							AND he1.idEvenement = '".$fetchVerif['idEvenementRecuperationTitre']."'
-									GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
-									HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+							FROM evenements he1
+							WHERE he1.idEvenement = '".$fetchVerif['idEvenementRecuperationTitre']."'
+									GROUP BY he1.idEvenement
 									";
 					$resTitre = $this->connexionBdd->requete($reqTitre);
 
@@ -1441,16 +1428,13 @@ class archiAdresse extends ArchiContenu
 				$reqTitre = "
 						SELECT he1.titre as titre
 						FROM _adresseEvenement ae
-						LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-						LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-						LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+						LEFT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
 						WHERE he1.titre!=''
 						AND he1.idTypeEvenement <>'6'
 						AND ae.idAdresse = '".$idAdresse."'
 						$sqlGA
-						GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-						HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-						ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+						GROUP BY he1.idEvenement
+						ORDER BY he1.dateDebut
 						LIMIT 1
 
 						";
@@ -1561,8 +1545,7 @@ class archiAdresse extends ArchiContenu
 				FROM historiqueAdresse ha2,historiqueAdresse ha1
 
 				LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-				LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-				LEFT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
+				LEFT JOIN _evenementImage ei ON ei.idEvenement = ae.idEvenement
 
 				RIGHT JOIN historiqueImage hi1 ON hi1.idImage = ei.idImage
 				RIGHT JOIN historiqueImage hi2 ON hi2.idImage = hi1.idImage
@@ -1574,9 +1557,6 @@ class archiAdresse extends ArchiContenu
 						HAVING hi1.idHistoriqueImage = max(hi2.idHistoriqueImage) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
 						LIMIT 1
 						";
-
-
-
 
 
 
@@ -1617,6 +1597,8 @@ class archiAdresse extends ArchiContenu
 			{
 				// on recherche les evenements du groupe d'adresses
 				$listeEvenementsGroupeAdresse = implode("','",$arrayListeEvenementsGroupeAdresse);
+				debug("A MODIFIER : les 'id evenement groupe adresse' n'éxistent plus, il n'y a plus que des idEvenement");
+				debug($arrayListeEvenementsGroupeAdresse);
 				$queryEvenementAssocies = "
 						SELECT idEvenementAssocie FROM _evenementEvenement WHERE idEvenement in ('".$listeEvenementsGroupeAdresse."')
 								";
@@ -1684,8 +1666,7 @@ class archiAdresse extends ArchiContenu
 				FROM historiqueAdresse ha2,historiqueAdresse ha1
 
 				LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-				LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-				LEFT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
+				LEFT JOIN _evenementImage ei ON ei.idEvenement = ae.idEvenement
 
 				RIGHT JOIN historiqueImage hi1 ON hi1.idImage = ei.idImage
 				RIGHT JOIN historiqueImage hi2 ON hi2.idImage = hi1.idImage
@@ -1738,6 +1719,9 @@ class archiAdresse extends ArchiContenu
 			}
 			if(count($arrayListeEvenementsGroupeAdresse)>0)
 			{
+				debug("A MODIFIER : les 'id evenement groupe adresse' n'éxistent plus, il n'y a plus que des idEvenement");
+				debug($arrayListeEvenementsGroupeAdresse);
+				
 				// on recherche les evenements du groupe d'adresses
 				$listeEvenementsGroupeAdresse = implode("','",$arrayListeEvenementsGroupeAdresse);
 				$queryEvenementAssocies = "
@@ -1874,6 +1858,9 @@ class archiAdresse extends ArchiContenu
 
 			if(count($arrayListeEvenementsGroupeAdresse)>0)
 			{
+				debug("A MODIFIER : les 'id evenement groupe adresse' n'éxistent plus, il n'y a plus que des idEvenement");
+				debug($arrayListeEvenementsGroupeAdresse);
+				
 				// on recherche les evenements du groupe d'adresses
 				$listeEvenementsGroupeAdresse = implode("','",$arrayListeEvenementsGroupeAdresse);
 				$queryEvenementAssocies = "
@@ -1993,6 +1980,9 @@ class archiAdresse extends ArchiContenu
 
 			if(count($arrayListeEvenementsGroupeAdresse)>0)
 			{
+				debug("A MODIFIER : les 'id evenement groupe adresse' n'éxistent plus, il n'y a plus que des idEvenement");
+				debug($arrayListeEvenementsGroupeAdresse);
+				
 				// on recherche les evenements du groupe d'adresses
 				$listeEvenementsGroupeAdresse = implode("','",$arrayListeEvenementsGroupeAdresse);
 				$queryEvenementAssocies = "
@@ -2201,9 +2191,8 @@ class archiAdresse extends ArchiContenu
 							SELECT hi1.idHistoriqueImage as idHistoriqueImage, hi1.idImage as idImage, hi1.dateUpload as dateUpload
 							FROM historiqueImage hi2,historiqueImage hi1
 							LEFT JOIN _evenementPersonne ep ON ep.idPersonne = ".mysql_real_escape_string($this->variablesGet['id'])."
-									LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie=ep.idEvenement
-									LEFT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
-									WHERE ee.idEvenement=".mysql_real_escape_string($params['idEvenementGroupeAdresse'])."
+									LEFT JOIN _evenementImage ei ON ei.idEvenement = ep.idEvenement
+									WHERE ep.idEvenement=".mysql_real_escape_string($params['idEvenementGroupeAdresse'])."
 											AND hi1.idImage = ei.idImage
 											AND hi2.idImage = hi1.idImage
 											GROUP BY hi1.idImage, hi1.idHistoriqueImage
@@ -2262,6 +2251,9 @@ class archiAdresse extends ArchiContenu
 				$arrayCritereListeIdEvenementPersonne=array();
 				if(isset($this->variablesGet['selection']) && $this->variablesGet['selection']=='personne')
 				{
+					
+					debug("Il y aura surement un probleme ici. Wait for it !");
+					debug($arrayListeEvenementsAssocies);
 					// voyons d'abord s'il y a des photos sur l'evenement concerné par l'architect , sinon ce n'est pas la peine d'ajouter ce critere a la recherche de la photo
 					$reqIsPhotoSurEvenement = "
 							SELECT idEvenementAssocie as idEvenementPhotoPersonne
@@ -2455,10 +2447,8 @@ class archiAdresse extends ArchiContenu
 
 				FROM historiqueImage hi2, historiqueImage hi1
 				RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = '".$idAdresse."'
-						RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-						RIGHT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
-						RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement=ee.idEvenementAssocie
-						RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+						RIGHT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
+						RIGHT JOIN _evenementImage ei ON ei.idEvenement = he1.idEvenement
 						RIGHT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
 						RIGHT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
 
@@ -2471,9 +2461,8 @@ class archiAdresse extends ArchiContenu
 						WHERE hi2.idImage = hi1.idImage
 						AND hi1.idImage = ei.idImage
 						".$sqlWhere."
-								GROUP BY hi1.idImage,he1.idEvenement,ha1.idAdresse, hi1.idHistoriqueImage, he1.idHistoriqueEvenement, ha1.idHistoriqueAdresse
+								GROUP BY hi1.idImage,he1.idEvenement,ha1.idAdresse, hi1.idHistoriqueImage, ha1.idHistoriqueAdresse
 								HAVING hi1.idHistoriqueImage = max(hi2.idHistoriqueImage)
-								AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
 								AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
 								LIMIT 1";
 
@@ -2524,8 +2513,7 @@ class archiAdresse extends ArchiContenu
 				FROM historiqueAdresse ha2,historiqueAdresse ha1
 
 				LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-				LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-				LEFT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
+				LEFT JOIN _evenementImage ei ON ei.idEvenement = ae.idEvenement
 
 				RIGHT JOIN historiqueImage hi1 ON hi1.idImage = ei.idImage
 				RIGHT JOIN historiqueImage hi2 ON hi2.idImage = hi1.idImage
@@ -2554,8 +2542,7 @@ class archiAdresse extends ArchiContenu
 					FROM historiqueAdresse ha2,historiqueAdresse ha1
 
 					LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-					LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-					LEFT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
+					LEFT JOIN _evenementImage ei ON ei.idEvenement = ae.idEvenement
 
 					RIGHT JOIN historiqueImage hi1 ON hi1.idImage = ei.idImage
 					RIGHT JOIN historiqueImage hi2 ON hi2.idImage = hi1.idImage
@@ -6134,16 +6121,14 @@ class archiAdresse extends ArchiContenu
 		 * Getting number of results
 		*/
 		$sqlCount = "
-		SELECT distinct ee.idEvenement as idEvenementGroupeAdresse    $critereSelectionIdAdressesModeAffichageListeAdressesCount
+		SELECT distinct he1.idEvenement as idEvenementGroupeAdresse    $critereSelectionIdAdressesModeAffichageListeAdressesCount
 
 		FROM historiqueAdresse ha2, historiqueAdresse ha1
 
 
 
 		RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-		RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-		RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-		RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+		RIGHT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
 
 		LEFT JOIN rue r         ON r.idRue = ha1.idRue
 		LEFT JOIN sousQuartier sq    ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' , ha1.idSousQuartier , r.idSousQuartier )
@@ -6160,8 +6145,8 @@ class archiAdresse extends ArchiContenu
 		ha2.idAdresse = ha1.idAdresse
 		". $sqlWhere ." ".$sqlAdressesSupplementaires." ".$sqlEvenementsGroupeAdressesSupplementaires." ".$sqlSelectionExterne." ".$sqlMotCle."
 		".$sqlSelectCoordonnees." ".$whereVillesModerees."
-		GROUP BY ha1.idAdresse,  he1.idEvenement, ha1.idHistoriqueAdresse, he1.idHistoriqueEvenement
-		HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+		GROUP BY ha1.idAdresse,  he1.idEvenement, ha1.idHistoriqueAdresse
+		HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
 		";
 
 
@@ -6451,7 +6436,7 @@ class archiAdresse extends ArchiContenu
 
 
 			$sql = "
-			SELECT distinct ee.idEvenement as idEvenementGA $critereSelectionIdAdressesModeAffichageListeAdressesRequete,
+			SELECT distinct he1.idEvenement as idEvenementGA $critereSelectionIdAdressesModeAffichageListeAdressesRequete,
 
 			ae.idEvenement as idEvenementGA,
 			r.nom as nomRue,
@@ -6480,9 +6465,7 @@ class archiAdresse extends ArchiContenu
 			LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
 
 			LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-			LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-			LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-			LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+			LEFT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
 
 			LEFT JOIN _evenementPersonne ep ON ep.idEvenement = he1.idEvenement
 			LEFT JOIN personne pers ON pers.idPersonne = ep.idPersonne
@@ -6496,8 +6479,8 @@ class archiAdresse extends ArchiContenu
 					". $sqlWhere ." ".$sqlAdressesSupplementaires." ".$sqlEvenementsGroupeAdressesSupplementaires." ".$sqlSelectionExterne." ".$sqlMotCle."
 							".$sqlSelectCoordonnees." ".$sqlAdressesSupplementairesRechercheRelancee." ".$whereVillesModerees."
 									AND ae.idAdresse IS NOT NULL
-									GROUP BY ha1.idAdresse, he1.idEvenement, ha1.idHistoriqueAdresse,  he1.idHistoriqueEvenement
-									HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+									GROUP BY ha1.idAdresse, he1.idEvenement, ha1.idHistoriqueAdresse
+									HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) 
 									ORDER BY  ".$sqlOrderBy."
 											DESC,  CAST(ha1.numero as signed) ASC";
 			if (!isset($params['sqlNoLimit']) || $params['sqlNoLimit']==false) {
@@ -6508,7 +6491,6 @@ class archiAdresse extends ArchiContenu
 
 
 
-			//echo $sql."<br><br>";
 			// ***************************************************************************************************************************************
 			// affichage des resultats de la recherche
 			// ***************************************************************************************************************************************
@@ -6532,7 +6514,7 @@ class archiAdresse extends ArchiContenu
 			if (isset($this->variablesGet['archiAffichage']) && $this->variablesGet['archiAffichage']=='listeAdressesFromSource') {
 				$criteres['desactivateRedirection']=true;
 			}
-
+				
 
 			// si on utilise le template par defaut ,  c'est qu'on est dans un affichage de resultat de recherche ,  sinon c'est un affichage de detail d'adresse
 			if (!isset($criteres['useTemplateFile']) && $nbReponses==1 && !isset($criteres['desactivateRedirection'])) {
@@ -6541,7 +6523,6 @@ class archiAdresse extends ArchiContenu
 				// a voir pour ne pas utiliser le javascript et afficher directement avec la fonction afficherDetail
 
 				$fetchIdAdresse = $this->getFetchOneAdresseElementsFromGroupeAdresse($fetch['idEvenementGA']);
-
 
 				header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$fetchIdAdresse['idAdresse'], 'archiIdEvenementGroupeAdresse'=>$fetch['idEvenementGA']), false, false));
 			} else {
@@ -6586,15 +6567,11 @@ class archiAdresse extends ArchiContenu
 								$tabTitresEvenements = array();
 								$reqTitresEvenements = "
 										SELECT he1.titre as titre ,  ae.idAdresse as idAdresse,  he1.idSource as idSource,  he1.numeroArchive as numeroArchive
-										FROM historiqueEvenement he1,  historiqueEvenement he2
-										RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ".$fetch['idEvenementGA']."
-												RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
-												WHERE he2.idEvenement = he1.idEvenement
-												AND he1.idEvenement = ee.idEvenementAssocie
-												GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-												HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-												ORDER BY he1.dateDebut, he1.idHistoriqueEvenement
-												";//RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = '".$fetch['idAdresse']."'
+										FROM evenements he1
+										RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = ".$fetch['idEvenementGA']."
+										GROUP BY he1.idEvenement
+										ORDER BY he1.dateDebut
+										";//RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = '".$fetch['idAdresse']."'
 
 								//debug($sql);
 								//debug($reqTitresEvenements);
@@ -6854,11 +6831,9 @@ class archiAdresse extends ArchiContenu
 								$idEvenementTitreAdresses = $e->getIdEvenementTitre(array("idEvenementGroupeAdresse"=>$criteres['archiIdEvenement']));
 								$reqTitreAdresse = "
 										SELECT he1.titre as titre
-										FROM historiqueEvenement he2,  historiqueEvenement he1
-										WHERE he2.idEvenement = he1.idEvenement
-										AND he1.idEvenement='".$idEvenementTitreAdresses."'
-												GROUP BY he1.idEvenement,  he1.idHistoriqueEvenement
-												HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+										FROM evenements he1
+										WHERE he1.idEvenement='".$idEvenementTitreAdresses."'
+												GROUP BY he1.idEvenement
 												";
 								$resTitreAdresse = $this->connexionBdd->requete($reqTitreAdresse);
 								$fetchTitreAdresse = mysql_fetch_assoc($resTitreAdresse);
@@ -6878,11 +6853,9 @@ class archiAdresse extends ArchiContenu
 								$idEvenementTitreAdresses = $e->getIdEvenementTitre(array("idEvenementGroupeAdresse"=>$this->variablesGet['archiIdEvenement']));
 								$reqTitreAdresse = "
 										SELECT he1.titre as titre
-										FROM historiqueEvenement he2,  historiqueEvenement he1
-										WHERE he2.idEvenement = he1.idEvenement
-										AND he1.idEvenement='".$idEvenementTitreAdresses."'
-												GROUP BY he1.idEvenement,  he1.idHistoriqueEvenement
-												HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+										FROM evenements he1
+										WHERE he1.idEvenement='".$idEvenementTitreAdresses."'
+												GROUP BY he1.idEvenement,  
 												";
 								$resTitreAdresse = $this->connexionBdd->requete($reqTitreAdresse);
 								$fetchTitreAdresse = mysql_fetch_assoc($resTitreAdresse);
@@ -6899,11 +6872,9 @@ class archiAdresse extends ArchiContenu
 								$idEvenementTitreAdresses = $e->getIdEvenementTitre(array("idEvenementGroupeAdresse"=>$fetchGroupeAdresses['idEvenement']));
 								$reqTitreAdresse = "
 										SELECT he1.titre as titre
-										FROM historiqueEvenement he2,  historiqueEvenement he1
-										WHERE he2.idEvenement = he1.idEvenement
-										AND he1.idEvenement='".$idEvenementTitreAdresses."'
-												GROUP BY he1.idEvenement,  he1.idHistoriqueEvenement
-												HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+										FROM evenements he1
+										WHERE  he1.idEvenement='".$idEvenementTitreAdresses."'
+												GROUP BY he1.idEvenement
 												";
 								$resTitreAdresse = $this->connexionBdd->requete($reqTitreAdresse);
 								$fetchTitreAdresse = mysql_fetch_assoc($resTitreAdresse);
@@ -6919,10 +6890,9 @@ class archiAdresse extends ArchiContenu
 						// a la suite de titresEvenements je rajoutes les images qui concerne la source courante quand on est en mode listeAdressesFromSource
 						if (isset($this->variablesGet['archiAffichage']) && $this->variablesGet['archiAffichage']=='listeAdressesFromSource' && isset($this->variablesGet['source']) && $this->variablesGet['source']!='') {
 							$reqImagesSource = "
-									SELECT hi1.idHistoriqueImage as idHistoriqueImage,  hi1.dateUpload as dateUpload, hi1.idImage as idImage,  ee.idEvenementAssocie as idEvenementAssocie
+									SELECT hi1.idHistoriqueImage as idHistoriqueImage,  hi1.dateUpload as dateUpload, hi1.idImage as idImage,  ei.idEvenement as idEvenementAssocie
 									FROM historiqueImage hi2,  historiqueImage hi1
-									LEFT JOIN _evenementEvenement ee ON ee.idEvenement = '".$fetch['idEvenementGA']."'
-											LEFT JOIN _evenementImage ei ON ei.idEvenement = ee.idEvenementAssocie
+											LEFT JOIN _evenementImage ei ON ei.idEvenement = '".$fetch['idEvenementGA']."'
 											WHERE hi2.idImage = hi1.idImage
 											AND hi1.idSource = '".$this->variablesGet['source']."'
 													AND hi1.idImage = ei.idImage
@@ -7050,12 +7020,15 @@ class archiAdresse extends ArchiContenu
 				}
 			}
 		}
+		
+		
+		
 		ob_start();
 		$t->pparse('listeAdresses');
 		$html=ob_get_contents();
 		ob_end_clean();
 
-
+		debug("end of the method ?!!");
 
 		return array('html'=>$html, 'nbAdresses'=>$nbAdresses, 'arrayLiens'=>$arrayRetour, 'arrayIdAdresses'=>$arrayIdAdressesRetour, 'arrayIdEvenementsGroupeAdresse'=>$arrayIdEvenementsGARetour, 'arrayRetourLiensVoirBatiments'=>$arrayRetourLiensVoirBatiments);
 	}
@@ -7752,7 +7725,7 @@ class archiAdresse extends ArchiContenu
                 // recherche des derniers evenenements 
 
                 $req="
-                                        SELECT distinct ha.idAdresse as idAdresse,ee.idEvenementAssocie as idEvenementAssocie,ha.date,ha.numero as numero,ha.idRue as idRue,
+                                        SELECT distinct ha.idAdresse as idAdresse,ae.idEvenement as idEvenementAssocie,ha.date,ha.numero as numero,ha.idRue as idRue,
                                         ha.idQuartier as idQuartier, ha.idSousQuartier as idSousQuartier, ha.idVille as idVille,ha.idIndicatif as idIndicatif,he1.idEvenement as idEvenement,he1.dateCreationEvenement as dateCreationEvenement, he1.description as description,
                                         
                                         r.nom as nomRue,
@@ -7764,9 +7737,7 @@ class archiAdresse extends ArchiContenu
                                         FROM historiqueAdresse ha2, historiqueAdresse ha
                                         
                                         RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
-                                        RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-                                        RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-                                        RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+                                        RIGHT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
                                         
                                         LEFT JOIN rue r ON r.idRue = ha.idRue
                                         LEFT JOIN sousQuartier sq ON sq.idSousQuartier = ha.idSousQuartier
@@ -7775,8 +7746,8 @@ class archiAdresse extends ArchiContenu
                                         
                                         WHERE ha2.idAdresse = ha.idAdresse
                                         AND he1.idTypeEvenement = '6'
-                                        GROUP BY ha.idAdresse, he1.idEvenement , ha.idHistoriqueAdresse, he1.idHistoriqueEvenement
-                                        HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+                                        GROUP BY ha.idAdresse, he1.idEvenement , ha.idHistoriqueAdresse
+                                        HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) 
                                         ORDER BY he1.dateCreationEvenement DESC,ha.idHistoriqueAdresse DESC
                                         LIMIT 5
                 ";
@@ -7832,7 +7803,7 @@ class archiAdresse extends ArchiContenu
             
                 // cas de l'encars des dernieres adresses
                 $req="
-                                        SELECT distinct ha.idAdresse as idAdresse,ee.idEvenementAssocie as idEvenementAssocie,ha.date,ha.numero as numero,ha.idRue as idRue,
+                                        SELECT distinct ha.idAdresse as idAdresse,ae.idEvenement as idEvenementAssocie,ha.date,ha.numero as numero,ha.idRue as idRue,
                                         ha.idQuartier as idQuartier, ha.idSousQuartier as idSousQuartier, ha.idVille as idVille,ha.idIndicatif as idIndicatif,he1.idEvenement as idEvenement,he1.dateCreationEvenement as dateCreationEvenement, he1.description as description,
                                         
                                         r.nom as nomRue,
@@ -7844,9 +7815,7 @@ class archiAdresse extends ArchiContenu
                                         FROM historiqueAdresse ha2, historiqueAdresse ha
                                         
                                         RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
-                                        RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-                                        RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-                                        RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+                                        RIGHT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
                                         
                                         LEFT JOIN rue r ON r.idRue = ha.idRue
                                         LEFT JOIN sousQuartier sq ON sq.idSousQuartier = ha.idSousQuartier
@@ -7856,8 +7825,8 @@ class archiAdresse extends ArchiContenu
                                         WHERE ha2.idAdresse = ha.idAdresse
                                         AND YEAR(he1.dateDebut)<>'".date("Y")."'
                                         ".$listeAdressesNePasAfficher."
-                                        GROUP BY ha.idAdresse, he1.idEvenement , ha.idHistoriqueAdresse, he1.idHistoriqueEvenement
-                                        HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+                                        GROUP BY ha.idAdresse, he1.idEvenement , ha.idHistoriqueAdresse
+                                        HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) 
                                         ORDER BY ha.date DESC,ha.idHistoriqueAdresse DESC
                                         LIMIT 5
                 ";
@@ -7903,7 +7872,7 @@ class archiAdresse extends ArchiContenu
                 // recherche des derniers evenenements 
                 //he.idTypeEvenement in (1,2,3,4,5) 
                 $req="
-                                        SELECT distinct ha.idAdresse as idAdresse,ee.idEvenementAssocie as idEvenementAssocie,ha.date,ha.numero as numero,ha.idRue as idRue,
+                                        SELECT distinct ha.idAdresse as idAdresse,ae.idEvenement as idEvenementAssocie,ha.date,ha.numero as numero,ha.idRue as idRue,
                                         ha.idQuartier as idQuartier, ha.idSousQuartier as idSousQuartier, ha.idVille as idVille,ha.idIndicatif as idIndicatif,he1.idEvenement as idEvenement,he1.dateCreationEvenement as dateCreationEvenement, he1.description as description,
                                         
                                         r.nom as nomRue,
@@ -7915,9 +7884,7 @@ class archiAdresse extends ArchiContenu
                                         FROM historiqueAdresse ha2, historiqueAdresse ha
                                         
                                         RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
-                                        RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-                                        RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-                                        RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+                                        RIGHT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
                                         
                                         LEFT JOIN rue r ON r.idRue = ha.idRue
                                         LEFT JOIN sousQuartier sq ON sq.idSousQuartier = ha.idSousQuartier
@@ -7927,8 +7894,8 @@ class archiAdresse extends ArchiContenu
                                         WHERE ha2.idAdresse = ha.idAdresse
                                         AND (he1.idTypeEvenement in (2,3,4,5) OR (he1.idTypeEvenement='1' AND YEAR(he1.dateDebut)='".date("Y")."'))
                                         
-                                        GROUP BY ha.idAdresse, he1.idEvenement , ha.idHistoriqueAdresse, he1.idHistoriqueEvenement
-                                        HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+                                        GROUP BY ha.idAdresse, he1.idEvenement , ha.idHistoriqueAdresse
+                                        HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) 
                                         ORDER BY he1.dateCreationEvenement DESC,ha.idHistoriqueAdresse DESC
                                         LIMIT 5
                 ";
@@ -7974,7 +7941,7 @@ class archiAdresse extends ArchiContenu
                 // cas des trois encart sauf celui des derniereAdresses
                 // recherche des derniers evenenements 
                 $req="
-                                        SELECT distinct ha.idAdresse as idAdresse,ee.idEvenementAssocie as idEvenementAssocie,ha.date,ha.numero as numero,ha.idRue as idRue,
+                                        SELECT distinct ha.idAdresse as idAdresse,ae.idEvenement as idEvenementAssocie,ha.date,ha.numero as numero,ha.idRue as idRue,
                                         ha.idQuartier as idQuartier, ha.idSousQuartier as idSousQuartier, ha.idVille as idVille,ha.idIndicatif as idIndicatif,he1.idEvenement as idEvenement,he1.dateCreationEvenement as dateCreationEvenement, he1.description as description,
                                         
                                         r.nom as nomRue,
@@ -7986,9 +7953,7 @@ class archiAdresse extends ArchiContenu
                                         FROM historiqueAdresse ha2, historiqueAdresse ha
                                         
                                         RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
-                                        RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-                                        RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-                                        RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+                                        RIGHT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
                                         
                                         LEFT JOIN rue r ON r.idRue = ha.idRue
                                         LEFT JOIN sousQuartier sq ON sq.idSousQuartier = ha.idSousQuartier
@@ -7997,8 +7962,8 @@ class archiAdresse extends ArchiContenu
                                         
                                         WHERE ha2.idAdresse = ha.idAdresse
                                         AND he1.idTypeEvenement not in (1,2,3,4,5,6,11) 
-                                        GROUP BY ha.idAdresse, he1.idEvenement , ha.idHistoriqueAdresse, he1.idHistoriqueEvenement
-                                        HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+                                        GROUP BY ha.idAdresse, he1.idEvenement , ha.idHistoriqueAdresse
+                                        HAVING ha.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                                         ORDER BY he1.dateCreationEvenement DESC,ha.idHistoriqueAdresse DESC
                                         LIMIT 5
                 ";
@@ -8047,6 +8012,12 @@ class archiAdresse extends ArchiContenu
         return $retour;
     }
     
+    
+    
+    
+    
+    
+    
     //  ************************************************************************************************************************
     // affichage des derniers evenements par categorie , travaux, culturel , dernieresAdresses,demolitions
     // on remplis un tableau au fur et a mesure , le but etant de realiser l'operation en 1 seul requete afin d'eviter les repetitions
@@ -8085,9 +8056,8 @@ class archiAdresse extends ArchiContenu
                     ae.idEvenement as idEvenementGroupeAdresses
                     
                                         
-            FROM historiqueEvenement he2, historiqueEvenement he1
-            RIGHT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = he1.idEvenement
-            RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
+            FROM evenements he1
+            RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = he1.idEvenement
             RIGHT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
             RIGHT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
             
@@ -8101,12 +8071,12 @@ class archiAdresse extends ArchiContenu
         
         
         
-            WHERE he2.idEvenement = he1.idEvenement
+            WHERE 
             
             ".$sqlWhere."
 
-            GROUP BY he1.idEvenement,ha1.idAdresse, he1.idHistoriqueEvenement, ha1.idHistoriqueAdresse
-            HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) 
+            GROUP BY he1.idEvenement,ha1.idAdresse, ha1.idHistoriqueAdresse
+            HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) 
             ORDER BY he1.dateCreationEvenement DESC
         ";
         
@@ -8120,25 +8090,23 @@ class archiAdresse extends ArchiContenu
                     ae.idEvenement as idEvenementGroupeAdresses
         
         
-            FROM historiqueEvenement he2, historiqueEvenement he1
-            RIGHT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = he1.idEvenement
-            RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
+            FROM evenements he1
+            RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = he1.idEvenement
             RIGHT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
             RIGHT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
         
             LEFT JOIN typeEvenement te ON te.idTypeEvenement = he1.idTypeEvenement
         
         
-            WHERE he2.idEvenement = he1.idEvenement
-        
-            GROUP BY he1.idEvenement,ha1.idAdresse, he1.idHistoriqueEvenement, ha1.idHistoriqueAdresse
-            HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+            GROUP BY he1.idEvenement,ha1.idAdresse, ha1.idHistoriqueAdresse
+            HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
             ORDER BY he1.dateCreationEvenement DESC
         ";
         
         
         $reqEvenements=$reqEvenementsCustom;
                 
+        debug($reqEvenements);
         $resEvenements = $this->connexionBdd->requete($reqEvenements);
                 
         $tabAdressesEvenementsAffichees=array(); // tableau contenant les idAdresses qu'il ne faudra pas reafficher 
@@ -8424,14 +8392,8 @@ class archiAdresse extends ArchiContenu
 
             FROM historiqueAdresse ha2, historiqueAdresse ha1
             LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-            LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-            
-            
 
-            LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-            LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
-            
-            
+            LEFT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
             
             LEFT JOIN rue r         ON r.idRue = ha1.idRue
             LEFT JOIN sousQuartier sq   ON sq.idSousQuartier = IF(ha1.idRue='0' and ha1.idSousQuartier!='0' ,ha1.idSousQuartier ,r.idSousQuartier )
@@ -8443,8 +8405,8 @@ class archiAdresse extends ArchiContenu
             WHERE ha2.idAdresse = ha1.idAdresse
             ".$sqlWhere."
             ".$sqlAdressesExclues."
-            GROUP BY ha1.idAdresse ,he1.idEvenement, ha1.idHistoriqueAdresse, he1.idHistoriqueEvenement
-            HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) and he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+            GROUP BY ha1.idAdresse ,he1.idEvenement, ha1.idHistoriqueAdresse
+            HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) 
             ORDER BY ha1.date DESC
         ";
         
@@ -8453,31 +8415,26 @@ class archiAdresse extends ArchiContenu
             SELECT  ha1.idAdresse as idAdresse, ha1.date as dateCreationAdresse,ha1.numero as numero, ha1.idRue as idRue , ha1.idQuartier as idQuartier, ha1.idSousQuartier as idSousQuartier,
                     ha1.idVille as idVille,ha1.idPays as idPays, ha1.idIndicatif as idIndicatif,
 
-                        ae.idEvenement as idEvenementGroupeAdresses
+                        he1.idEvenement as idEvenementGroupeAdresses
         
         
         
             FROM historiqueAdresse ha2, historiqueAdresse ha1
             LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
-            LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+            LEFT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
         
-        
-        
-            LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-            LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
         
         
             WHERE ha2.idAdresse = ha1.idAdresse
             ".$sqlAdressesExclues."
-            GROUP BY ha1.idAdresse ,he1.idEvenement, ha1.idHistoriqueAdresse, he1.idHistoriqueEvenement
-            HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) and he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+            GROUP BY ha1.idAdresse ,he1.idEvenement, ha1.idHistoriqueAdresse
             ORDER BY ha1.date DESC
         ";
         
-        $reqAdresses=$reqAdressesCustom;
+        $reqAdresses=$reqAdressesOriginal;
         
         
-        //debug($reqAdresses);
+        debug($reqAdresses);
         $resAdresses = $this->connexionBdd->requete($reqAdresses);
         $image = new archiImage();
         $isImageAdresses=false;
@@ -8924,15 +8881,10 @@ class archiAdresse extends ArchiContenu
         
             SELECT distinct he1.idEvenement as idEvenement
             FROM 
-                historiqueEvenement he1,historiqueEvenement he2
-            RIGHT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = '".$idEvenement."'
-            RIGHT JOIN _evenementEvenement ee2 ON ee2.idEvenement = ee.idEvenement
-            WHERE
-                he2.idEvenement = he1.idEvenement
-            AND he1.idEvenement = ee2.idEvenementAssocie
-            GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-            HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
-            ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+                evenements he1
+            WHERE he1.idEvenement =  '".$idEvenement."'
+            GROUP BY he1.idEvenement
+            ORDER BY he1.dateDebut
         ";
         
         $res = $this->connexionBdd->requete($req);
@@ -8959,18 +8911,16 @@ class archiAdresse extends ArchiContenu
     {
         $req = "
                 SELECT he1.description as description
-                FROM historiqueEvenement he1, historiqueEvenement he2
+                FROM evenements he1
                 LEFT JOIN historiqueAdresse ha1 ON ha1.idAdresse = '".$idAdresse."'
                 LEFT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
                 LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha1.idAdresse
                 LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
                 WHERE
-                    he1.idEvenement = ee.idEvenementAssocie
-                AND
-                    he2.idEvenement = he1.idEvenement
+                    he1.idEvenement = ae.idEvenement
                 AND he1.description<>''
-                GROUP BY he1.idEvenement,ha1.idAdresse,he1.idHistoriqueEvenement,ha1.idHistoriqueAdresse
-                HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+                GROUP BY he1.idEvenement,ha1.idAdresse,ha1.idHistoriqueAdresse
+                HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
         ";
         
         $res = $this->connexionBdd->requete($req);
@@ -9073,15 +9023,13 @@ class archiAdresse extends ArchiContenu
         $sql = "
                 SELECT ae.idEvenement, ae.idAdresse,he1.titre , ha1.numero
                 FROM _adresseEvenement ae
-                RIGHT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
-                RIGHT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
-                RIGHT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+                RIGHT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
                 RIGHT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
                 RIGHT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
                 RIGHT JOIN typeEvenement te ON te.idTypeEvenement = he1.idTypeEvenement
                 WHERE ".$whereSql."
                 GROUP BY he1.idEvenement,ha1.idAdresse, he1.idHistoriqueEvenement, ha1.idHistoriqueAdresse
-                HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+                HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                 ".$limitSql."
         ";
         
@@ -12651,8 +12599,8 @@ class archiAdresse extends ArchiContenu
                     ha2.idAdresse = ha1.idAdresse
                 AND ha1.idRue<>'".$arrayRue[0]."'
                 AND v.idVille = '".$idVilleAdresseCourante."'
-                GROUP BY ha1.idAdresse, ha1.idHistoriqueAdresse,ee.idEvenement
-                HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND count(ee.idEvenement)>0
+                GROUP BY ha1.idAdresse, ha1.idHistoriqueAdresse,ae.idEvenement
+                HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse) AND count(ae.idEvenement)>0
                 ORDER BY ((acos(sin(".$arrayCoordonnees['latitude']."*PI()/180) * sin(ha1.latitude*PI()/180) + cos(".$arrayCoordonnees['latitude']."*PI()/180) * cos(ha1.latitude*PI()/180) * cos((".$arrayCoordonnees['longitude']." - ha1.longitude)*PI()/180))/ pi() * 180.0)* 60 * 1.1515 * 1.609344)*1000 ASC
                 LIMIT 1
             ";
@@ -12693,7 +12641,6 @@ class archiAdresse extends ArchiContenu
                 FROM _adresseEvenement ae
                 LEFT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
                 LEFT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse 
-                LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement 
                 LEFT JOIN rue r ON r.idRue = ha1.idRue
                 LEFT JOIN sousQuartier sq ON sq.idSousQuartier = r.idSousQuartier
                 LEFT JOIN quartier q ON q.idQuartier = sq.idQuartier
@@ -12702,8 +12649,8 @@ class archiAdresse extends ArchiContenu
                     ha2.idAdresse = ha1.idAdresse
                 AND ha1.idRue<>'".$arrayRue[0]."'
                 AND v.idVille = '".$idVilleAdresseCourante."'
-                GROUP BY ha1.idAdresse, ha1.idHistoriqueAdresse,ee.idEvenement
-                HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)  AND count(ee.idEvenement)>0
+                GROUP BY ha1.idAdresse, ha1.idHistoriqueAdresse,ae.idEvenement
+                HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)  AND count(ae.idEvenement)>0
                 ORDER BY ((acos(sin(".$arrayCoordonnees['latitude']."*PI()/180) * sin(ha1.latitude*PI()/180) + cos(".$arrayCoordonnees['latitude']."*PI()/180) * cos(ha1.latitude*PI()/180) * cos((".$arrayCoordonnees['longitude']." - ha1.longitude)*PI()/180))/ pi() * 180.0)* 60 * 1.1515 * 1.609344)*1000 ASC
                 
             ";
@@ -12978,8 +12925,8 @@ class archiAdresse extends ArchiContenu
                     AND ha.numero<>'0'
                     AND ha.numero IS NOT NULL
                     AND ae.idEvenement<>'".$params['idEvenementGroupeAdresseCourant']."'
-                    GROUP BY ha.idRue,ee.idEvenementAssocie
-                    HAVING count(ee.idEvenementAssocie)>0
+                    GROUP BY ha.idRue
+                    HAVING count(ae.idEvenement)>0
                     ORDER BY ha.numero DESC, ha.idIndicatif DESC
                     LIMIT 1
                 ";
@@ -13011,10 +12958,9 @@ class archiAdresse extends ArchiContenu
                 }
                 
                 $reqNumeroApres = "
-                    SELECT ha.numero as numero,ha.idIndicatif as idIndicatif,count(ee.idEvenementAssocie)
+                    SELECT ha.numero as numero,ha.idIndicatif as idIndicatif,count(ae.idEvenement)
                     FROM historiqueAdresse ha
                     LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
-                    LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
                     WHERE 
                         ha.idRue='$idRue'
                     AND (
@@ -13026,8 +12972,8 @@ class archiAdresse extends ArchiContenu
                     AND ha.numero<>'0'
                     AND ha.numero IS NOT NULL
                     AND ae.idEvenement<>'".$params['idEvenementGroupeAdresseCourant']."'
-                    GROUP BY ha.idRue,ee.idEvenementAssocie
-                    HAVING count(ee.idEvenementAssocie)>0
+                    GROUP BY ha.idRue,ae.idEvenement
+                    HAVING count(ae.idEvenement)>0
                     ORDER BY ha.numero ASC,ha.idIndicatif  ASC
                     LIMIT 1
                 ";
@@ -13069,15 +13015,14 @@ class archiAdresse extends ArchiContenu
                         SELECT distinct ha.numero, count(ee.idEvenementAssocie)
                         FROM historiqueAdresse ha
                         LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
-                        LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
                         WHERE 
                             ha.idRue='$idRue'
                         AND ha.numero<>''
                         AND ha.numero<>'0'
                         AND ha.numero IS NOT NULL
                         AND ae.idEvenement<>'".$params['idEvenementGroupeAdresseCourant']."'
-                        GROUP BY ha.idRue,ee.idEvenementAssocie
-                        HAVING count(ee.idEvenementAssocie)>0
+                        GROUP BY ha.idRue,ae.idEvenement
+                        HAVING count(ae.idEvenement)>0
                         ORDER BY ha.numero ASC
                         LIMIT 2
                     ";
@@ -13168,7 +13113,6 @@ class archiAdresse extends ArchiContenu
                             SELECT distinct ha.numero,r.idRue as idRue, count(ee.idEvenementAssocie)
                             FROM historiqueAdresse ha
                             LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
-                            LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
                             LEFT JOIN sousQuartier sq ON sq.idQuartier = '$idQuartier'
                             LEFT JOIN rue r ON r.idSousQuartier = sq.idSousQuartier
                             WHERE 
@@ -13177,8 +13121,8 @@ class archiAdresse extends ArchiContenu
                             AND ha.numero<>'0'
                             AND ha.numero IS NOT NULL
                             AND ae.idEvenement<>'".$params['idEvenementGroupeAdresseCourant']."'
-                            GROUP BY ha.idRue,ee.idEvenementAssocie
-                            HAVING count(ee.idEvenementAssocie)>0
+                            GROUP BY ha.idRue,ae.idEvenement
+                            HAVING count(ae.idEvenement)>0
                             ORDER BY ha.numero ASC
                             LIMIT 2
                         ";
@@ -13263,10 +13207,9 @@ class archiAdresse extends ArchiContenu
                     {
                         // si pas de numero , on va chercher les deux premieres adresses de la rue
                         $reqPremiersNumeros = "
-                            SELECT distinct ha.numero,r.idRue as idRue, count(ee.idEvenementAssocie)
+                            SELECT distinct ha.numero,r.idRue as idRue, count(ae.idEvenement)
                             FROM historiqueAdresse ha
                             LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
-                            LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
                             LEFT JOIN rue r ON r.idSousQuartier = '$idSousQuartier'
                             WHERE 
                                 ha.idRue=r.idRue
@@ -13274,8 +13217,8 @@ class archiAdresse extends ArchiContenu
                             AND ha.numero<>'0'
                             AND ha.numero IS NOT NULL
                             AND ae.idEvenement<>'".$params['idEvenementGroupeAdresseCourant']."'
-                            GROUP BY ha.idRue,ee.idEvenementAssocie
-                            HAVING count(ee.idEvenementAssocie)>0
+                            GROUP BY ha.idRue,ae.idEvenement
+                            HAVING count(ae.idEvenement)>0
                             ORDER BY ha.numero ASC
                             LIMIT 2
                         ";
@@ -14276,9 +14219,8 @@ class archiAdresse extends ArchiContenu
 			while($fetch = mysql_fetch_assoc($res)){
 				$reqTitresEvenements ="
 					SELECT  distinct he1.titre
-    				FROM historiqueEvenement he1
-					LEFT JOIN _evenementEvenement ee on ee.idEvenementAssocie = he1.idEvenement
-					LEFT JOIN _adresseEvenement ae on ae.idEvenement = ee.idEvenement
+    				FROM evenements he1
+					LEFT JOIN _adresseEvenement ae on ae.idEvenement = he1.idEvenement
 					LEFT JOIN historiqueAdresse ha on ha.idAdresse = ae.idAdresse
 					WHERE ha.idAdresse =  ".$fetch['idAdresse']."
 						

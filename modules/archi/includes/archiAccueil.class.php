@@ -55,7 +55,7 @@ class ArchiAccueil extends config
         
         $infos = "";
         // recherche du nombre d'evenements
-        $reqEvenements = "SELECT DISTINCT idEvenement as nbEvenements FROM historiqueEvenement;";
+        $reqEvenements = "SELECT DISTINCT idEvenement as nbEvenements FROM evenements;";
         $resEvenements = $this->connexionBdd->requete($reqEvenements);
         $infos .= "<b>"._("Nombre d'évènements :")."</b> ".mysql_num_rows($resEvenements);
         
@@ -177,16 +177,14 @@ class ArchiAccueil extends config
             $req = "
                     SELECT distinct ha1.idAdresse, he1.dateCreationEvenement as dateCreationEvenement
                     
-                    FROM historiqueEvenement he2,  historiqueEvenement he1
-                    LEFT JOIN _evenementEvenement ee1 ON ee1.idEvenementAssocie = he1.idEvenement
-                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee1.idEvenement
+                    FROM evenements he1
+                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = he1.idEvenement
                     LEFT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
                     LEFT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
                     
-                    WHERE he2.idEvenement = he1.idEvenement
-                    AND he1.idUtilisateur = '".$auth->getIdUtilisateur()."'
-                    GROUP BY he1.idEvenement,  ha1.idAdresse, he1.idHistoriqueEvenement,  ha1.idHistoriqueAdresse
-                    HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+                    WHERE he1.idUtilisateur = '".$auth->getIdUtilisateur()."'
+                    GROUP BY he1.idEvenement,  ha1.idAdresse,  ha1.idHistoriqueAdresse
+                    HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
             ";
             $res = $this->connexionBdd->requete($req);
             
@@ -231,9 +229,8 @@ class ArchiAccueil extends config
                     ha1.idIndicatif as idIndicatif
                     
                     
-                    FROM historiqueEvenement he2,  historiqueEvenement he1
-                    LEFT JOIN _evenementEvenement ee1 ON ee1.idEvenementAssocie = he1.idEvenement
-                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee1.idEvenement
+                    FROM evenements he1
+                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = he1.idEvenement
                     LEFT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
                     LEFT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
                     
@@ -246,10 +243,9 @@ class ArchiAccueil extends config
                     LEFT JOIN pays p        ON p.idPays = if (ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
                     
                     
-                    WHERE he2.idEvenement = he1.idEvenement
-                    AND he1.idUtilisateur = '".$auth->getIdUtilisateur()."'
-                    GROUP BY he1.idEvenement,  ha1.idAdresse, he1.idHistoriqueEvenement,  ha1.idHistoriqueAdresse
-                    HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement) AND ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
+                    WHERE he1.idUtilisateur = '".$auth->getIdUtilisateur()."'
+                    GROUP BY he1.idEvenement,  ha1.idAdresse,  ha1.idHistoriqueAdresse
+                    HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                     ORDER BY he1.dateCreationEvenement DESC
                     
             ";
@@ -479,7 +475,24 @@ class ArchiAccueil extends config
                 
             }
                 
-            $tabInfosAccueil = $adresses->getDerniersEvenementsParCategorie(5, $params); // on affichera un maximum de 5 evenements par encart
+
+            
+            $news = $this->getIndexitem('news');
+            $lastAdd = $this->getIndexitem('lastAdded');
+            $t->assign_block_vars('test', array());
+            $t->assign_vars(array(
+            		'news' => $news,
+            		'lastAdd' => $lastAdd
+            ));
+            
+            
+            
+            
+            
+            
+            
+           // echo $test;
+          /*  $tabInfosAccueil = $adresses->getDerniersEvenementsParCategorie(5, $params); // on affichera un maximum de 5 evenements par encart
             
 
             $encarts =  $this->getEncarts($tabInfosAccueil);
@@ -494,6 +507,7 @@ class ArchiAccueil extends config
                     'encart6'=>$encarts['dernieresVues']
                 )
             );
+            */
             
             
             $t->assign_vars(
@@ -516,9 +530,7 @@ class ArchiAccueil extends config
         $t->pparse('accueil');
         $html .= ob_get_contents();
         ob_end_clean();
-        
         return $html;
-        
     }
     
     /**
@@ -1244,8 +1256,7 @@ class ArchiAccueil extends config
                                 FROM personne p
                                 LEFT JOIN personne p2 ON p2.idPersonne = p.idPersonne
                                 LEFT JOIN _evenementPersonne ep ON ep.idPersonne = p2.idPersonne
-                                LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = ep.idEvenement
-                                LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
+                                LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ep.idEvenement
                                 WHERE ae.idAdresse IS NOT NULL
                                 GROUP BY p.idPersonne
             ";
@@ -1269,8 +1280,7 @@ class ArchiAccueil extends config
                             FROM personne p
                             LEFT JOIN personne p2 ON p2.idPersonne = p.idPersonne
                             LEFT JOIN _evenementPersonne ep ON ep.idPersonne = p2.idPersonne
-                            LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = ep.idEvenement
-                            LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
+                            LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ep.idEvenement
                             WHERE ae.idAdresse IS NOT NULL
                             GROUP BY p.idPersonne
                             ORDER BY nbAdresses DESC
@@ -1391,7 +1401,7 @@ class ArchiAccueil extends config
         $t->set_filenames(array('statsAccueil'=>'statistiquesAccueil.tpl'));
         
         // recherche du nombre d'evenements
-        $reqEvenements = "SELECT DISTINCT idEvenement as nbEvenements FROM historiqueEvenement;";
+        $reqEvenements = "SELECT DISTINCT idEvenement as nbEvenements FROM evenements;";
         $resEvenements = $this->connexionBdd->requete($reqEvenements);
         
         // recherche du nombre d'adresses
@@ -1759,6 +1769,98 @@ class ArchiAccueil extends config
         }
         
         return $retour;
+    }
+    
+    
+    
+    public function getIndexitem($itemType = null){
+    	$t=new Template('modules/archi/templates/accueil/');
+    	$t->set_filenames(array('indexItem'=>'indexItem.tpl'));
+    	$itemContent = array();
+
+    	switch($itemType){
+    		case 'news':
+    			$sqlField = "titre,  date,  photoIllustration,  LEFT(texte,100) as texte,  urlFichier";
+				$news = $this->getDernieresActualites(array('sqlLimit' => 'LIMIT 5','sqlFields'=>$sqlField));
+				$t->assign_var('CSSClassWrapper', 'newsItem');
+				foreach ($news as $new){
+					
+					$item['CSSClass'] = 'news';
+					$item['titre'] =$new['titre'];
+					$item['img'] = $new['titre'];;
+					$item['url'] = $new['url'];;
+					$item['text'] = $new['texte'];;
+					
+					$itemContent[]=$item;
+				}
+    			break;
+    		case 'lastAdded':
+    			$requete = "SELECT ha.nom as nom , ai.idImage , hi.idHistoriqueImage as idHistoriqueImage
+    					FROM historiqueAdresse ha
+    					LEFT JOIN _adresseImage ai ON ai.idAdresse = ha.idAdresse
+    					LEFT JOIN historiqueImage hi ON hi.idImage = ai.idImage
+    					ORDER BY idHistoriqueAdresse DESC
+    					LIMIT 5
+    					";
+    			$result = $this->connexionBdd->requete($requete);
+    			while($fetch = mysql_fetch_assoc($result)){
+    				$item['CSSClass'] = 'lastAdd';
+    				$item['titre'] =$fetch['nom'];
+    				$item['img'] = $this->getUrlRacine().'getPhotoSquare.php?id='.$fetch['idHistoriqueImage'];
+    				$item['url'] = $this->creerUrl('', '',
+    						 array(
+    						 		'archiAffichage'=>'adresseDetail', 
+    						 		"archiIdAdresse"=>$value['idAdresse'], 
+    						 		"archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']
+    				));
+    				$item['text'] = $fetch['nom'];
+    				$itemContent[] = $item;
+    			}
+    			break;
+    		case 'liked':
+    			
+    			
+    			$itemContent['CSSClass'] = 'liked';
+    			$itemContent['titre'] ='';
+    			$itemContent['img'] = '';
+    			$itemContent['url'] = '';
+    			$itemContent['text'] = '';
+    			break;
+    		default:
+    			$itemContent['CSSClass'] = 'news';
+    			$itemContent['titre'] ='';
+    			$itemContent['img'] = '';
+    			$itemContent['url'] = '';
+    			$itemContent['text'] = '';
+
+    	}
+
+    	
+    	
+    	
+    	foreach ($itemContent as $item){
+			$t->assign_block_vars('item', array(
+					'imgUrl'=> $item['img'],
+					'titreItem' =>  $item['titre'],
+					'urlItem'=> $item['url'],
+					'textItem'=> $item['text'],
+			));
+    	}
+    	
+    	 
+    	 
+    	$t->assign_vars(array(
+    			'CSSClassWrapper'=>$itemContent['CSSClass'],
+    			'imgUrl' => $itemContent['img'],
+    			'titreItem' => $itemContent['titre'],
+    			'urlItem' => $itemContent['url'],
+    			'textItem' => $itemContent['text']
+    	));
+    	$t->pparse('indexItem');
+    	$html.=ob_get_contents();
+    	ob_end_clean();
+    	//debug($html);
+		return $html;    	
     }
     
 }

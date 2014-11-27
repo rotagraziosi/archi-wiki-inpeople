@@ -298,7 +298,7 @@ class Template
 
         // If we don't have a file assigned to this handle, die.
         if (!isset($this->files[$handle])) {
-            die("Template->loadfile(): Aucun fichier spécifié pour le modèle $handle");
+            die("Template->loadfile(): Aucun fichier spécifié pour le modèle". $handle);
         }
 
         $filename = $this->files[$handle];
