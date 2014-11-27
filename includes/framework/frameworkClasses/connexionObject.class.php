@@ -82,7 +82,11 @@ class ConnexionBdd extends config
     {
     	//debug($requete);
         if ($silencieux==false) {
-            $res = mysql_query($requete) or die($requete.' -- '.mysql_error());
+            $res = mysql_query($requete) 
+            or 
+            die($requete.' -- '.mysql_error().' -- <br/> Request in file : <b>'.debug_backtrace()[0]['file'].'</b><br/> on line <b>'.debug_backtrace()[0]['line']).'</b>';
+            
+            
         } else {
             $res = mysql_query($requete);
         }
