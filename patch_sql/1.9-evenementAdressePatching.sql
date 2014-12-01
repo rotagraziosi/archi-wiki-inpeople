@@ -8,6 +8,7 @@
 CREATE TABLE _adrEvent as (
 SELECT idEvenement, idAdresse
 FROM _adresseEvenement
+PRIMARY KEY (`idEvenement`,`idAdresse`)
 )
 
 
@@ -26,7 +27,7 @@ ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
 
 
 
-CREATE TABLE _adresseEvenement as(
+CREATE TABLE _adrEvt as(
 	SELECT distinct he1.idEvenement as idEvenement, ae.idAdresse as idAdresse, ha.latitude as latitudeGroupeAdresse, ha.longitude as longitudeGroupeAdresse
 	FROM _adresseEvenement ae
 	LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
@@ -37,3 +38,34 @@ CREATE TABLE _adresseEvenement as(
 	HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
 	ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
 )
+
+
+
+
+
+
+
+
+
+SELECT distinct he1.idEvenement as idEvenement, ae.idAdresse as idAdresse, ha.latitude as latitudeGroupeAdresse, ha.longitude as longitudeGroupeAdresse
+FROM _evenementEvenement ee
+LEFT JOIN _adresseEvenement ae on ae.idEvenement
+
+
+
+
+
+
+
+
+SELECT distinct he1.idEvenement as idEvenement, ae.idAdresse as idAdresse, ha.latitude as latitudeGroupeAdresse, ha.longitude as longitudeGroupeAdresse
+FROM _adresseEvenement ae
+LEFT JOIN _evenementEvenement ee ON ee.idEvenement = ae.idEvenement
+LEFT JOIN historiqueEvenement he1 ON he1.idEvenement = ee.idEvenementAssocie
+LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
+LEFT JOIN historiqueAdresse ha on ha.idAdresse = ae.idAdresse
+GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
+HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+ORDER BY he1.dateDebut,he1.idHistoriqueEvenement
+
+
