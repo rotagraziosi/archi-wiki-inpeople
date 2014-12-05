@@ -58,7 +58,6 @@ $listeActionsAuthentificationNonRequise=array(
 //$s = new objetSession();
 //echo $s->getFromSession('archiIdVilleGeneral');
 
-
 if (isset($_GET['archiAction'])) {
     $archiAction=$_GET['archiAction'];
     // Authentification non requise pour ces actions : 
@@ -494,10 +493,6 @@ if (isset($_GET['archiAction'])) {
             $i = new archiImage();
             $i->regenereImageFromUploadDirectory();
             break;
-
-  
-        default:
-            break;
         }
     } else {
         if (!in_array($archiAction, $listeActionsAuthentificationNonRequise)) {
@@ -509,6 +504,16 @@ if (isset($_GET['archiAction'])) {
 }
 
 
+/*
+elseif(!isset($_GET['archiAffichage'])){
+	ob_start();
+	$accueil = new archiAccueil();
+	echo $accueil->afficheAccueil();
+	$coucou = ob_get_contents();
+	ob_end_clean();
+	//echo $coucou;
+}
+*/
 
 
 // Liste des affichages qui ont besoin d'une authentification
@@ -1500,6 +1505,16 @@ if (isset($_GET['archiAffichage'])) {
         	$i = new archiInterest();
         	echo $i->deleteInterest();
         	break;
+       case 'showEvenement':
+			$e = new archiEvenement();
+			if(isset($_GET['idEvenement'])){
+				$idEvenement = $_GET['idEvenement'];				
+			}
+			else{
+				$idEvenement = 2134; //LOOL MAGiC NUMBER
+			}
+			echo $e->displaySingleEvent($idEvenement,array('displayMenu' => true));    		
+    		break;
         }
     }
 }
@@ -1511,10 +1526,10 @@ if ((count($_POST)==0 && count($_GET)==0)
 ) {
     
     
-    
     $accueil = new archiAccueil();
-    //echo $accueil->gestionSondage(array('modeAffichage'=>'resultatAccueil'));
     echo $accueil->afficheAccueil();
+    //echo $accueil->gestionSondage(array('modeAffichage'=>'resultatAccueil'));
+    //echo $accueil->afficheAccueil();
 }
 
 

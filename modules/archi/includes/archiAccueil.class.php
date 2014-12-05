@@ -474,24 +474,18 @@ class ArchiAccueil extends config
                 $s->addToSession('archiIdVilleGeneral', $params['idVille']);
                 
             }
-                
 
             
-            $news = $this->getIndexitem('news');
-            $lastAdd = $this->getIndexitem('lastAdded');
-            $t->assign_block_vars('test', array());
-            $t->assign_vars(array(
-            		'news' => $news,
-            		'lastAdd' => $lastAdd
-            ));
+            $categories=array('news','lastAdded'); //Liste des catégories à afficher
             
+            foreach ($categories as $category){ //Category is the array containing the whole category content
+	            $categoryContent = $this->getIndexitem($category);
+				foreach ($categoryContent as $singleContent){ //Single content contains a single content (a news, an addresse...)
+					$t->assign_block_vars('item', $singleContent);
+				}
+            }
             
-            
-            
-            
-            
-            
-           // echo $test;
+
           /*  $tabInfosAccueil = $adresses->getDerniersEvenementsParCategorie(5, $params); // on affichera un maximum de 5 evenements par encart
             
 
@@ -508,15 +502,7 @@ class ArchiAccueil extends config
                 )
             );
             */
-            
-            
-            $t->assign_vars(
-                array(
-                    'onglet1'=>_("Nouveautés"), 
-                    'onglet2'=>"<a href='".$this->creerUrl('', 'afficheAccueil', array('modeAffichage'=>'profil'))."'><font color='#FFFFFF'>"._("Mon Profil")."</font></a>", 
-                    'onglet3'=>"<a href='".$this->creerUrl('', 'afficheAccueil', array('modeAffichage'=>'monArchi'))."'><font color='#FFFFFF'>"._("Mon Archi")."</font></a>"
-                )
-            );
+          
             break;
         
         }
@@ -1780,63 +1766,104 @@ class ArchiAccueil extends config
 
     	switch($itemType){
     		case 'news':
-    			$sqlField = "titre,  date,  photoIllustration,  LEFT(texte,100) as texte,  urlFichier";
+    			$sqlField = "titre,  date,  photoIllustration,  LEFT(texte,100) as texte, idActualite";
 				$news = $this->getDernieresActualites(array('sqlLimit' => 'LIMIT 5','sqlFields'=>$sqlField));
-				$t->assign_var('CSSClassWrapper', 'newsItem');
+				//$t->assign_var('CSSClassWrapper', 'newsItem');
 				foreach ($news as $new){
-					
-					$item['CSSClass'] = 'news';
-					$item['titre'] =$new['titre'];
-					$item['img'] = $new['titre'];;
-					$item['url'] = $new['url'];;
-					$item['text'] = $new['texte'];;
+					$item['CSSClassWrapper'] = 'news';
+					$item['titreItem'] =$new['titre'];
+					$item['imgUrl'] = $this->getUrlRacine().'getPhotoSquare.php?id='.$new['photoIllustration'];;
+					$item['urlItem'] = $this->creerUrl('', 'afficherActualite', array('archiIdActualite'=>$new['idActualite']));;
+					$item['textItem'] = $new['texte'];
 					
 					$itemContent[]=$item;
 				}
     			break;
-    		case 'lastAdded':
-    			$requete = "SELECT ha.nom as nom , ai.idImage , hi.idHistoriqueImage as idHistoriqueImage
-    					FROM historiqueAdresse ha
-    					LEFT JOIN _adresseImage ai ON ai.idAdresse = ha.idAdresse
-    					LEFT JOIN historiqueImage hi ON hi.idImage = ai.idImage
-    					ORDER BY idHistoriqueAdresse DESC
+    		case 'derniereVue':
+    			//$t->assign_var('CSSClassWrapper', 'lastAddItem');
+    			$requete = "SELECT idHistoriqueImage
+    					FROM historiqueImage
+    					ORDER BY dateUpload
     					LIMIT 5
     					";
     			$result = $this->connexionBdd->requete($requete);
+    			$arrayId = array();
     			while($fetch = mysql_fetch_assoc($result)){
-    				$item['CSSClass'] = 'lastAdd';
-    				$item['titre'] =$fetch['nom'];
-    				$item['img'] = $this->getUrlRacine().'getPhotoSquare.php?id='.$fetch['idHistoriqueImage'];
-    				$item['url'] = $this->creerUrl('', '',
+    				$arrayId[]=$fetch['idHistoriqueImage'];
+    			}
+    			
+    			$sqlIn = "(";
+    			$i=0;
+    			foreach ($arrayId as $id){
+    				$sqlIn .=$id;
+    				if($i++<count($arrayId)-1){
+    					$sqlIn .=',';
+    				}
+    			}
+    			$sqlIn.=')';
+    			
+    			
+    			$requete = "SELECT * from  historiqueImage hi
+							LEFT JOIN _evenementImage ei on hi.idImage = hi.idImage
+							LEFT JOIN evenements evt on evt.idEvenement = ei.idEvenement
+							WHERE hi.idHistoriqueImage in " .$sqlIn."
+									GROUP BY hi.idHistoriqueImage";
+    			
+    			$result = $this->connexionBdd->requete($requete);
+    			while($fetch = mysql_fetch_assoc($result)){
+    				$item['CSSClassWrapper'] = 'lastAdd';
+    				$item['titreItem'] =$fetch['nom'];
+    				$item['imgUrl'] = $this->getUrlRacine().'getPhotoSquare.php?id='.$fetch['idHistoriqueImage'];
+    				$item['urlItem'] = $this->creerUrl('', '',
     						 array(
     						 		'archiAffichage'=>'adresseDetail', 
-    						 		"archiIdAdresse"=>$value['idAdresse'], 
-    						 		"archiIdEvenementGroupeAdresse"=>$value['idEvenementGroupeAdresse']
+    						 		"archiIdAdresse"=>$fetch['idAdresse'], 
+    						 		"archiIdEvenementGroupeAdresse"=>$fetch['idEvenementGroupeAdresse']
     				));
-    				$item['text'] = $fetch['nom'];
+    				$item['textItem'] = $fetch['nom'];
     				$itemContent[] = $item;
     			}
     			break;
-    		case 'liked':
-    			
-    			
-    			$itemContent['CSSClass'] = 'liked';
-    			$itemContent['titre'] ='';
-    			$itemContent['img'] = '';
-    			$itemContent['url'] = '';
-    			$itemContent['text'] = '';
+    		case 'lastAdded':
+    			$requete = 
+    					"
+			    		SELECT evt.idEvenement AS idEvenement, evt.titre AS titre, evt.idImagePrincipale AS idHistoriqueImage, ha.nom, ha.idAdresse AS idAdresse
+						FROM evenements evt
+						LEFT JOIN _adresseEvenement ae ON ae.idEvenement = evt.idEvenement
+						LEFT JOIN historiqueAdresse ha ON ha.idAdresse = ae.idAdresse
+						GROUP BY ha.idAdresse
+						ORDER BY evt.idEvenement DESC
+						LIMIT 5 
+							";
+    			 
+    			$result = $this->connexionBdd->requete($requete);
+    			while($fetch = mysql_fetch_assoc($result)){
+    				$item['CSSClassWrapper'] = 'lastAdd';
+    				$item['titreItem'] =$fetch['nom'];
+    				$item['imgUrl'] = $this->getUrlRacine().'getPhotoSquare.php?id='.$fetch['idHistoriqueImage'];
+    				$item['urlItem'] = $this->creerUrl('', '',
+    						array(
+    								'archiAffichage'=>'adresseDetail',
+    								"archiIdAdresse"=>$fetch['idAdresse'],
+    								"archiIdEvenementGroupeAdresse"=>$fetch['idEvenement']
+    						));
+    				$item['textItem'] = $fetch['nom'];
+    				$itemContent[] = $item;
+    			}
     			break;
     		default:
-    			$itemContent['CSSClass'] = 'news';
-    			$itemContent['titre'] ='';
-    			$itemContent['img'] = '';
-    			$itemContent['url'] = '';
-    			$itemContent['text'] = '';
+    			$itemContent['CSSClassWrapper'] = 'news';
+    			$itemContent['titreItem'] ='';
+    			$itemContent['imgUrl'] = '';
+    			$itemContent['urlItem'] = '';
+    			$itemContent['textItem'] = '';
 
     	}
-
     	
     	
+    	
+    	/*
+    	//debug($itemContent);
     	
     	foreach ($itemContent as $item){
 			$t->assign_block_vars('item', array(
@@ -1846,21 +1873,12 @@ class ArchiAccueil extends config
 					'textItem'=> $item['text'],
 			));
     	}
-    	
-    	 
-    	 
-    	$t->assign_vars(array(
-    			'CSSClassWrapper'=>$itemContent['CSSClass'],
-    			'imgUrl' => $itemContent['img'],
-    			'titreItem' => $itemContent['titre'],
-    			'urlItem' => $itemContent['url'],
-    			'textItem' => $itemContent['text']
-    	));
     	$t->pparse('indexItem');
     	$html.=ob_get_contents();
     	ob_end_clean();
     	//debug($html);
-		return $html;    	
+		return $html;   */
+		return $itemContent;
     }
     
 }

@@ -427,6 +427,35 @@ class archiAdresse extends ArchiContenu
 		return $this->getIdEvenementsFromAdresse($idAdresse);
 	}
 
+	
+	/**
+	 * Affiche le detail de l'adresse avec le listing des événements associés
+	 * 
+	 * @param unknown $idAdresse : Id de l'adresse a afficher
+	 * 
+	 * @return HTML du contenu principal de la page
+	 */
+	public function afficherDetailAdresse($idAdresse){
+		/*
+		 * Etape : 
+		 * Afficher la google map
+		 * Afficher le sommaire des evenements 
+		 * Récupérer la liste des evenements et les afficher un par un 
+		 * 
+		 * TODO : Découper le template en 2 : un pour cette fonction et un pour le détail d'un evenement
+		 * Ne pas fuckedup les ob_clear ob_get_content pour l'affichage : les mettre en global pour cet fonction  et aviser sur bronx
+		 *
+		 */
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
 	// ***************************************************************************************************************************************
 	// affiche le detail d'une adresse , c'est a dire les evenements dont le groupe d'adresse correspond
 	// ***************************************************************************************************************************************
@@ -5115,6 +5144,7 @@ class archiAdresse extends ArchiContenu
 
 		));
 
+		debug($modeAffichageList);
 		 
 		switch($modeAffichageListe)
 		{
@@ -6568,7 +6598,7 @@ class archiAdresse extends ArchiContenu
 								$reqTitresEvenements = "
 										SELECT he1.titre as titre ,  ae.idAdresse as idAdresse,  he1.idSource as idSource,  he1.numeroArchive as numeroArchive
 										FROM evenements he1
-										RIGHT JOIN _adresseEvenement ae ON ae.idEvenement = ".$fetch['idEvenementGA']."
+										LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ".$fetch['idEvenementGA']."
 										GROUP BY he1.idEvenement
 										ORDER BY he1.dateDebut
 										";//RIGHT JOIN _adresseEvenement ae ON ae.idAdresse = '".$fetch['idAdresse']."'
@@ -9028,7 +9058,7 @@ class archiAdresse extends ArchiContenu
                 RIGHT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
                 RIGHT JOIN typeEvenement te ON te.idTypeEvenement = he1.idTypeEvenement
                 WHERE ".$whereSql."
-                GROUP BY he1.idEvenement,ha1.idAdresse, he1.idHistoriqueEvenement, ha1.idHistoriqueAdresse
+                GROUP BY he1.idEvenement,ha1.idAdresse, ha1.idHistoriqueAdresse
                 HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                 ".$limitSql."
         ";
@@ -10800,8 +10830,7 @@ class archiAdresse extends ArchiContenu
                         ha1.idIndicatif as idIndicatif
                     FROM historiqueAdresse ha2, historiqueAdresse ha1
                     
-                    LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = '".$id."'
-                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
+                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = '".$id."'
                     
                     LEFT JOIN indicatif ind ON ind.idIndicatif = ha1.idIndicatif
                 
@@ -13012,7 +13041,7 @@ class archiAdresse extends ArchiContenu
                 {
                     // si pas de numero , on va chercher les deux premieres adresses de la rue
                     $reqPremiersNumeros = "
-                        SELECT distinct ha.numero, count(ee.idEvenementAssocie)
+                        SELECT distinct ha.numero, count(ae.idEvenement)
                         FROM historiqueAdresse ha
                         LEFT JOIN _adresseEvenement ae ON ae.idAdresse = ha.idAdresse
                         WHERE 

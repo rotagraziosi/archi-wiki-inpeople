@@ -37,8 +37,6 @@ UPDATE `evenements` SET `idEvenement` = '0' WHERE `evenements`.`idEvenement` =10
 
 
 
-
-
 delimiter //
 CREATE TRIGGER trig_historique_evenement_update
 BEFORE UPDATE ON evenements FOR EACH ROW

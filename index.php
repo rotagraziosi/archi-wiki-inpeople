@@ -13,7 +13,8 @@
  * @link     https://archi-strasbourg.org/
  * 
  * */
- 
+$countTest=0;
+
 //Debug mode ?
 error_reporting(E_ERROR);
 
@@ -134,5 +135,4 @@ $t->pparse('template');
 $page = ob_get_contents();
 ob_end_clean();
 echo $page;
-
 ?>

@@ -18,21 +18,43 @@
 
 </div>
 
+</div>
 
 
 <!-- BEGIN test -->
-<div class="body-content">
-{news}
-{lastAdd}
+<div class="body-content" style='display:table;'>
+{test.news}
+{test.lastAdd}
 </div>
 <!-- END test -->
 
 
+
+<div class="news_content">
+<!-- BEGIN item -->
+<div class="indexItemWrapper {item.CSSClassWrapper}">
+	<img alt="" src="{item.imgUrl}">
+	<h5>{item.titreItem}</h5>
+	<p>
+	{item.textItem}
+	</p>
+	<a href="{item.urlItem}">{item.titreItem}</a>
+</div>
+<!-- END item -->
+
 </div>
 
 
+
+<!-- BEGIN homeCategory -->
+<div class="content_item">
+	{homeCategory.category}	
+</div>
+<!-- END homeCategory -->
+
 <!-- BEGIN afficheEncarts -->
-<div style='display:table;' class="clear">
+<div style='display:table;'>
+
 <div class="homeTable">
 {encart1}
 {encart2}
@@ -67,28 +89,10 @@
 </div>
 <!-- END afficheMonArchi -->
 
-<!-- bouton "Ajoutez votre adresse" 
-<a href='{urlAjoutAdresse}' onmouseover="document.getElementById('imageAjouterAdresse').src='images/ajoutAdresse2.jpg';" onmouseout="document.getElementById('imageAjouterAdresse').src='images/ajoutAdresse1.jpg';"><img src='images/ajoutAdresse1.jpg' id='imageAjouterAdresse' border=0></a>
-<br>
--->
-
-
-
-<!--
-<strong>== Pourquoi ajouter votre adresse ? ==</strong><br><br>
-
-Bonne question. En ajoutant votre adresse vous contribuez au développement du site. Mais d'abord qu'entend t-on par "votre adresse" ? Et bien cela peut être l'immeuble ou la maison que vous occupez. Un immeuble que vous aimez mais que vous ne trouvez pas sur le site. Avec le développement des appareils photo numériques, il devient très simple de prendre une photo, et de la copier sur l'ordinateur. Ajouter une adresse dans www.archi-strasbourg.org ne prend pas plus de 20 secondes. Copier la photo 10 secondes de plus...<br><br>
-
-Ensuite si vous n'avez aucune information concernant l'adresse que vous avez ajouté, laissez faire les internautes... www.archi-strasbourg.org est une site collaboratif, c'est à dire que tout le monde pourra ajouter des informations qui pourront être commentées et rectifiées en cas d'erreur.
-<br><br>
-Si la passion "vous mange" vous pourrez ensuite rajouter autant d'adresses que vous le souhaitez et peut être même devenir un administrateur du site si vous souhaitez vous investir davantage.
-<br><br>
-A terme www.archi-strasbourg.org a l'ambition tout d'abord de couvrir tout Strasbourg et pourquoi pas d'autres villes de France. 
--->
-
 
 </div>
 
 
-
 {calqueHelp}
+
+

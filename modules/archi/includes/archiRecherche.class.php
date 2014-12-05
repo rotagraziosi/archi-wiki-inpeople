@@ -423,14 +423,11 @@ class archiRecherche extends config {
 						$reqEvenementAvecNumeroArchiveSansIdSource="
 								SELECT distinct ae.idEvenement as idEvenementGA
 								FROM _adresseEvenement ae
-								LEFT JOIN historiqueEvenement he1 ON he1.numeroArchive<>''
-								LEFT JOIN historiqueEvenement he2 ON he2.idEvenement = he1.idEvenement
-								LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = he1.idEvenement
+								LEFT JOIN evenements he1 ON he1.numeroArchive<>''
 								WHERE 1=1
 								AND (he1.idSource='0' OR he1.idSource='')
-								AND ae.idEvenement = ee.idEvenement
-								GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
-								HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
+								AND ae.idEvenement = he.idEvenement
+								GROUP BY he1.idEvenement
 								";
 						$resEvenementAvecNumeroArchiveSansIdSource = $this->connexionBdd->requete($reqEvenementAvecNumeroArchiveSansIdSource);
 
