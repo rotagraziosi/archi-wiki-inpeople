@@ -1471,7 +1471,27 @@ class archiEvenement extends config
 		$isAdmin = ($u->getIdProfil($userId)=='4');
 		
 		
+		$urlMenuAction = array(
+		'ajouterImage'     => $this->creerUrl('','ajoutImageEvenement',array('archiIdEvenement'=>$idEvenement)),
+		'modifierImage'    => $this->creerUrl('','modifierImageEvenement',array('archiIdEvenement'=>$idEvenement)),
+		'modifierEvenement'=> $this->creerUrl('', 'modifierEvenement', array_merge(array('archiIdEvenement' => $idEvenement,'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse),$arrayIdAdresseToUrl)),
 		
+		'urlImporterImage'=>"#",
+		'onClickImporterImage'=>"document.getElementById('formulaireEvenement').action='".$this->creerUrl('deplacerImagesSelectionnees','evenement',array('idEvenement'=>$idEvenement))."&deplacerVersIdEvenement=".$res->idEvenement."';document.getElementById('actionFormulaireEvenement').value='deplacerImages';if(confirm('Voulez-vous vraiment déplacer ces images ?')){document.getElementById('formulaireEvenement').submit();}",
+		'onClickSupprimerImage'=>"document.getElementById('formulaireEvenement').action='".$this->creerUrl('supprimerImagesSelectionnees','evenement',array('idEvenement'=>$idEvenement))."';document.getElementById('actionFormulaireEvenement').value='supprimerImages';if(confirm('Voulez-vous vraiment supprimer ces images ?')){document.getElementById('formulaireEvenement').submit();}",
+		'urlLierAdresses'=>$this->creerUrl('','afficheFormulaireEvenementAdresseLiee',array('idEvenement'=>$res->idEvenement))
+		);
+		
+		
+		
+		
+		// si on est en mode de deplacement d'image
+		// ou de selection de titre
+		// on rajoute le formulaire sur la page
+		if($authentification->estConnecte() && ((isset($this->variablesGet['afficheSelectionImage']) && $this->variablesGet['afficheSelectionImage']=='1')||(isset($this->variablesGet['afficheSelectionTitre']) && $this->variablesGet['afficheSelectionTitre']=='1') ))
+		{
+			$t->assign_block_vars('formEvenement', array());
+		}
 		/*
 		 * Template filling
 		 */
@@ -1507,16 +1527,16 @@ class archiEvenement extends config
 			$t->assign_block_vars('menuAction', array());
 			$t->assign_block_vars('menuAction.rowName', array(
 					'actionName'=>'Ajouter',
-					'urlAction'=>'http://hohoho.com',
+					'urlAction'=>$urlMenuAction['ajouterImage'],
 					'actionTarget'=>'Image'
 			));
 			$t->assign_block_vars('menuAction.rowName', array(
 					'actionName'=>'Modifier',
-					'urlAction'=>'http://hohoho.com',
+					'urlAction'=>$urlMenuAction['modifierImage'],
 					'actionTarget'=>'Image'
 			));
 			$t->assign_block_vars('menuAction.rowName.secondAction', array(
-					'urlAction'=>'http://hohoho.com',
+					'urlAction'=>$urlMenuAction['modifierEvenement'],
 					'actionTarget'=>'Evenement'
 			));
 		}
@@ -1525,23 +1545,23 @@ class archiEvenement extends config
 		if($isModerateur || $isAdmin){
 			$t->assign_block_vars('menuAction.rowName', array(
 					'actionName'=>'Supprimer',
-					'urlAction'=>'http://hohoho.com',
+					'urlAction'=>'#',
 					'actionTarget'=>'Evenement'
 			));
 			$t->assign_block_vars('menuAction.rowName.confirmMessage', array(
 					'message'=>'Voulez vous vraiment supprimer cet évènement ?',
-					'url'=>'http://blopblop.com'
+					'url'=>$urlMenuAction['supprimerEvenement']
 			));
 			
 			if($isAdmin){
 				$t->assign_block_vars('menuAction.rowName.secondAction', array(
-						'urlAction'=>'http://hohoho.com',
+						'urlAction'=>'#',
 						'actionTarget'=>'Image'
 				));
 				
 				$t->assign_block_vars('menuAction.rowName.secondAction.confirmMessage', array(
 						'message'=>'Voulez vous vraiment supprimer cette image ?',
-						'url'=>'http://blopblop.com'
+						'url'=>$urlMenuAction['onClickSupprimerImage']
 				));
 			}
 		}
