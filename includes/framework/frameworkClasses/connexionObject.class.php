@@ -80,7 +80,10 @@ class ConnexionBdd extends config
      * */
     function requete($requete="",$silencieux=false)
     {
-    	//debug($requete);
+    	/*
+    	global $countTest;
+    	debug("Requete n°".$countTest++);
+    	*/
         if ($silencieux==false) {
             $res = mysql_query($requete) 
             or 

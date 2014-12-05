@@ -1378,7 +1378,7 @@ class archiEvenement extends config
 		
 		
 		$req = "
-							SELECT e.dateDebut
+							SELECT e.dateDebut, ae1.idAdresse
 							FROM _adresseEvenement ae1,_adresseEvenement ae2
 							LEFT JOIN evenements e on e.idEvenement= ae2.idEvenement
 							WHERE ae1.idAdresse= ae2.idAdresse
@@ -1388,6 +1388,7 @@ class archiEvenement extends config
 		
 		$res = $this->connexionBdd->requete($req);
 		$date2 =mysql_fetch_object($res);
+		$idAdresse = $date2->idAdresse;
 		$linkedEventsHTML=archiPersonne::displayEvenementsLies($idPerson, $dateDebut, $date2->dateDebut);
 		
 		
@@ -1452,6 +1453,25 @@ class archiEvenement extends config
 		$dateTxt = $this->getDateAsString($fetch);
 
 		
+		
+		$requeteCityId = "
+				SELECT idVille 
+				FROM historiqueAdresse
+				WHERE idAdresse = ".$idAdresse."
+				";
+		$resultCityId = $this->connexionBdd->requete($requeteCityId);
+		$fetchCityId = mysql_fetch_assoc($resultCityId);
+		$cityId = $fetchCityId['idVille'];
+		
+		$isModerateur = true;
+		$isAdmin = true;
+		$u = new archiUtilisateur();
+		$userId = $authentification->getIdUtilisateur();
+		$isModerateur = $u->isModerateurFromVille($userId,$cityId,'idVille');
+		$isAdmin = ($u->getIdProfil($userId)=='4');
+		
+		
+		
 		/*
 		 * Template filling
 		 */
@@ -1476,72 +1496,66 @@ class archiEvenement extends config
 		);
 		
 		
-		$conditionRowName = (isset($rowName) && !empty($rowName)) ;
-		$conditionSingleRowLink = (isset($singleRowLink) && !empty($singleRowLink));
-		$conditionConfirmMessage1=(isset($confirmMessage1) && !empty($confirmMessage1));
-		$conditionSecondAction = (isset($secondAction) && !empty($secondAction));
-		$conditionConfirmMessage2=(isset($confirmMessage2) && !empty($confirmMessage2));
+		
+		/*
+		 * Useless now, but might be need futher if
+		 *	this function is reused and should not display menu action
+		 */
+		$afficherMenu=true; 
+		
+		if($afficherMenu){
+			$t->assign_block_vars('menuAction', array());
+			$t->assign_block_vars('menuAction.rowName', array(
+					'actionName'=>'Ajouter',
+					'urlAction'=>'http://hohoho.com',
+					'actionTarget'=>'Image'
+			));
+			$t->assign_block_vars('menuAction.rowName', array(
+					'actionName'=>'Modifier',
+					'urlAction'=>'http://hohoho.com',
+					'actionTarget'=>'Image'
+			));
+			$t->assign_block_vars('menuAction.rowName.secondAction', array(
+					'urlAction'=>'http://hohoho.com',
+					'actionTarget'=>'Evenement'
+			));
+		}
 		
 		
-		$conditionRowName=true; //Sabotage
-		$conditionSingleRowLink=true;
-		$conditionConfirmMessage1=true;
-		$conditionConfirmMessage2=true;
-		$conditionSecondAction=true;
-		
-		
-		$menuActionCondition = (
-				$conditionRowName
-				|| $conditionSingleRowLink
-				|| $conditionConfirmMessage1
-				|| $conditionSecondAction
-				|| $conditionConfirmMessage2
-				);
-		
-		
-		
-		
-		
-		if($menuActionCondition){
+		if($isModerateur || $isAdmin){
+			$t->assign_block_vars('menuAction.rowName', array(
+					'actionName'=>'Supprimer',
+					'urlAction'=>'http://hohoho.com',
+					'actionTarget'=>'Evenement'
+			));
+			$t->assign_block_vars('menuAction.rowName.confirmMessage', array(
+					'message'=>'Voulez vous vraiment supprimer cet évènement ?',
+					'url'=>'http://blopblop.com'
+			));
+			
+			if($isAdmin){
+				$t->assign_block_vars('menuAction.rowName.secondAction', array(
+						'urlAction'=>'http://hohoho.com',
+						'actionTarget'=>'Image'
+				));
 				
-			if(isset($params['displayMenu']) && $params['displayMenu']){
-				$t->assign_block_vars('menuAction', array());
-					
-				if($conditionRowName){
-					$t->assign_block_vars('menuAction.rowName', array(
-							'actionName'=>'truc',
-							'urlAction'=>'http://hohoho.com',
-							'actionTarget'=>'Blablabla'
-					));
-				}
-					
-				if($conditionSecondAction){
-					$t->assign_block_vars('menuAction.rowName', array(
-							'actionName'=>'oula',
-							'urlAction'=>'http://hohoho.com',
-							'actionTarget'=>'deuxieme link'
-					));
-					$t->assign_block_vars('menuAction.rowName.secondAction', array(
-							'urlAction'=>'http://hohoho.com',
-							'actionTarget'=>'troisieme link'
-					));
-					$t->assign_block_vars('menuAction.rowName.secondAction.confirmMessage', array(
-							'message'=>'blabla test de message',
-							'url'=>'http://blopblop.com'
-					));
-
-				}
+				$t->assign_block_vars('menuAction.rowName.secondAction.confirmMessage', array(
+						'message'=>'Voulez vous vraiment supprimer cette image ?',
+						'url'=>'http://blopblop.com'
+				));
 			}
 		}
 		
 		
+		/*
+		 $t->assign_block_vars('menuAction.rowName.secondAction.confirmMessage', array(
+		 		'message'=>'blabla test de message',
+		 		'url'=>'http://blopblop.com'
+		 ));*/
 		
 		
 		$t->assign_vars($evenementData); //Assign the body of the event with date description, title, user, etc...
-		
-		
 		$t->pparse('list');
-		
 		return $html;
 	}
 	

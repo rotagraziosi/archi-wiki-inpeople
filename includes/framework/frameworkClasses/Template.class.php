@@ -276,7 +276,6 @@ class Template
         if (!file_exists($filename)) {
             die("Template->make_filename(): Erreur - Le fichier $filename est inexistant");
         }
-
         return $filename;
     }
 
