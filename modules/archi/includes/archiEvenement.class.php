@@ -1479,6 +1479,12 @@ class archiEvenement extends config
 
 		
 		
+		$bbCode = new bbCodeObject();
+		$description = $bbCode->convertToDisplay(array('text'=>$fetch['description']));
+		$description = empty($description)?"":"<div itemprop='description' class='desc'>".$description."</div>";
+		
+		
+		
 		$requeteCityId = "
 				SELECT idVille 
 				FROM historiqueAdresse
@@ -1533,7 +1539,7 @@ class archiEvenement extends config
 				'urlTypeEvenement'=>$this->creerUrl('', 'evenementListe', array('selection' => 'typeEvenement', 'id' => $fetch['idTypeEvenement'])),
 				'typeEvenement'=>$fetch['nomTypeEvenement'],
 				'numeroArchive'=>$fetch['numeroArchive'],
-				'description'=>$fetch['description'],
+				'description'=>$description,
 				'imagesLiees'=>$imagesHTML,
 				'evenementsParents'=>'',
 				'listeAdressesLiees'=>$adressesLieesHTML,
