@@ -146,12 +146,31 @@ class Template
             // Actually compile the code now.
             $this->compiled_code[$handle] = $this->compile($this->uncompiled_code[$handle]);
         }
-
         // Run the compiled code.
         eval($this->compiled_code[$handle]);
         //return true;
     }
 
+    /**
+     * Modified by Antoine Rota Graziosi
+     * @param unknown $handle
+     */
+    function pparse_plainHTML($handle){
+    	if (!$this->loadfile($handle)) {
+    		die("Template->pparse(): Impossible de charger le fichier template pour le modèle $handle");
+    	}
+    	
+    	// actually compile the template now.
+    	if (!isset($this->compiled_code[$handle]) || empty($this->compiled_code[$handle])) {
+    		// Actually compile the code now.
+    		$this->compiled_code[$handle] = $this->compile($this->uncompiled_code[$handle],true);
+    	}
+    	return $this->compiled_code[$handle];
+    	//return true;
+    }
+    
+    
+    
     /**
      * Inserts the uncompiled code for $handle as the
      * value of $varname in the root-level. This can be used

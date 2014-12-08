@@ -1331,14 +1331,17 @@ class archiEvenement extends config
 	 * @param unknown $idEvenement : id of the event to display  
 	 * @return string : html of the detail event
 	 */
-	public function displaySingleEvent($idEvenement,$params = array()){
+	public function displaySingleEvent($idEvenement,$template,$handle,$params = array()){
 		$html ="";
 		
 		$authentification = new archiAuthentification();
 		
-		$t = new Template('modules/archi/templates/evenement');
-		$t->set_filenames(array('list'=>'list.tpl'));
-
+		
+		/*
+		//$t = new Template('modules/archi/templates/evenement');
+		$t = $template; 
+		$t->set_filenames(array($handle=>'list.tpl'));
+*/
 		/*
 		 * Data processing
 		 */
@@ -1354,7 +1357,6 @@ class archiEvenement extends config
 		
 		$result = $this->connexionBdd->requete($requete);
 		$fetch = mysql_fetch_assoc($result);
-		debug($fetch);
 		
 		
 		//History processing
@@ -1403,10 +1405,13 @@ class archiEvenement extends config
 						ORDER BY p.nom DESC');
 		
 		$metier="";
+		$arrayPersonne = array();
 		while( $res = mysql_fetch_object($rep)){
+			$personne=array();
 			if(isset($res->metier) && $res->metier!='')	{
 				$metier = $res->metier.' : ';
 			}
+			/*
 			$t->assign_block_vars('simple.pers', array(
 					'urlDetail'    => $this->creerUrl('', 'personne', array('idPersonne' => $res->idPersonne)),
 					'urlEvenement' => $this->creerUrl('', 'evenementListe', array('selection' => 'personne', 'id' => $res->idPersonne)),
@@ -1416,8 +1421,22 @@ class archiEvenement extends config
 					'idPerson' => $res->idPersonne,
 					'idEvent' => $idEvenement
 			));
+			*/
+			$arrayPersonne[]= array(
+					'evenement.pers', array(
+					'urlDetail'    => $this->creerUrl('', 'personne', array('idPersonne' => $res->idPersonne)),
+					'urlEvenement' => $this->creerUrl('', 'evenementListe', array('selection' => 'personne', 'id' => $res->idPersonne)),
+					'nom' => stripslashes($res->nom),
+					'prenom' => stripslashes($res->prenom),
+					'metier' => stripslashes($metier),
+					'idPerson' => $res->idPersonne,
+					'idEvent' => $idEvenement
+				)
+			);
+			
 			if($authentification->estConnecte()){
-				$t->assign_block_vars('simple.pers.connected',array());
+				//$t->assign_block_vars('simple.pers.connected',array());
+			//	$arrayPersonne[]=array('evenement.pers.connected',array());
 			}
 		}
 		
@@ -1432,11 +1451,17 @@ class archiEvenement extends config
 						LEFT JOIN courantArchitectural cA  ON cA.idCourantArchitectural  = _eA.idCourantArchitectural
 						WHERE _eA.idEvenement='.$idEvenement.'
 						ORDER BY cA.nom ASC');
-		
+		$arrayCourantArchi = array();
 		if(mysql_num_rows($rep)>0){
-			$t->assign_block_vars('isCourantArchi',array());
+			//$t->assign_block_vars('isCourantArchi',array());
+			$arrayCourantArchi[] = array('evenement.isCourantArchi',array());
 			while( $res = mysql_fetch_object($rep))	{
+				/*
 				$t->assign_block_vars('isCourantArchi.archi', array(
+						'url' => $this->creerUrl('', 'evenementListe', array('selection' => 'courant', 'id' => $res->idCourantArchitectural)),
+						'nom' => $res->nom));
+				*/
+				$arrayCourantArchi[] = array('isCourantArchi.archi' , array(
 						'url' => $this->creerUrl('', 'evenementListe', array('selection' => 'courant', 'id' => $res->idCourantArchitectural)),
 						'nom' => $res->nom));
 			}
@@ -1490,7 +1515,8 @@ class archiEvenement extends config
 		// on rajoute le formulaire sur la page
 		if($authentification->estConnecte() && ((isset($this->variablesGet['afficheSelectionImage']) && $this->variablesGet['afficheSelectionImage']=='1')||(isset($this->variablesGet['afficheSelectionTitre']) && $this->variablesGet['afficheSelectionTitre']=='1') ))
 		{
-			$t->assign_block_vars('formEvenement', array());
+			//$t->assign_block_vars('formEvenement', array());
+			$arrayFormEvenement = array('formEvenement', array());
 		}
 		/*
 		 * Template filling
@@ -1523,46 +1549,111 @@ class archiEvenement extends config
 		 */
 		$afficherMenu=true; 
 		
+		$menuArray = array();
+		
+		
 		if($afficherMenu){
-			$t->assign_block_vars('menuAction', array());
+			//$t->assign_block_vars('menuAction', array());
+			
+			$menuArray[] = array('evenement.menuAction', array());
+			 /*
 			$t->assign_block_vars('menuAction.rowName', array(
 					'actionName'=>'Ajouter',
 					'urlAction'=>$urlMenuAction['ajouterImage'],
 					'actionTarget'=>'Image'
 			));
+			*/
+			$menuArray[] = array('evenement.menuAction.rowName', array(
+					'actionName'=>'Ajouter',
+					'urlAction'=>$urlMenuAction['ajouterImage'],
+					'actionTarget'=>'Image'
+			));
+			
+			/*
 			$t->assign_block_vars('menuAction.rowName', array(
 					'actionName'=>'Modifier',
 					'urlAction'=>$urlMenuAction['modifierImage'],
 					'actionTarget'=>'Image'
 			));
+			*/
+			
+			$menuArray[] = array('evenement.menuAction.rowName', array(
+					'actionName'=>'Modifier',
+					'urlAction'=>$urlMenuAction['modifierImage'],
+					'actionTarget'=>'Image'
+			));
+				
+			/*			
 			$t->assign_block_vars('menuAction.rowName.secondAction', array(
 					'urlAction'=>$urlMenuAction['modifierEvenement'],
 					'actionTarget'=>'Evenement'
 			));
+			*/
+			
+			
+			$menuArray[] = array('evenement.menuAction.rowName.secondAction', array(
+					'urlAction'=>$urlMenuAction['modifierEvenement'],
+					'actionTarget'=>'Evenement'
+			));
+			
+			
 		}
 		
 		
 		if($isModerateur || $isAdmin){
+			/*
 			$t->assign_block_vars('menuAction.rowName', array(
 					'actionName'=>'Supprimer',
 					'urlAction'=>'#',
 					'actionTarget'=>'Evenement'
 			));
+			*/
+
+			$menuArray[] = array('evenement.menuAction.rowName', array(
+					'actionName'=>'Supprimer',
+					'urlAction'=>'#',
+					'actionTarget'=>'Evenement'
+			));
+				
+			
+			/*
 			$t->assign_block_vars('menuAction.rowName.confirmMessage', array(
 					'message'=>'Voulez vous vraiment supprimer cet évènement ?',
 					'url'=>$urlMenuAction['supprimerEvenement']
 			));
+			*/
+			
+			
+			$menuArray[] = array('evenement.menuAction.rowName.confirmMessage', array(
+					'message'=>'Voulez vous vraiment supprimer cet évènement ?',
+					'url'=>$urlMenuAction['supprimerEvenement']
+			));
+			
 			
 			if($isAdmin){
+				/*
 				$t->assign_block_vars('menuAction.rowName.secondAction', array(
 						'urlAction'=>'#',
 						'actionTarget'=>'Image'
 				));
+				*/
+				$menuArray[] = array('evenement.menuAction.rowName.secondAction', array(
+						'urlAction'=>'#',
+						'actionTarget'=>'Image'
+				));
 				
+				/*
 				$t->assign_block_vars('menuAction.rowName.secondAction.confirmMessage', array(
 						'message'=>'Voulez vous vraiment supprimer cette image ?',
 						'url'=>$urlMenuAction['onClickSupprimerImage']
 				));
+				*/
+				$menuArray[] = array('evenement.menuAction.rowName.secondAction.confirmMessage', array(
+						'message'=>'Voulez vous vraiment supprimer cette image ?',
+						'url'=>$urlMenuAction['onClickSupprimerImage']
+				));
+				
+				
 			}
 		}
 		
@@ -1574,9 +1665,15 @@ class archiEvenement extends config
 		 ));*/
 		
 		
+		/*
 		$t->assign_vars($evenementData); //Assign the body of the event with date description, title, user, etc...
-		$t->pparse('list');
-		return $html;
+		$t->pparse($handle);
+		*/
+		//$html = $t->pparse_plainHTML('list');
+		
+		return array('evenementData' => $evenementData, 'menuArray' => $menuArray, 'arrayPersonne'=>$arrayPersonne,'arrayFormEvent' => $arrayFormEvenement,'arrayCourantArchi' => $arrayCourantArchi);
+		//return $html;
+		//return eval($html);
 	}
 	
 	
@@ -1587,7 +1684,7 @@ class archiEvenement extends config
 	public function afficher($idEvenement = null,$modeAffichage='', $idHistoriqueEvenement = null, $paramChampCache=array(),$params=array())
 	{
 		$t = new Template('modules/archi/templates/evenement');
-		$t->set_filenames(array('list'=>'list.tpl'));
+		$t->set_filenames(array('index'=>'index.tpl'));
 /*		
 		debug($idEvenement);
 		debug($modeAffichage);
@@ -1631,8 +1728,15 @@ class archiEvenement extends config
 				'popupGoogleMap'=>$calqueGoogleMap->getDivNoDraggableWithBackgroundOpacity(array('top'=>20,'lienSrcIFrame'=>'','contenu'=>$contenuIFramePopup))
 		));
 		
+		$e = new archiEvenement();
+		$hoho = $e->displaySingleEvent(152);
+		
+		
+		
+		
+		
 		ob_start();
-		$t->pparse('list');
+		$t->pparse('index');
 		$html .= ob_get_contents();
 		ob_end_clean();
 		return array('html'=>$html);		
@@ -3269,7 +3373,6 @@ class archiEvenement extends config
 	// *********************************************************************
 	public function getDescriptionAndTitreFromFirstChildEvenement($idEvenementGroupeAdresse=0)
 	{
-		debug("Big modification on the request, doesn't seem to be buggy");
 		$query="
 				select he.titre as titre, he.description as description
 				from evenements he
@@ -3285,7 +3388,6 @@ class archiEvenement extends config
 				)
 				group by he.idEvenement
 						";
-		debug($query);
 		$res = $this->connexionBdd->requete($query);
 		$fetch=mysql_fetch_assoc($res);
 
@@ -6949,7 +7051,6 @@ class archiEvenement extends config
 	 * @return string date
 	 */
 	private function getDateAsString($res){
-		debug($res);
 		$dateTxt="";
 		$environDateDebutTxt = "";
 		if($res['isDateDebutEnviron']=='1'){

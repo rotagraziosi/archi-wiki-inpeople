@@ -446,11 +446,100 @@ class archiAdresse extends ArchiContenu
 		 * Ne pas fuckedup les ob_clear ob_get_content pour l'affichage : les mettre en global pour cet fonction  et aviser sur bronx
 		 *
 		 */
+		$t = new Template('modules/archi/templates/evenement');
+		$t->set_filenames(array('index'=>'index.tpl'));
+		/*
+		 debug($idEvenement);
+		debug($modeAffichage);
+		debug($idHistoriqueEvenement);
+		debug($paramChampCache);
+		debug($params);
+		debug($this->variablesGet);
+		*/
+		$title = $this->displayTitle();
+		
+		if(isset($this->variablesGet['archiIdAdresse']) && ! empty($this->variablesGet['archiIdAdresse'])){
+			$idAdresse=$this->variablesGet['archiIdAdresse'];
+		}
+		elseif(isset($idEvenement) && !empty($idEvenement)){
+			//Getting idAdresse
+			$requete = "SELECT idAdresse FROM _adresseEvenement WHERE idEvenement = ".$idEvenement;
+			$result = $this->connexionBdd->requete($requete);
+			$fetch = mysql_fetch_assoc($result);
+			$idAdresse = $fetch['idAdresse'];
+		}
+		
+		//Getting coordo for the current address
+		
+		$requete = "SELECT latitude , longitude FROM historiqueAdresse WHERE idAdresse = ".$idAdresse;
+		$result = $this->connexionBdd->requete($requete);
+		$fetch = mysql_fetch_assoc($result);
+		$coordonnees['longitude'] = $fetch['longitude'];
+		$coordonnees['latitude'] = $fetch['latitude'];
+		
+		
+		$e = new archiEvenement();//Should be moved to archiUtils
+		$calqueGoogleMap = new calqueObject(array('idPopup'=>10));
+		$contenuIFramePopup = $e->getContenuIFramePopupGoogleMap(array(
+				'idAdresseCourante'=>$idAdresse,
+				'calqueObject'=>$calqueGoogleMap,
+				'idEvenementGroupeAdresseCourant'=>$idEvenement
+		));
+		
+		$t->assign_block_vars('CarteGoogle',array(
+				'src'=>$this->creerUrl('','afficheGoogleMapIframe',array('noHeaderNoFooter'=>1,'longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement)),
+				'lienVoirCarteGrand'=>"<a href='#' onclick=\"".$calqueGoogleMap->getJsOpenPopupNoDraggableWithBackgroundOpacity()."document.getElementById('iFrameDivPopupGM').src='".$this->creerUrl('','afficheGoogleMapIframe',array('longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'noHeaderNoFooter'=>true,'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement,'modeAffichage'=>'popupDetailAdresse'))."';\" class='bigger' style='font-size:11px;'>"._("Voir la carte en + grand")."</a>",
+				'popupGoogleMap'=>$calqueGoogleMap->getDivNoDraggableWithBackgroundOpacity(array('top'=>20,'lienSrcIFrame'=>'','contenu'=>$contenuIFramePopup))
+		));
+		
+		
+		$evenement = $e->displaySingleEvent(152,$t,'list');
+		
+		$t->assign_block_vars('evenement', $evenement['evenementData']);
 		
 		
 		
+		foreach ($evenement['menuArray'] as $menuElt){
+			$t->assign_block_vars($menuElt[0], $menuElt[1]);
+		}
+		foreach ($evenement['arrayPersonne'] as $personne){
+			$t->assign_block_vars($personne[0], $personne[1]);
+		}
 		
 		
+		//debug($hoho);
+		//eval($hoho);
+		
+		/*
+		$t->assign_block_vars('listEvt', array());
+		$t->assign_var_from_handle('listEvt.evenement', 'list');
+		
+		*/
+		
+		//$t->assign_var('listeEvenements', $hoho,'list');
+		/*$t->assign_var_from_handle(
+				'listeEvenements', 'list'
+				);
+		*/
+		
+		//$e->displaySingleEvent(153,$t);
+		/*$t->assign_var_from_handle(
+				'listeEvenements', 'list'
+		);*/
+		
+		
+		
+		$t->assign_vars(array(
+				'title' => $title
+				
+		));
+		
+		
+		ob_start();
+		$t->pparse('index');
+		$html .= ob_get_contents();
+		ob_end_clean();
+		return $html;
 	}
 	
 	
@@ -14438,6 +14527,80 @@ class archiAdresse extends ArchiContenu
 			$nextPage = $nbPages;
 		}
 		return array('previousPage'=>$previousPage , 'nextPage'=>$nextPage) ;
+	}
+	
+	
+	
+	
+	
+	private function displayTitle($idAdresse){
+		// attention s'il y a plusieurs evenement distinct (pas associes entre eux) reliés a l'adresse on les affichera a la suite
+		if (isset($_GET["archiIdAdresse"])) {
+			$address=$this->getArrayAdresseFromIdAdresse($_GET["archiIdAdresse"]);
+		}
+		
+		$reqTitre = "
+				SELECT he1.titre as titre
+				FROM _adresseEvenement ae
+				LEFT JOIN evenements he1 ON he1.idEvenement = ae.idEvenement
+				WHERE he1.titre!=''
+				AND ae.idAdresse = '".$idAdresse."'
+				AND he1.idTypeEvenement <>'6'
+				GROUP BY he1.idEvenement
+				ORDER BY he1.dateDebut
+				LIMIT 1
+		
+				";
+		$resTitre = $this->connexionBdd->requete($reqTitre);
+		if(mysql_num_rows($resTitre)==1)
+		{
+			$fetchTitre = mysql_fetch_assoc($resTitre);
+			$titre = stripslashes($fetchTitre['titre']);
+			if(trim($fetchTitre['titre'])=='')
+			{
+				$noTitreDetected=true;
+				$titre='';
+			}
+		}
+			
+		
+		//    }
+		$e=new archiEvenement();
+		$archiIdEvenementGroupeAdresse=isset($_GET['archiIdEvenementGroupeAdresse'])?$_GET['archiIdEvenementGroupeAdresse']:$e->getIdEvenementGroupeAdresseFromIdEvenement($_GET["archiIdEvenement"]);
+		$titre=$intituleAdresse = $this->getIntituleAdresseFrom($archiIdEvenementGroupeAdresse, "idEvenementGroupeAdresse", array("afficheTitreSiTitreSinonRien"=>true, "noHTML"=>true));
+		if (isset($titre) && !empty($titre)) {
+			if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail') {
+				$html.="<span itemprop='name'>";
+			}
+			$html.=$titre;
+			if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail') {
+				$html.="</span>";
+			}
+			if (!empty($address["nomRue"])) {
+				$html.="&nbsp;-&nbsp;";
+			}
+		}
+		if (isset($address)) {
+			if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail') {
+				$html.="<span itemprop='address' itemscope itemtype='http://schema.org/PostalAddress'><span itemprop='streetAddress'>";
+			}
+			if ($address["numero"]." " != 0) {
+				$html.=$address["numero"];
+				if (isset($address['nomIndicatif'])) {
+					$html.=$address["nomIndicatif"];
+				}
+				$html.=' ';
+			}
+			$html.=$address["prefixeRue"]." ".$address["nomRue"];
+			if (isset($_GET['archiAffichage']) && $_GET['archiAffichage']=='adresseDetail') {
+				$html.="</span>
+						<meta itemprop='addressLocality' content='".$address["nomVille"]."'/>
+						<meta itemprop='addressCountry' content='".$address["nomPays"]."'/>
+						</span>";
+			}
+		
+		}
+		return $html;
 	}
 
 }
