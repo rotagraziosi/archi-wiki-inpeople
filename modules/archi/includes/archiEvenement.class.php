@@ -1508,7 +1508,7 @@ class archiEvenement extends config
 		);
 		
 		
-		
+		//debug($arrayEncartAdresses);
 		
 		// si on est en mode de deplacement d'image
 		// ou de selection de titre
@@ -1530,14 +1530,15 @@ class archiEvenement extends config
 				'dates'=>$dateTxt,
 				'sources'=>$fetch['nomSource'],
 				'typeStructure'=>$fetch['nomTypeStructure'],
-				'urlTypeEvenement'=>'MGBEP',
+				'urlTypeEvenement'=>$this->creerUrl('', 'evenementListe', array('selection' => 'typeEvenement', 'id' => $fetch['idTypeEvenement'])),
 				'typeEvenement'=>$fetch['nomTypeEvenement'],
 				'numeroArchive'=>$fetch['numeroArchive'],
 				'description'=>$fetch['description'],
 				'imagesLiees'=>$imagesHTML,
 				'evenementsParents'=>'',
 				'listeAdressesLiees'=>$adressesLieesHTML,
-				'evenementsLiesPersonne' =>$linkedEventsHTML
+				'evenementsLiesPersonne' =>$linkedEventsHTML,
+				'idEvenement' =>$idEvenement
 				
 		);
 		
@@ -1672,8 +1673,6 @@ class archiEvenement extends config
 		//$html = $t->pparse_plainHTML('list');
 		
 		return array('evenementData' => $evenementData, 'menuArray' => $menuArray, 'arrayPersonne'=>$arrayPersonne,'arrayFormEvent' => $arrayFormEvenement,'arrayCourantArchi' => $arrayCourantArchi);
-		//return $html;
-		//return eval($html);
 	}
 	
 	
@@ -7126,6 +7125,29 @@ class archiEvenement extends config
 		}
 		return $dateTxt;
 	}
+	
+	
+	
+	
+	public function getSommaireInfo($idEvenement){
+		
+		
+		$requete = 'SELECT  hE.idEvenement, hE.titre, hE.idSource, hE.idTypeStructure, hE.idTypeEvenement, hE.description, hE.dateDebut, hE.dateFin, hE.dateDebut, hE.dateFin, tE.nom AS nomTypeEvenement, tS.nom AS nomTypeStructure, s.nom AS nomSource, u.nom AS nomUtilisateur,u.prenom as prenomUtilisateur, tE.groupe, hE.ISMH , hE.MH, date_format(hE.dateCreationEvenement,"'._("%e/%m/%Y à %kh%i").'") as dateCreationEvenement,hE.isDateDebutEnviron as isDateDebutEnviron, u.idUtilisateur as idUtilisateur, hE.numeroArchive as numeroArchive
+					FROM evenements hE
+					LEFT JOIN source s      ON s.idSource = hE.idSource
+					LEFT JOIN typeStructure tS  ON tS.idTypeStructure = hE.idTypeStructure
+					LEFT JOIN typeEvenement tE  ON tE.idTypeEvenement = hE.idTypeEvenement
+					LEFT JOIN utilisateur u     ON u.idUtilisateur = hE.idUtilisateur
+					WHERE hE.idEvenement='.$idEvenement.'
+			ORDER BY hE.idEvenement DESC';
+		
+		$result = $this->connexionBdd->requete($requete);
+		$fetch = mysql_fetch_assoc($result);
+		
+		
+		return array('titre' => $titre,'date' =>$date);
+	}
+	
 	
 }
 

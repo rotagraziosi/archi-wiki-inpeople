@@ -1498,3 +1498,21 @@ li:empty {
 	background-color: #c3f2c3;
 	border: 1px solid green; 
 }
+
+.actionsEvenement{
+	width: 246px;
+}
+.sommaireEvenements{
+	width: 600px;
+}
+.inline-div{
+	display: inline-block;
+}
+
+.part_one, .part_two, .evenement{
+	margin-bottom: 20px;
+}
+
+.listAdressesVoisines{
+	margin-left: 100px;
+}

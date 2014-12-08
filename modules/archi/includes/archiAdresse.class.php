@@ -443,19 +443,11 @@ class archiAdresse extends ArchiContenu
 		 * Récupérer la liste des evenements et les afficher un par un 
 		 * 
 		 * TODO : Découper le template en 2 : un pour cette fonction et un pour le détail d'un evenement
-		 * Ne pas fuckedup les ob_clear ob_get_content pour l'affichage : les mettre en global pour cet fonction  et aviser sur bronx
 		 *
 		 */
 		$t = new Template('modules/archi/templates/evenement');
 		$t->set_filenames(array('index'=>'index.tpl'));
-		/*
-		 debug($idEvenement);
-		debug($modeAffichage);
-		debug($idHistoriqueEvenement);
-		debug($paramChampCache);
-		debug($params);
-		debug($this->variablesGet);
-		*/
+
 		$title = $this->displayTitle();
 		
 		if(isset($this->variablesGet['archiIdAdresse']) && ! empty($this->variablesGet['archiIdAdresse'])){
@@ -470,13 +462,11 @@ class archiAdresse extends ArchiContenu
 		}
 		
 		//Getting coordo for the current address
-		
 		$requete = "SELECT latitude , longitude FROM historiqueAdresse WHERE idAdresse = ".$idAdresse;
 		$result = $this->connexionBdd->requete($requete);
 		$fetch = mysql_fetch_assoc($result);
 		$coordonnees['longitude'] = $fetch['longitude'];
 		$coordonnees['latitude'] = $fetch['latitude'];
-		
 		
 		$e = new archiEvenement();//Should be moved to archiUtils
 		$calqueGoogleMap = new calqueObject(array('idPopup'=>10));
@@ -486,13 +476,14 @@ class archiAdresse extends ArchiContenu
 				'idEvenementGroupeAdresseCourant'=>$idEvenement
 		));
 		
+		
+		$arrayEncartAdresses = $this->getArrayEncartAdressesImmeublesAvantApres(array('idEvenementGroupeAdresse'=>152));
+		$t->assign_block_vars('listeAdressesVoisines', array('content' => $arrayEncartAdresses['html']));
 		$t->assign_block_vars('CarteGoogle',array(
 				'src'=>$this->creerUrl('','afficheGoogleMapIframe',array('noHeaderNoFooter'=>1,'longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement)),
 				'lienVoirCarteGrand'=>"<a href='#' onclick=\"".$calqueGoogleMap->getJsOpenPopupNoDraggableWithBackgroundOpacity()."document.getElementById('iFrameDivPopupGM').src='".$this->creerUrl('','afficheGoogleMapIframe',array('longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'noHeaderNoFooter'=>true,'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement,'modeAffichage'=>'popupDetailAdresse'))."';\" class='bigger' style='font-size:11px;'>"._("Voir la carte en + grand")."</a>",
 				'popupGoogleMap'=>$calqueGoogleMap->getDivNoDraggableWithBackgroundOpacity(array('top'=>20,'lienSrcIFrame'=>'','contenu'=>$contenuIFramePopup))
 		));
-		
-		
 		
 		$requeteIdEvenements = "
 				SELECT idEvenement
@@ -501,41 +492,54 @@ class archiAdresse extends ArchiContenu
 				";
 		$resultIdEvenements = $this->connexionBdd->requete($requeteIdEvenements);
 		
-		
+		$t->assign_block_vars('sommaireEvenements',array('urlAddEvent'=>'http://mgbep.rofl'));
+		//Loop on all evenet related to this idAdresse specified in argument of this function
 		while($fetch = mysql_fetch_assoc($resultIdEvenements)){
+			
+			//Getting all the infos with this method 
 			$evenement = $e->getEventInfos($fetch['idEvenement']);
 			
+			//Filling the template with the infos
 			$t->assign_block_vars('evenement', $evenement['evenementData']);
 			
 			
+			//Menu (ajouter image/event, modifier image/event etc..)
 			if(isset($evenement['menuArray'])){
 				foreach ($evenement['menuArray'] as $menuElt){
 					$t->assign_block_vars($menuElt[0], $menuElt[1]);
 				}
 			}
+			
+			//Personnes
 			if(isset($evenement['arrayPersonne'])){
 				foreach ($evenement['arrayPersonne'] as $personne){
 					$t->assign_block_vars($personne[0], $personne[1]);
 				}
 			}
 			
+			//Formulaire pour les modifications d'images
 			if(isset($evenement['arrayFormEvent'])){
 				$t->assign_block_vars($personne[0], $personne[1]);
 			}
 			
+			//Courant architectural
 			if(isset($evenement['arrayCourantArchi'])){
 				foreach ($evenement['arrayCourantArchi'] as $courantArchi){
 					$t->assign_block_vars($courantArchi[0], $courantArchi[1]);
 				}
 			}
+			$ancre = "#evenement".$evenement['evenementData']['idEvenement'];
+			$t->assign_block_vars('sommaireEvenements.sommaireItem', array(
+					'ancre' => $ancre,
+					'titre' => $evenement['evenementData']['titre'],
+					'date' =>$evenement['evenementData']['dates']
+			));
+						
 		}
 
-		
 		$t->assign_vars(array(
 				'title' => $title
-				
 		));
-		
 		
 		ob_start();
 		$t->pparse('index');
