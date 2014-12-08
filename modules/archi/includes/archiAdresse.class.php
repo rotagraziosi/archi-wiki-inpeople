@@ -493,41 +493,43 @@ class archiAdresse extends ArchiContenu
 		));
 		
 		
-		$evenement = $e->displaySingleEvent(152,$t,'list');
 		
-		$t->assign_block_vars('evenement', $evenement['evenementData']);
+		$requeteIdEvenements = "
+				SELECT idEvenement
+				FROM _adresseEvenement
+				WHERE idAdresse = ".$idAdresse."
+				";
+		$resultIdEvenements = $this->connexionBdd->requete($requeteIdEvenements);
 		
 		
-		
-		foreach ($evenement['menuArray'] as $menuElt){
-			$t->assign_block_vars($menuElt[0], $menuElt[1]);
+		while($fetch = mysql_fetch_assoc($resultIdEvenements)){
+			$evenement = $e->getEventInfos($fetch['idEvenement']);
+			
+			$t->assign_block_vars('evenement', $evenement['evenementData']);
+			
+			
+			if(isset($evenement['menuArray'])){
+				foreach ($evenement['menuArray'] as $menuElt){
+					$t->assign_block_vars($menuElt[0], $menuElt[1]);
+				}
+			}
+			if(isset($evenement['arrayPersonne'])){
+				foreach ($evenement['arrayPersonne'] as $personne){
+					$t->assign_block_vars($personne[0], $personne[1]);
+				}
+			}
+			
+			if(isset($evenement['arrayFormEvent'])){
+				$t->assign_block_vars($personne[0], $personne[1]);
+			}
+			
+			if(isset($evenement['arrayCourantArchi'])){
+				foreach ($evenement['arrayCourantArchi'] as $courantArchi){
+					$t->assign_block_vars($courantArchi[0], $courantArchi[1]);
+				}
+			}
 		}
-		foreach ($evenement['arrayPersonne'] as $personne){
-			$t->assign_block_vars($personne[0], $personne[1]);
-		}
-		
-		
-		//debug($hoho);
-		//eval($hoho);
-		
-		/*
-		$t->assign_block_vars('listEvt', array());
-		$t->assign_var_from_handle('listEvt.evenement', 'list');
-		
-		*/
-		
-		//$t->assign_var('listeEvenements', $hoho,'list');
-		/*$t->assign_var_from_handle(
-				'listeEvenements', 'list'
-				);
-		*/
-		
-		//$e->displaySingleEvent(153,$t);
-		/*$t->assign_var_from_handle(
-				'listeEvenements', 'list'
-		);*/
-		
-		
+
 		
 		$t->assign_vars(array(
 				'title' => $title

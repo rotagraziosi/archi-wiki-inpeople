@@ -1331,7 +1331,7 @@ class archiEvenement extends config
 	 * @param unknown $idEvenement : id of the event to display  
 	 * @return string : html of the detail event
 	 */
-	public function displaySingleEvent($idEvenement,$template,$handle,$params = array()){
+	public function getEventInfos($idEvenement,$params = array()){
 		$html ="";
 		
 		$authentification = new archiAuthentification();
@@ -1461,7 +1461,7 @@ class archiEvenement extends config
 						'url' => $this->creerUrl('', 'evenementListe', array('selection' => 'courant', 'id' => $res->idCourantArchitectural)),
 						'nom' => $res->nom));
 				*/
-				$arrayCourantArchi[] = array('isCourantArchi.archi' , array(
+				$arrayCourantArchi[] = array('evenement.isCourantArchi.archi' , array(
 						'url' => $this->creerUrl('', 'evenementListe', array('selection' => 'courant', 'id' => $res->idCourantArchitectural)),
 						'nom' => $res->nom));
 			}
@@ -7093,7 +7093,6 @@ class archiEvenement extends config
 						} else {
 							$nomTypeEvenement=strtolower($res['nomTypeEvenement']);
 						}
-						debug($datetime);
 						$dateTxt=_("Année")." ".$articleAvantTypeEvenement." <time itemprop='startDate' datetime='".$datetime."'>".$nomTypeEvenement." : $environDateDebutTxt".$this->date->toFrenchAffichage($res['dateDebut'])."</time>";
 					} else {
 						if (archiPersonne::isPerson($idEvenementGroupeAdresse)) {
