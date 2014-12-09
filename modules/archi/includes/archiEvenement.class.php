@@ -1478,13 +1478,13 @@ class archiEvenement extends config
 		$dateTxt = $this->getDateAsString($fetch);
 
 		
-		
+		//Description processing : BBCode parsing
 		$bbCode = new bbCodeObject();
 		$description = $bbCode->convertToDisplay(array('text'=>$fetch['description']));
 		$description = empty($description)?"":"<div itemprop='description' class='desc'>".$description."</div>";
 		
 		
-		
+		//Getting info on user profile to display or not menu actions
 		$requeteCityId = "
 				SELECT idVille 
 				FROM historiqueAdresse
@@ -1514,7 +1514,6 @@ class archiEvenement extends config
 		);
 		
 		
-		//debug($arrayEncartAdresses);
 		
 		// si on est en mode de deplacement d'image
 		// ou de selection de titre

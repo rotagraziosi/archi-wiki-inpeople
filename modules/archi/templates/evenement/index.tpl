@@ -16,6 +16,15 @@
 <!-- BEGIN listeAdressesVoisines -->
 	<div class="listAdressesVoisines inline-div">
 		{listeAdressesVoisines.content}
+		
+		<div class="boutonsAutresBiens">
+			<ul>
+				<li class="seeAll"><a href="{listeAdressesVoisines.urlAutresBiensRue}"><?_("Voir tous les bâtiments de cette rue...")?>
+				</a></li>
+				<li class="seeAll"><a href="{listeAdressesVoisines.urlAutresBiensQuartier}"><?_("Voir tous les bâtiments de ce quartier...")?>
+				</a></li>
+			</ul>
+		</div>
 	</div>
 <!-- END adressesVoisines -->
 </div>

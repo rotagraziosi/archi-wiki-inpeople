@@ -442,14 +442,15 @@ class archiAdresse extends ArchiContenu
 		 * Afficher le sommaire des evenements 
 		 * Récupérer la liste des evenements et les afficher un par un 
 		 * 
-		 * TODO : Découper le template en 2 : un pour cette fonction et un pour le détail d'un evenement
-		 *
 		 */
+		
+		//Template loading
 		$t = new Template('modules/archi/templates/evenement');
 		$t->set_filenames(array('index'=>'index.tpl'));
-
 		$title = $this->displayTitle();
 		
+		
+		//Setting idAdresse
 		if(isset($this->variablesGet['archiIdAdresse']) && ! empty($this->variablesGet['archiIdAdresse'])){
 			$idAdresse=$this->variablesGet['archiIdAdresse'];
 		}
@@ -468,6 +469,7 @@ class archiAdresse extends ArchiContenu
 		$coordonnees['longitude'] = $fetch['longitude'];
 		$coordonnees['latitude'] = $fetch['latitude'];
 		
+		//Dispaying google map
 		$e = new archiEvenement();//Should be moved to archiUtils
 		$calqueGoogleMap = new calqueObject(array('idPopup'=>10));
 		$contenuIFramePopup = $e->getContenuIFramePopupGoogleMap(array(
@@ -476,15 +478,25 @@ class archiAdresse extends ArchiContenu
 				'idEvenementGroupeAdresseCourant'=>$idEvenement
 		));
 		
-		
+		//Getting neighbors addresses 
 		$arrayEncartAdresses = $this->getArrayEncartAdressesImmeublesAvantApres(array('idEvenementGroupeAdresse'=>152));
-		$t->assign_block_vars('listeAdressesVoisines', array('content' => $arrayEncartAdresses['html']));
+		$urlAutreBiens = $this->getArrayRetourLiensVoirBatiments($idAdresse);
+		
+		$t->assign_block_vars('listeAdressesVoisines', array(
+				'content' => $arrayEncartAdresses['html'],
+				'urlAutresBiensRue'=>$urlAutreBiens['urlAutresBiensRue'],
+				'urlAutresBiensQuartier' => $urlAutreBiens['urlAutresBiensQuartier']
+				));
 		$t->assign_block_vars('CarteGoogle',array(
 				'src'=>$this->creerUrl('','afficheGoogleMapIframe',array('noHeaderNoFooter'=>1,'longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement)),
 				'lienVoirCarteGrand'=>"<a href='#' onclick=\"".$calqueGoogleMap->getJsOpenPopupNoDraggableWithBackgroundOpacity()."document.getElementById('iFrameDivPopupGM').src='".$this->creerUrl('','afficheGoogleMapIframe',array('longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'noHeaderNoFooter'=>true,'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement,'modeAffichage'=>'popupDetailAdresse'))."';\" class='bigger' style='font-size:11px;'>"._("Voir la carte en + grand")."</a>",
 				'popupGoogleMap'=>$calqueGoogleMap->getDivNoDraggableWithBackgroundOpacity(array('top'=>20,'lienSrcIFrame'=>'','contenu'=>$contenuIFramePopup))
 		));
 		
+		
+		
+		
+		//Preparing the loop on all related event to the current address
 		$requeteIdEvenements = "
 				SELECT idEvenement
 				FROM _adresseEvenement
@@ -7082,8 +7094,7 @@ class archiAdresse extends ArchiContenu
 						// **********************************************************************************************************************************************
 						// lien vers la liste des adresses relatives a l'adresse courante:
 						// **********************************************************************************************************************************************
-						$arrayRetourLiensVoirBatiments['urlAutresBiensRue']=$this->creerUrl('', 'adresseListe', array('recherche_rue'=>$fetch['idRue']));
-						$arrayRetourLiensVoirBatiments['urlAutresBiensQuartier']=$this->creerUrl('', 'adresseListe', array('recherche_quartier'=>$fetch['idQuartier']));
+						$arrayRetourLiensVoirBatiments = $this->getArrayRetourLiensVoirBatiments($fetch['idRue'],$fetch['idQuartier']);
 						// **********************************************************************************************************************************************
 						// recherche des images liées a l'adresse et uniquement les images de la table de liaison _adresseImage
 						// **********************************************************************************************************************************************
@@ -14607,6 +14618,19 @@ class archiAdresse extends ArchiContenu
 		
 		}
 		return $html;
+	}
+	public function getArrayRetourLiensVoirBatiments($idAdresse){
+		$requete ="
+				SELECT idRue,idQuartier
+				FROM historiqueAdresse 
+				WHERE idAdresse = ".$idAdresse."
+				";
+		$result = $this->connexionBdd->requete($requete);
+		$fetch = mysql_fetch_assoc($result);
+		
+		$arrayRetourLiensVoirBatiments['urlAutresBiensRue']=$this->creerUrl('', 'adresseListe', array('recherche_rue'=>$fetch['idRue']));
+		$arrayRetourLiensVoirBatiments['urlAutresBiensQuartier']=$this->creerUrl('', 'adresseListe', array('recherche_quartier'=>$fetch['idQuartier']));
+		return $arrayRetourLiensVoirBatiments;
 	}
 
 }

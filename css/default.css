@@ -1516,3 +1516,6 @@ li:empty {
 .listAdressesVoisines{
 	margin-left: 100px;
 }
+.boutonsAutresBiens{
+	width: 300px;
+}
