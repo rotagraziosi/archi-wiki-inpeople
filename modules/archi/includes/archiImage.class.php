@@ -900,6 +900,7 @@ class archiImage extends config
             
             $intituleAdresse = $adresse->getIntituleAdresse($fetch);
             
+            debug($_GET);
             $reqImages = "
             SELECT idImage FROM _evenementImage WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
             ";
@@ -2782,6 +2783,7 @@ class archiImage extends config
         
         
                 ));
+                
                 if ($utilisateur->canChangeNumeroArchiveField(array('idUtilisateur'=>$authentification->getIdUtilisateur())))
                 {
                     $t->assign_block_vars('listePhotos.isDisplayNumeroArchive',  array());
@@ -2836,7 +2838,6 @@ class archiImage extends config
                 
                 $i++;
             }
-            
             // ***************************************************
             $t->assign_vars(array(    "proprietaireImages"=>"Images concernant l'adresse", 
                                     'actionFormImage'=>$this->creerUrl('modifImage',  '',  $arrayModifUrlParams), 
@@ -3603,7 +3604,7 @@ class archiImage extends config
         
         
         
-        
+        debug($listeIdNouvellesImages);
         
         // on appelle le formulaire permettant de mettre a jour les infos concernant les photos
         echo $this->afficherFormulaireModification(0,  '',  $listeIdNouvellesImages);

@@ -218,6 +218,7 @@ class archiEvenement extends config
 		$ajoutOk = false;
 		$aAuthentification = new archiAuthentification();
 		$formulaire = new formGenerator();
+		debug($this->variablesPost);
 		if ( $aAuthentification->estConnecte() == 0)
 		{
 			echo 'utilisateur non connecté';
@@ -416,15 +417,16 @@ class archiEvenement extends config
 		{
 			if(isset($idSousEvenement))
 			{
+				debug($idSousEvenement);
 				$idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromIdEvenement($idSousEvenement);
 
 				// d'abord on classe les evenements (les positions précédentes sont conservees)
 				$this->majPositionsEvenements(array('idEvenementGroupeAdresse'=>$idEvenementGroupeAdresse,'idNouvelEvenement'=>$idSousEvenement));
-
+				debug("hoho");
+				
 				$mail = new mailObject();
 				$adresse = new archiAdresse();
 				$reqAdresses = $adresse->getIdAdressesFromIdEvenement(array('idEvenement'=>$idSousEvenement));
-
 				$resAdresses = $this->connexionBdd->requete($reqAdresses);
 				$arrayVilles=array();
 				$arrayAdresses = array();
@@ -489,7 +491,7 @@ class archiEvenement extends config
 				// envoi mail aussi au moderateur si ajout sur adresse de ville que celui ci modere
 				$u = new archiUtilisateur();
 
-
+				
 				$arrayListeModerateurs = $u->getArrayIdModerateursActifsFromVille($arrayVilles[0],array("sqlWhere"=>" AND alerteAdresses='1' "));
 				if(count($arrayListeModerateurs)>0)
 				{
@@ -511,7 +513,8 @@ class archiEvenement extends config
 				}
 
 				// *************************************************************************************************************************************************************
-
+				
+				debug($tabForm);
 				$retourArray = $this->afficher($idSousEvenement); // afficher le sousEvenement revient a afficher l'evenement parent de type groupe d'adresse
 				$html .= $retourArray['html'];
 				$adresse = new archiAdresse();
@@ -521,6 +524,7 @@ class archiEvenement extends config
 		}
 		else
 		{
+			debug("coucou");
 			$html .= $this->afficheFormulaire($tabForm);
 		}
 
@@ -1685,7 +1689,7 @@ class archiEvenement extends config
 	
 	// *************************************************************************************************************************************
 	// le parametre idHistoriqueEvenement n'est plus utilisé
-	public function afficher($idEvenement = null,$modeAffichage='', $idHistoriqueEvenement = null, $paramChampCache=array(),$params=array())
+	public function affichertemp($idEvenement = null,$modeAffichage='', $idHistoriqueEvenement = null, $paramChampCache=array(),$params=array())
 	{
 		$t = new Template('modules/archi/templates/evenement');
 		$t->set_filenames(array('index'=>'index.tpl'));
@@ -1749,7 +1753,7 @@ class archiEvenement extends config
 
 		// *************************************************************************************************************************************
 	// le parametre idHistoriqueEvenement n'est plus utilisé
-	public function afficherBACK($idEvenement = null,$modeAffichage='', $idHistoriqueEvenement = null, $paramChampCache=array(),$params=array())
+	public function afficher($idEvenement = null,$modeAffichage='', $idHistoriqueEvenement = null, $paramChampCache=array(),$params=array())
 	{
 		debug($idEvenement);
 		debug($idHistoriqueEvenement);
@@ -4029,7 +4033,6 @@ class archiEvenement extends config
 			{
 				// ce n'est pas une modification d'evenement
 				$t->assign_block_vars('afficheAjoutEvenement',array());
-
 			}
 		}
 
@@ -4043,15 +4046,29 @@ class archiEvenement extends config
 		if($idParent<>'0' && $typeParentId=='evenement')
 		{
 
+
+			
 			$sqlTypeStructureHerite = "
 					SELECT he.idTypeStructure as idTypeStructure
-					FROM historiqueEvenement he2, historiqueEvenement he
+					FROM historiqueEvenement he
+					LEFT JOIN _adresseEvenement ae1 on ae1.idEvenement 
 					WHERE he.idEvenement =(select min(ee.idEvenementAssocie) from _evenementEvenement ee where ee.idEvenement = '".$idParent."')
 							AND he2.idEvenement = he.idEvenement
 							GROUP BY he.idEvenement,he.idHistoriqueEvenement
 							HAVING he.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
 							";
-
+				
+			
+			debug($this->variablesGet['idAdresse']);
+			$sqlTypeStructureHerite = "
+					SELECT he.idTypeStructure as idTypeStructure
+					FROM historiqueEvenement he
+					LEFT JOIN _adresseEvenement ae on ae.idEvenement = he.idEvenement
+					WHERE ae.idAdresse = ".$this->variablesGet['idAdresse']."
+			
+							";
+			
+			
 			$resTypeStructureHerite = $this->connexionBdd->requete($sqlTypeStructureHerite);
 
 			if (mysql_num_rows($resTypeStructureHerite)==1) {
@@ -5222,6 +5239,7 @@ class archiEvenement extends config
 	// on va donc trouver la position du nouvel evenement et renvoyer les nouvelles positions de tous les evenements pour les mettres toutes a jour
 	public function majPositionsEvenements($params = array())
 	{
+		debug($params);
 		$retour = true;
 		$tabTravail = array();
 

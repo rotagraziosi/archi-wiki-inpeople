@@ -494,8 +494,6 @@ class archiAdresse extends ArchiContenu
 		));
 		
 		
-		
-		
 		//Preparing the loop on all related event to the current address
 		$requeteIdEvenements = "
 				SELECT idEvenement
@@ -504,7 +502,7 @@ class archiAdresse extends ArchiContenu
 				";
 		$resultIdEvenements = $this->connexionBdd->requete($requeteIdEvenements);
 		
-		$t->assign_block_vars('sommaireEvenements',array('urlAddEvent'=>'http://mgbep.rofl'));
+		$t->assign_block_vars('sommaireEvenements',array('urlAddEvent'=>$this->creerUrl('', 'ajouterSousEvenement',array('idAdresse'=>$idAdresse,'archiIdEvenement' =>'MGBEP'))));
 		//Loop on all evenet related to this idAdresse specified in argument of this function
 		while($fetch = mysql_fetch_assoc($resultIdEvenements)){
 			
@@ -1781,6 +1779,7 @@ class archiAdresse extends ArchiContenu
 	{
 		$url="";
 		$string = new stringObject();
+		//Note d'Antoine : J'ai trouvé ce switch case tellement drole que je vais le laisser comme ça
 		switch($format)
 		{
 			case 'mini':
@@ -1860,9 +1859,20 @@ class archiAdresse extends ArchiContenu
 				
 				// on recherche les evenements du groupe d'adresses
 				$listeEvenementsGroupeAdresse = implode("','",$arrayListeEvenementsGroupeAdresse);
+				
+				
+				/*
 				$queryEvenementAssocies = "
 						SELECT idEvenementAssocie FROM _evenementEvenement WHERE idEvenement in ('".$listeEvenementsGroupeAdresse."')
 								";
+				*/
+				$queryEvenementAssocies = "
+						SELECT ae1.idEvenement 
+						FROM _adresseEvenement ae1 , _adresseEvenement ae2 
+						WHERE ae2.idEvenement in ('".$listeEvenementsGroupeAdresse."')
+						AND ae2.idAdresse = ae1.idAdresse
+								";
+				
 
 				$resEvenementsAssocies = $this->connexionBdd->requete($queryEvenementAssocies);
 
