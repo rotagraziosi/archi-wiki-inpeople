@@ -2002,11 +2002,10 @@ class archiRecherche extends config {
 		}
 
 		if(count($criteres) <= 1&& empty($criteres['motcle'])){
-			return "Erreur ! Aucun mot-clé n'a été spécifié. Veuillez entrer un mot-clé pour effectuer une recherche.";
-			//$html.="Aucun";
+			$this->messages->addError("Erreur ! Aucun mot-clé n'a été spécifié. Veuillez entrer un mot-clé pour effectuer une recherche.");
+			$this->messages->display();
 		}
 		//If no keyword specified, show an error
-		//TODO : Create a common error method showing an error message with a red panel
 		else{
 			return $this->advancedSearch($criteres);
 		}
@@ -2324,9 +2323,8 @@ class archiRecherche extends config {
 			$html .=$a->displayList($idHistoriqueEvenementArray,$nbResult);
 		}
 		else{
-			$this->errors->ajouter("Erreur, aucun critères n'a été renseigné.");
-			$this->errors->afficher();
-			//$html = "Erreur, aucun critères n'a été renseigné.";	
+			$this->messages->addError("Erreur, aucun critères n'a été renseigné.");
+			$this->messages->display();
 		}
 		return $html;
 	}

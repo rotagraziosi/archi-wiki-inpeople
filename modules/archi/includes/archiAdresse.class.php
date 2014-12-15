@@ -14395,18 +14395,7 @@ class archiAdresse extends ArchiContenu
 				}
 			}
 			
-/*
- * 			$optionsPagination=array(
-					'nbResult' => 0,
-					'nbPages' => 0,
-					'currentPage'=> 0,
-					'nextPage' => 0,
-					'previousPage' => 0,
-					'nbResultPerPage' => 10,
-					'offset'=>4
-			);
- */			
-			
+		
 			$limit = " ";
 			if(!empty($optionsPagination)){
 				$indexResult = ($optionsPagination['currentPage'] )*$optionsPagination['nbResultPerPage'];
@@ -14444,7 +14433,6 @@ class archiAdresse extends ArchiContenu
 				
 				//Generating all the link to the events linked to current address 
 				while ($row = mysql_fetch_assoc($resTitresEvenements)) {
-				 	
 					$titre = ($row['titre']=="") ? $defaultEventTitle : $row['titre']; //Assigning default title to event which doesn't have one 
 					//Link creation with the ancre to each event
 					$titresEvenements[] =
@@ -14455,7 +14443,7 @@ class archiAdresse extends ArchiContenu
 				 			array(
 				 					'archiIdAdresse'=>$fetch['idAdresse'], 
 				 					'archiAffichage'=>'adresseDetail', 
-				 					'archiIdEvenementGroupeAdresse'=>$fetch['idEvenementGA'], 
+				 					'archiIdEvenementGroupeAdresse'=>$fetch['idEvenementGroupeAdresse'], 
 				 					'debut'=>'')
 				 			)
 				 	."#".$positionAncre."'>"
@@ -14463,7 +14451,6 @@ class archiAdresse extends ArchiContenu
 				 	"</a>";
 				 
 				}
-				
 				//Putting all this in a nice array
 				$fetch['titresEvenements'] = $titresEvenements;
 				$addressesInformations[]=$fetch;
