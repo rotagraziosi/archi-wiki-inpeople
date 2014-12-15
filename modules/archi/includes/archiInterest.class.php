@@ -160,8 +160,8 @@ class archiInterest extends config{
 		foreach ($requestParameters as $rp){
 			//Insert if not exists
 			$requete= "
-					INSERT INTO ".$rp['table']." (".$rp['fieldName1'].",".$rp['fieldName2'].")
-					SELECT '".$this->userId."', '".$rp['idInteret']."'
+					INSERT INTO ".$rp['table']." (".$rp['fieldName1'].",".$rp['fieldName2'].",'created')
+					SELECT '".$this->userId."', '".$rp['idInteret']."' , now()
 					FROM DUAL
 					WHERE NOT EXISTS (SELECT * FROM `".$rp['table']."`
 					WHERE ".$rp['fieldName1']."='".$this->userId."' AND ".$rp['fieldName2']."='".$rp['idInteret']."')
