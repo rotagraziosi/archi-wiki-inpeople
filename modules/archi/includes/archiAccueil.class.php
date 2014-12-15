@@ -480,7 +480,7 @@ class ArchiAccueil extends config
             }
 
             
-            $categories=array('news','lastAdded'); //Liste des catégories à afficher
+            $categories=array('news','lastAdded','interest'); //Liste des catégories à afficher
             
             foreach ($categories as $category){ //Category is the array containing the whole category content
 	            $categoryContent = $this->getIndexitem($category);
@@ -1858,6 +1858,95 @@ class ArchiAccueil extends config
     				$itemContent[] = $item;
     			}
     			break;
+    		case 'interest':
+    			/*
+    			 * Plan de la methode 
+    			 */
+    			
+				/*
+				 * Initialisation des variables :
+				 * Tableau avec les champs pour remplir la requete
+				 */    			
+    			$requestField = array(
+    					array(
+    							'table'=>'_interetRue',
+    							'id'=> 'idRue'
+    					),
+    					array(
+    							'table'=>'_interetSousQuartier',
+    							'id'=> 'idSousQuartier'
+    					),
+    					array(
+    							'table'=>'_interetVille',
+    							'id'=> 'idVille'
+    					),
+    					array(
+    							'table'=>'_interetAdresse',
+    							'id'=> 'idHistoriqueAdresse'
+    					),
+    					array(
+    							'table'=>'_interetPays',
+    							'id'=> 'idPays'
+    					),
+    					array(
+    							'table'=>'_interetQuartier',
+    							'id'=> 'idQuartier'
+    					)
+    			);
+    			$auth = new ArchiAuthentification();
+    			$userId=$auth->getIdUtilisateur();
+    			
+    			/*
+    			 * Boucle pour faire les sous requete
+    			 */
+    			
+    			$subRequest = array();
+    			$request ="";
+    			$i=0;
+    			foreach ($requestField as $fields){
+    				$request.="
+    						(
+							SELECT evt.idEvenement AS idEvenement, evt.titre AS titre, evt.idImagePrincipale AS idHistoriqueImage, ee.idEvenement AS idEvenementGroupeAdresse, ae.idAdresse AS idAdresse,ha.nom , i.created as created
+							FROM evenements evt
+							INNER JOIN _evenementEvenement ee ON ee.idEvenementAssocie = evt.idEvenement
+							INNER JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
+							INNER JOIN historiqueAdresse ha ON ha.idAdresse = ae.idAdresse
+							INNER JOIN ".$fields['table']." i ON i.".$fields['id']." = ha.".$fields['id']."
+							WHERE i.idUtilisateur =".$userId."
+							GROUP BY idEvenement DESC
+							ORDER BY i.created 
+							LIMIT 5
+							)
+    						";
+    				if($i++<count($requestField)-1){
+    					$request.=" UNION ";
+    				}
+    				else{
+    					$request.=" ORDER BY created
+    							LIMIT 5";
+    				}
+    			}
+    			
+    			debug($request);
+    			
+    			
+    			$result = $this->connexionBdd->requete($request);
+    			while($fetch = mysql_fetch_assoc($result)){
+    				$item['CSSClassWrapper'] = 'lastAdd';
+    				$item['titreItem'] =$fetch['nom'];
+    				$item['imgUrl'] = $this->getUrlRacine().'getPhotoSquare.php?id='.$fetch['idHistoriqueImage'];
+    				$item['urlItem'] = $this->creerUrl('', '',
+    						array(
+    								'archiAffichage'=>'adresseDetail',
+    								"archiIdAdresse"=>$fetch['idAdresse'],
+    								"archiIdEvenementGroupeAdresse"=>$fetch['idEvenementGroupeAdresse']
+    						));
+    				$item['textItem'] = $fetch['nom'];
+    				$itemContent[] = $item;
+    			}
+    			
+    			
+    			break;
     		default:
     			$itemContent['CSSClassWrapper'] = 'news';
     			$itemContent['titreItem'] ='';
@@ -1867,24 +1956,6 @@ class ArchiAccueil extends config
 
     	}
     	
-    	
-    	
-    	/*
-    	//debug($itemContent);
-    	
-    	foreach ($itemContent as $item){
-			$t->assign_block_vars('item', array(
-					'imgUrl'=> $item['img'],
-					'titreItem' =>  $item['titre'],
-					'urlItem'=> $item['url'],
-					'textItem'=> $item['text'],
-			));
-    	}
-    	$t->pparse('indexItem');
-    	$html.=ob_get_contents();
-    	ob_end_clean();
-    	//debug($html);
-		return $html;   */
 		return $itemContent;
     }
     
