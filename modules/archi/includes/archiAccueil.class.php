@@ -177,12 +177,14 @@ class ArchiAccueil extends config
             $req = "
                     SELECT distinct ha1.idAdresse, he1.dateCreationEvenement as dateCreationEvenement
                     
-                    FROM evenements he1
-                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = he1.idEvenement
+                    FROM evenements he2,  evenements he1
+                    LEFT JOIN _evenementEvenement ee1 ON ee1.idEvenementAssocie = he1.idEvenement
+                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee1.idEvenement
                     LEFT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
                     LEFT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
                     
-                    WHERE he1.idUtilisateur = '".$auth->getIdUtilisateur()."'
+                    WHERE he2.idEvenement = he1.idEvenement
+                    AND he1.idUtilisateur = '".$auth->getIdUtilisateur()."'
                     GROUP BY he1.idEvenement,  ha1.idAdresse,  ha1.idHistoriqueAdresse
                     HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
             ";
@@ -229,8 +231,9 @@ class ArchiAccueil extends config
                     ha1.idIndicatif as idIndicatif
                     
                     
-                    FROM evenements he1
-                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = he1.idEvenement
+                    FROM evenements he2,  evenements he1
+                    LEFT JOIN _evenementEvenement ee1 ON ee1.idEvenementAssocie = he1.idEvenement
+                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee1.idEvenement
                     LEFT JOIN historiqueAdresse ha1 ON ha1.idAdresse = ae.idAdresse
                     LEFT JOIN historiqueAdresse ha2 ON ha2.idAdresse = ha1.idAdresse
                     
@@ -243,7 +246,8 @@ class ArchiAccueil extends config
                     LEFT JOIN pays p        ON p.idPays = if (ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' , ha1.idPays , v.idPays )
                     
                     
-                    WHERE he1.idUtilisateur = '".$auth->getIdUtilisateur()."'
+                    WHERE he2.idEvenement = he1.idEvenement
+                    AND he1.idUtilisateur = '".$auth->getIdUtilisateur()."'
                     GROUP BY he1.idEvenement,  ha1.idAdresse,  ha1.idHistoriqueAdresse
                     HAVING ha1.idHistoriqueAdresse = max(ha2.idHistoriqueAdresse)
                     ORDER BY he1.dateCreationEvenement DESC
@@ -480,7 +484,7 @@ class ArchiAccueil extends config
             
             foreach ($categories as $category){ //Category is the array containing the whole category content
 	            $categoryContent = $this->getIndexitem($category);
-				foreach ($categoryContent as $singleContent){ //Single content contains a single content (a news, an addresse...)
+				foreach ($categoryContent as $singleContent){ //$singleContent contains a news, an address etc...
 					$t->assign_block_vars('item', $singleContent);
 				}
             }
@@ -1242,7 +1246,8 @@ class ArchiAccueil extends config
                                 FROM personne p
                                 LEFT JOIN personne p2 ON p2.idPersonne = p.idPersonne
                                 LEFT JOIN _evenementPersonne ep ON ep.idPersonne = p2.idPersonne
-                                LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ep.idEvenement
+                                LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = ep.idEvenement
+                                LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
                                 WHERE ae.idAdresse IS NOT NULL
                                 GROUP BY p.idPersonne
             ";
@@ -1266,7 +1271,8 @@ class ArchiAccueil extends config
                             FROM personne p
                             LEFT JOIN personne p2 ON p2.idPersonne = p.idPersonne
                             LEFT JOIN _evenementPersonne ep ON ep.idPersonne = p2.idPersonne
-                            LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ep.idEvenement
+                            LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = ep.idEvenement
+                            LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
                             WHERE ae.idAdresse IS NOT NULL
                             GROUP BY p.idPersonne
                             ORDER BY nbAdresses DESC
@@ -1827,11 +1833,12 @@ class ArchiAccueil extends config
     		case 'lastAdded':
     			$requete = 
     					"
-			    		SELECT evt.idEvenement AS idEvenement, evt.titre AS titre, evt.idImagePrincipale AS idHistoriqueImage, ha.nom, ha.idAdresse AS idAdresse
-						FROM evenements evt
-						LEFT JOIN _adresseEvenement ae ON ae.idEvenement = evt.idEvenement
+			    		SELECT evt.idEvenement AS idEvenement, evt.titre AS titre, evt.idImagePrincipale AS idHistoriqueImage, ee.idEvenement AS idEvenementGroupeAdresse, ae.idAdresse AS idAdresse,ha.nom
+						FROM evenements evt 
+						LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = evt.idEvenement
+						LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
 						LEFT JOIN historiqueAdresse ha ON ha.idAdresse = ae.idAdresse
-						GROUP BY ha.idAdresse
+						
 						ORDER BY evt.idEvenement DESC
 						LIMIT 5 
 							";
@@ -1845,7 +1852,7 @@ class ArchiAccueil extends config
     						array(
     								'archiAffichage'=>'adresseDetail',
     								"archiIdAdresse"=>$fetch['idAdresse'],
-    								"archiIdEvenementGroupeAdresse"=>$fetch['idEvenement']
+    								"archiIdEvenementGroupeAdresse"=>$fetch['idEvenementGroupeAdresse']
     						));
     				$item['textItem'] = $fetch['nom'];
     				$itemContent[] = $item;

@@ -802,7 +802,7 @@ if (isset($_GET['archiAffichage'])) {
             break;
         case 'adresseDetail':
             $a = new archiAdresse();
-            echo $a->afficherDetailAdresse($_GET['archiIdAdresse']);
+            echo $a->afficherDetailAdresse($_GET['archiIdAdresse'],$_GET['archiIdEvenementGroupeAdresse']);
             break;
         case 'displayAddress':
         	$a = new archiAdresse();

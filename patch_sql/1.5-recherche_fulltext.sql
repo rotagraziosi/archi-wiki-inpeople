@@ -16,8 +16,6 @@ CREATE TABLE recherche AS
                 ha1.idQuartier AS idQuartier,
                 ha1.idVille  AS idVille,
                 ha1.idPays AS idPays,
-                ha1.latitude AS latitude,
-                ha1.longitude AS longitude,
 				he1.description as description,
 				he1.titre as titre,
 				pers.nom as nomPersonne,
@@ -56,7 +54,7 @@ CREATE TABLE recherche AS
         LEFT JOIN _evenementPersonne ep ON ep.idEvenement = he1.idEvenement
         LEFT JOIN personne pers ON pers.idPersonne = ep.idPersonne
         LEFT JOIN indicatif ind ON ind.idIndicatif = ha1.idIndicatif
-	LEFT JOIN _evenementCourantArchitectural eca on eca.idEvenement = ee.idEvenementAssocie
+		LEFT JOIN _evenementCourantArchitectural eca on eca.idEvenement = ee.idEvenementAssocie
         
         WHERE ha2.idAdresse = ha1.idAdresse 
 

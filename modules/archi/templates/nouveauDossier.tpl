@@ -337,8 +337,6 @@ function affichePopupAttente()
         <input type='hidden' name="nbEtages" value=''>
         <!-- END isNotAdmin -->
         
-        
-        
         <tr  title="{msgCourantArchitectural}" onMouseOut="closeContextHelp();">
         <td class='enteteFormulaireDossier'><?_("Courant architectural")?></td><td class='listeCourantsArchitecturaux'>
             {listeCourantsArchitecturaux}

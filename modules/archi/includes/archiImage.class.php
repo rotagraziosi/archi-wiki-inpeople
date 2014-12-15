@@ -1443,9 +1443,11 @@ class archiImage extends config
         
         $reqEvenementsLies="
             SELECT he.titre
-            FROM evenements he
+            FROM evenements heb, evenements he
             RIGHT JOIN _evenementImage ei ON ei.idEvenement=he.idEvenement
             WHERE he.idTypeEvenement != '3'
+            AND heb.idTypeEvenement != '3'
+            AND heb.idEvenement = he.idEvenement
             AND ei.idImage = '".$idImage."'
             GROUP BY he.idEvenement
         ";
@@ -4048,10 +4050,11 @@ class archiImage extends config
     {
         $reqEvenementsLies
             ="SELECT he.idEvenement as idEvenement,  he.titre as titre
-            FROM evenements he
+            FROM evenements heb,  evenements he
             RIGHT JOIN _evenementImage ei ON ei.idEvenement = he.idEvenement
-            WHERE ei.idImage = '".$idImage."'
-            GROUP BY he.idEvenement
+            WHERE heb.idEvenement = he.idEvenement
+            AND ei.idImage = '".$idImage."'
+            GROUP BY he.idEvenement                        
         ";
         
         $resEvenementsLies = $this->connexionBdd->requete($reqEvenementsLies);
@@ -4737,10 +4740,11 @@ class archiImage extends config
             
             $req = "
                 SELECT he1.idImagePrincipale as idImagePrincipale
-                FROM evenements he1
+                FROM evenements he2,  evenements he1
                 WHERE he1.idEvenement = $idEvenementGroupeAdresse
                 AND he1.idTypeEvenement='11'
                 AND he1.idImagePrincipale !='0'
+                AND he2.idEvenement = he1.idEvenement
                 GROUP BY he1.idEvenement
             ";
             

@@ -278,8 +278,7 @@ begin
 	
 	UPDATE recherche 
 	SET
-	nomRue=new.nom,
-	prefixeRue = new.prefixe
+	nomRue=new.nom
 	WHERE nomRue = old.nom
 	; 
 END$$

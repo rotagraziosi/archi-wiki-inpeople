@@ -30,9 +30,11 @@ CREATE TABLE evenements as (
 
 );
 
-UPDATE `evenements` SET `idEvenement` = '1000000' WHERE `evenements`.`idEvenement` =0;
-ALTER TABLE `evenements` CHANGE `idEvenement` `idEvenement` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT ;
-UPDATE `evenements` SET `idEvenement` = '0' WHERE `evenements`.`idEvenement` =1000000;
+ALTER TABLE `evenements` ADD PRIMARY KEY ( `idEvenement` ) ;
+
+SET SQL_MODE=NO_AUTO_VALUE_ON_ZERO;
+ALTER TABLE `evenements` CHANGE `idEvenement` `idEvenement` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT  ;
+SET SQL_MODE='';
 
 
 

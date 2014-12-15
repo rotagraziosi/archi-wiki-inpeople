@@ -922,9 +922,9 @@ class ArchiPersonne extends ArchiContenu
             foreach ($linkedEvents as $linkedEvent) {
                 $req = "
                     SELECT titre, dateDebut, idTypeEvenement
-                    FROM historiqueEvenement
+                    FROM evenements
                     WHERE idEvenement = '".$linkedEvent."'
-                    ORDER BY idHistoriqueEvenement DESC
+                    ORDER BY idEvenement DESC
                 ";
             
                 $res = $config->connexionBdd->requete($req);
@@ -936,8 +936,8 @@ class ArchiPersonne extends ArchiContenu
                 $req = "
                         SELECT  idAdresse
                         FROM _adresseEvenement 
-                        WHERE idEvenement = ".
-                        $e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent);
+                        WHERE idEvenement = ".$linkedEvent;
+                      //  $e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent);
                 $res = $config->connexionBdd->requete($req);
                 $fetch = mysql_fetch_object($res);
                 if (isset($fetch->idAdresse)) {

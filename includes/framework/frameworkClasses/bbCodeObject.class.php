@@ -34,7 +34,7 @@ class BBCodeObject extends config
     /**
      * Constructeur de bbCodeObject
      * 
-     * @param array $params Paramètres
+     * @param array $params Paramï¿½tres
      * 
      * @return void
      * */
@@ -54,9 +54,9 @@ class BBCodeObject extends config
     }
     
     /**
-     * Convertir une chaîne BBcode en HTML
+     * Convertir une chaï¿½ne BBcode en HTML
      * 
-     * @param string $string Chaîne
+     * @param string $string Chaï¿½ne
      * 
      * @return string HTML
      * */
@@ -72,9 +72,9 @@ class BBCodeObject extends config
     /**
      * Renvoi les boutons de la mise en forme
      * en entree il faut le nom du formulaire et le nom de la textarea
-     * ainsi que les différents messages d'aide
+     * ainsi que les diffï¿½rents messages d'aide
      * 
-     * @param array $params Paramètres
+     * @param array $params Paramï¿½tres
      * 
      * @return array
      * */
@@ -180,7 +180,7 @@ class BBCodeObject extends config
     /**
      * Convertir le BBcode en HTML
      * 
-     * @param array $params Paramètres
+     * @param array $params Paramï¿½tres
      * 
      * @return string HTML
      * */
@@ -231,6 +231,7 @@ class BBCodeObject extends config
             $description = ($description);
         } else {
             echo "<br>attention le parametre 'text' n'est pas defini dans la fonction convertToDisplay.<br>";
+            debug($params);
         }
         
         
