@@ -1098,9 +1098,10 @@ class archiEvenement extends config
 	// *************************************************************************************************************************************
 	public function supprimer($idEvenement, $idHistoriqueEvenement='')
 	{
+		debug($idEvenement);
+		debug($idHistoriqueEvenement);
 		$html = '';
 		$idEvenementGroupeAdresse = 0;
-/*
 		if($idHistoriqueEvenement !='')
 		{
 
@@ -1116,7 +1117,8 @@ class archiEvenement extends config
 
 
 			// recup d'idAdresse pour l'affichage du detail de l'adresse a la fin de la suppression
-			$reqSuppHistorique = "DELETE FROM evenements WHERE idEvenement = '".$idHistoriqueEvenement."'";
+			$reqSuppHistorique = "DELETE FROM evenements WHERE idEvenement = '".idEvenement."'";
+			debug($reqSuppHistorique);
 			$resSupprHistorique = $this->connexionBdd->requete($reqSuppHistorique);
 
 
@@ -1129,7 +1131,6 @@ class archiEvenement extends config
 		}
 		else
 		{
-*/
 			$image = new archiImage();
 			$personne = new archiPersonne();
 			$courant = new archiCourantArchitectural();
@@ -1139,6 +1140,7 @@ class archiEvenement extends config
 			// verification que l'evenement est le seul ou pas lié au groupe d'adresse
 			$idEvenementGroupeAdresse = $this->getParent($idEvenement);
 
+			debug($idEvenementGroupeAdresse);
 			// on verifie que l'evenement n'a qu'un seul parent
 			$reqVerifParent = "
 					SELECT idEvenement
@@ -1149,7 +1151,6 @@ class archiEvenement extends config
 			$resVerifParent = $this->connexionBdd->requete($reqVerifParent);
 			if(mysql_num_rows($resVerifParent)==1)
 			{
-
 				// on verifie que l'evenement parent est bien un groupe d'adresse ( pour le jour ou on ajoutera les sous sous evenements)
 				if($this->isEvenementGroupeAdresse($idEvenementGroupeAdresse))
 				{
@@ -1175,10 +1176,13 @@ class archiEvenement extends config
 						// quand il y aura des sous sous evenements , il faudra aussi les supprimer
 						// ...
 						$reqDeleteEvenement = "DELETE FROM evenements WHERE idEvenement = '".$idEvenement."'";
+						debug($reqDeleteEvenement);
 						$resDeleteEvenement = $this->connexionBdd->requete($reqDeleteEvenement );
+						
+						$reqDeleteEvenementGroupeEvenement = "DELETE FROM evenements WHERE idEvenement = ( SELECT idEvenement FROM _evenementEvenement WHERE idEvenementAssocie = '".$idEvenement."' )";
 						$reqDeleteEvenementEvenement = "DELETE FROM _evenementEvenement WHERE idEvenementAssocie = '".$idEvenement."'";
+						debug($reqDeleteEvenementEvenement);
 						$resDeleteEvenementEvenement = $this->connexionBdd->requete($reqDeleteEvenementEvenement);
-						//$reqDeleteAdresseEvenement = "DELETE FROM _adresseEvenement WHERE idEvenement='".."'";
 
 						// maj des position
 						$this->majPositionsEvenements(array('idEvenementGroupeAdresse'=>$idEvenementGroupeAdresse,'refreshAfterDelete'=>true)); // dans ce cas la fonction va se charger de supprimer les positions des evenements du groupe d'adresse supprimé
@@ -1189,7 +1193,7 @@ class archiEvenement extends config
 						$personne = new archiPersonne();
 						$courant = new archiCourantArchitectural();
 						// plusieurs elements , on supprime simplement l'evenement passé en parametre de la fonction
-
+						
 						// evenement images
 						$image->deleteImagesFromIdEvenement($idEvenement);
 						// personnes
@@ -1202,9 +1206,12 @@ class archiEvenement extends config
 						$this->deleteLiaisonsAdressesLieesSurEvenement($idEvenement);
 
 						$reqDeleteEvenementEvenement = "DELETE FROM _evenementEvenement WHERE idEvenementAssocie = '".$idEvenement."'";
+						debug($reqDeleteEvenementEvenement);
 						$resDeleteEvenementEvenement = $this->connexionBdd->requete($reqDeleteEvenementEvenement);
+						
 						//supression de l'evenement
-						$reqDeleteEvenement = "DELETE FROM evenement WHERE idEvenement = '".$idEvenement."'";
+						$reqDeleteEvenement = "DELETE FROM evenements WHERE idEvenement = '".$idEvenement."'";
+						debug($reqDeleteEvenement);
 						$resDeleteEvenement = $this->connexionBdd->requete($reqDeleteEvenement );
 
 						$this->majPositionsEvenements(array('idEvenementGroupeAdresse'=>$idEvenementGroupeAdresse,'refreshAfterDelete'=>true)); // dans ce cas la fonction va mettre a jour les positions des evenements pour que ceux ci se suivent, et supprimera la liaison vers l'evenement qui n'existe plus
@@ -1243,34 +1250,60 @@ class archiEvenement extends config
 			{
 
 				// s'il n'y a aucun evenement lié au groupe d'adresses , on peut supprimer le groupe d'adresse et les liaisons vers celui ci
-				$reqDeleteGroupeAdresseHistorique = "DELETE FROM evenement WHERE idEvenement = '".$idEvenementGroupeAdresse."'";
+				$reqDeleteGroupeAdresseHistorique = "DELETE FROM evenements WHERE idEvenement = '".$idEvenementGroupeAdresse."'";
+				debug($reqDeleteGroupeAdresseHistorique);
 				$resDeleteGroupeAdresseHistorique = $this->connexionBdd->requete($reqDeleteGroupeAdresseHistorique);
 
 				$reqDeleteAdresseGroupeAdresse = "DELETE FROM _adresseEvenement WHERE idEvenement = '".$idEvenementGroupeAdresse."'";
+				debug($reqDeleteAdresseGroupeAdresse);
 				$resDeleteAdresseGroupeAdresse = $this->connexionBdd->requete($reqDeleteAdresseGroupeAdresse);
 
 				// on supprime aussi les liaisons vers le groupe d'adresse dans les adresses liés
 				$reqDeleteLiaisonsAdressesLiees = "DELETE FROM _evenementAdresseLiee WHERE idEvenementGroupeAdresse='".$idEvenementGroupeAdresse."'";
+				debug($reqDeleteLiaisonsAdressesLiees );
 				$resDeleteAdresseGroupeAdresse = $this->connexionBdd->requete($reqDeleteLiaisonsAdressesLiees);
 
 				// supprimons aussi les liaisons vueSur et prisDepuis sur le groupe d'adresse
 				$reqDeleteVueSurPrisDepuis = "DELETE FROM _adresseImage WHERE idEvenementGroupeAdresse = '".$idEvenementGroupeAdresse."' AND (vueSur='1' OR prisDepuis='1')";
+				debug($reqDeleteVueSurPrisDepuis );
 				$resDeleteVueSurPrisDepuis = $this->connexionBdd->requete($reqDeleteVueSurPrisDepuis);
 
 				// suppression des liaisons entre evenement et evenement groupe d'adresse
 				$reqDeleteEvenementGAEvenementAssocie = "DELETE FROM _evenementEvenement WHERE idEvenement='".$idEvenementGroupeAdresse."'";
+				debug($reqDeleteEvenementGAEvenementAssocie);
 				$resDeleteEvenementGAEvenementAssocie = $this->connexionBdd->requete($reqDeleteEvenementGAEvenementAssocie);
 			}
-		//}
+		}
 		if ($idPerson=archiPersonne::isPerson($idEvenementGroupeAdresse)) {
 			header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'evenementListe', 'selection'=>"personne", 'id'=>$idPerson), false, false));
 		}
+		
+		
+		
+		
+		
+		
+		
+	
+		$idEvenementGroupeAdresse=$this->getParent($idEvenement);
+		if($idEvenementGroupeAdresse == 0){
+			$accueil = new ArchiAccueil();
+			echo $accueil->afficheAccueil();			
+		}
+		else{
+			$adresse = new archiAdresse();
+			echo $adresse->afficherDetailAdresse($idAdresse, $this->getParent($idEvenement));
+		}
+		debug(array($idAdresse,$idEvenementGroupeAdresse,$idEvenement));
+		
+		/*
 		$retourArray = $this->afficher($idEvenementGroupeAdresse);
 		$html =  $retourArray['html'];
 		$adresse = new archiAdresse();
 		$html.=$adresse->getListeCommentaires($idEvenementGroupeAdresse);
 		$html.=$adresse->getFormulaireCommentaires($idEvenementGroupeAdresse,$adresse->getCommentairesFields());
 		echo $html;
+		*/
 	}
 
 
@@ -1384,7 +1417,7 @@ class archiEvenement extends config
 				$sqlWhere = '(hE.idEvenement=
 						IF (
 						(SELECT _eE.idEvenement FROM _evenementEvenement _eE
-						LEFT JOIN evnements USING (idEvenement)
+						LEFT JOIN evenements USING (idEvenement)
 						LEFT JOIN typeEvenement tE USING (idTypeEvenement) WHERE idEvenementAssocie='.$idEvenement.' LIMIT 1),
 								(SELECT _eE.idEvenement FROM _evenementEvenement _eE
 								LEFT JOIN evenements USING (idEvenement)
@@ -4088,6 +4121,7 @@ class archiEvenement extends config
 						and he.idTypeEvenement = '".$this->getIdTypeEvenementGroupeAdresse()."'
 								group by he.idEvenement
 								";
+		debug($req);
 		$res = $this->connexionBdd->requete($req);
 
 		if(mysql_num_rows($res)==1)
@@ -6845,6 +6879,7 @@ class archiEvenement extends config
 				'ajouterImage'     => $this->creerUrl('','ajoutImageEvenement',array('archiIdEvenement'=>$idEvenement)),
 				'modifierImage'    => $this->creerUrl('','modifierImageEvenement',array('archiIdEvenement'=>$idEvenement)),
 				'modifierEvenement'=> $this->creerUrl('', 'modifierEvenement', array_merge(array('archiIdEvenement' => $idEvenement,'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse),$arrayIdAdresseToUrl)),
+				'supprimerEvenement' =>  $this->creerUrl('supprimerEvenement', '',  array('archiIdEvenement'=>$idEvenement)),
 	
 				'urlImporterImage'=>"#",
 				'onClickImporterImage'=>"document.getElementById('formulaireEvenement').action='".$this->creerUrl('deplacerImagesSelectionnees','evenement',array('idEvenement'=>$idEvenement))."&deplacerVersIdEvenement=".$res->idEvenement."';document.getElementById('actionFormulaireEvenement').value='deplacerImages';if(confirm('Voulez-vous vraiment déplacer ces images ?')){document.getElementById('formulaireEvenement').submit();}",

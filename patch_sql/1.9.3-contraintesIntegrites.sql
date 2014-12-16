@@ -5,7 +5,7 @@
 -- Commentaires
 ALTER TABLE `commentaires` DROP FOREIGN KEY `commentaires_ibfk_2` ;
 
-ALTER TABLE `commentaires` ADD CONSTRAINT `commentaires_ibfk_3` FOREIGN KEY ( `idEvenementGroupeAdresse` ) REFERENCES `archi_v2`.`historiqueEvenement` (
+ALTER TABLE `commentaires` ADD CONSTRAINT `commentaires_ibfk_3` FOREIGN KEY ( `idEvenementGroupeAdresse` ) REFERENCES `archi_v2`.`evenements` (
 `idEvenement`
 ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
 
@@ -13,7 +13,7 @@ ALTER TABLE `commentaires` ADD CONSTRAINT `commentaires_ibfk_3` FOREIGN KEY ( `i
 -- Positions evenements
 ALTER TABLE `positionsEvenements` DROP FOREIGN KEY `positionsEvenements_ibfk_1` ;
 
-ALTER TABLE `positionsEvenements` ADD CONSTRAINT `positionsEvenements_ibfk_2` FOREIGN KEY ( `idEvenement` ) REFERENCES `archi_v2`.`historiqueEvenement` (
+ALTER TABLE `positionsEvenements` ADD CONSTRAINT `positionsEvenements_ibfk_2` FOREIGN KEY ( `idEvenement` ) REFERENCES `archi_v2`.`evenements` (
 `idEvenement`
 ) ON DELETE CASCADE ON UPDATE CASCADE ;
 

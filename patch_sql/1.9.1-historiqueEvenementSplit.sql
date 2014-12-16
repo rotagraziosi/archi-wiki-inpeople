@@ -18,13 +18,8 @@ CREATE TABLE evenements as (
 	he1.numeroArchive,
 	he1.parent
 	FROM `historiqueEvenement` he1, historiqueEvenement he2
-	WHERE NOT EXISTS
-	(
-	    select ee.idEvenement 
-	    from _evenementEvenement ee
-	    where ee.idEvenement = he1.idEvenement
-	)
-	AND he1.idEvenement = he2.idEvenement
+	
+	WHERE he1.idEvenement = he2.idEvenement
 	GROUP BY he1.idEvenement, he1.idHistoriqueEvenement
 	HAVING he1.idHistoriqueEvenement = max(he2.idHistoriqueEvenement)
 
