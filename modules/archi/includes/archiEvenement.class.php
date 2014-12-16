@@ -256,6 +256,8 @@ class archiEvenement extends config
 				$MH             = $tabForm['MH']['value'];
 
 
+				debug($tabForm);
+				
 				//**************
 				//**  VERIFICATION DOUBLON
 				//**
@@ -295,7 +297,7 @@ class archiEvenement extends config
 					//***************
 					//**  ENREGISTREMENT
 					//**
-					$idEvenement = $this->getNewIdEvenement();
+					//$idEvenement = $this->getNewIdEvenement();
 					// si c'est un évènement sans évènements parents
 					// c'est qu'il faut créer un evenement vide
 					// ayant pour type d'évènement un groupe d'adresses
@@ -307,8 +309,10 @@ class archiEvenement extends config
 						$sql = "INSERT INTO evenements (titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement)
 								VALUES ('', '', '', '', ".$idSource.", ".$idUtilisateur.", 0, '".$this->getIdTypeEvenementGroupeAdresse()."', now())";
 
-						//$this->connexionBdd->requete($sql);
+						$this->connexionBdd->requete($sql);
 						$tabForm['evenements']['value'][] = $idEvenement;
+						
+						$idEvenement = mysql_insert_id();
 						$idSousEvenement =$idEvenement+ 1; // id du sous evenements lié à l'evenement groupe d'adresses
 
 						// on lie les adresses a l'evenement groupe d'adresse
@@ -401,9 +405,6 @@ class archiEvenement extends config
 							VALUES (".$idSousEvenement.", \"".$titre."\", \"".$description."\", '".$dateDebut."', '".$dateFin."', ".$idSource.", ".$idUtilisateur.", '".$idTypeStructure."', '".$idTypeEvenement."',now(),".$nbEtages.",'".$ISMH."','".$MH."','".$isDateDebutEnviron."')";*/
 					$sqlHistoriqueEvenement = "INSERT INTO evenements (titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement , nbEtages, ISMH, MH,isDateDebutEnviron)
 							VALUES (\"".$titre."\", \"".$description."\", '".$dateDebut."', '".$dateFin."', ".$idSource.", ".$idUtilisateur.", '".$idTypeStructure."', '".$idTypeEvenement."',now(),".$nbEtages.",'".$ISMH."','".$MH."','".$isDateDebutEnviron."')";
-					
-						
-
 					$this->connexionBdd->requete($sqlHistoriqueEvenement);
 
 
@@ -6825,23 +6826,13 @@ class archiEvenement extends config
 		//Date processing
 		$dateTxt = $this->getDateAsString($fetch);
 	
-	
-		//Description processing : BBCode parsing
-		$bbCode = new bbCodeObject();
-		$description = $bbCode->convertToDisplay(array('text'=>$fetch['description'],'idEvenement'=>$idEvenement));
-		$description = empty($description)?"":"<div itemprop='description' class='desc'>".$description."</div>";
-	
-	/*
-		//Getting info on user profile to display or not menu actions
-		$requeteCityId = "
-				SELECT idVille
-				FROM historiqueAdresse
-				WHERE idAdresse = ".$idAdresse."
-				";
-		$resultCityId = $this->connexionBdd->requete($requeteCityId);
-		$fetchCityId = mysql_fetch_assoc($resultCityId);
-		$cityId = $fetchCityId['idVille'];
-		*/
+		if(!empty($fetch['description']) && $fetch['description']!=''){
+			//Description processing : BBCode parsing
+			$bbCode = new bbCodeObject();
+			$description = $bbCode->convertToDisplay(array('text'=>$fetch['description'],'idEvenement'=>$idEvenement));
+			$description = empty($description)?"":"<div itemprop='description' class='desc'>".$description."</div>";
+		}
+
 		$cityId = $fetch['idVille'];
 		$isModerateur = true;
 		$isAdmin = true;

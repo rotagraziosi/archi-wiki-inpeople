@@ -1859,10 +1859,7 @@ class ArchiAccueil extends config
     			}
     			break;
     		case 'interest':
-    			/*
-    			 * Plan de la methode 
-    			 */
-    			
+
 				/*
 				 * Initialisation des variables :
 				 * Tableau avec les champs pour remplir la requete
@@ -1926,10 +1923,9 @@ class ArchiAccueil extends config
     							LIMIT 5";
     				}
     			}
-    			
-    			debug($request);
-    			
-    			
+    			/*
+    			 * Data processing
+    			 */
     			$result = $this->connexionBdd->requete($request);
     			while($fetch = mysql_fetch_assoc($result)){
     				$item['CSSClassWrapper'] = 'lastAdd';
@@ -1944,8 +1940,6 @@ class ArchiAccueil extends config
     				$item['textItem'] = $fetch['nom'];
     				$itemContent[] = $item;
     			}
-    			
-    			
     			break;
     		default:
     			$itemContent['CSSClassWrapper'] = 'news';
