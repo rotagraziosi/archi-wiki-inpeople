@@ -342,6 +342,15 @@ class ConnexionBdd extends config
         return mysql_real_escape_string($var, $this->ressource);
     }
     
+    /**
+     * Get the last id inserted
+     * 
+     * @return last id inserted
+     */
+    public function getLastId(){
+    	return mysql_insert_id($this->ressource);
+    }
+    
 }
 
 ?>

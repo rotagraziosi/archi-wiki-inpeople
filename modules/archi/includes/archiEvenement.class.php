@@ -102,14 +102,15 @@ class archiEvenement extends config
 
 
 			// creation de l'evenement parent groupe d'adresse
-			$sql = "INSERT INTO historiqueEvenement (idEvenement, titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement)
+			$sql = "INSERT INTO evenements (idEvenement, titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement)
 					VALUES (".$idEvenementGroupeAdresse.", '', '', '', '', ".$tabForm['source']['value'].", ".$idUtilisateur.", 0, ".$this->getIdTypeEvenementGroupeAdresse().",now())";
-
-			//$this->connexionBdd->requete($sql);
-
+			$this->connexionBdd->requete($sql);
+			$idEvenementGroupeAdresse= $this->connexionBdd->getLastId();
+			debug($idEvenementGroupeAdresse);
+			
 			// *****************************************************
 			// on recupere l'id de l'evenement enfant ( construction)
-			$idSousEvenement = $this->getNewIdEvenement();
+			//$idSousEvenement = $this->getNewIdEvenement();
 
 
 			// ajout de l'evenement fils
@@ -161,10 +162,9 @@ class archiEvenement extends config
 					VALUES ( \"".mysql_real_escape_string($libelle)."\", \"".mysql_real_escape_string($description)."\", '".mysql_real_escape_string($dateDebut)."', '".mysql_real_escape_string($dateFin)."', ".mysql_real_escape_string($idSource).", ".mysql_real_escape_string($idUtilisateur).", '".mysql_real_escape_string($idTypeStructure)."', '".mysql_real_escape_string($idTypeEvenement)."', now(), '".mysql_real_escape_string($ISMH)."', '".mysql_real_escape_string($MH)."', '".mysql_real_escape_string($nbEtages)."', '".mysql_real_escape_string($isDateDebutEnviron)."',\"".mysql_real_escape_string($numeroArchive)."\")";
 			$this->connexionBdd->requete($sqlHistoriqueEvenement );
 
-			$idEvenement = mysql_insert_id();
-
+			$idEvenement = $this->connexionBdd->getLastId();
 			
-			
+			debug(array($idEvenementGroupeAdresse,$idSousEvenement,$idEvenement));
 			
 			// on relie l'evenement pere (groupe d'adresse ) à l'evenement fils
 			$sqlAssociationNettoie = "delete from _evenementEvenement where idEvenement = '".$idEvenementGroupeAdresse."'";
@@ -312,7 +312,7 @@ class archiEvenement extends config
 						$this->connexionBdd->requete($sql);
 						$tabForm['evenements']['value'][] = $idEvenement;
 						
-						$idEvenement = mysql_insert_id();
+						$idEvenement = $this->connexionBdd->getLastId();
 						$idSousEvenement =$idEvenement+ 1; // id du sous evenements lié à l'evenement groupe d'adresses
 
 						// on lie les adresses a l'evenement groupe d'adresse
@@ -326,12 +326,14 @@ class archiEvenement extends config
 							$sqlEvenementAdresse = pia_substr($sqlEvenementAdresse,0,-1);
 							$this->connexionBdd->requete($sqlEvenementAdresse);
 						}
+						debug($idSousEvenement);
 					}
 					else
 					{
 						$idSousEvenement = $idEvenement; // si on est dans le cas d'un ajout de sous evenement simple , sans creation de groupe d'adresse, on recupere l'id d'un nouvel element virtuel (getNewIdEVenement)
+						debug($idSousEvenement);
 					}
-
+					debug($idSousEvenement);
 					if (!empty($tabForm['courant']['value']))
 					{
 						$sqlEvenementCourantArchitectural = "INSERT INTO _evenementCourantArchitectural (idCourantArchitectural, idEvenement) VALUES ";
@@ -343,7 +345,7 @@ class archiEvenement extends config
 
 						$this->connexionBdd->requete($sqlEvenementCourantArchitectural);
 					}
-
+					debug($idSousEvenement);
 
 
 					if (!empty($tabForm['personnes']['value']))
@@ -372,29 +374,10 @@ class archiEvenement extends config
 						$this->connexionBdd->requete($sqlEvenementSource);
 					}
 					*/
-
+					debug($idSousEvenement);
 					
 					
-					// ajout de l'evenement enfant à l'evenement groupe d'adresse
 
-					if (!isset($this->variablesPost['evenementGroupeAdresse']) || $this->variablesPost['evenementGroupeAdresse']=='')//(empty($tabForm['evenements']['value']))
-					{
-						// cas liaison entre le nouvel evenement groupe d'adresse et le nouvel evenement fils // ajout d'un evenement
-						$sqlEvenementEvenement = "
-								insert into _evenementEvenement (idEvenement,idEvenementAssocie)
-								values ('".$idEvenement."','".$idSousEvenement."');
-										";
-						$this->connexionBdd->requete($sqlEvenementEvenement);
-					}
-					else
-					{
-						// cas liaison entre l'element groupe d'adresse precisé dans $tabForm['evenementGroupeAdresse'] et le nouvel evenement fils // ajout d'un sous evenement
-						$sqlEvenementEvenement = "
-								insert into _evenementEvenement (idEvenement,idEvenementAssocie)
-								values ('".$this->variablesPost['evenementGroupeAdresse']."','".$idSousEvenement."')
-										";
-						$this->connexionBdd->requete($sqlEvenementEvenement);
-					}
 
 					// debug
 					if($nbEtages=='')
@@ -406,7 +389,34 @@ class archiEvenement extends config
 					$sqlHistoriqueEvenement = "INSERT INTO evenements (titre, description, dateDebut, dateFin, idSource, idUtilisateur, idTypeStructure, idTypeEvenement,dateCreationEvenement , nbEtages, ISMH, MH,isDateDebutEnviron)
 							VALUES (\"".$titre."\", \"".$description."\", '".$dateDebut."', '".$dateFin."', ".$idSource.", ".$idUtilisateur.", '".$idTypeStructure."', '".$idTypeEvenement."',now(),".$nbEtages.",'".$ISMH."','".$MH."','".$isDateDebutEnviron."')";
 					$this->connexionBdd->requete($sqlHistoriqueEvenement);
-
+					
+					
+					$idSousEvenement=$this->connexionBdd->getLastId();
+					
+					
+					
+					// ajout de l'evenement enfant à l'evenement groupe d'adresse
+					
+					if (!isset($this->variablesPost['evenementGroupeAdresse']) || $this->variablesPost['evenementGroupeAdresse']=='')//(empty($tabForm['evenements']['value']))
+					{
+						// cas liaison entre le nouvel evenement groupe d'adresse et le nouvel evenement fils // ajout d'un evenement
+						$sqlEvenementEvenement = "
+								insert into _evenementEvenement (idEvenement,idEvenementAssocie)
+								values ('".$idEvenement."','".$idSousEvenement."');
+										";
+						debug($sqlEvenementEvenement);
+						$this->connexionBdd->requete($sqlEvenementEvenement);
+					}
+					else
+					{
+						// cas liaison entre l'element groupe d'adresse precisé dans $tabForm['evenementGroupeAdresse'] et le nouvel evenement fils // ajout d'un sous evenement
+						$sqlEvenementEvenement = "
+								insert into _evenementEvenement (idEvenement,idEvenementAssocie)
+								values ('".$this->variablesPost['evenementGroupeAdresse']."','".$idSousEvenement."')
+										";
+						debug($sqlEvenementEvenement);
+						$this->connexionBdd->requete($sqlEvenementEvenement);
+					}
 
 					$ajoutOk = true;
 				}
@@ -518,12 +528,23 @@ class archiEvenement extends config
 
 				// *************************************************************************************************************************************************************
 				
+				
+				
+				debug(array($idEvenementGroupeAdresse,$idEvenement,$idSousEvenement,$this->getParent($idSousEvenement)));
+				$adresse = new archiAdresse();
+				
+				$idGroupeAdresse = $this->getParent($idSousEvenement);
+				$idAdresse = $this->getIdAdresseFromIdEvenementGroupeAdresse($idGroupeAdresse);
+				$html = $adresse->afficherDetailAdresse($idAdresse,$idGroupeAdresse);
+				
+				/*
 				debug($tabForm);
 				$retourArray = $this->afficher($idSousEvenement); // afficher le sousEvenement revient a afficher l'evenement parent de type groupe d'adresse
 				$html .= $retourArray['html'];
 				$adresse = new archiAdresse();
 				$html.=$adresse->getListeCommentaires($idSousEvenement);
 				$html.=$adresse->getFormulaireCommentaires($idSousEvenement,$adresse->getCommentairesFields());
+				*/
 			}
 		}
 		else
@@ -1280,30 +1301,17 @@ class archiEvenement extends config
 		
 		
 		
-		
-		
-		
-		
 	
 		$idEvenementGroupeAdresse=$this->getParent($idEvenement);
 		if($idEvenementGroupeAdresse == 0){
-			$accueil = new ArchiAccueil();
+			$accueil = new archiAccueil();
 			echo $accueil->afficheAccueil();			
 		}
 		else{
 			$adresse = new archiAdresse();
 			echo $adresse->afficherDetailAdresse($idAdresse, $this->getParent($idEvenement));
 		}
-		debug(array($idAdresse,$idEvenementGroupeAdresse,$idEvenement));
-		
-		/*
-		$retourArray = $this->afficher($idEvenementGroupeAdresse);
-		$html =  $retourArray['html'];
-		$adresse = new archiAdresse();
-		$html.=$adresse->getListeCommentaires($idEvenementGroupeAdresse);
-		$html.=$adresse->getFormulaireCommentaires($idEvenementGroupeAdresse,$adresse->getCommentairesFields());
-		echo $html;
-		*/
+
 	}
 
 
