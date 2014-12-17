@@ -1919,13 +1919,22 @@ class ArchiAccueil extends config
     					$request.=" UNION ";
     				}
     				else{
-    					$request.=" ORDER BY created
+    					/*$request.=" ORDER BY created
     							LIMIT 5";
+    							*/
     				}
     			}
     			/*
     			 * Data processing
     			 */
+    			
+    			//Strange request wrapping to avoid redundancy, might not be accepted by MySQL
+    			$request = "SELECT * FROM
+    					(".$request.") 
+    							AS tmp
+    							GROUP BY idEvenementGroupeAdresse
+    							ORDER BY created
+    							LIMIT 5 ";
     			$result = $this->connexionBdd->requete($request);
     			while($fetch = mysql_fetch_assoc($result)){
     				$item['CSSClassWrapper'] = 'lastAdd';
