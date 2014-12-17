@@ -12,7 +12,6 @@
 					style='width: 275px; height: 275px;' itemprop='map'></iframe><br>{CarteGoogle.lienVoirCarteGrand}{CarteGoogle.popupGoogleMap}</td>
 	</div>
 <!-- END CarteGoogle -->
-
 <!-- BEGIN listeAdressesVoisines -->
 	<div class="listAdressesVoisines inline-div">
 		{listeAdressesVoisines.content}
@@ -23,6 +22,11 @@
 				</a></li>
 				<li class="seeAll"><a href="{listeAdressesVoisines.urlAutresBiensQuartier}"><?_("Voir tous les bâtiments de ce quartier...")?>
 				</a></li>
+				<!-- BEGIN favoris -->
+					<li class="ajouterFavoris seeAll">
+					<a href="{listeAdressesVoisines.favoris.urlFavoris}">Ajouter aux favoris</a>
+					</li>
+				<!-- END favoris -->
 			</ul>
 		</div>
 	</div>

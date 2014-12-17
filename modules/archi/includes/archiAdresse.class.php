@@ -450,7 +450,6 @@ class archiAdresse extends ArchiContenu
 		$title = $this->displayTitle();
 		
 		
-		
 		//Setting idAdresse
 		if(isset($this->variablesGet['archiIdAdresse']) && ! empty($this->variablesGet['archiIdAdresse'])){
 			$idAdresse=$this->variablesGet['archiIdAdresse'];
@@ -495,6 +494,10 @@ class archiAdresse extends ArchiContenu
 				'popupGoogleMap'=>$calqueGoogleMap->getDivNoDraggableWithBackgroundOpacity(array('top'=>20,'lienSrcIFrame'=>'','contenu'=>$contenuIFramePopup))
 		));
 		
+		$t->assign_block_vars('listeAdressesVoisines.favoris', array(
+				//'urlFavoris' => $this->creerUrl('saveInterest','',array('adresse'=>$idAdresse)) 
+				'urlFavoris' => $this->creerUrl('','saveInterest',array('adresse'=>$idAdresse)) 
+		));
 		
 		//Preparing the loop on all related event to the current address
 		$requeteIdEvenements = "

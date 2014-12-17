@@ -1,4 +1,4 @@
 <div>
 	{message}
-	<a href="#" onClick="history.back();"> Revenir à la liste de mes intérêts</a>
+	<a href="#" onClick="history.back();"> {textLink} </a>
 </div>

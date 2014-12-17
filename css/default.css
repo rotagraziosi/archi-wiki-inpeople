@@ -1519,3 +1519,7 @@ li:empty {
 .boutonsAutresBiens{
 	width: 300px;
 }
+
+.ajouterFavoris{
+	display: inline-block;
+}

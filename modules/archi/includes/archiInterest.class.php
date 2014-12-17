@@ -136,9 +136,16 @@ class archiInterest extends config{
 		$t = new Template($this->getCheminPhysique().$this->cheminTemplates."interest/");
 		$t->set_filenames(array('confirm'=>'confirm.tpl'));
 		
-		$interets = $this->variablesPost;
-
-
+		$urlBack = $this->creerUrl('', 'mesInterets', array());
+		$txtLink = "Revenir à la liste de mes intérêts";
+		
+		if(isset($this->variablesPost) && !empty($this->variablesPost)){
+			$interets = $this->variablesPost;
+		}
+		elseif (isset($this->variablesGet) && !empty($this->variablesGet)){
+			$interets = $this->variablesGet;
+		}
+		
 		$requestParameters = array();
 		if($interets['rue']!=0){
 			$requestParameters[]=array('table'=>'_interetRue','fieldName1'=>'idUtilisateur','fieldName2'=>'idRue','idInteret'=>$interets['rue'],'userId'=>$this->userId);
@@ -154,6 +161,27 @@ class archiInterest extends config{
 		}
 		if($interets['pays']!=0){
 			$requestParameters[]=array('table'=>'_interetPays','fieldName1'=>'idUtilisateur','fieldName2'=>'idPays','idInteret'=>$interets['pays'],'userId'=>$this->userId);
+		}
+		if($interets['adresse']!=0){
+			$idHistoriqueAdresse = $interets['adresse'];
+			$requestParameters[]=array('table'=>'_interetAdresse','fieldName1'=>'idUtilisateur','fieldName2'=>'idHistoriqueAdresse','idInteret'=>$interets['adresse'],'userId'=>$this->userId);
+			
+			$requete = "
+					SELECT ae.idEvenement as idEvenementGroupeAdresse, ae.idAdresse as idAdresse 
+					FROM _adresseEvenement ae
+					LEFT JOIN historiqueAdresse ha on ha.idAdresse = ae.idAdresse 
+					WHERE ha.idHistoriqueAdresse  = ".$idHistoriqueAdresse."
+					";			
+			$result = $this->connexionBdd->requete($requete);
+			$fetch = mysql_fetch_array($result);
+			$idAdresse = $fetch['idAdresse'];
+			$idEvenementGroupeAdresse = $fetch['idEvenementGroupeAdresse'];
+			
+			$evenement = new archiEvenement();
+			$titreAdresse = $evenement->getIntituleAdresseFrom($idAdresse,'idAdresse');
+			
+			$urlBack = $this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdAdresse'=>$idAdresse,'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse));
+			$txtLink="Aller à l'adresse " . $titreAdresse;
 		}
 
 		$nbEltInserted=0;
@@ -172,13 +200,11 @@ class archiInterest extends config{
 		}
 		
 		$this->messages->addConfirmation('Intérêt(s) sauvegardé(s) avec succès !');
-		$test = $this->messages->display();
-		//$this->erreurs->ajouter("Intérêt(s) sauvegardé(s) avec succès !");
 
 		$t->assign_vars(array(
-				'message' =>  $test,
-				//'message' =>  $this->erreurs->afficher(),
-				'urlBack'=> $this->creerUrl('', 'mesInterets', array())
+				'message' =>  $this->messages->display(),
+				'textLink' => $txtLink,
+				'urlBack'=> $urlBack
 		)); 
 		ob_start();
 		$t->pparse('confirm');

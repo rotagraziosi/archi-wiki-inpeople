@@ -106,7 +106,6 @@ class archiEvenement extends config
 					VALUES (".$idEvenementGroupeAdresse.", '', '', '', '', ".$tabForm['source']['value'].", ".$idUtilisateur.", 0, ".$this->getIdTypeEvenementGroupeAdresse().",now())";
 			$this->connexionBdd->requete($sql);
 			$idEvenementGroupeAdresse= $this->connexionBdd->getLastId();
-			debug($idEvenementGroupeAdresse);
 			
 			// *****************************************************
 			// on recupere l'id de l'evenement enfant ( construction)
@@ -164,7 +163,6 @@ class archiEvenement extends config
 
 			$idEvenement = $this->connexionBdd->getLastId();
 			
-			debug(array($idEvenementGroupeAdresse,$idSousEvenement,$idEvenement));
 			
 			// on relie l'evenement pere (groupe d'adresse ) à l'evenement fils
 			$sqlAssociationNettoie = "delete from _evenementEvenement where idEvenement = '".$idEvenementGroupeAdresse."'";
@@ -218,7 +216,6 @@ class archiEvenement extends config
 		$ajoutOk = false;
 		$aAuthentification = new archiAuthentification();
 		$formulaire = new formGenerator();
-		debug($this->variablesPost);
 		if ( $aAuthentification->estConnecte() == 0)
 		{
 			echo 'utilisateur non connecté';
@@ -256,8 +253,6 @@ class archiEvenement extends config
 				$MH             = $tabForm['MH']['value'];
 
 
-				debug($tabForm);
-				
 				//**************
 				//**  VERIFICATION DOUBLON
 				//**
@@ -326,14 +321,11 @@ class archiEvenement extends config
 							$sqlEvenementAdresse = pia_substr($sqlEvenementAdresse,0,-1);
 							$this->connexionBdd->requete($sqlEvenementAdresse);
 						}
-						debug($idSousEvenement);
 					}
 					else
 					{
 						$idSousEvenement = $idEvenement; // si on est dans le cas d'un ajout de sous evenement simple , sans creation de groupe d'adresse, on recupere l'id d'un nouvel element virtuel (getNewIdEVenement)
-						debug($idSousEvenement);
 					}
-					debug($idSousEvenement);
 					if (!empty($tabForm['courant']['value']))
 					{
 						$sqlEvenementCourantArchitectural = "INSERT INTO _evenementCourantArchitectural (idCourantArchitectural, idEvenement) VALUES ";
@@ -345,8 +337,6 @@ class archiEvenement extends config
 
 						$this->connexionBdd->requete($sqlEvenementCourantArchitectural);
 					}
-					debug($idSousEvenement);
-
 
 					if (!empty($tabForm['personnes']['value']))
 					{
@@ -374,9 +364,6 @@ class archiEvenement extends config
 						$this->connexionBdd->requete($sqlEvenementSource);
 					}
 					*/
-					debug($idSousEvenement);
-					
-					
 
 
 					// debug
@@ -394,7 +381,6 @@ class archiEvenement extends config
 					$idSousEvenement=$this->connexionBdd->getLastId();
 					
 					
-					
 					// ajout de l'evenement enfant à l'evenement groupe d'adresse
 					
 					if (!isset($this->variablesPost['evenementGroupeAdresse']) || $this->variablesPost['evenementGroupeAdresse']=='')//(empty($tabForm['evenements']['value']))
@@ -404,7 +390,6 @@ class archiEvenement extends config
 								insert into _evenementEvenement (idEvenement,idEvenementAssocie)
 								values ('".$idEvenement."','".$idSousEvenement."');
 										";
-						debug($sqlEvenementEvenement);
 						$this->connexionBdd->requete($sqlEvenementEvenement);
 					}
 					else
@@ -414,7 +399,6 @@ class archiEvenement extends config
 								insert into _evenementEvenement (idEvenement,idEvenementAssocie)
 								values ('".$this->variablesPost['evenementGroupeAdresse']."','".$idSousEvenement."')
 										";
-						debug($sqlEvenementEvenement);
 						$this->connexionBdd->requete($sqlEvenementEvenement);
 					}
 
@@ -430,12 +414,10 @@ class archiEvenement extends config
 		{
 			if(isset($idSousEvenement))
 			{
-				debug($idSousEvenement);
 				$idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromIdEvenement($idSousEvenement);
 
 				// d'abord on classe les evenements (les positions précédentes sont conservees)
 				$this->majPositionsEvenements(array('idEvenementGroupeAdresse'=>$idEvenementGroupeAdresse,'idNouvelEvenement'=>$idSousEvenement));
-				debug("hoho");
 				
 				$mail = new mailObject();
 				$adresse = new archiAdresse();
@@ -530,26 +512,21 @@ class archiEvenement extends config
 				
 				
 				
-				debug(array($idEvenementGroupeAdresse,$idEvenement,$idSousEvenement,$this->getParent($idSousEvenement)));
 				$adresse = new archiAdresse();
 				
 				$idGroupeAdresse = $this->getParent($idSousEvenement);
 				$idAdresse = $this->getIdAdresseFromIdEvenementGroupeAdresse($idGroupeAdresse);
-				$html = $adresse->afficherDetailAdresse($idAdresse,$idGroupeAdresse);
-				
-				/*
-				debug($tabForm);
-				$retourArray = $this->afficher($idSousEvenement); // afficher le sousEvenement revient a afficher l'evenement parent de type groupe d'adresse
-				$html .= $retourArray['html'];
-				$adresse = new archiAdresse();
-				$html.=$adresse->getListeCommentaires($idSousEvenement);
-				$html.=$adresse->getFormulaireCommentaires($idSousEvenement,$adresse->getCommentairesFields());
-				*/
+				$url= $this->creerUrl('', '',
+    						array(
+    								'archiAffichage'=>'adresseDetail',
+    								"archiIdAdresse"=>$idAdresse,
+    								"archiIdEvenementGroupeAdresse"=>$idGroupeAdresse
+    						));
+				header("Location: ".htmlspecialchars_decode($url));
 			}
 		}
 		else
 		{
-			debug("coucou");
 			$html .= $this->afficheFormulaire($tabForm);
 		}
 
@@ -5712,9 +5689,6 @@ class archiEvenement extends config
 			$arrayFetch[] = $fetch;
 		}
 
-
-
-
 		if(isset($params['idAdresseReference']) && $params['idAdresseReference']!=0)
 		{
 			// si on passe une adresse de reference en parametres (idAdresse de la page courante par exemple) , on a la regle suivante
@@ -7058,6 +7032,7 @@ class archiEvenement extends config
 		//debug($evenement);
 		
 	}
+	
 	
 }
 
