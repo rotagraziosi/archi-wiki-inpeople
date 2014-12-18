@@ -1429,7 +1429,28 @@ class archiEvenement extends config
 			// on ne fait pas de group by   having
 			// on prend simplement le dernier enregistrement classé selon l'idHistoriqueEvenement
 			// et donc le nombre de resultats de la requete permet de recuperer le nombre d'historiques sur l'evenement dans la foulée
-			$sql = 'SELECT  hE.idEvenement, hE.titre, hE.idSource, hE.idTypeStructure, hE.idTypeEvenement, hE.description, hE.dateDebut, hE.dateFin, hE.dateDebut, hE.dateFin, tE.nom AS nomTypeEvenement, tS.nom AS nomTypeStructure, s.nom AS nomSource, u.nom AS nomUtilisateur,u.prenom as prenomUtilisateur, tE.groupe, hE.ISMH , hE.MH, date_format(hE.dateCreationEvenement,"'._("%e/%m/%Y à %kh%i").'") as dateCreationEvenement,hE.isDateDebutEnviron as isDateDebutEnviron, u.idUtilisateur as idUtilisateur, hE.numeroArchive as numeroArchive
+			$sql = 'SELECT  hE.idEvenement, 
+					hE.titre, hE.idSource, 
+					hE.idTypeStructure, 
+					hE.idTypeEvenement, 
+					hE.description, 
+					hE.dateDebut, 
+					hE.dateFin, 
+					hE.dateDebut, 
+					hE.dateFin, 
+					tE.nom AS nomTypeEvenement, 
+					tS.nom AS nomTypeStructure, 
+					s.nom AS nomSource, 
+					u.nom AS nomUtilisateur,
+					u.prenom as prenomUtilisateur, 
+					tE.groupe, 
+					hE.ISMH , 
+					hE.MH, 
+					date_format(hE.dateCreationEvenement,"'._("%e/%m/%Y à %kh%i").'") as dateCreationEvenement,
+					hE.isDateDebutEnviron as isDateDebutEnviron, 
+					u.idUtilisateur as idUtilisateur, 
+					hE.numeroArchive as numeroArchive
+							
 					FROM evenements hE
 					LEFT JOIN source s      ON s.idSource = hE.idSource
 					LEFT JOIN typeStructure tS  ON tS.idTypeStructure = hE.idTypeStructure
@@ -1821,7 +1842,7 @@ class archiEvenement extends config
 				$txtEnvoi = _("Envoyé");
 				$dateEnvoi="";
 
-				if(!$this->isFirstIdHistoriqueEvenementFromHistorique($res->idHistoriqueEvenement))
+				if(!$this->isFirstIdHistoriqueEvenementFromHistorique($res->idEvenement))
 				{
 					$txtEnvoi = _("Modifié");
 				}
@@ -2625,12 +2646,34 @@ class archiEvenement extends config
 	// est ce que l'idHistoriqueEvenement passé en parametre est le premier de l'historique (le premier qui a ete envoyé),
 	// les autres idHistoriqueEvenement du meme evenement sont donc des mises a jour de celui ci
 	// ******************************************************************************************
-	public function isFirstIdHistoriqueEvenementFromHistorique($idHistoriqueEvenement=0)
+	public function isFirstIdHistoriqueEvenementFromHistorique($idEvenement=0)
 	{
-		debug($idHistoriqueEvenement);
+		
+		/*
+		 * Modification due to historiqueEvenement and evenements split
+		 * 
+		 * Previously working on idHistoriqueEvenement and checking if it was the first one with the same idEvenement as input
+		 * 
+		 * Now : Just checking number of evenements in historiqueEvenement with $idEvenement 
+		 * If there is more than 2 events with same idEvenement (1 for the group of events and 1 for the event itself)
+		 * there has been modification(s) on this event
+		 */
+		$requete = "SELECT idEvenement 
+				FROM historiqueEvenement
+				WHERE idEvenement = ".$idEvenement;
+		$result = $this->connexionBdd->requete($requete);
+		
+		if(mysql_num_rows($result)>2){
+			return false;
+		}
+		return true;
+		
+		/*
+		
+		debug($idEvenement);
 		$retour = false;
 		// recuperation de l'idEvenement
-		$reqIdEvenement = "SELECT idEvenement FROM historiqueEvenement WHERE idHistoriqueEvenement=$idHistoriqueEvenement";
+		$reqIdEvenement = "SELECT idEvenement FROM historiqueEvenement WHERE idEvenement=$idEvenement";
 		$resIdEvenement = $this->connexionBdd->requete($reqIdEvenement);
 		$fetchIdEvenement = mysql_fetch_assoc($resIdEvenement);
 		$idEvenement = $fetchIdEvenement['idEvenement'];
@@ -2646,11 +2689,12 @@ class archiEvenement extends config
 		";
 		$resIdHistoriqueEvenement = $this->connexionBdd->requete($reqIdHistoriqueEvenement);
 		$fetchIdHistoriqueEvenement = mysql_fetch_assoc($resIdHistoriqueEvenement);
-		if($fetchIdHistoriqueEvenement['idHistoriqueEvenement'] == $idHistoriqueEvenement)
+		if($fetchIdHistoriqueEvenement['idHistoriqueEvenement'] == $idEvenement)
 		{
 			$retour = true;
 		}
 		return $retour;
+		*/
 	}
 
 	// ******************************************************************************************
