@@ -183,6 +183,11 @@ class archiInterest extends config{
 			$urlBack = $this->creerUrl('','',array('archiAffichage'=>'adresseDetail','archiIdAdresse'=>$idAdresse,'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse));
 			$txtLink="Aller à l'adresse " . $titreAdresse;
 		}
+		if($interets['personne']){
+			$requestParameters[]=array('table'=>'_interetPersonne','fieldName1'=>'idUtilisateur','fieldName2'=>'idPersonne','idInteret'=>$interets['personne'],'userId'=>$this->userId);
+			$urlBack = $this->creerUrl('', 'evenementListe', array('selection' => 'personne', 'id' => $interets['personne']));
+			$txtLink = "Retour à la fiche de la personne";
+		}
 
 		$nbEltInserted=0;
 		foreach ($requestParameters as $rp){

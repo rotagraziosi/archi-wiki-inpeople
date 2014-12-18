@@ -512,7 +512,6 @@ class archiAdresse extends ArchiContenu
 		while($fetch = mysql_fetch_assoc($resultIdEvenements)){
 			//Getting all the infos with this method 
 			$evenement = $e->getEventInfos($fetch['idEvenement']);
-			
 			//Filling the template with the infos
 			$t->assign_block_vars('evenement', $evenement['evenementData']);
 			
@@ -2318,7 +2317,8 @@ class archiAdresse extends ArchiContenu
 			*/
 
 			$affichageListeAdressesPersonneImageTrouvee = false;
-			if(isset($this->variablesGet['archiAffichage']) && $this->variablesGet['archiAffichage']=='evenementListe' && isset($this->variablesGet['selection']) && $this->variablesGet['selection']=='personne' && isset($this->variablesGet['id']) && $this->variablesGet['id']!='' && isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='' && !$affichageListeAdresseFromSourceTrouvee)
+			if(
+			isset($this->variablesGet['archiAffichage']) && $this->variablesGet['archiAffichage']=='evenementListe' && isset($this->variablesGet['selection']) && $this->variablesGet['selection']=='personne' && isset($this->variablesGet['id']) && $this->variablesGet['id']!='' && isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='' && !$affichageListeAdresseFromSourceTrouvee)
 			{
 				// si on est sur l'affichage de la liste des adresses d'un architecte par exemple , on va chercher les photos sur les evenements concernant l'architecte
 				// verifions s'il y a au moins une photo sur l'evenement concerné
@@ -2403,7 +2403,6 @@ class archiAdresse extends ArchiContenu
 				$arrayCritereListeIdEvenementPersonne=array();
 				if(isset($this->variablesGet['selection']) && $this->variablesGet['selection']=='personne')
 				{
-					
 					debug("Il y aura surement un probleme ici. Wait for it !");
 					debug($arrayListeEvenementsAssocies);
 					// voyons d'abord s'il y a des photos sur l'evenement concerné par l'architect , sinon ce n'est pas la peine d'ajouter ce critere a la recherche de la photo
@@ -5886,6 +5885,9 @@ class archiAdresse extends ArchiContenu
 	 * */
 	public function afficherListe($criteres = array() ,  $modeAffichage='', $params = array())
 	{
+		
+		debug(array($criteres,$modeAffichage,$params,$this->varia));
+		
 		$sqlId='';
 
 		$nbAdresses=0;
@@ -5905,10 +5907,6 @@ class archiAdresse extends ArchiContenu
 		$sqlOrderByPoidsMotCle="";
 		$sqlOrderBy=" ha1.date";
 
-		debug($criteres);
-		debug($modeAffichage);
-		debug($params);
-		
 		foreach ($tabParametresAutorises as $param) {
 			if (isset($this->variablesGet[$param]) and !isset($criteres[$param]))
 				$criteres[$param] = $this->variablesGet[$param];
@@ -5920,7 +5918,6 @@ class archiAdresse extends ArchiContenu
 				$tabSqlWhere[] = " (ae.longitudeGroupeAdresse='0' AND ae.latitudeGroupeAdresse='0') " ;
 			}
 		}
-		debug("passed!!");
 		$locationCriterias = '';
 		$sqlWhere= $locationCriterias;
 		$tabSqlWhere[] = $locationCriterias;
@@ -6027,7 +6024,6 @@ class archiAdresse extends ArchiContenu
 		}
 
 
-		debug("passed!!");
 		/*
 		 * Recherche dans les evenements
 		*/
@@ -6093,7 +6089,6 @@ class archiAdresse extends ArchiContenu
 			$sqlSelectCoordonnees=" AND ha1.latitude<>0 AND ha1.longitude<>0 AND ha1.latitude<>'' AND ha1.longitude<>'' AND ((acos(sin(".$criteres['recherche_latitude']."*PI()/180) * sin(ha1.latitude*PI()/180) + cos(".$criteres['recherche_latitude']."*PI()/180) * cos(ha1.latitude*PI()/180) * cos((".$criteres['recherche_longitude']." - ha1.longitude)*PI()/180))/ pi() * 180.0)* 60 * 1.1515 * 1.609344)*1000<".$criteres['recherche_rayon']." ";
 		}
 
-		debug("passed!!");
 
 		// ****************************************************************************************************
 		// ajout d'adresses pouvant provenir de la recherche avancee d'evenements
@@ -6194,7 +6189,6 @@ class archiAdresse extends ArchiContenu
 		if (isset($params['sqlLimitExterne']) && $params['sqlLimitExterne']!='') {
 			$sqlLimit = " ".$params['sqlLimitExterne']." ";
 		}
-		debug("passed!!");
 
 		if (isset($criteres['tri'])) {
 			if ($criteres['tri'] == 'desc')
@@ -6242,7 +6236,6 @@ class archiAdresse extends ArchiContenu
 		}
 
 
-		debug("passed!!");
 
 		// bidouille pour que l'on affiche encore toutes les adresses en mode detail dans l'encars qui affiche la liste des adresses,  ce qui va faire que la requete ne renvoie des groupes d'adresses en double
 		$critereSelectionIdAdressesModeAffichageListeAdressesCount = "";
@@ -6277,7 +6270,6 @@ class archiAdresse extends ArchiContenu
 			*/
 		}
 
-		debug("passed!!");
 		/*
 		 * Getting number of results
 		*/
@@ -6339,7 +6331,6 @@ class archiAdresse extends ArchiContenu
 			$nbReponses = $nbAdresses;
 
 		}
-		debug("passed!!");
 
 
 		$t=new Template('modules/archi/templates/');
@@ -6376,6 +6367,8 @@ class archiAdresse extends ArchiContenu
 						if ($authentification->estAdmin()) {
 							$description.="<li><a href='".$this->creerUrl("", "deletePerson", array("id"=>$_GET["id"]))."'>"._("Supprimer")."</a></li>";
 						}
+						//TODO: Ajouter le lien pour ajouter aux favoris
+						$description.="<li><a href='".$this->creerUrl("", "saveInterest", array("personne"=>$this->variablesGet["id"]))."'>"._("Ajouter aux favoris")."</a></li>";
 						$description.='</ul>';
 					}
 					$description.="<img src='".archiPersonne::getImage($this->variablesGet['id'])."' alt=''/>
@@ -6417,7 +6410,6 @@ class archiAdresse extends ArchiContenu
 					}
 
 					//$description.="<br><br><h2>"._("Liste de ses réalisations :")."</h2>";
-
 
 					$t->assign_vars(
 							array(
@@ -6466,7 +6458,6 @@ class archiAdresse extends ArchiContenu
 				}
 			}
 		}
-		debug("passed!!");
 		// gestion de la pagination de la recherche
 		switch ($modeAffichage) {
 			case 'calqueImage':
@@ -7205,7 +7196,7 @@ class archiAdresse extends ArchiContenu
 		$html=ob_get_contents();
 		ob_end_clean();
 
-		debug("end of the method ?!!");
+		debug("end of the method afficherList");
 
 		return array('html'=>$html, 'nbAdresses'=>$nbAdresses, 'arrayLiens'=>$arrayRetour, 'arrayIdAdresses'=>$arrayIdAdressesRetour, 'arrayIdEvenementsGroupeAdresse'=>$arrayIdEvenementsGARetour, 'arrayRetourLiensVoirBatiments'=>$arrayRetourLiensVoirBatiments);
 	}

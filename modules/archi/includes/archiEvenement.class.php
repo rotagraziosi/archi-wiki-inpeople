@@ -1330,13 +1330,8 @@ class archiEvenement extends config
 	// le parametre idHistoriqueEvenement n'est plus utilisé
 	public function afficher($idEvenement = null,$modeAffichage='', $idHistoriqueEvenement = null, $paramChampCache=array(),$params=array())
 	{
-		debug($idEvenement);
-		debug($idHistoriqueEvenement);
-		
 		$html = '';
-
 		$erreurObject = new objetErreur();
-
 
 		$t = new Template('modules/archi/templates/');
 		$t->set_filenames(array('ev'=>'evenement.tpl'));
@@ -1459,7 +1454,6 @@ class archiEvenement extends config
 					WHERE '.$sqlWhere.'
 			ORDER BY hE.idEvenement DESC';
 
-			debug($sql);
 			$rep = $this->connexionBdd->requete($sql);
 		} else {
 			echo "<p><strong>Cette fiche n'existe plus, merci de <a href='".$this->creerUrl("", "contact")."'>contacter un administrateur</a>.</strong></p>";
@@ -1901,10 +1895,7 @@ class archiEvenement extends config
 						'numeroArchive'=>$numeroArchive
 				));
 
-				debug($idEvenement);
-				debug($res);
 				$idEvenement = $res->idEvenement;
-
 
 				// affichage des images de l'evenement
 				if($modeAffichage!='consultationHistoriqueEvenement')
@@ -2010,7 +2001,6 @@ class archiEvenement extends config
 			// *************************************************************************************************************************************
 			if($modeAffichage!='simple' && $modeAffichage!='consultationHistoriqueEvenement')
 			{
-				debug($idEvenement);
 				$tabIdEvenementsLies=$this->getEvenementsLies($idEvenement); // recherche des sous evenements (idEvenementAssocie) du groupe d'adresse
 				
 				if(count($tabIdEvenementsLies)>0)
@@ -2594,10 +2584,8 @@ class archiEvenement extends config
 		$retour=0;
 		if(isset($params['idEvenement']))
 		{
-			debug($params);
 			debug("A modifier vis  a vis de l'historique  (en principe la requete est ok");
 			$req = "SELECT count(idHistoriqueEvenement) as nb FROM historiqueEvenement WHERE idEvenement=".$params['idEvenement'];
-			debug($req);
 			$res = $this->connexionBdd->requete($req);
 			$fetch = mysql_fetch_assoc($res);
 			$retour = $fetch['nb'];
@@ -2668,33 +2656,6 @@ class archiEvenement extends config
 		}
 		return true;
 		
-		/*
-		
-		debug($idEvenement);
-		$retour = false;
-		// recuperation de l'idEvenement
-		$reqIdEvenement = "SELECT idEvenement FROM historiqueEvenement WHERE idEvenement=$idEvenement";
-		$resIdEvenement = $this->connexionBdd->requete($reqIdEvenement);
-		$fetchIdEvenement = mysql_fetch_assoc($resIdEvenement);
-		$idEvenement = $fetchIdEvenement['idEvenement'];
-
-		// on recherche l'idHistoriqueEvenement du premier evenement ayant comme idEvenement l'idEvenement de l'idHistoriqueEvenement passé en parametre
-		$reqIdHistoriqueEvenement = "
-		SELECT he1.idHistoriqueEvenement as idHistoriqueEvenement
-		FROM historiqueEvenement he2, historiqueEvenement he1
-		WHERE he1.idEvenement=$idEvenement
-		AND he2.idEvenement = he1.idEvenement
-		GROUP BY he1.idEvenement,he1.idHistoriqueEvenement
-		HAVING he1.idHistoriqueEvenement = min(he2.idHistoriqueEvenement)
-		";
-		$resIdHistoriqueEvenement = $this->connexionBdd->requete($reqIdHistoriqueEvenement);
-		$fetchIdHistoriqueEvenement = mysql_fetch_assoc($resIdHistoriqueEvenement);
-		if($fetchIdHistoriqueEvenement['idHistoriqueEvenement'] == $idEvenement)
-		{
-			$retour = true;
-		}
-		return $retour;
-		*/
 	}
 
 	// ******************************************************************************************
@@ -2729,18 +2690,13 @@ class archiEvenement extends config
 
 		if(isset($params['idEvenementGroupeAdresse']) && $params['idEvenementGroupeAdresse']!='0')
 		{
-			debug("passed!!");
 			$req = "SELECT idEvenementRecuperationTitre 
 					FROM evenements e
 					LEFT JOIN _evenementEvenement ee on ee.idEvenementAssocie =e.idEvenement   
 					WHERE ee.idEvenement=".$params['idEvenementGroupeAdresse'];
-			debug($req);
 			$res = $this->connexionBdd->requete($req);
 			$fetch = mysql_fetch_assoc($res);
 
-			debug($fetch);
-			debug("passed!!");
-			debug($params);
 			// on verifie que l'evenement existe, on ne sait jamais
 			if($fetch['idEvenementRecuperationTitre']=='-1') // dans ce cas on affiche pas de titre mais l'adresse a la place
 			{
@@ -6953,6 +6909,7 @@ class archiEvenement extends config
 		*	this function is reused and should not display menu action
 		*/
 		$afficherMenu=true;
+		$allowSuppressImage = false; //Set to false now, image suppression isn't implemented
 	
 		$menuArray = array();
 	
@@ -6990,7 +6947,7 @@ class archiEvenement extends config
 					'url'=>$urlMenuAction['supprimerEvenement']
 			));
 				
-			if($isAdmin){
+			if($isAdmin && $allowSuppressImage){
 				$menuArray[] = array('evenement.menuAction.rowName.secondAction', array(
 						'urlAction'=>'#',
 						'actionTarget'=>'Image'
