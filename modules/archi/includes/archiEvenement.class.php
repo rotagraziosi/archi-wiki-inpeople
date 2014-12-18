@@ -5043,7 +5043,6 @@ class archiEvenement extends config
 			$email=$auth->estConnecte()?$user->getMailUtilisateur($idUtilisateur):$this->variablesPost['email'];
 			$uniqid = uniqid(null, true);
 
-			
 			$req = "INSERT INTO commentairesEvenement (commentaire, idHistoriqueEvenement, date, idUtilisateur, CommentaireValide) VALUES ('".mysql_real_escape_string(strip_tags($this->variablesPost['commentaire']))."', '".mysql_real_escape_string($this->variablesPost['idEvenementGroupeAdresse'])."', now(), '".mysql_real_escape_string($idUtilisateur). "'," . mysql_real_escape_string($CommentaireValide).")";
 			$res = $this->connexionBdd->requete($req);
 			// retour a l'affichage de l'adresse
@@ -5125,12 +5124,26 @@ class archiEvenement extends config
 			$_POST['email']="";
 			$_POST['nom']="";
 			$_POST['prenom']="";
+			
+			//$idAdresse = $this->getIdAdresseFromIdEvenementGroupeAdresse($this->variablesPost['idEvenementGroupeAdresse']);
 
-			$this->variablesGet['archiIdEvenementGroupeAdresse'] = $this->variablesPost['idEvenementGroupeAdresse'];
-			echo $this->afficheHistoriqueEvenement(array('idEvenement' =>$this->variablesGet['archiIdEvenementGroupeAdresse']));
+			$idGroupeEvenement = $this->getIdEvenementGroupeAdresseFromIdEvenement($this->variablesPost['idEvenementGroupeAdresse']);
+			$idAdresse = $this->getIdAdresseFromIdEvenementGroupeAdresse($idGroupeEvenement);
+			//$this->variablesGet['archiIdEvenementGroupeAdresse'] = $this->variablesPost['idEvenementGroupeAdresse'];
+			debug(array($this->variablesGet , $this->variablesPost,$idGroupeEvenement,$idAdresse));
+				
+			$adresse = new archiAdresse();
+			
+			$this->messages->addConfirmation("Commentaire enregistré !");
+			header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$idAdresse, 'archiIdEvenementGroupeAdresse'=>$idGroupeEvenement), false, false));
+				
+			//echo $adresse->afficherDetailAdresse($idAdresse,$idGroupeEvenement);
+			//echo $this->afficheHistoriqueEvenement(array('idEvenement' =>$this->variablesGet['archiIdEvenementGroupeAdresse']));
 		}
 		else
 		{
+			debug(array($this->variablesGet , $this->variablesPost));
+				
 			$this->erreurs->ajouter('Il y a une erreur dans le formulaire.');
 			echo $this->erreurs->afficher();
 			echo $this->getListeCommentaires($this->variablesPost['idEvenementGroupeAdresse']);

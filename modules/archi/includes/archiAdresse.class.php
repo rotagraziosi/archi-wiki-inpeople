@@ -445,6 +445,7 @@ class archiAdresse extends ArchiContenu
 		 */
 		
 		//Template loading
+		$this->messages->display();
 		$t = new Template('modules/archi/templates/evenement');
 		$t->set_filenames(array('index'=>'index.tpl'));
 		$title = $this->displayTitle();
