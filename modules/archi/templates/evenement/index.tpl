@@ -119,12 +119,10 @@
 				{evenement.evenementsLiesPersonne}
 			</div>
 		</div>
-		<!-- BEGIN commentaireEvenement -->
 		<div class="commentaireEvenement">
 			{evenement.listeCommentaireEvenement} 
 			{evenement.formulaireCommentaireEvenement} 
 		</div>
-		<!-- END commentaireEvenement -->
 	</div>
 	<!-- END evenement -->
 </div>

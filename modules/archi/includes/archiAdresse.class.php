@@ -515,7 +515,6 @@ class archiAdresse extends ArchiContenu
 			//Filling the template with the infos
 			$t->assign_block_vars('evenement', $evenement['evenementData']);
 			
-			
 			//Menu (ajouter image/event, modifier image/event etc..)
 			if(isset($evenement['menuArray'])){
 				foreach ($evenement['menuArray'] as $menuElt){

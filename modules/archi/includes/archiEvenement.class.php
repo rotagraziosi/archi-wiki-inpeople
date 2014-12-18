@@ -6833,7 +6833,11 @@ class archiEvenement extends config
 						'nom' => $res->nom));
 			}
 		}
-	
+		
+		//Commentaires
+		$listeCommentaires = $this->getListCommentairesEvenements( $idEvenement);
+		$formulaireCommentaire = $this->getFormulaireCommentairesHistorique($idEvenement,$this->getCommentairesFields());
+
 		//Adresses liees processing
 		$adressesLieesHTML = $this->getAdressesLieesAEvenement(array('modeRetour'=>'affichageSurDetailEvenement','idEvenement'=>$idEvenement));
 		if($adressesLieesHTML!=''){
@@ -6849,6 +6853,7 @@ class archiEvenement extends config
 			$description = empty($description)?"":"<div itemprop='description' class='desc'>".$description."</div>";
 		}
 
+		//Info used for menu display
 		$cityId = $fetch['idVille'];
 		$isModerateur = true;
 		$isAdmin = true;
@@ -6898,7 +6903,9 @@ class archiEvenement extends config
 				'evenementsParents'=>'',
 				'listeAdressesLiees'=>$adressesLieesHTML,
 				'evenementsLiesPersonne' =>$linkedEventsHTML,
-				'idEvenement' =>$idEvenement
+				'idEvenement' =>$idEvenement,
+				'listeCommentaireEvenement' => $listeCommentaires,
+				'formulaireCommentaireEvenement' => $formulaireCommentaire
 	
 		);
 	
