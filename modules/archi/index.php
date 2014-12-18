@@ -404,6 +404,12 @@ if (isset($_GET['archiAction'])) {
                 $adresse->deleteCommentaire();
             }
             break;
+		case 'supprimerCommentaireEvenement':
+            if ($authentification->estAdmin()) {
+            	$adresse = new archiAdresse();
+            	$adresse->deleteCommentaireEvenement();
+            }
+            break;
         case 'enregistrePositionsImages':
             $image = new archiImage();
             $image -> enregistrePositionImages();

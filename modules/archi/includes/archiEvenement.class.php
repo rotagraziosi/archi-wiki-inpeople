@@ -5216,7 +5216,7 @@ class archiEvenement extends config
 				{
 					$archiIdAdresse = $this->variablesGet['archiIdAdresse'];
 				}
-				$boutonSupprimer = "<input type='button' value='supprimer' onclick=\"location.href='".$this->creerUrl('supprimerCommentaire','',array('archiIdCommentaire'=>$fetch['idCommentaire'],'archiIdAdresse'=>$archiIdAdresse))."';\">";
+				$boutonSupprimer = "<input type='button' value='supprimer' onclick=\"location.href='".$this->creerUrl('supprimerCommentaireEvenement','',array('archiIdCommentaire'=>$fetch['idCommentaire'],'archiIdAdresse'=>$archiIdAdresse))."';\">";
 				$adresseMail = "<br><a style='font-size:9px;color:#FFFFFF;' itemprop='email' href='mailto:".$fetch['email']."'>".$fetch['email']."</a>";
 			}
 			$t->assign_block_vars('commentaires',array(

@@ -414,6 +414,11 @@ class archiAdresse extends ArchiContenu
 	// ***************************************************************************************************************************************
 	// renvoi les Evenements lies a l'adresses ( en principe on ne retourne que des groupes d'adresses
 	// ***************************************************************************************************************************************
+	/**
+	 * @deprecated as it's not returning idEvenement but ressource of the request
+	 * @param number $idAdresse
+	 * @return Ambigous <object, resource>
+	 */
 	public function getIdEvenementsFromAdresse($idAdresse=0)
 	{
 		$sql = "SELECT ae.idEvenement as idEvenement,ae.idEvenement as idEvenementGroupeAdresse FROM _adresseEvenement ae WHERE ae.idAdresse = '".$idAdresse."'";
@@ -422,12 +427,27 @@ class archiAdresse extends ArchiContenu
 	}
 
 	// alias de la fonction précédente
+	/**
+	 * @deprecated as it's a stupid alias
+	 * @param number $idAdresse
+	 * @return Ambigous <Ambigous, object, resource>
+	 */
 	public function getIdEvenementGroupeAdresseFromAdresse($idAdresse=0)
 	{
 		return $this->getIdEvenementsFromAdresse($idAdresse);
 	}
 
-	
+	/**
+	 * 
+	 * 
+	 * @param unknown $idAdresse
+	 * @return idEvenementGroupeAdresse of the idAdresse input
+	 */
+	public function getIdEvenementGroupeAdresseFromIdAdresse($idAdresse){
+		$ressource = $this->getIdEvenementsFromAdresse($idAdresse);
+		$fetch = mysql_fetch_assoc($ressource);
+		return $fetch['idEvenementGroupeAdresse'];
+	}
 	/**
 	 * Affiche le detail de l'adresse avec le listing des événements associés
 	 * 
@@ -14688,6 +14708,24 @@ class archiAdresse extends ArchiContenu
 		$arrayRetourLiensVoirBatiments['urlAutresBiensRue']=$this->creerUrl('', 'adresseListe', array('recherche_rue'=>$fetch['idRue']));
 		$arrayRetourLiensVoirBatiments['urlAutresBiensQuartier']=$this->creerUrl('', 'adresseListe', array('recherche_quartier'=>$fetch['idQuartier']));
 		return $arrayRetourLiensVoirBatiments;
+	}
+	
+	
+	public function deleteCommentaireEvenement(){
+		if(isset($this->variablesGet['archiIdCommentaire']) && $this->variablesGet['archiIdCommentaire']!=''){
+			$req = "DELETE FROM commentairesEvenement WHERE idCommentairesEvenement = '".$this->variablesGet['archiIdCommentaire']."'";
+			$res = $this->connexionBdd->requete($req);
+		}
+		
+		// redirection javascript ... pas terrible ca , a changer
+		if(isset($this->variablesGet['archiIdAdresse']) && $this->variablesGet['archiIdAdresse']!=''){
+			$idAdresse = $this->variablesGet['archiIdAdresse'];
+			
+			$idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromIdAdresse($idAdresse);
+			//$idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromIdAdresse($idAdresse);
+			header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$idAdresse, 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse), false, false));
+			//echo "<script langage='javascript'>location.href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$this->variablesGet['archiIdAdresse']), false, false)."';</script>";
+		}
 	}
 
 }
