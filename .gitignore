@@ -3,7 +3,7 @@
 *BACK*
 logs/
 includes/framework/config.php
-images
+images/
 cache/
 mobile
 doc/
