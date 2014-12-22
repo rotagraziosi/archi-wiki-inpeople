@@ -994,8 +994,6 @@ if (isset($_GET['archiAffichage'])) {
             $s = new archiStatic();
             echo $s->afficheQuiSommesNousCreationAssociation2011();
             break;
-        
-        
         case 'faireUnDon':
             $s = new archiStatic();
             echo $s->afficheFaireUnDon();

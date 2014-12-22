@@ -67,7 +67,6 @@ class archiImage extends config
     public function modifier()
     {
 
-    
         set_time_limit(0);
         $mail = new mailObject();    
         $authentifie = new archiAuthentification();
@@ -380,7 +379,6 @@ class archiImage extends config
                             }
                         
                             $reqVueSur = "INSERT INTO _adresseImage (idImage,  idAdresse, idEvenementGroupeAdresse,  vueSur $champs) VALUES ('".$idImage."',  '".$idAdresse."',  '".$idEvenementGroupeAdresse."',  '1' $values)";
-                            
                             $resVueSur = $this->connexionBdd->requete($reqVueSur);
                         }
                     }
@@ -522,8 +520,10 @@ class archiImage extends config
             }
             
             if ($idEvenementGroupeAdresseRetour!=0) {
+            	header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$idAdresse, 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresseRetour), false, false));
+            	 
                 $a = new archiAdresse();
-                echo $a->afficherDetail(0,  $idEvenementGroupeAdresseRetour);
+               // echo $a->afficherDetail(0,  $idEvenementGroupeAdresseRetour);
             } else {
                 echo $this->afficher($idImageModifiee);
             }
@@ -900,7 +900,6 @@ class archiImage extends config
             
             $intituleAdresse = $adresse->getIntituleAdresse($fetch);
             
-            debug($_GET);
             $reqImages = "
             SELECT idImage FROM _evenementImage WHERE idEvenement = ".mysql_real_escape_string($_GET['archiRetourIdValue'])." ORDER BY position
             ";
@@ -987,10 +986,6 @@ class archiImage extends config
                                             'archiSelectionZone'=>1,  'formatPhoto'=>$formatPhotoUrl))));
                 }
             }
-            
-            
-            
-            
             
             
             $authentifie = new archiAuthentification();
@@ -2388,6 +2383,7 @@ class archiImage extends config
     //  *****************************************************************************************************************************************************************
     public function afficherFormulaireModification($id=0,  $type='',  $arrayListeIdImages=array())
     {
+    	debug(array($id,$type,$arrayListeIdImages));
         $html="";
         
         $utilisateur = new archiUtilisateur();

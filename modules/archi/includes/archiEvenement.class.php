@@ -2137,7 +2137,6 @@ class archiEvenement extends config
 					if ($modeAffichage=="personne") {
 
 					} else {
-						debug($idEvenementGroupeAdresse);
 						$arrayCorrespondancesVuesSur = $this->getArrayCorrespondancesIdImageVuesSurAndEvenementByDateFromGA($idEvenementGroupeAdresse);
 						$arrayNoDiplayIdImageVueSur=array();
 						foreach($arrayCorrespondancesVuesSur as $indice => $values)
@@ -2481,7 +2480,6 @@ class archiEvenement extends config
 		$retour=array();
 		// recuperation des adresses du groupe d'adresse
 		$reqAdresse = "SELECT idAdresse FROM _adresseEvenement WHERE idEvenement = '$idGA'";
-		debug($reqAdresse);
 		$resAdresse = $this->connexionBdd->requete($reqAdresse);
 		$arrayAdresses = array();
 		while($fetchAdresse = mysql_fetch_assoc($resAdresse))
@@ -2700,14 +2698,11 @@ class archiEvenement extends config
 			// on verifie que l'evenement existe, on ne sait jamais
 			if($fetch['idEvenementRecuperationTitre']=='-1') // dans ce cas on affiche pas de titre mais l'adresse a la place
 			{
-				debug("passed!!");
 				$retour='-1';
 				$trouve=true;
 			}
 			elseif($fetch['idEvenementRecuperationTitre']!='0')
 			{
-				debug("passed!!");
-				debug($fetch);
 				$reqVerifEvenementTitre = "SELECT idEvenement from evenements WHERE idEvenement=".$fetch['idEvenementRecuperationTitre'];
 				$resVerifEvenementTitre = $this->connexionBdd->requete($reqVerifEvenementTitre);
 				if(mysql_num_rows($resVerifEvenementTitre)>0)
@@ -6984,65 +6979,6 @@ class archiEvenement extends config
 		return array('evenementData' => $evenementData, 'menuArray' => $menuArray, 'arrayPersonne'=>$arrayPersonne,'arrayFormEvent' => $arrayFormEvenement,'arrayCourantArchi' => $arrayCourantArchi);
 	}
 
-	// *************************************************************************************************************************************
-	// le parametre idHistoriqueEvenement n'est plus utilisé
-	public function affichertemp($idEvenement = null,$modeAffichage='', $idHistoriqueEvenement = null, $paramChampCache=array(),$params=array())
-	{
-	$t = new Template('modules/archi/templates/evenement');
-			$t->set_filenames(array('index'=>'index.tpl'));
-					/*
-					debug($idEvenement);
-					debug($modeAffichage);
-					debug($idHistoriqueEvenement);
-					debug($paramChampCache);
-					debug($params);
-					debug($this->variablesGet);
-					*/
-	
-			if(isset($this->variablesGet['archiIdAdresse']) && ! empty($this->variablesGet['archiIdAdresse'])){
-				$idAdresse=$this->variablesGet['archiIdAdresse'];
-			}
-			elseif(isset($idEvenement) && !empty($idEvenement)){
-				//Getting idAdresse
-				$requete = "SELECT idAdresse FROM _adresseEvenement WHERE idEvenement = ".$idEvenement;
-				$result = $this->connexionBdd->requete($requete);
-				$fetch = mysql_fetch_assoc($result);
-				$idAdresse = $fetch['idAdresse'];
-			}
-	
-			//Getting coordo for the current address
-	
-			$requete = "SELECT latitude , longitude FROM historiqueAdresse WHERE idAdresse = ".$idAdresse;
-			$result = $this->connexionBdd->requete($requete);
-			$fetch = mysql_fetch_assoc($result);
-			$coordonnees['longitude'] = $fetch['longitude'];
-			$coordonnees['latitude'] = $fetch['latitude'];
-	
-	
-	
-			$calqueGoogleMap = new calqueObject(array('idPopup'=>10));
-			$contenuIFramePopup = $this->getContenuIFramePopupGoogleMap(array(
-					'idAdresseCourante'=>$idAdresse,
-					'calqueObject'=>$calqueGoogleMap,
-					'idEvenementGroupeAdresseCourant'=>$idEvenement
-			));
-	
-			$t->assign_block_vars('CarteGoogle',array(
-					'src'=>$this->creerUrl('','afficheGoogleMapIframe',array('noHeaderNoFooter'=>1,'longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement)),
-					'lienVoirCarteGrand'=>"<a href='#' onclick=\"".$calqueGoogleMap->getJsOpenPopupNoDraggableWithBackgroundOpacity()."document.getElementById('iFrameDivPopupGM').src='".$this->creerUrl('','afficheGoogleMapIframe',array('longitude'=>$coordonnees['longitude'],'latitude'=>$coordonnees['latitude'],'noHeaderNoFooter'=>true,'archiIdAdresse'=>$idAdresseCourante,'archiIdEvenementGroupeAdresse'=>$idEvenement,'modeAffichage'=>'popupDetailAdresse'))."';\" class='bigger' style='font-size:11px;'>"._("Voir la carte en + grand")."</a>",
-					'popupGoogleMap'=>$calqueGoogleMap->getDivNoDraggableWithBackgroundOpacity(array('top'=>20,'lienSrcIFrame'=>'','contenu'=>$contenuIFramePopup))
-			));
-	
-			$e = new archiEvenement();
-			$hoho = $e->displaySingleEvent(152);
-	
-	
-			ob_start();
-			$t->pparse('index');
-			$html .= ob_get_contents();
-			ob_end_clean();
-			return array('html'=>$html);
-	}
 	
 	function displaySingleEvent($idEvenement){
 

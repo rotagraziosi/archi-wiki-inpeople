@@ -6,6 +6,7 @@
 </div>
 -->
 <script src="js/homeSearch.js"></script>
+<script type="js/utils.js"></script>
 <div class="homeSearch" id="homeSearch">
 <div class="switchSearch"><b>Texte</b> &mdash; <a id="switchSearchImg" href="index.php?archiAffichage=imageSearch">Images</a></div>
 <form method="get" action="index.php?archiAffichage=recherche">

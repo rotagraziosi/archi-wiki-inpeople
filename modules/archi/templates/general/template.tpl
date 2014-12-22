@@ -4,6 +4,8 @@
 		<script type='text/javascript' src='includes/datePicker.js'></script>
 		<script type='text/javascript' src='includes/bbcode.js'></script>
 		<script type='text/javascript' src='includes/common.js'></script>
+		<script type='text/javascript' src='js/utils.js'></script>
+		
 		{ajaxFunctions}
 		{headerJS}
 		{analyticsJS}

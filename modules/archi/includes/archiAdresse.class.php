@@ -1880,7 +1880,6 @@ class archiAdresse extends ArchiContenu
 							";
 
 
-			//echo $queryEvenements."<br>";
 			$resEvenements = $this->connexionBdd->requete($queryEvenements);
 			$arrayListeEvenementsGroupeAdresse=array();
 			while($fetchEvenement = mysql_fetch_assoc($resEvenements))
@@ -2270,13 +2269,6 @@ class archiAdresse extends ArchiContenu
 				break;
 		}
 
-
-
-
-
-
-
-
 		// requete desactivée (limit 0) : on n'affiche pas les images reliee a l'adresse par la table _adresseimage
 		$queryAdresse = "
 				SELECT hi.idHistoriqueImage as idHistoriqueImage , hi.idImage as idImage, hi.nom as nom , hi.dateUpload as dateUpload , hi.dateCliche as dateCliche
@@ -2553,10 +2545,10 @@ class archiAdresse extends ArchiContenu
 					LEFT JOIN pays p        ON p.idPays = IF(ha1.idRue='0' and ha1.idSousQuartier='0' and ha1.idQuartier='0' and ha1.idVille='0' and ha1.idPays!='0' ,ha1.idPays ,v.idPays )
 
 					WHERE ai.idEvenementGroupeAdresse='".$params['idEvenementGroupeAdresse']."'
-							AND ai.vueSur='1'
-							AND ai.idAdresse<>'' AND ai.idAdresse<>'0'
+					AND ai.vueSur='1'
+					AND ai.idAdresse<>'' AND ai.idAdresse<>'0'
 
-							GROUP BY hi1.idImage , hi1.idHistoriqueImage,ha1.idAdresse,ha1.idHistoriqueAdresse
+					GROUP BY hi1.idImage , hi1.idHistoriqueImage,ha1.idAdresse,ha1.idHistoriqueAdresse
 
 
 							";
@@ -5906,8 +5898,6 @@ class archiAdresse extends ArchiContenu
 	public function afficherListe($criteres = array() ,  $modeAffichage='', $params = array())
 	{
 		
-		debug(array($criteres,$modeAffichage,$params,$this->varia));
-		
 		$sqlId='';
 
 		$nbAdresses=0;
@@ -6665,7 +6655,7 @@ class archiAdresse extends ArchiContenu
 			}
 
 
-			debug("passed!!");
+			
 
 			// ***************************************************************************************************************************************
 			// affichage des resultats de la recherche
@@ -6690,7 +6680,7 @@ class archiAdresse extends ArchiContenu
 			if (isset($this->variablesGet['archiAffichage']) && $this->variablesGet['archiAffichage']=='listeAdressesFromSource') {
 				$criteres['desactivateRedirection']=true;
 			}
-			debug("passed!!");
+			
 
 			// si on utilise le template par defaut ,  c'est qu'on est dans un affichage de resultat de recherche ,  sinon c'est un affichage de detail d'adresse
 			if (!isset($criteres['useTemplateFile']) && $nbReponses==1 && !isset($criteres['desactivateRedirection'])) {
@@ -6699,13 +6689,13 @@ class archiAdresse extends ArchiContenu
 				// a voir pour ne pas utiliser le javascript et afficher directement avec la fonction afficherDetail
 
 				$fetchIdAdresse = $this->getFetchOneAdresseElementsFromGroupeAdresse($fetch['idEvenementGA']);
-				debug("passed!!");
+				
 				header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$fetchIdAdresse['idAdresse'], 'archiIdEvenementGroupeAdresse'=>$fetch['idEvenementGA']), false, false));
 			} else {
-				debug("passed!!");
+				
 				if (mysql_num_rows($requeteAdresse)>0) {
 					while ($fetch=mysql_fetch_assoc($requeteAdresse)) {
-						debug("passed!!");
+						
 						// on recupere un idAdresse,  idQuartier ,  idRue etc appartenant au groupe d'adresse pour l'urlRewriting
 
 
@@ -6731,7 +6721,6 @@ class archiAdresse extends ArchiContenu
 						// on prend le premier titre qui n'est pas vide
 						// et on fabrique le lien avec l'ancre vers l'evenement qui pourra etre cliqué directement
 						// on a une adresse qui correspond a un groupe d'adresse ,  on va donc chercher le titre des evenements qui correspondent au groupe d'adresse
-						debug($modeAffichage);
 						switch ($modeAffichage) {
 							
 							case 'popupRechercheAdressePrisDepuis':
@@ -7000,19 +6989,18 @@ class archiAdresse extends ArchiContenu
 						$styleAdresse = "";
 						if ($modeAffichage=='listeDesAdressesDuGroupeAdressesSurDetailAdresse') {
 							$idAdresse=0;
-							debug("passed!!");
+							
 							if (isset($criteres['archiIdEvenement'])) {
 								$reqAdresse = $this->getIdAdressesFromIdEvenement(array('idEvenement'=>$criteres['archiIdEvenement']));
 								$resAdresse = $this->connexionBdd->requete($reqAdresse);
 								$fetchAdresse = mysql_fetch_assoc($resAdresse);
 								$idAdresse = $fetchAdresse['idAdresse'];
 
-								debug("passed!!");
+								
 								$e = new archiEvenement();
 
-								debug($criteres);
 								$idEvenementTitreAdresses = $e->getIdEvenementTitre(array("idEvenementGroupeAdresse"=>$criteres['archiIdEvenement']));
-								debug("passed!!");
+								
 								$reqTitreAdresse = "
 										SELECT he1.titre as titre
 										FROM evenements he2,  evenements he1
@@ -7026,7 +7014,7 @@ class archiAdresse extends ArchiContenu
 								$t->assign_vars(array('titreAdresses'=>$titreAdresse."<br>"));
 								if ($idEvenementTitreAdresses!=0 && $titreAdresse!='')
 									$styleAdresse = "font-size:13px;";
-								debug("passed!!");
+								
 							} elseif (isset($this->variablesGet['archiIdEvenement'])) {
 								$reqAdresse = $this->getIdAdressesFromIdEvenement(array('idEvenement'=>$this->variablesGet['archiIdEvenement']));
 								$resAdresse = $this->connexionBdd->requete($reqAdresse);
@@ -9271,7 +9259,6 @@ class archiAdresse extends ArchiContenu
         $t = new Template('modules/archi/templates/');
         $t->set_filenames((array('recapitulatifAdresses'=>'recapitulatifAdresses.tpl')));
         
-        debug($idEvenementGroupeAdresse);
         $retourAdresse=$this->afficherListe(
             array(
                 'archiIdEvenement'=>$idEvenementGroupeAdresse, 'useTemplateFile'=>'listeAdressesDetailEvenement.tpl'
@@ -14228,7 +14215,7 @@ class archiAdresse extends ArchiContenu
      */
 	public function displayList($idList = array(),$nbResult = 0){
 		$html = "";
-
+		
 		//Template loading 
 		$t=new Template('modules/archi/templates/');
 		$t->set_filenames(array('addressesList'=>'addressesList.tpl'));
@@ -14319,7 +14306,7 @@ class archiAdresse extends ArchiContenu
 				);
 				
 				// Dirty hack for displaying strong tag on current page
-				if($indexPage == $optionsPagination['currentPage']){ //-2 Because of currentPage start at 0 and index of indexPage start at 1
+				if($indexPage == $optionsPagination['currentPage']){ 
 					
 					$t->assign_block_vars(
 							'nav.courant',
@@ -14334,8 +14321,33 @@ class archiAdresse extends ArchiContenu
 						'urlSuivant'=>$url[$siblingIndex['nextPage']]
 			));
 			
-			//Addresses display
-			//Loop on each address infos
+
+			
+			
+			/*
+			 * Addresses display
+			 * Loop on each address infos
+			 * 
+			 * 
+			 * Structure of $info :
+			 * 
+			 * Array
+				(
+				    [nom] => 22 rue du général castelnau
+				    [idHistoriqueAdresse] => 2
+				    [idAdresse] => 2
+				    [idEvenementGroupeAdresse] => 1289
+				    [titresEvenements] => Array
+				        (
+				            [0] => 22 rue du général castelnau
+				            [1] => Photos de nuit
+				            [2] => Visite des appartements
+				            [3] => Evenement sans titre
+				            [4] => Visite des parties communes
+				            [5] => détails art nouveau
+				        )
+				)
+			 */
 			foreach ($addressesInfromations as $info){
 				$illustration = $this->getUrlImageFromAdresse(
 						$info['idHistoriqueAdresse'], 
@@ -14344,24 +14356,67 @@ class archiAdresse extends ArchiContenu
 								'idEvenementGroupeAdresse'=>$info['idEvenementGroupeAdresse']
 								
 				));
-				$addressUrl = $this->creerUrl(
-						'',
-						'',
-						array(
-								'archiAffichage'=>'adresseDetail',
-								"archiIdAdresse"=>$info['idHistoriqueAdresse'],
-								"archiIdEvenementGroupeAdresse"=>$info['idEvenementGroupeAdresse']
-						)
-					);
-
+				
 				
 				//Processing name of the address
 				$nom = $info['nom'];
-				//if(empty($nom) || $nom == "" || $nom == ' '){
-					$fulladdress =  $this->getIntituleAdresseFrom($info['idEvenementGroupeAdresse'],$type='idEvenementGroupeAdresse');
-				//}
+				$fulladdress =  $this->getIntituleAdresseFrom($info['idEvenementGroupeAdresse'],$type='idEvenementGroupeAdresse');
 				
-				$titreEvenements = 	implode(" - ", $info['titresEvenements']); // Getting all the events links on one line
+				
+				//If prisdepuis
+				if(isset($this->variablesGet['modeAffichage']) && ($this->variablesGet['modeAffichage'] == 'popupRechercheAdressePrisDepuis')){
+					$addressUrl="#";
+					$nomMod = str_replace(array("'", "\""), array("\\'", "&#34;"), $nom);
+					$urlDetailOnClick = "
+							parent.document.getElementById('listePrisDepuisDiv'+parent.document.getElementById('identifiantRetour').value).innerHTML+=
+							'".$nomMod."
+									<a style=\'cursor:pointer;\' onclick=\'retirerPrisDepuis(&#34;".$info['idAdresse']."_".$info['idEvenementGroupeAdresse']."&#34;, '
+											+parent.document.getElementById('identifiantRetour').value+');\'>(-)</a>
+											<br>';
+							parent.document.getElementById('prisDepuis'+parent.document.getElementById('identifiantRetour').value).innerHTML+=
+											'<option value=\'".$info["idAdresse"]."_".$info['idEvenementGroupeAdresse']."\' SELECTED>".$nomMod."
+											</option>';";
+					$urlDetailOnClick = "addPrisDepuis('".$info['idEvenementGroupeAdresse']."' , '".$info['idAdresse']."' , '".$nomMod."');";
+						
+				}
+				//elseif vueSur
+				elseif (isset($this->variablesGet['modeAffichage']) && ($this->variablesGet['modeAffichage'] == 'popupRechercheAdresseVueSur')){
+					$addressUrl    = "#";
+					$nomMod = str_replace(array("'", "\""), array("\\'", "&#34;"), $nom);
+					$urlDetailOnClick = "
+							parent.document.getElementById('listeVueSurDiv'+parent.document.getElementById('identifiantRetour').value).innerHTML+=
+							'".$nomMod."
+									<a style=\'cursor:pointer;\' onclick=\' retirerVueSur(&#34;".$info['idAdresse']."_".$info['idEvenementGroupeAdresse']."&#34;, &#34;'+parent.document.getElementById('identifiantRetour').value+'&#34;); \'>
+											(-)
+											</a><br>';
+							parent.document.getElementById('vueSur'+parent.document.getElementById('identifiantRetour').value).innerHTML+='
+									<option value=\'".$info['idAdresse']."_".$info['idEvenementGroupeAdresse']."\' SELECTED>".$nomMod."
+									</option>';";
+					$urlDetailOnClick = "addVueSur('".$info['idEvenementGroupeAdresse']."' , '".$info['idAdresse']."' , '".$nomMod."');";
+						
+						
+				}
+				//Regular case
+				else{
+					$addressUrl = $this->creerUrl(
+							'',
+							'',
+							array(
+									'archiAffichage'=>'adresseDetail',
+									"archiIdAdresse"=>$info['idHistoriqueAdresse'],
+									"archiIdEvenementGroupeAdresse"=>$info['idEvenementGroupeAdresse']
+							)
+					);
+					$urlDetailOnClick='';
+
+					//Event title
+					$titreEvenements = 	implode(" - ", $info['titresEvenements']); // Getting all the events links on one line
+					$t->assign_block_vars(
+						'adresses',
+						array('titresEvenements'        => $titreEvenements));
+				}
+								
+				
 				$t->assign_block_vars(
 						'adresses',
 						array(
@@ -14370,12 +14425,12 @@ class archiAdresse extends ArchiContenu
 								'urlImageIllustration'    => 'getPhotoSquare.php?id='.$illustration['idHistoriqueImage'],
 								'alt' => $nom,
 								'urlDetailHref' => $addressUrl,
-								'titresEvenements'        => $titreEvenements
-								
+								'urlDetailOnClick' => $urlDetailOnClick
 						)
 				);
-			}			
-		}
+				
+			}//End foreach			
+		}//End else (regular display w/ errors)
 		
 		
 		//Filling template, getting content, returning it

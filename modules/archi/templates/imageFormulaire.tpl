@@ -115,15 +115,15 @@
     </tr>
     <!-- BEGIN canModifyTags -->
     <tr>
-        <td class='enteteFormulaireMajPhoto'><label for="tags_{listePhotos.idHistoriqueImage}"><?_("Tags (séparés par une virgule)")?></label></td>
+        <td class='enteteFormulaireMajPhoto'><label for="tags_{listePhotos.canNotModifyTags.idHistoriqueImage}"><?_("Tags (séparés par une virgule)")?></label></td>
         <td>
-        <input type="text" id="tags_{listePhotos.idHistoriqueImage}" name="tags_{listePhotos.idHistoriqueImage}" value="{listePhotos.tags}" />
+        <input type="text" id="tags_{listePhotos.canNotModifyTags.idHistoriqueImage}" name="tags_{listePhotos.canNotModifyTags.idHistoriqueImage}" value="{listePhotos.canNotModifyTags.tags}" />
         </td>
     </tr>
     <!-- END canModifyTags -->
     </table>
     <!-- BEGIN canNotModifyTags -->
-    <input type="hidden" id="tags_{listePhotos.idHistoriqueImage}" name="tags_{listePhotos.idHistoriqueImage}" value="{listePhotos.tags}" />
+    <input type="hidden" id="tags_{listePhotos.canNotModifyTags.idHistoriqueImage}" name="tags_{listePhotos.canNotModifyTags.idHistoriqueImage}" value="{listePhotos.canNotModifyTags.tags}" />
     <!-- END canNotModifyTags -->
     <select name='prisDepuis{listePhotos.idHistoriqueImage}[]' id='prisDepuis{listePhotos.idHistoriqueImage}' MULTIPLE style='display:none;'>
     {listePhotos.selectPrisDepuis}
