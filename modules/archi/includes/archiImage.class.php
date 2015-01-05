@@ -304,14 +304,12 @@ class archiImage extends config
                     );
                 }
                 
-                
                 //prisDepuis
                 // on supprime d'abord les informations des adresses liées à la photo afin de pouvoir ajouter les nouvelles adresses
                 $reqDeletePrisDepuis = "delete from _adresseImage where idImage = '".$idImage."' AND prisDepuis='1'";
                 $resDeletePrisDepuis = $this->connexionBdd->requete($reqDeletePrisDepuis);
                 // enregistrement des liaisons 
-                if (isset($this->variablesPost['prisDepuis'.$idHistorique]) && count($this->variablesPost['prisDepuis'.$idHistorique])>0)
-                {
+                if (isset($this->variablesPost['prisDepuis'.$idHistorique]) && count($this->variablesPost['prisDepuis'.$idHistorique])>0){
                     foreach ($this->variablesPost['prisDepuis'.$idHistorique] as $indice => $value) {
                         $arrayAdresseGroupeAdresseImage = explode("_",  $value);
                         $idAdresse = $arrayAdresseGroupeAdresseImage[0];
@@ -322,28 +320,27 @@ class archiImage extends config
                         if (mysql_num_rows($resVerifPrisDepuis)==0) {
                             $champs="";
                             $values="";
-                            if (isset($tabRecupZonesPrisDepuis[$value]) && count($tabRecupZonesPrisDepuis[$value])>0)
-                            {
+                            if (isset($tabRecupZonesPrisDepuis[$value]) && count($tabRecupZonesPrisDepuis[$value])>0){
                                 $champs=",  coordonneesZoneImage,  largeurBaseZoneImage,  longueurBaseZoneImage";
                                 $values=",  '".$tabRecupZonesPrisDepuis[$value]['coordonneesZoneImage']."',  '".$tabRecupZonesPrisDepuis[$value]['largeurBaseZoneImage']."',  '".$tabRecupZonesPrisDepuis[$value]['longueurBaseZoneImage']."' ";
                             }
                         
-                            $reqPrisDepuis = "INSERT INTO _adresseImage (idImage,  idAdresse, idEvenementGroupeAdresse,  prisDepuis $champs) VALUES ('".$idImage."',  '".$idAdresse."',  '".$idEvenementGroupeAdresse."',  '1' $values)";
+                            $reqPrisDepuis = "
+                            		INSERT INTO _adresseImage (idImage,  idAdresse, idEvenementGroupeAdresse,  prisDepuis $champs) 
+                            		VALUES ('".$idImage."',  '".$idAdresse."',  '".$idEvenementGroupeAdresse."',  '1' $values)
+                            ";
                             $resPrisDepuis = $this->connexionBdd->requete($reqPrisDepuis);
                         }
                     }
                 }
 
                 // vueSur
-                
-                
                 // on recupere d'abord les zones existantes pour ne pas les perdres ,  on les replacera ensuite sur les liaisons inserees
                 $tabRecupZonesVuesSur = array();
                 $reqRecupZones = "SELECT * FROM _adresseImage WHERE idImage = '".$idImage."' AND vueSur='1' AND coordonneesZoneImage<>'' AND largeurBaseZoneImage<>'' AND longueurBaseZoneImage<>''";
                 $resRecupZones = $this->connexionBdd->requete($reqRecupZones);
                 
-                while ($fetchRecupZones = mysql_fetch_assoc($resRecupZones))
-                {
+                while ($fetchRecupZones = mysql_fetch_assoc($resRecupZones)){
                     $tabRecupZonesVuesSur[$fetchRecupZones['idAdresse']."_".$fetchRecupZones['idEvenementGroupeAdresse']] = array(
                                                                                 'idAdresse'=>$fetchRecupZones['idAdresse'], 
                                                                                 'idEvenementGroupeAdresse'=>$fetchRecupZones['idEvenementGroupeAdresse'], 
@@ -359,8 +356,7 @@ class archiImage extends config
                 $reqDeleteVueSur = "delete from _adresseImage where idImage='".$idImage."' AND vueSur='1'";
                 $resDeleteVueSur = $this->connexionBdd->requete($reqDeleteVueSur);
 
-                if (isset($this->variablesPost['vueSur'.$idHistorique]) && count($this->variablesPost['vueSur'.$idHistorique])>0)
-                {
+                if (isset($this->variablesPost['vueSur'.$idHistorique]) && count($this->variablesPost['vueSur'.$idHistorique])>0){
                     foreach ($this->variablesPost['vueSur'.$idHistorique] as $indice => $value) {
                         $arrayAdresseGroupeAdresseImage = explode("_",  $value);
                         $idAdresse = $arrayAdresseGroupeAdresseImage[0];
@@ -372,13 +368,13 @@ class archiImage extends config
                         if (mysql_num_rows($resVerifVueSur)==0) {
                             $champs="";
                             $values="";
-                            if (isset($tabRecupZonesVuesSur[$value]) && count($tabRecupZonesVuesSur[$value])>0)
-                            {
+                            if (isset($tabRecupZonesVuesSur[$value]) && count($tabRecupZonesVuesSur[$value])>0){
                                 $champs=",  coordonneesZoneImage,  largeurBaseZoneImage,  longueurBaseZoneImage";
                                 $values=",  '".$tabRecupZonesVuesSur[$value]['coordonneesZoneImage']."',  '".$tabRecupZonesVuesSur[$value]['largeurBaseZoneImage']."',  '".$tabRecupZonesVuesSur[$value]['longueurBaseZoneImage']."' ";
                             }
                         
-                            $reqVueSur = "INSERT INTO _adresseImage (idImage,  idAdresse, idEvenementGroupeAdresse,  vueSur $champs) VALUES ('".$idImage."',  '".$idAdresse."',  '".$idEvenementGroupeAdresse."',  '1' $values)";
+                            $reqVueSur = "INSERT INTO _adresseImage (idImage,  idAdresse, idEvenementGroupeAdresse,  vueSur $champs) 
+                            VALUES ('".$idImage."',  '".$idAdresse."',  '".$idEvenementGroupeAdresse."',  '1' $values)";
                             $resVueSur = $this->connexionBdd->requete($reqVueSur);
                         }
                     }
@@ -522,8 +518,6 @@ class archiImage extends config
             if ($idEvenementGroupeAdresseRetour!=0) {
             	header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$idAdresse, 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresseRetour), false, false));
             	 
-                $a = new archiAdresse();
-               // echo $a->afficherDetail(0,  $idEvenementGroupeAdresseRetour);
             } else {
                 echo $this->afficher($idImageModifiee);
             }
@@ -2383,7 +2377,6 @@ class archiImage extends config
     //  *****************************************************************************************************************************************************************
     public function afficherFormulaireModification($id=0,  $type='',  $arrayListeIdImages=array())
     {
-    	debug(array($id,$type,$arrayListeIdImages));
         $html="";
         
         $utilisateur = new archiUtilisateur();
@@ -3601,8 +3594,6 @@ class archiImage extends config
         // *************************************************************************************************************************************************************
         
         
-        
-        debug($listeIdNouvellesImages);
         
         // on appelle le formulaire permettant de mettre a jour les infos concernant les photos
         echo $this->afficherFormulaireModification(0,  '',  $listeIdNouvellesImages);
@@ -4832,7 +4823,6 @@ class archiImage extends config
     public function getDernieresVues($params = array())
     {
     	
-    	debug($params);
         $sqlLimit = "";
         if (isset($params['sqlLimit']) && $params['sqlLimit']!='') {
             $sqlLimit = $params['sqlLimit'];

@@ -34,9 +34,8 @@ function addVueSur(idEvenementGroupeAdresse , idAdresse , nom){
 	 */
 	
 	optionToAdd = "<option value=\'"+param1+"\' SELECTED>"+nom+"</option>";
-	idTargetDiv = "prisDepuis"+identifiantRetour;
+	idTargetDiv = "vueSur"+identifiantRetour;
 	parent.document.getElementById(idTargetDiv).innerHTML += optionToAdd;
-	
 }	
 
 
@@ -60,8 +59,7 @@ function addPrisDepuis(idEvenementGroupeAdresse , idAdresse , nom){
 	 * Add option to the select form input
 	 */
 	optionToAdd = "<option value=\'"+param1+"\' SELECTED>"+nom+"</option>";
-	idTargetDiv = "vueSur"+identifiantRetour;
+	idTargetDiv = "prisDepuis"+identifiantRetour;
 	parent.document.getElementById(idTargetDiv).innerHTML += optionToAdd;
-	console.log();
 }
 

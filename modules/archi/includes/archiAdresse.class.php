@@ -533,6 +533,7 @@ class archiAdresse extends ArchiContenu
 		while($fetch = mysql_fetch_assoc($resultIdEvenements)){
 			//Getting all the infos with this method 
 			$evenement = $e->getEventInfos($fetch['idEvenement']);
+			
 			//Filling the template with the infos
 			$t->assign_block_vars('evenement', $evenement['evenementData']);
 			
@@ -567,9 +568,27 @@ class archiAdresse extends ArchiContenu
 					'titre' => $evenement['evenementData']['titre'],
 					'date' =>$evenement['evenementData']['dates']
 			));
-						
+				
 		}
 
+		
+		
+		//Getting all the miscellaneous images (vueSur / prisDepuis)
+		$idVueSur = array();
+		$requeteVueSur = "SELECT idImage FROM _adresseImage WHERE idAdresse = $idAdresse AND vueSur = 1";
+		$result = $this->connexionBdd->requete($requeteVueSur);
+		while($fetch = mysql_fetch_assoc($result)){
+			$idVueSur[]=$fetch['idImage'];
+		}
+		
+		$idPrisDepuis = array();
+		$requetePrisDepuis = "SELECT idImage FROM _adresseImage WHERE idAdresse = $idAdresse AND prisDepuis = 1";
+		$result = $this->connexionBdd->requete($requetePrisDepuis);
+		while($fetch = mysql_fetch_assoc($result)){
+			$idPrisDepuis[]=$fetch['idImage'];
+		}
+		
+		
 		$t->assign_vars(array(
 				'title' => $title
 		));
@@ -14779,9 +14798,9 @@ class archiAdresse extends ArchiContenu
 			$idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromIdAdresse($idAdresse);
 			//$idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromIdAdresse($idAdresse);
 			header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$idAdresse, 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse), false, false));
-			//echo "<script langage='javascript'>location.href='".$this->creerUrl('','adresseDetail',array('archiIdAdresse'=>$this->variablesGet['archiIdAdresse']), false, false)."';</script>";
 		}
 	}
+
 
 }
 
