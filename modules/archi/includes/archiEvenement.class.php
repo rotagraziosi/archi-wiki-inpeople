@@ -6879,7 +6879,9 @@ class archiEvenement extends config
 				'urlImporterImage'=>"#",
 				'onClickImporterImage'=>"document.getElementById('formulaireEvenement').action='".$this->creerUrl('deplacerImagesSelectionnees','evenement',array('idEvenement'=>$idEvenement))."&deplacerVersIdEvenement=".$res->idEvenement."';document.getElementById('actionFormulaireEvenement').value='deplacerImages';if(confirm('Voulez-vous vraiment déplacer ces images ?')){document.getElementById('formulaireEvenement').submit();}",
 				'onClickSupprimerImage'=>"document.getElementById('formulaireEvenement').action='".$this->creerUrl('supprimerImagesSelectionnees','evenement',array('idEvenement'=>$idEvenement))."';document.getElementById('actionFormulaireEvenement').value='supprimerImages';if(confirm('Voulez-vous vraiment supprimer ces images ?')){document.getElementById('formulaireEvenement').submit();}",
-				'urlLierAdresses'=>$this->creerUrl('','afficheFormulaireEvenementAdresseLiee',array('idEvenement'=>$res->idEvenement))
+				'lierAdresse'=>$this->creerUrl('','afficheFormulaireEvenementAdresseLiee',array('idEvenement'=>$idEvenement)),
+				'versAdresse'=>$this->creerUrl('deplacerEvenementVersNouveauGA','evenement',array('idEvenement'=>$idEvenement)),
+				'plusCreer' => $this->creerUrl('deplacerEvenementVersNouveauGA','evenement',array('idEvenement'=>$idEvenement))
 		);
 	
 	
@@ -6973,6 +6975,24 @@ class archiEvenement extends config
 						'url'=>$urlMenuAction['onClickSupprimerImage']
 				));
 
+			}
+			if($isAdmin){
+				$menuArray[] = array('evenement.menuAction.rowName', array(
+						'actionName'=>'Lier',
+						'urlAction'=>$urlMenuAction['lierAdresse'],
+						'actionTarget'=>'Adresses'
+				));
+				
+				$menuArray[] = array('evenement.menuAction.rowName', array(
+						'actionName'=>'Déplacer',
+						'urlAction'=>$urlMenuAction['versAdresse'],
+						'actionTarget'=>'Vers adresse'
+				));
+				
+				$menuArray[] = array('evenement.menuAction.rowName.secondAction', array(
+						'urlAction'=>$urlMenuAction['plusCreer'],
+						'actionTarget'=>'+Créer'
+				));
 			}
 		}
 	
