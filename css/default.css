@@ -20,6 +20,7 @@ h1 {
 	margin-top: 1em;
 	margin-bottom: 1em;
 	border-bottom: thin solid #EEE;
+	clear:right;
 }
 
 h4,h5,h6 {
@@ -374,6 +375,10 @@ a:hover {
 	margin-right: 25px;
 	padding: 0 0 0 5px;
 	margin-left: 220px;
+}
+
+.primaryContent h2 {
+    clear:right;
 }
 
 /* Secondary Content */
@@ -769,6 +774,7 @@ img {
 .barredons {
 	float: right;
 	margin-top: 2em;
+	margin-right:25px;
 	clear: both;
 }
 
@@ -886,6 +892,11 @@ img {
 .reseauSocial {
 	margin-top: 1em;
 }
+
+.social_widgets {
+    clear:right;
+}
+
 /*
 .reseauSocial,
 .licenceLogo {

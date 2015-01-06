@@ -922,9 +922,9 @@ class ArchiPersonne extends ArchiContenu
             foreach ($linkedEvents as $linkedEvent) {
                 $req = "
                     SELECT titre, dateDebut, idTypeEvenement
-                    FROM evenements
+                    FROM historiqueEvenement
                     WHERE idEvenement = '".$linkedEvent."'
-                    ORDER BY idEvenement DESC
+                    ORDER BY idHistoriqueEvenement DESC
                 ";
             
                 $res = $config->connexionBdd->requete($req);
@@ -933,72 +933,73 @@ class ArchiPersonne extends ArchiContenu
                 $a=new archiAdresse();
                 $linkedEventAddress=$a->getIntituleAdresseFrom($linkedEvent, "idEvenement");
                 $e = new archiEvenement();
-                $req = "
-                        SELECT  idAdresse
-                        FROM _adresseEvenement 
-                        WHERE idEvenement = ".$linkedEvent;
-                      //  $e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent);
-                $res = $config->connexionBdd->requete($req);
-                $fetch = mysql_fetch_object($res);
-                if (isset($fetch->idAdresse)) {
-                    $linkedEventIdAddress=$fetch->idAdresse;
-                                      
-
-                    //WIP sélection de l'image des personnes
-                    /*$req = "
-                            SELECT  nom
-                            FROM typeEvenement 
-                            WHERE idTypeEvenement = ".
-                            mysql_real_escape_string($event->idTypeEvenement);
+                if (!empty($linkedEventAddress)) {
+                    $req = "
+                            SELECT  idAdresse
+                            FROM _adresseEvenement
+                            WHERE idEvenement = ".
+                            $e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent);
                     $res = $config->connexionBdd->requete($req);
-                    $linkedEventType=mysql_fetch_object($res)->nom;
+                    $fetch = mysql_fetch_object($res);
+                    if (isset($fetch->idAdresse)) {
+                        $linkedEventIdAddress=$fetch->idAdresse;
+                    }
+                }
 
-                     $req = "
-                            SELECT idImage
-                            FROM _personneAdresse
-                            WHERE idPersonne = ".mysql_real_escape_string($idPerson)."
-                            AND idAdresse = ".mysql_real_escape_string($linkedEventIdAddress)."
-                            LIMIT 1";
-                    $res = $config->connexionBdd->requete($req);*/
-                    if ($idImage = mysql_fetch_object($res)->idImage) {
-                        $img=new ArchiImage();
-                        $img=($img->getInfosCompletesFromIdImage($idImage));
-                        $linkedEventImg['url'] = $a->getUrlImage("mini").$img['dateUpload'].'/'.$idImage.'.jpg';
-                    } else {
-                        $linkedEventImg=$a->getUrlImageFromEvenement($linkedEvent, "mini");
-                        if ($linkedEventImg["url"]==$config->getUrlImage("", "transparent.gif")) {
-                            $linkedEventImg=$a->getUrlImageFromAdresse($linkedEventIdAddress, "mini");
-                        }
+                //WIP sélection de l'image des personnes
+                /*$req = "
+                        SELECT  nom
+                        FROM typeEvenement
+                        WHERE idTypeEvenement = ".
+                        mysql_real_escape_string($event->idTypeEvenement);
+                $res = $config->connexionBdd->requete($req);
+                $linkedEventType=mysql_fetch_object($res)->nom;
+
+                 $req = "
+                        SELECT idImage
+                        FROM _personneAdresse
+                        WHERE idPersonne = ".mysql_real_escape_string($idPerson)."
+                        AND idAdresse = ".mysql_real_escape_string($linkedEventIdAddress)."
+                        LIMIT 1";
+                $res = $config->connexionBdd->requete($req);*/
+                if ($idImage = mysql_fetch_object($res)->idImage) {
+                    $img=new ArchiImage();
+                    $img=($img->getInfosCompletesFromIdImage($idImage));
+                    $linkedEventImg['url'] = $a->getUrlImage("mini").$img['dateUpload'].'/'.$idImage.'.jpg';
+                } else {
+                    $linkedEventImg=$a->getUrlImageFromEvenement($linkedEvent, "mini");
+                    if ($linkedEventImg["url"]==$config->getUrlImage("", "transparent.gif")) {
+                        $linkedEventImg=$a->getUrlImageFromAdresse($linkedEventIdAddress, "mini");
                     }
-                    $linkedEventUrl=$config->creerUrl("", "adresseDetail", array("archiIdAdresse"=>$linkedEventIdAddress, "archiIdEvenementGroupeAdresse"=>$linkedEvent));
-                    $linkedEventsHTML.="<li class='linkedEvents'><img src='".
-                    $linkedEventImg["url"]."' alt='' /> <div style='display:inline-block;'><a href='$linkedEventUrl'>".$linkedEventAddress;
-                    $res=$e->getInfosEvenementsLiesForAncres($e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent));
-                    $i=0;
-                    while ($rep=mysql_fetch_object($res)) {
-                        if ($rep->idEvenement == $linkedEvent) {
-                            $linkedEventPos=$i;
-                        }
-                        $i++;
+                }
+                $linkedEventUrl=$config->creerUrl("", "adresseDetail", array("archiIdAdresse"=>$linkedEventIdAddress, "archiIdEvenementGroupeAdresse"=>$linkedEvent));
+                $linkedEventsHTML.="<li class='linkedEvents'><img src='".
+                $linkedEventImg["url"]."' alt='' /> <div style='display:inline-block;'><a href='$linkedEventUrl'>".$linkedEventAddress;
+                $res=$e->getInfosEvenementsLiesForAncres($e->getIdEvenementGroupeAdresseFromIdEvenement($linkedEvent));
+                $i=0;
+                while ($rep=mysql_fetch_object($res)) {
+                    if ($rep->idEvenement == $linkedEvent) {
+                        $linkedEventPos=$i;
                     }
-                    $linkedEventsHTML.="</a>";
-                    $linkedEventsHTML.="<br/><small><a href='".$linkedEventUrl."#".$linkedEventPos."'>";
-                    if ($event->dateDebut != "0000-00-00") {
-                        $linkedEventsHTML.=$config->date->toFrench($event->dateDebut);
-                        if (!empty($event->titre)) {
-                            $linkedEventsHTML.=", ";
-                        }
-                    }
+                    $i++;
+                }
+                $linkedEventsHTML.="</a>";
+                $linkedEventsHTML.="<br/><small><a href='".$linkedEventUrl."#".$linkedEventPos."'>";
+                if ($event->dateDebut != "0000-00-00") {
+                    $linkedEventsHTML.=$config->date->toFrench($event->dateDebut);
                     if (!empty($event->titre)) {
-                        $linkedEventsHTML.=stripslashes($event->titre);
-                    }
-                    if (!empty($linkedEventType)) {
                         $linkedEventsHTML.=", ";
                     }
-                    $linkedEventsHTML.=$linkedEventType;
-                    $linkedEventsHTML.="</a></small>";
-                    $linkedEventsHTML.="</div></li>";
                 }
+                if (!empty($event->titre)) {
+                    $linkedEventsHTML.=stripslashes($event->titre);
+                }
+                if (!empty($linkedEventType)) {
+                    $linkedEventsHTML.=", ";
+                }
+                $linkedEventsHTML.=$linkedEventType;
+                $linkedEventsHTML.="</a></small>";
+                $linkedEventsHTML.="</div></li>";
             }
             $linkedEventsHTML.="</ul>";
             return $linkedEventsHTML;

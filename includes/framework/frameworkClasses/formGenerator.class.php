@@ -257,7 +257,7 @@ class formGenerator extends config
             $objetDeLaRecherche="";
             // gestion de la recherche
             if (isset($this->variablesPost['validationFormulaireAdministration']) && $this->variablesPost['validationFormulaireAdministration']=='rechercheAdministration') {
-                $sqlRecherche=" AND LOWER(CONCAT_WS(' ', ".implode(", ", $champsDeRecherche).")) LIKE \"%".pia_strtolower($this->variablesPost['rechercheFormulaireAdministration'])."%\" ";
+                $sqlRecherche=" AND LOWER(CONCAT_WS(' ', ".implode(", ", $champsDeRecherche).")) LIKE \"%".mysql_real_escape_string($this->variablesPost['rechercheFormulaireAdministration'])."%\" ";
                 
                 $objetDeLaRecherche = $this->variablesPost['rechercheFormulaireAdministration'];
             }
@@ -873,16 +873,16 @@ class formGenerator extends config
                     if ((pia_ereg("/", $this->variablesPost[$fetchFields['Field']]) || pia_strlen($this->variablesPost[$fetchFields['Field']])>3) && !pia_ereg("-", $this->variablesPost[$fetchFields['Field']] ))
                     {// on admet que s'il y a des / ,  c'est le format francais,  donc on convertis
                         $date = new dateObject();
-                        $arrayModification[]=$fetchFields['Field']."=\"".$date->toBdd($date->convertYears($this->variablesPost[$fetchFields['Field']]))."\"";
+                $arrayModification[]=$fetchFields['Field']."=\"".mysql_real_escape_string($date->toBdd($date->convertYears($this->variablesPost[$fetchFields['Field']])))."\"";
                     }
                     else
                     {// sinon format anglais
-                        $arrayModification[]=$fetchFields['Field']."=\"".$this->variablesPost[$fetchFields['Field']]."\"";
+                        $arrayModification[]=$fetchFields['Field']."=\"".mysql_real_escape_string($this->variablesPost[$fetchFields['Field']])."\"";
                     }
                 }
                 else
                 {
-                    $arrayModification[]=$fetchFields['Field']."=\"".$this->variablesPost[$fetchFields['Field']]."\"";
+                    $arrayModification[]=$fetchFields['Field']."=\"".mysql_real_escape_string($this->variablesPost[$fetchFields['Field']])."\"";
                 }
             }
             else
@@ -1875,8 +1875,8 @@ class formGenerator extends config
                 }
             }
         }
-	if (isset($param["recaptcha_challenge_field"])) {
-	$resp = recaptcha_check_answer(
+    if (isset($param["recaptcha_challenge_field"])) {
+    $resp = recaptcha_check_answer(
             $config->captchakey,
             $_SERVER["REMOTE_ADDR"],
             $param["recaptcha_challenge_field"],

@@ -712,9 +712,9 @@ class archiAdresse extends ArchiContenu
 		 
 
 		//    }
-		$html="<div class='fb-like right' data-send='false' data-layout='button_count' data-show-faces='true' data-action='recommend'></div>
-				<a href='https://twitter.com/share' class='twitter-share-button right' data-via='ArchiStrasbourg' data-lang='fr' data-related='ArchiStrasbourg'>Tweeter</a>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>";
+		$html="<div class='social_widgets'><div class='fb-like right' data-send='false' data-layout='button_count' data-show-faces='true' data-action='recommend'></div>
+        <a href='https://twitter.com/share' class='twitter-share-button right' data-via='ArchiStrasbourg' data-lang='fr' data-related='ArchiStrasbourg'>Tweeter</a> 
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script></div>"; 
 		$html.="<h2>";
 		$e=new archiEvenement();
 		$archiIdEvenementGroupeAdresse=isset($_GET['archiIdEvenementGroupeAdresse'])?$_GET['archiIdEvenementGroupeAdresse']:$e->getIdEvenementGroupeAdresseFromIdEvenement($_GET["archiIdEvenement"]);
@@ -756,6 +756,11 @@ class archiAdresse extends ArchiContenu
 		// si le groupe d'adresse est precisé dans l'url , on ne va afficher que celui ci
 		if(isset($this->variablesGet['archiIdEvenementGroupeAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresse']!='')
 		{
+			if (isset($this->variablesGet['modeAffichage'])) {
+				$modeAffichage = $this->variablesGet['modeAffichage'];
+			} else {
+				$modeAffichage = '';
+			}
 			$retourEvenement = $evenement->afficher($this->variablesGet['archiIdEvenementGroupeAdresse'],'',null,array()); // cette fonction va afficher les evenements liés au groupe d'adresse
 			$html.=$retourEvenement['html'];
 			$html.=$this->getListeCommentaires($this->variablesGet['archiIdEvenementGroupeAdresse']);
@@ -6452,7 +6457,7 @@ class archiAdresse extends ArchiContenu
 					$infosPersonne = $personneObj->getInfosPersonne($this->variablesGet['id']);
 					$titre="";
 					if (isset($infosPersonne['nomMetier']) && $infosPersonne['nomMetier']!="") {
-						$titre = "<span itemprop='jobTitle'>".ucwords(stripslashes($infosPersonne['nomMetier']))."</span> : ";
+                        $titre = "<span itemprop='jobTitle'>".ucfirst(stripslashes($infosPersonne['nomMetier']))."</span> : ";
 					}
 					$titre.="<span itemprop='name'><span itemprop='familyName'>".ucwords(stripslashes($infosPersonne['nom']))."</span> <span itemprop='givenName'>".ucwords(stripslashes($infosPersonne['prenom']))."</span></span>";
 
@@ -11096,8 +11101,8 @@ class archiAdresse extends ArchiContenu
                         ha1.idIndicatif as idIndicatif
                     FROM historiqueAdresse ha2, historiqueAdresse ha1
                     
-                    LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = '".$id."'
-                    LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
+                    LEFT JOIN _evenementEvenement ee ON ee.idEvenementAssocie = '".mysql_real_escape_string($id)."'
+					LEFT JOIN _adresseEvenement ae ON ae.idEvenement = ee.idEvenement
                     
                     LEFT JOIN indicatif ind ON ind.idIndicatif = ha1.idIndicatif
                 
