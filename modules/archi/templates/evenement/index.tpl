@@ -45,10 +45,16 @@
 		<!-- END sommaireItem -->
 		</ul>
 	</div>
-	<div class="actionsEvenement addEvent inline-div">
-		<a href="{sommaireEvenements.urlAddEvent}">Ajouter un évènement</a>		
+	<!-- END sommaireEvenements -->
+	
+	<div class="actionsEvenement inline-div">
+		<!-- BEGIN actionsSommaire -->
+		<div class="addEvent">
+			<a href="{actionsSommaire.urlAction}">{actionsSommaire.labelAction}</a>	
+		</div>
+		<!-- END actionsSommaire -->
 	</div>
-<!-- END sommaireEvenements -->
+	
 </div>	
 
 <div class="detailEvenements">

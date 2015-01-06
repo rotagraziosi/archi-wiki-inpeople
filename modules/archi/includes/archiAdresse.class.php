@@ -471,6 +471,10 @@ class archiAdresse extends ArchiContenu
 		$title = $this->displayTitle();
 		
 		
+		//Init auth var to check furtherly user state (connected or not)
+		$authentification = new archiAuthentification();
+		
+		
 		//Setting idAdresse
 		if(isset($this->variablesGet['archiIdAdresse']) && ! empty($this->variablesGet['archiIdAdresse'])){
 			$idAdresse=$this->variablesGet['archiIdAdresse'];
@@ -515,11 +519,13 @@ class archiAdresse extends ArchiContenu
 				'popupGoogleMap'=>$calqueGoogleMap->getDivNoDraggableWithBackgroundOpacity(array('top'=>20,'lienSrcIFrame'=>'','contenu'=>$contenuIFramePopup))
 		));
 		
-		$t->assign_block_vars('listeAdressesVoisines.favoris', array(
-				//'urlFavoris' => $this->creerUrl('saveInterest','',array('adresse'=>$idAdresse)) 
-				'urlFavoris' => $this->creerUrl('','saveInterest',array('adresse'=>$idAdresse)) 
-		));
-		
+		if($authentification->estConnecte()){
+			$t->assign_block_vars('listeAdressesVoisines.favoris', array(
+					//'urlFavoris' => $this->creerUrl('saveInterest','',array('adresse'=>$idAdresse)) 
+					'urlFavoris' => $this->creerUrl('','saveInterest',array('adresse'=>$idAdresse)) 
+			));
+		}
+		$t->assign_block_vars('sommaireEvenements', array());
 		//Preparing the loop on all related event to the current address
 		$requeteIdEvenements = "
 				SELECT idEvenementAssocie as idEvenement
@@ -528,12 +534,77 @@ class archiAdresse extends ArchiContenu
 				";
 		$resultIdEvenements = $this->connexionBdd->requete($requeteIdEvenements);
 		
-		$t->assign_block_vars('sommaireEvenements',array('urlAddEvent'=>$this->creerUrl('', 'ajouterSousEvenement',array('idAdresse'=>$idAdresse,'archiIdEvenement' =>$idEvenementGroupeAdresse))));
+		
+		
+		//Add actions buttons
+		
+		//Ajouter sous evenement 
+		$t->assign_block_vars('actionsSommaire',
+				array(
+						'urlAction'=>$this->creerUrl('', 'ajouterSousEvenement',array('idAdresse'=>$idAdresse,'archiIdEvenement' =>$idEvenementGroupeAdresse)),
+						'labelAction' => 'Ajouter un évènement'
+			)
+		);
+		
+		//Selection des images
+		//Copy/paste code from old function
+		$afficheSelectionImages=1;
+		if($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionImage']) && $this->variablesGet['afficheSelectionImage']=='1'){
+			$afficheSelectionImages=0;
+		}
+		$t->assign_block_vars('actionsSommaire',
+				array(
+						'urlAction'=>$this->creerUrl('', 'evenement',array('idEvenement'=>$idEvenementGroupeAdresse,'afficheSelectionImage'=>$afficheSelectionImages)),
+						'labelAction' => 'Sélectionner des images'
+				)
+		);
+		
+		//Selection de l'image principale
+		$afficheSelectionImagePrincipale = 1;
+		if ($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionImagePrincipale']) && $this->variablesGet['afficheSelectionImagePrincipale']=='1') {
+			$afficheSelectionImagePrincipale = 0;
+		}
+		$t->assign_block_vars('actionsSommaire',
+				array(
+						'urlAction'=>$this->creerUrl('','evenement',array('idEvenement'=>$idEvenementGroupeAdresse,'afficheSelectionImagePrincipale'=>$afficheSelectionImagePrincipale)),
+						'labelAction' => 'Sélectionner l\'image principale'
+				)
+		);
+		
+		
+		//Selection du titre
+		$afficheSelectionTitre = 1;
+		if($authentification->estConnecte() && isset($this->variablesGet['afficheSelectionTitre']) && $this->variablesGet['afficheSelectionTitre']=='1'){
+			$afficheSelectionTitre = 0;
+		}
+		$t->assign_block_vars('actionsSommaire',
+				array(
+						'urlAction'=>$this->creerUrl('','evenement',array('idEvenement'=>$idEvenementGroupeAdresse,'afficheSelectionTitre'=>$afficheSelectionTitre)),
+						'labelAction' => 'Sélectionner un titre'
+				)
+		);
+		
+		//Repositionner les evenements
+		$affichePositionnementEvenements = 1;
+		if($authentification->estConnecte() && isset($this->variablesGet['affichePositionnementEvenements']) && $this->variablesGet['affichePositionnementEvenements']=='1'){
+			$affichePositionnementEvenements = 0;
+			$a = new archiEvenement();
+			$imageObject = new imageObject(); // objet image du framework
+			$a->addToJsHeader($imageObject->getJSFunctionsDragAndDrop(array('withBalisesScript'=>true))); // rajoute les fonctions de deplacement d'elements dans le header du formulaire
+		}
+		$t->assign_block_vars('actionsSommaire',
+				array(
+						'urlAction'=>$this->creerUrl('', 'evenement', array('archiIdAdresse'=>$idAdresse,'idEvenement'=>$idEvenementGroupeAdresse, 'affichePositionnementEvenements'=>$affichePositionnementEvenements)),
+						'labelAction' => 'Repositionner les évènements'
+				)
+		);
+		
+		
 		//Loop on all evenet related to this idAdresse specified in argument of this function
 		while($fetch = mysql_fetch_assoc($resultIdEvenements)){
 			//Getting all the infos with this method 
 			$evenement = $e->getEventInfos($fetch['idEvenement']);
-			
+
 			//Filling the template with the infos
 			$t->assign_block_vars('evenement', $evenement['evenementData']);
 			

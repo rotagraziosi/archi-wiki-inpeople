@@ -2664,11 +2664,13 @@ class archiEvenement extends config
 		if(isset($this->variablesGet['idEvenementTitreSelection']) && $this->variablesGet['idEvenementTitreSelection']!='' && isset($this->variablesGet['archiIdEvenementGroupeAdresse']) && $this->variablesGet['archiIdEvenementGroupeAdresse']!='')
 		{
 			$idEvenementGroupeAdresse = $this->variablesGet['archiIdEvenementGroupeAdresse'];
+			$idAdresse = $this->getIdAdresseFromIdEvenementGroupeAdresse($idEvenementGroupeAdresse);
 			debug("Modifier la requete et les param de la fonction : utiliser _adresseEvenement et l'idAdresse pour trouver touts les evenements liés");
 			//Modifier la requete et les param de la fonction : utiliser _adresseEvenement et l'idAdresse pour trouver touts les evenements liés
 			$req = "update evenements set idEvenementRecuperationTitre=".$this->variablesGet['idEvenementTitreSelection']." WHERE idEvenement=$idEvenementGroupeAdresse";
 				
 			$res = $this->connexionBdd->requete($req);
+			header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$idAdresse, 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse), false, false));
 		}
 	}
 
@@ -4699,6 +4701,7 @@ class archiEvenement extends config
 		if($authentification->estConnecte() && isset($this->variablesGet['idEvenement']) && $this->variablesGet['idEvenement']!='' && isset($this->variablesGet['idImage']) && $this->variablesGet['idImage']!='')
 		{
 			$idEvenementGroupeAdresse = $this->getIdEvenementGroupeAdresseFromIdEvenement($this->variablesGet['idEvenement']);
+			$idAdresse = $this->getIdAdresseFromIdEvenementGroupeAdresse($idEvenementGroupeAdresse);
 
 			// recherche de l'historiqueEvenement de l'evenement groupe adresse
 			$reqHistorique = "
@@ -4720,6 +4723,7 @@ class archiEvenement extends config
 				$reqUpdate = "UPDATE evenements SET idImagePrincipale='".$this->variablesGet['idImage']."' WHERE idEvenement = '".$idHistoriqueEvenement."'";
 				$resUpdate = $this->connexionBdd->requete($reqUpdate);
 				echo "Image selectionnée<br>";
+				header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$idAdresse, 'archiIdEvenementGroupeAdresse'=>$idEvenementGroupeAdresse), false, false));
 			}
 			else
 			{
@@ -4750,11 +4754,11 @@ class archiEvenement extends config
 			{
 				$reqInsert = "INSERT INTO positionsEvenements (idEvenementGroupeAdresse,idEvenement,position) VALUES ('".$this->variablesGet['archiIdEvenementGroupeAdresse']."','".$idEvenement."','".$position."') ";
 				$resInsert = $this->connexionBdd->requete($reqInsert);
-
+		
 
 				$position++;
 			}
-
+			header("Location: ".$this->creerUrl('', '', array('archiAffichage'=>'adresseDetail', 'archiIdAdresse'=>$this->variablesGet['archiIdAdresse'], 'archiIdEvenementGroupeAdresse'=>$this->variablesGet['archiIdEvenementGroupeAdresse']), false, false));
 		}
 	}
 
@@ -6816,10 +6820,7 @@ class archiEvenement extends config
 							'idEvent' => $idEvenement
 					)
 			);
-			if($authentification->estConnecte()){
-				//$t->assign_block_vars('simple.pers.connected',array());
-				//	$arrayPersonne[]=array('evenement.pers.connected',array());
-			}
+			
 		}
 	
 	
@@ -6948,7 +6949,7 @@ class archiEvenement extends config
 				
 			$menuArray[] = array('evenement.menuAction.rowName.secondAction', array(
 					'urlAction'=>$urlMenuAction['modifierEvenement'],
-					'actionTarget'=>'Evenement'
+					'actionTarget'=>'Évènement'
 			));
 		}
 	
@@ -6956,7 +6957,7 @@ class archiEvenement extends config
 			$menuArray[] = array('evenement.menuAction.rowName', array(
 					'actionName'=>'Supprimer',
 					'urlAction'=>'#',
-					'actionTarget'=>'Evenement'
+					'actionTarget'=>'Évènement'
 			));
 				
 			$menuArray[] = array('evenement.menuAction.rowName.confirmMessage', array(
